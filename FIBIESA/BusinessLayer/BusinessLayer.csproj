@@ -46,8 +46,11 @@
     <Compile Include="EstadosBL.cs" />
     <Compile Include="FormulariosBL.cs" />
     <Compile Include="ParametrosBL.cs" />
+    <Compile Include="PermissoesBL.cs" />
     <Compile Include="PessoasBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelefonesBL.cs" />
+    <Compile Include="UsuariosBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

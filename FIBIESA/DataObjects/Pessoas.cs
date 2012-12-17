@@ -227,7 +227,7 @@ namespace DataObjects
         private DateTime _dtCadastro;
         public DateTime DtCadastro
         {
-            get { return _dtCadastro }
+            get { return _dtCadastro; }
             set { _dtCadastro = value; }
         }
                

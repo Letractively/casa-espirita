@@ -46,8 +46,11 @@
     <Compile Include="EstadosDA.cs" />
     <Compile Include="FormulariosDA.cs" />
     <Compile Include="ParametrosDA.cs" />
+    <Compile Include="PermissoesDA.cs" />
     <Compile Include="PessoasDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelefonesDA.cs" />
+    <Compile Include="UsuariosDA.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataObjects\DataObjects.csproj">
