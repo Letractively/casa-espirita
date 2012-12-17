@@ -25,7 +25,7 @@ namespace BusinessLayer
             return categoriasDA.EditarDA(cat);
         }
 
-        public bool ExcluirBL(CategoriasDA cat)
+        public bool ExcluirBL(Categorias cat)
         {
             /*criar as regras de negocio*/
             CategoriasDA categoriasDA = new CategoriasDA();
