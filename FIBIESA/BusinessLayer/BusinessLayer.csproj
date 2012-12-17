@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BairrosBL.cs" />
+    <Compile Include="CategoriasBL.cs" />
+    <Compile Include="CidadesBL.cs" />
+    <Compile Include="EstadosBL.cs" />
+    <Compile Include="FormulariosBL.cs" />
+    <Compile Include="ParametrosBL.cs" />
     <Compile Include="PessoasBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
