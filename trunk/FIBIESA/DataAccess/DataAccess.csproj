@@ -57,6 +57,7 @@
     <Compile Include="PessoasDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservasDA.cs" />
+    <Compile Include="SqlHelper.cs" />
     <Compile Include="TelefonesDA.cs" />
     <Compile Include="TiposDeAutoresDA.cs" />
     <Compile Include="TiposObrasDA.cs" />
