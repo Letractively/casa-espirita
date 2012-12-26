@@ -44,6 +44,10 @@
     <Compile Include="BairrosBL.cs" />
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />
+    <Compile Include="ChamadasBL.cs" />
+    <Compile Include="TurmasAlunosBL.cs" />
+    <Compile Include="TurmasBL.cs" />
+    <Compile Include="CursosBL.cs" />
     <Compile Include="EditorasBL.cs" />
     <Compile Include="EmprestimosBL.cs" />
     <Compile Include="EstadosBL.cs" />
