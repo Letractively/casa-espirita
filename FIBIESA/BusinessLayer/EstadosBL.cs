@@ -33,12 +33,12 @@ namespace BusinessLayer
             return estadosDA.ExcluirDA(est);
         }
 
-        public List<Pessoas> PesquisarBL()
+        public List<Estados> PesquisarBL()
         {
             /*criar as regras de negocio*/
-            PessoasDA pessoasDA = new PessoasDA();
+            EstadosDA estadosDA = new EstadosDA();
 
-            return pessoasDA.PesquisarDA();
+            return estadosDA.PesquisarDA();
         }
     }
 }
