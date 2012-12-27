@@ -28,7 +28,7 @@ namespace BusinessLayer
         public bool ExcluirBL(Origens instancia)
         {
             /*criar as regras de negocio*/
-           OrigensDA varDA = new OrigensDA();
+            OrigensDA varDA = new OrigensDA();
 
             return varDA.ExcluirDA(instancia);
         }
@@ -40,6 +40,6 @@ namespace BusinessLayer
 
             return varDA.PesquisarDA();
         }
-    }
+
     }
 }

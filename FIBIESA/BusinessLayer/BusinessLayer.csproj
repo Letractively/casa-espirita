@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoresBL.cs" />
     <Compile Include="BairrosBL.cs" />
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />
@@ -51,7 +50,6 @@
     <Compile Include="EditorasBL.cs" />
     <Compile Include="EmprestimosBL.cs" />
     <Compile Include="EstadosBL.cs" />
-    <Compile Include="ExemplaresBL.cs" />
     <Compile Include="FormulariosBL.cs" />
     <Compile Include="ImagensCapaBL.cs" />
     <Compile Include="ObrasBL.cs" />
