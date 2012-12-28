@@ -9,9 +9,9 @@ namespace BusinessLayer
 {
     public class TurmasBL
     {
-        public bool InserirBL(Turmas tur)
+       /* public bool InserirBL(Turmas tur)
         {
-            /*criar as regras de negocio*/
+            
             TurmasDA turmasDA = new TurmasDA();
 
             return turmasDA.InserirDA(tur);
@@ -19,7 +19,7 @@ namespace BusinessLayer
 
         public bool EditarBL(Turmas tur)
         {
-            /*criar as regras de negocio*/
+            
             TurmasDA turmasDA = new TurmasDA();
 
             return turmasDA.EditarDA(tur);
@@ -27,7 +27,7 @@ namespace BusinessLayer
 
         public bool ExcluirBL(Turmas tur)
         {
-            /*criar as regras de negocio*/
+            
              TurmasDA turmasDA = new TurmasDA();
 
             return turmasDA.ExcluirDA(tur);
@@ -35,10 +35,10 @@ namespace BusinessLayer
 
         public List<Turmas> PesquisarBL()
         {
-            /*criar as regras de negocio*/
+           
             TurmasDA turmasDA = new TurmasDA();
 
             return turmasDA.PesquisarDA();
-        }
+        }*/
     }
 }

@@ -17,11 +17,8 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", SqlDbType.Int);
-            paramsToSP[0].Value = bai.Codigo;
-
-            paramsToSP[1] = new SqlParameter("@descricao", SqlDbType.Int);
-            paramsToSP[1].Value = bai.Descricao;
+            paramsToSP[0] = new SqlParameter("@codigo", bai.Codigo); 
+            paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao);       
             
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_bairros", paramsToSP);
                            

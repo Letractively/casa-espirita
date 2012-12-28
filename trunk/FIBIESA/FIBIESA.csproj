@@ -136,6 +136,10 @@
       <Project>{B9417EA1-C9A2-45A1-9FBC-C8A2315768E4}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="DataObjects\DataObjects.csproj">
+      <Project>{7EE895E3-958E-46DE-B833-E4072F2DC992}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
