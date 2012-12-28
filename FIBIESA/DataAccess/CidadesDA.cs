@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataObjects;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using InfrastructureSqlServer.Helpers;
 
 namespace DataAccess
 {
@@ -10,6 +14,14 @@ namespace DataAccess
     {
         public bool InserirDA(Cidades cid)
         {
+            SqlParameter[] paramsToSP = new SqlParameter[3];
+
+            paramsToSP[0] = new SqlParameter("@codigo", cid.Codigo);
+            paramsToSP[1] = new SqlParameter("@descricao", cid.Descricao);
+            paramsToSP[2] = new SqlParameter("@estadoId", cid.EstadoId);
+
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_cidades", paramsToSP);
+
             return true;
         }
 
