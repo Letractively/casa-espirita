@@ -27,11 +27,25 @@ namespace DataAccess
 
         public bool EditarDA(Bairros bai)
         {
+            SqlParameter[] paramsToSP = new SqlParameter[3];
+
+            paramsToSP[0] = new SqlParameter("@id", bai.Id);
+            paramsToSP[1] = new SqlParameter("@codigo", bai.Codigo);
+            paramsToSP[2] = new SqlParameter("@descricao", bai.Descricao);
+
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_bairros", paramsToSP);
+
             return true;
         }
 
-        public bool ExcluirDA(Bairros pes)
+        public bool ExcluirDA(Bairros bai)
         {
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@id", bai.Id);
+
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_bairros", paramsToSP); 
+
             return true;
         }
 
