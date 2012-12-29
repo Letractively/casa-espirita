@@ -44,6 +44,10 @@
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />
     <Compile Include="ChamadasBL.cs" />
+    <Compile Include="MovimentosEstoqueBL.cs" />
+    <Compile Include="JurosMultasBL.cs" />
+    <Compile Include="ItensEstoqueBL.cs" />
+    <Compile Include="DoacoesBL.cs" />
     <Compile Include="TurmasAlunosBL.cs" />
     <Compile Include="TurmasBL.cs" />
     <Compile Include="CursosBL.cs" />

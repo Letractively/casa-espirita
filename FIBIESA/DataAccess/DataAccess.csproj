@@ -45,6 +45,14 @@
     <Compile Include="BairrosDA.cs" />
     <Compile Include="CategoriasDA.cs" />
     <Compile Include="CidadesDA.cs" />
+    <Compile Include="ChamadasDA.cs" />
+    <Compile Include="MovimentosEstoqueDA.cs" />
+    <Compile Include="JurosMultasDA.cs" />
+    <Compile Include="ItensEstoqueDA.cs" />
+    <Compile Include="DoacoesDA.cs" />
+    <Compile Include="TurmasAlunosDA.cs" />
+    <Compile Include="TurmasDA.cs" />
+    <Compile Include="CursosDA.cs" />
     <Compile Include="EditorasDA.cs" />
     <Compile Include="EmprestimosDA.cs" />
     <Compile Include="EstadosDA.cs" />
