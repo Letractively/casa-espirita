@@ -14,6 +14,13 @@ namespace DataObjects
             set { _id = value; }
         }
 
+        private Int32 _codigo;
+        public Int32 Codigo
+        {
+            get { return _codigo; }
+            set { _codigo = value; }
+        }
+
         private string _descricao;
         public string Descricao
         {

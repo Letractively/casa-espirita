@@ -36,11 +36,34 @@ namespace DataAccess
 
         public bool EditarDA(Usuarios usu)
         {
+            SqlParameter[] paramsToSP = new SqlParameter[12];
+
+            paramsToSP[0] = new SqlParameter("@id", usu.Id);
+            paramsToSP[1] = new SqlParameter("@login", usu.Login);
+            paramsToSP[2] = new SqlParameter("@senha", usu.Senha);
+            paramsToSP[3] = new SqlParameter("@nome", usu.Nome);
+            paramsToSP[4] = new SqlParameter("@status", usu.Status);
+            paramsToSP[5] = new SqlParameter("@dtinicio", usu.DtInicio);
+            paramsToSP[6] = new SqlParameter("@dtfim", usu.DtFim);
+            paramsToSP[7] = new SqlParameter("@tipo", usu.Tipo);
+            paramsToSP[8] = new SqlParameter("@email", usu.Email);
+            paramsToSP[9] = new SqlParameter("@pessoaid", usu.PessoaId);
+            paramsToSP[10] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
+            paramsToSP[11] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
+
+            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+
             return true;
         }
 
         public bool ExcluirDA(Usuarios usu)
         {
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@id", usu.Id);
+
+           // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+
             return true;
         }
 
