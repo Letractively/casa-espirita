@@ -25,8 +25,8 @@ namespace DataAccess
 
         public List<JurosMultas> PesquisarDA()
         {
-            List<JurosMultas> itensEstoque = new List<JurosMultas>();
-            return JurosMultas;
+            List<JurosMultas> jurosmultas = new List<JurosMultas>();
+            return jurosmultas;
         }
     }
 }
