@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
     public class CursosBL
     {
-       /* public bool InserirBL(Cursos cur)
+        public bool InserirBL(Cursos cur)
         {
             
             CursosDA cursosDA = new CursosDA();
@@ -39,6 +39,6 @@ namespace BusinessLayer
             CursosDA cursosDA = new CursosDA();
 
             return cursosDA.PesquisarDA();
-        }*/
+        }
     }
 }
