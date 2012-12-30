@@ -1,0 +1,164 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="home.Master.cs" Inherits="FIBIESA.Principal" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <!-- Calendario Styles -->
+    <link href="styles/fullcalendar.css" rel="stylesheet" type="text/css" />
+    <!-- Lightbox -->
+    <link href="styles/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+    <!-- WYSIWYG Editor -->
+    <link href="styles/wysiwyg.css" rel="stylesheet" type="text/css" />
+    <!-- Controle Styles -->
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    <!-- Tema Styles -->
+    <link href="themes/blue/styles.css" rel="stylesheet" type="text/css" />
+    <!-- Java Script - Documentação -->
+    <script type="text/javascript" src="svn/trunk/_shared/EnhanceJS/enhance.js"></script>
+    <script type='text/javascript' src='svn/trunk/charting/js/excanvas.js'></script>
+    <script type='text/javascript' src='ajax/libs/jquery/1.5.1/jquery.min.js'></script>
+    <script type='text/javascript' src='ajax/libs/jqueryui/1.8.6/jquery-ui.min.js'></script>
+    <!-- Fim Java Script - Documentação -->
+    <!-- Java Script - Funcionalidade -->
+    <script type='text/javascript' src='Scripts/jquery.fancybox-1.3.4.pack.js'></script>
+    <script type='text/javascript' src='Scripts/fullcalendar.min.js'></script>
+    <script type='text/javascript' src='Scripts/jquery.wysiwyg.js'></script>
+    <script type='text/javascript' src='Scripts/visualize.jQuery.js'></script>
+    <script type='text/javascript' src='Scripts/functions.js'></script>
+    <!-- Fim Java Script - Funcionalidade -->
+</head>
+<body>
+    <div id="header">
+        <img src="images/logo2.png" alt="AdminCP" class="logo" />
+        <div id="searchbox">
+            <input type="text" class="searchinput" />
+            <input type="image" src="images/search_btn.png" class="searchbtn" />
+        </div>
+    </div>
+    <div id="left">
+        <div id="openCloseIdentifier">
+        </div>
+        <div id="slider">
+            <ul id="sliderContent">
+                <li class="alt"><a href="#" title="">Alterar Dados</a></li>
+                <li class="alt"><a href="#" title="">Alterar senha</a></li>
+                <li class="alt"><a href="#" title="">Alterar endereço</a></li>
+                <li class="alt"><a href="#" title="">Detalhes do pagamento</a></li>
+                <li class="alt"><a href="#" title="">Sair</a></li>
+            </ul>
+            <div id="openCloseWrap">
+                <div id="toolbox">
+                    <a href="#" class="toolboxdrop">Admin
+                        <img src="images/icon_expand_grey.png" alt="Expand" /></a>
+                </div>
+            </div>
+        </div>
+        <div id="userbox">
+            <p>
+                Bem Vindo Marcos</p>
+            <p>
+                <span>Você está logado como Administrador</span></p>
+            <ul>
+                <li><a href="#" title="E-mail"><img src="images/icons/icon_mail.png" alt="Mail" /></a></li>
+                <li><a href="#" title="Configuração"><img src="images/icons/icon_cog.png" alt="Configure" /></a></li>
+                <li><a href="index.aspx" title="Sair"><img src="images/icons/icon_unlock.png" alt="Logout" /></a></li>
+            </ul>
+        </div>
+        <ul id="nav">
+            <li><a class="collapsed heading">Financeiro</a>
+                <ul class="navigation">
+                    <li><a href="viewDoacao.aspx" title="">Doação</a></li>
+                    <li><a href="viewTipoDocumento.aspx" title="">Tipo de Documento</a></li>
+                    <li><a href="viewTitulo.aspx" title="">Título</a></li>
+                    <li><a href="viewBanco.aspx" title="">Banco</a></li>
+                    <li><a href="viewConta.aspx" title="">Conta</a></li>
+                    <li><a href="viewAgencia.aspx" title="">Agência</a></li>
+                    <li><a href="viewPortador.aspx" title="">Portador</a></li>
+                </ul>
+            </li>
+            <li><a class="collapsed heading">Biblioteca</a>
+                <ul class="navigation">
+                    <li><a href="viewExemplar.aspx" title="">Exemplar</a></li>
+                    <li><a href="viewOrigem.aspx" title="">Origem</a></li>
+                    <li><a href="viewJuroMulta.aspx" title="">Juro / Multa</a></li>
+                    <li><a href="viewReserva.aspx" title="">Reserva</a></li>
+                    <li><a href="viewEditora.aspx" title="">Editora</a></li>
+                    <li><a href="viewObra.aspx" title="">Obra</a></li>
+                    <li><a href="viewAutor.aspx" title="">Autor</a></li>
+                    <li><a href="viewTipoAutor.aspx" title="">Tipo de Autor</a></li>
+                    <li><a href="viewTipoObra.aspx" title="">Tipo de Obra</a></li>
+                </ul>
+            </li>
+            <li><a class="collapsed heading">Estoque</a>
+                <ul class="navigation">
+                    <li><a href="viewVendaItem.aspx" title="">Venda de Ítem</a></li>
+                    <li><a href="viewVenda.aspx" title="">Venda</a></li>
+                    <li><a href="viewNotaEntradaItem.aspx" title="">Nota de entrada de Ítem</a></li>
+                    <li><a href="viewNotaEntrada.aspx" title="">Nota de entrada</a></li>
+                    <li><a href="viewMovimentoEstoque.aspx" title="">Movimento de Estoque</a></li>
+                    <li><a href="viewItemEstoque.aspx" title="">Ítem de Estoque</a></li>
+                </ul>
+            </li>
+            <li><a class="collapsed heading">Acadêmico</a>
+                <ul class="navigation">
+                    <li><a href="viewChamada.aspx" title="">Chamada</a></li>
+                    <li><a href="viewTurmaAluno.aspx" title="">Turma do Aluno</a></li>
+                    <li><a href="viewTurma.aspx" title="">Turma</a></li>
+                    <li><a href="viewCurso.aspx" title="">Curso</a></li>
+                </ul>
+            </li>
+            <li><a class="collapsed heading">Usuário</a>
+                <ul class="navigation">
+                    <li><a href="viewUsuario.aspx" title="">Usuário</a></li>
+                    <li><a href="viewPessoa.aspx" title="">Pessoa</a></li>
+                    <li><a href="viewBairro.aspx" title="">Bairro</a></li>
+                    <li><a href="viewCidade.aspx" title="">Cidade</a></li>
+                    <li><a href="viewEstado.aspx" title="">Estado</a></li>
+                    <li><a href="viewTelefone.aspx" title="">Telefone</a></li>
+                    <li><a href="viewCategoria.aspx" title="">Categoria</a></li>
+                    <li><a href="viewPermicao.aspx" title="">Permição</a></li>
+                    <li><a href="viewFormulario.aspx" title="">Formulário</a></li>
+               </ul>
+            </li>
+            <li><a class="collapsed heading">Falta</a>
+                <ul class="navigation">
+                    <li><a href="viewParametro.aspx" title="">Parâmetro</a></li>
+                </ul>
+            </li>
+            </li>
+        </ul>
+    </div>
+    <div id="right">
+        <div id="breadcrumb">
+            <ul>
+                <li><img src="images/icon_breadcrumb.png" alt="Location" /></li>
+                <li><a href="#" title="">Sub-Seção</a></li>
+                <li>/</li>
+                <li class="current">Painel de controle</li>
+            </ul>
+        </div>
+        <ul id="topbtns">
+            <li class="desc"><strong>Home</strong><br />Atalhos</li>
+            <li><a href="home.aspx"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Home</a> </li>
+            <li class="desc"><strong>VENDA</strong><br />Atalhos</li>
+            <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Nova</a> </li>
+            <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Alterando Vendas" /><br />Alterar</a> </li>
+            <li><a href="#"><img src="images/icons/icon_lrg_media.png" alt="Vizualizar Vendas" /><br />Vizualizar</a> </li>
+            <li class="desc"><strong>Configuração</strong><br />Atalhos</li>
+            <li><a href="#"><img src="images/icons/icon_lrg_user.png" alt="Usuário" /><br />Usuário</a> </li>
+            <li><a href="#"><img src="images/icons/icon_lrg_comment.png" alt="Comentário" /><br />Comentário</a> </li>
+            <li><a href="#"><img src="images/icons/icon_lrg_support.png" alt="Suporte" /><br />Suporte</a> </li>
+        </ul>
+        <div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <p id="footer">
+            &copy; Centro Espírita Alunos do Bem</p>
+    </div>
+</body>
+</html>
+

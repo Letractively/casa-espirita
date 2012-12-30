@@ -55,12 +55,162 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="Styles\Site.css" />
-    <Content Include="Default.aspx" />
+    <Content Include="ajax\libs\jqueryui\1.8.6\jquery-ui.min.js" />
+    <Content Include="ajax\libs\jquery\1.5.1\jquery.min.js" />
+    <Content Include="cadAgencia.aspx" />
+    <Content Include="cadAutor.aspx" />
+    <Content Include="cadBairro.aspx" />
+    <Content Include="cadBanco.aspx" />
+    <Content Include="cadCategoria.aspx" />
+    <Content Include="cadChamada.aspx" />
+    <Content Include="cadCidade.aspx" />
+    <Content Include="cadConta.aspx" />
+    <Content Include="cadCurso.aspx" />
+    <Content Include="cadDoacao.aspx" />
+    <Content Include="cadEditora.aspx" />
+    <Content Include="cadEstado.aspx" />
+    <Content Include="cadExemplar.aspx" />
+    <Content Include="cadFormulario.aspx" />
+    <Content Include="cadItemEstoque.aspx" />
+    <Content Include="cadJuroMulta.aspx" />
+    <Content Include="cadMovimentoEstoque.aspx" />
+    <Content Include="cadNotaEntrada.aspx" />
+    <Content Include="cadNotaEntradaItem.aspx" />
+    <Content Include="cadObra.aspx" />
+    <Content Include="cadOrigem.aspx" />
+    <Content Include="cadParametro.aspx" />
+    <Content Include="cadPermicao.aspx" />
+    <Content Include="cadPessoa.aspx" />
+    <Content Include="cadPortador.aspx" />
+    <Content Include="cadReserva.aspx" />
+    <Content Include="cadTelefone.aspx" />
+    <Content Include="cadTipoAutor.aspx" />
+    <Content Include="cadTipoDocumento.aspx" />
+    <Content Include="cadTipoObra.aspx" />
+    <Content Include="cadTitulo.aspx" />
+    <Content Include="cadTurma.aspx" />
+    <Content Include="cadTurmaAluno.aspx" />
+    <Content Include="cadUsuario.aspx" />
+    <Content Include="cadVenda.aspx" />
+    <Content Include="cadVendaItem.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="home.aspx" />
+    <Content Include="images\bg_breadcrumb.png" />
+    <Content Include="images\bg_btns.png" />
+    <Content Include="images\bg_btns_alt.png" />
+    <Content Include="images\bg_cont_head.png" />
+    <Content Include="images\bg_fade_blue_med.png" />
+    <Content Include="images\bg_fade_green_med.png" />
+    <Content Include="images\bg_fade_red_med.png" />
+    <Content Include="images\bg_fade_sml.png" />
+    <Content Include="images\bg_fade_sml_reverse.png" />
+    <Content Include="images\bg_fade_yellow_med.png" />
+    <Content Include="images\bg_gallerybox.png" />
+    <Content Include="images\bg_header.png" />
+    <Content Include="images\bg_input_correct.png" />
+    <Content Include="images\bg_input_error.png" />
+    <Content Include="images\bg_input_normal.png" />
+    <Content Include="images\bg_loginbox.png" />
+    <Content Include="images\bg_login_btn.png" />
+    <Content Include="images\bg_nav_link.png" />
+    <Content Include="images\bg_toolbox_tab.png" />
+    <Content Include="images\blank.gif" />
+    <Content Include="images\fancybox-x.png" />
+    <Content Include="images\fancybox-y.png" />
+    <Content Include="images\fancybox\fancybox.png" />
+    <Content Include="images\icons\icon_approve.png" />
+    <Content Include="images\icons\icon_arrow.png" />
+    <Content Include="images\icons\icon_close_sq.png" />
+    <Content Include="images\icons\icon_cog.png" />
+    <Content Include="images\icons\icon_cross.png" />
+    <Content Include="images\icons\icon_delete.png" />
+    <Content Include="images\icons\icon_edit.png" />
+    <Content Include="images\icons\icon_error.png" />
+    <Content Include="images\icons\icon_info.png" />
+    <Content Include="images\icons\icon_locked.png" />
+    <Content Include="images\icons\icon_lrg_calendar.png" />
+    <Content Include="images\icons\icon_lrg_comment.png" />
+    <Content Include="images\icons\icon_lrg_create.png" />
+    <Content Include="images\icons\icon_lrg_media.png" />
+    <Content Include="images\icons\icon_lrg_support.png" />
+    <Content Include="images\icons\icon_lrg_user.png" />
+    <Content Include="images\icons\icon_mail.png" />
+    <Content Include="images\icons\icon_success.png" />
+    <Content Include="images\icons\icon_tick.png" />
+    <Content Include="images\icons\icon_tick_sq.png" />
+    <Content Include="images\icons\icon_unapprove.png" />
+    <Content Include="images\icons\icon_unlock.png" />
+    <Content Include="images\icons\icon_username.png" />
+    <Content Include="images\icons\icon_warning.png" />
+    <Content Include="images\icon_breadcrumb.png" />
+    <Content Include="images\icon_expand_grey.png" />
+    <Content Include="images\jquery.wysiwyg.gif" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\logo2.png" />
+    <Content Include="images\search_btn.png" />
+    <Content Include="images\status_high.png" />
+    <Content Include="images\status_low.png" />
+    <Content Include="images\status_med.png" />
+    <Content Include="images\toolbox_alt_row.png" />
+    <Content Include="images\toolbox_row.png" />
+    <Content Include="images\Índice.png" />
+    <Content Include="index.aspx" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\functions.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Scripts\jquery.wysiwyg.js" />
+    <Content Include="Scripts\visualize.jQuery.js" />
+    <Content Include="Styles\fullcalendar.css" />
+    <Content Include="Styles\jquery.fancybox-1.3.4.css" />
+    <Content Include="Styles\login.css" />
+    <Content Include="Styles\main.css" />
+    <Content Include="Styles\wysiwyg.css" />
+    <Content Include="svn\trunk\charting\js\excanvas.js" />
+    <Content Include="svn\trunk\_shared\EnhanceJS\enhance.js" />
+    <Content Include="themes\blue\images\bg_btns.png" />
+    <Content Include="themes\blue\images\bg_navigation_links.png" />
+    <Content Include="themes\blue\images\bg_toolbox_tab.png" />
+    <Content Include="themes\blue\images\toolbox_alt_row.png" />
+    <Content Include="themes\blue\styles.css" />
+    <Content Include="viewAgencia.aspx" />
+    <Content Include="viewAutor.aspx" />
+    <Content Include="viewBairro.aspx" />
+    <Content Include="viewBanco.aspx" />
+    <Content Include="viewCategoria.aspx" />
+    <Content Include="viewChamada.aspx" />
+    <Content Include="viewCidade.aspx" />
+    <Content Include="viewConta.aspx" />
+    <Content Include="viewCurso.aspx" />
+    <Content Include="viewDoacao.aspx" />
+    <Content Include="viewEditora.aspx" />
+    <Content Include="viewEstado.aspx" />
+    <Content Include="viewExemplar.aspx" />
+    <Content Include="viewFormulario.aspx" />
+    <Content Include="viewItemEstoque.aspx" />
+    <Content Include="viewJuroMulta.aspx" />
+    <Content Include="viewMovimentoEstoque.aspx" />
+    <Content Include="viewNotaEntrada.aspx" />
+    <Content Include="viewNotaEntradaItem.aspx" />
+    <Content Include="viewObra.aspx" />
+    <Content Include="viewOrigem.aspx" />
+    <Content Include="viewParametro.aspx" />
+    <Content Include="viewPermicao.aspx" />
+    <Content Include="viewPessoa.aspx" />
+    <Content Include="viewPortador.aspx" />
+    <Content Include="viewReserva.aspx" />
+    <Content Include="viewTelefone.aspx" />
+    <Content Include="viewTipoAutor.aspx" />
+    <Content Include="viewTipoDocumento.aspx" />
+    <Content Include="viewTipoObra.aspx" />
+    <Content Include="viewTitulo.aspx" />
+    <Content Include="viewTurma.aspx" />
+    <Content Include="viewTurmaAluno.aspx" />
+    <Content Include="viewUsuario.aspx" />
+    <Content Include="viewVenda.aspx" />
+    <Content Include="viewVendaItem.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -105,23 +255,541 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="cadAgencia.aspx.cs">
+      <DependentUpon>cadAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="cadAgencia.aspx.designer.cs">
+      <DependentUpon>cadAgencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadAutor.aspx.cs">
+      <DependentUpon>cadAutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadAutor.aspx.designer.cs">
+      <DependentUpon>cadAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadBairro.aspx.cs">
+      <DependentUpon>cadBairro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadBairro.aspx.designer.cs">
+      <DependentUpon>cadBairro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadBanco.aspx.cs">
+      <DependentUpon>cadBanco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadBanco.aspx.designer.cs">
+      <DependentUpon>cadBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadCategoria.aspx.cs">
+      <DependentUpon>cadCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadCategoria.aspx.designer.cs">
+      <DependentUpon>cadCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadChamada.aspx.cs">
+      <DependentUpon>cadChamada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadChamada.aspx.designer.cs">
+      <DependentUpon>cadChamada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadCidade.aspx.cs">
+      <DependentUpon>cadCidade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadCidade.aspx.designer.cs">
+      <DependentUpon>cadCidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadConta.aspx.cs">
+      <DependentUpon>cadConta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadConta.aspx.designer.cs">
+      <DependentUpon>cadConta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadCurso.aspx.cs">
+      <DependentUpon>cadCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadCurso.aspx.designer.cs">
+      <DependentUpon>cadCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadDoacao.aspx.cs">
+      <DependentUpon>cadDoacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadDoacao.aspx.designer.cs">
+      <DependentUpon>cadDoacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadEditora.aspx.cs">
+      <DependentUpon>cadEditora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadEditora.aspx.designer.cs">
+      <DependentUpon>cadEditora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadEstado.aspx.cs">
+      <DependentUpon>cadEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadEstado.aspx.designer.cs">
+      <DependentUpon>cadEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadExemplar.aspx.cs">
+      <DependentUpon>cadExemplar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadExemplar.aspx.designer.cs">
+      <DependentUpon>cadExemplar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadFormulario.aspx.cs">
+      <DependentUpon>cadFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadFormulario.aspx.designer.cs">
+      <DependentUpon>cadFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadItemEstoque.aspx.cs">
+      <DependentUpon>cadItemEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadItemEstoque.aspx.designer.cs">
+      <DependentUpon>cadItemEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadJuroMulta.aspx.cs">
+      <DependentUpon>cadJuroMulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadJuroMulta.aspx.designer.cs">
+      <DependentUpon>cadJuroMulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadMovimentoEstoque.aspx.cs">
+      <DependentUpon>cadMovimentoEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadMovimentoEstoque.aspx.designer.cs">
+      <DependentUpon>cadMovimentoEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadNotaEntrada.aspx.cs">
+      <DependentUpon>cadNotaEntrada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadNotaEntrada.aspx.designer.cs">
+      <DependentUpon>cadNotaEntrada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadNotaEntradaItem.aspx.cs">
+      <DependentUpon>cadNotaEntradaItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadNotaEntradaItem.aspx.designer.cs">
+      <DependentUpon>cadNotaEntradaItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadObra.aspx.cs">
+      <DependentUpon>cadObra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadObra.aspx.designer.cs">
+      <DependentUpon>cadObra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadOrigem.aspx.cs">
+      <DependentUpon>cadOrigem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadOrigem.aspx.designer.cs">
+      <DependentUpon>cadOrigem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadParametro.aspx.cs">
+      <DependentUpon>cadParametro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadParametro.aspx.designer.cs">
+      <DependentUpon>cadParametro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadPermicao.aspx.cs">
+      <DependentUpon>cadPermicao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadPermicao.aspx.designer.cs">
+      <DependentUpon>cadPermicao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadPessoa.aspx.cs">
+      <DependentUpon>cadPessoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadPessoa.aspx.designer.cs">
+      <DependentUpon>cadPessoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadPortador.aspx.cs">
+      <DependentUpon>cadPortador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadPortador.aspx.designer.cs">
+      <DependentUpon>cadPortador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadReserva.aspx.cs">
+      <DependentUpon>cadReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadReserva.aspx.designer.cs">
+      <DependentUpon>cadReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTelefone.aspx.cs">
+      <DependentUpon>cadTelefone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTelefone.aspx.designer.cs">
+      <DependentUpon>cadTelefone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTipoAutor.aspx.cs">
+      <DependentUpon>cadTipoAutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTipoAutor.aspx.designer.cs">
+      <DependentUpon>cadTipoAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTipoDocumento.aspx.cs">
+      <DependentUpon>cadTipoDocumento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTipoDocumento.aspx.designer.cs">
+      <DependentUpon>cadTipoDocumento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTipoObra.aspx.cs">
+      <DependentUpon>cadTipoObra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTipoObra.aspx.designer.cs">
+      <DependentUpon>cadTipoObra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTitulo.aspx.cs">
+      <DependentUpon>cadTitulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTitulo.aspx.designer.cs">
+      <DependentUpon>cadTitulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTurma.aspx.cs">
+      <DependentUpon>cadTurma.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTurma.aspx.designer.cs">
+      <DependentUpon>cadTurma.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadTurmaAluno.aspx.cs">
+      <DependentUpon>cadTurmaAluno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadTurmaAluno.aspx.designer.cs">
+      <DependentUpon>cadTurmaAluno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadUsuario.aspx.cs">
+      <DependentUpon>cadUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadUsuario.aspx.designer.cs">
+      <DependentUpon>cadUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadVenda.aspx.cs">
+      <DependentUpon>cadVenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadVenda.aspx.designer.cs">
+      <DependentUpon>cadVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadVendaItem.aspx.cs">
+      <DependentUpon>cadVendaItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadVendaItem.aspx.designer.cs">
+      <DependentUpon>cadVendaItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home.Master.cs">
+      <DependentUpon>home.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home.Master.designer.cs">
+      <DependentUpon>home.Master</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.Master.cs">
+      <DependentUpon>index.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.Master.designer.cs">
+      <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewAgencia.aspx.cs">
+      <DependentUpon>viewAgencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewAgencia.aspx.designer.cs">
+      <DependentUpon>viewAgencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewAutor.aspx.cs">
+      <DependentUpon>viewAutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewAutor.aspx.designer.cs">
+      <DependentUpon>viewAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewBairro.aspx.cs">
+      <DependentUpon>viewBairro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewBairro.aspx.designer.cs">
+      <DependentUpon>viewBairro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewBanco.aspx.cs">
+      <DependentUpon>viewBanco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewBanco.aspx.designer.cs">
+      <DependentUpon>viewBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewCategoria.aspx.cs">
+      <DependentUpon>viewCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewCategoria.aspx.designer.cs">
+      <DependentUpon>viewCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewChamada.aspx.cs">
+      <DependentUpon>viewChamada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewChamada.aspx.designer.cs">
+      <DependentUpon>viewChamada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewCidade.aspx.cs">
+      <DependentUpon>viewCidade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewCidade.aspx.designer.cs">
+      <DependentUpon>viewCidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewConta.aspx.cs">
+      <DependentUpon>viewConta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewConta.aspx.designer.cs">
+      <DependentUpon>viewConta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewCurso.aspx.cs">
+      <DependentUpon>viewCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewCurso.aspx.designer.cs">
+      <DependentUpon>viewCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewDoacao.aspx.cs">
+      <DependentUpon>viewDoacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewDoacao.aspx.designer.cs">
+      <DependentUpon>viewDoacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewEditora.aspx.cs">
+      <DependentUpon>viewEditora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewEditora.aspx.designer.cs">
+      <DependentUpon>viewEditora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewEstado.aspx.cs">
+      <DependentUpon>viewEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewEstado.aspx.designer.cs">
+      <DependentUpon>viewEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewExemplar.aspx.cs">
+      <DependentUpon>viewExemplar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewExemplar.aspx.designer.cs">
+      <DependentUpon>viewExemplar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewFormulario.aspx.cs">
+      <DependentUpon>viewFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewFormulario.aspx.designer.cs">
+      <DependentUpon>viewFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewItemEstoque.aspx.cs">
+      <DependentUpon>viewItemEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewItemEstoque.aspx.designer.cs">
+      <DependentUpon>viewItemEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewJuroMulta.aspx.cs">
+      <DependentUpon>viewJuroMulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewJuroMulta.aspx.designer.cs">
+      <DependentUpon>viewJuroMulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewMovimentoEstoque.aspx.cs">
+      <DependentUpon>viewMovimentoEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewMovimentoEstoque.aspx.designer.cs">
+      <DependentUpon>viewMovimentoEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewNotaEntrada.aspx.cs">
+      <DependentUpon>viewNotaEntrada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewNotaEntrada.aspx.designer.cs">
+      <DependentUpon>viewNotaEntrada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewNotaEntradaItem.aspx.cs">
+      <DependentUpon>viewNotaEntradaItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewNotaEntradaItem.aspx.designer.cs">
+      <DependentUpon>viewNotaEntradaItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewObra.aspx.cs">
+      <DependentUpon>viewObra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewObra.aspx.designer.cs">
+      <DependentUpon>viewObra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewOrigem.aspx.cs">
+      <DependentUpon>viewOrigem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewOrigem.aspx.designer.cs">
+      <DependentUpon>viewOrigem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewParametro.aspx.cs">
+      <DependentUpon>viewParametro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewParametro.aspx.designer.cs">
+      <DependentUpon>viewParametro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewPermicao.aspx.cs">
+      <DependentUpon>viewPermicao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewPermicao.aspx.designer.cs">
+      <DependentUpon>viewPermicao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewPessoa.aspx.cs">
+      <DependentUpon>viewPessoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewPessoa.aspx.designer.cs">
+      <DependentUpon>viewPessoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewPortador.aspx.cs">
+      <DependentUpon>viewPortador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewPortador.aspx.designer.cs">
+      <DependentUpon>viewPortador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewReserva.aspx.cs">
+      <DependentUpon>viewReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewReserva.aspx.designer.cs">
+      <DependentUpon>viewReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTelefone.aspx.cs">
+      <DependentUpon>viewTelefone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTelefone.aspx.designer.cs">
+      <DependentUpon>viewTelefone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTipoAutor.aspx.cs">
+      <DependentUpon>viewTipoAutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTipoAutor.aspx.designer.cs">
+      <DependentUpon>viewTipoAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTipoDocumento.aspx.cs">
+      <DependentUpon>viewTipoDocumento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTipoDocumento.aspx.designer.cs">
+      <DependentUpon>viewTipoDocumento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTipoObra.aspx.cs">
+      <DependentUpon>viewTipoObra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTipoObra.aspx.designer.cs">
+      <DependentUpon>viewTipoObra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTitulo.aspx.cs">
+      <DependentUpon>viewTitulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTitulo.aspx.designer.cs">
+      <DependentUpon>viewTitulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTurma.aspx.cs">
+      <DependentUpon>viewTurma.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTurma.aspx.designer.cs">
+      <DependentUpon>viewTurma.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewTurmaAluno.aspx.cs">
+      <DependentUpon>viewTurmaAluno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewTurmaAluno.aspx.designer.cs">
+      <DependentUpon>viewTurmaAluno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewUsuario.aspx.cs">
+      <DependentUpon>viewUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewUsuario.aspx.designer.cs">
+      <DependentUpon>viewUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewVenda.aspx.cs">
+      <DependentUpon>viewVenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewVenda.aspx.designer.cs">
+      <DependentUpon>viewVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewVendaItem.aspx.cs">
+      <DependentUpon>viewVendaItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewVendaItem.aspx.designer.cs">
+      <DependentUpon>viewVendaItem.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +797,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
-    <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="BusinessLayer\BusinessLayer.csproj">
@@ -140,6 +807,12 @@
       <Project>{7EE895E3-958E-46DE-B833-E4072F2DC992}</Project>
       <Name>DataObjects</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="home.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
