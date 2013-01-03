@@ -16,95 +16,26 @@
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Título
-                                </th>
-                                <th>
-                                    Sub-título
-                                </th>
-                                <th>
-                                    Ação
-                                </th>
-                                <th>
-                                    <input name="" type="checkbox" value="" id="checkboxall" />
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Conteúdo
-                                </td>
-                                <td>
-                                    O no nono nononono nono nonononono.
-                                </td>
-                                <td>
-                                    <a href="cadEstado.aspx" title=""><img src="images/icons/icon_edit.png" alt="Edit" /></a>
-                                    <a href="#" title=""><img src="images/icons/icon_approve.png" alt="Approve" /></a>
-                                    <a href="#" title=""><img src="images/icons/icon_unapprove.png" alt="Unapprove" /></a>
-                                    <a href="#" title=""><img src="images/icons/icon_delete.png" alt="Delete" /></a>
-                                </td>
-                                <td>
-                                    <input type="checkbox" value="" name="checkall" />
-                                </td>
-                            </tr>
-                            <tr class="alt">
-                                <td>
-                                    Conteúdo
-                                </td>
-                                <td>
-                                    O no nono nononono nono nonononono.
-                                </td>
-                                <td>
-                                    <a href="#" title="">
-                                        <img src="images/icons/icon_edit.png" alt="Edit" /></a> <a href="#" title="">
-                                            <img src="images/icons/icon_approve.png" alt="Approve" /></a> <a href="#" title="">
-                                                <img src="images/icons/icon_unapprove.png" alt="Unapprove" /></a> <a href="#" title="">
-                                                    <img src="images/icons/icon_delete.png" alt="Delete" /></a>
-                                </td>
-                                <td>
-                                    <input type="checkbox" value="" name="checkall" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Conteúdo
-                                </td>
-                                <td>
-                                    O no nono nononono nono nonononono.
-                                </td>
-                                <td>
-                                    <a href="#" title="">
-                                        <img src="images/icons/icon_edit.png" alt="Edit" /></a> <a href="#" title="">
-                                            <img src="images/icons/icon_approve.png" alt="Approve" /></a> <a href="#" title="">
-                                                <img src="images/icons/icon_unapprove.png" alt="Unapprove" /></a> <a href="#" title="">
-                                                    <img src="images/icons/icon_delete.png" alt="Delete" /></a>
-                                </td>
-                                <td>
-                                    <input type="checkbox" value="" name="checkall" />
-                                </td>
-                            </tr>
-                            <tr class="alt">
-                                <td>
-                                    Conteúdo
-                                </td>
-                                <td>
-                                    O no nono nononono nono nonononono.
-                                </td>
-                                <td>
-                                    <a href="#" title="">
-                                        <img src="images/icons/icon_edit.png" alt="Edit" /></a> <a href="#" title="">
-                                            <img src="images/icons/icon_approve.png" alt="Approve" /></a> <a href="#" title="">
-                                                <img src="images/icons/icon_unapprove.png" alt="Unapprove" /></a> <a href="#" title="">
-                                                    <img src="images/icons/icon_delete.png" alt="Delete" /></a>
-                                </td>
-                                <td>
-                                    <input type="checkbox" value="" name="checkall" />
-                                </td>
-                            </tr>
-                        </tbody>
+                       <tr>
+                            <td>
+                                <asp:Panel ID="pnlGrid" runat="server" ScrollBars="Auto">
+                                    <asp:GridView ID="grdEstados" runat="server" AutoGenerateColumns="False" 
+                                        onselectedindexchanged="grdEstados_SelectedIndexChanged" 
+                                        AllowSorting="True" DataKeyNames="ID">
+                                        <Columns>                                   
+                                            <asp:CommandField SelectText="clique aqui para selecionar o registro." ShowSelectButton="True"
+                                                AccessibleHeaderText="4546">                                      
+                                            <HeaderStyle CssClass="grd_cmd_header" />
+                                            <ItemStyle CssClass="grd_select" />
+                                            </asp:CommandField>                                                                                       
+                                            <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                            <asp:BoundField DataField="UF" HeaderText="UF" />
+                                            <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </asp:Panel>
+                            </td>
+                       </tr>                      
                     </table>
                     <div class="extrabottom">
                         <ul class="pagination">
@@ -115,6 +46,8 @@
                             <li><a href="#" title="">4</a></li>
                             <li class="text"><a href="#" title="">Próximo</a></li>
                         </ul>
+                        <asp:ImageButton ID="ImageButton1" runat="server" 
+                            ImageUrl="~/images/icons/icon_edit.png" />
                     </div>
                 </div>
                 <!-- grid modelo finaliza aqui -->

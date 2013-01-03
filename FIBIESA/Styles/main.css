@@ -275,4 +275,23 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		
 		#openCloseWrap {*margin: 150px 0 0 0}	
 		
+   	
+   /* GridView*/
+	.grd_select a
+	{
+		background:url(~/images/icons/icon_edit.png) no-repeat center center;
+	}               
+	
+	.grd_cmd_header
+	{
+		width:16px;	
+	}
+
+	.grd_cmd_header, .grd_header_c, .grd_header_r,.grd_header_r_menor, .grd_header_l, .grd_header_l_menor, .grd_header_l_direita
+	{
+		background-color:#dadada;
+		font-weight:500;
+		height:24px;	
+	}
+		
 		
