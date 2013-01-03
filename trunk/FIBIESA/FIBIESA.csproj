@@ -135,6 +135,7 @@
     <Content Include="images\icons\icon_lrg_support.png" />
     <Content Include="images\icons\icon_lrg_user.png" />
     <Content Include="images\icons\icon_mail.png" />
+    <Content Include="images\icons\icon_save.png" />
     <Content Include="images\icons\icon_success.png" />
     <Content Include="images\icons\icon_tick.png" />
     <Content Include="images\icons\icon_tick_sq.png" />
