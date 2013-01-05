@@ -15,8 +15,8 @@
     <!-- Controle Styles -->
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
     <!-- Tema Styles -->
-    <link href="themes/blue/styles.css" rel="stylesheet" type="text/css" />
-    <!-- Java Script - Documentação -->
+    <link href="themes/blue/styles.css" rel="stylesheet" type="text/css" />   
+    <!-- Java Script - Documentacao -->
     <script type="text/javascript" src="svn/trunk/_shared/EnhanceJS/enhance.js"></script>
     <script type='text/javascript' src='svn/trunk/charting/js/excanvas.js'></script>
     <script type='text/javascript' src='ajax/libs/jquery/1.5.1/jquery.min.js'></script>
@@ -28,6 +28,7 @@
     <script type='text/javascript' src='Scripts/jquery.wysiwyg.js'></script>
     <script type='text/javascript' src='Scripts/visualize.jQuery.js'></script>
     <script type='text/javascript' src='Scripts/functions.js'></script>
+    
     <!-- Fim Java Script - Funcionalidade -->
 </head>
 <body>

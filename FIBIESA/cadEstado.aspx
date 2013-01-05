@@ -15,18 +15,26 @@
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            UF:
+                           UF:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_uf" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtUf" runat="server" CssClass="inputbox" MaxLength="2" 
+                                Width="47px" Columns="2"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtUf" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Descrição:
+                           Descrição:    
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_descricao" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" MaxLength="70" 
+                                Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -34,9 +42,12 @@
                     <tr>
                         <td style="width: 140px">
                         </td>
-                        <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
-                        </td>
+                        <td style ="width: 400px">
+                            <asp:Button ID="bntVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="bntVoltar_Click" />&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="bntSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="bntSalvar_Click" ValidationGroup="salvar" />
+                        </td>                      
                     </tr>
                 </table>
             </div>
