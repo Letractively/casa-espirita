@@ -21,7 +21,7 @@
 
 /* Button Styling */
 	
-	.btn, .btnalt {background: url(images/bg_btns.png) repeat-x top; color: #0F525B; text-shadow: 1px 1px 1px #68C5D1; font-size: 13px; padding: 10px 15px; boirder-radius: 7px; -moz-border-radius: 7px; font-weight: 700; border: none}
+	.btn, .btnalt {background: url(images/bg_btns.png) repeat-x top; color:  #fff; text-shadow: 1px 1px 1px #68C5D1; font-size: 13px; padding: 10px 15px; boirder-radius: 7px; -moz-border-radius: 7px; font-weight: 700; border: none}
 		.btn:hover {background: url(images/bg_btns.png) 0 -30px; cursor: pointer; color: #fff; text-shadow: none}
 		
 	.btnalt {background: url(images/bg_btns_alt.png) repeat-x top !important; color: #666; text-shadow: 1px 1px 1px #fff}
@@ -31,4 +31,4 @@
 	
 	ul.pagination li.page a {background: url(images/bg_btns.png) repeat-x top; color: #fff; border: 1px solid #1B9CAF}
 		ul.pagination li.page a:hover {background: url(images/bg_btns.png) 0 -30px;}
-	
+  

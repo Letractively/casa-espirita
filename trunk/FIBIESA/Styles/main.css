@@ -12,6 +12,12 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 	.extramar {margin-bottom: 15px}
 	.nomar {margin: 0!important}
 	
+.lbl
+{
+	font-size: 18px;
+}	
+		
+	
 /* Header/Top Bar Styles */
 
 	#header {height: 60px; background: #bababa url(../images/bg_header.png) repeat-x bottom; border-bottom: 1px solid #6c6c6c; position: relative; z-index: 1000}
@@ -115,13 +121,15 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 	
 		.med {width: 60%}
 		.sml {width: 38%}
-		.half {width:49%}
+		.half {width:56%;
+	height: 258px;
+}
 	
 	/* Form Styles */
 		select {float: none}
 		.inputboxes  {padding: 5px; overflow: auto; margin-bottom: 5px}
 		.inputboxes label {width: 75px; display: block; float: left; padding-top: 8px}
-			.inputbox, .inputboxes select, select {float: left; padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 200px}
+			.inputbox, .inputboxes select, select {float: left; padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
 				.inputbox {background: #fff url(../images/bg_input_normal.png) repeat-x top}
 		
 				
@@ -276,22 +284,4 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		#openCloseWrap {*margin: 150px 0 0 0}	
 		
    	
-   /* GridView*/
-	.grd_select a
-	{
-		background:url(~/images/icons/icon_edit.png) no-repeat center center;
-	}               
-	
-	.grd_cmd_header
-	{
-		width:16px;	
-	}
-
-	.grd_cmd_header, .grd_header_c, .grd_header_r,.grd_header_r_menor, .grd_header_l, .grd_header_l_menor, .grd_header_l_direita
-	{
-		background-color:#dadada;
-		font-weight:500;
-		height:24px;	
-	}
-		
-		
+   

@@ -50,7 +50,19 @@ namespace DataAccess
 
         public List<Estados> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.Text, " select * from estados ");
+                       
             List<Estados> estados = new List<Estados>();
+
+            while (dr.Read())
+            {
+                Estados est = new Estados();
+                est.Id = int.Parse(dr["ID"].ToString());
+                est.Uf = dr["UF"].ToString();
+                est.Descricao = dr["DESCRICAO"].ToString();
+                                
+                estados.Add(est);
+            }
             return estados;
         }
     }
