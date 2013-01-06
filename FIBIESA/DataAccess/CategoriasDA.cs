@@ -51,8 +51,41 @@ namespace DataAccess
 
         public List<Categorias> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM CATEGORIAS ");
+
             List<Categorias> categorias = new List<Categorias>();
+
+            while (dr.Read())
+            {
+                Categorias cat = new Categorias();
+                cat.Id = int.Parse(dr["ID"].ToString());
+                cat.Codigo = int.Parse(dr["CODIGO"].ToString());
+                cat.Descricao = dr["DESCRICAO"].ToString();
+
+                categorias.Add(cat);
+            }
             return categorias;
         }
+
+        public List<Categorias> PesquisarDA(int id_cat)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM CATEGORIAS WHERE ID = {0}",id_cat));
+
+            List<Categorias> categorias = new List<Categorias>();
+
+            while (dr.Read())
+            {
+                Categorias cat = new Categorias();
+                cat.Id = int.Parse(dr["ID"].ToString());
+                cat.Codigo = int.Parse(dr["CODIGO"].ToString());
+                cat.Descricao = dr["DESCRICAO"].ToString();
+
+                categorias.Add(cat);
+            }
+            return categorias;
+        }
+
     }
 }

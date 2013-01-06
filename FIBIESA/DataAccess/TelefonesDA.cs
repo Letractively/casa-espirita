@@ -54,7 +54,45 @@ namespace DataAccess
 
         public List<Telefones> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM TELEFONES ");
+
             List<Telefones> telefones = new List<Telefones>();
+
+            while (dr.Read())
+            {
+                Telefones tel = new Telefones();
+                tel.Id = int.Parse(dr["ID"].ToString());
+                tel.Descricao = dr["DESCRICAO"].ToString();
+                tel.Ddd = short.Parse(dr["DDD"].ToString());
+                tel.Numero = int.Parse(dr["NUMERO"].ToString());
+                tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
+
+                telefones.Add(tel);
+            }
+
+            return telefones;
+        }
+
+        public List<Telefones> PesquisarDA(int id_tel)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text,string.Format(@"SELECT * FROM TELEFONES WHERE ID = {0}",id_tel));
+
+            List<Telefones> telefones = new List<Telefones>();
+
+            while (dr.Read())
+            {
+                Telefones tel = new Telefones();
+                tel.Id = int.Parse(dr["ID"].ToString());
+                tel.Descricao = dr["DESCRICAO"].ToString();
+                tel.Ddd = short.Parse(dr["DDD"].ToString());
+                tel.Numero = int.Parse(dr["NUMERO"].ToString());
+                tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
+
+                telefones.Add(tel);
+            }
+
             return telefones;
         }
     }

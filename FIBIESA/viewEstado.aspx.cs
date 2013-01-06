@@ -95,5 +95,10 @@ namespace Admin
 
         }
 
+        protected void bntInserir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("cadEstado.aspx?operacao=new");
+        }
+
     }
 }

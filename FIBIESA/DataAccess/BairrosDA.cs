@@ -51,7 +51,40 @@ namespace DataAccess
 
         public List<Bairros> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
+                                                                CommandType.Text, string.Format(@"SELECT * FROM BAIRROS "));
+
             List<Bairros> bairros = new List<Bairros>();
+
+            while (dr.Read())
+            {
+                Bairros bai = new Bairros();
+                bai.Id = int.Parse(dr["ID"].ToString());
+                bai.Codigo = int.Parse(dr["UF"].ToString());
+                bai.Descricao = dr["DESCRICAO"].ToString();
+
+                bairros.Add(bai);
+            }
+            return bairros;
+        }
+
+        public List<Bairros> PesquisarDA(int id_bai)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM BAIRROS WHERE ID = {0}", id_bai));
+
+            List<Bairros> bairros = new List<Bairros>();
+
+            while (dr.Read())
+            {
+                Bairros bai = new Bairros();
+                bai.Id = int.Parse(dr["ID"].ToString());
+                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
+                bai.Descricao = dr["DESCRICAO"].ToString();
+
+                bairros.Add(bai);
+            }
             return bairros;
         }
     }

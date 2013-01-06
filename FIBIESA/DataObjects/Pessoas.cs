@@ -237,6 +237,13 @@ namespace DataObjects
             get { return _dtCadastro; }
             set { _dtCadastro = value; }
         }
+
+        private bool _status;
+        public bool Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
                
     }
 }

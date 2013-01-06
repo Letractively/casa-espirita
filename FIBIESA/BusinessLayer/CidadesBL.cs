@@ -40,5 +40,12 @@ namespace BusinessLayer
 
             return cidadesDA.PesquisarDA();
         }
+
+        public List<Cidades> PesquisarBL(int id_cid)
+        {
+            CidadesDA cidadesDA = new CidadesDA();
+
+            return cidadesDA.PesquisaDA(id_cid);
+        }
     }
 }

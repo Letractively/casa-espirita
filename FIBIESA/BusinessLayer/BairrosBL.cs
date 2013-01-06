@@ -40,5 +40,12 @@ namespace BusinessLayer
 
             return bairrosDA.PesquisarDA();
         }
+
+        public List<Bairros> PesquisarBL(int bai)
+        {
+            BairrosDA bairrosDA = new BairrosDA();
+
+            return bairrosDA.PesquisarDA(bai);
+        }
     }
 }

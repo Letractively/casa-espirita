@@ -40,5 +40,13 @@ namespace BusinessLayer
 
             return estadosDA.PesquisarDA();
         }
+
+        public List<Estados> PesquisarBL(int id_est)
+        {
+            /*criar as regras de negocio*/
+            EstadosDA estadosDA = new EstadosDA();
+
+            return estadosDA.PesquisarDA(id_est);
+        }
     }
 }
