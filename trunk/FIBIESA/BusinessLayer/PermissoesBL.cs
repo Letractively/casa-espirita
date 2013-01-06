@@ -40,5 +40,12 @@ namespace BusinessLayer
 
             return permissoesDA.PesquisarDA();
         }
+
+        public List<Permissoes> PesquisarBL(int id_per)
+        {
+            PermissoesDA permissoesDA = new PermissoesDA();
+
+            return permissoesDA.PesquisarDA(id_per);
+        }
     }
 }

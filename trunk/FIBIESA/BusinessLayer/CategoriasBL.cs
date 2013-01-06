@@ -40,5 +40,12 @@ namespace BusinessLayer
 
             return categoriasDA.PesquisarDA();
         }
+
+        public List<Categorias> PesquisarBL(int id_cat)
+        {
+            CategoriasDA categoriasDA = new CategoriasDA();
+
+            return categoriasDA.PesquisarDA(id_cat);
+        }
     }
 }

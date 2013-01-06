@@ -29,7 +29,7 @@ namespace DataAccess
             paramsToSP[9] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[10] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_usuarios", paramsToSP);
 
             return true;
         }
@@ -51,7 +51,7 @@ namespace DataAccess
             paramsToSP[10] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[11] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_usuarios", paramsToSP);
 
             return true;
         }
@@ -62,14 +62,64 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", usu.Id);
 
-           // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_usuarios", paramsToSP);
 
             return true;
         }
 
         public List<Usuarios> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM USUARIOS ");
+
             List<Usuarios> usuarios = new List<Usuarios>();
+
+            while (dr.Read())
+            {
+                Usuarios usu = new Usuarios();
+                usu.Id = int.Parse(dr["ID"].ToString());
+                usu.Login = dr["LOGIN"].ToString();
+                usu.Senha = dr["SENHA"].ToString();
+                usu.Nome = dr["NOME"].ToString();
+                usu.Status = dr["STATUS"].ToString();
+                usu.DtInicio = DateTime.Parse(dr["DTINICIO"].ToString());
+                usu.DtFim = DateTime.Parse(dr["DTFIM"].ToString());
+                usu.Tipo = dr["TIPO"].ToString();
+                usu.Email = dr["EMAIL"].ToString();
+                usu.PessoaId = int.Parse(dr["PESSOAID"].ToString());
+                usu.NrTentLogin = int.Parse(dr["NRTENTLOGIN"].ToString());
+                usu.DhTentLogin = DateTime.Parse(dr["DHTENTLOGIN"].ToString());
+
+                usuarios.Add(usu);
+            }
+            return usuarios;
+        }
+
+        public List<Usuarios> PesquisarDA(int id_usu)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text,string.Format(@"SELECT * FROM USUARIOS WHERE ID = {0}",id_usu));
+
+            List<Usuarios> usuarios = new List<Usuarios>();
+
+            while (dr.Read())
+            {
+                Usuarios usu = new Usuarios();
+                usu.Id = int.Parse(dr["ID"].ToString());
+                usu.Login = dr["LOGIN"].ToString();
+                usu.Senha = dr["SENHA"].ToString();
+                usu.Nome = dr["NOME"].ToString();
+                usu.Status = dr["STATUS"].ToString();
+                usu.DtInicio = DateTime.Parse(dr["DTINICIO"].ToString());
+                usu.DtFim = DateTime.Parse(dr["DTFIM"].ToString());
+                usu.Tipo = dr["TIPO"].ToString();
+                usu.Email = dr["EMAIL"].ToString();
+                usu.PessoaId = int.Parse(dr["PESSOAID"].ToString());
+                usu.NrTentLogin = int.Parse(dr["NRTENTLOGIN"].ToString());
+                usu.DhTentLogin = DateTime.Parse(dr["DHTENTLOGIN"].ToString());
+
+                usuarios.Add(usu);
+            }
             return usuarios;
         }
     }

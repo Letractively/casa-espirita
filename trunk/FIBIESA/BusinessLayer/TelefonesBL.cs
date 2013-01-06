@@ -33,12 +33,19 @@ namespace BusinessLayer
             return telefonesDA.ExcluirDA(tel);
         }
 
-        public List<Pessoas> PesquisarBL()
+        public List<Telefones> PesquisarBL()
         {
             /*criar as regras de negocio*/
-            PessoasDA pessoasDA = new PessoasDA();
+            TelefonesDA telefonesDA = new TelefonesDA();
 
-            return pessoasDA.PesquisarDA();
+            return telefonesDA.PesquisarDA();
+        }
+
+        public List<Telefones> PesquisarBL(int id_tel)
+        {
+            TelefonesDA telefonesDA = new TelefonesDA();
+
+            return telefonesDA.PesquisarDA(id_tel);
         }
     }
 }

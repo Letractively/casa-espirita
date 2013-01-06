@@ -58,7 +58,47 @@ namespace DataAccess
 
         public List<Permissoes> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM PERMISSOES ");
+                        
             List<Permissoes> permissoes = new List<Permissoes>();
+
+            while (dr.Read())
+            {
+                Permissoes per = new Permissoes();
+                per.Id = int.Parse(dr["ID"].ToString());
+                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
+                per.Editar = bool.Parse(dr["EDITAR"].ToString());
+                per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
+                per.Inserir = bool.Parse(dr["INSERIR"].ToString());
+                per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
+
+                permissoes.Add(per);
+            }
+
+            return permissoes;
+        }
+
+        public List<Permissoes> PesquisarDA(int id_per)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PERMISSOES WHERE ID = {0}",id_per));
+
+            List<Permissoes> permissoes = new List<Permissoes>();
+
+            while (dr.Read())
+            {
+                Permissoes per = new Permissoes();
+                per.Id = int.Parse(dr["ID"].ToString());
+                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
+                per.Editar = bool.Parse(dr["EDITAR"].ToString());
+                per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
+                per.Inserir = bool.Parse(dr["INSERIR"].ToString());
+                per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
+
+                permissoes.Add(per);
+            }
+
             return permissoes;
         }
     }

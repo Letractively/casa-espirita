@@ -110,8 +110,96 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM PESSOAS ");
             List<Pessoas> pessoas = new List<Pessoas>();
+
+            while (dr.Read())
+            {
+                Pessoas pes = new Pessoas();
+                pes.Id = int.Parse(dr["ID"].ToString());
+                pes.Nome = dr["NOME"].ToString();
+                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
+                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
+                pes.Rg = dr["RG"].ToString();
+                pes.NomeMae = dr["NOMEMAE"].ToString();
+                pes.NomePai = dr["NOMEPAI"].ToString();
+                pes.DtNascimento = DateTime.Parse(dr["DTNASCIMENTO"].ToString());
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
+                pes.Naturalidade = int.Parse(dr["NATURALIDADE"].ToString());
+                pes.Endereco = dr["ENDERECO"].ToString();
+                pes.Numero = dr["NUMERO"].ToString();
+                pes.BairroId = int.Parse(dr["BAIRROID"].ToString());
+                pes.Cep = dr["CEP"].ToString();
+                pes.CidadeId = int.Parse(dr["CIDADEID"].ToString());
+                pes.Complemento = dr["COMPLEMENTO"].ToString();
+                pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
+                pes.NumeroProf = dr["NUMEROPROF"].ToString();
+                pes.CepProf = dr["CEPPROF"].ToString();
+                pes.CidadeProfId = int.Parse(dr["CIDADEPROFID"].ToString());
+                pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
+                pes.Empresa = dr["EMPRESA"].ToString();
+                pes.Email = dr["EMAIL"].ToString();
+                pes.Tipo = dr["TIPO"].ToString();
+                pes.Obs = dr["OBS"].ToString();
+                pes.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
+                pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
+                pes.RefNome = dr["REFNOME"].ToString();
+                pes.RefTelefone = int.Parse(dr["REFTELEFONE"].ToString());
+                pes.RefDDD = short.Parse(dr["REFDDD"].ToString());
+                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
+                pes.Status = bool.Parse(dr["STATUS"].ToString());
+
+                pessoas.Add(pes);
+            }
             return pessoas; 
+        }
+
+        public List<Pessoas> PesquisarDA(int id_pes)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE ID = {0}",id_pes));
+            List<Pessoas> pessoas = new List<Pessoas>();
+
+            while (dr.Read())
+            {
+                Pessoas pes = new Pessoas();
+                pes.Id = int.Parse(dr["ID"].ToString());
+                pes.Nome = dr["NOME"].ToString();
+                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
+                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
+                pes.Rg = dr["RG"].ToString();
+                pes.NomeMae = dr["NOMEMAE"].ToString();
+                pes.NomePai = dr["NOMEPAI"].ToString();
+                pes.DtNascimento = DateTime.Parse(dr["DTNASCIMENTO"].ToString());
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
+                pes.Naturalidade = int.Parse(dr["NATURALIDADE"].ToString());
+                pes.Endereco = dr["ENDERECO"].ToString();
+                pes.Numero = dr["NUMERO"].ToString();
+                pes.BairroId = int.Parse(dr["BAIRROID"].ToString());
+                pes.Cep = dr["CEP"].ToString();
+                pes.CidadeId = int.Parse(dr["CIDADEID"].ToString());
+                pes.Complemento = dr["COMPLEMENTO"].ToString();
+                pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
+                pes.NumeroProf = dr["NUMEROPROF"].ToString();
+                pes.CepProf = dr["CEPPROF"].ToString();
+                pes.CidadeProfId = int.Parse(dr["CIDADEPROFID"].ToString());
+                pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
+                pes.Empresa = dr["EMPRESA"].ToString();
+                pes.Email = dr["EMAIL"].ToString();
+                pes.Tipo = dr["TIPO"].ToString();
+                pes.Obs = dr["OBS"].ToString();
+                pes.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
+                pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
+                pes.RefNome = dr["REFNOME"].ToString();
+                pes.RefTelefone = int.Parse(dr["REFTELEFONE"].ToString());
+                pes.RefDDD = short.Parse(dr["REFDDD"].ToString());
+                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
+                pes.Status = bool.Parse(dr["STATUS"].ToString());
+
+                pessoas.Add(pes);
+            }
+            return pessoas;
         }
     }
 }

@@ -9,7 +9,7 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Estado</h2>
+                    Cadastro de Estados</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -46,11 +46,12 @@
                             <asp:Button ID="bntVoltar" runat="server" Text="Voltar" CssClass="btn" 
                                 onclick="bntVoltar_Click" />&nbsp;&nbsp;&nbsp;
                             <asp:Button ID="bntSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="bntSalvar_Click" ValidationGroup="salvar" />
+                                onclick="bntSalvar_Click" ValidationGroup="salvar" />                            
                         </td>                      
                     </tr>
-                </table>
+                </table>                
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
         </div>

@@ -54,7 +54,41 @@ namespace DataAccess
 
         public List<Parametros> PesquisarDA()
         {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM PARAMETROS ");
+
             List<Parametros> parametros = new List<Parametros>();
+
+            while (dr.Read())
+            {
+                Parametros par = new Parametros();
+                par.Id = int.Parse(dr["ID"].ToString());
+                par.Descricao = dr["DESCRICAO"].ToString();
+                par.Valor = decimal.Parse(dr["VALOR"].ToString());
+                par.Modulo = dr["MODULO"].ToString();
+
+                parametros.Add(par);
+            }
+            return parametros;
+        }
+
+        public List<Parametros> PesquisarDA(int id_par)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PARAMETROS WHERE ID = {0}",id_par));
+
+            List<Parametros> parametros = new List<Parametros>();
+
+            while (dr.Read())
+            {
+                Parametros par = new Parametros();
+                par.Id = int.Parse(dr["ID"].ToString());
+                par.Descricao = dr["DESCRICAO"].ToString();
+                par.Valor = decimal.Parse(dr["VALOR"].ToString());
+                par.Modulo = dr["MODULO"].ToString();
+
+                parametros.Add(par);
+            }
             return parametros;
         }
     }

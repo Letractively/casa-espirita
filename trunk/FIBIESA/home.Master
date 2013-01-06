@@ -111,7 +111,7 @@
                     <li><a href="viewCurso.aspx" title="">Curso</a></li>
                 </ul>
             </li>
-            <li><a class="collapsed heading">Usuário</a>
+            <li><a class="collapsed heading">Geral</a>
                 <ul class="navigation">
                     <li><a href="viewUsuario.aspx" title="">Usuário</a></li>
                     <li><a href="viewPessoa.aspx" title="">Pessoa</a></li>
@@ -124,7 +124,7 @@
                     <li><a href="viewFormulario.aspx" title="">Formulário</a></li>
                </ul>
             </li>
-            <li><a class="collapsed heading">Falta</a>
+            <li><a class="collapsed heading">Configuração</a>
                 <ul class="navigation">
                     <li><a href="viewParametro.aspx" title="">Parâmetro</a></li>
                 </ul>

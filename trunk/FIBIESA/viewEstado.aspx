@@ -8,11 +8,13 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Estado</h2>
+                <h2>Cadastro de Estados</h2>
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="Busca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />
+                <asp:Button ID="Busca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="bntInserir" runat="server" Text="Inserir" CssClass="btn" 
+                    onclick="bntInserir_Click" />
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
