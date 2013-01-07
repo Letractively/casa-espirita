@@ -7,12 +7,15 @@ using System.Web.UI.WebControls;
 using System.Data;
 using DataObjects;
 using BusinessLayer;
+using FG;
 
 
 namespace Admin
 {
     public partial class viewEstado : System.Web.UI.Page
     {
+        Utils utils = new Utils();
+
         #region funcoes
         private void Pesquisar()
         {
@@ -65,30 +68,15 @@ namespace Admin
 
         protected void grdEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            int str_Est = 0;
-            
-            str_Est = Convert.ToInt32(grdEstados.SelectedDataKey[0].ToString());
-
+            int str_Est = 0;            
+            str_Est = utils.ComparaIntComZero(grdEstados.SelectedDataKey[0].ToString());
             Response.Redirect("cadEstado.aspx?id_est=" + str_Est.ToString() + "&operacao=edit");
-        }
-
-        protected void imgBtnEditar_Click(object sender, ImageClickEventArgs e)
-        {
-
-        }
-
-        protected void imgBtnExcluir_Click(object sender, ImageClickEventArgs e)
-        {
-
-        }
+        }        
 
         protected void grdEstados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             EstadosBL estBL = new EstadosBL();
             Estados estados = new Estados();
-            int est;
-            est = int.Parse(grdEstados.DataKeys[e.RowIndex][0].ToString());
             estados.Id = int.Parse(grdEstados.DataKeys[e.RowIndex][0].ToString());
             estBL.ExcluirBL(estados);
             Pesquisar();

@@ -43,9 +43,9 @@
                         <td style="width: 140px">
                         </td>
                         <td style ="width: 400px">
-                            <asp:Button ID="bntVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
                                 onclick="bntVoltar_Click" />&nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="bntSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="bntSalvar_Click" ValidationGroup="salvar" />                            
                         </td>                      
                     </tr>
