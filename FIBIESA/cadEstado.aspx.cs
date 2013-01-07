@@ -6,18 +6,20 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
+using FG;
 
 namespace Admin
 {
     public partial class cadEstado : System.Web.UI.Page
-    {
-        EstadosBL estBL = new EstadosBL();
-        Estados estados = new Estados();
+    {        
+        Utils utils = new Utils();
         string v_operacao = "";
 
         #region funcoes
         private void carregarDados(int id_est)
         {
+            EstadosBL estBL = new EstadosBL();
+            Estados estados = new Estados();
             List<Estados> est = estBL.PesquisarBL(id_est);
 
             foreach (Estados ltEst in est)
@@ -53,9 +55,9 @@ namespace Admin
 
         protected void bntSalvar_Click(object sender, EventArgs e)
         {
-            int id = 0;
-            Int32.TryParse(hfId.Value, out id);
-            estados.Id = id;
+            EstadosBL estBL = new EstadosBL();
+            Estados estados = new Estados();
+            estados.Id = utils.ComparaIntComZero(hfId.Value);
             estados.Uf = txtUf.Text;
             estados.Descricao = txtDescricao.Text;
 

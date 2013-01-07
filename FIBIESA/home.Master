@@ -113,15 +113,15 @@
             </li>
             <li><a class="collapsed heading">Geral</a>
                 <ul class="navigation">
-                    <li><a href="viewUsuario.aspx" title="">Usuário</a></li>
-                    <li><a href="viewPessoa.aspx" title="">Pessoa</a></li>
-                    <li><a href="viewBairro.aspx" title="">Bairro</a></li>
-                    <li><a href="viewCidade.aspx" title="">Cidade</a></li>
-                    <li><a href="viewEstado.aspx" title="">Estado</a></li>
-                    <li><a href="viewTelefone.aspx" title="">Telefone</a></li>
-                    <li><a href="viewCategoria.aspx" title="">Categoria</a></li>
-                    <li><a href="viewPermicao.aspx" title="">Permição</a></li>
-                    <li><a href="viewFormulario.aspx" title="">Formulário</a></li>
+                    <li><a href="viewUsuario.aspx" title="">Usuários</a></li>
+                    <li><a href="viewPessoa.aspx" title="">Pessoas</a></li>
+                    <li><a href="viewBairro.aspx" title="">Bairros</a></li>
+                    <li><a href="viewCidade.aspx" title="">Cidades</a></li>
+                    <li><a href="viewEstado.aspx" title="">Estados</a></li>
+                    <li><a href="viewTelefone.aspx" title="">Telefones</a></li>
+                    <li><a href="viewCategoria.aspx" title="">Categorias</a></li>
+                    <li><a href="viewPermicao.aspx" title="">Permições</a></li>
+                    <li><a href="viewFormulario.aspx" title="">Formulários</a></li>
                </ul>
             </li>
             <li><a class="collapsed heading">Configuração</a>

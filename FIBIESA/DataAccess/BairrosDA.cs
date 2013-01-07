@@ -60,7 +60,7 @@ namespace DataAccess
             {
                 Bairros bai = new Bairros();
                 bai.Id = int.Parse(dr["ID"].ToString());
-                bai.Codigo = int.Parse(dr["UF"].ToString());
+                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
                 bai.Descricao = dr["DESCRICAO"].ToString();
 
                 bairros.Add(bai);
