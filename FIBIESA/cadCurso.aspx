@@ -31,7 +31,7 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <input type="submit" value="Enviar" class="btn_Salvar" />
                         </td>
                     </tr>
                 </table>

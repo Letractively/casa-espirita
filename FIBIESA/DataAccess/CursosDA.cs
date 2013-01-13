@@ -47,10 +47,40 @@ namespace DataAccess
             return true;
         }
 
-        public List<Autores> PesquisarDA()
+        public List<Cursos> PesquisarDA()
         {
-            List<Autores> instancia = new List<Autores>();
-            return instancia;
+            SqlDataReader reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM CURSOS "));
+            List<Cursos> cursos = new List<Cursos>();
+            while (reader!=null)
+            {
+                Cursos cur = new Cursos();
+                cur.Id = int.Parse(reader["ID"].ToString());
+                cur.Codigo = int.Parse(reader["CODIGO"].ToString());
+                cur.Descricao = reader["DESCRICAO"].ToString();
+
+                cursos.Add(cur);
+            }
+            return cursos;
+        }
+        public List<Cursos> PesquisarDA(int id_cur)
+        {
+            SqlDataReader reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CURSOS WHERE ID = {0}", id_cur));
+
+            List<Cursos> cursos = new List<Cursos>();
+
+            while (reader.Read())
+            {
+                Cursos cur = new Cursos();
+                cur.Id = int.Parse(reader["ID"].ToString());
+                cur.Codigo = int.Parse(reader["CODIGO"].ToString());
+                cur.Descricao = reader["DESCRICAO"].ToString();
+
+                cursos.Add(cur);
+            }
+            return cursos;
         }
     }
 }
