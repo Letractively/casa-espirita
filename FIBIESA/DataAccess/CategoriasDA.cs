@@ -44,7 +44,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", cat.Id);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_categorias", paramsToSP);
 
             return true;
         }

@@ -31,22 +31,22 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtBusca;
         
         /// <summary>
-        /// Busca control.
+        /// btnBusca control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Busca;
+        protected global::System.Web.UI.WebControls.Button btnBusca;
         
         /// <summary>
-        /// bntInserir control.
+        /// btnInserir control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bntInserir;
+        protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
         /// pnlGrid control.
@@ -58,13 +58,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Panel pnlGrid;
         
         /// <summary>
-        /// grdEstados control.
+        /// dtgEstados control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdEstados;
+        protected global::System.Web.UI.WebControls.GridView dtgEstados;
         
         /// <summary>
         /// ImageButton1 control.

@@ -37,7 +37,7 @@ namespace Admin
         {
             int id_bai = 0;
 
-            if (!Page.IsPostBack)
+            if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
                 {

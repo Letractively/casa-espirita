@@ -4,14 +4,74 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DataObjects;
+using BusinessLayer;
+using FG;
 
 namespace Admin
 {
     public partial class cadCategoria : System.Web.UI.Page
     {
+        Utils utils = new Utils();
+        string v_operacao = "";
+
+        #region funcoes
+        private void carregarDados(int id_cat)
+        {
+            CategoriasBL catBL = new CategoriasBL();
+            Categorias categorias = new Categorias();
+            List<Categorias> cat = catBL.PesquisarBL(id_cat);
+
+            foreach (Categorias ltCat in cat)
+	        {
+                hfId.Value = ltCat.Id.ToString();
+                txtCodigo.Text = ltCat.Codigo.ToString();
+                txtDescricao.Text = ltCat.Descricao;	 
+	        }            
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            int id_cat = 0;
 
+            if (!Page.IsPostBack)
+            {
+                if (Request.QueryString["operacao"] != null)
+                {
+                    v_operacao = Request.QueryString["operacao"];
+
+                    if (v_operacao == "edit")
+                        if (Request.QueryString["id_cat"] != null)
+                            id_cat = Convert.ToInt32(Request.QueryString["id_cat"].ToString());
+                }
+
+                if (v_operacao.ToLower() == "edit")
+                    carregarDados(id_cat);
+            }
+
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("viewCategoria.aspx");
+        }
+
+        protected void btnSalvar_Click(object sender, EventArgs e)
+        {
+            CategoriasBL catBL = new CategoriasBL();
+            Categorias categorias = new Categorias();
+
+            categorias.Id = utils.ComparaIntComZero(hfId.Value);
+            categorias.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            categorias.Descricao = txtDescricao.Text;
+
+            if (categorias.Id > 0)
+                catBL.EditarBL(categorias);
+            else
+                catBL.InserirBL(categorias);
+
+            Response.Redirect("viewCategoria.aspx");
         }
     }
 }

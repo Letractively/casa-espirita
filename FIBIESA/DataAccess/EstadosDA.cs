@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace DataAccess
 {
-    public class EstadosDA
+    public class EstadosDA : BaseDA
     {
         public bool InserirDA(Estados est)
         {
@@ -86,5 +86,33 @@ namespace DataAccess
             }
             return estados;
         }
+                
+        public override List<Base> Pesquisar(string descricao)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM ESTADOS WHERE UF = '{0}'", descricao));
+
+            if (!dr.HasRows)
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM ESTADOS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["UF"].ToString();
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }    
+
     }
 }

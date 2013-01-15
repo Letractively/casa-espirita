@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Autores.cs" />
     <Compile Include="Bairros.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="Categorias.cs" />
     <Compile Include="Cidades.cs" />
     <Compile Include="Chamadas.cs" />

@@ -9,7 +9,7 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Cidade</h2>
+                    Cadastro de Cidades</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -17,11 +17,14 @@
                         <td style="width: 140px">
                             Estado:
                         </td>
-                        <td style="width: 400px">
-                            <asp:DropDownList ID="_estado" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                        <td style="width: 400px">                            
+                            <asp:TextBox ID="txtEstado" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:Button ID="btnPesEstado" runat="server" Text="..."  CssClass="btn" 
+                                onclick="btnPesEstado_Click" />
+                            <asp:Label ID="lblDesEstado" runat="server"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtEstado" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -29,7 +32,10 @@
                             Código:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_codigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +43,11 @@
                             Descrição:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_descricao" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
+                                MaxLength="70" Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -46,11 +56,17 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="btnVoltar_Click" />
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
                         </td>
                     </tr>
-                </table>
+                </table>               
             </div>
+             <asp:HiddenField ID="hfId" runat="server" />
+            <asp:HiddenField ID="hfIdEstado" runat="server" />
         </div>
         <div class="status">
         </div>
