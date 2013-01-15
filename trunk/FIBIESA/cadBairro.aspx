@@ -46,7 +46,7 @@
                                 onclick="btnVoltar_Click" />
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" />   
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />   
                         </td>
                     </tr>
                 </table>                

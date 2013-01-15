@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BairrosBL.cs" />
+    <Compile Include="BaseBL.cs" />
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />
     <Compile Include="ChamadasBL.cs" />

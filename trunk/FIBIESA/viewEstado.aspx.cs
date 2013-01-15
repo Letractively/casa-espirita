@@ -50,9 +50,9 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
             /*Vincula o datatable ao gridview para ser possivel visualizar o resultado da pesquisa */
-            grdEstados.DataSource = tabela;
+            dtgEstados.DataSource = tabela;
             /*efetua a atualização da datagrid para exibir os dados da consulta.*/
-            grdEstados.DataBind();
+            dtgEstados.DataBind();
         }
         #endregion
 
@@ -60,32 +60,31 @@ namespace Admin
         {
             Pesquisar();
         }
-
-        protected void Busca_Click(object sender, EventArgs e)
+                          
+        protected void btnBusca_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void grdEstados_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnInserir_Click(object sender, EventArgs e)
         {
-            int str_Est = 0;            
-            str_Est = utils.ComparaIntComZero(grdEstados.SelectedDataKey[0].ToString());
-            Response.Redirect("cadEstado.aspx?id_est=" + str_Est.ToString() + "&operacao=edit");
-        }        
+            Response.Redirect("cadEstado.aspx?operacao=new");
+        }
 
-        protected void grdEstados_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void dtgEstados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             EstadosBL estBL = new EstadosBL();
             Estados estados = new Estados();
-            estados.Id = int.Parse(grdEstados.DataKeys[e.RowIndex][0].ToString());
+            estados.Id = int.Parse(dtgEstados.DataKeys[e.RowIndex][0].ToString());
             estBL.ExcluirBL(estados);
             Pesquisar();
-
         }
 
-        protected void bntInserir_Click(object sender, EventArgs e)
+        protected void dtgEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Response.Redirect("cadEstado.aspx?operacao=new");
+            int str_Est = 0;
+            str_Est = utils.ComparaIntComZero(dtgEstados.SelectedDataKey[0].ToString());
+            Response.Redirect("cadEstado.aspx?id_est=" + str_Est.ToString() + "&operacao=edit");
         }
 
     }

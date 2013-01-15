@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Admin {
+namespace StarFestaEventos {
     
     
-    public partial class viewBairro {
+    public partial class Pesquisar {
         
         /// <summary>
         /// form1 control.
@@ -22,48 +22,30 @@ namespace Admin {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtBusca control.
+        /// txtPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBusca;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
         
         /// <summary>
-        /// btnBusca control.
+        /// btnPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBusca;
+        protected global::System.Web.UI.WebControls.Button btnPesquisa;
         
         /// <summary>
-        /// btnInserir control.
+        /// grdPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInserir;
-        
-        /// <summary>
-        /// dtgBairros control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dtgBairros;
-        
-        /// <summary>
-        /// GridProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridProduto;
+        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
     }
 }

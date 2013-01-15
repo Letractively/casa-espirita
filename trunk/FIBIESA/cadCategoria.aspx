@@ -9,7 +9,7 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Categoria</h2>
+                    Cadastro de Categorias</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -18,7 +18,10 @@
                             Código:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_codigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -26,7 +29,12 @@
                             Descrição:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_descricao" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
+                                MaxLength="70" Width="335px"></asp:TextBox>
+                            <br />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -35,13 +43,18 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="btnVoltar_Click" />
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />                            
                         </td>
                     </tr>
                 </table>
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
-        <div class="status">
+        <div class="status">            
         </div>
     </div>
     </form>

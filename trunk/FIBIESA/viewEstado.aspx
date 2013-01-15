@@ -12,30 +12,33 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="Busca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="bntInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="bntInserir_Click" />
+                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                    OnClick="btnBusca_Click" />&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                    onclick="btnInserir_Click" />
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
                        <tr>
                             <td>
                                 <asp:Panel ID="pnlGrid" runat="server" ScrollBars="Auto">
-                                    <asp:GridView ID="grdEstados" runat="server" AutoGenerateColumns="False" 
-                                        onselectedindexchanged="grdEstados_SelectedIndexChanged" 
+                                    <asp:GridView ID="dtgEstados" runat="server" AutoGenerateColumns="False" 
+                                        onselectedindexchanged="dtgEstados_SelectedIndexChanged" 
                                         AllowSorting="True" DataKeyNames="ID" AllowPaging="True" BackColor="White" 
                                         BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-                                        onrowdeleting="grdEstados_RowDeleting" PageSize="7">
-                                        <Columns>                                   
-                                            <asp:CommandField SelectText="Editar" ShowSelectButton="True"
-                                                AccessibleHeaderText="4546">                                      
-                                            <HeaderStyle CssClass="grd_cmd_header" />
-                                            <ItemStyle CssClass="grd_select" />
-                                            </asp:CommandField>                                                                                       
-                                            <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True" />
+                                        onrowdeleting="dtgEstados_RowDeleting" PageSize="7">
+                                        <Columns>
+                                            <asp:CommandField SelectText="Editar" ShowSelectButton="True">
+                                                <HeaderStyle CssClass="grd_cmd_header" />
+                                                <ItemStyle CssClass="grd_edit" />
+                                            </asp:CommandField>
+                                            <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
+                                                <HeaderStyle CssClass="grd_cmd_header" />
+                                                <ItemStyle CssClass="grd_delete" />
+                                            </asp:CommandField>
                                             <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                            <asp:BoundField DataField="UF" HeaderText="UF" />
-                                            <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                       <asp:BoundField DataField="UF" HeaderText="UF" />
+                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
                                         </Columns>
                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
