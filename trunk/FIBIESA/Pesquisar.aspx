@@ -16,8 +16,14 @@
             <tr>
                 <td>
                     <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
-                    <asp:Button ID="btnPesquisa" runat="server" Text="..." CssClass="btn" 
-                        onclick="btnPesquisa_Click" />
+                    &nbsp;
+                    <asp:DropDownList ID="ddlPesCampo" runat="server" CssClass="inputbox">
+                        <asp:ListItem Value="C">Código</asp:ListItem>
+                        <asp:ListItem Value="D">Descrição</asp:ListItem>
+                    </asp:DropDownList>
+                    &nbsp;
+                    <asp:ImageButton ID="btnPesquisa" runat="server"  CssClass="btnPes"
+                        onclick="btnPesquisa_Click" />  
                 </td>
             </tr>
              <tr>

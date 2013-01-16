@@ -124,6 +124,7 @@
     <Content Include="images\fancybox-x.png" />
     <Content Include="images\fancybox-y.png" />
     <Content Include="images\fancybox\fancybox.png" />
+    <Content Include="images\icons\icone_lupa.jpg" />
     <Content Include="images\icons\icon_approve.png" />
     <Content Include="images\icons\icon_arrow.png" />
     <Content Include="images\icons\icon_close_sq.png" />
