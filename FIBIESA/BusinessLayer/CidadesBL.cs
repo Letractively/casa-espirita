@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class CidadesBL
+    public class CidadesBL : BaseBL
     {
         public bool InserirBL(Cidades cid)
         {
@@ -46,6 +46,13 @@ namespace BusinessLayer
             CidadesDA cidadesDA = new CidadesDA();
 
             return cidadesDA.PesquisaDA(id_cid);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            CidadesDA cidDA = new CidadesDA();
+
+            return cidDA.Pesquisar(codDes, tipo);
         }
     }
 }

@@ -49,11 +49,11 @@ namespace BusinessLayer
             return estadosDA.PesquisarDA(id_est);
         }
 
-        public override List<Base> Pesquisar(string codDes)
+        public override List<Base> Pesquisar(string codDes, string tipo)
         {
             EstadosDA estDA = new EstadosDA();
 
-            return estDA.Pesquisar(codDes);
+            return estDA.Pesquisar(codDes, tipo);
         }
             
     }

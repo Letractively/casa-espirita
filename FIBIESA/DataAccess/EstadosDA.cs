@@ -87,14 +87,18 @@ namespace DataAccess
             return estados;
         }
                 
-        public override List<Base> Pesquisar(string descricao)
+        public override List<Base> Pesquisar(string descricao, string tipo)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            SqlDataReader dr;
+
+            if (tipo == "C")
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM ESTADOS WHERE UF = '{0}'", descricao));
-
-            if (!dr.HasRows)
-            {
+            }
+            else 
+            {          
                 dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM ESTADOS WHERE DESCRICAO LIKE '%{0}%'", descricao));

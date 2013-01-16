@@ -73,6 +73,18 @@
 {
 	text-align:center;
 }
+
+.btnPes
+{
+	background: url(../images/icons/icone_lupa.jpg)no-repeat center center; 
+	float:left;
+	text-indent: -1500px;
+	width:32px;
+	height:32px;
+}
+
+
+
 	
    	
    

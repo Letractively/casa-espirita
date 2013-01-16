@@ -17,7 +17,7 @@ namespace StarFestaEventos
         private Base ba;
         #region funcoes
 
-        private void PesquisarConteudo(string pesquisa)
+        private void PesquisarConteudo(string pesquisa, string tipo)
         {
             Session["tabelaPesquisa"] = null;
             
@@ -36,7 +36,7 @@ namespace StarFestaEventos
             ba = (Base)Session["objPesquisa"];
             
             //EstadosBL estBL = new EstadosBL();
-            List<Base> baPes = baBL.Pesquisar(pesquisa);
+            List<Base> baPes = baBL.Pesquisar(pesquisa,tipo);
 
             foreach (Base bas in baPes)
             {
@@ -52,15 +52,15 @@ namespace StarFestaEventos
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
 
+            DataTable tabela;
+            
             if (Session["tabelaPesquisa"] != null)
             {
-                DataTable tabela;
-
                 tabela = (DataTable)Session["tabelaPesquisa"];
-
                 grdPesquisa.DataSource = tabela;
-                grdPesquisa.DataBind();
             }
+                       
+            grdPesquisa.DataBind();
 
         }
         #endregion
@@ -106,9 +106,11 @@ namespace StarFestaEventos
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), js.ToString(), false);
         }
 
-        protected void btnPesquisa_Click(object sender, EventArgs e)
+        protected void btnPesquisa_Click(object sender, ImageClickEventArgs e)
         {
-            PesquisarConteudo(txtPesquisa.Text);
+            PesquisarConteudo(txtPesquisa.Text,ddlPesCampo.SelectedValue);
         }
+
+      
     }
 }

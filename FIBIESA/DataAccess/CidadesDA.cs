@@ -10,7 +10,7 @@ using InfrastructureSqlServer.Helpers;
 
 namespace DataAccess
 {
-    public class CidadesDA
+    public class CidadesDA : BaseDA
     {
         public bool InserirDA(Cidades cid)
         {
@@ -91,5 +91,38 @@ namespace DataAccess
             return cidades;
 
         }
+
+        public override List<Base> Pesquisar(string descricao, string tipo)
+        {
+            SqlDataReader dr;
+            int codigo;
+
+            if (tipo == "C")
+            {
+                Int32.TryParse(descricao, out codigo);
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CIDADES WHERE CODIGO = '{0}'", codigo));
+            }
+            else
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CIDADES WHERE DESCRICAO LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["CODIGO"].ToString();
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }    
     }
 }
