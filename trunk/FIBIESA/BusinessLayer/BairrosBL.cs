@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class BairrosBL
+    public class BairrosBL : BaseBL
     {
         public bool InserirBL(Bairros bai)
         {
@@ -46,6 +46,13 @@ namespace BusinessLayer
             BairrosDA bairrosDA = new BairrosDA();
 
             return bairrosDA.PesquisarDA(bai);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            BairrosDA baiDA = new BairrosDA();
+
+            return baiDA.Pesquisar(codDes, tipo);
         }
     }
 }

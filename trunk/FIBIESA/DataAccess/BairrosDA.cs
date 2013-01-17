@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace DataAccess
 {
-    public class BairrosDA
+    public class BairrosDA : BaseDA
     {
         public bool InserirDA(Bairros bai)
         {
@@ -87,5 +87,39 @@ namespace DataAccess
             }
             return bairros;
         }
+
+        public override List<Base> Pesquisar(string descricao, string tipo)
+        {
+            SqlDataReader dr;
+
+            if (tipo == "C")
+            {
+                int codigo = 0;
+                Int32.TryParse(descricao, out codigo);
+
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM BAIRROS WHERE CODIGO = '{0}'", codigo));
+            }
+            else
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM BAIRROS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["UF"].ToString();
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }    
     }
 }

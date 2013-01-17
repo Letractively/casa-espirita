@@ -7,7 +7,7 @@ using DataObjects;
 
 namespace BusinessLayer
 {
-    public class CategoriasBL
+    public class CategoriasBL : BaseBL
     {
         public bool InserirBL(Categorias cat)
         {
@@ -46,6 +46,13 @@ namespace BusinessLayer
             CategoriasDA categoriasDA = new CategoriasDA();
 
             return categoriasDA.PesquisarDA(id_cat);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            CategoriasDA catDA = new CategoriasDA();
+
+            return catDA.Pesquisar(codDes, tipo);
         }
     }
 }

@@ -11,7 +11,7 @@ using InfrastructureSqlServer.Helpers;
 
 namespace DataAccess
 {
-    public class CategoriasDA
+    public class CategoriasDA : BaseDA
     {
         public bool InserirDA(Categorias cat)
         {
@@ -86,6 +86,40 @@ namespace DataAccess
             }
             return categorias;
         }
+
+        public override List<Base> Pesquisar(string descricao, string tipo)
+        {
+            SqlDataReader dr;
+            
+            if (tipo == "C")
+            {
+                int codigo = 0;
+                Int32.TryParse(descricao,out codigo);
+
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CATEGORIAS WHERE CODIGO = '{0}'", codigo));
+            }
+            else
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CATEGORIAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["CODIGO"].ToString();
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }    
 
     }
 }

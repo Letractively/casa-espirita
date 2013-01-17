@@ -74,10 +74,10 @@ namespace DataAccess
             return telefones;
         }
 
-        public List<Telefones> PesquisarDA(int id_tel)
+        public List<Telefones> PesquisarDA(int id_pes)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text,string.Format(@"SELECT * FROM TELEFONES WHERE ID = {0}",id_tel));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM TELEFONES WHERE PESSOAID = {0}", id_pes));
 
             List<Telefones> telefones = new List<Telefones>();
 
