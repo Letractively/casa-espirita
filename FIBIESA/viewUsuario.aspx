@@ -25,7 +25,8 @@
                                 <asp:GridView ID="dtgUsuarios" runat="server" AutoGenerateColumns="False" 
                                     AllowPaging="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" 
                                     BorderWidth="1px" CellPadding="3" onrowdeleting="dtgUsuarios_RowDeleting" 
-                                    onselectedindexchanged="dtgUsuarios_SelectedIndexChanged" PageSize="7">
+                                    onselectedindexchanged="dtgUsuarios_SelectedIndexChanged" PageSize="7" 
+                                    DataKeyNames="ID">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">
                                             <HeaderStyle  CssClass="grd_cmd_header"/>

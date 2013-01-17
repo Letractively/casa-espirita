@@ -41,11 +41,11 @@ namespace BusinessLayer
             return telefonesDA.PesquisarDA();
         }
 
-        public List<Telefones> PesquisarBL(int id_tel)
+        public List<Telefones> PesquisarBL(int id_pes)
         {
             TelefonesDA telefonesDA = new TelefonesDA();
 
-            return telefonesDA.PesquisarDA(id_tel);
+            return telefonesDA.PesquisarDA(id_pes);
         }
     }
 }

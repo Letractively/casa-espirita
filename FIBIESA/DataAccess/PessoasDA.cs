@@ -10,7 +10,7 @@ using InfrastructureSqlServer.Helpers;
 
 namespace DataAccess
 {
-    public class PessoasDA
+    public class PessoasDA : BaseDA
     {
         public bool InserirDA(Pessoas pes)
         {
@@ -47,9 +47,9 @@ namespace DataAccess
             paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
             paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);
             paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro); 
+            paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
 
-           // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
 
             return true;
         }
@@ -92,7 +92,7 @@ namespace DataAccess
             paramsToSP[31] = new SqlParameter("@reftelefone", pes.RefTelefone);
             paramsToSP[32] = new SqlParameter("@dtcadastro", pes.DtCadastro);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_pessoas", paramsToSP);
 
             return true;
         }
@@ -103,7 +103,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_pessoas", paramsToSP);
 
             return true;
         }
@@ -201,5 +201,39 @@ namespace DataAccess
             }
             return pessoas;
         }
+
+        public override List<Base> Pesquisar(string descricao, string tipo)
+        {
+            SqlDataReader dr;
+
+            if (tipo == "C")
+            {
+                int codigo = 0;
+                Int32.TryParse(descricao,out codigo);
+
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM PESSOAS WHERE CODIGO = '{0}'", codigo));
+            }
+            else
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM PESSOAS WHERE NOME LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["CODIGO"].ToString();
+                bas.PesDescricao = dr["NOME"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }    
     }
 }
