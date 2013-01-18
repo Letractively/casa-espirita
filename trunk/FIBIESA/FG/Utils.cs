@@ -33,14 +33,59 @@ namespace FG
             }
         }
 
-        public DateTime ComparaDataComNull(string prm_Data)
+        public int? ComparaIntComNull(string prm_Int)
         {
-            DateTime data;
-            DateTime.TryParse(prm_Data, out data);
-            return data; 
+            try
+            {
+                if (prm_Int.Trim() != string.Empty)
+                {
+                    if (prm_Int.Trim() == "0")
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Convert.ToInt32(prm_Int.Trim());
+                    }
+                }
+                else
+                {
+                    return Convert.ToInt32(prm_Int.Trim());
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public DateTime? ComparaDataComNull1(string prm_Data)
+        public short? ComparaShortComNull(string prm_Int)
+        {
+            try
+            {
+                if (prm_Int.Trim() != string.Empty)
+                {
+                    if (prm_Int.Trim() == "0")
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Convert.ToInt16(prm_Int.Trim());
+                    }
+                }
+                else
+                {
+                    return Convert.ToInt16(prm_Int.Trim());
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public DateTime? ComparaDataComNull(string prm_Data)
         {
             if (prm_Data == "" || prm_Data == null)
                 return null;

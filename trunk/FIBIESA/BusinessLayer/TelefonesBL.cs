@@ -47,5 +47,12 @@ namespace BusinessLayer
 
             return telefonesDA.PesquisarDA(id_pes);
         }
+
+        public int RetornarMaxCodigoBL()
+        {
+            TelefonesDA telDA = new TelefonesDA();
+
+            return telDA.RetornarMaxCodigoDA();
+        }
     }
 }

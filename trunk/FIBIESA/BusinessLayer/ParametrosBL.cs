@@ -47,5 +47,12 @@ namespace BusinessLayer
 
             return parametrosDA.PesquisarDA(id_par);
         }
+
+        public List<Parametros> PesquisarBL(string descricao)
+        {
+            ParametrosDA parametrosDA = new ParametrosDA();
+
+            return parametrosDA.PesquisarDA(descricao);
+        }
     }
 }

@@ -89,7 +89,6 @@
     <Content Include="cadPessoa.aspx" />
     <Content Include="cadPortador.aspx" />
     <Content Include="cadReserva.aspx" />
-    <Content Include="cadTelefone.aspx" />
     <Content Include="cadTipoAutor.aspx" />
     <Content Include="cadTipoDocumento.aspx" />
     <Content Include="cadTipoObra.aspx" />
@@ -212,7 +211,6 @@
     <Content Include="viewPessoa.aspx" />
     <Content Include="viewPortador.aspx" />
     <Content Include="viewReserva.aspx" />
-    <Content Include="viewTelefone.aspx" />
     <Content Include="viewTipoAutor.aspx" />
     <Content Include="viewTipoDocumento.aspx" />
     <Content Include="viewTipoObra.aspx" />
@@ -447,13 +445,6 @@
     </Compile>
     <Compile Include="cadReserva.aspx.designer.cs">
       <DependentUpon>cadReserva.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="cadTelefone.aspx.cs">
-      <DependentUpon>cadTelefone.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cadTelefone.aspx.designer.cs">
-      <DependentUpon>cadTelefone.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadTipoAutor.aspx.cs">
       <DependentUpon>cadTipoAutor.aspx</DependentUpon>
@@ -738,13 +729,6 @@
     </Compile>
     <Compile Include="viewReserva.aspx.designer.cs">
       <DependentUpon>viewReserva.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewTelefone.aspx.cs">
-      <DependentUpon>viewTelefone.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewTelefone.aspx.designer.cs">
-      <DependentUpon>viewTelefone.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewTipoAutor.aspx.cs">
       <DependentUpon>viewTipoAutor.aspx</DependentUpon>

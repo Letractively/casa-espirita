@@ -17,9 +17,93 @@ namespace Admin
         #region variaveis
         Utils utils = new Utils();
         DataTable dtTelefones = new DataTable();
+        string v_operacao = "";
         #endregion
 
         #region funcoes
+        private void CarregarDadosPessoas(int id_pes)
+        {
+            string[] v_pesquisa;
+            PessoasBL pesBL = new PessoasBL();
+            List<Pessoas> pessoas = pesBL.PesquisarBL();
+
+            foreach (Pessoas pes in pessoas)
+            {
+                hfId.Value = pes.Id.ToString();
+                // pessoas.Codigo = 
+                txtNome.Text = pes.Nome;
+                txtNomeFantasia.Text = pes.NomeFantasia;                
+                txtCpfCnpj.Text =  pes.CpfCnpj;
+                txtRg.Text = pes.Rg;
+                txtDataNascimento.Text =  pes.DtNascimento.ToString();
+                ddlEstadoCivil.SelectedValue =  pes.EstadoCivil;
+                txtNomeMae.Text =  pes.NomeMae;
+                txtNomePai.Text = pes.NomePai;                
+                txtCep.Text = pes.Cep;
+                txtEndereco.Text =  pes.Endereco;
+                txtNumero.Text = pes.Numero;                
+                txtComplemento.Text = pes.Complemento;
+                txtEmpresa.Text = pes.Empresa;
+                txtEnderecoProf.Text = pes.EnderecoProf;
+                txtNumeroProf.Text = pes.NumeroProf;                
+                txtComplementoProf.Text = pes.ComplementoProf;                
+                txtCepProf.Text = pes.CepProf;
+                txtObservacao.Text = pes.Obs;
+                txtDtCadastro.Text = pes.DtCadastro.ToString();
+                               
+                hfIdCidade.Value = pes.CidadeId.ToString();
+                if (utils.ComparaIntComZero(hfIdCidade.Value) > 0)
+                {
+                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidade.Value));
+                    txtCidade.Text = v_pesquisa[0];
+                    lblDesCidade.Text = v_operacao[1].ToString();
+                }
+
+                hfIdNaturalidade.Value = pes.Naturalidade.ToString();
+                if (utils.ComparaIntComZero(hfIdNaturalidade.Value) > 0)
+                {
+                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdNaturalidade.Value));
+                    txtNaturalidade.Text = v_pesquisa[0];
+                    lblDesNaturalidade.Text = v_operacao[1].ToString();
+                }
+
+                hfIdCidProf.Value = pes.CidadeProfId.ToString();
+                if (utils.ComparaIntComZero(hfIdCidProf.Value) > 0)
+                {
+                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidProf.Value));
+                    txtCidadeProf.Text = v_pesquisa[0];
+                    lblDesCidProf.Text = v_operacao[1].ToString();
+                }
+                
+                hfIdBairro.Value = pes.BairroId.ToString();
+                if (utils.ComparaIntComZero(hfIdBairro.Value) > 0)
+                {
+                    v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairro.Value));
+                    txtBairro.Text = v_pesquisa[0];
+                    lblDesBairro.Text = v_operacao[1].ToString();
+                }
+                
+                hfIdBairroProf.Value = pes.BairroProf.ToString();
+                if (utils.ComparaIntComZero(hfIdBairroProf.Value) > 0)
+                {
+                    v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairroProf.Value));
+                    txtBairroProf.Text = v_pesquisa[0];
+                    lblDesBairroProf.Text = v_operacao[1].ToString();
+                }
+
+                hfIdCategoria.Value = pes.CategoriaId.ToString();
+                if (utils.ComparaIntComZero(hfIdCategoria.Value) > 0)
+                {
+                    CategoriasBL catBL = new CategoriasBL();
+                    List<Categorias> categorias = catBL.PesquisarBL(utils.ComparaIntComZero(hfIdCategoria.Value));
+                                        
+                    txtCategoria.Text = categorias[0].Codigo.ToString();
+                    lblDesCategoria.Text = categorias[0].Descricao;
+                }                         
+                
+            }          
+ 
+        }
         private void CarregarTabelaPesquisaCidade()
         {
             Session["tabelaPesquisa"] = null;
@@ -54,8 +138,7 @@ namespace Admin
             Session["objBLPesquisa"] = cidBL;
             Session["objPesquisa"] = ci;
         }
-
-        private void PesquisarTelefones(int id_pes)
+        private void CarregarDadosTelefones(int id_pes)
         {
             DataTable dt = new DataTable();
 
@@ -63,11 +146,13 @@ namespace Admin
             DataColumn coluna2 = new DataColumn("DDD", Type.GetType("System.Int16"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
+            DataColumn coluna5 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
 
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
             dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
 
             TelefonesBL telBL = new TelefonesBL();
 
@@ -81,17 +166,74 @@ namespace Admin
                 linha["DDD"] = tel.Ddd;
                 linha["DESCRICAO"] = tel.Descricao;
                 linha["PESSOAID"] = tel.PessoaId;
+                linha["CODIGO"] = tel.Codigo;
             }
 
             dtgTelefones.DataSource = dt;
             dtgTelefones.DataBind();
         }
+        private string[] RetornarCodigoDecricaoCidade(int id_cid)
+        {
+            string[] v_cidade = new string[2];
+            CidadesBL cidBL = new CidadesBL();
+            List<Cidades> cidades =  cidBL.PesquisarBL(id_cid);
+
+            v_cidade[0] = cidades[0].Codigo.ToString();
+            v_cidade[1] = cidades[0].Descricao;		 
+	        
+            return v_cidade;
+        }
+        private string[] RetornarCodigoDecricaoBairro(int id_bai)
+        {
+            string[] v_bairro = new string[2];
+            BairrosBL baiBL = new BairrosBL();
+            List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
+
+            v_bairro[0] = bairros[0].Codigo.ToString();
+            v_bairro[1] = bairros[0].Descricao;
+           
+            return v_bairro;
+        }
+        private void CriarDtTelefones()
+        {  
+            if (dtTelefones.Columns.Count == 0)
+            {
+                DataColumn[] keys = new DataColumn[1];
+                DataColumn coluna1 = new DataColumn("CODIGO",Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("DDD", Type.GetType("System.Int16"));
+                DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
+                DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+                dtTelefones.Columns.Add(coluna1);
+                dtTelefones.Columns.Add(coluna2);
+                dtTelefones.Columns.Add(coluna3);
+                dtTelefones.Columns.Add(coluna4);
+                keys[0] = coluna1;                        
+
+                dtTelefones.PrimaryKey = keys;
+            }
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            int id_pes = 0;
+            CriarDtTelefones();
             if (!IsPostBack)
             {
-                //PesquisarTelefones();
+                if (Request.QueryString["operacao"] != null)
+                {
+                    v_operacao = Request.QueryString["operacao"];
+
+                    if (v_operacao == "edit")
+                        if (Request.QueryString["id_pes"] != null)
+                            id_pes = Convert.ToInt32(Request.QueryString["id_pes"].ToString());
+                }
+
+                if (v_operacao.ToLower() == "edit")
+                {
+                    CarregarDadosPessoas(id_pes);
+                    CarregarDadosTelefones(id_pes);
+                }
             }
 
         }
@@ -187,29 +329,7 @@ namespace Admin
             CarregarTabelaPesquisaCidade();
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCidadeProf.ClientID + "&id=" + hfIdCidProf.ClientID + "&lbl=" + lblDesCidProf.ClientID + "','',600,500);", true);
         }
-
-        protected void btnInserir_Click(object sender, EventArgs e)
-        {
-            if(Session["dtTelefone"] != null)
-                dtTelefones = (DataTable)Session["dtTelefone"];
-
-            DataRow linha = dtTelefones.NewRow(); 
-
-            linha["DDD"] = 
-            linha["NUMERO"] = txtTelefone.Text;
-            linha["DESCRICAO"] = ddlTipo.SelectedValue;
-
-            dtTelefones.Rows.Add(linha);
-
-            Session["dtTelefone"] = dtTelefones;
-            dtgTelefones.DataSource = dtgTelefones;
-            dtgTelefones.DataBind();
-
-            txtTelefone.Text = "";
-            ddlTipo.SelectedIndex = 1;
-
-        }
-
+                
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewPessoa.aspx");
@@ -231,7 +351,7 @@ namespace Admin
             pessoas.EstadoCivil = ddlEstadoCivil.SelectedValue;
             pessoas.NomeMae = txtNomeMae.Text;
             pessoas.NomePai = txtNomePai.Text;
-            pessoas.Naturalidade = utils.ComparaIntComZero(hfIdNaturalidade.Value);
+            pessoas.Naturalidade = utils.ComparaIntComNull(hfIdNaturalidade.Value);
             pessoas.CidadeId = utils.ComparaIntComZero(hfIdCidade.Value);
             pessoas.Cep = txtCep.Text;
             pessoas.Endereco = txtEndereco.Text;
@@ -241,21 +361,65 @@ namespace Admin
             pessoas.Empresa = txtEmpresa.Text;
             pessoas.EnderecoProf = txtEnderecoProf.Text;
             pessoas.NumeroProf = txtNumeroProf.Text;
-            pessoas.CidadeProfId = utils.ComparaIntComZero(hfIdCidProf.Value);
+            pessoas.CidadeProfId = utils.ComparaIntComNull(hfIdCidProf.Value);
             pessoas.ComplementoProf = txtComplementoProf.Text;
-            pessoas.BairroProf = utils.ComparaIntComZero(hfIdBairroProf.Value);
+            pessoas.BairroProf = utils.ComparaIntComNull(hfIdBairroProf.Value);
             pessoas.CepProf = txtCepProf.Text;
             pessoas.Obs = txtObservacao.Text;
             pessoas.DtCadastro = DateTime.Now;
-
-
+            
             if (pessoas.Id > 0)
                 pesBL.EditarBL(pessoas);
             else
                 pesBL.InserirBL(pessoas);
 
             Response.Redirect("viewPessoa.aspx");
-        }      
-       
+        }
+
+        protected void btnInserirTelefone_Click(object sender, EventArgs e)
+        {
+            bool altera = false;
+            int codigo = 0;
+            TelefonesBL telBL = new TelefonesBL();
+
+            if (Session["dtTelefone"] != null)
+                dtTelefones = (DataTable)Session["dtTelefone"];
+
+            DataRow linha = dtTelefones.NewRow();
+
+            codigo = utils.ComparaIntComZero(hfCodTelefone.Value);
+
+            if (codigo == 0)
+                codigo = telBL.RetornarMaxCodigoBL();
+
+            if (dtTelefones.Rows.Contains(codigo))
+            {
+                linha = dtTelefones.Rows.Find(codigo);
+                linha.BeginEdit();
+                altera = true;
+            }
+            else
+                altera = false;
+
+            linha["CODIGO"] = codigo.ToString();
+            linha["DDD"] = txtDDD.Text;
+            linha["NUMERO"] = txtTelefone.Text;
+            linha["DESCRICAO"] = ddlTipo.SelectedValue;
+
+            if (altera)
+                linha.EndEdit();
+            else
+                dtTelefones.Rows.Add(linha);
+
+            Session["dtTelefone"] = dtTelefones;
+            dtgTelefones.DataSource = dtTelefones;
+            dtgTelefones.DataBind();
+
+            txtTelefone.Text = "";
+            txtDDD.Text = "";
+            ddlTipo.SelectedIndex = 1;             
+        }
+
+              
     }
 }

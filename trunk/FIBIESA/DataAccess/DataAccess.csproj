@@ -78,6 +78,10 @@
       <Project>{7EE895E3-958E-46DE-B833-E4072F2DC992}</Project>
       <Name>DataObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FG\FG.csproj">
+      <Project>{5F2498BE-B263-4CC7-9D9F-9C5C012528E8}</Project>
+      <Name>FG</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -63,8 +63,8 @@ namespace DataObjects
             set { _nomePai = value; }
         }
 
-        private DateTime _dtNascimento;
-        public DateTime DtNascimento
+        private DateTime? _dtNascimento;
+        public DateTime? DtNascimento
         {
             get { return _dtNascimento; }
             set { _dtNascimento = value; }
@@ -77,8 +77,8 @@ namespace DataObjects
             set { _estadoCivil = value; }
         }
 
-        private Int32 _naturalidade;
-        public Int32 Naturalidade
+        private Int32? _naturalidade;
+        public Int32? Naturalidade
         {
             get { return _naturalidade; }
             set { _naturalidade = value; }
@@ -140,8 +140,8 @@ namespace DataObjects
             set { _numeroProf = value; }
         }
 
-        private Int32 _bairroProf;
-        public Int32 BairroProf
+        private Int32? _bairroProf;
+        public Int32? BairroProf
         {
             get { return _bairroProf; }
             set { _bairroProf = value; }
@@ -154,8 +154,8 @@ namespace DataObjects
             set { _cepProf = value; }
         }
 
-        private Int32 _cidadeProfId;
-        public Int32 CidadeProfId
+        private Int32? _cidadeProfId;
+        public Int32? CidadeProfId
         {
             get { return _cidadeProfId; }
             set { _cidadeProfId = value; }
@@ -217,29 +217,29 @@ namespace DataObjects
             set { _refNome = value; }
         }
 
-        private Int32 _refTelefone;
-        public Int32 RefTelefone
+        private Int32? _refTelefone;
+        public Int32? RefTelefone
         {
             get { return _refTelefone; }
             set { _refTelefone = value; }
         }
 
-        private Int16 _refDDD;
-        public Int16 RefDDD
+        private Int16? _refDDD;
+        public Int16? RefDDD
         {
             get { return _refDDD; }
             set { _refDDD = value; }
         }
 
-        private DateTime _dtCadastro;
-        public DateTime DtCadastro
+        private DateTime? _dtCadastro;
+        public DateTime? DtCadastro
         {
             get { return _dtCadastro; }
             set { _dtCadastro = value; }
         }
 
-        private bool _status;
-        public bool Status
+        private int _status;
+        public int Status
         {
             get { return _status; }
             set { _status = value; }
