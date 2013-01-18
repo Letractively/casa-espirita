@@ -28,8 +28,8 @@ namespace DataObjects
             set { _descricao = value; }
         }
 
-        private decimal _valor;
-        public decimal Valor
+        private string _valor;
+        public string Valor
         {
             get { return _valor; }
             set { _valor = value; }

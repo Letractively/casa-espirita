@@ -17,13 +17,12 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
-        private void carregarDados(int id_bai)
+        private void CarregarDados(int id_bai)
         {
-            BairrosBL baiBL = new BairrosBL();
-            Bairros bairros = new Bairros();
-            List<Bairros> bai = baiBL.PesquisarBL(id_bai);
+            BairrosBL baiBL = new BairrosBL();            
+            List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
 
-            foreach (Bairros ltBai in bai)
+            foreach (Bairros ltBai in bairros)
             {
                 hfId.Value = ltBai.Id.ToString();
                 txtCodigo.Text = ltBai.Codigo.ToString();
@@ -49,7 +48,7 @@ namespace Admin
                 }
 
                 if (v_operacao.ToLower() == "edit")
-                    carregarDados(id_bai);
+                    CarregarDados(id_bai);
             }
         }
 

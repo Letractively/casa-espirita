@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>                        
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="1" 
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0" 
                                 AutoPostBack="True">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
@@ -25,12 +25,18 @@
                                                 <td style="width: 200px">
                                                     Nome:
                                                 </td>
-                                                <td style="width: 400px" colspan="3">
+                                                <td style="width: 400px">
                                                     <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="335px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                                         ErrorMessage="*Preenchimento Obrigatório" ControlToValidate="txtNome" 
                                                         ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                </td>
+                                                <td style="width: 200px">
+                                                    Data Cadastro:
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -230,20 +236,21 @@
                                                 </asp:DropDownList>
                                             </td>                                       
                                             <td style="width: 140px">
-                                                Telefone:
+                                               DDD/Telefone:
                                             </td>
                                             <td style="width: 400px">
+                                                <asp:TextBox ID="txtDDD" runat="server" CssClass="inputbox" Width="72px"></asp:TextBox>
                                                 <asp:TextBox ID="txtTelefone" runat="server" CssClass="inputbox" MaxLength="30"></asp:TextBox>
                                                 &nbsp;&nbsp;
-                                                <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" 
-                                                    onclick="btnInserir_Click" />
+                                                <asp:Button ID="btnInserirTelefone" runat="server" CssClass="btn" Text="Inserir" 
+                                                    onclick="btnInserirTelefone_Click" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4">
                                                 <asp:GridView ID="dtgTelefones" runat="server" AutoGenerateColumns="False" 
                                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                                    CellPadding="3">
+                                                    CellPadding="3" DataKeyNames="CODIGO">
                                                     <Columns>
                                                         <asp:CommandField ShowSelectButton="True">
                                                              <HeaderStyle CssClass="grd_cmd_header" />
@@ -257,6 +264,7 @@
                                                         <asp:BoundField DataField="DESCRICAO" HeaderText="Tipo" />
                                                         <asp:BoundField DataField="DDD" HeaderText="DDD" />
                                                         <asp:BoundField DataField="NUMERO" HeaderText="Número" />
+                                                        <asp:BoundField DataField="CODIGO" HeaderText="Codigo" Visible="False" />
                                                     </Columns>
                                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -381,7 +389,7 @@
                                 onclick="btnVoltar_Click" />
                             &nbsp;&nbsp;&nbsp
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
                         </td>
                     </tr>
                 </table>
@@ -394,6 +402,7 @@
             <asp:HiddenField ID="hfIdCidProf" runat="server" />
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdBairroProf" runat="server" />
+            <asp:HiddenField ID="hfCodTelefone" runat="server" />
         </div>
         <div class="status">
         </div>

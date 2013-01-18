@@ -95,5 +95,17 @@ namespace DataAccess
 
             return telefones;
         }
+
+        public int RetornarMaxCodigoDA()
+        {
+            int codigo = 0;
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT COALESCE(MAX(CODIGO),1) COD FROM TELEFONES "));
+
+           while(dr.Read())
+            codigo = Convert.ToInt32(dr["COD"].ToString());
+
+            return codigo;
+        }
     }
 }

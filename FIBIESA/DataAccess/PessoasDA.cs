@@ -7,47 +7,51 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using InfrastructureSqlServer.Helpers;
+using FG;
 
 namespace DataAccess
 {
     public class PessoasDA : BaseDA
     {
+        Utils utils = new Utils();
+
         public bool InserirDA(Pessoas pes)
         {
             SqlParameter[] paramsToSP = new SqlParameter[32];
-
-            paramsToSP[0] = new SqlParameter("@codigo", pes.Codigo);
-            paramsToSP[1] = new SqlParameter("@nome", pes.Nome);
-            paramsToSP[2] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
-            paramsToSP[3] = new SqlParameter("@cpfcnpj", pes.CpfCnpj);
-            paramsToSP[4] = new SqlParameter("@rg", pes.Rg);
-            paramsToSP[5] = new SqlParameter("@nomemae", pes.NomeMae);
-            paramsToSP[6] = new SqlParameter("@nomepai", pes.NomePai);
-            paramsToSP[7] = new SqlParameter("@dtnascimento", pes.DtNascimento);
-            paramsToSP[8] = new SqlParameter("@estadocivil", pes.EstadoCivil);
-            paramsToSP[9] = new SqlParameter("@naturalidade", pes.Naturalidade);
-            paramsToSP[10] = new SqlParameter("@endereco", pes.Endereco);
-            paramsToSP[11] = new SqlParameter("@numero", pes.Numero);
-            paramsToSP[12] = new SqlParameter("@bairroid", pes.BairroId);
-            paramsToSP[13] = new SqlParameter("@cep", pes.Cep);
-            paramsToSP[14] = new SqlParameter("@cidadeid", pes.CidadeId);
-            paramsToSP[15] = new SqlParameter("@complemento", pes.Complemento);
-            paramsToSP[16] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[17] = new SqlParameter("@numeroprof", pes.NumeroProf);
-            paramsToSP[18] = new SqlParameter("@bairroprof", pes.BairroProf);
-            paramsToSP[19] = new SqlParameter("@cepprof", pes.CepProf);
-            paramsToSP[20] = new SqlParameter("@cidadeprofid", pes.CidadeProfId);
-            paramsToSP[21] = new SqlParameter("@complementoprof", pes.ComplementoProf);
-            paramsToSP[22] = new SqlParameter("@empresa", pes.Empresa);
-            paramsToSP[23] = new SqlParameter("@email", pes.Email);
+                        
+            paramsToSP[0] = new SqlParameter("@nome", pes.Nome);
+            paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
+            paramsToSP[2] = new SqlParameter("@cpfcnpj", pes.CpfCnpj);
+            paramsToSP[3] = new SqlParameter("@rg", pes.Rg);
+            paramsToSP[4] = new SqlParameter("@nomemae", pes.NomeMae);
+            paramsToSP[5] = new SqlParameter("@nomepai", pes.NomePai);
+            paramsToSP[6] = new SqlParameter("@dtnascimento", pes.DtNascimento);
+            paramsToSP[7] = new SqlParameter("@estadocivil", pes.EstadoCivil);
+            paramsToSP[8] = new SqlParameter("@naturalidade", pes.Naturalidade);
+            paramsToSP[9] = new SqlParameter("@endereco", pes.Endereco);
+            paramsToSP[10] = new SqlParameter("@numero", pes.Numero);
+            paramsToSP[11] = new SqlParameter("@bairroid", pes.BairroId);
+            paramsToSP[12] = new SqlParameter("@cep", pes.Cep);
+            paramsToSP[13] = new SqlParameter("@cidadeid", pes.CidadeId);
+            paramsToSP[14] = new SqlParameter("@complemento", pes.Complemento);
+            paramsToSP[15] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
+            paramsToSP[16] = new SqlParameter("@numeroprof", pes.NumeroProf);            
+            paramsToSP[17] = new SqlParameter("@cepprof", pes.CepProf);
+            paramsToSP[18] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
+            paramsToSP[19] = new SqlParameter("@complementoprof", pes.ComplementoProf);
+            paramsToSP[20] = new SqlParameter("@empresa", pes.Empresa);
+            paramsToSP[21] = new SqlParameter("@email", pes.Email);
+            paramsToSP[22] = new SqlParameter("@status", pes.Status);
+            paramsToSP[23] = new SqlParameter("@tipo", pes.Tipo);
             paramsToSP[24] = new SqlParameter("@obs", pes.Obs);
-            paramsToSP[25] = new SqlParameter("@categoriaid", pes.CategoriaId);
-            paramsToSP[26] = new SqlParameter("@tipo", pes.Tipo);
-            paramsToSP[27] = new SqlParameter("@envemail", pes.EnvEmail);
+            paramsToSP[25] = new SqlParameter("@categoriaid", pes.CategoriaId);            
+            paramsToSP[26] = new SqlParameter("@envemail", pes.EnvEmail);
+            paramsToSP[27] = new SqlParameter("@dtcadastro", pes.DtCadastro);
             paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
-            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);
-            paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
+            paramsToSP[29] = new SqlParameter("@reftelefone", pes.RefTelefone);
+            paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);       
+            paramsToSP[31] = new SqlParameter("@codigo", pes.Codigo);
+            //paramsToSP[17] = new SqlParameter("@bairroprof", pes.BairroProf);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
 
@@ -76,21 +80,22 @@ namespace DataAccess
             paramsToSP[15] = new SqlParameter("@cidadeid", pes.CidadeId);
             paramsToSP[16] = new SqlParameter("@complemento", pes.Complemento);
             paramsToSP[17] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[18] = new SqlParameter("@numeroprof", pes.NumeroProf);
-            paramsToSP[19] = new SqlParameter("@bairroprof", pes.BairroProf);
-            paramsToSP[20] = new SqlParameter("@cepprof", pes.CepProf);
-            paramsToSP[21] = new SqlParameter("@cidadeprofid", pes.CidadeProfId);
-            paramsToSP[22] = new SqlParameter("@complementoprof", pes.ComplementoProf);
-            paramsToSP[23] = new SqlParameter("@empresa", pes.Empresa);
-            paramsToSP[24] = new SqlParameter("@email", pes.Email);
-            paramsToSP[25] = new SqlParameter("@obs", pes.Obs);
-            paramsToSP[26] = new SqlParameter("@categoriaid", pes.CategoriaId);
-            paramsToSP[27] = new SqlParameter("@tipo", pes.Tipo);
-            paramsToSP[28] = new SqlParameter("@envemail", pes.EnvEmail);
-            paramsToSP[29] = new SqlParameter("@refnome", pes.RefNome);
-            paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);
-            paramsToSP[31] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[32] = new SqlParameter("@dtcadastro", pes.DtCadastro);
+            paramsToSP[18] = new SqlParameter("@numeroprof", pes.NumeroProf);           
+            paramsToSP[19] = new SqlParameter("@cepprof", pes.CepProf);
+            paramsToSP[20] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
+            paramsToSP[21] = new SqlParameter("@complementoprof", pes.ComplementoProf);
+            paramsToSP[22] = new SqlParameter("@empresa", pes.Empresa);
+            paramsToSP[23] = new SqlParameter("@email", pes.Email);
+            paramsToSP[24] = new SqlParameter("@obs", pes.Obs);
+            paramsToSP[25] = new SqlParameter("@categoriaid", pes.CategoriaId);
+            paramsToSP[26] = new SqlParameter("@tipo", pes.Tipo);
+            paramsToSP[27] = new SqlParameter("@envemail", pes.EnvEmail);
+            paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
+            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);
+            paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
+            paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
+            paramsToSP[32] = new SqlParameter("@status", pes.Status);
+           // paramsToSP[19] = new SqlParameter("@bairroprof", pes.BairroProf);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_pessoas", paramsToSP);
 
@@ -124,31 +129,31 @@ namespace DataAccess
                 pes.Rg = dr["RG"].ToString();
                 pes.NomeMae = dr["NOMEMAE"].ToString();
                 pes.NomePai = dr["NOMEPAI"].ToString();
-                pes.DtNascimento = DateTime.Parse(dr["DTNASCIMENTO"].ToString());
-                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
-                pes.Naturalidade = int.Parse(dr["NATURALIDADE"].ToString());
+                pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());                
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();                                             
+                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());                
                 pes.Endereco = dr["ENDERECO"].ToString();
                 pes.Numero = dr["NUMERO"].ToString();
-                pes.BairroId = int.Parse(dr["BAIRROID"].ToString());
+                pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
                 pes.Cep = dr["CEP"].ToString();
-                pes.CidadeId = int.Parse(dr["CIDADEID"].ToString());
+                pes.CidadeId = Convert.ToInt32(dr["CIDADEID"].ToString());
                 pes.Complemento = dr["COMPLEMENTO"].ToString();
                 pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
                 pes.NumeroProf = dr["NUMEROPROF"].ToString();
-                pes.CepProf = dr["CEPPROF"].ToString();
-                pes.CidadeProfId = int.Parse(dr["CIDADEPROFID"].ToString());
+                pes.CepProf = dr["CEPPROF"].ToString();   
+                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROF"].ToString());                
                 pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
                 pes.Empresa = dr["EMPRESA"].ToString();
                 pes.Email = dr["EMAIL"].ToString();
                 pes.Tipo = dr["TIPO"].ToString();
-                pes.Obs = dr["OBS"].ToString();
-                pes.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
+                pes.Obs = dr["OBS"].ToString();                
+                pes.CategoriaId = Convert.ToInt32(dr["CATEGORIAID"].ToString());                
                 pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
                 pes.RefNome = dr["REFNOME"].ToString();
-                pes.RefTelefone = int.Parse(dr["REFTELEFONE"].ToString());
-                pes.RefDDD = short.Parse(dr["REFDDD"].ToString());
+                pes.RefTelefone = utils.ComparaShortComNull(dr["REFTELEFONE"].ToString());
+                pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
                 pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
-                pes.Status = bool.Parse(dr["STATUS"].ToString());
+                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
 
                 pessoas.Add(pes);
             }
@@ -171,31 +176,31 @@ namespace DataAccess
                 pes.Rg = dr["RG"].ToString();
                 pes.NomeMae = dr["NOMEMAE"].ToString();
                 pes.NomePai = dr["NOMEPAI"].ToString();
-                pes.DtNascimento = DateTime.Parse(dr["DTNASCIMENTO"].ToString());
+                pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());
                 pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
-                pes.Naturalidade = int.Parse(dr["NATURALIDADE"].ToString());
+                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());
                 pes.Endereco = dr["ENDERECO"].ToString();
                 pes.Numero = dr["NUMERO"].ToString();
-                pes.BairroId = int.Parse(dr["BAIRROID"].ToString());
+                pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
                 pes.Cep = dr["CEP"].ToString();
-                pes.CidadeId = int.Parse(dr["CIDADEID"].ToString());
+                pes.CidadeId = Convert.ToInt32(dr["CIDADEID"].ToString());
                 pes.Complemento = dr["COMPLEMENTO"].ToString();
                 pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
                 pes.NumeroProf = dr["NUMEROPROF"].ToString();
                 pes.CepProf = dr["CEPPROF"].ToString();
-                pes.CidadeProfId = int.Parse(dr["CIDADEPROFID"].ToString());
+                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROFID"].ToString());
                 pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
                 pes.Empresa = dr["EMPRESA"].ToString();
                 pes.Email = dr["EMAIL"].ToString();
                 pes.Tipo = dr["TIPO"].ToString();
                 pes.Obs = dr["OBS"].ToString();
-                pes.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
+                pes.CategoriaId =Convert.ToInt32(dr["CATEGORIAID"].ToString());
                 pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
                 pes.RefNome = dr["REFNOME"].ToString();
-                pes.RefTelefone = int.Parse(dr["REFTELEFONE"].ToString());
-                pes.RefDDD = short.Parse(dr["REFDDD"].ToString());
-                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
-                pes.Status = bool.Parse(dr["STATUS"].ToString());
+                pes.RefTelefone = utils.ComparaIntComNull(dr["REFTELEFONE"].ToString());
+                pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
+                pes.DtCadastro = utils.ComparaDataComNull(dr["DTCADASTRO"].ToString());
+                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
 
                 pessoas.Add(pes);
             }
