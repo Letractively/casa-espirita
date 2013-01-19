@@ -97,7 +97,6 @@
     <Content Include="cadTurmaAluno.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
-    <Content Include="cadVendaItem.aspx" />
     <Content Include="Global.asax" />
     <Content Include="home.aspx" />
     <Content Include="images\bg_breadcrumb.png" />
@@ -163,6 +162,7 @@
     <Content Include="images\Índice.png" />
     <Content Include="index.aspx" />
     <Content Include="Pesquisar.aspx" />
+    <Content Include="PesquisarItens.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\functions.js" />
@@ -219,7 +219,6 @@
     <Content Include="viewTurmaAluno.aspx" />
     <Content Include="viewUsuario.aspx" />
     <Content Include="viewVenda.aspx" />
-    <Content Include="viewVendaItem.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -502,13 +501,6 @@
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
     </Compile>
-    <Compile Include="cadVendaItem.aspx.cs">
-      <DependentUpon>cadVendaItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cadVendaItem.aspx.designer.cs">
-      <DependentUpon>cadVendaItem.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -546,6 +538,13 @@
     </Compile>
     <Compile Include="Pesquisar.aspx.designer.cs">
       <DependentUpon>Pesquisar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PesquisarItens.aspx.cs">
+      <DependentUpon>PesquisarItens.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PesquisarItens.aspx.designer.cs">
+      <DependentUpon>PesquisarItens.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="viewAgencia.aspx.cs">
@@ -785,13 +784,6 @@
     </Compile>
     <Compile Include="viewVenda.aspx.designer.cs">
       <DependentUpon>viewVenda.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewVendaItem.aspx.cs">
-      <DependentUpon>viewVendaItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewVendaItem.aspx.designer.cs">
-      <DependentUpon>viewVendaItem.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

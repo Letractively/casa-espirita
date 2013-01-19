@@ -1,67 +1,91 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
-    CodeBehind="cadVenda.aspx.cs" Inherits="Admin.cadDoacao" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true" CodeBehind="cadVenda.aspx.cs" Inherits="FIBIESA.cadVenda" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="form1" runat="server">
+<form id="form1" runat="server">
     <div id="content">
-        <div class="container half left">
+        <div class="container half2 left">
             <div class="conthead">
                 <h2>
-                    Venda</h2>
+                    Vendas</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            Pessoa:
+                            Cliente:
                         </td>
-                        <td style="width: 400px">
-                            <asp:DropDownList ID="_pessoa" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Usuário:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:DropDownList ID="_usuario" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                        <td style="width: 400px" colspan="3">
+                            <asp:TextBox ID="txtCliente" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." 
+                                onclick="btnPesCliente_Click" />
+                            &nbsp;
+                            <asp:Label ID="lblDesCliente" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Data:
+                            Item:
                         </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_data" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td style="width: 400px" colspan="3">
+                            <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox"></asp:TextBox> 
+                            <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
+                                 />
+                            &nbsp;
+                            <asp:Label ID="lblDesItem" runat="server"></asp:Label>                           
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Número:
+                            Quantidade:
                         </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_numero" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td style="width: 400px" >
+                            <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>
+                        <td style="width: 140px">
+                            Desconto:
+                        </td>
+                        <td style="width: 400px"> 
+                            <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>
+                    </tr>
+                     <tr>
+                        <td style="width: 140px">
+                            Valor:
+                        </td>
+                        <td style="width: 400px"  colspan="3">
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>                       
+                    </tr>
+                    <tr>
+                        <td colspan ="4">
+                            <asp:GridView ID="dtgItens" runat="server">
+                            </asp:GridView>
                         </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
+                            <strong>Qtd. Itens:</strong>
                         </td>
-                        <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                        <td style="width: 350px">
+                            <asp:TextBox ID="txtQtdItens" runat="server" CssClass="inputbox"></asp:TextBox>    
+                        </td>
+                        <td style="width: 200px">
+                            <strong>Valor Total:</strong>
+                        </td>
+                        <td style="width: 350px">
+                            <asp:TextBox ID="txtValorTotal" runat="server" CssClass="inputbox"></asp:TextBox>    
+                        </td>
+                        <td style="width: 350px">
+                            <asp:Button ID="btnFinalizar" runat="server" CssClass="btn" Text="Finalizar" />
                         </td>
                     </tr>
-                </table>
+                </table>                
             </div>
+            <asp:HiddenField ID="hfIdPessoa" runat="server" />
+            <asp:HiddenField ID="hfIdItem" runat="server" />
         </div>
         <div class="status">
         </div>

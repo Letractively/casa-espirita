@@ -73,7 +73,8 @@
         <ul id="nav">
             <li><a class="collapsed heading">Financeiro</a>
                 <ul class="navigation">
-                    <li><a href="viewDoacao.aspx" title="">Doação</a></li>
+                    <li><a href="cadVenda.aspx" title="">Vendas</a></li>
+                    <li><a href="viewDoacao.aspx" title="">Doações</a></li>
                     <li><a href="viewTipoDocumento.aspx" title="">Tipo de Documento</a></li>
                     <li><a href="viewTitulo.aspx" title="">Título</a></li>
                     <li><a href="viewBanco.aspx" title="">Banco</a></li>
@@ -96,9 +97,7 @@
                 </ul>
             </li>
             <li><a class="collapsed heading">Estoque</a>
-                <ul class="navigation">
-                    <li><a href="viewVendaItem.aspx" title="">Venda de Ítem</a></li>
-                    <li><a href="viewVenda.aspx" title="">Venda</a></li>
+                <ul class="navigation">  
                     <li><a href="viewNotaEntradaItem.aspx" title="">Nota de entrada de Ítem</a></li>
                     <li><a href="viewNotaEntrada.aspx" title="">Nota de entrada</a></li>
                     <li><a href="viewMovimentoEstoque.aspx" title="">Movimento de Estoque</a></li>
