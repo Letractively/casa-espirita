@@ -35,7 +35,6 @@ namespace StarFestaEventos
             baBL =(BaseBL)Session["objBLPesquisa"];
             ba = (Base)Session["objPesquisa"];
             
-            //EstadosBL estBL = new EstadosBL();
             List<Base> baPes = baBL.Pesquisar(pesquisa,tipo);
 
             foreach (Base bas in baPes)

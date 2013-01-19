@@ -92,10 +92,10 @@ namespace DataAccess
             return parametros;
         }
 
-        public List<Parametros> PesquisarDA(string descricao)
+        public List<Parametros> PesquisarDA(int codigo, string modulo)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM PARAMETROS WHERE DESCRICAO = '{0}'", descricao.Trim()));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PARAMETROS WHERE CODIGO = {0} AND MODULO = '{1}'",codigo, modulo));
 
             List<Parametros> parametros = new List<Parametros>();
 

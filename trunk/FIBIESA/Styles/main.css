@@ -120,10 +120,13 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 	/* Alternative Box Widths */
 	
 		.med {width: 60%}
-		.sml {width: 38%}
-		.half {width:60%;
-	height: 609px;
-}
+		.sml {width: 38%}		
+		.half{width:60%;
+			  height: 609px;
+        }
+		.half2 {width:80%;
+			height: 609px;
+		}
 	
 	/* Form Styles */
 		select {float: none}
