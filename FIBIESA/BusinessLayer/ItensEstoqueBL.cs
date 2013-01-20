@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -39,6 +40,13 @@ namespace BusinessLayer
             ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
 
             return itensEstoqueDA.PesquisarDA();
+        }
+
+        public DataTable PesquisarItensEstoqueBL()
+        {
+            ItensEstoqueDA itEstDA = new ItensEstoqueDA();
+
+            return itEstDA.PesquisarItensEstoqueDA();
         }
     }
 }

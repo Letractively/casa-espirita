@@ -20,38 +20,34 @@ namespace Admin
         private void Pesquisar()
         {
             DataTable tabela = new DataTable("tabela");
-            /*Cria as colunas do datatable*/
+            
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
-            /*Adiciona as colunas a datatable*/
-
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
-
-            /*Efetua a pesquisa dos bairros recebendo como retorno uma lista de bairros*/
+            
             BairrosBL baiBL = new BairrosBL();
-            //Esta pesquisando todos os livros sempre
+            
             List<Bairros> bairros = baiBL.PesquisarBL();
-           
-            /*Preenche as linhas do datatable com o retorno da consulta*/
+                       
             foreach (Bairros bai in bairros)
             {
-                /*Cria uma linha vazia*/
+                
                 DataRow linha = tabela.NewRow();
-                /*Preenche as colunas desta linha vazia*/
+                
                 linha["ID"] = bai.Id;
                 linha["CODIGO"] = bai.Codigo;
                 linha["DESCRICAO"] = bai.Descricao;
 
-                /*Adiciona a linha vazia no datatable*/
+               
                 tabela.Rows.Add(linha);
             }
-            /*Vincula o datatable ao gridview para ser possivel visualizar o resultado da pesquisa */
+            
             dtgBairros.DataSource = tabela;
-            /*efetua a atualização da datagrid para exibir os dados da consulta.*/
+           
             dtgBairros.DataBind();
         }
         #endregion

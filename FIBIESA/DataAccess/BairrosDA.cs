@@ -65,7 +65,8 @@ namespace DataAccess
 
                 bairros.Add(bai);
             }
-            return bairros;
+            return bairros;    
+
         }
 
         public List<Bairros> PesquisarDA(int id_bai)
@@ -120,6 +121,7 @@ namespace DataAccess
                 ba.Add(bas);
             }
             return ba;
-        }    
+        }
+                
     }
 }

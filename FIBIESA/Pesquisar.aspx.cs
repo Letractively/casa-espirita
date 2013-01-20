@@ -16,7 +16,6 @@ namespace StarFestaEventos
         private BaseBL baBL;
         private Base ba;
         #region funcoes
-
         private void PesquisarConteudo(string pesquisa, string tipo)
         {
             Session["tabelaPesquisa"] = null;
@@ -50,15 +49,8 @@ namespace StarFestaEventos
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
-            DataTable tabela;
             
-            if (Session["tabelaPesquisa"] != null)
-            {
-                tabela = (DataTable)Session["tabelaPesquisa"];
-                grdPesquisa.DataSource = tabela;
-            }
-                       
+            grdPesquisa.DataSource = dt;                        
             grdPesquisa.DataBind();
 
         }

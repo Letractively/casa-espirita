@@ -107,14 +107,7 @@ namespace Admin
         private void CarregarTabelaPesquisaCidade()
         {
             Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
+            DataTable dt = CriarDtPesquisa();
 
             CidadesBL cidBL = new CidadesBL();
             Cidades ci = new Cidades();
@@ -213,6 +206,19 @@ namespace Admin
                 dtTelefones.PrimaryKey = keys;
             }
         }
+        private DataTable CriarDtPesquisa()
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            return dt;
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -241,15 +247,8 @@ namespace Admin
         protected void btnPesCategoria_Click(object sender, EventArgs e)
         {
             Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
+            DataTable dt = CriarDtPesquisa();
+            
             CategoriasBL catBL = new CategoriasBL();
             Categorias ca = new Categorias();
             List<Categorias> categorias = catBL.PesquisarBL();
@@ -278,15 +277,8 @@ namespace Admin
         protected void btnPesBairro_Click(object sender, EventArgs e)
         {
             Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
+            DataTable dt = CriarDtPesquisa();
+            
             BairrosBL baiBL = new BairrosBL();
             Bairros ba = new Bairros();
             List<Bairros> bairros = baiBL.PesquisarBL();

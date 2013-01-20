@@ -37,29 +37,41 @@
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Quantidade:
+                            Valor Unitário:
                         </td>
                         <td style="width: 400px" >
-                            <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox"></asp:TextBox>   
-                        </td>
+                            <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>                         
                         <td style="width: 140px">
                             Desconto:
                         </td>
-                        <td style="width: 400px"> 
+                        <td style="width: 400px" colspan="2"> 
                             <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputbox"></asp:TextBox>   
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Quantidade:
+                        </td>
+                        <td style="width: 400px" colspan="3">
+                            <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>                          
+                    </tr>
+                    <tr>
                         <td style="width: 140px">
                             Valor:
                         </td>
-                        <td style="width: 400px"  colspan="3">
+                        <td style="width: 400px">
                             <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox"></asp:TextBox>   
+                        </td>   
+                        <td colspan="2">
+                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" />
                         </td>                       
                     </tr>
                     <tr>
                         <td colspan ="4">
                             <asp:GridView ID="dtgItens" runat="server">
+                            <EmptyDataTemplate>NO data found</EmptyDataTemplate>
                             </asp:GridView>
                         </td>
                     </tr>
