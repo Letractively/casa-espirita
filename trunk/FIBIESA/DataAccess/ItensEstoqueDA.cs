@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataObjects;
+using System.Data;
+using System.Data.SqlClient;
+using InfrastructureSqlServer.Helpers;
+using System.Configuration;
 
 namespace DataAccess
 {
@@ -27,6 +31,26 @@ namespace DataAccess
         {
             List<ItensEstoque> itensEstoque = new List<ItensEstoque>();
             return itensEstoque;
+        }
+
+        public DataTable PesquisarItensEstoqueDA()
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT ITEST.ID, ITEST.CONTROLAESTOQUE, ITEST.QTDMINIMA " +
+                                                                                        "       ,ITEST.STATUS, ITEST.EXEMPLARID, MEST.VALOR " +
+                                                                                        "       ,MEST.QUANTIDADE, OB.CODIGO, OB.TITULO " +
+                                                                                        " FROM ITENSESTOQUE ITEST " +
+                                                                                        "    , MOVIMENTOSESTOQUE MEST " +
+                                                                                        "    , EXEMPLARES EXE " +
+                                                                                        "    , OBRAS OB " +
+                                                                                        " WHERE ITEST.ID = MEST.ITEMESTOQUEID " +
+                                                                                        "   AND ITEST.EXEMPLARID = EXE.ID " +
+                                                                                        "   AND OB.ID = EXE.OBRAID "));
+
+                 
+            DataTable tabela = ds.Tables[0];
+
+            return tabela;
         }
     }
 }

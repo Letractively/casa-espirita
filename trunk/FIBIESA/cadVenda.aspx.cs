@@ -37,7 +37,7 @@ namespace FIBIESA
        
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/PesquisarItens.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID +"&valor"+ txtValor.ClientID +"','',600,500);", true);
         }
 
         protected void btnPesCliente_Click(object sender, EventArgs e)

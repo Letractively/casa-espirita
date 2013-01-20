@@ -76,13 +76,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Label lblDesItem;
         
         /// <summary>
-        /// txtQuantidade control.
+        /// txtValorUni control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuantidade;
+        protected global::System.Web.UI.WebControls.TextBox txtValorUni;
         
         /// <summary>
         /// txtDesconto control.
@@ -94,6 +94,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtDesconto;
         
         /// <summary>
+        /// txtQuantidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuantidade;
+        
+        /// <summary>
         /// txtValor control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtValor;
+        
+        /// <summary>
+        /// btnInserir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
         /// dtgItens control.

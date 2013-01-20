@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -54,5 +55,6 @@ namespace BusinessLayer
 
             return baiDA.Pesquisar(codDes, tipo);
         }
+       
     }
 }

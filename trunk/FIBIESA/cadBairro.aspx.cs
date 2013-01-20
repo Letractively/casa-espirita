@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
 using FG;
-
+using System.Data;
 
 namespace Admin
 {
@@ -21,7 +21,7 @@ namespace Admin
         {
             BairrosBL baiBL = new BairrosBL();            
             List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
-
+                       
             foreach (Bairros ltBai in bairros)
             {
                 hfId.Value = ltBai.Id.ToString();
@@ -35,9 +35,9 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_bai = 0;
+            
+            if (!IsPostBack)            {
 
-            if (!IsPostBack)
-            {
                 if (Request.QueryString["operacao"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
