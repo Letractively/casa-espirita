@@ -16,8 +16,7 @@
                 <table>
                     <tr>
                         <td>                        
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0" 
-                                AutoPostBack="True">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="2">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -36,7 +35,9 @@
                                                     Data Cadastro:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox"></asp:TextBox>
+                                                    <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox" 
+                                                        ReadOnly="True"></asp:TextBox>
+                                                        
                                                 </td>
                                             </tr>
                                             <tr>
@@ -154,7 +155,7 @@
                                                     <asp:Button ID="btnPesCidade" runat="server" CssClass="btn" Text="..." 
                                                         onclick="btnPesCidade_Click" />
                                                     &nbsp;
-                                                    <asp:Label ID="lblDesCidade" runat="server"></asp:Label>
+                                                    <asp:Label ID="lblDesCidade" runat="server" ></asp:Label>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
                                                         ControlToValidate="txtCidade" ErrorMessage="*Preenchimento Obrigatório" 
                                                         ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -236,21 +237,24 @@
                                                 </asp:DropDownList>
                                             </td>                                       
                                             <td style="width: 140px">
-                                               DDD/Telefone:
+                                               Telefone:
                                             </td>
-                                            <td style="width: 400px">
-                                                <asp:TextBox ID="txtDDD" runat="server" CssClass="inputbox" Width="72px"></asp:TextBox>
-                                                <asp:TextBox ID="txtTelefone" runat="server" CssClass="inputbox" MaxLength="30"></asp:TextBox>
+                                            <td style="width: 400px">                                               
+                                                <asp:TextBox ID="txtTelefone" runat="server" CssClass="inputbox" MaxLength="13"></asp:TextBox>                                                
                                                 &nbsp;&nbsp;
                                                 <asp:Button ID="btnInserirTelefone" runat="server" CssClass="btn" Text="Inserir" 
-                                                    onclick="btnInserirTelefone_Click" />
+                                                    onclick="btnInserirTelefone_Click" ValidationGroup="salvarTelefone" />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                                                    ControlToValidate="txtTelefone" ErrorMessage="*Preenchimento Obrigatório" 
+                                                    ForeColor="#CC0000" ValidationGroup="salvarTelefone"></asp:RequiredFieldValidator>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4">
                                                 <asp:GridView ID="dtgTelefones" runat="server" AutoGenerateColumns="False" 
                                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                                    CellPadding="3" DataKeyNames="CODIGO">
+                                                    CellPadding="3" DataKeyNames="CODIGO" 
+                                                    onselectedindexchanged="dtgTelefones_SelectedIndexChanged">
                                                     <Columns>
                                                         <asp:CommandField ShowSelectButton="True">
                                                              <HeaderStyle CssClass="grd_cmd_header" />
@@ -262,9 +266,8 @@
                                                         </asp:CommandField>
                                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                                         <asp:BoundField DataField="DESCRICAO" HeaderText="Tipo" />
-                                                        <asp:BoundField DataField="DDD" HeaderText="DDD" />
-                                                        <asp:BoundField DataField="NUMERO" HeaderText="Número" />
                                                         <asp:BoundField DataField="CODIGO" HeaderText="Codigo" Visible="False" />
+                                                        <asp:BoundField DataField="NUMERO" HeaderText="Número" />
                                                     </Columns>
                                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -402,7 +405,8 @@
             <asp:HiddenField ID="hfIdCidProf" runat="server" />
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdBairroProf" runat="server" />
-            <asp:HiddenField ID="hfCodTelefone" runat="server" />
+            <asp:HiddenField ID="hfCodTel" runat="server" />
+            <asp:HiddenField ID="hfCodTelAlt" runat="server" />
         </div>
         <div class="status">
         </div>

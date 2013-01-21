@@ -373,15 +373,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
         
         /// <summary>
-        /// txtDDD control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDDD;
-        
-        /// <summary>
         /// txtTelefone control.
         /// </summary>
         /// <remarks>
@@ -398,6 +389,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInserirTelefone;
+        
+        /// <summary>
+        /// RequiredFieldValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
         
         /// <summary>
         /// dtgTelefones control.
@@ -625,12 +625,21 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.HiddenField hfIdBairroProf;
         
         /// <summary>
-        /// hfCodTelefone control.
+        /// hfCodTel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCodTelefone;
+        protected global::System.Web.UI.WebControls.HiddenField hfCodTel;
+        
+        /// <summary>
+        /// hfCodTelAlt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfCodTelAlt;
     }
 }

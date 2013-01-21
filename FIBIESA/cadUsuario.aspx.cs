@@ -16,7 +16,7 @@ namespace Admin
         Utils utils = new Utils();
         string v_operacao = "";
         #region funcoes
-        private void carregarDados(int id_usu)
+        private void CarregarDados(int id_usu)
         {
             UsuariosBL usuBL = new UsuariosBL();
             List<Usuarios> usuarios = usuBL.PesquisarBL(id_usu);
@@ -35,12 +35,18 @@ namespace Admin
             }
 
         }
+        private void CarregarAtributos()
+        {
+            txtDtInicio.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_usu = 0;
-
+            CarregarAtributos();
             if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -53,7 +59,7 @@ namespace Admin
                 }
 
                 if (v_operacao.ToLower() == "edit")
-                    carregarDados(id_usu);
+                    CarregarDados(id_usu);
             }
         }
 

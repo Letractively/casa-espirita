@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>                            
-                            <asp:TabContainer ID="tcParametros" runat="server" ActiveTabIndex="0" >
+                            <asp:TabContainer ID="tcParametros" runat="server" ActiveTabIndex="1" >
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -56,7 +56,7 @@
                                         <tr>
                                             <td style="width: 400px"> 
                                                 <asp:label ID="lblTempoMinRetirada" runat="server">
-                                                Tempo mínimo para retirada inicial de livros: 
+                                                Tempo mínimo para retirada inicial de livros (dias): 
                                                 </asp:label>                                                 
                                             </td>
                                             <td style="width: 140px">

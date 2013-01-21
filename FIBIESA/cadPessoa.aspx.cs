@@ -56,7 +56,7 @@ namespace Admin
                 {
                     v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidade.Value));
                     txtCidade.Text = v_pesquisa[0];
-                    lblDesCidade.Text = v_operacao[1].ToString();
+                    lblDesCidade.Text = v_pesquisa[1];
                 }
 
                 hfIdNaturalidade.Value = pes.Naturalidade.ToString();
@@ -64,7 +64,7 @@ namespace Admin
                 {
                     v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdNaturalidade.Value));
                     txtNaturalidade.Text = v_pesquisa[0];
-                    lblDesNaturalidade.Text = v_operacao[1].ToString();
+                    lblDesNaturalidade.Text = v_pesquisa[1];
                 }
 
                 hfIdCidProf.Value = pes.CidadeProfId.ToString();
@@ -72,7 +72,7 @@ namespace Admin
                 {
                     v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidProf.Value));
                     txtCidadeProf.Text = v_pesquisa[0];
-                    lblDesCidProf.Text = v_operacao[1].ToString();
+                    lblDesCidProf.Text = v_pesquisa[1];
                 }
                 
                 hfIdBairro.Value = pes.BairroId.ToString();
@@ -80,7 +80,7 @@ namespace Admin
                 {
                     v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairro.Value));
                     txtBairro.Text = v_pesquisa[0];
-                    lblDesBairro.Text = v_operacao[1].ToString();
+                    lblDesBairro.Text = v_pesquisa[1];
                 }
                 
                 hfIdBairroProf.Value = pes.BairroProf.ToString();
@@ -88,7 +88,7 @@ namespace Admin
                 {
                     v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairroProf.Value));
                     txtBairroProf.Text = v_pesquisa[0];
-                    lblDesBairroProf.Text = v_operacao[1].ToString();
+                    lblDesBairroProf.Text = v_pesquisa[1];
                 }
 
                 hfIdCategoria.Value = pes.CategoriaId.ToString();
@@ -161,9 +161,11 @@ namespace Admin
                 linha["PESSOAID"] = tel.PessoaId;
                 linha["CODIGO"] = tel.Codigo;
             }
-
+            
             dtgTelefones.DataSource = dt;
             dtgTelefones.DataBind();
+            hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
+                           
         }
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
@@ -192,15 +194,13 @@ namespace Admin
             if (dtTelefones.Columns.Count == 0)
             {
                 DataColumn[] keys = new DataColumn[1];
-                DataColumn coluna1 = new DataColumn("CODIGO",Type.GetType("System.Int32"));
-                DataColumn coluna2 = new DataColumn("DDD", Type.GetType("System.Int16"));
-                DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
-                DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+                DataColumn coluna1 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
+                DataColumn coluna2 = new DataColumn("NUMERO", Type.GetType("System.String"));
+                DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
                 dtTelefones.Columns.Add(coluna1);
                 dtTelefones.Columns.Add(coluna2);
-                dtTelefones.Columns.Add(coluna3);
-                dtTelefones.Columns.Add(coluna4);
+                dtTelefones.Columns.Add(coluna3);          
                 keys[0] = coluna1;                        
 
                 dtTelefones.PrimaryKey = keys;
@@ -219,13 +219,29 @@ namespace Admin
 
             return dt;
         }
+        private void CarregarAtributos()
+        {
+            txtDtCadastro.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtCategoria.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtCidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtCidadeProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtBairro.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtBairroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_pes = 0;
-            CriarDtTelefones();
+            int id_pes = 0;            
+            CarregarAtributos();
+            CriarDtTelefones();           
+
             if (!IsPostBack)
-            {
+            {                
                 if (Request.QueryString["operacao"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
@@ -234,6 +250,8 @@ namespace Admin
                         if (Request.QueryString["id_pes"] != null)
                             id_pes = Convert.ToInt32(Request.QueryString["id_pes"].ToString());
                 }
+
+                txtDtCadastro.Text = DateTime.Now.ToString();
 
                 if (v_operacao.ToLower() == "edit")
                 {
@@ -379,11 +397,12 @@ namespace Admin
 
             DataRow linha = dtTelefones.NewRow();
 
-            codigo = utils.ComparaIntComZero(hfCodTelefone.Value);
-
-            if (codigo == 0)
-                codigo = telBL.RetornarMaxCodigoBL();
-
+            if (hfCodTelAlt.Value != "")
+                codigo = utils.ComparaIntComZero(hfCodTelAlt.Value);
+            else
+                codigo = utils.ComparaIntComZero(hfCodTel.Value);
+                   
+            
             if (dtTelefones.Rows.Contains(codigo))
             {
                 linha = dtTelefones.Rows.Find(codigo);
@@ -393,8 +412,7 @@ namespace Admin
             else
                 altera = false;
 
-            linha["CODIGO"] = codigo.ToString();
-            linha["DDD"] = txtDDD.Text;
+            linha["CODIGO"] = codigo.ToString();          
             linha["NUMERO"] = txtTelefone.Text;
             linha["DESCRICAO"] = ddlTipo.SelectedValue;
 
@@ -407,9 +425,18 @@ namespace Admin
             dtgTelefones.DataSource = dtTelefones;
             dtgTelefones.DataBind();
 
-            txtTelefone.Text = "";
-            txtDDD.Text = "";
-            ddlTipo.SelectedIndex = 1;             
+            txtTelefone.Text = "";         
+            ddlTipo.SelectedIndex = 0;
+            hfCodTel.Value = (utils.ComparaIntComZero(hfCodTel.Value) + 1).ToString();
+        }
+
+        protected void dtgTelefones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = dtgTelefones.SelectedRow;
+
+            hfCodTelAlt.Value = dtgTelefones.SelectedDataKey[0].ToString();
+            ddlTipo.SelectedValue = row.Cells[3].Text;          
+            txtTelefone.Text = row.Cells[4].Text;          
         }
 
               

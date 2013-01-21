@@ -29,11 +29,17 @@ namespace Admin
                 txtDescricao.Text = ltCat.Descricao;	 
 	        }            
         }
+        private void CarregarAtributos()
+        {
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cat = 0;
+
+            CarregarAtributos();
 
             if (!Page.IsPostBack)
             {

@@ -44,11 +44,17 @@ namespace Admin
             }
 
         }
+        private void CarregarAtributos()
+        {           
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cid = 0;
+
+            CarregarAtributos();
 
             if (!IsPostBack)
             {

@@ -73,10 +73,21 @@ namespace Admin
             txtDesconto.Text = CarregarParametro(3, "F");
             #endregion
         }
-        
+        private void CarregarAtributos()
+        {           
+            txtQtdMaxEmp.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtQtdMaxRen.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtQtdMinRetirada.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtTempoMinRetirada.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtValorMulta.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtPerLucro.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtDesconto.Attributes.Add("onkeypress", "return(Reais(this,event))");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            CarregarAtributos();
+
             if (!IsPostBack)
                 CarregarDados();
         }

@@ -27,7 +27,7 @@
                                     onselectedindexchanged="dtgPessoas_SelectedIndexChanged">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">                                            
-                                            <ItemStyle CssClass="grd_select" />
+                                            <ItemStyle CssClass="grd_edit" />
                                         </asp:CommandField>    
                                         <asp:CommandField ShowDeleteButton="True">
                                             <ItemStyle CssClass="grd_delete" />
