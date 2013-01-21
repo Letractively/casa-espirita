@@ -79,7 +79,7 @@
       <Name>DataObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\FG\FG.csproj">
-      <Project>{5F2498BE-B263-4CC7-9D9F-9C5C012528E8}</Project>
+      <Project>{EBAFE9FC-FFFF-4664-A8FA-E3A0B7727C97}</Project>
       <Name>FG</Name>
     </ProjectReference>
   </ItemGroup>
