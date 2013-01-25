@@ -15,7 +15,7 @@ namespace DataAccess
     {
         Utils utils = new Utils();
 
-        public bool InserirDA(Pessoas pes)
+        public int InserirDA(Pessoas pes)
         {
             SqlParameter[] paramsToSP = new SqlParameter[32];
                         
@@ -52,10 +52,14 @@ namespace DataAccess
             paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);       
             paramsToSP[31] = new SqlParameter("@codigo", pes.Codigo);
             //paramsToSP[17] = new SqlParameter("@bairroprof", pes.BairroProf);
+                        
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
+            DataTable tabela = ds.Tables[0];
 
-            return true;
+            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+            
+            return id;
         }
 
         public bool EditarDA(Pessoas pes)

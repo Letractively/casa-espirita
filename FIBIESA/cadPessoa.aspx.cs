@@ -233,6 +233,24 @@ namespace Admin
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
         }
+        private void GravarTelefones(int idPes)
+        {
+            TelefonesBL telBL = new TelefonesBL();
+            Telefones telefones = new Telefones();
+
+            foreach (DataRow linha in dtgTelefones.Rows)
+            {
+                telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());
+                telefones.Codigo = utils.ComparaIntComZero(linha["CODIGO"].ToString());
+                telefones.Numero = linha["NUMERO"].ToString();
+                telefones.PessoaId = idPes;
+
+                if (telefones.Id > 0)
+                    telBL.EditarBL(telefones);
+                else
+                    telBL.InserirBL(telefones);               
+            }
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -377,12 +395,16 @@ namespace Admin
             pessoas.CepProf = txtCepProf.Text;
             pessoas.Obs = txtObservacao.Text;
             pessoas.DtCadastro = DateTime.Now;
+
+            int idPes = 0;
             
             if (pessoas.Id > 0)
                 pesBL.EditarBL(pessoas);
             else
-                pesBL.InserirBL(pessoas);
-
+                idPes = pesBL.InserirBL(pessoas);
+                        
+            GravarTelefones(idPes);
+            
             Response.Redirect("viewPessoa.aspx");
         }
 
@@ -412,6 +434,7 @@ namespace Admin
             else
                 altera = false;
 
+            linha["ID"] = hfIdTelefone.ToString();
             linha["CODIGO"] = codigo.ToString();          
             linha["NUMERO"] = txtTelefone.Text;
             linha["DESCRICAO"] = ddlTipo.SelectedValue;
@@ -435,6 +458,7 @@ namespace Admin
             GridViewRow row = dtgTelefones.SelectedRow;
 
             hfCodTelAlt.Value = dtgTelefones.SelectedDataKey[0].ToString();
+            hfIdTelefone.Value = row.Cells[1].Text;
             ddlTipo.SelectedValue = row.Cells[3].Text;          
             txtTelefone.Text = row.Cells[4].Text;          
         }

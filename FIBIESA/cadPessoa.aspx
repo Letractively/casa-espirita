@@ -265,8 +265,8 @@
                                                              <ItemStyle CssClass="grd_delete" />
                                                         </asp:CommandField>
                                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Tipo" />
                                                         <asp:BoundField DataField="CODIGO" HeaderText="Codigo" Visible="False" />
+                                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Tipo" />
                                                         <asp:BoundField DataField="NUMERO" HeaderText="Número" />
                                                     </Columns>
                                                     <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -407,6 +407,7 @@
             <asp:HiddenField ID="hfIdBairroProf" runat="server" />
             <asp:HiddenField ID="hfCodTel" runat="server" />
             <asp:HiddenField ID="hfCodTelAlt" runat="server" />
+            <asp:HiddenField ID="hfIdTelefone" runat="server" />
         </div>
         <div class="status">
         </div>

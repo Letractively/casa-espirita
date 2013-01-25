@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
     public class PessoasBL : BaseBL
     {
-        public bool InserirBL(Pessoas pes)
+        public int InserirBL(Pessoas pes)
         {
             /*criar as regras de negocio*/
             PessoasDA pessoasDA = new PessoasDA();

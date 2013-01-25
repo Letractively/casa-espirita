@@ -65,7 +65,7 @@ namespace DataAccess
                 tel.Id = int.Parse(dr["ID"].ToString());
                 tel.Descricao = dr["DESCRICAO"].ToString();
                 tel.Ddd = short.Parse(dr["DDD"].ToString());
-                tel.Numero = int.Parse(dr["NUMERO"].ToString());
+                tel.Numero = dr["NUMERO"].ToString();
                 tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
 
                 telefones.Add(tel);
@@ -87,7 +87,7 @@ namespace DataAccess
                 tel.Id = int.Parse(dr["ID"].ToString());
                 tel.Descricao = dr["DESCRICAO"].ToString();
                 tel.Ddd = short.Parse(dr["DDD"].ToString());
-                tel.Numero = int.Parse(dr["NUMERO"].ToString());
+                tel.Numero = dr["NUMERO"].ToString();
                 tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
 
                 telefones.Add(tel);

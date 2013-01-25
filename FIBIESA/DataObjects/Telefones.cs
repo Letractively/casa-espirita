@@ -35,8 +35,8 @@ namespace DataObjects
             set { _ddd = value; }
         }
 
-        private Int32 _numero;
-        public Int32 Numero
+        private string _numero;
+        public string Numero
         {
             get { return _numero; }
             set { _numero = value; }
