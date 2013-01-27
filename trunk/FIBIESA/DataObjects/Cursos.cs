@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataObjects
 {
-    public class Cursos
+    public class Cursos : Base
     {
         private Int32 _id;
         public Int32 Id
@@ -27,6 +27,6 @@ namespace DataObjects
             get { return _descricao; }
             set { _descricao = value; }
         }
-    
+
     }
 }

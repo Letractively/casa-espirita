@@ -8,58 +8,47 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>Turma</h2>
+                <h2>
+                    Cadastro de Turmas</h2>
             </div>
             <div class="contentbox">
                 <table>
-                    
-                    <tr>
-                        <td style="width: 140px">Código:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_codigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">Descrição:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_descricao" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">Curso:</td>
-                        <td style="width: 400px">
-                            <asp:DropDownList ID="_curso" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">Data Inicial:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_dataInicial" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">Data Final:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_dataFinal" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                </table>
-                <table>
                     <tr>
                         <td style="width: 140px">
+                            Código:
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
-                </table>
-            </div>
-        </div>
-        <div class="status">
-        </div>
-    </div>
-    </form>
+                    <tr>
+                        <td style="width: 140px">
+                            Descrição:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
+                                MaxLength="40" Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Data Inicial:
+                        </td>
+                        <td style="width: 200px">
+                            <asp:TextBox ID="txtDataInicial" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Data Final:
+                        </td>
+                        <td style="width: 200px">
+                            &nbsp;
 </asp:Content>

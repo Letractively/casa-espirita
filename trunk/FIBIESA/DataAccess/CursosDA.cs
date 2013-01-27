@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataObjects;
-using System.Data;
-using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
+using System.Data.SqlClient;
+using System.Data;
 using System.Configuration;
+
+
 namespace DataAccess
 {
-    public class AutoresDA
+    public class CursosDA : BaseDA
     {
         public bool InserirDA(Cursos cur)
         {
@@ -49,38 +51,76 @@ namespace DataAccess
 
         public List<Cursos> PesquisarDA()
         {
-            SqlDataReader reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM CURSOS "));
+
             List<Cursos> cursos = new List<Cursos>();
-            while (reader!=null)
+
+            while (dr.Read())
             {
                 Cursos cur = new Cursos();
-                cur.Id = int.Parse(reader["ID"].ToString());
-                cur.Codigo = int.Parse(reader["CODIGO"].ToString());
-                cur.Descricao = reader["DESCRICAO"].ToString();
+                cur.Id = int.Parse(dr["ID"].ToString());
+                cur.Codigo = int.Parse(dr["CODIGO"].ToString());
+                cur.Descricao = dr["DESCRICAO"].ToString();
 
                 cursos.Add(cur);
             }
             return cursos;
+
         }
+
         public List<Cursos> PesquisarDA(int id_cur)
         {
-            SqlDataReader reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM CURSOS WHERE ID = {0}", id_cur));
 
             List<Cursos> cursos = new List<Cursos>();
 
-            while (reader.Read())
+            while (dr.Read())
             {
                 Cursos cur = new Cursos();
-                cur.Id = int.Parse(reader["ID"].ToString());
-                cur.Codigo = int.Parse(reader["CODIGO"].ToString());
-                cur.Descricao = reader["DESCRICAO"].ToString();
+                cur.Id = int.Parse(dr["ID"].ToString());
+                cur.Codigo = int.Parse(dr["CODIGO"].ToString());
+                cur.Descricao = dr["DESCRICAO"].ToString();
 
                 cursos.Add(cur);
             }
             return cursos;
         }
+
+        public override List<Base> Pesquisar(string descricao, string tipo)
+        {
+            SqlDataReader dr;
+
+            if (tipo == "C")
+            {
+                int codigo = 0;
+                Int32.TryParse(descricao, out codigo);
+
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CURSOS WHERE CODIGO = '{0}'", codigo));
+            }
+            else
+            {
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CURSOS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+            }
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }
+
     }
 }
