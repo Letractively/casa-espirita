@@ -47,5 +47,13 @@ namespace BusinessLayer
 
             return usuariosDA.PesquisarDA(id_usu);
         }
+
+        public List<Usuarios> PesquisarBL(string login, string senha)
+        {
+            UsuariosDA usuariosDA = new UsuariosDA();
+
+            return usuariosDA.PesquisarDA(login,senha);
+        }
+       
     }
 }

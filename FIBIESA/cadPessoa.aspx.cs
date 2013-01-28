@@ -17,6 +17,7 @@ namespace Admin
         #region variaveis
         Utils utils = new Utils();
         DataTable dtTelefones = new DataTable();
+        DataTable dtExcluidos = new DataTable();
         string v_operacao = "";
         #endregion
 
@@ -135,18 +136,16 @@ namespace Admin
         {
             DataTable dt = new DataTable();
 
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("DDD", Type.GetType("System.Int16"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));           
+            DataColumn coluna2 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
+            DataColumn coluna4 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
 
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
             dt.Columns.Add(coluna4);
-            dt.Columns.Add(coluna5);
-
+            
             TelefonesBL telBL = new TelefonesBL();
 
             List<Telefones> telefones = telBL.PesquisarBL(id_pes);
@@ -155,8 +154,7 @@ namespace Admin
             {
                 DataRow linha = dt.NewRow();
 
-                linha["ID"] = tel.Id;
-                linha["DDD"] = tel.Ddd;
+                linha["ID"] = tel.Id;                
                 linha["DESCRICAO"] = tel.Descricao;
                 linha["PESSOAID"] = tel.PessoaId;
                 linha["CODIGO"] = tel.Codigo;
@@ -166,7 +164,7 @@ namespace Admin
             dtgTelefones.DataBind();
             hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
                            
-        }
+        }        
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
             string[] v_cidade = new string[2];
@@ -194,16 +192,29 @@ namespace Admin
             if (dtTelefones.Columns.Count == 0)
             {
                 DataColumn[] keys = new DataColumn[1];
-                DataColumn coluna1 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
-                DataColumn coluna2 = new DataColumn("NUMERO", Type.GetType("System.String"));
-                DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+                DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
+                DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
+                DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
                 dtTelefones.Columns.Add(coluna1);
                 dtTelefones.Columns.Add(coluna2);
-                dtTelefones.Columns.Add(coluna3);          
-                keys[0] = coluna1;                        
+                dtTelefones.Columns.Add(coluna3);
+                dtTelefones.Columns.Add(coluna4);
+                keys[0] = coluna2;                        
 
                 dtTelefones.PrimaryKey = keys;
+            }
+        }
+        private void CriaDtExcluidos()
+        {
+            if (dtExcluidos.Columns.Count == 0)
+            {
+                DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("TIPO", Type.GetType("System.String"));
+
+                dtExcluidos.Columns.Add(coluna1);
+                dtExcluidos.Columns.Add(coluna2);                
             }
         }
         private DataTable CriarDtPesquisa()
@@ -238,11 +249,15 @@ namespace Admin
             TelefonesBL telBL = new TelefonesBL();
             Telefones telefones = new Telefones();
 
-            foreach (DataRow linha in dtgTelefones.Rows)
+            if (Session["dtTelefone"] != null)
+                dtTelefones = (DataTable)Session["dtTelefone"];
+
+            foreach (DataRow linha in dtTelefones.Rows)
             {
                 telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());
                 telefones.Codigo = utils.ComparaIntComZero(linha["CODIGO"].ToString());
                 telefones.Numero = linha["NUMERO"].ToString();
+                telefones.Descricao = linha["DESCRICAO"].ToString();
                 telefones.PessoaId = idPes;
 
                 if (telefones.Id > 0)
@@ -251,13 +266,37 @@ namespace Admin
                     telBL.InserirBL(telefones);               
             }
         }
+        private void ExcluirTelefones()
+        {
+            TelefonesBL telBL = new TelefonesBL();
+            Telefones telefones = new Telefones();
+                        
+            if (Session["tbexcluidos"] != null)
+            {
+                dtExcluidos = (DataTable)Session["tbexcluidos"];
+                foreach (DataRow row in dtExcluidos.Rows)
+                {
+                    switch (row["TIPO"].ToString().ToUpper())
+                    {
+                        case "T": //telefones
+                            {
+                                telefones.Id = utils.ComparaIntComZero(row["ID"].ToString());
+                                telBL.ExcluirBL(telefones);
+                                break;
+                            }  
+                    }
+                }
+            }
+           
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_pes = 0;            
             CarregarAtributos();
-            CriarDtTelefones();           
-
+            CriarDtTelefones();
+            CriaDtExcluidos();
+            
             if (!IsPostBack)
             {                
                 if (Request.QueryString["operacao"] != null)
@@ -397,12 +436,16 @@ namespace Admin
             pessoas.DtCadastro = DateTime.Now;
 
             int idPes = 0;
-            
+
             if (pessoas.Id > 0)
+            {
+                idPes = pessoas.Id;
                 pesBL.EditarBL(pessoas);
+            }
             else
                 idPes = pesBL.InserirBL(pessoas);
-                        
+
+            ExcluirTelefones();
             GravarTelefones(idPes);
             
             Response.Redirect("viewPessoa.aspx");
@@ -434,7 +477,7 @@ namespace Admin
             else
                 altera = false;
 
-            linha["ID"] = hfIdTelefone.ToString();
+            linha["ID"] = utils.ComparaIntComZero(hfIdTelefone.ToString());
             linha["CODIGO"] = codigo.ToString();          
             linha["NUMERO"] = txtTelefone.Text;
             linha["DESCRICAO"] = ddlTipo.SelectedValue;
@@ -451,6 +494,18 @@ namespace Admin
             txtTelefone.Text = "";         
             ddlTipo.SelectedIndex = 0;
             hfCodTel.Value = (utils.ComparaIntComZero(hfCodTel.Value) + 1).ToString();
+
+            if (utils.ComparaIntComZero(hfIdTelefone.Value) > 0)
+            {
+                if (Session["tbexcluidos"] != null)
+                    dtExcluidos = (DataTable)Session["tbexcluidos"];
+
+                DataRow row = dtExcluidos.NewRow();
+                row["ID"] = hfIdTelefone.Value;
+                row["TIPO"] = "T";
+                dtExcluidos.Rows.Add(row);
+                Session["tbexcluidos"] = dtExcluidos;
+            }
         }
 
         protected void dtgTelefones_SelectedIndexChanged(object sender, EventArgs e)
@@ -461,6 +516,23 @@ namespace Admin
             hfIdTelefone.Value = row.Cells[1].Text;
             ddlTipo.SelectedValue = row.Cells[3].Text;          
             txtTelefone.Text = row.Cells[4].Text;          
+        }
+
+        protected void dtgTelefones_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int codigo = 0;
+            codigo = utils.ComparaIntComZero(dtgTelefones.DataKeys[e.RowIndex][0].ToString());
+
+            if (Session["dtTelefone"] != null)
+                dtTelefones = (DataTable)Session["dtTelefone"];
+
+            if (dtTelefones.Rows.Contains(codigo))
+                dtTelefones.Rows.Remove(dtTelefones.Rows.Find(codigo));
+
+            Session["dtTelefone"] = dtTelefones;
+            dtgTelefones.DataSource = dtTelefones;
+            dtgTelefones.DataBind();
+          
         }
 
               

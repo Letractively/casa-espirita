@@ -16,27 +16,27 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
-            paramsToSP[0] = new SqlParameter("@descricao", tel.Descricao);
-            paramsToSP[1] = new SqlParameter("@ddd", tel.Ddd);
+            paramsToSP[0] = new SqlParameter("@codigo", tel.Codigo);
+            paramsToSP[1] = new SqlParameter("@descricao", tel.Descricao);            
             paramsToSP[2] = new SqlParameter("@numero", tel.Numero);
             paramsToSP[3] = new SqlParameter("@pessoaid", tel.PessoaId);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_telefones", paramsToSP);
 
             return true;
         }
 
         public bool EditarDA(Telefones tel)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@id", tel.Id);
-            paramsToSP[1] = new SqlParameter("@descricao", tel.Descricao);
-            paramsToSP[2] = new SqlParameter("@ddd", tel.Ddd);
+            paramsToSP[1] = new SqlParameter("@codigo", tel.Codigo);
+            paramsToSP[2] = new SqlParameter("@descricao", tel.Descricao);            
             paramsToSP[3] = new SqlParameter("@numero", tel.Numero);
             paramsToSP[4] = new SqlParameter("@pessoaid", tel.PessoaId);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_telefones", paramsToSP);
 
             return true;
         }
@@ -47,7 +47,15 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", tel.Id);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_telefones", paramsToSP);
+
+            return true;
+        }
+
+        public bool ExcluirDA(int id_pes)
+        {
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                           CommandType.Text, string.Format(@"DELETE TELEFONES WHERE PESSOAID = {0}", id_pes));
 
             return true;
         }
@@ -63,8 +71,7 @@ namespace DataAccess
             {
                 Telefones tel = new Telefones();
                 tel.Id = int.Parse(dr["ID"].ToString());
-                tel.Descricao = dr["DESCRICAO"].ToString();
-                tel.Ddd = short.Parse(dr["DDD"].ToString());
+                tel.Descricao = dr["DESCRICAO"].ToString();                
                 tel.Numero = dr["NUMERO"].ToString();
                 tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
 
@@ -85,8 +92,8 @@ namespace DataAccess
             {
                 Telefones tel = new Telefones();
                 tel.Id = int.Parse(dr["ID"].ToString());
-                tel.Descricao = dr["DESCRICAO"].ToString();
-                tel.Ddd = short.Parse(dr["DDD"].ToString());
+                tel.Codigo = int.Parse(dr["CODIGO"].ToString());
+                tel.Descricao = dr["DESCRICAO"].ToString();               
                 tel.Numero = dr["NUMERO"].ToString();
                 tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
 

@@ -99,7 +99,7 @@
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="home.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="images\bg_breadcrumb.png" />
     <Content Include="images\bg_btns.png" />
     <Content Include="images\bg_btns_alt.png" />
@@ -123,6 +123,7 @@
     <Content Include="images\fancybox-x.png" />
     <Content Include="images\fancybox-y.png" />
     <Content Include="images\fancybox\fancybox.png" />
+    <Content Include="images\icons\exit.png" />
     <Content Include="images\icons\icone_lupa.jpg" />
     <Content Include="images\icons\icon_approve.png" />
     <Content Include="images\icons\icon_arrow.png" />
@@ -161,7 +162,7 @@
     <Content Include="images\toolbox_alt_row.png" />
     <Content Include="images\toolbox_row.png" />
     <Content Include="images\Índice.png" />
-    <Content Include="index.aspx" />
+    <Content Include="login.aspx" />
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="Scripts\default.js" />
@@ -505,12 +506,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="home.aspx.cs">
-      <DependentUpon>home.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="home.aspx.designer.cs">
-      <DependentUpon>home.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="home.Master.cs">
       <DependentUpon>home.Master</DependentUpon>
@@ -519,12 +520,12 @@
     <Compile Include="home.Master.designer.cs">
       <DependentUpon>home.Master</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.Master.cs">
       <DependentUpon>index.Master</DependentUpon>

@@ -42,15 +42,15 @@ namespace DataObjects
             set { _status = value; }
         }
 
-        private DateTime _dtInicio;
-        public DateTime DtInicio
+        private DateTime? _dtInicio;
+        public DateTime? DtInicio
         {
             get { return _dtInicio; }
             set { _dtInicio = value; }
         }
 
-        private DateTime _dtFim;
-        public DateTime DtFim
+        private DateTime? _dtFim;
+        public DateTime? DtFim
         {
             get { return _dtFim; }
             set { _dtFim = value; }
@@ -70,25 +70,32 @@ namespace DataObjects
             set { _email = value; }
         }
 
-        private Int32 _pessoaId;
-        public Int32 PessoaId
+        private Int32? _pessoaId;
+        public Int32? PessoaId
         {
             get { return _pessoaId; }
             set { _pessoaId = value; }
         }
 
-        private Int32 _nrTentLogin;
-        public Int32 NrTentLogin
+        private Int32? _nrTentLogin;
+        public Int32? NrTentLogin
         {
             get { return _nrTentLogin; }
             set { _nrTentLogin = value; }
         }
 
-        private DateTime _dhTentLogin;
-        public DateTime DhTentLogin
+        private DateTime? _dhTentLogin;
+        public DateTime? DhTentLogin
         {
             get { return _dhTentLogin; }
             set { _dhTentLogin = value; }
+        }
+
+        private Int32? _categoriaId;
+        public Int32? CategoriaId
+        {
+            get { return _categoriaId; }
+            set { _categoriaId = value; }
         }
 
     }
