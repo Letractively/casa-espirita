@@ -6,26 +6,26 @@ using DataObjects;
 
 namespace DataAccess
 {
-    public class CursosDA
+    public class AutoresDA
     {
-        public bool InserirDA(Cursos instancia)
+        public bool InserirDA(Autores instancia)
         {
             return true;
         }
 
-        public bool EditarDA(Cursos instancia)
+        public bool EditarDA(Autores instancia)
         {
             return true;
         }
 
-        public bool ExcluirDA(Cursos instancia)
+        public bool ExcluirDA(Autores instancia)
         {
             return true;
         }
 
-        public List<Cursos> PesquisarDA()
+        public List<Autores> PesquisarDA()
         {
-            List<Cursos> instancia = new List<Cursos>();
+            List<Autores> instancia = new List<Autores>();
             return instancia;
         }
     }

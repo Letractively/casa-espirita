@@ -27,6 +27,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="width: 200px">
+                            Categoria:
+                        </td>
+                        <td style="width: 400px" colspan="3">
+                            <asp:TextBox ID="txtCategoria" runat="server" CssClass="inputbox"></asp:TextBox>  
+                            <asp:Button ID="btnPesCategoria" runat="server" Text="..." CssClass="btn" 
+                                onclick="btnPesCategoria_Click" />     
+                            &nbsp;
+                            <asp:Label ID="lblDesCategoria" runat="server"></asp:Label>                                       
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="width: 140px">
                             Nome:
                         </td>
@@ -100,6 +112,9 @@
                             <asp:CalendarExtender ID="txtDtInicio_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtInicio">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtDtInicio" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>                   
                         <td style="width: 176px">
                             Data Fim:
@@ -109,14 +124,15 @@
                             <asp:CalendarExtender ID="txtDtFim_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtFim">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="txtDtFim" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>         
                                       
                 </table>
                 <table>
-                    <tr>
-                        <td style="width: 140px">
-                        </td>
+                    <tr>                       
                         <td style="width: 400px">                            
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
                                 onclick="btnVoltar_Click" />
@@ -129,6 +145,7 @@
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
+            <asp:HiddenField ID="hfIdCategoria" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>

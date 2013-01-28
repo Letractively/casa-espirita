@@ -34,6 +34,7 @@
     <!-- Fim Java Script - Funcionalidade -->
 </head>
 <body>
+<form id="form1" runat="server">
     <div id="header">
         <img src="images/logo2.png" alt="AdminCP" class="logo" />
         <div id="searchbox">
@@ -67,7 +68,9 @@
             <ul>
                 <li><a href="#" title="E-mail"><img src="images/icons/icon_mail.png" alt="Mail" /></a></li>
                 <li><a href="#" title="Configuração"><img src="images/icons/icon_cog.png" alt="Configure" /></a></li>
-                <li><a href="index.aspx" title="Sair"><img src="images/icons/icon_unlock.png" alt="Logout" /></a></li>
+                <li><a> <asp:ImageButton ID="imbSair" runat="server" 
+                        ImageUrl="images/icons/icon_unlock.png"  AlternateText="Sair" 
+                        onclick="imbSair_Click" ToolTip="Sair" /></a></li>
             </ul>
         </div>
         <ul id="nav">
@@ -159,6 +162,7 @@
         <p id="footer">
             &copy; Centro Espírita Alunos do Bem</p>
     </div>
+    </form>
 </body>
 </html>
 

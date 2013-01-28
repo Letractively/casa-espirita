@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>                        
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="2">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -254,7 +254,8 @@
                                                 <asp:GridView ID="dtgTelefones" runat="server" AutoGenerateColumns="False" 
                                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                                     CellPadding="3" DataKeyNames="CODIGO" 
-                                                    onselectedindexchanged="dtgTelefones_SelectedIndexChanged">
+                                                    onselectedindexchanged="dtgTelefones_SelectedIndexChanged" 
+                                                    onrowdeleting="dtgTelefones_RowDeleting">
                                                     <Columns>
                                                         <asp:CommandField ShowSelectButton="True">
                                                              <HeaderStyle CssClass="grd_cmd_header" />

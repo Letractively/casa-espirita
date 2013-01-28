@@ -8,11 +8,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using InfrastructureSqlServer.Helpers;
+using FG;
 
 namespace DataAccess
 {
     public class UsuariosDA
     {
+        Utils utils = new Utils();
+
         public bool InserirDA(Usuarios usu)
         {
             SqlParameter[] paramsToSP = new SqlParameter[11];
@@ -50,6 +53,7 @@ namespace DataAccess
             paramsToSP[9] = new SqlParameter("@pessoaid", usu.PessoaId);
             paramsToSP[10] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[11] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
+            //paramsToSP[12] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_usuarios", paramsToSP);
 
@@ -82,13 +86,14 @@ namespace DataAccess
                 usu.Senha = dr["SENHA"].ToString();
                 usu.Nome = dr["NOME"].ToString();
                 usu.Status = dr["STATUS"].ToString();
-                usu.DtInicio = DateTime.Parse(dr["DTINICIO"].ToString());
-                usu.DtFim = DateTime.Parse(dr["DTFIM"].ToString());
+                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
+                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
                 usu.Tipo = dr["TIPO"].ToString();
                 usu.Email = dr["EMAIL"].ToString();
-                usu.PessoaId = int.Parse(dr["PESSOAID"].ToString());
-                usu.NrTentLogin = int.Parse(dr["NRTENTLOGIN"].ToString());
-                usu.DhTentLogin = DateTime.Parse(dr["DHTENTLOGIN"].ToString());
+                usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
+                usu.NrTentLogin = utils.ComparaIntComNull(dr["NRTENTLOGIN"].ToString());
+                usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
+                //usu.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
 
                 usuarios.Add(usu);
             }
@@ -117,6 +122,39 @@ namespace DataAccess
                 usu.PessoaId = int.Parse(dr["PESSOAID"].ToString());
                 usu.NrTentLogin = int.Parse(dr["NRTENTLOGIN"].ToString());
                 usu.DhTentLogin = DateTime.Parse(dr["DHTENTLOGIN"].ToString());
+
+                usuarios.Add(usu);
+            }
+            return usuarios;
+        }
+
+        public List<Usuarios> PesquisarDA(string login, string senha)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +
+                                                                                                 " AND STATUS = 'A' ", login, senha));
+
+            //string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +
+            //" AND STATUS = 'A' AND GETDATE() BETWEEN DTINICIO AND DTFIM ", login, senha));
+
+            List<Usuarios> usuarios = new List<Usuarios>();
+
+            while (dr.Read())
+            {
+                Usuarios usu = new Usuarios();
+                usu.Id = int.Parse(dr["ID"].ToString());
+                usu.Login = dr["LOGIN"].ToString();
+                usu.Senha = dr["SENHA"].ToString();
+                usu.Nome = dr["NOME"].ToString();
+                usu.Status = dr["STATUS"].ToString();
+                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
+                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
+                usu.Tipo = dr["TIPO"].ToString();
+                usu.Email = dr["EMAIL"].ToString();
+                usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
+                usu.NrTentLogin = utils.ComparaIntComNull(dr["NRTENTLOGIN"].ToString());
+                usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
+                //usu.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
 
                 usuarios.Add(usu);
             }

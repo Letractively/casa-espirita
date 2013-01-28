@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataObjects;
-using InfrastructureSqlServer.Helpers;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using InfrastructureSqlServer.Helpers;
 using System.Configuration;
-
 
 namespace DataAccess
 {
@@ -123,4 +122,5 @@ namespace DataAccess
         }
 
     }
+    
 }

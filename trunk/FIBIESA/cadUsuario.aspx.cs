@@ -41,6 +41,19 @@ namespace Admin
             txtDtFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
+        private DataTable CriarDtPesquisa()
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            return dt;
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -71,15 +84,7 @@ namespace Admin
         protected void btnPesPessoa_Click(object sender, EventArgs e)
         {
             Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
+            DataTable dt = CriarDtPesquisa();
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
             List<Pessoas> pessoas = pesBL.PesquisarBL();
@@ -119,11 +124,41 @@ namespace Admin
             usuarios.Status = ddlStatus.SelectedItem.Text;
             usuarios.DtInicio = Convert.ToDateTime(txtDtInicio.Text);
             usuarios.DtFim = Convert.ToDateTime(txtDtFim.Text);
+            usuarios.CategoriaId = utils.ComparaIntComNull(hfIdCategoria.Value);
 
             if (usuarios.Id > 0)
                 usuBL.EditarBL(usuarios);
             else
                 usuBL.InserirBL(usuarios);
+        }
+
+        protected void btnPesCategoria_Click(object sender, EventArgs e)
+        {
+            Session["tabelaPesquisa"] = null;
+            DataTable dt = CriarDtPesquisa();
+            CategoriasBL catBL = new CategoriasBL();
+            Categorias ca = new Categorias();
+            List<Categorias> categorias = catBL.PesquisarBL();
+
+            foreach (Categorias cat in categorias)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = cat.Id;
+                linha["CODIGO"] = cat.Codigo;
+                linha["DESCRICAO"] = cat.Descricao;
+
+                dt.Rows.Add(linha);
+            }
+
+            if (dt.Rows.Count > 0)
+                Session["tabelaPesquisa"] = dt;
+
+
+            Session["objBLPesquisa"] = catBL;
+            Session["objPesquisa"] = ca;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCategoria.ClientID + "&id=" + hfIdCategoria.ClientID + "&lbl=" + lblDesCategoria.ClientID + "','',600,500);", true);
         }
               
                
