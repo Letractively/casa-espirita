@@ -12,9 +12,44 @@ namespace DataAccess
 {
     public class PermissoesDA
     {
+        #region funcoes
+        private List<Permissoes> CarregarObjPermissao(SqlDataReader dr)
+        {
+            List<Permissoes> permissoes = new List<Permissoes>();
+
+            while (dr.Read())
+            {
+                Permissoes per = new Permissoes();
+                per.Id = int.Parse(dr["ID"].ToString());
+                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
+                per.Editar = bool.Parse(dr["EDITAR"].ToString());
+                per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
+                per.Inserir = bool.Parse(dr["INSERIR"].ToString());
+                per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
+                per.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
+
+                CategoriasDA catDA = new CategoriasDA();
+
+                List<Categorias> categorias = catDA.PesquisarDA(per.CategoriaId);
+                Categorias cat = new Categorias();
+
+                foreach (Categorias ltcat in categorias)
+                {
+                    cat.Id = ltcat.Id;
+                    cat.Codigo = ltcat.Codigo;
+                    cat.Descricao = ltcat.Descricao;
+                }
+
+                per.Categoria = cat;
+                permissoes.Add(per);
+            }
+
+            return permissoes;
+        }
+        #endregion
         public bool InserirDA(Permissoes per)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[7];
 
             paramsToSP[0] = new SqlParameter("@codigo", per.Codigo);
             paramsToSP[1] = new SqlParameter("@consultar", per.Consultar);
@@ -22,15 +57,16 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@editar", per.Editar);
             paramsToSP[4] = new SqlParameter("@excluir", per.Excluir);
             paramsToSP[5] = new SqlParameter("@formularioid", per.FormularioId);
+            paramsToSP[6] = new SqlParameter("@categoriaid", per.CategoriaId);
 
-           // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_permissoes", paramsToSP);
 
             return true;
         }
 
         public bool EditarDA(Permissoes per)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[7];
+            SqlParameter[] paramsToSP = new SqlParameter[8];
 
             paramsToSP[0] = new SqlParameter("@id", per.Id);
             paramsToSP[1] = new SqlParameter("@codigo", per.Codigo);
@@ -39,8 +75,9 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@editar", per.Editar);
             paramsToSP[5] = new SqlParameter("@excluir", per.Excluir);
             paramsToSP[6] = new SqlParameter("@formularioid", per.FormularioId);
+            paramsToSP[7] = new SqlParameter("@categoriaid", per.CategoriaId);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_permissoes", paramsToSP);
 
             return true;
         }
@@ -51,7 +88,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", per.Id);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Permissoes", paramsToSP);
 
             return true;
         }
@@ -60,22 +97,9 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, @"SELECT * FROM PERMISSOES ");
-                        
-            List<Permissoes> permissoes = new List<Permissoes>();
 
-            while (dr.Read())
-            {
-                Permissoes per = new Permissoes();
-                per.Id = int.Parse(dr["ID"].ToString());
-                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
-                per.Editar = bool.Parse(dr["EDITAR"].ToString());
-                per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
-                per.Inserir = bool.Parse(dr["INSERIR"].ToString());
-                per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
-
-                permissoes.Add(per);
-            }
-
+            List<Permissoes> permissoes = CarregarObjPermissao(dr);
+            
             return permissoes;
         }
 
@@ -84,21 +108,23 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM PERMISSOES WHERE ID = {0}",id_per));
 
-            List<Permissoes> permissoes = new List<Permissoes>();
+            List<Permissoes> permissoes = CarregarObjPermissao(dr);
+            
+            return permissoes;
+        }
 
-            while (dr.Read())
-            {
-                Permissoes per = new Permissoes();
-                per.Id = int.Parse(dr["ID"].ToString());
-                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
-                per.Editar = bool.Parse(dr["EDITAR"].ToString());
-                per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
-                per.Inserir = bool.Parse(dr["INSERIR"].ToString());
-                per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
+        public List<Permissoes> PesquisarDA(int id_categoria, string formulario)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT PER.* " + 
+                                                                                                 " FROM PERMISSOES PER " +
+                                                                                                 "     ,FORMULARIOS F " +                                                                                                 
+                                                                                                 " WHERE PER.FORMULARIOID = F.ID " +
+                                                                                                 " AND PER.CATEGORIAID = {0} " +
+                                                                                                 " AND F.DESCRICAO = '{1}' ",id_categoria, formulario));
 
-                permissoes.Add(per);
-            }
-
+            List<Permissoes> permissoes = CarregarObjPermissao(dr);
+                        
             return permissoes;
         }
     }

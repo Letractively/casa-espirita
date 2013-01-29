@@ -55,5 +55,19 @@ namespace DataObjects
             get { return _formularioId; }
             set { _formularioId = value; }
         }
+
+        private Int32 _categoriaId;
+        public Int32 CategoriaId
+        {
+            get { return _categoriaId; }
+            set { _categoriaId = value; }
+        }
+
+        private Categorias _categoria;
+        public Categorias Categoria
+        {
+            get { return _categoria; }
+            set { _categoria = value; }
+        }
     }
 }

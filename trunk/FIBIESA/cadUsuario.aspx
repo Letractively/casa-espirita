@@ -5,10 +5,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="form1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
     <div id="content">
-        <div class="container half left">
+        <div class="container half3 left">
             <div class="conthead">
                 <h2>
                     Cadastro de Usuários</h2>
@@ -16,10 +15,10 @@
             <div class="contentbox">
                 <table>
                      <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Pessoa:
                         </td>
-                        <td style="width: 400px" colspan="3">                      
+                        <td style="width: 400px" colspan="5">                      
                             <asp:TextBox ID="txtPessoa" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:Button ID="btnPesPessoa" runat="server" Text="..." CssClass="btn" 
                                 onclick="btnPesPessoa_Click" />
@@ -30,7 +29,7 @@
                         <td style="width: 200px">
                             Categoria:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtCategoria" runat="server" CssClass="inputbox"></asp:TextBox>  
                             <asp:Button ID="btnPesCategoria" runat="server" Text="..." CssClass="btn" 
                                 onclick="btnPesCategoria_Click" />     
@@ -39,28 +38,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Nome:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
                                 Width="335px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             E-mail:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                 Width="335px"></asp:TextBox>
                         </td>
                     </tr> 
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Login:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtLogin" runat="server" CssClass="inputbox" MaxLength="20"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtLogin" ErrorMessage="*Preenchimento Obrigatório" 
@@ -68,10 +67,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Senha:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtSenha" runat="server" CssClass="inputbox" MaxLength="100" 
                                 Width="335px" ></asp:TextBox>                              
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
@@ -80,10 +79,10 @@
                         </td>
                     </tr>  
                      <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Confirmar Senha:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px" colspan="5">
                             <asp:TextBox ID="txtConfirmarSenha" runat="server" CssClass="inputbox" 
                                 MaxLength="100" Width="335px"></asp:TextBox>                               
                             <asp:CompareValidator ID="CompareValidator1" runat="server" 
@@ -93,42 +92,46 @@
                         </td>
                     </tr>                     
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 200px">
                             Status:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 200px">
                             <asp:DropDownList ID="ddlStatus" runat="server" Width="95px">
                                 <asp:ListItem Value="A">Ativo</asp:ListItem>
                                 <asp:ListItem Value="I">Inativo</asp:ListItem>
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
+                        </td>                    
                         <td style="width: 140px">
                             Data Início:
                         </td>
-                        <td style="width: 400px" >
+                        <td style="width: 300px" >
                             <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="115px"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDtInicio_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtInicio">
-                            </asp:CalendarExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtDtInicio" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                            </asp:CalendarExtender>                         
                         </td>                   
-                        <td style="width: 176px">
+                        <td style="width: 140px">
                             Data Fim:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 300px">
                             <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="115px"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDtFim_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtFim">
-                            </asp:CalendarExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                            </asp:CalendarExtender>                            
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtDtInicio" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                        <td colspan="2">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtDtFim" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
-                    </tr>         
+                    </tr>        
                                       
                 </table>
                 <table>
@@ -151,6 +154,5 @@
         </div>
         <div class="status">            
         </div>
-    </div>
-    </form>
+    </div>   
 </asp:Content>

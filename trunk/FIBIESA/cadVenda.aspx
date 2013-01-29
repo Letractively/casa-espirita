@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<form id="form1" runat="server">
     <div id="content">
         <div class="container half2 left">
             <div class="conthead">
@@ -101,6 +100,5 @@
         </div>
         <div class="status">
         </div>
-    </div>
-    </form>
+    </div>    
 </asp:Content>

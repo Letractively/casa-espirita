@@ -21,13 +21,13 @@ namespace Admin
             DataTable tabela = new DataTable();
 
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("PESSOAID", Type.GetType("System.String"));                                                 
             DataColumn coluna3 = new DataColumn("NOME", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("EMAIL", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("STATUS", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("DTINICIO", Type.GetType("System.DateTime"));
             DataColumn coluna7 = new DataColumn("DTFIM", Type.GetType("System.DateTime"));
-            DataColumn coluna8 = new DataColumn("LOGIM", Type.GetType("System.String"));
+            DataColumn coluna8 = new DataColumn("LOGIN", Type.GetType("System.String"));
             DataColumn coluna9 = new DataColumn("SENHA", Type.GetType("System.String"));
             
             tabela.Columns.Add(coluna1);

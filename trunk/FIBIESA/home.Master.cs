@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DataObjects;
 
 namespace FIBIESA
 {
@@ -18,7 +19,20 @@ namespace FIBIESA
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["usuario"] != null)
+                {
+                    List <Usuarios> usuarios;
+                    usuarios = (List<Usuarios>)Session["usuario"];
 
+                    foreach (Usuarios usu in usuarios)
+                    {
+                        lblNomeUsuario.Text = usu.Nome;
+                        lblCategoria.Text = usu.Categoria.Descricao;
+                    }
+                }
+            }
         }
 
         protected void imbSair_Click(object sender, ImageClickEventArgs e)
