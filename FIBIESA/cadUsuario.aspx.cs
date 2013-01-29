@@ -124,7 +124,7 @@ namespace Admin
             usuarios.Status = ddlStatus.SelectedItem.Text;
             usuarios.DtInicio = Convert.ToDateTime(txtDtInicio.Text);
             usuarios.DtFim = Convert.ToDateTime(txtDtFim.Text);
-            usuarios.CategoriaId = utils.ComparaIntComNull(hfIdCategoria.Value);
+            usuarios.CategoriaId = utils.ComparaIntComZero(hfIdCategoria.Value);
 
             if (usuarios.Id > 0)
                 usuBL.EditarBL(usuarios);

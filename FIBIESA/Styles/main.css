@@ -43,13 +43,13 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 				ul#sliderContent li a {width: 160px; padding: 5px 10px; height: 20px; display: block; text-decoration: none}
 			#openCloseWrap {position:relative; margin: 150px 0 0 15px}	
 	
-	#userbox {width: 180px; position: absolute; top: 40px; left: 15px; padding: 20px 0 0 0; text-align: center; font-size: 16px; text-shadow: 1px 1px 1px #fff; font-weight: 700}
-		#userbox span {color: #888; font-size: 12px; letter-spacing: normal}
-		
-		#userbox ul {width: 100px; margin: 10px auto}
+	#userbox  {width: 180px; position: absolute; top: 40px; left: 15px; padding: 20px 0 0 0; text-align: center; font-size: 16px; text-shadow: 1px 1px 1px #fff; font-weight: 700}
+		#userbox span {color: #888; font-size: 12px; letter-spacing: normal}		
+ 		#userbox ul {width: 100px; margin: 10px auto}
 			#userbox li {float: left}
 				#userbox li a {padding: 5px; margin-right: 5px; float: left}
-
+				
+				
 /* Navigation */
 
 	#nav {width: 210px; position: absolute; top: 160px}
@@ -126,6 +126,8 @@ body {background: #e0e0e0; margin: 0; padding: 0}
         }
 		.half2 {width:80%;
 			height: 609px;
+		}
+		.half3 {width:80%;			
 		}
 	
 	/* Form Styles */

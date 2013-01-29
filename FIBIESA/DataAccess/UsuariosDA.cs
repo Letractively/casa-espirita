@@ -16,6 +16,49 @@ namespace DataAccess
     {
         Utils utils = new Utils();
 
+        #region funcoes
+        private List<Usuarios> CarregarObjUsuario(SqlDataReader dr)
+        {
+            List<Usuarios> usuarios = new List<Usuarios>();
+
+            while (dr.Read())
+            {
+                Usuarios usu = new Usuarios();
+                usu.Id = int.Parse(dr["ID"].ToString());
+                usu.Login = dr["LOGIN"].ToString();
+                usu.Senha = dr["SENHA"].ToString();
+                usu.Nome = dr["NOME"].ToString();
+                usu.Status = dr["STATUS"].ToString();
+                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
+                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
+                usu.Tipo = dr["TIPO"].ToString();
+                usu.Email = dr["EMAIL"].ToString();
+                usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
+                usu.NrTentLogin = utils.ComparaIntComNull(dr["NRTENTLOGIN"].ToString());
+                usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
+                usu.CategoriaId = utils.ComparaIntComZero(dr["CATEGORIAID"].ToString());
+
+                CategoriasDA catDA = new CategoriasDA();
+                
+                List<Categorias> categorias = catDA.PesquisarDA(usu.CategoriaId);
+                Categorias cat = new Categorias();
+
+                foreach (Categorias ltcat in categorias)
+                {                    
+                    cat.Id = ltcat.Id;
+                    cat.Codigo = ltcat.Codigo;
+                    cat.Descricao = ltcat.Descricao;                    
+                }
+
+                usu.Categoria = cat;
+
+                usuarios.Add(usu);
+            }
+
+            return usuarios;        
+        }
+        #endregion
+
         public bool InserirDA(Usuarios usu)
         {
             SqlParameter[] paramsToSP = new SqlParameter[11];
@@ -31,6 +74,7 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@pessoaid", usu.PessoaId);
             paramsToSP[9] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[10] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
+            //paramsToSP[11] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_usuarios", paramsToSP);
 
@@ -76,27 +120,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, @"SELECT * FROM USUARIOS ");
 
-            List<Usuarios> usuarios = new List<Usuarios>();
-
-            while (dr.Read())
-            {
-                Usuarios usu = new Usuarios();
-                usu.Id = int.Parse(dr["ID"].ToString());
-                usu.Login = dr["LOGIN"].ToString();
-                usu.Senha = dr["SENHA"].ToString();
-                usu.Nome = dr["NOME"].ToString();
-                usu.Status = dr["STATUS"].ToString();
-                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
-                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
-                usu.Tipo = dr["TIPO"].ToString();
-                usu.Email = dr["EMAIL"].ToString();
-                usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
-                usu.NrTentLogin = utils.ComparaIntComNull(dr["NRTENTLOGIN"].ToString());
-                usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
-                //usu.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
-
-                usuarios.Add(usu);
-            }
+            List<Usuarios> usuarios = CarregarObjUsuario(dr);
+                       
             return usuarios;
         }
 
@@ -104,27 +129,9 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text,string.Format(@"SELECT * FROM USUARIOS WHERE ID = {0}",id_usu));
-
-            List<Usuarios> usuarios = new List<Usuarios>();
-
-            while (dr.Read())
-            {
-                Usuarios usu = new Usuarios();
-                usu.Id = int.Parse(dr["ID"].ToString());
-                usu.Login = dr["LOGIN"].ToString();
-                usu.Senha = dr["SENHA"].ToString();
-                usu.Nome = dr["NOME"].ToString();
-                usu.Status = dr["STATUS"].ToString();
-                usu.DtInicio = DateTime.Parse(dr["DTINICIO"].ToString());
-                usu.DtFim = DateTime.Parse(dr["DTFIM"].ToString());
-                usu.Tipo = dr["TIPO"].ToString();
-                usu.Email = dr["EMAIL"].ToString();
-                usu.PessoaId = int.Parse(dr["PESSOAID"].ToString());
-                usu.NrTentLogin = int.Parse(dr["NRTENTLOGIN"].ToString());
-                usu.DhTentLogin = DateTime.Parse(dr["DHTENTLOGIN"].ToString());
-
-                usuarios.Add(usu);
-            }
+                        
+            List<Usuarios> usuarios = CarregarObjUsuario(dr);             
+            
             return usuarios;
         }
 
@@ -137,27 +144,8 @@ namespace DataAccess
             //string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +
             //" AND STATUS = 'A' AND GETDATE() BETWEEN DTINICIO AND DTFIM ", login, senha));
 
-            List<Usuarios> usuarios = new List<Usuarios>();
+            List<Usuarios> usuarios = CarregarObjUsuario(dr); 
 
-            while (dr.Read())
-            {
-                Usuarios usu = new Usuarios();
-                usu.Id = int.Parse(dr["ID"].ToString());
-                usu.Login = dr["LOGIN"].ToString();
-                usu.Senha = dr["SENHA"].ToString();
-                usu.Nome = dr["NOME"].ToString();
-                usu.Status = dr["STATUS"].ToString();
-                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
-                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
-                usu.Tipo = dr["TIPO"].ToString();
-                usu.Email = dr["EMAIL"].ToString();
-                usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
-                usu.NrTentLogin = utils.ComparaIntComNull(dr["NRTENTLOGIN"].ToString());
-                usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
-                //usu.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
-
-                usuarios.Add(usu);
-            }
             return usuarios;
         }
     }

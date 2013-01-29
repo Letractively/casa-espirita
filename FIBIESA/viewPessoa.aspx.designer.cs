@@ -13,22 +13,13 @@ namespace Admin {
     public partial class viewPessoa {
         
         /// <summary>
-        /// form1 control.
+        /// txtBuscas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// txtBusca control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBusca;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscas;
         
         /// <summary>
         /// btnBusca control.
@@ -56,14 +47,5 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dtgPessoas;
-        
-        /// <summary>
-        /// GridProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridProduto;
     }
 }

@@ -98,6 +98,7 @@
     <Content Include="cadTurmaAluno.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="erroPermissao.aspx" />
     <Content Include="Global.asax" />
     <Content Include="default.aspx" />
     <Content Include="images\bg_breadcrumb.png" />
@@ -503,6 +504,13 @@
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="erroPermissao.aspx.cs">
+      <DependentUpon>erroPermissao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="erroPermissao.aspx.designer.cs">
+      <DependentUpon>erroPermissao.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -534,6 +542,7 @@
     <Compile Include="index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
     </Compile>
+    <Compile Include="moduloautenticador.cs" />
     <Compile Include="Pesquisar.aspx.cs">
       <DependentUpon>Pesquisar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

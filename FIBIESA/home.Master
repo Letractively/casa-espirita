@@ -51,7 +51,7 @@
                 <li class="alt"><a href="#" title="">Alterar senha</a></li>
                 <li class="alt"><a href="#" title="">Alterar endereço</a></li>
                 <li class="alt"><a href="#" title="">Detalhes do pagamento</a></li>
-                <li class="alt"><a href="#" title="">Sair</a></li>
+                <li class="alt"><a>Sair</a></li>
             </ul>
             <div id="openCloseWrap">
                 <div id="toolbox">
@@ -60,11 +60,11 @@
                 </div>
             </div>
         </div>
-        <div id="userbox">
+        <div id="userbox">             
             <p>
-                Bem Vindo Marcos</p>
+                Bem-vindo, <asp:Label ID="lblNomeUsuario" runat="server"/></p>
             <p>
-                <span>Você está logado como Administrador</span></p>
+                <span>Você está logado como <asp:Label ID="lblCategoria" runat="server"/></span></p>
             <ul>
                 <li><a href="#" title="E-mail"><img src="images/icons/icon_mail.png" alt="Mail" /></a></li>
                 <li><a href="#" title="Configuração"><img src="images/icons/icon_cog.png" alt="Configure" /></a></li>

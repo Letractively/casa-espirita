@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Admin {
+namespace FIBIESA {
     
     
-    public partial class viewAutor {
+    public partial class erroPermissao {
         
         /// <summary>
-        /// txtBusca control.
+        /// lblMensagem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBusca;
+        protected global::System.Web.UI.WebControls.Label lblMensagem;
         
         /// <summary>
-        /// Busca control.
+        /// btnVoltar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Busca;
-        
-        /// <summary>
-        /// GridProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridProduto;
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
     }
 }

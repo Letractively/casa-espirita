@@ -3,15 +3,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="form1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
     <div id="content">
         <div class="container">
             <div class="conthead">
                 <h2>Cadastro de Pessoas</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:TextBox ID="txtBuscas" runat="server" CssClass="inputbox"></asp:TextBox>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
@@ -69,8 +68,6 @@
                 <!-- grid modelo finaliza aqui -->
                 <br />
                 <br />
-                <asp:GridView ID="GridProduto" runat="server">
-                </asp:GridView>
                 <br />
                 <br />
                 <br />
@@ -78,6 +75,5 @@
         </div>
         <div class="status">
         </div>
-    </div>
-    </form>
+    </div>    
 </asp:Content>
