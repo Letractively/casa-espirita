@@ -12,6 +12,24 @@ namespace DataAccess
 {
     public class FormulariosDA
     {
+        #region funcoes
+        private List<Formularios> CarregarObjFormulario(SqlDataReader dr)
+        {
+            List<Formularios> formularios = new List<Formularios>();
+
+            while (dr.Read())
+            {
+                Formularios formu = new Formularios();
+                formu.Id = int.Parse(dr["ID"].ToString());
+                formu.Codigo = int.Parse(dr["CODIGO"].ToString());
+                formu.Descricao = dr["DESCRICAO"].ToString();
+                                              
+                formularios.Add(formu);
+            }
+
+            return formularios;
+        }
+        #endregion
         public bool InserirDA(Formularios form)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
@@ -43,14 +61,28 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", form.Id);
 
-            // SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_formularios", paramsToSP);
 
             return true;
         }
 
         public List<Formularios> PesquisarDA()
         {
-            List<Formularios> formularios = new List<Formularios>();
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, @"SELECT * FROM FORMULARIOS ");
+
+            List<Formularios> formularios = CarregarObjFormulario(dr);
+
+            return formularios;
+        }
+
+        public List<Formularios> PesquisarDA(int id_for)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM FORMULARIOS WHERE ID = {0}", id_for));
+
+            List<Formularios> formularios = CarregarObjFormulario(dr);
+
             return formularios;
         }
     }

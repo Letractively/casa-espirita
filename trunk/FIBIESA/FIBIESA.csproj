@@ -86,7 +86,7 @@
     <Content Include="cadObra.aspx" />
     <Content Include="cadOrigem.aspx" />
     <Content Include="cadParametro.aspx" />
-    <Content Include="cadPermicao.aspx" />
+    <Content Include="cadPermissao.aspx" />
     <Content Include="cadPessoa.aspx" />
     <Content Include="cadPortador.aspx" />
     <Content Include="cadReserva.aspx" />
@@ -210,7 +210,7 @@
     <Content Include="viewObra.aspx" />
     <Content Include="viewOrigem.aspx" />
     <Content Include="viewParametro.aspx" />
-    <Content Include="viewPermicao.aspx" />
+    <Content Include="viewPermissao.aspx" />
     <Content Include="viewPessoa.aspx" />
     <Content Include="viewPortador.aspx" />
     <Content Include="viewReserva.aspx" />
@@ -420,12 +420,12 @@
     <Compile Include="cadParametro.aspx.designer.cs">
       <DependentUpon>cadParametro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="cadPermicao.aspx.cs">
-      <DependentUpon>cadPermicao.aspx</DependentUpon>
+    <Compile Include="cadPermissao.aspx.cs">
+      <DependentUpon>cadPermissao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="cadPermicao.aspx.designer.cs">
-      <DependentUpon>cadPermicao.aspx</DependentUpon>
+    <Compile Include="cadPermissao.aspx.designer.cs">
+      <DependentUpon>cadPermissao.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadPessoa.aspx.cs">
       <DependentUpon>cadPessoa.aspx</DependentUpon>
@@ -712,12 +712,12 @@
     <Compile Include="viewParametro.aspx.designer.cs">
       <DependentUpon>viewParametro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewPermicao.aspx.cs">
-      <DependentUpon>viewPermicao.aspx</DependentUpon>
+    <Compile Include="viewPermissao.aspx.cs">
+      <DependentUpon>viewPermissao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="viewPermicao.aspx.designer.cs">
-      <DependentUpon>viewPermicao.aspx</DependentUpon>
+    <Compile Include="viewPermissao.aspx.designer.cs">
+      <DependentUpon>viewPermissao.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewPessoa.aspx.cs">
       <DependentUpon>viewPessoa.aspx</DependentUpon>

@@ -122,14 +122,14 @@
                     <li><a href="viewBairro.aspx" title="">Bairros</a></li>
                     <li><a href="viewCidade.aspx" title="">Cidades</a></li>
                     <li><a href="viewEstado.aspx" title="">Estados</a></li>                   
-                    <li><a href="viewCategoria.aspx" title="">Categorias</a></li>
-                    <li><a href="viewPermicao.aspx" title="">Permições</a></li>
-                    <li><a href="viewFormulario.aspx" title="">Formulários</a></li>
+                    <li><a href="viewCategoria.aspx" title="">Categorias</a></li>                                      
                </ul>
             </li>
             <li><a class="collapsed heading">Configuração</a>
                 <ul class="navigation">
                     <li><a href="cadParametro.aspx" title="">Parâmetros</a></li>
+                    <li><a href="viewFormulario.aspx" title="">Formulários</a></li>
+                    <li><a href="viewPermissao.aspx" title="">Permissões</a></li>  
                 </ul>
             </li>    
         </ul>
@@ -145,7 +145,7 @@
         </div>
         <ul id="topbtns">
             <li class="desc"><strong>Home</strong><br />Atalhos</li>
-            <li><a href="home.aspx"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Home</a> </li>
+            <li><a href="default.aspx"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Home</a> </li>
             <li class="desc"><strong>VENDA</strong><br />Atalhos</li>
             <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Nova</a> </li>
             <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Alterando Vendas" /><br />Alterar</a> </li>
