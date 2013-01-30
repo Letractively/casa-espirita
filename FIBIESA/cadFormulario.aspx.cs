@@ -26,6 +26,7 @@ namespace Admin
                 hfId.Value = ltFor.Id.ToString();
                 txtCodigo.Text = ltFor.Codigo.ToString();
                 txtDescricao.Text = ltFor.Descricao;
+                txtNome.Text = ltFor.Nome;
             }
 
         }
@@ -71,6 +72,7 @@ namespace Admin
             formulario.Id = utils.ComparaIntComZero(hfId.Value);
             formulario.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             formulario.Descricao = txtDescricao.Text;
+            formulario.Nome = txtNome.Text;
 
             if (formulario.Id > 0)
                 forBL.EditarBL(formulario);
@@ -79,5 +81,7 @@ namespace Admin
 
             Response.Redirect("~/viewFormulario.aspx");
         }
+
+        
     }
 }

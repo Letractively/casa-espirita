@@ -11,10 +11,7 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
-                &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="btnInserir_Click" />
+                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />                
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
@@ -23,20 +20,16 @@
                                <asp:GridView ID="dtgPermissoes" runat="server" AutoGenerateColumns="False" 
                                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" PageSize="7" 
-                                    AllowSorting="True">
+                                    AllowSorting="True" 
+                                    onselectedindexchanged="dtgPermissoes_SelectedIndexChanged">
                                    <Columns>
-                                       <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
-                                            <HeaderStyle CssClass="grd_cmd_header" />
-                                            <ItemStyle CssClass="grd_delete" />
-                                       </asp:CommandField>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
                                             <ItemStyle CssClass="grd_edit" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                       <asp:BoundField DataField="CODCATEGORIA" HeaderText="Cód. Categoria" />
-                                       <asp:BoundField DataField="DESCCATEGORIA" HeaderText="Desc. Categoria" />
+                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

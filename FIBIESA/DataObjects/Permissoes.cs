@@ -69,5 +69,12 @@ namespace DataObjects
             get { return _categoria; }
             set { _categoria = value; }
         }
+
+        private Formularios _formulario;
+        public Formularios Formulario
+        {
+            get { return _formulario; }
+            set { _formulario = value; }
+        }
     }
 }

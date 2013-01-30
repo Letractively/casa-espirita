@@ -41,18 +41,25 @@ namespace BusinessLayer
             return permissoesDA.PesquisarDA();
         }
 
-        public List<Permissoes> PesquisarBL(int id_per)
+        public List<Permissoes> PesquisarBL(int id_cat)
         {
             PermissoesDA permissoesDA = new PermissoesDA();
 
-            return permissoesDA.PesquisarDA(id_per);
+            return permissoesDA.PesquisarDA(id_cat);
         }
 
-        public List<Permissoes> PesquisarBL(int id_categoria, string formulario)
+        public List<Permissoes> PesquisarBL(int id_categoria, int id_formulario)
         {
             PermissoesDA permissoesDA = new PermissoesDA();
 
-            return permissoesDA.PesquisarDA(id_categoria, formulario);
+            return permissoesDA.PesquisarDA(id_categoria, id_formulario);
+        }
+
+        public List<Permissoes> PesquisarBL(int id_categoria, string nome)
+        {
+            PermissoesDA permissoesDA = new PermissoesDA();
+
+            return permissoesDA.PesquisarDA(id_categoria, nome);
         }
     }
 }

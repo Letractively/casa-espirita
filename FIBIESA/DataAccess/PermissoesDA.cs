@@ -21,7 +21,8 @@ namespace DataAccess
             {
                 Permissoes per = new Permissoes();
                 per.Id = int.Parse(dr["ID"].ToString());
-                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());
+                per.Codigo = int.Parse(dr["CODIGO"].ToString());
+                per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());                
                 per.Editar = bool.Parse(dr["EDITAR"].ToString());
                 per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
                 per.Inserir = bool.Parse(dr["INSERIR"].ToString());
@@ -29,7 +30,6 @@ namespace DataAccess
                 per.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
 
                 CategoriasDA catDA = new CategoriasDA();
-
                 List<Categorias> categorias = catDA.PesquisarDA(per.CategoriaId);
                 Categorias cat = new Categorias();
 
@@ -40,6 +40,19 @@ namespace DataAccess
                     cat.Descricao = ltcat.Descricao;
                 }
 
+                FormulariosDA forDA = new FormulariosDA();
+                List<Formularios> formularios = forDA.PesquisarDA(per.FormularioId);
+                Formularios formu = new Formularios();
+
+                foreach (Formularios ltFor in formularios)
+	            {
+                    formu.Id = ltFor.Id;
+                    formu.Codigo = ltFor.Codigo;
+                    formu.Descricao = ltFor.Descricao;
+                    formu.Nome = ltFor.Nome;		 
+	            }
+
+                per.Formulario = formu;
                 per.Categoria = cat;
                 permissoes.Add(per);
             }
@@ -103,17 +116,21 @@ namespace DataAccess
             return permissoes;
         }
 
-        public List<Permissoes> PesquisarDA(int id_per)
+        public List<Permissoes> PesquisarDA(int id_cat)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM PERMISSOES WHERE ID = {0}",id_per));
+                                                                CommandType.Text, string.Format(@"SELECT PER.* " +
+                                                                                                 " FROM PERMISSOES PER " +
+                                                                                                 "     ,FORMULARIOS F " +
+                                                                                                 " WHERE PER.FORMULARIOID = F.ID " +
+                                                                                                 " AND PER.CATEGORIAID = {0} ", id_cat));
 
             List<Permissoes> permissoes = CarregarObjPermissao(dr);
             
             return permissoes;
         }
 
-        public List<Permissoes> PesquisarDA(int id_categoria, string formulario)
+        public List<Permissoes> PesquisarDA(int id_categoria, int id_formulario)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT PER.* " + 
@@ -121,10 +138,25 @@ namespace DataAccess
                                                                                                  "     ,FORMULARIOS F " +                                                                                                 
                                                                                                  " WHERE PER.FORMULARIOID = F.ID " +
                                                                                                  " AND PER.CATEGORIAID = {0} " +
-                                                                                                 " AND F.DESCRICAO = '{1}' ",id_categoria, formulario));
+                                                                                                 " AND F.ID = {1} ", id_categoria, id_formulario));
 
             List<Permissoes> permissoes = CarregarObjPermissao(dr);
                         
+            return permissoes;
+        }
+
+        public List<Permissoes> PesquisarDA(int id_categoria, string nome)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT PER.* " +
+                                                                                                 " FROM PERMISSOES PER " +
+                                                                                                 "     ,FORMULARIOS F " +
+                                                                                                 " WHERE PER.FORMULARIOID = F.ID " +
+                                                                                                 " AND PER.CATEGORIAID = {0} " +
+                                                                                                 " AND F.NOME = '{1}' ", id_categoria, nome));
+
+            List<Permissoes> permissoes = CarregarObjPermissao(dr);
+
             return permissoes;
         }
     }

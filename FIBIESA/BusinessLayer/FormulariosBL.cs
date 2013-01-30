@@ -9,28 +9,28 @@ namespace BusinessLayer
 {
     public class FormulariosBL
     {
-        public bool InserirBL(Formularios form)
+        public bool InserirBL(Formularios formu)
         {
             /*criar as regras de negocio*/
             FormulariosDA formulariosDA = new FormulariosDA();
 
-            return formulariosDA.InserirDA(form);
+            return formulariosDA.InserirDA(formu);
         }
 
-        public bool EditarBL(Formularios form)
+        public bool EditarBL(Formularios formu)
         {
             /*criar as regras de negocio*/
             FormulariosDA formulariosDA = new FormulariosDA();
 
-            return formulariosDA.EditarDA(form);
+            return formulariosDA.EditarDA(formu);
         }
 
-        public bool ExcluirBL(Formularios form)
+        public bool ExcluirBL(Formularios formu)
         {
             /*criar as regras de negocio*/
             FormulariosDA formulariosDA = new FormulariosDA();
 
-            return formulariosDA.ExcluirDA(form);
+            return formulariosDA.ExcluirDA(formu);
         }
 
         public List<Formularios> PesquisarBL()

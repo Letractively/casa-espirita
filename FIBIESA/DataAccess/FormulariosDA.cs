@@ -23,6 +23,8 @@ namespace DataAccess
                 formu.Id = int.Parse(dr["ID"].ToString());
                 formu.Codigo = int.Parse(dr["CODIGO"].ToString());
                 formu.Descricao = dr["DESCRICAO"].ToString();
+                formu.Nome = dr["NOME"].ToString();
+                formu.Tipo = dr["TIPO"].ToString();
                                               
                 formularios.Add(formu);
             }
@@ -30,25 +32,29 @@ namespace DataAccess
             return formularios;
         }
         #endregion
-        public bool InserirDA(Formularios form)
+        public bool InserirDA(Formularios formu)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[2];
+            SqlParameter[] paramsToSP = new SqlParameter[4];
 
-            paramsToSP[0] = new SqlParameter("@codigo", form.Codigo);
-            paramsToSP[1] = new SqlParameter("@descricao", form.Descricao);
+            paramsToSP[0] = new SqlParameter("@codigo", formu.Codigo);
+            paramsToSP[1] = new SqlParameter("@descricao", formu.Descricao);
+            paramsToSP[2] = new SqlParameter("@nome", formu.Nome);
+            paramsToSP[3] = new SqlParameter("@tipo", formu.Tipo);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_formularios", paramsToSP);
 
             return true;
         }
 
-        public bool EditarDA(Formularios form)
+        public bool EditarDA(Formularios formu)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[3];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
-            paramsToSP[0] = new SqlParameter("@id", form.Id);
-            paramsToSP[1] = new SqlParameter("@codigo", form.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", form.Descricao);
+            paramsToSP[0] = new SqlParameter("@id", formu.Id);
+            paramsToSP[1] = new SqlParameter("@codigo", formu.Codigo);
+            paramsToSP[2] = new SqlParameter("@descricao", formu.Descricao);
+            paramsToSP[3] = new SqlParameter("@nome", formu.Nome);
+            paramsToSP[4] = new SqlParameter("@tipo", formu.Tipo);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_formularios", paramsToSP);
 

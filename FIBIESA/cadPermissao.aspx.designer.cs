@@ -13,57 +13,30 @@ namespace Admin {
     public partial class cadPermicao {
         
         /// <summary>
-        /// _fomulario control.
+        /// repPermissao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _fomulario;
+        protected global::System.Web.UI.WebControls.Repeater repPermissao;
         
         /// <summary>
-        /// _categoria control.
+        /// btnVoltar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _categoria;
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
-        /// _data control.
+        /// btnSalvar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _data;
-        
-        /// <summary>
-        /// _editar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _editar;
-        
-        /// <summary>
-        /// _inserir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _inserir;
-        
-        /// <summary>
-        /// _excluir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _excluir;
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
     }
 }
