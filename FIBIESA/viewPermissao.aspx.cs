@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using DataObjects;
+using BusinessLayer;
+using FG;
 
 namespace Admin
 {
@@ -16,9 +18,11 @@ namespace Admin
 
         }
 
-        protected void Busca_Click(object sender, EventArgs e)
+        protected void btnInserir_Click(object sender, EventArgs e)
         {
-            
+            Response.Redirect("cadPermissao.aspx?operacao=new");
         }
+
+               
     }
 }

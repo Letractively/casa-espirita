@@ -54,7 +54,8 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            if(!IsPostBack)
+                Pesquisar();
         }
 
      

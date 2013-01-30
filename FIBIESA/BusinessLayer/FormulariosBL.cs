@@ -40,5 +40,13 @@ namespace BusinessLayer
 
             return formulariosDA.PesquisarDA();
         }
+
+        public List<Formularios> PesquisarBL(int id_for)
+        {
+            /*criar as regras de negocio*/
+            FormulariosDA formulariosDA = new FormulariosDA();
+
+            return formulariosDA.PesquisarDA(id_for);
+        }
     }
 }
