@@ -134,6 +134,7 @@
     <Content Include="images\icons\icon_delete.png" />
     <Content Include="images\icons\icon_edit.png" />
     <Content Include="images\icons\icon_error.png" />
+    <Content Include="images\icons\icon_home.png" />
     <Content Include="images\icons\icon_info.png" />
     <Content Include="images\icons\icon_locked.png" />
     <Content Include="images\icons\icon_lrg_calendar.png" />
