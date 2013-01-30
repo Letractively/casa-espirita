@@ -145,7 +145,7 @@
         </div>
         <ul id="topbtns">
             <li class="desc"><strong>Home</strong><br />Atalhos</li>
-            <li><a href="default.aspx"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Home</a> </li>
+            <li><a href="default.aspx"><img src="images/icons/icon_home.png" alt="Nova Venda" /><br />Home</a> </li>
             <li class="desc"><strong>VENDA</strong><br />Atalhos</li>
             <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Nova</a> </li>
             <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Alterando Vendas" /><br />Alterar</a> </li>

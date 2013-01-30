@@ -18,7 +18,7 @@
                                 <table>
                                     <thead>
                                     <tr>                                        
-                                        <th></th><th></th><th>Código</th><th>Página</th><th>Tipo</th><th colspan="4">Tipos de permissões</th>   
+                                        <th></th><th></th><th></th><th>Código</th><th>Página</th><th>Tipo</th><th colspan="4">Tipos de permissões</th>   
                                     </tr>
                                     </thead>
                             </HeaderTemplate>
