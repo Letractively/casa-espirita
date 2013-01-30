@@ -30,6 +30,16 @@
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="width: 140px">Nome:</td>
+                        <td>
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
+                                Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtNome" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
                 </table>
                 <table>
                     <tr>
