@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadParametro.aspx.cs" Inherits="Admin.cadParametro" %>
-
+     <%@ MasterType VirtualPath="~/home.Master" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">

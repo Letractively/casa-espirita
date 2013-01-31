@@ -25,7 +25,7 @@ namespace FIBIESA
             context = application.Context;
             //obtem o nome do arquivo que está sendo acessado
             string origem = context.Request.FilePath;
-            if (!origem.Contains("aspx") || origem.Contains("default.aspx"))
+            if (!origem.Contains("aspx") || origem.Contains("default.aspx") || origem.Contains("Pesquisar.aspx") || origem.Contains("PesquisarItens.aspx"))
             {
                 return;
             }
@@ -47,14 +47,28 @@ namespace FIBIESA
                 //exemplo
                 //Cria objeto usuario local, baseado no objeto da sessao
                 List<Usuarios> usuarios = (List<Usuarios>)context.Session["usuario"];
-                PermissoesBL perBL = new PermissoesBL();
+                PermissoesBL perBL = new PermissoesBL();                
 
                 foreach (Usuarios ltUsu in usuarios)
                 {
                     List<Permissoes> permissoes = perBL.PesquisarBL(ltUsu.CategoriaId, origem);
 
                     if (permissoes.Count == 0 && !origem.Contains("erroPermissao.aspx"))
-                        context.Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ltUsu.Nome, true);                      
+                    {
+                        context.Session["usuPermissoes"] = null;
+                        context.Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ltUsu.Nome, true);                        
+                    }
+                    else
+                        if (!origem.Contains("erroPermissao.aspx"))
+                        {
+                            Permissoes per = new Permissoes();
+
+                            per.Editar = permissoes[0].Editar;
+                            per.Excluir = permissoes[0].Excluir;
+                            per.Inserir = permissoes[0].Inserir;
+
+                            context.Session["usuPermissoes"] = per;
+                        }
                 }
                    
             }

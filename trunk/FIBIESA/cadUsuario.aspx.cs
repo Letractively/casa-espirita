@@ -127,9 +127,19 @@ namespace Admin
             usuarios.CategoriaId = utils.ComparaIntComZero(hfIdCategoria.Value);
 
             if (usuarios.Id > 0)
-                usuBL.EditarBL(usuarios);
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    usuBL.EditarBL(usuarios);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
             else
-                usuBL.InserirBL(usuarios);
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    usuBL.InserirBL(usuarios);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }        
         }
 
         protected void btnPesCategoria_Click(object sender, EventArgs e)

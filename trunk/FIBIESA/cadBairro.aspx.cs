@@ -12,16 +12,16 @@ using System.Data;
 namespace Admin
 {
     public partial class cadBairro : System.Web.UI.Page
-    {        
+    {
         Utils utils = new Utils();
         string v_operacao = "";
 
         #region funcoes
         private void CarregarDados(int id_bai)
         {
-            BairrosBL baiBL = new BairrosBL();            
+            BairrosBL baiBL = new BairrosBL();
             List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
-                       
+
             foreach (Bairros ltBai in bairros)
             {
                 hfId.Value = ltBai.Id.ToString();
@@ -31,18 +31,19 @@ namespace Admin
 
         }
         private void CarregarAtributos()
-        {           
+        {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         #endregion
-                
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_bai = 0;
 
             CarregarAtributos();
 
-            if (!IsPostBack)            {
+            if (!IsPostBack)
+            {
 
                 if (Request.QueryString["operacao"] != null)
                 {
@@ -65,16 +66,28 @@ namespace Admin
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
+
             BairrosBL baiBL = new BairrosBL();
             Bairros bairros = new Bairros();
             bairros.Id = utils.ComparaIntComZero(hfId.Value);
-            bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);               
+            bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             bairros.Descricao = txtDescricao.Text;
 
             if (bairros.Id > 0)
-                baiBL.EditarBL(bairros);
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    baiBL.EditarBL(bairros);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
+            }
             else
-                baiBL.InserirBL(bairros);
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    baiBL.InserirBL(bairros);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
 
             Response.Redirect("viewBairro.aspx");
         }

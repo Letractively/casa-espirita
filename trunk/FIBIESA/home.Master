@@ -100,11 +100,10 @@
                 </ul>
             </li>
             <li><a class="collapsed heading">Estoque</a>
-                <ul class="navigation">  
-                    <li><a href="viewNotaEntradaItem.aspx" title="">Nota de entrada de Ítem</a></li>
+                <ul class="navigation">                    
                     <li><a href="viewNotaEntrada.aspx" title="">Nota de entrada</a></li>
                     <li><a href="viewMovimentoEstoque.aspx" title="">Movimento de Estoque</a></li>
-                    <li><a href="viewItemEstoque.aspx" title="">Ítem de Estoque</a></li>
+                    <li><a href="viewItemEstoque.aspx" title="">Item de Estoque</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Acadêmico</a>

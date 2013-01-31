@@ -79,12 +79,17 @@ namespace Admin
 
         protected void dtgPessoas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pessoas = new Pessoas();
-            
-            pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
-            pesBL.ExcluirBL(pessoas);
-            Pesquisar();
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                PessoasBL pesBL = new PessoasBL();
+                Pessoas pessoas = new Pessoas();
+
+                pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
+                pesBL.ExcluirBL(pessoas);
+                Pesquisar();
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
 
         protected void dtgPessoas_SelectedIndexChanged(object sender, EventArgs e)

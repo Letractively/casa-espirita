@@ -100,18 +100,23 @@ namespace Admin
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
 
-            #region biblioteca
-            SalvarParametro(1, "B", lblQtdMaxEmp.Text, txtQtdMaxEmp.Text);
-            SalvarParametro(2, "B", lblQtdMaxRen.Text, txtQtdMaxRen.Text);
-            SalvarParametro(3, "B", lblTempoMinRetirada.Text, txtTempoMinRetirada.Text);
-            SalvarParametro(4, "B", lblQtdMinRetirada.Text, txtQtdMinRetirada.Text);
-            #endregion
+            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+            {
+                #region biblioteca
+                SalvarParametro(1, "B", lblQtdMaxEmp.Text, txtQtdMaxEmp.Text);
+                SalvarParametro(2, "B", lblQtdMaxRen.Text, txtQtdMaxRen.Text);
+                SalvarParametro(3, "B", lblTempoMinRetirada.Text, txtTempoMinRetirada.Text);
+                SalvarParametro(4, "B", lblQtdMinRetirada.Text, txtQtdMinRetirada.Text);
+                #endregion
 
-            #region financeiro
-            SalvarParametro(1, "F", lblValorMulta.Text, txtValorMulta.Text);
-            SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
-            SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
-            #endregion
+                #region financeiro
+                SalvarParametro(1, "F", lblValorMulta.Text, txtValorMulta.Text);
+                SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
+                SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
+                #endregion
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
         }
     }

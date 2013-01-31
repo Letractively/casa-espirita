@@ -19,6 +19,9 @@ namespace Admin
         DataTable dtTelefones = new DataTable();
         DataTable dtExcluidos = new DataTable();
         string v_operacao = "";
+        private bool inserir = false;
+        private bool excluir = false;
+        private bool editar = false;
         #endregion
 
         #region funcoes
@@ -26,12 +29,12 @@ namespace Admin
         {
             string[] v_pesquisa;
             PessoasBL pesBL = new PessoasBL();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
+            List<Pessoas> pessoas = pesBL.PesquisarBL(id_pes);
 
             foreach (Pessoas pes in pessoas)
             {
                 hfId.Value = pes.Id.ToString();
-                // pessoas.Codigo = 
+                txtCodigo.Text = pes.Codigo.ToString();
                 txtNome.Text = pes.Nome;
                 txtNomeFantasia.Text = pes.NomeFantasia;                
                 txtCpfCnpj.Text =  pes.CpfCnpj;
@@ -140,11 +143,13 @@ namespace Admin
             DataColumn coluna2 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
             DataColumn coluna4 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna5 = new DataColumn("NUMERO", Type.GetType("System.String"));
 
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
             dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
             
             TelefonesBL telBL = new TelefonesBL();
 
@@ -158,13 +163,26 @@ namespace Admin
                 linha["DESCRICAO"] = tel.Descricao;
                 linha["PESSOAID"] = tel.PessoaId;
                 linha["CODIGO"] = tel.Codigo;
+                linha["NUMERO"] = tel.Numero;
+
+                dt.Rows.Add(linha);
             }
             
             dtgTelefones.DataSource = dt;
             dtgTelefones.DataBind();
             hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
                            
-        }        
+        }
+        private void CarregarPermissoes()
+        {
+            if (Session["usuPermissoes"] != null)
+            {
+                Permissoes permissoes = (Permissoes)Session["usuPermissoes"];
+                inserir = permissoes.Inserir;
+                excluir = permissoes.Excluir;
+                editar = permissoes.Editar;
+            }
+        }
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
             string[] v_cidade = new string[2];
@@ -243,6 +261,7 @@ namespace Admin
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         private void GravarTelefones(int idPes)
         {
@@ -292,7 +311,7 @@ namespace Admin
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_pes = 0;            
+            int id_pes = 0;           
             CarregarAtributos();
             CriarDtTelefones();
             CriaDtExcluidos();
@@ -408,7 +427,7 @@ namespace Admin
             Pessoas pessoas = new Pessoas();
 
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
-            //pessoas.Codigo = 
+            pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text); 
             pessoas.Nome = txtNome.Text;
             pessoas.NomeFantasia = txtNomeFantasia.Text;
             pessoas.CategoriaId = utils.ComparaIntComZero(hfIdCategoria.Value);
@@ -438,15 +457,30 @@ namespace Admin
             int idPes = 0;
 
             if (pessoas.Id > 0)
-            {
-                idPes = pessoas.Id;
-                pesBL.EditarBL(pessoas);
+            {                
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                {
+                    idPes = pessoas.Id;
+                    pesBL.EditarBL(pessoas);
+                    ExcluirTelefones();
+                    GravarTelefones(idPes);
+                }
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                
             }
             else
-                idPes = pesBL.InserirBL(pessoas);
-
-            ExcluirTelefones();
-            GravarTelefones(idPes);
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                {
+                    idPes = pesBL.InserirBL(pessoas);
+                    ExcluirTelefones();
+                    GravarTelefones(idPes);
+                }
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
+                
             
             Response.Redirect("viewPessoa.aspx");
         }
@@ -535,6 +569,6 @@ namespace Admin
           
         }
 
-              
+                            
     }
 }

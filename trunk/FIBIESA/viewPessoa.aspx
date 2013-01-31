@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="viewPessoa.aspx.cs" Inherits="Admin.viewPessoa" %>
+    <%@ MasterType VirtualPath="~/home.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
