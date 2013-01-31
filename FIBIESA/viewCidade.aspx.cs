@@ -80,10 +80,15 @@ namespace Admin
 
         protected void dtgCidades_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            CidadesBL cidBL = new CidadesBL();
-            Cidades cidades = new Cidades();
-            cidades.Id = utils.ComparaIntComZero(dtgCidades.DataKeys[e.RowIndex][0].ToString());
-            cidBL.ExcluirBL(cidades);
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                CidadesBL cidBL = new CidadesBL();
+                Cidades cidades = new Cidades();
+                cidades.Id = utils.ComparaIntComZero(dtgCidades.DataKeys[e.RowIndex][0].ToString());
+                cidBL.ExcluirBL(cidades);
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)

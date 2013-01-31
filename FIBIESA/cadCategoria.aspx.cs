@@ -65,6 +65,7 @@ namespace Admin
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
+            
             CategoriasBL catBL = new CategoriasBL();
             Categorias categorias = new Categorias();
 
@@ -73,9 +74,19 @@ namespace Admin
             categorias.Descricao = txtDescricao.Text;
 
             if (categorias.Id > 0)
-                catBL.EditarBL(categorias);
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    catBL.EditarBL(categorias);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
             else
-                catBL.InserirBL(categorias);
+            {
+                if(this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    catBL.InserirBL(categorias);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
 
             Response.Redirect("viewCategoria.aspx");
         }

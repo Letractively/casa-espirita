@@ -16,6 +16,30 @@ namespace FIBIESA
             Session["usuario"] = null;
             Response.Redirect("~/login.aspx");
         }
+
+        public bool VerificaPermissaoUsuario(string tipoPermissao)
+        {
+            if (Session["usuPermissoes"] != null)
+            {
+                Permissoes permissoes = (Permissoes)Session["usuPermissoes"];
+
+                switch (tipoPermissao.ToUpper())
+                {
+                    case "INSERIR":
+                        return permissoes.Inserir;                      
+
+                    case "EXCLUIR":
+                        return permissoes.Excluir;                        
+
+                    case "EDITAR":
+                        return permissoes.Editar;
+                       
+                    default: return false;                        
+                }
+            }
+            else
+                return false;
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {

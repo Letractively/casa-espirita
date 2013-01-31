@@ -99,7 +99,7 @@ namespace DataAccess
             paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
             paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
             paramsToSP[32] = new SqlParameter("@status", pes.Status);
-           // paramsToSP[19] = new SqlParameter("@bairroprof", pes.BairroProf);
+            //paramsToSP[19] = new SqlParameter("@bairroprof", pes.BairroProf);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_pessoas", paramsToSP);
 
@@ -192,7 +192,7 @@ namespace DataAccess
                 pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
                 pes.NumeroProf = dr["NUMEROPROF"].ToString();
                 pes.CepProf = dr["CEPPROF"].ToString();
-                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROFID"].ToString());
+                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROF"].ToString());
                 pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
                 pes.Empresa = dr["EMPRESA"].ToString();
                 pes.Email = dr["EMAIL"].ToString();

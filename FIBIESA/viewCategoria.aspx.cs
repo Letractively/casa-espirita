@@ -66,11 +66,17 @@ namespace Admin
 
         protected void dtgCategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            CategoriasBL catBL = new CategoriasBL();
-            Categorias categorias = new Categorias();
-            categorias.Id = utils.ComparaIntComZero(dtgCategorias.DataKeys[e.RowIndex][0].ToString());
-            catBL.ExcluirBL(categorias);
-            Pesquisar();
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                CategoriasBL catBL = new CategoriasBL();
+                Categorias categorias = new Categorias();
+                categorias.Id = utils.ComparaIntComZero(dtgCategorias.DataKeys[e.RowIndex][0].ToString());
+                catBL.ExcluirBL(categorias);
+                Pesquisar();
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            
         }
 
         protected void dtgCategorias_SelectedIndexChanged(object sender, EventArgs e)

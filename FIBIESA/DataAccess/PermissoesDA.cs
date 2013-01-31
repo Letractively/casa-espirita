@@ -153,9 +153,11 @@ namespace DataAccess
                                                                                                  "     ,FORMULARIOS F " +
                                                                                                  " WHERE PER.FORMULARIOID = F.ID " +
                                                                                                  " AND PER.CATEGORIAID = {0} " +
-                                                                                                 " AND F.NOME = '{1}' ", id_categoria, nome));
+                                                                                                 " AND F.NOME = '{1}' " +
+                                                                                                 " AND PER.CONSULTAR = 1 ", id_categoria, nome));
 
             List<Permissoes> permissoes = CarregarObjPermissao(dr);
+            
 
             return permissoes;
         }

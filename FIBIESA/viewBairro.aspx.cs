@@ -79,11 +79,16 @@ namespace Admin
 
         protected void dtgBairros_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            BairrosBL baiBL = new BairrosBL();
-            Bairros bairros = new Bairros();
-            bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
-            baiBL.ExcluirBL(bairros);
-            Pesquisar();
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                BairrosBL baiBL = new BairrosBL();
+                Bairros bairros = new Bairros();
+                bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
+                baiBL.ExcluirBL(bairros);
+                Pesquisar();
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
                
       

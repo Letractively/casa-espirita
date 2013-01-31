@@ -88,9 +88,19 @@ namespace Admin
             cidades.EstadoId = utils.ComparaIntComZero(hfIdEstado.Value);
 
             if (cidades.Id > 0)
-                cidBL.EditarBL(cidades);
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    cidBL.EditarBL(cidades);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
             else
-                cidBL.InserirBL(cidades);
+            {
+                if(this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    cidBL.InserirBL(cidades);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
 
             Response.Redirect("viewCidade.aspx");
 
