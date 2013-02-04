@@ -46,6 +46,8 @@
     <Compile Include="Categorias.cs" />
     <Compile Include="Cidades.cs" />
     <Compile Include="Chamadas.cs" />
+    <Compile Include="Instituicoes.cs" />
+    <Compile Include="InstituicoesLogo.cs" />
     <Compile Include="MovimentosEstoque.cs" />
     <Compile Include="JurosMultas.cs" />
     <Compile Include="ItensEstoque.cs" />

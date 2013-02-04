@@ -31,6 +31,17 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="width: 140px">Tipo:</td>
+                        <td><asp:DropDownList ID="ddlTipo" runat="server" CssClass="inputbox" >
+                            <asp:ListItem Value="V">Consulta</asp:ListItem>
+                            <asp:ListItem Value="C">Edição</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="ddlTipo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="width: 140px">Nome:</td>
                         <td>
                             <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
