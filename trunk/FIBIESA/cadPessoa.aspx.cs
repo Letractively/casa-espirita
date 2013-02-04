@@ -19,9 +19,6 @@ namespace Admin
         DataTable dtTelefones = new DataTable();
         DataTable dtExcluidos = new DataTable();
         string v_operacao = "";
-        private bool inserir = false;
-        private bool excluir = false;
-        private bool editar = false;
         #endregion
 
         #region funcoes
@@ -172,17 +169,7 @@ namespace Admin
             dtgTelefones.DataBind();
             hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
                            
-        }
-        private void CarregarPermissoes()
-        {
-            if (Session["usuPermissoes"] != null)
-            {
-                Permissoes permissoes = (Permissoes)Session["usuPermissoes"];
-                inserir = permissoes.Inserir;
-                excluir = permissoes.Excluir;
-                editar = permissoes.Editar;
-            }
-        }
+        }       
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
             string[] v_cidade = new string[2];

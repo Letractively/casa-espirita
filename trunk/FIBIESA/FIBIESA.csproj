@@ -78,6 +78,7 @@
     <Content Include="cadEstado.aspx" />
     <Content Include="cadExemplar.aspx" />
     <Content Include="cadFormulario.aspx" />
+    <Content Include="cadInstituicao.aspx" />
     <Content Include="cadItemEstoque.aspx" />
     <Content Include="cadJuroMulta.aspx" />
     <Content Include="cadMovimentoEstoque.aspx" />
@@ -203,6 +204,7 @@
     <Content Include="viewEstado.aspx" />
     <Content Include="viewExemplar.aspx" />
     <Content Include="viewFormulario.aspx" />
+    <Content Include="viewInstituicao.aspx" />
     <Content Include="viewItemEstoque.aspx" />
     <Content Include="viewJuroMulta.aspx" />
     <Content Include="viewMovimentoEstoque.aspx" />
@@ -364,6 +366,13 @@
     </Compile>
     <Compile Include="cadFormulario.aspx.designer.cs">
       <DependentUpon>cadFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadInstituicao.aspx.cs">
+      <DependentUpon>cadInstituicao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadInstituicao.aspx.designer.cs">
+      <DependentUpon>cadInstituicao.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadItemEstoque.aspx.cs">
       <DependentUpon>cadItemEstoque.aspx</DependentUpon>
@@ -656,6 +665,13 @@
     </Compile>
     <Compile Include="viewFormulario.aspx.designer.cs">
       <DependentUpon>viewFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewInstituicao.aspx.cs">
+      <DependentUpon>viewInstituicao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewInstituicao.aspx.designer.cs">
+      <DependentUpon>viewInstituicao.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewItemEstoque.aspx.cs">
       <DependentUpon>viewItemEstoque.aspx</DependentUpon>

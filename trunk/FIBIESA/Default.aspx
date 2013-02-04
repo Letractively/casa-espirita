@@ -192,22 +192,7 @@
                 		<h2>Estatos</h2>
                     </div>
                 	<div class="contentbox">
-
-                    	<ul class="summarystats">
-                        	<li>
-                            	<p class="statcount">30</p> <p>Inscriçào(ões)</p>  <p class="statview"><a href="#" title="visualização">visualização</a></p>
-                            </li>
-                            <li>
-                            	<p class="statcount">17</p> <p>Venda(s) nova(s)</p>  <p class="statview"><a href="#" title="visualização">visualização</a></p>
-
-                            </li>
-                            <li>
-                            	<p class="statcount">05</p> <p>Durante venda(s)</p>  <p class="statview"><a href="#" title="visualização">visualização</a></p>
-                            </li>
-                            <li>
-                            	<p class="statcount">10</p> <p>As solicitações de suporte</p>  <p class="statview"><a href="#" title="visualização">visualização</a>
-                            </li>
-                        </ul>
+                        <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>                    	
                     </div>
                 </div>
 

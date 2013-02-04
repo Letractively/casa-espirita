@@ -48,6 +48,8 @@
     <Compile Include="CidadesDA.cs" />
     <Compile Include="ChamadasDA.cs" />
     <Compile Include="CursosDA.cs" />
+    <Compile Include="InstituicoesDA.cs" />
+    <Compile Include="InstituicoesLogoDA.cs" />
     <Compile Include="MovimentosEstoqueDA.cs" />
     <Compile Include="JurosMultasDA.cs" />
     <Compile Include="ItensEstoqueDA.cs" />

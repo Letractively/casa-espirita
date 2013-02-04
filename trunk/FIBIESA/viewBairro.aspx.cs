@@ -46,8 +46,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
             
-            dtgBairros.DataSource = tabela;
-           
+            dtgBairros.DataSource = tabela;           
             dtgBairros.DataBind();
         }
         #endregion

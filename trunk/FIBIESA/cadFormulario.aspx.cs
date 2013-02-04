@@ -27,6 +27,7 @@ namespace Admin
                 txtCodigo.Text = ltFor.Codigo.ToString();
                 txtDescricao.Text = ltFor.Descricao;
                 txtNome.Text = ltFor.Nome;
+                ddlTipo.SelectedValue = ltFor.Tipo;
             }
 
         }
@@ -73,6 +74,7 @@ namespace Admin
             formulario.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             formulario.Descricao = txtDescricao.Text;
             formulario.Nome = txtNome.Text;
+            formulario.Tipo = ddlTipo.SelectedValue;
 
             if (formulario.Id > 0)
                 forBL.EditarBL(formulario);
