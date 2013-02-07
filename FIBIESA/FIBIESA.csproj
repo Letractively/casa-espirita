@@ -158,7 +158,9 @@
     <Content Include="images\jquery.wysiwyg.gif" />
     <Content Include="images\loading.gif" />
     <Content Include="images\logo2.png" />
+    <Content Include="images\logo_emp.png" />
     <Content Include="images\search_btn.png" />
+    <Content Include="images\sem_images.jpg" />
     <Content Include="images\status_high.png" />
     <Content Include="images\status_low.png" />
     <Content Include="images\status_med.png" />

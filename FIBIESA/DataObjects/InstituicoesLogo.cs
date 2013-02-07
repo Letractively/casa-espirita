@@ -26,6 +26,13 @@ namespace DataObjects
         {
             get { return _imagem; }
             set { _imagem = value; }
-        } 
+        }
+                
+        private string _extensao;
+        public string Extensao
+        {
+            get { return _extensao; }
+            set { _extensao = value; }
+        }
     }
 }

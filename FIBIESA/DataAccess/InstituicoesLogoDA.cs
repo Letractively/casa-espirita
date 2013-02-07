@@ -22,6 +22,7 @@ namespace DataAccess
                 InstituicoesLogo insL = new InstituicoesLogo();
                 insL.Id = int.Parse(dr["ID"].ToString());
                 insL.InstituicoesId = int.Parse(dr["INSTITUICOESID"].ToString());
+                insL.Extensao = dr["EXTENSAO"].ToString();
                 //insL.Imagem = dr["IMAGEM"].ToString();
                 
                 instituicoesLogo.Add(insL);
@@ -32,10 +33,11 @@ namespace DataAccess
 
         public bool InserirDA(InstituicoesLogo insL)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[2];
+            SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@instituicoesid", insL.InstituicoesId);
             paramsToSP[1] = new SqlParameter("@imagem", insL.Imagem);
+            paramsToSP[2] = new SqlParameter("@extensao", insL.Extensao);
                        
             //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
 
@@ -44,11 +46,12 @@ namespace DataAccess
 
         public bool EditarDA(InstituicoesLogo insL)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[3];
+            SqlParameter[] paramsToSP = new SqlParameter[4];
 
             paramsToSP[0] = new SqlParameter("@id", insL.Id);
             paramsToSP[1] = new SqlParameter("@instituicoesid", insL.InstituicoesId);
             paramsToSP[2] = new SqlParameter("@imagem", insL.Imagem);
+            paramsToSP[3] = new SqlParameter("@extensao", insL.Extensao);
            
             //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
 

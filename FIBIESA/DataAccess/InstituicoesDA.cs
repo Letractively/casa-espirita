@@ -26,6 +26,7 @@ namespace DataAccess
                 ins.Id = int.Parse(dr["ID"].ToString());
                 ins.Codigo = int.Parse(dr["CODIGO"].ToString());
                 ins.Razao = dr["RAZAO"].ToString();
+                ins.NomeFantasia = dr["NOMEFANTASIA"].ToString();
                 ins.Email = dr["EMAIL"].ToString();
                 ins.Cnpj = dr["CNPJ"].ToString();
                 ins.CidadeId = utils.ComparaIntComNull(dr["CIDADEID"].ToString());
@@ -34,7 +35,7 @@ namespace DataAccess
                 ins.Endereco = dr["ENDERECO"].ToString();
                 ins.Numero = dr["NUMERO"].ToString();
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
-
+                
                 InstituicoesLogoDA insLDA = new InstituicoesLogoDA();
 
                 List<InstituicoesLogo> instituicoesLogo = insLDA.PesquisarDA(ins.Id);
@@ -57,18 +58,19 @@ namespace DataAccess
 
         public bool InserirDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[10];
+            SqlParameter[] paramsToSP = new SqlParameter[11];
 
             paramsToSP[0] = new SqlParameter("@codigo", ins.Codigo);
             paramsToSP[1] = new SqlParameter("@razao", ins.Razao);
-            paramsToSP[2] = new SqlParameter("@email", ins.Email);
-            paramsToSP[3] = new SqlParameter("@cnpj", ins.Cnpj);
-            paramsToSP[4] = new SqlParameter("@cidadeid", ins.CidadeId);
-            paramsToSP[5] = new SqlParameter("@cep", ins.Cep);
-            paramsToSP[6] = new SqlParameter("@bairroid", ins.BairroId);
-            paramsToSP[7] = new SqlParameter("@endereco", ins.Endereco);
-            paramsToSP[8] = new SqlParameter("@numero", ins.Numero);
-            paramsToSP[9] = new SqlParameter("@complemento", ins.Complemento);                      
+            paramsToSP[2] = new SqlParameter("@nomefantasia", ins.NomeFantasia);
+            paramsToSP[3] = new SqlParameter("@email", ins.Email);
+            paramsToSP[4] = new SqlParameter("@cnpj", ins.Cnpj);
+            paramsToSP[5] = new SqlParameter("@cidadeid", ins.CidadeId);
+            paramsToSP[6] = new SqlParameter("@cep", ins.Cep);
+            paramsToSP[7] = new SqlParameter("@bairroid", ins.BairroId);
+            paramsToSP[8] = new SqlParameter("@endereco", ins.Endereco);
+            paramsToSP[9] = new SqlParameter("@numero", ins.Numero);
+            paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);                      
 
             //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
 
@@ -77,19 +79,20 @@ namespace DataAccess
 
         public bool EditarDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[11];
+            SqlParameter[] paramsToSP = new SqlParameter[12];
 
             paramsToSP[0] = new SqlParameter("@id", ins.Id);
             paramsToSP[1] = new SqlParameter("@codigo", ins.Codigo);
             paramsToSP[2] = new SqlParameter("@razao", ins.Razao);
-            paramsToSP[3] = new SqlParameter("@email", ins.Email);
-            paramsToSP[4] = new SqlParameter("@cnpj", ins.Cnpj);
-            paramsToSP[5] = new SqlParameter("@cidadeid", ins.CidadeId);
-            paramsToSP[6] = new SqlParameter("@cep", ins.Cep);
-            paramsToSP[7] = new SqlParameter("@bairroid", ins.BairroId);
-            paramsToSP[8] = new SqlParameter("@endereco", ins.Endereco);
-            paramsToSP[9] = new SqlParameter("@numero", ins.Numero);
-            paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);      
+            paramsToSP[3] = new SqlParameter("@nomeFantasia", ins.NomeFantasia);
+            paramsToSP[4] = new SqlParameter("@email", ins.Email);
+            paramsToSP[5] = new SqlParameter("@cnpj", ins.Cnpj);
+            paramsToSP[6] = new SqlParameter("@cidadeid", ins.CidadeId);
+            paramsToSP[7] = new SqlParameter("@cep", ins.Cep);
+            paramsToSP[8] = new SqlParameter("@bairroid", ins.BairroId);
+            paramsToSP[9] = new SqlParameter("@endereco", ins.Endereco);
+            paramsToSP[10] = new SqlParameter("@numero", ins.Numero);
+            paramsToSP[11] = new SqlParameter("@complemento", ins.Complemento);      
 
             //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
 

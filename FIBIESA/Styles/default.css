@@ -83,6 +83,10 @@
 	height:32px;
 }
 
+.sem_imagem
+{
+	background-image: url(../images/sem_images.jpg) no-repeat center center;
+}
 
 
 

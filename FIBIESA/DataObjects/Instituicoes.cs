@@ -28,6 +28,13 @@ namespace DataObjects
             set { _razao = value; }
         }
 
+        private string _nomeFantasia;
+        public string NomeFantasia
+        {
+            get { return _nomeFantasia; }
+            set { _nomeFantasia = value; }
+        }
+
         private string _email;
         public string Email
         {
