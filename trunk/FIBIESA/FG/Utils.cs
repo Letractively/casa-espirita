@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace FG
 {
@@ -32,7 +35,6 @@ namespace FG
                 return 0;
             }
         }
-
         public int? ComparaIntComNull(string prm_Int)
         {
             try
@@ -58,7 +60,6 @@ namespace FG
                 return null;
             }
         }
-
         public short? ComparaShortComNull(string prm_Int)
         {
             try
@@ -84,7 +85,6 @@ namespace FG
                 return null;
             }
         }
-
         public DateTime? ComparaDataComNull(string prm_Data)
         {
             if (prm_Data == "" || prm_Data == null)
@@ -160,6 +160,40 @@ namespace FG
                 else
                     return Convert.ToDateTime(prm_Data).ToString(formato);
             }
+        }
+        public bool CriaImagemPeloByte(byte[] Binary, ImageFormat imgFor, string pCaminho)
+        {
+            Stream strm = null;
+            Bitmap original = null;
+
+            try
+            {
+                if (File.Exists(pCaminho))
+                    File.Delete(pCaminho);
+
+                //File.SetLastWriteTime(pCaminho, DateTime.Now);
+
+                strm = this.ConvertByteArrayToStream(Binary);
+                original = (Bitmap)System.Drawing.Image.FromStream(strm);
+                original.Save(pCaminho, imgFor);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (strm != null)
+                    strm.Close();
+                if (original != null)
+                    original.Dispose();
+            }
+        }
+        public Stream ConvertByteArrayToStream(byte[] input)
+        {
+            Stream str = new MemoryStream(input);
+            return str;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace FIBIESA
 {
     public partial class cadVenda : System.Web.UI.Page
     {
+        DataTable dtItens = new DataTable();
 
         #region funcoes
         private DataTable CriarTabelaPesquisa()
@@ -28,10 +29,25 @@ namespace FIBIESA
             return dt;
  
         }
+        private void CriarDtItens()
+        {
+            if (dtItens.Columns.Count == 0)
+            {                
+                DataColumn coluna1 = new DataColumn("ITEMESTOQUEID", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("QUANTIDADE", Type.GetType("System.Int32"));
+                DataColumn coluna3 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+                DataColumn coluna4 = new DataColumn("DESCONTO", Type.GetType("System.Decimal"));
+              
+                dtItens.Columns.Add(coluna1);
+                dtItens.Columns.Add(coluna2);
+                dtItens.Columns.Add(coluna3);
+                dtItens.Columns.Add(coluna4);               
+            }
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CriarDtItens();
         }
 
        
@@ -69,6 +85,28 @@ namespace FIBIESA
             Session["objPesquisa"] = pe;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCliente.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesCliente.ClientID + "','',600,500);", true);
+        }
+
+        protected void btnInserir_Click(object sender, EventArgs e)
+        {
+            DataRow linha = dtItens.NewRow();
+            linha["ITEMESTOQUEID"] = hfIdItem.Value;
+            linha["QUANTIDADE"] = txtQuantidade.Text;
+            linha["VALOR"] = txtValor.Text;
+            linha["DESCONTO"] = txtDesconto.Text;
+
+            dtItens.Rows.Add(linha);
+
+            dtgItens.DataSource = dtItens;
+            dtgItens.DataBind();            
+        }
+
+        protected void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            if (dtgItens.Rows.Count > 0)
+            {
+                
+            }
         }
        
     }

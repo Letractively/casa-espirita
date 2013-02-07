@@ -70,6 +70,7 @@
     <Compile Include="TiposDeAutoresBL.cs" />
     <Compile Include="TiposObrasBL.cs" />
     <Compile Include="UsuariosBL.cs" />
+    <Compile Include="VendasBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

@@ -44,9 +44,10 @@
                         <td style="width: 140px">
                             Desconto:
                         </td>
-                        <td style="width: 400px" colspan="2"> 
+                        <td style="width: 400px"> 
                             <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputbox"></asp:TextBox>   
                         </td>
+                       
                     </tr>
                     <tr>
                         <td style="width: 140px">
@@ -64,13 +65,26 @@
                             <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox"></asp:TextBox>   
                         </td>   
                         <td colspan="2">
-                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" />
+                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" 
+                                onclick="btnInserir_Click" />
                         </td>                       
                     </tr>
                     <tr>
-                        <td colspan ="4">
-                            <asp:GridView ID="dtgItens" runat="server">
-                            <EmptyDataTemplate>NO data found</EmptyDataTemplate>
+                        <td colspan ="4">  
+                            <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False">
+                                <Columns>
+                                    <asp:CommandField ShowDeleteButton="True">
+                                     <HeaderStyle CssClass="grd_cmd_header" />
+                                     <ItemStyle CssClass="grd_delete" />
+                                    </asp:CommandField>
+                                    <asp:BoundField DataField="ITEMESTQOUEID" HeaderText="ITEMESTQOUEID" 
+                                        Visible="False" />
+                                    <asp:BoundField DataField="CODIGO" HeaderText="Código" />
+                                    <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                    <asp:BoundField DataField="QUANTIDADE" HeaderText="Quantidade" />
+                                    <asp:BoundField DataField="DESCONTO" HeaderText="Desconto" />
+                                    <asp:BoundField DataField="VALOR" HeaderText="Valor" />
+                                </Columns>
                             </asp:GridView>
                         </td>
                     </tr>
@@ -90,7 +104,8 @@
                             <asp:TextBox ID="txtValorTotal" runat="server" CssClass="inputbox"></asp:TextBox>    
                         </td>
                         <td style="width: 350px">
-                            <asp:Button ID="btnFinalizar" runat="server" CssClass="btn" Text="Finalizar" />
+                            <asp:Button ID="btnFinalizar" runat="server" CssClass="btn" Text="Finalizar" 
+                                onclick="btnFinalizar_Click" />
                         </td>
                     </tr>
                 </table>                

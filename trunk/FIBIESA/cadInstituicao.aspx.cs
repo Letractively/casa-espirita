@@ -8,6 +8,7 @@ using System.Data;
 using BusinessLayer;
 using DataObjects;
 using FG;
+using System.IO;
 
 namespace FIBIESA
 {
@@ -15,6 +16,7 @@ namespace FIBIESA
     {
         Utils utils = new Utils();
         string v_operacao = "";
+        string fileType = string.Empty;
         #region funcoes
         private void CarregarDados(int id_ins)
         {
@@ -94,6 +96,56 @@ namespace FIBIESA
 
             return v_bairro;
         }
+        private void SalvarImagem(bool bRetorno)
+        {
+            if (bRetorno)
+            {
+                InstituicoesLogoBL insLBL = new InstituicoesLogoBL();
+                InstituicoesLogo instituicoesLogo = new InstituicoesLogo();
+                byte[] imagemBytes = new byte[fupImgLogo.PostedFile.InputStream.Length + 1];
+                fupImgLogo.PostedFile.InputStream.Read(imagemBytes, 0, imagemBytes.Length);
+
+                instituicoesLogo.Id = utils.ComparaIntComZero(hfIdInstLogo.Value);
+                instituicoesLogo.InstituicoesId = utils.ComparaIntComZero(hfId.Value);
+                instituicoesLogo.Extensao = fileType;
+                instituicoesLogo.Imagem = imagemBytes;
+
+                if (instituicoesLogo.Id > 0)
+                    insLBL.EditarBL(instituicoesLogo);
+                else
+                    insLBL.InserirBL(instituicoesLogo);
+            }
+            else
+            { 
+            }
+        }
+        private void VerificarImagem()
+        {
+            bool bRetorno = false;
+            string extension = Path.GetExtension(fupImgLogo.PostedFile.FileName).ToLower();
+            switch (extension)
+            {
+                case ".gif":
+                    fileType = "gif";
+                    bRetorno = true;
+                    break;
+
+                case ".jpg":
+                case ".jpeg":
+                    fileType = "jpeg";
+                    bRetorno = true;
+                    break;
+
+                default:
+                   // lblMsg.text = "Tipo de arquivo inválido."
+                    bRetorno = false;
+                    break;
+            }
+
+            SalvarImagem(bRetorno);
+
+        }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -127,6 +179,7 @@ namespace FIBIESA
             instituicoes.Id = utils.ComparaIntComZero(hfId.Value);
             instituicoes.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             instituicoes.Razao = txtRazao.Text;
+            instituicoes.NomeFantasia = txtNomeFantasia.Text;
             instituicoes.Email = txtEmail.Text;
             instituicoes.Cnpj = txtCnpj.Text;
             instituicoes.CidadeId = utils.ComparaIntComNull(hfIdCidade.Value);
@@ -143,16 +196,20 @@ namespace FIBIESA
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
                     idIns = instituicoes.Id;
-                    insBL.EditarBL(instituicoes);                    
+                    insBL.EditarBL(instituicoes);
+                    VerificarImagem();
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
             else            
-            { 
+            {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                {
                     insBL.InserirBL(instituicoes);
+                    VerificarImagem();
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -161,7 +218,7 @@ namespace FIBIESA
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/default.aspx");
+            Response.Redirect("~/viewInstituicao.aspx");
         }
 
         protected void btnPesCidade_Click(object sender, EventArgs e)

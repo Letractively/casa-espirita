@@ -42,6 +42,17 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 140px">
+                                                    Nome Fantasia:
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtNomeFantasia" runat="server" CssClass="inputbox" MaxLength="70" 
+                                                        Width="335px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtNomeFantasia"
+                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 140px">
                                                     CNPJ:
                                                 </td>
                                                 <td style="width: 400px">
@@ -64,7 +75,7 @@
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
-                                <asp:TabPanel ID="tpEndereco" runat="server" HeaderText="Enderço">
+                                <asp:TabPanel ID="tpEndereco" runat="server" HeaderText="Endereço">
                                     <ContentTemplate>
                                         <table>
                                             <tr>
@@ -131,8 +142,13 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 540px; height: 54px;">
-                                                    <asp:Image ID="imgLogo" runat="server" />    
+                                                <td align="center">
+                                                    <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/sem_images.jpg"  />   
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center">
+                                                    <asp:FileUpload ID="fupImgLogo" runat="server" />    
                                                 </td>
                                             </tr>
                                         </table>                                    
@@ -145,6 +161,7 @@
                 <table>
                     <tr>
                         <td style="width: 140px">
+                            
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" OnClick="btnVoltar_Click" />
@@ -158,6 +175,7 @@
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdCidade" runat="server" />
             <asp:HiddenField ID="hfIdBairro" runat="server" />
+            <asp:HiddenField ID="hfIdInstLogo" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
         </div>
