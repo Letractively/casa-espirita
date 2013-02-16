@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgenciasDA.cs" />
     <Compile Include="AutoresDA.cs" />
     <Compile Include="BairrosDA.cs" />
+    <Compile Include="BancosDA.cs" />
     <Compile Include="BaseDA.cs" />
     <Compile Include="CategoriasDA.cs" />
     <Compile Include="CidadesDA.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="JurosMultasDA.cs" />
     <Compile Include="ItensEstoqueDA.cs" />
     <Compile Include="DoacoesDA.cs" />
+    <Compile Include="PortadoresDA.cs" />
     <Compile Include="TurmasAlunosDA.cs" />
     <Compile Include="TurmasDA.cs" />
     <Compile Include="EditorasDA.cs" />

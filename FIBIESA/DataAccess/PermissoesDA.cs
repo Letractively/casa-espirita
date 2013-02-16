@@ -20,8 +20,7 @@ namespace DataAccess
             while (dr.Read())
             {
                 Permissoes per = new Permissoes();
-                per.Id = int.Parse(dr["ID"].ToString());
-                per.Codigo = int.Parse(dr["CODIGO"].ToString());
+                per.Id = int.Parse(dr["ID"].ToString());               
                 per.Consultar = bool.Parse(dr["CONSULTAR"].ToString());                
                 per.Editar = bool.Parse(dr["EDITAR"].ToString());
                 per.Excluir = bool.Parse(dr["EXCLUIR"].ToString());
@@ -62,15 +61,15 @@ namespace DataAccess
         #endregion
         public bool InserirDA(Permissoes per)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[7];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
-            paramsToSP[0] = new SqlParameter("@codigo", per.Codigo);
-            paramsToSP[1] = new SqlParameter("@consultar", per.Consultar);
-            paramsToSP[2] = new SqlParameter("@inserir", per.Inserir);
-            paramsToSP[3] = new SqlParameter("@editar", per.Editar);
-            paramsToSP[4] = new SqlParameter("@excluir", per.Excluir);
-            paramsToSP[5] = new SqlParameter("@formularioid", per.FormularioId);
-            paramsToSP[6] = new SqlParameter("@categoriaid", per.CategoriaId);
+           
+            paramsToSP[0] = new SqlParameter("@consultar", per.Consultar);
+            paramsToSP[1] = new SqlParameter("@inserir", per.Inserir);
+            paramsToSP[2] = new SqlParameter("@editar", per.Editar);
+            paramsToSP[3] = new SqlParameter("@excluir", per.Excluir);
+            paramsToSP[4] = new SqlParameter("@formularioid", per.FormularioId);
+            paramsToSP[5] = new SqlParameter("@categoriaid", per.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_permissoes", paramsToSP);
 
@@ -79,16 +78,15 @@ namespace DataAccess
 
         public bool EditarDA(Permissoes per)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[8];
+            SqlParameter[] paramsToSP = new SqlParameter[7];
 
-            paramsToSP[0] = new SqlParameter("@id", per.Id);
-            paramsToSP[1] = new SqlParameter("@codigo", per.Codigo);
-            paramsToSP[2] = new SqlParameter("@consultar", per.Consultar);
-            paramsToSP[3] = new SqlParameter("@inserir", per.Inserir);
-            paramsToSP[4] = new SqlParameter("@editar", per.Editar);
-            paramsToSP[5] = new SqlParameter("@excluir", per.Excluir);
-            paramsToSP[6] = new SqlParameter("@formularioid", per.FormularioId);
-            paramsToSP[7] = new SqlParameter("@categoriaid", per.CategoriaId);
+            paramsToSP[0] = new SqlParameter("@id", per.Id);           
+            paramsToSP[1] = new SqlParameter("@consultar", per.Consultar);
+            paramsToSP[2] = new SqlParameter("@inserir", per.Inserir);
+            paramsToSP[3] = new SqlParameter("@editar", per.Editar);
+            paramsToSP[4] = new SqlParameter("@excluir", per.Excluir);
+            paramsToSP[5] = new SqlParameter("@formularioid", per.FormularioId);
+            paramsToSP[6] = new SqlParameter("@categoriaid", per.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_permissoes", paramsToSP);
 

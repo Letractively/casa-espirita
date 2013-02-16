@@ -115,7 +115,7 @@ namespace DataAccess
             {
                 Base bas = new Base();
                 bas.PesId1 = int.Parse(dr["ID"].ToString());
-                bas.PesCodigo = dr["UF"].ToString();
+                bas.PesCodigo = dr["CODIGO"].ToString();
                 bas.PesDescricao = dr["DESCRICAO"].ToString();
 
                 ba.Add(bas);
