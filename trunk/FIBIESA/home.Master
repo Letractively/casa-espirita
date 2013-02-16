@@ -82,10 +82,10 @@
                     <li><a href="viewDoacao.aspx" title="">Doações</a></li>
                     <li><a href="viewTipoDocumento.aspx" title="">Tipo de Documento</a></li>
                     <li><a href="viewTitulo.aspx" title="">Título</a></li>
-                    <li><a href="viewBanco.aspx" title="">Banco</a></li>
+                    <li><a href="viewBanco.aspx" title="">Bancos</a></li>
                     <li><a href="viewConta.aspx" title="">Conta</a></li>
                     <li><a href="viewAgencia.aspx" title="">Agência</a></li>
-                    <li><a href="viewPortador.aspx" title="">Portador</a></li>
+                    <li><a href="viewPortador.aspx" title="">Portadores</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Biblioteca</a>

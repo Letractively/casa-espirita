@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgenciasBL.cs" />
     <Compile Include="BairrosBL.cs" />
+    <Compile Include="BancosBL.cs" />
     <Compile Include="BaseBL.cs" />
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="JurosMultasBL.cs" />
     <Compile Include="ItensEstoqueBL.cs" />
     <Compile Include="DoacoesBL.cs" />
+    <Compile Include="PortadoresBL.cs" />
     <Compile Include="TurmasAlunosBL.cs" />
     <Compile Include="TurmasBL.cs" />
     <Compile Include="CursosBL.cs" />
