@@ -43,7 +43,12 @@ namespace DataObjects
         }
 
         private string _endereco;
-        public string Endereco;
+        public string Endereco
+        {
+            get { return _endereco; }
+            set { _endereco = value; }
+        }
+        
 
         private string _complemento;
         public string Complemento
