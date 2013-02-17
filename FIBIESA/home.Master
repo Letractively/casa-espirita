@@ -83,9 +83,9 @@
                     <li><a href="viewJuroMulta.aspx" title="">Juros / Multas</a></li>
                     <li><a href="viewTipoDocumento.aspx" title="">Tipos de Documentos</a></li>
                     <li><a href="viewTitulo.aspx" title="">Título</a></li>
-                    <li><a href="viewBanco.aspx" title="">Bancos</a></li>
-                    <li><a href="viewConta.aspx" title="">Conta</a></li>
+                    <li><a href="viewBanco.aspx" title="">Bancos</a></li>                    
                     <li><a href="viewAgencia.aspx" title="">Agências</a></li>
+                    <li><a href="viewConta.aspx" title="">Contas</a></li>
                     <li><a href="viewPortador.aspx" title="">Portadores</a></li>
                 </ul>
             </li>

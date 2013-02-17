@@ -1,6 +1,5 @@
 body {background: #e0e0e0; margin: 0; padding: 0}
-	input, textarea, body {
-}
+	input, textarea, body {font-family: Arial, Helvetica, sans-serif; color: #666; font-size: 13px}
 	img {border: none}
 	p {margin: 0; padding: 0}
 	ul {list-style: none; padding:0; margin: 0}
@@ -28,10 +27,8 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		.searchbtn, #userbox li a {background-color: #ababab; background-image: -moz-radial-gradient(50% -8px , circle , #c8c8c8, #8d8d8d); padding: 6px; float: right; -moz-border-radius: 5px; border-radius: 5px; -webkit-border-radius: 5px}
 			.searchbtn:hover, .searchbtn:focus, #userbox li a:hover {background-color: #888; background-image: -moz-radial-gradient(50% -8px , circle , #a9a9a9, #6d6d6d)}
 		.searchinput {float: left; background: none; border: none; margin: 4px 0 0 5px; width: 250px; padding-right: 15px}
- 
- .titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}
- 
- /* Left Side Styles */
+	
+/* Left Side Styles */
 
 	#left {width: 210px; position: absolute; top: 61px}
 	
@@ -46,13 +43,13 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 				ul#sliderContent li a {width: 160px; padding: 5px 10px; height: 20px; display: block; text-decoration: none}
 			#openCloseWrap {position:relative; margin: 150px 0 0 15px}	
 	
-	#userbox  {width: 180px; position: absolute; top: 40px; left: 15px; padding: 20px 0 0 0; text-align: center; font-size: 16px; text-shadow: 1px 1px 1px #fff; font-weight: 700}
-		#userbox span {color: #888; font-size: 12px; letter-spacing: normal}		
- 		#userbox ul {width: 100px; margin: 10px auto}
+	#userbox {width: 180px; position: absolute; top: 40px; left: 15px; padding: 20px 0 0 0; text-align: center; font-size: 16px; text-shadow: 1px 1px 1px #fff; font-weight: 700}
+		#userbox span {color: #888; font-size: 12px; letter-spacing: normal}
+		
+		#userbox ul {width: 100px; margin: 10px auto}
 			#userbox li {float: left}
 				#userbox li a {padding: 5px; margin-right: 5px; float: left}
-				
-				
+
 /* Navigation */
 
 	#nav {width: 210px; position: absolute; top: 160px}
@@ -123,15 +120,10 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 	/* Alternative Box Widths */
 	
 		.med {width: 60%}
-		.sml {width: 38%}		
-		.half{width:60%;
-			  height: 609px;
-        }
-		.half2 {width:80%;
-			height: 609px;
-		}
-		.half3 {width:80%;			
-		}
+		.sml {width: 38%}
+		.half {width:60%;
+	height: 450px;
+}
 	
 	/* Form Styles */
 		select {float: none}

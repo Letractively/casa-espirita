@@ -49,6 +49,7 @@
     <Compile Include="CategoriasDA.cs" />
     <Compile Include="CidadesDA.cs" />
     <Compile Include="ChamadasDA.cs" />
+    <Compile Include="ContasDA.cs" />
     <Compile Include="CursosDA.cs" />
     <Compile Include="InstituicoesDA.cs" />
     <Compile Include="InstituicoesLogoDA.cs" />
