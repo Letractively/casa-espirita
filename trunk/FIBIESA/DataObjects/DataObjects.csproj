@@ -55,6 +55,7 @@
     <Compile Include="ItensEstoque.cs" />
     <Compile Include="Doacoes.cs" />
     <Compile Include="Portadores.cs" />
+    <Compile Include="TiposDocumentos.cs" />
     <Compile Include="TurmasAlunos.cs" />
     <Compile Include="Turmas.cs" />
     <Compile Include="Cursos.cs" />

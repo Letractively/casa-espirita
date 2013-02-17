@@ -80,6 +80,14 @@
                                         <table>
                                             <tr>
                                                 <td style="width: 140px">
+                                                    CEP:
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="10"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 140px">
                                                     Cidade:
                                                 </td>
                                                 <td style="width: 500px">
@@ -87,15 +95,7 @@
                                                         ID="btnPesCidade" runat="server" CssClass="btn" Text="..." OnClick="btnPesCidade_Click" />&nbsp;&nbsp;<asp:Label
                                                             ID="lblDesCidade" runat="server"></asp:Label>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 140px">
-                                                    CEP:
-                                                </td>
-                                                <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="10"></asp:TextBox>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td style="width: 140px">
                                                     Bairro:

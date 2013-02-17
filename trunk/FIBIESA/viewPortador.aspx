@@ -42,7 +42,7 @@
                                        <asp:BoundField DataField="CODBANCO" HeaderText="Cód. Banco" />
                                        <asp:BoundField DataField="DESBANCO" HeaderText="Descrição" />
                                        <asp:BoundField DataField="AGENCIAID" HeaderText="AGENCIAID" Visible="False" />
-                                       <asp:BoundField DataField="AGENCIA" HeaderText="Cód. Agência" />
+                                       <asp:BoundField DataField="CODAGENCIA" HeaderText="Cód. Agência" />
                                        <asp:BoundField DataField="DESAGENCIA" HeaderText="Descrição" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />

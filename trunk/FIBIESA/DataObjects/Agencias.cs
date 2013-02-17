@@ -72,5 +72,26 @@ namespace DataObjects
             get { return _bancoId; }
             set { _bancoId = value; }
         }
+
+        private Bancos _banco;
+        public Bancos Banco
+        {
+            get { return _banco; }
+            set { _banco = value; }
+        }
+
+        private Cidades _cidade;
+        public Cidades Cidade
+        {
+            get { return _cidade; }
+            set { _cidade = value; }
+        }
+
+        private Bairros _bairro;
+        public Bairros Bairro
+        {
+            get { return _bairro; }
+            set { _bairro = value; }
+        }
     }
 }

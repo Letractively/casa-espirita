@@ -18,6 +18,8 @@ namespace DataAccess
         private List<Portadores> CarregarObjPortadores(SqlDataReader dr)
         {
             List<Portadores> portadores = new List<Portadores>();
+            AgenciasDA ageDA = new AgenciasDA();
+            BancosDA banDA = new BancosDA();
 
             while (dr.Read())
             {
@@ -27,6 +29,39 @@ namespace DataAccess
                 por.Descricao = dr["DESCRICAO"].ToString();
                 por.AgenciaId = utils.ComparaIntComNull(dr["AGENCIAID"].ToString());
                 por.BancoId = utils.ComparaIntComNull(dr["BANCOID"].ToString());
+                
+                int Id = 0;
+                
+                if(por.AgenciaId != null )
+                {
+                    Id = Convert.ToInt32(por.AgenciaId);
+                    List<Agencias> agencias = ageDA.PesquisarDA(Id);
+                    Agencias age = new Agencias();
+
+                    foreach (Agencias ltAge in agencias)
+	                {
+                        age.Codigo = ltAge.Codigo;
+                        age.Descricao = ltAge.Descricao;		 
+	                }
+
+                    por.Agencia = age;
+                }
+
+                if (por.BancoId != null)
+                {
+                    Id = Convert.ToInt32(por.BancoId);
+                    List<Bancos> bancos = banDA.PesquisarDA(Id);
+                    Bancos ban = new Bancos();
+
+                    foreach (Bancos ltBan in bancos)
+                    {
+                        ban.Codigo = ltBan.Codigo;
+                        ban.Descricao = ltBan.Descricao;
+                    }
+
+                    por.Banco = ban;
+
+                }                
 
                 portadores.Add(por);
             }

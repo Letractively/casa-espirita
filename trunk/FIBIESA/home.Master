@@ -80,19 +80,19 @@
                 <ul class="navigation">
                     <li><a href="cadVenda.aspx" title="">Vendas</a></li>
                     <li><a href="viewDoacao.aspx" title="">Doações</a></li>
-                    <li><a href="viewTipoDocumento.aspx" title="">Tipo de Documento</a></li>
+                    <li><a href="viewJuroMulta.aspx" title="">Juros / Multas</a></li>
+                    <li><a href="viewTipoDocumento.aspx" title="">Tipos de Documentos</a></li>
                     <li><a href="viewTitulo.aspx" title="">Título</a></li>
                     <li><a href="viewBanco.aspx" title="">Bancos</a></li>
                     <li><a href="viewConta.aspx" title="">Conta</a></li>
-                    <li><a href="viewAgencia.aspx" title="">Agência</a></li>
+                    <li><a href="viewAgencia.aspx" title="">Agências</a></li>
                     <li><a href="viewPortador.aspx" title="">Portadores</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Biblioteca</a>
                 <ul class="navigation">
                     <li><a href="viewExemplar.aspx" title="">Exemplar</a></li>
-                    <li><a href="viewOrigem.aspx" title="">Origem</a></li>
-                    <li><a href="viewJuroMulta.aspx" title="">Juro / Multa</a></li>
+                    <li><a href="viewOrigem.aspx" title="">Origem</a></li>                    
                     <li><a href="viewReserva.aspx" title="">Reserva</a></li>
                     <li><a href="viewEditora.aspx" title="">Editora</a></li>
                     <li><a href="viewObra.aspx" title="">Obra</a></li>

@@ -62,7 +62,7 @@ namespace Admin
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/default.aspx");
+            Response.Redirect("~/viewFormulario.aspx");
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)

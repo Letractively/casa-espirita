@@ -57,6 +57,7 @@
     <Compile Include="ItensEstoqueDA.cs" />
     <Compile Include="DoacoesDA.cs" />
     <Compile Include="PortadoresDA.cs" />
+    <Compile Include="TiposDocumentosDA.cs" />
     <Compile Include="TurmasAlunosDA.cs" />
     <Compile Include="TurmasDA.cs" />
     <Compile Include="EditorasDA.cs" />

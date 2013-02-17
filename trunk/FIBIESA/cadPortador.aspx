@@ -13,7 +13,7 @@
                 <table>
                     
                     <tr>
-                        <td style="width: 140px">Código:</td>
+                        <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
@@ -22,7 +22,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Descrição:</td>
+                        <td style="width: 140px">* Descrição:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="70" Width="335px"></asp:TextBox>
@@ -31,23 +31,28 @@
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
-
                     <tr>
-                        <td style="width: 140px">Banco:</td>
+                        <td style="width: 140px">* Banco:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtBanco" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:Button ID="btnPesBanco" runat="server" Text="..."  CssClass="btn" onclick="btnPesBanco_Click" 
                                  />
                             <asp:Label ID="lblDesBanco" runat="server"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="txtBanco" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Agência:</td>
+                        <td style="width: 140px">* Agência:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtAgencia" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:Button ID="btnPesAgencia" runat="server" Text="..."  CssClass="btn" onclick="btnPesAgencia_Click" 
                                  />
                             <asp:Label ID="lblDesAgencia" runat="server"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtAgencia" ErrorMessage="*Preenchimento Obrigatório" 
+                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
