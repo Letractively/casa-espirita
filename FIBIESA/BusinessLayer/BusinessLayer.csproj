@@ -54,6 +54,7 @@
     <Compile Include="ItensEstoqueBL.cs" />
     <Compile Include="DoacoesBL.cs" />
     <Compile Include="PortadoresBL.cs" />
+    <Compile Include="TiposDocumentosBL.cs" />
     <Compile Include="TurmasAlunosBL.cs" />
     <Compile Include="TurmasBL.cs" />
     <Compile Include="CursosBL.cs" />

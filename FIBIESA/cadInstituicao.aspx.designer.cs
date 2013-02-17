@@ -130,6 +130,15 @@ namespace FIBIESA {
         protected global::AjaxControlToolkit.TabPanel tpEndereco;
         
         /// <summary>
+        /// txtCep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCep;
+        
+        /// <summary>
         /// txtCidade control.
         /// </summary>
         /// <remarks>
@@ -155,15 +164,6 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDesCidade;
-        
-        /// <summary>
-        /// txtCep control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCep;
         
         /// <summary>
         /// txtBairro control.

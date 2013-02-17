@@ -22,14 +22,18 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("AGENCIAID", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("BANCOID", Type.GetType("System.Int32"));
+            DataColumn coluna4 = new DataColumn("CODAGENCIA", Type.GetType("System.Int32"));
+            DataColumn coluna5 = new DataColumn("CODBANCO", Type.GetType("System.Int32"));
+            DataColumn coluna6 = new DataColumn("DESBANCO", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("DESAGENCIA", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
             tabela.Columns.Add(coluna5);
+            tabela.Columns.Add(coluna6);
+            tabela.Columns.Add(coluna7);
 
             PortadoresBL porBL = new PortadoresBL();
             List<Portadores> portadores = porBL.PesquisarBL();
@@ -41,8 +45,10 @@ namespace Admin
                 linha["ID"] = ltPor.Id;
                 linha["CODIGO"] = ltPor.Codigo;
                 linha["DESCRICAO"] = ltPor.Descricao;
-                linha["AGENCIAID"] = ltPor.AgenciaId;
-                linha["BANCOID"] = ltPor.BancoId;
+                linha["CODBANCO"] = ltPor.Banco.Codigo;
+                linha["DESBANCO"] = ltPor.Banco.Descricao;
+                linha["CODAGENCIA"] = ltPor.Agencia.Codigo;
+                linha["DESAGENCIA"] = ltPor.Agencia.Descricao;
 
                 tabela.Rows.Add(linha);                
             }

@@ -241,6 +241,8 @@ namespace FIBIESA
                 dt.Rows.Add(linha);
             }
 
+            Session["tabelaPesquisa"] = null;
+
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
 
@@ -269,6 +271,8 @@ namespace FIBIESA
 
                 dt.Rows.Add(linha);
             }
+
+            Session["tabelaPesquisa"] = null;
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;

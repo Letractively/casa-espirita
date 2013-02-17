@@ -30,8 +30,13 @@ namespace Admin
                 hfId.Value = ltPor.Id.ToString();
                 txtCodigo.Text = ltPor.Codigo.ToString();
                 txtDescricao.Text = ltPor.Descricao;
+                hfIdBanco.Value = ltPor.BancoId.ToString();
                 txtBanco.Text = ltPor.Banco.Codigo.ToString();
-                lblDesBanco.Text = ltPor.Banco.Descricao;                                
+                lblDesBanco.Text = ltPor.Banco.Descricao;
+                hfIdAgencia.Value = ltPor.AgenciaId.ToString();
+                txtAgencia.Text = ltPor.Agencia.Codigo.ToString();
+                lblDesAgencia.Text = ltPor.Agencia.Descricao;
+                           
             }
 
         }
@@ -125,6 +130,8 @@ namespace Admin
                 dt.Rows.Add(linha);
             }
 
+            Session["tabelaPesquisa"] = null;
+            
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
 
@@ -162,6 +169,8 @@ namespace Admin
                 dt.Rows.Add(linha);
             }
 
+            Session["tabelaPesquisa"] = null;
+
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
 
@@ -171,7 +180,7 @@ namespace Admin
             Session["objBLPesquisa"] = agBL;
             Session["objPesquisa"] = ag;
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtAgencia.ClientID + "&id=" + hfIdBanco.ClientID + "&lbl=" + lblDesBanco.ClientID + "','',600,500);", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtAgencia.ClientID + "&id=" + hfIdAgencia.ClientID + "&lbl=" + lblDesAgencia.ClientID + "','',600,500);", true);
             
         }
     }

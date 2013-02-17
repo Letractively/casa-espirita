@@ -195,5 +195,42 @@ namespace FG
             Stream str = new MemoryStream(input);
             return str;
         }
+        public string ComparaDecimalComZero(decimal prm_Dec)
+        {
+            if (prm_Dec == 0)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return prm_Dec.ToString();
+            }
+        }
+
+        public decimal ComparaDecimalComZero(string prm_Dec)
+        {
+            try
+            {
+                if (prm_Dec.Trim() != string.Empty)
+                {
+                    if (prm_Dec.Trim() == "0")
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Convert.ToDecimal(prm_Dec.Trim());
+                    }
+                }
+                else
+                {
+                    return Convert.ToDecimal(prm_Dec.Trim());
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -27,32 +27,7 @@ namespace DataAccess
                 per.Inserir = bool.Parse(dr["INSERIR"].ToString());
                 per.FormularioId = int.Parse(dr["FORMULARIOID"].ToString());
                 per.CategoriaId = int.Parse(dr["CATEGORIAID"].ToString());
-
-                CategoriasDA catDA = new CategoriasDA();
-                List<Categorias> categorias = catDA.PesquisarDA(per.CategoriaId);
-                Categorias cat = new Categorias();
-
-                foreach (Categorias ltcat in categorias)
-                {
-                    cat.Id = ltcat.Id;
-                    cat.Codigo = ltcat.Codigo;
-                    cat.Descricao = ltcat.Descricao;
-                }
-
-                FormulariosDA forDA = new FormulariosDA();
-                List<Formularios> formularios = forDA.PesquisarDA(per.FormularioId);
-                Formularios formu = new Formularios();
-
-                foreach (Formularios ltFor in formularios)
-	            {
-                    formu.Id = ltFor.Id;
-                    formu.Codigo = ltFor.Codigo;
-                    formu.Descricao = ltFor.Descricao;
-                    formu.Nome = ltFor.Nome;		 
-	            }
-
-                per.Formulario = formu;
-                per.Categoria = cat;
+                               
                 permissoes.Add(per);
             }
 
