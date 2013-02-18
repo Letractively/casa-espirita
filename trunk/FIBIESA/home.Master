@@ -108,12 +108,12 @@
                     <li><a href="viewItemEstoque.aspx" title="">Item de Estoque</a></li>
                 </ul>
             </li>
-            <li><a class="collapsed heading">Acadêmico</a>
+            <li><a class="collapsed heading">Eventos</a>
                 <ul class="navigation">
-                    <li><a href="viewChamada.aspx" title="">Chamada</a></li>
-                    <li><a href="viewTurmaAluno.aspx" title="">Turma do Aluno</a></li>
-                    <li><a href="viewTurma.aspx" title="">Turma</a></li>
-                    <li><a href="viewCurso.aspx" title="">Curso</a></li>
+                    <li><a href="viewEvento.aspx" title="">Eventos</a></li>
+                    <li><a href="viewTurma.aspx" title="">Turmas</a></li>
+                    <li><a href="viewTurmaParticipante.aspx" title="">Participantes</a></li>
+                    <li><a href="viewChamada.aspx" title="">Registro de Frequências</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Geral</a>

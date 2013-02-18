@@ -15,8 +15,7 @@ namespace Admin
     public partial class viewFormulario : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        #region funcoes
-        
+        #region funcoes        
         private void Pesquisar()
         {
             DataTable tabela = new DataTable("tabela");
@@ -49,6 +48,23 @@ namespace Admin
             dtgFormularios.DataSource = tabela;
             dtgFormularios.DataBind();
         }
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -76,6 +92,26 @@ namespace Admin
             int str_for = 0;
             str_for = utils.ComparaIntComZero(dtgFormularios.SelectedDataKey[0].ToString());
             Response.Redirect("cadFormulario.aspx?id_for=" + str_for.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgFormularios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgFormularios.PageIndex = e.NewPageIndex;
+            dtgFormularios.DataBind();
+        }
+
+        protected void dtgFormularios_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dataTable = dtgFormularios.DataSource as DataTable;
+
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+                dtgFormularios.DataSource = dataView;
+                dtgFormularios.DataBind();
+            }
         }
          
     }

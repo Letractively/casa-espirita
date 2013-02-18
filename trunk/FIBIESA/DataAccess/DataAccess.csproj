@@ -50,7 +50,7 @@
     <Compile Include="CidadesDA.cs" />
     <Compile Include="ChamadasDA.cs" />
     <Compile Include="ContasDA.cs" />
-    <Compile Include="CursosDA.cs" />
+    <Compile Include="EventosDA.cs" />
     <Compile Include="InstituicoesDA.cs" />
     <Compile Include="InstituicoesLogoDA.cs" />
     <Compile Include="MovimentosEstoqueDA.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="DoacoesDA.cs" />
     <Compile Include="PortadoresDA.cs" />
     <Compile Include="TiposDocumentosDA.cs" />
-    <Compile Include="TurmasAlunosDA.cs" />
+    <Compile Include="TurmasParticipantesDA.cs" />
     <Compile Include="TurmasDA.cs" />
     <Compile Include="EditorasDA.cs" />
     <Compile Include="EmprestimosDA.cs" />

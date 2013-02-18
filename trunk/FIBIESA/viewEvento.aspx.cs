@@ -9,7 +9,6 @@ using DataObjects;
 using BusinessLayer;
 using FG;
 
-
 namespace Admin
 {
     public partial class viewCurso : System.Web.UI.Page
@@ -29,11 +28,11 @@ namespace Admin
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
 
-            CursosBL curBL = new CursosBL();
+            EventosBL eveBL = new EventosBL();
 
-            List<Cursos> cursos = curBL.PesquisarBL();
+            List<Eventos> eventos = eveBL.PesquisarBL();
 
-            foreach (Cursos cur in cursos)
+            foreach (Eventos cur in eventos)
             {
 
                 DataRow linha = tabela.NewRow();
@@ -46,21 +45,21 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
-            dtgCursos.DataSource = tabela;
-
-            dtgCursos.DataBind();
+            dtgEventos.DataSource = tabela;
+            dtgEventos.DataBind();
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            if(!IsPostBack)
+                Pesquisar();
         }
 
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("cadCurso.aspx?operacao=new");
+            Response.Redirect("cadEvento.aspx?operacao=new");
         }
 
 
@@ -71,17 +70,17 @@ namespace Admin
 
         protected void dtgCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int str_cur = 0;
-            str_cur = utils.ComparaIntComZero(dtgCursos.SelectedDataKey[0].ToString());
-            Response.Redirect("cadCurso.aspx?id_cur=" + str_cur.ToString() + "&operacao=edit");
+            int str_eve = 0;
+            str_eve = utils.ComparaIntComZero(dtgEventos.SelectedDataKey[0].ToString());
+            Response.Redirect("cadEvento.aspx?id_eve=" + str_eve.ToString() + "&operacao=edit");
         }
 
         protected void dtgCursos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            CursosBL curBL = new CursosBL();
-            Cursos cursos = new Cursos();
-            cursos.Id = utils.ComparaIntComZero(dtgCursos.DataKeys[e.RowIndex][0].ToString());
-            curBL.ExcluirBL(cursos);
+            EventosBL eveBL = new EventosBL();
+            Eventos eventos = new Eventos();
+            eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
+            eveBL.ExcluirBL(eventos);
             Pesquisar();
         }
 

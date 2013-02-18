@@ -28,25 +28,81 @@ namespace DataObjects
             set { _descricao = value; }
         }
 
-        private Int32 _cursoId;
-        public Int32 CursoId
+        private Int32 _eventoId;
+        public Int32 EventoId
         {
-            get { return _cursoId; }
-            set { _cursoId = value; }
+            get { return _eventoId; }
+            set { _eventoId = value; }
         }
 
-        private DateTime _dataInicial;
-        public DateTime DataInicial
+        private DateTime? _dataInicial;
+        public DateTime? DataInicial
         {
             get { return _dataInicial; }
             set { _dataInicial = value; }
         }
 
-        private DateTime _dataFinal;
-        public DateTime DataFinal
+        private DateTime? _dataFinal;
+        public DateTime? DataFinal
         {
             get { return _dataFinal; }
             set { _dataFinal = value; }
+        }
+
+        private Int32 _nromax;
+        public Int32 Nromax
+        {
+            get { return _nromax; }
+            set { _nromax = value; }
+        }
+
+        private string _sala;
+        public string Sala
+        {
+            get { return _sala; }
+            set { _sala = value; }
+        }
+
+        private DateTime? _horaIni;
+        public DateTime? HoraIni
+        {
+            get { return _horaIni; }
+            set { _horaIni = value; }
+        }
+
+        private DateTime? _horaFim;
+        public DateTime? HoraFim
+        {
+            get { return _horaFim; }
+            set { _horaFim = value; }
+        }
+
+        private string _diaSemana;
+        public string DiaSemana
+        {
+            get { return _diaSemana; }
+            set { _diaSemana = value; }
+        }
+
+        private Int32? _pessoaId;
+        public Int32? PessoaId
+        {
+            get { return _pessoaId; }
+            set { _pessoaId = value; }
+        }
+
+        private Pessoas _pessoa;
+        public Pessoas Pessoa
+        {
+            get { return _pessoa; }
+            set { _pessoa = value; }
+        }
+
+        private Eventos _evento;
+        public Eventos Evento
+        {
+            get { return _evento; }
+            set { _evento = value; }
         }
     
     }

@@ -64,7 +64,8 @@
                         </table>
                     </div>
                     <asp:HiddenField ID="hfId" runat="server" />
-                    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+                        EnableScriptLocalization="true">
                     </asp:ScriptManager>
                 </div>
                 <div class="status"></div>  

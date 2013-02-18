@@ -40,21 +40,12 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
-        /// dtgCursos control.
+        /// dtgEventos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dtgCursos;
-        
-        /// <summary>
-        /// GridProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridProduto;
+        protected global::System.Web.UI.WebControls.GridView dtgEventos;
     }
 }

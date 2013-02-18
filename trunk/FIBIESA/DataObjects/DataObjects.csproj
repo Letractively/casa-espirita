@@ -57,9 +57,9 @@
     <Compile Include="Doacoes.cs" />
     <Compile Include="Portadores.cs" />
     <Compile Include="TiposDocumentos.cs" />
-    <Compile Include="TurmasAlunos.cs" />
+    <Compile Include="TurmasParticipantes.cs" />
     <Compile Include="Turmas.cs" />
-    <Compile Include="Cursos.cs" />
+    <Compile Include="Eventos.cs" />
     <Compile Include="Editoras.cs" />
     <Compile Include="Emprestimos.cs" />
     <Compile Include="Estados.cs" />
