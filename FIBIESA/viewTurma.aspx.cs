@@ -43,13 +43,13 @@ namespace Admin
                 linha["ID"] = tur.Id;
                 linha["CODIGO"] = tur.Codigo;
                 linha["DESCRICAO"] = tur.Descricao;
-                linha["CURSOID"] = tur.CursoId;
+                linha["EVENTOID"] = tur.EventoId;
                 linha["DATAINICIAL"] = tur.DataInicial;
                 linha["DATAFINAL"] = tur.DataFinal;
 
-                CursosBL curBL = new CursosBL();
-                List<Cursos> cursos = curBL.PesquisarBL(tur.CursoId);
-                foreach (Cursos cur in cursos)
+                EventosBL curBL = new EventosBL();
+                List<Eventos> eventos = curBL.PesquisarBL(tur.EventoId);
+                foreach (Eventos cur in eventos)
                 {
                     linha["DESCATEGORIA"] = cur.Descricao;
                 }

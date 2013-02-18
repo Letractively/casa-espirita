@@ -25,7 +25,8 @@
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
                                    onrowdeleting="dtgFormularios_RowDeleting" 
                                    onselectedindexchanged="dtgFormularios_SelectedIndexChanged" PageSize="7" 
-                                    AllowSorting="True">
+                                    AllowSorting="True" onpageindexchanging="dtgFormularios_PageIndexChanging" 
+                                    onsorting="dtgFormularios_Sorting">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

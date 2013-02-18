@@ -143,5 +143,7 @@ namespace Admin
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtEstado.ClientID + "&id=" + hfIdEstado.ClientID + "&lbl=" + lblDesEstado.ClientID + "','',600,500);", true);
         }
+
+       
     }
 }

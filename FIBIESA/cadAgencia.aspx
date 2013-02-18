@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="content">
-        <div class="container half left">
+        <div class="container half2 left">
             <div class="conthead">
                 <h2>
                     Cadastro de Agências</h2>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataObjects
 {
-    public class Cursos : Base
+    public class Eventos : Base
     {
         private Int32 _id;
         public Int32 Id
@@ -26,6 +26,20 @@ namespace DataObjects
         {
             get { return _descricao; }
             set { _descricao = value; }
+        }
+
+        private DateTime _dtInicio;
+        public DateTime DtInicio
+        {
+            get { return _dtInicio; }
+            set { _dtInicio = value; }
+        }
+
+        private DateTime _dtFim;
+        public DateTime DtFim
+        {
+            get { return _dtFim; }
+            set { _dtFim = value; }
         }
 
     }

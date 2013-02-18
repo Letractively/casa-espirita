@@ -7,21 +7,92 @@ using InfrastructureSqlServer.Helpers;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
-
+using FG;
 
 namespace DataAccess
 {
     public class TurmasDA : BaseDA
     {
+        Utils utils = new Utils();
+
+        #region funcoes
+        private List<Turmas> CarregarObjTurmas(SqlDataReader dr)
+        {
+            List<Turmas> turmas = new List<Turmas>();
+            PessoasDA pesDA = new PessoasDA();
+            EventosDA eveDA = new EventosDA();
+
+            while (dr.Read())
+            {
+                Turmas tur = new Turmas();
+                tur.Id = int.Parse(dr["id"].ToString());
+                tur.Codigo = int.Parse(dr["codigo"].ToString());
+                tur.Descricao = dr["descricao"].ToString();
+                tur.EventoId = int.Parse(dr["eventoid"].ToString());
+                tur.DataInicial = utils.ComparaDataComNull(dr["dtini"].ToString());
+                tur.DataFinal = utils.ComparaDataComNull(dr["dtfim"].ToString());
+                tur.Nromax = utils.ComparaIntComZero(dr["nromax"].ToString());
+                tur.HoraIni = utils.ComparaDataComNull(dr["horaini"].ToString());
+                tur.HoraFim = utils.ComparaDataComNull(dr["horafim"].ToString());
+                tur.Sala = dr["sala"].ToString();
+                tur.DiaSemana = dr["diasemana"].ToString();
+                tur.PessoaId = utils.ComparaIntComNull(dr["pessoaid"].ToString());
+
+                int id = 0;
+
+                if (tur.PessoaId != null)
+                {
+                    id = Convert.ToInt32(tur.PessoaId);
+                    List<Pessoas> pes = pesDA.PesquisarDA(id);
+                    Pessoas pessoa = new Pessoas();
+
+                    foreach (Pessoas ltPes in pes)
+	                {
+                        pessoa.Id = ltPes.Id;
+                        pessoa.Codigo = ltPes.Codigo;
+                        pessoa.Nome = ltPes.Nome;		 
+	                }
+
+                    tur.Pessoa = pessoa;
+                }
+
+                if (tur.EventoId != null)
+                {
+                    id = Convert.ToInt32(tur.EventoId);
+                    List<Eventos> eve = eveDA.PesquisarDA(id);
+                    Eventos eventos = new Eventos();
+
+                    foreach (Eventos ltEve in eve)
+                    {
+                        eventos.Id = ltEve.Id;
+                        eventos.Codigo = ltEve.Codigo;
+                        eventos.Descricao = ltEve.Descricao;
+                    }
+
+                    tur.Evento = eventos;
+                }
+
+                turmas.Add(tur);
+            }
+            return turmas;
+        }
+        #endregion
         public bool InserirDA(Turmas tur)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[11];
 
             paramsToSP[0] = new SqlParameter("@codigo", tur.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", tur.Descricao);
-            paramsToSP[2] = new SqlParameter("@cursoId", tur.CursoId);
-            paramsToSP[3] = new SqlParameter("@dataInicial", tur.DataInicial);
-            paramsToSP[4] = new SqlParameter("@dataFinal", tur.DataFinal);
+            paramsToSP[2] = new SqlParameter("@cursoId", tur.EventoId);
+            paramsToSP[3] = new SqlParameter("@dtini", tur.DataInicial);
+            paramsToSP[4] = new SqlParameter("@dtfim", tur.DataFinal);
+            paramsToSP[5] = new SqlParameter("@nromax", tur.Nromax);
+            paramsToSP[6] = new SqlParameter("@sala", tur.Sala);
+            paramsToSP[7] = new SqlParameter("@horaini", tur.HoraIni);
+            paramsToSP[8] = new SqlParameter("@horafim", tur.HoraFim);
+            paramsToSP[9] = new SqlParameter("@diasemana", tur.DiaSemana);
+            paramsToSP[10] = new SqlParameter("@pessoaid", tur.PessoaId);
+
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_turmas", paramsToSP);
 
@@ -30,14 +101,20 @@ namespace DataAccess
 
         public bool EditarDA(Turmas tur)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[12];
 
             paramsToSP[0] = new SqlParameter("@id", tur.Id);
             paramsToSP[1] = new SqlParameter("@codigo", tur.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", tur.Descricao);
-            paramsToSP[2] = new SqlParameter("@cursoId", tur.CursoId);
-            paramsToSP[3] = new SqlParameter("@dataInicial", tur.DataInicial);
-            paramsToSP[4] = new SqlParameter("@dataFinal", tur.DataFinal);
+            paramsToSP[3] = new SqlParameter("@cursoId", tur.EventoId);
+            paramsToSP[4] = new SqlParameter("@dtini", tur.DataInicial);
+            paramsToSP[5] = new SqlParameter("@dtfim", tur.DataFinal);
+            paramsToSP[6] = new SqlParameter("@nromax", tur.Nromax);
+            paramsToSP[7] = new SqlParameter("@sala", tur.Sala);
+            paramsToSP[8] = new SqlParameter("@horaini", tur.HoraIni);
+            paramsToSP[9] = new SqlParameter("@horafim", tur.HoraFim);
+            paramsToSP[10] = new SqlParameter("@diasemana", tur.DiaSemana);
+            paramsToSP[11] = new SqlParameter("@pessoaid", tur.PessoaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_turmas", paramsToSP);
 
@@ -60,20 +137,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM TURMAS "));
 
-            List<Turmas> turmas = new List<Turmas>();
-
-            while (dr.Read())
-            {
-                Turmas tur = new Turmas();
-                tur.Id = int.Parse(dr["ID"].ToString());
-                tur.Codigo = int.Parse(dr["CODIGO"].ToString());
-                tur.Descricao = dr["DESCRICAO"].ToString();
-                tur.CursoId = int.Parse(dr["CURSOID"].ToString());
-                tur.DataInicial = DateTime.Parse(dr["DATAINICIAL"].ToString());
-                tur.DataFinal = DateTime.Parse(dr["DESCRICAO"].ToString());
-
-                turmas.Add(tur);
-            }
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+                        
             return turmas;
 
         }
@@ -84,20 +149,8 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM TURMAS WHERE ID = {0}", id_tur));
 
-            List<Turmas> turmas = new List<Turmas>();
-
-            while (dr.Read())
-            {
-                Turmas tur = new Turmas();
-                tur.Id = int.Parse(dr["ID"].ToString());
-                tur.Codigo = int.Parse(dr["CODIGO"].ToString());
-                tur.Descricao = dr["DESCRICAO"].ToString();
-                tur.CursoId = int.Parse(dr["CURSOID"].ToString());
-                tur.DataInicial = DateTime.Parse(dr["DESCRICAO"].ToString());
-                tur.DataFinal = DateTime.Parse(dr["DESCRICAO"].ToString());
-
-                turmas.Add(tur);
-            }
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+                      
             return turmas;
         }
 

@@ -72,7 +72,7 @@
     <Content Include="cadChamada.aspx" />
     <Content Include="cadCidade.aspx" />
     <Content Include="cadConta.aspx" />
-    <Content Include="cadCurso.aspx" />
+    <Content Include="cadEvento.aspx" />
     <Content Include="cadDoacao.aspx" />
     <Content Include="cadEditora.aspx" />
     <Content Include="cadEstado.aspx" />
@@ -201,7 +201,7 @@
     <Content Include="viewChamada.aspx" />
     <Content Include="viewCidade.aspx" />
     <Content Include="viewConta.aspx" />
-    <Content Include="viewCurso.aspx" />
+    <Content Include="viewEvento.aspx" />
     <Content Include="viewDoacao.aspx" />
     <Content Include="viewEditora.aspx" />
     <Content Include="viewEstado.aspx" />
@@ -328,12 +328,12 @@
     <Compile Include="cadConta.aspx.designer.cs">
       <DependentUpon>cadConta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="cadCurso.aspx.cs">
-      <DependentUpon>cadCurso.aspx</DependentUpon>
+    <Compile Include="cadEvento.aspx.cs">
+      <DependentUpon>cadEvento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="cadCurso.aspx.designer.cs">
-      <DependentUpon>cadCurso.aspx</DependentUpon>
+    <Compile Include="cadEvento.aspx.designer.cs">
+      <DependentUpon>cadEvento.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadDoacao.aspx.cs">
       <DependentUpon>cadDoacao.aspx</DependentUpon>
@@ -627,12 +627,12 @@
     <Compile Include="viewConta.aspx.designer.cs">
       <DependentUpon>viewConta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewCurso.aspx.cs">
-      <DependentUpon>viewCurso.aspx</DependentUpon>
+    <Compile Include="viewEvento.aspx.cs">
+      <DependentUpon>viewEvento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="viewCurso.aspx.designer.cs">
-      <DependentUpon>viewCurso.aspx</DependentUpon>
+    <Compile Include="viewEvento.aspx.designer.cs">
+      <DependentUpon>viewEvento.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewDoacao.aspx.cs">
       <DependentUpon>viewDoacao.aspx</DependentUpon>

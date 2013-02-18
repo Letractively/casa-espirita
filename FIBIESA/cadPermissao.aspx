@@ -7,7 +7,7 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Cadastro de Permissão</h2>
+                <h2>Cadastro de Permissões</h2>
             </div>
             <div class="contentbox">
                 <table>
