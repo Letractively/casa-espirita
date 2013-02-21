@@ -111,9 +111,8 @@
             <li><a class="collapsed heading">Eventos</a>
                 <ul class="navigation">
                     <li><a href="viewEvento.aspx" title="">Eventos</a></li>
-                    <li><a href="viewTurma.aspx" title="">Turmas</a></li>
-                    <li><a href="viewTurmaParticipante.aspx" title="">Participantes</a></li>
-                    <li><a href="viewChamada.aspx" title="">Registro de Frequências</a></li>
+                    <li><a href="viewTurma.aspx" title="">Turmas</a></li>                    
+                    <li><a href="cadChamada.aspx" title="">Registro de Frequências</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Geral</a>

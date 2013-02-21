@@ -9,36 +9,53 @@ namespace BusinessLayer
 {
     public class ChamadasBL
     {
-       /* public bool InserirBL(Chamadas cha)
+        public bool InserirBL(Chamadas cha)
         {
             
-            ChamadasDA chamadasDA = new ChamadasDA();
+            ChamadasDA chaDA = new ChamadasDA();
 
-            return chamadasDA.InserirDA(cha);
+            return chaDA.InserirDA(cha);
         }
 
         public bool EditarBL(Chamadas cha)
         {
-            
-            ChamadasDA chamadasDA = new ChamadasDA();
 
-            return chamadasDA.EditarDA(cha);
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.EditarDA(cha);
         }
 
         public bool ExcluirBL(Chamadas cha)
         {
-            
-            ChamadasDA chamadasDA = new ChamadasDA();
 
-            return chamadasDA.ExcluirDA(cha);
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.ExcluirDA(cha);
         }
 
         public List<Chamadas> PesquisarBL()
         {
-            
-            ChamadasDA bairrosDA = new ChamadasDA();
 
-            return chamadasDA.PesquisarDA();
-        }*/
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.PesquisarDA();
+        }
+
+        public List<Chamadas> PesquisarBL(int id_tPar)
+        {
+
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.PesquisarDA(id_tPar);
+        }
+
+        public List<Chamadas> PesquisarBL(int id_tur, int id_eve)
+        {
+
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.PesquisarDA(id_tur, id_eve);
+        } 
+               
     }
 }

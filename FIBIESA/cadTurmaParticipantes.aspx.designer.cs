@@ -10,79 +10,52 @@
 namespace Admin {
     
     
-    public partial class cadChamada {
+    public partial class cadTurmaAluno {
         
         /// <summary>
-        /// txtEvento control.
+        /// pnParticipantes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEvento;
+        protected global::System.Web.UI.WebControls.Panel pnParticipantes;
         
         /// <summary>
-        /// btnPesEvento control.
+        /// lblTurma control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesEvento;
+        protected global::System.Web.UI.WebControls.Label lblTurma;
         
         /// <summary>
-        /// lblDesEvento control.
+        /// txtParticipante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtParticipante;
         
         /// <summary>
-        /// RequiredFieldValidator3 control.
+        /// btnPesParticipante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        protected global::System.Web.UI.WebControls.Button btnPesParticipante;
         
         /// <summary>
-        /// txtTurma control.
+        /// lblDesParticipante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTurma;
-        
-        /// <summary>
-        /// btnPesTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesTurma;
-        
-        /// <summary>
-        /// lblDesTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesTurma;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.Label lblDesParticipante;
         
         /// <summary>
         /// btnVoltar control.
@@ -94,15 +67,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
-        /// btnPesquisar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesquisar;
-        
-        /// <summary>
         /// btnInserir control.
         /// </summary>
         /// <remarks>
@@ -112,31 +76,22 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
-        /// repPermissao control.
+        /// dtgParticipantes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repPermissao;
+        protected global::System.Web.UI.WebControls.GridView dtgParticipantes;
         
         /// <summary>
-        /// hfId control.
+        /// hfIdParticipante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfId;
-        
-        /// <summary>
-        /// hfIdEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdEvento;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdParticipante;
         
         /// <summary>
         /// hfIdTurma control.
@@ -146,6 +101,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfIdTurma;
+        
+        /// <summary>
+        /// hfId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfId;
         
         /// <summary>
         /// Master property.

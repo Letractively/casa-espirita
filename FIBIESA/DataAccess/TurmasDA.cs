@@ -154,6 +154,19 @@ namespace DataAccess
             return turmas;
         }
 
+        public List<Turmas> PesquisarDA(int id_tur, int id_eve)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM TURMAS " +
+                                                                                       " WHERE ID = {0} " +
+                                                                                       " AND EVENTOID = {1}", id_tur, id_eve));
+
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+
+            return turmas;
+        }
+
         public override List<Base> Pesquisar(string descricao, string tipo)
         {
             SqlDataReader dr;

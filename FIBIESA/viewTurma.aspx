@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="viewTurma.aspx.cs" Inherits="Admin.viewTurma" %>
-
+<%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -34,9 +34,9 @@
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                         <asp:BoundField DataField="CODIGO" HeaderText="Código" />
                                         <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
-                                        <asp:BoundField DataField="CURSOID" HeaderText="CURSOID" 
+                                        <asp:BoundField DataField="EVENTOID" HeaderText="EVENTOID" 
                                             Visible="False" />
-                                        <asp:BoundField DataField="DATAINICIAL" HeaderText="Dt. Inicial" />
+                                        <asp:BoundField DataField="DTINICIAL" HeaderText="Dt. Inicial" />
                                         <asp:BoundField DataField="DTFINAL" HeaderText="Dt. Final" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />

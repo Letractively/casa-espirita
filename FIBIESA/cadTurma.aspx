@@ -32,7 +32,7 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="335px" ontextchanged="txtDescricao_TextChanged"></asp:TextBox>
+                                MaxLength="40" Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -44,7 +44,8 @@
                         </td>
                         <td style="width: 400px" colspan="3">                            
                             <asp:TextBox ID="txtEvento" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesEvento" runat="server" Text="..."  CssClass="btn"/>
+                            <asp:Button ID="btnPesEvento" runat="server" Text="..."  CssClass="btn" 
+                                onclick="btnPesEvento_Click"/>
                             <asp:Label ID="lblDesEvento" runat="server"></asp:Label>
                             <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
@@ -58,7 +59,8 @@
                         </td>
                         <td style="width: 400px" colspan="3">                            
                             <asp:TextBox ID="txtInstrutor" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesInstrutor" runat="server" Text="..."  CssClass="btn"/>
+                            <asp:Button ID="btnPesInstrutor" runat="server" Text="..."  CssClass="btn" 
+                                onclick="btnPesInstrutor_Click"/>
                             <asp:Label ID="lblDesInstrutor" runat="server"></asp:Label>
                             <br />
                         </td>
@@ -117,7 +119,10 @@
                                 onclick="btnVoltar_Click" />                             
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />   
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />  
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnParticipantes" runat="server" Text="Participantes" 
+                                CssClass="btn" onclick="btnParticipantes_Click" /> 
                         </td>
                     </tr>
                 </table>                

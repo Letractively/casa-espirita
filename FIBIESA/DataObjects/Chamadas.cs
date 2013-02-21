@@ -14,11 +14,11 @@ namespace DataObjects
             set { _id = value; }
         }
 
-        private Int32 _turmaAlunoid;
-        public Int32 TurmaAlunoId
+        private Int32 _turmaParticipanteId;
+        public Int32 TurmaParticipanteId
         {
-            get { return _turmaAlunoid; }
-            set { _turmaAlunoid = value; }
+            get { return _turmaParticipanteId; }
+            set { _turmaParticipanteId = value; }
         }
 
         private Boolean _presenca;
