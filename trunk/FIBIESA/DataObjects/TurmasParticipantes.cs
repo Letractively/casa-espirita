@@ -27,6 +27,20 @@ namespace DataObjects
             get { return _pessoaId; }
             set { _pessoaId = value; }
         }
+
+        private Turmas _turma;
+        public Turmas Turma
+        {
+            get { return _turma; }
+            set { _turma = value; }
+        }
+
+        private Pessoas _pessoa;
+        public Pessoas Pessoa
+        {
+            get { return _pessoa; }
+            set { _pessoa = value; }
+        }
     
     }
 }

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using BusinessLayer;
 using DataObjects;
 using FG;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Admin
 {
@@ -65,6 +67,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_tur);
+
+                btnParticipantes.Visible = v_operacao.ToLower() == "edit";
             }
         }
 
@@ -86,7 +90,6 @@ namespace Admin
             turmas.Sala = txtSala.Text;
             turmas.PessoaId = utils.ComparaIntComNull(hfIdPessoa.Value);
             
-
             if (turmas.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
@@ -111,6 +114,86 @@ namespace Admin
             Response.Redirect("viewTurma.aspx");
         }
 
+        protected void btnPesEvento_Click(object sender, EventArgs e)
+        {
+            Session["tabelaPesquisa"] = null;
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            EventosBL eveBL = new EventosBL();
+            List<Eventos> eventos = eveBL.PesquisarBL();
+
+            foreach (Eventos eve in eventos)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = eve.Id;
+                linha["CODIGO"] = eve.Codigo;
+                linha["DESCRICAO"] = eve.Descricao;
+
+                dt.Rows.Add(linha);
+            }
+
+            if (dt.Rows.Count > 0)
+                Session["tabelaPesquisa"] = dt;
+
+           
+            Eventos ev = new Eventos();
+
+            Session["objBLPesquisa"] = eveBL;
+            Session["objPesquisa"] = ev;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtEvento.ClientID + "&id=" + hfIdEvento.ClientID + "&lbl=" + lblDesEvento.ClientID + "','',600,500);", true);
+        }
+
+        protected void btnPesInstrutor_Click(object sender, EventArgs e)
+        {
+            Session["tabelaPesquisa"] = null;
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            PessoasBL pesBL = new PessoasBL();
+            List<Pessoas> pessoas = pesBL.PesquisarBL();
+
+            foreach (Pessoas pes in pessoas)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["DESCRICAO"] = pes.Nome;
+
+                dt.Rows.Add(linha);
+            }
+
+            if (dt.Rows.Count > 0)
+                Session["tabelaPesquisa"] = dt;
+
+
+            Pessoas pe = new Pessoas();
+
+            Session["objBLPesquisa"] = pesBL;
+            Session["objPesquisa"] = pe;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtInstrutor.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesInstrutor.ClientID + "','',600,500);", true);
+        }
+
+        protected void btnParticipantes_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("cadTurmaParticipantes.aspx?turmaId=" + hfId.Value + "&lblDesTurma=" + txtDescricao.Text);
+        }        
       
     }
 }

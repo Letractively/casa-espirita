@@ -96,7 +96,7 @@
     <Content Include="cadTipoObra.aspx" />
     <Content Include="cadTitulo.aspx" />
     <Content Include="cadTurma.aspx" />
-    <Content Include="cadTurmaAluno.aspx" />
+    <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
     <Content Include="erroPermissao.aspx" />
@@ -225,7 +225,6 @@
     <Content Include="viewTipoObra.aspx" />
     <Content Include="viewTitulo.aspx" />
     <Content Include="viewTurma.aspx" />
-    <Content Include="viewTurmaAluno.aspx" />
     <Content Include="viewUsuario.aspx" />
     <Content Include="viewVenda.aspx" />
     <Content Include="Web.config" />
@@ -496,12 +495,12 @@
     <Compile Include="cadTurma.aspx.designer.cs">
       <DependentUpon>cadTurma.aspx</DependentUpon>
     </Compile>
-    <Compile Include="cadTurmaAluno.aspx.cs">
-      <DependentUpon>cadTurmaAluno.aspx</DependentUpon>
+    <Compile Include="cadTurmaParticipantes.aspx.cs">
+      <DependentUpon>cadTurmaParticipantes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="cadTurmaAluno.aspx.designer.cs">
-      <DependentUpon>cadTurmaAluno.aspx</DependentUpon>
+    <Compile Include="cadTurmaParticipantes.aspx.designer.cs">
+      <DependentUpon>cadTurmaParticipantes.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadUsuario.aspx.cs">
       <DependentUpon>cadUsuario.aspx</DependentUpon>
@@ -794,13 +793,6 @@
     </Compile>
     <Compile Include="viewTurma.aspx.designer.cs">
       <DependentUpon>viewTurma.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewTurmaAluno.aspx.cs">
-      <DependentUpon>viewTurmaAluno.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewTurmaAluno.aspx.designer.cs">
-      <DependentUpon>viewTurmaAluno.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewUsuario.aspx.cs">
       <DependentUpon>viewUsuario.aspx</DependentUpon>
