@@ -41,5 +41,13 @@ namespace BusinessLayer
 
             return doacoesDA.PesquisarDA();
         }
+
+        public List<Doacoes> PesquisarBL(int id_doa)
+        {
+            /*criar as regras de negocio*/
+            DoacoesDA doacoesDA = new DoacoesDA();
+
+            return doacoesDA.PesquisarDA(id_doa);
+        }
     }
 }

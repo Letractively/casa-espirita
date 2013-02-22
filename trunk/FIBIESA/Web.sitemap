@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="default.aspx" title="Home"  description="">
+        <siteMapNode url="viewInstituicao.aspx" title="Instituições"  description="">
+          <siteMapNode url="cadInstituicao.aspx" title="Cadastro de Instituições"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewPessoa.aspx" title="Pessoas"  description="">
+          <siteMapNode url="cadPessoa.aspx" title="Cadastro de Pessoas"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewCategoria.aspx" title="Categorias"  description="">
+          <siteMapNode url="cadCategoria.aspx" title="Cadastro de Categorias"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewUsuario.aspx" title="Usuários"  description="">
+          <siteMapNode url="cadUsuario.aspx" title="Cadastro de Usuários"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewEstado.aspx" title="Estados"  description="">
+          <siteMapNode url="cadEstado.aspx" title="Cadastro de Estados"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewCidade.aspx" title="Cidades"  description="">
+          <siteMapNode url="cadCidade.aspx" title="Cadastro de Cidades"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewBairro.aspx" title="Bairros"  description="">
+          <siteMapNode url="cadBairro.aspx" title="Cadastro de Bairros"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewParametro.aspx" title="Parâmetros"  description=""/>        
+        <siteMapNode url="viewFormulario.aspx" title="Formulários"  description="">
+          <siteMapNode url="cadFormulario.aspx" title="Cadastro de Formulários"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewPermissao.aspx" title="Permissões"  description="">
+          <siteMapNode url="cadPermissao.aspx" title="Cadastro de Permissões"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewEvento.aspx" title="Eventos"  description="">
+          <siteMapNode url="cadEvento.aspx" title="Cadastro de Eventos"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewTurma.aspx" title="Turmas"  description="">
+          <siteMapNode url="cadTurma.aspx" title="Cadastro de Turmas"  description="" />
+        </siteMapNode>
+        <siteMapNode url="cadChamada.aspx" title="Registro de Frequências"  description=""/>
+        <siteMapNode url="cadVenda.aspx" title="Vendas"  description=""/>
+        <siteMapNode url="viewBanco.aspx" title="Bancos"  description="">
+          <siteMapNode url="cadBanco.aspx" title="Cadastro de Bancos"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewAgencia.aspx" title="Agências"  description="">
+          <siteMapNode url="cadAgencia.aspx" title="Cadastro de Agências"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewConta.aspx" title="Contas"  description="">
+          <siteMapNode url="cadConta.aspx" title="Cadastro de Contas"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewPortador.aspx" title="Portadores"  description="">
+          <siteMapNode url="cadPortador.aspx" title="Cadastro de Portadores"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewDoacao.aspx" title="Doações"  description="">
+          <siteMapNode url="cadDoacao.aspx" title="Cadastro de Doações"  description="" />
+        </siteMapNode>
+        
+    </siteMapNode>
+</siteMap>

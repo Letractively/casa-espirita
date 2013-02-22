@@ -41,12 +41,12 @@ namespace BusinessLayer
             return chaDA.PesquisarDA();
         }
 
-        public List<Chamadas> PesquisarBL(int id_tPar)
+        public List<Chamadas> PesquisarBL(int id_tPar, DateTime data)
         {
 
             ChamadasDA chaDA = new ChamadasDA();
 
-            return chaDA.PesquisarDA(id_tPar);
+            return chaDA.PesquisarDA(id_tPar, data);
         }
 
         public List<Chamadas> PesquisarBL(int id_tur, int id_eve)
