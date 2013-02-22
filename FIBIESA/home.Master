@@ -145,18 +145,14 @@
                 <li class="current">Painel de controle</li>
             </ul>
         </div>
-        <ul id="topbtns">
-            <li class="desc"><strong>Home</strong><br />Atalhos</li>
-            <li><a href="default.aspx"><img src="images/icons/icon_home.png" alt="Nova Venda" /><br />Home</a> </li>
-            <li class="desc"><strong>VENDA</strong><br />Atalhos</li>
-            <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Nova Venda" /><br />Nova</a> </li>
-            <li><a href="#"><img src="images/icons/icon_lrg_create.png" alt="Alterando Vendas" /><br />Alterar</a> </li>
-            <li><a href="#"><img src="images/icons/icon_lrg_media.png" alt="Vizualizar Vendas" /><br />Vizualizar</a> </li>
-            <li class="desc"><strong>Configuração</strong><br />Atalhos</li>
-            <li><a href="#"><img src="images/icons/icon_lrg_user.png" alt="Usuário" /><br />Usuário</a> </li>
-            <li><a href="#"><img src="images/icons/icon_lrg_comment.png" alt="Comentário" /><br />Comentário</a> </li>
-            <li><a href="#"><img src="images/icons/icon_lrg_support.png" alt="Suporte" /><br />Suporte</a> </li>
-        </ul>
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" 
+            Font-Size="Medium" PathSeparator=" : ">
+            <CurrentNodeStyle ForeColor="#333333" />
+            <NodeStyle Font-Bold="True" ForeColor="#7C6F57" />
+            <PathSeparatorStyle Font-Bold="True" ForeColor="#5D7B9D" />
+            <RootNodeStyle Font-Bold="True" ForeColor="#5D7B9D" />
+        </asp:SiteMapPath>
+        
         <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

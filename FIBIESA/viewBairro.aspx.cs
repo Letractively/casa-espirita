@@ -9,7 +9,6 @@ using DataObjects;
 using BusinessLayer;
 using FG;
 
-
 namespace Admin
 {
     public partial class viewBairro : System.Web.UI.Page

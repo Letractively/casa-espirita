@@ -65,14 +65,23 @@ namespace Admin
                     linha["CODPARTICIPANTE"] = ltTpar.Pessoa.Codigo;
                     linha["DESCPARTICIPANTE"] = ltTpar.Pessoa.Nome;
 
-                    List<Chamadas> cha = chaBL.PesquisarBL(ltTpar.Id);
+                    List<Chamadas> cha = chaBL.PesquisarBL(ltTpar.Id, Convert.ToDateTime(txtSelData.Text));
 
-                    foreach (Chamadas ltCha in cha)
-	                {
-                        linha["ID"] = ltCha.Id;
-                        linha["PRESENCA"] = ltCha.Presenca;
-                        linha["DATA"] = ltCha.Data;		 
-	                }
+                    if (cha.Count > 0)
+                    {
+                        foreach (Chamadas ltCha in cha)
+                        {
+                            linha["ID"] = ltCha.Id;
+                            linha["PRESENCA"] = ltCha.Presenca;
+                            linha["DATA"] = ltCha.Data;
+                        }
+                    }
+                    else
+                    {
+                        linha["ID"] = 0;
+                        linha["PRESENCA"] = false;
+                        linha["DATA"] = DateTime.Now; 
+                    }
 
                     tabela.Rows.Add(linha);
                 }                
@@ -84,7 +93,8 @@ namespace Admin
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                txtSelData.Text = DateTime.Now.ToString();
         }
 
         protected void btnPesEvento_Click(object sender, EventArgs e)

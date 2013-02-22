@@ -28,18 +28,32 @@ namespace DataObjects
             set { _data = value; }
         }
 
-        private float _valor;
-        private float Valor
+        private Decimal _valor;
+        public Decimal Valor
         {
             get { return _valor; }
             set { _valor = value; }
         }
 
         private Int32 _usuarioId;
-        private Int32 UsuarioId
+        public Int32 UsuarioId
         {
             get { return _usuarioId; }
             set { _usuarioId = value; }
+        }
+
+        private Usuarios _usuario;
+        public Usuarios Usuario
+        {
+            get { return _usuario; }
+            set { _usuario = value; }
+        }
+
+        private Pessoas _pessoa;
+        public Pessoas Pessoa
+        {
+            get { return _pessoa; }
+            set { _pessoa = value; }
         }
     
     }
