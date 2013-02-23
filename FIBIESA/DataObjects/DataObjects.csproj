@@ -55,6 +55,8 @@
     <Compile Include="JurosMultas.cs" />
     <Compile Include="ItensEstoque.cs" />
     <Compile Include="Doacoes.cs" />
+    <Compile Include="NotasEntrada.cs" />
+    <Compile Include="NotasEntradaItens.cs" />
     <Compile Include="Portadores.cs" />
     <Compile Include="TiposDocumentos.cs" />
     <Compile Include="TurmasParticipantes.cs" />
