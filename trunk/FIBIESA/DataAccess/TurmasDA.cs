@@ -47,30 +47,28 @@ namespace DataAccess
                     Pessoas pessoa = new Pessoas();
 
                     foreach (Pessoas ltPes in pes)
-	                {
+                    {
                         pessoa.Id = ltPes.Id;
                         pessoa.Codigo = ltPes.Codigo;
-                        pessoa.Nome = ltPes.Nome;		 
-	                }
+                        pessoa.Nome = ltPes.Nome;
+                    }
 
                     tur.Pessoa = pessoa;
                 }
+                
+                id = Convert.ToInt32(tur.EventoId);
+                List<Eventos> eve = eveDA.PesquisarDA(id);
+                Eventos eventos = new Eventos();
 
-                if (tur.EventoId != null)
+                foreach (Eventos ltEve in eve)
                 {
-                    id = Convert.ToInt32(tur.EventoId);
-                    List<Eventos> eve = eveDA.PesquisarDA(id);
-                    Eventos eventos = new Eventos();
-
-                    foreach (Eventos ltEve in eve)
-                    {
-                        eventos.Id = ltEve.Id;
-                        eventos.Codigo = ltEve.Codigo;
-                        eventos.Descricao = ltEve.Descricao;
-                    }
-
-                    tur.Evento = eventos;
+                    eventos.Id = ltEve.Id;
+                    eventos.Codigo = ltEve.Codigo;
+                    eventos.Descricao = ltEve.Descricao;
                 }
+
+                tur.Evento = eventos;
+
 
                 turmas.Add(tur);
             }
@@ -138,7 +136,7 @@ namespace DataAccess
                                                                 CommandType.Text, string.Format(@"SELECT * FROM TURMAS "));
 
             List<Turmas> turmas = CarregarObjTurmas(dr);
-                        
+
             return turmas;
 
         }
@@ -150,7 +148,7 @@ namespace DataAccess
                                                                                        " FROM TURMAS WHERE ID = {0}", id_tur));
 
             List<Turmas> turmas = CarregarObjTurmas(dr);
-                      
+
             return turmas;
         }
 

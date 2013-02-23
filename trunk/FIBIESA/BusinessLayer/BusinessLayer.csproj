@@ -54,6 +54,8 @@
     <Compile Include="JurosMultasBL.cs" />
     <Compile Include="ItensEstoqueBL.cs" />
     <Compile Include="DoacoesBL.cs" />
+    <Compile Include="NotasEntradaBL.cs" />
+    <Compile Include="NotasEntradaItensBL.cs" />
     <Compile Include="PortadoresBL.cs" />
     <Compile Include="TiposDocumentosBL.cs" />
     <Compile Include="TurmasParticipantesBL.cs" />
