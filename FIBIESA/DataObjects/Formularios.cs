@@ -42,5 +42,12 @@ namespace DataObjects
             set { _tipo = value; }
         }
 
+        private string _modulo;
+        public string Modulo
+        {
+            get { return _modulo; }
+            set { _modulo = value; }
+        }
+
     }
 }

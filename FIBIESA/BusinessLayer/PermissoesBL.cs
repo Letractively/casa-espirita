@@ -61,5 +61,6 @@ namespace BusinessLayer
 
             return permissoesDA.PesquisarDA(id_categoria, nome);
         }
+               
     }
 }

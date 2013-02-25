@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
     public class NotasEntradaBL
     {
-        public bool InserirBL(NotasEntrada ntE)
+        public int InserirBL(NotasEntrada ntE)
         {
             /*criar as regras de negocio*/
             NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();

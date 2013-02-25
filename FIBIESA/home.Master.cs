@@ -76,5 +76,10 @@ namespace FIBIESA
         {
             Logout();
         }
+
+        protected void imgHome_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
     }
 }

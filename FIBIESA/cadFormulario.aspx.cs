@@ -28,6 +28,7 @@ namespace Admin
                 txtDescricao.Text = ltFor.Descricao;
                 txtNome.Text = ltFor.Nome;
                 ddlTipo.SelectedValue = ltFor.Tipo;
+                ddlModulo.SelectedValue = ltFor.Modulo;
             }
 
         }
@@ -75,6 +76,7 @@ namespace Admin
             formulario.Descricao = txtDescricao.Text;
             formulario.Nome = txtNome.Text;
             formulario.Tipo = ddlTipo.SelectedValue;
+            formulario.Modulo = ddlModulo.SelectedValue;
 
             if (formulario.Id > 0)
                 forBL.EditarBL(formulario);

@@ -15,10 +15,10 @@ namespace Admin
     public partial class cadPermicao : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        int id_cat = 0;
+        int id_cat;
 
         #region funcoes
-        private void Pesquisar(int id_cat)
+        private void Pesquisar(int id_cat, string modulo)
         {
             DataTable tabela = new DataTable();
 
@@ -45,7 +45,7 @@ namespace Admin
             tabela.Columns.Add(coluna10);
 
             FormulariosBL forBL = new FormulariosBL();            
-            List<Formularios> formularios = forBL.PesquisarBL();
+            List<Formularios> formularios = forBL.PesquisarBL(modulo);
 
             PermissoesBL perBL = new PermissoesBL();
             List<Permissoes> permissoes;
@@ -106,14 +106,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {  
-            if (!IsPostBack)
-            {
-                if (Request.QueryString["id_per_cat"] != null)
-                {
-                    id_cat = utils.ComparaIntComZero(Request.QueryString["id_per_cat"].ToString()); 
-                    Pesquisar(id_cat);
-                }
-            }
+           
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -146,6 +139,16 @@ namespace Admin
             }
             
             Response.Redirect("~/viewPermissao.aspx");
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (Request.QueryString["id_per_cat"] != null)
+            {
+                id_cat = utils.ComparaIntComZero(Request.QueryString["id_per_cat"].ToString());
+                Pesquisar(id_cat, ddlModulo.SelectedValue);
+            }
+              
         }
     }
 }

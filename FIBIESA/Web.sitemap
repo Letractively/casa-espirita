@@ -52,6 +52,9 @@
         <siteMapNode url="viewDoacao.aspx" title="Doações"  description="">
           <siteMapNode url="cadDoacao.aspx" title="Cadastro de Doações"  description="" />
         </siteMapNode>
+        <siteMapNode url="viewNotaEntrada.aspx" title="Notas de Entrada"  description="">
+          <siteMapNode url="cadNotaEntrada.aspx" title="Cadastro de Notas de Entrada"  description="" />
+        </siteMapNode>
         
     </siteMapNode>
 </siteMap>

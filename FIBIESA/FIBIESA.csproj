@@ -83,7 +83,6 @@
     <Content Include="cadJuroMulta.aspx" />
     <Content Include="cadMovimentoEstoque.aspx" />
     <Content Include="cadNotaEntrada.aspx" />
-    <Content Include="cadNotaEntradaItem.aspx" />
     <Content Include="cadObra.aspx" />
     <Content Include="cadOrigem.aspx" />
     <Content Include="cadParametro.aspx" />
@@ -212,7 +211,6 @@
     <Content Include="viewJuroMulta.aspx" />
     <Content Include="viewMovimentoEstoque.aspx" />
     <Content Include="viewNotaEntrada.aspx" />
-    <Content Include="viewNotaEntradaItem.aspx" />
     <Content Include="viewObra.aspx" />
     <Content Include="viewOrigem.aspx" />
     <Content Include="viewParametro.aspx" />
@@ -403,13 +401,6 @@
     </Compile>
     <Compile Include="cadNotaEntrada.aspx.designer.cs">
       <DependentUpon>cadNotaEntrada.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="cadNotaEntradaItem.aspx.cs">
-      <DependentUpon>cadNotaEntradaItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cadNotaEntradaItem.aspx.designer.cs">
-      <DependentUpon>cadNotaEntradaItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadObra.aspx.cs">
       <DependentUpon>cadObra.aspx</DependentUpon>
@@ -703,13 +694,6 @@
     <Compile Include="viewNotaEntrada.aspx.designer.cs">
       <DependentUpon>viewNotaEntrada.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewNotaEntradaItem.aspx.cs">
-      <DependentUpon>viewNotaEntradaItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewNotaEntradaItem.aspx.designer.cs">
-      <DependentUpon>viewNotaEntradaItem.aspx</DependentUpon>
-    </Compile>
     <Compile Include="viewObra.aspx.cs">
       <DependentUpon>viewObra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -846,7 +830,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52699</DevelopmentServerPort>
+          <DevelopmentServerPort>55354</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

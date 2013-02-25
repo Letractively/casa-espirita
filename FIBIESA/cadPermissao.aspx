@@ -12,7 +12,25 @@
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td>                        
+                        <td  style="width: 80px" >
+                           <strong>Módulo:</strong>     
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlModulo" runat="server" CssClass="inputbox">
+                                <asp:ListItem Value="F">Financeiro</asp:ListItem>
+                                <asp:ListItem Value="B">Biblioteca</asp:ListItem>
+                                <asp:ListItem Value="E">Estoque</asp:ListItem>
+                                <asp:ListItem Value="V">Eventos</asp:ListItem>
+                                <asp:ListItem Value="G">Geral</asp:ListItem>
+                                <asp:ListItem Value="C">Configuração</asp:ListItem>
+                            </asp:DropDownList>
+                            &nbsp;&nbsp;
+                            <asp:Button ID="btnBuscar" runat="server" CssClass="btn" Text="Buscar" 
+                                onclick="btnBuscar_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">                        
                             <asp:Repeater ID="repPermissao" runat="server">
                             <HeaderTemplate>
                                 <table>

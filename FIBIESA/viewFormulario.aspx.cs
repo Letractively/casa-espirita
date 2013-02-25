@@ -15,8 +15,21 @@ namespace Admin
     public partial class viewFormulario : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        #region funcoes        
-        private void Pesquisar()
+
+        #region funcoes 
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+ 
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -29,8 +42,13 @@ namespace Admin
             tabela.Columns.Add(coluna3);
 
             FormulariosBL forBL = new FormulariosBL();
+            List<Formularios> formularios;
 
-            List<Formularios> formularios = forBL.PesquisarBL();
+
+            if (campo != null && valor.Trim() != "")
+                formularios = forBL.PesquisarBL(campo, valor);
+            else
+                formularios = forBL.PesquisarBL();
 
             foreach (Formularios formu in formularios)
             {
@@ -45,6 +63,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgFormularios.DataSource = tabela;
             dtgFormularios.DataBind();
         }
@@ -70,7 +89,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -84,7 +103,7 @@ namespace Admin
             Formularios formularios = new Formularios();
             formularios.Id = utils.ComparaIntComZero(dtgFormularios.DataKeys[e.RowIndex][0].ToString());
             formBL.ExcluirBL(formularios);
-            Pesquisar();
+            Pesquisar(null,null);
         }
 
         protected void dtgFormularios_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,24 +114,56 @@ namespace Admin
         }
 
         protected void dtgFormularios_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
+        {            
+            dtgFormularios.DataSource = dtbPesquisa;
             dtgFormularios.PageIndex = e.NewPageIndex;
             dtgFormularios.DataBind();
         }
 
         protected void dtgFormularios_Sorting(object sender, GridViewSortEventArgs e)
         {
-            DataTable dataTable = dtgFormularios.DataSource as DataTable;
-
-            if (dataTable != null)
+            if (dtbPesquisa != null)
             {
-                DataView dataView = new DataView(dataTable);
-                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+                string ordem = e.SortExpression;
 
-                dtgFormularios.DataSource = dataView;
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgFormularios.DataSource = m_DataView;
                 dtgFormularios.DataBind();
             }
         }
-         
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);            
+        }
+
+        protected void dtgFormularios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+                
     }
 }
