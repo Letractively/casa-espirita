@@ -7,12 +7,32 @@ using InfrastructureSqlServer.Helpers;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using FG;
 
 
 namespace DataAccess
 {
     public class BairrosDA : BaseDA
     {
+        Utils utils = new Utils();
+        #region funcoes
+        private List<Bairros> CarregarObjBairro(SqlDataReader dr)
+        {
+            List<Bairros> bairros = new List<Bairros>();
+
+            while (dr.Read())
+            {
+                Bairros bai = new Bairros();
+                bai.Id = int.Parse(dr["ID"].ToString());
+                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
+                bai.Descricao = dr["DESCRICAO"].ToString();
+
+                bairros.Add(bai);
+            }
+
+            return bairros;
+        }
+        #endregion
         public bool InserirDA(Bairros bai)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
@@ -54,17 +74,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
                                                                 CommandType.Text, string.Format(@"SELECT * FROM BAIRROS "));
 
-            List<Bairros> bairros = new List<Bairros>();
-
-            while (dr.Read())
-            {
-                Bairros bai = new Bairros();
-                bai.Id = int.Parse(dr["ID"].ToString());
-                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
-                bai.Descricao = dr["DESCRICAO"].ToString();
-
-                bairros.Add(bai);
-            }
+            List<Bairros> bairros = CarregarObjBairro(dr);
+                        
             return bairros;    
 
         }
@@ -75,17 +86,33 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM BAIRROS WHERE ID = {0}", id_bai));
 
-            List<Bairros> bairros = new List<Bairros>();
+            List<Bairros> bairros = CarregarObjBairro(dr);
+                        
+            return bairros;
+        }
 
-            while (dr.Read())
+        public List<Bairros> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
             {
-                Bairros bai = new Bairros();
-                bai.Id = int.Parse(dr["ID"].ToString());
-                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
-                bai.Descricao = dr["DESCRICAO"].ToString();
-
-                bairros.Add(bai);
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM BAIRROS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM BAIRROS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
             }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Bairros> bairros = CarregarObjBairro(dr);
+
             return bairros;
         }
 

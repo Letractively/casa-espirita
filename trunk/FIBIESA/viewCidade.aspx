@@ -10,7 +10,13 @@
                 <h2>Cadastro de Cidades</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" />
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por" />
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
+                </asp:DropDownList>
+                &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
@@ -23,9 +29,12 @@
                             
                                 <asp:GridView ID="dtgCidades" runat="server" AllowPaging="True" 
                                     AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" 
-                                    BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="7" 
+                                    BorderStyle="None" BorderWidth="1px" CellPadding="3" 
                                     DataKeyNames="ID" onrowdeleting="dtgCidades_RowDeleting" 
-                                    onselectedindexchanged="dtgCidades_SelectedIndexChanged">
+                                    onselectedindexchanged="dtgCidades_SelectedIndexChanged" GridLines="None" 
+                                    onpageindexchanging="dtgCidades_PageIndexChanging" 
+                                    onrowdatabound="dtgCidades_RowDataBound" onsorting="dtgCidades_Sorting" 
+                                    ShowHeaderWhenEmpty="True" AllowSorting="True">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header"/>
@@ -36,11 +45,12 @@
                                             <ItemStyle CssClass="grd_delete" />
                                         </asp:CommandField>
                                         <asp:BoundField DataField="ID" HeaderText="id" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
                                         <asp:BoundField DataField="ESTADOID" Visible="False" />
-                                        <asp:BoundField DataField="UF" HeaderText="UF" />
-                                        <asp:BoundField DataField="DESESTADO" HeaderText="Des. Estado" />
+                                        <asp:BoundField DataField="UF" HeaderText="UF" SortExpression="UF" />
+                                        <asp:BoundField DataField="DESESTADO" HeaderText="Estado"  
+                                            SortExpression="DESESTADO"/>
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -55,26 +65,8 @@
                             
                             </td>
                         </tr>                       
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- grid modelo finaliza aqui -->
-                <br />
-                <br />
-                <asp:GridView ID="GridProduto" runat="server">
-                </asp:GridView>
-                <br />
-                <br />
-                <br />
+                    </table>                    
+                </div>              
             </div>
         </div>
         <div class="status">

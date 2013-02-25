@@ -11,9 +11,15 @@
                 <h2>Cadastro de Bairros</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por"></asp:TextBox>
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
+                </asp:DropDownList>
+                &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                    OnClick="btnBusca_Click" />
+                    OnClick="btnBusca_Click" />                 
                 &nbsp;&nbsp;&nbsp
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
@@ -26,8 +32,11 @@
                                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
                                    onrowdeleting="dtgBairros_RowDeleting" 
-                                   onselectedindexchanged="dtgBairros_SelectedIndexChanged" PageSize="7" 
-                                    AllowSorting="True">
+                                   onselectedindexchanged="dtgBairros_SelectedIndexChanged" 
+                                    AllowSorting="True" GridLines="None" 
+                                    onpageindexchanging="dtgBairros_PageIndexChanging" 
+                                    onrowdatabound="dtgBairros_RowDataBound" onsorting="dtgBairros_Sorting" 
+                                    ShowHeaderWhenEmpty="True">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -38,8 +47,8 @@
                                             <ItemStyle CssClass="grd_delete" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -53,17 +62,7 @@
                                </asp:GridView>                       
                             </td>
                        </tr>
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
+                    </table>                   
                 </div>
                 <!-- grid modelo finaliza aqui -->               
             </div>

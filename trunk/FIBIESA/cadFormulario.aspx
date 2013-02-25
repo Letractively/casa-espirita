@@ -12,43 +12,58 @@
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td style="width: 140px">Código:</td>
+                        <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Descrição:</td>
+                        <td style="width: 140px">* Descrição:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="70" Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Tipo:</td>
+                        <td style="width: 140px">* Tipo:</td>
                         <td><asp:DropDownList ID="ddlTipo" runat="server" CssClass="inputbox" >
                             <asp:ListItem Value="V">Consulta</asp:ListItem>
                             <asp:ListItem Value="C">Edição</asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="ddlTipo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Nome:</td>
+                        <td style="width: 140px">* Nome:</td>
                         <td>
                             <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
                                 Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtNome" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">* Modulo:</td>
+                        <td><asp:DropDownList ID="ddlModulo" runat="server" CssClass="inputbox" >
+                            <asp:ListItem Value="F">Financeiro</asp:ListItem>
+                            <asp:ListItem Value="B">Biblioteca</asp:ListItem>
+                            <asp:ListItem Value="E">Estoque</asp:ListItem>
+                            <asp:ListItem Value="V">Eventos</asp:ListItem>
+                            <asp:ListItem Value="G">Geral</asp:ListItem>
+                            <asp:ListItem Value="C">Configuração</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                ControlToValidate="ddlModulo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>

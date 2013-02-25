@@ -16,7 +16,18 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("tabela");
             
@@ -28,9 +39,13 @@ namespace Admin
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
             
-            BairrosBL baiBL = new BairrosBL();
-            
-            List<Bairros> bairros = baiBL.PesquisarBL();
+            BairrosBL baiBL = new BairrosBL();            
+            List<Bairros> bairros;
+
+            if (campo != null && valor.Trim() != "")
+                bairros = baiBL.PesquisarBL(campo, valor);
+            else
+                bairros = baiBL.PesquisarBL();
                        
             foreach (Bairros bai in bairros)
             {
@@ -44,7 +59,8 @@ namespace Admin
                
                 tabela.Rows.Add(linha);
             }
-            
+
+            dtbPesquisa = tabela;
             dtgBairros.DataSource = tabela;           
             dtgBairros.DataBind();
         }
@@ -53,7 +69,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar();
+                Pesquisar(null, null);
         }
 
      
@@ -65,7 +81,7 @@ namespace Admin
             
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,10 +99,56 @@ namespace Admin
                 Bairros bairros = new Bairros();
                 bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
                 baiBL.ExcluirBL(bairros);
-                Pesquisar();
+                Pesquisar(null, null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
+
+        protected void dtgBairros_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgBairros.DataSource = dtbPesquisa;
+            dtgBairros.PageIndex = e.NewPageIndex;
+            dtgBairros.DataBind();
+        }
+
+        protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgBairros_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgBairros.DataSource = m_DataView;
+                dtgBairros.DataBind();
+            }
         }
                
       

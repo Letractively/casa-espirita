@@ -48,6 +48,13 @@ namespace BusinessLayer
             return categoriasDA.PesquisarDA(id_cat);
         }
 
+        public List<Categorias> PesquisarBL(string campo, string valor)
+        {
+            CategoriasDA categoriasDA = new CategoriasDA();
+
+            return categoriasDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             CategoriasDA catDA = new CategoriasDA();

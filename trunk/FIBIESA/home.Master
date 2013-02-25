@@ -103,7 +103,7 @@
             </li>
             <li><a class="collapsed heading">Estoque</a>
                 <ul class="navigation">                    
-                    <li><a href="viewNotaEntrada.aspx" title="">Nota de entrada</a></li>
+                    <li><a href="viewNotaEntrada.aspx" title="">Nota de Entrada</a></li>
                     <li><a href="viewMovimentoEstoque.aspx" title="">Movimento de Estoque</a></li>
                     <li><a href="viewItemEstoque.aspx" title="">Item de Estoque</a></li>
                 </ul>
@@ -144,6 +144,9 @@
                 <li>/</li>
                 <li class="current">Painel de controle</li>
             </ul>
+            <asp:ImageButton ID="imgHome" runat="server" 
+                ImageUrl="~/images/icons/icon_home.png" onclick="imgHome_Click" 
+                AlternateText="Home" ToolTip="Home"  />
         </div>
         <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" 
             Font-Size="Medium" PathSeparator=":">

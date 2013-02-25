@@ -5,7 +5,10 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 namespace FG
 {
     public class Utils
@@ -83,6 +86,31 @@ namespace FG
             catch
             {
                 return null;
+            }
+        }
+        public short ComparaShortComZero(string prm_Int)
+        {
+            try
+            {
+                if (prm_Int.Trim() != string.Empty)
+                {
+                    if (prm_Int.Trim() == "0")
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Convert.ToInt16(prm_Int.Trim());
+                    }
+                }
+                else
+                {
+                    return Convert.ToInt16(prm_Int.Trim());
+                }
+            }
+            catch
+            {
+                return 0;
             }
         }
         public DateTime? ComparaDataComNull(string prm_Data)
@@ -206,7 +234,6 @@ namespace FG
                 return prm_Dec.ToString();
             }
         }
-
         public decimal ComparaDecimalComZero(string prm_Dec)
         {
             try
@@ -231,6 +258,12 @@ namespace FG
             {
                 return 0;
             }
+        }
+        public void CarregarEfeitoGrid(string prm_cor_in, string prm_cor_out, GridViewRowEventArgs e)
+        {
+            e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='" + prm_cor_in + "'");
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='" + prm_cor_out + "'");
+            e.Row.Style.Add("cursor", "pointer");
         }
     }
 }

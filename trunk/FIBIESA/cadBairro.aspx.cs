@@ -17,6 +17,18 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+        
         private void CarregarDados(int id_bai)
         {
             BairrosBL baiBL = new BairrosBL();

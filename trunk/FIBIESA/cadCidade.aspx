@@ -11,9 +11,35 @@
                     Cadastro de Cidades</h2>
             </div>
             <div class="contentbox">
-                <table>
+                <table>                    
                     <tr>
                         <td style="width: 140px">
+                            *
+                            Código:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            *
+                            Descrição:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
+                                MaxLength="70" Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            *
                             Estado:
                         </td>
                         <td style="width: 400px">                            
@@ -23,30 +49,7 @@
                             <asp:Label ID="lblDesEstado" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtEstado" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Código:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Descrição:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="70" Width="335px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>

@@ -7,11 +7,33 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using InfrastructureSqlServer.Helpers;
+using FG;
 
 namespace DataAccess
 {
     public class CidadesDA : BaseDA
     {
+        Utils utils = new Utils();
+        #region funcoes
+        private List<Cidades> CarregarObjCidade(SqlDataReader dr)
+        {
+            List<Cidades> cidades = new List<Cidades>();
+
+            while (dr.Read())
+            {
+                Cidades cid = new Cidades();
+                cid.Id = int.Parse(dr["ID"].ToString());
+                cid.Codigo = int.Parse(dr["CODIGO"].ToString());
+                cid.Descricao = dr["DESCRICAO"].ToString();
+                cid.EstadoId = int.Parse(dr["ESTADOID"].ToString());
+
+                cidades.Add(cid);
+            }
+
+            return cidades;
+        }
+        #endregion
+
         public bool InserirDA(Cidades cid)
         {
             SqlParameter[] paramsToSP = new SqlParameter[3];
@@ -55,18 +77,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                CommandType.Text, @"SELECT * FROM CIDADES ");
 
-            List<Cidades> cidades = new List<Cidades>();
+            List<Cidades> cidades = CarregarObjCidade(dr);
 
-            while (dr.Read())
-            {
-                Cidades cid = new Cidades();
-                cid.Id = int.Parse(dr["ID"].ToString());
-                cid.Codigo = int.Parse(dr["CODIGO"].ToString());
-                cid.Descricao = dr["DESCRICAO"].ToString();
-                cid.EstadoId = int.Parse(dr["ESTADOID"].ToString());
-
-                cidades.Add(cid);
-            }
             return cidades;
         }
 
@@ -75,18 +87,33 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                               CommandType.Text, string.Format( @"SELECT * FROM CIDADES WHERE ID = {0}", id_cid));
 
-            List<Cidades> cidades = new List<Cidades>();
+            List<Cidades> cidades = CarregarObjCidade(dr);
+                      
+            return cidades;
 
-            while (dr.Read())
+        }
+
+        public List<Cidades> PesquisaDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
             {
-                Cidades cid = new Cidades();
-                cid.Id = int.Parse(dr["ID"].ToString());
-                cid.Codigo = int.Parse(dr["CODIGO"].ToString());
-                cid.Descricao = dr["DESCRICAO"].ToString();
-                cid.EstadoId = int.Parse(dr["ESTADOID"].ToString());
-                    
-                cidades.Add(cid);
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM CIDADES WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM CIDADES WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
             }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Cidades> cidades = CarregarObjCidade(dr);
 
             return cidades;
 

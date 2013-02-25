@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class NotasEntradaItensItens
+    public class NotasEntradaItensBL
     {
         public bool InserirBL(NotasEntradaItens ntE)
         {

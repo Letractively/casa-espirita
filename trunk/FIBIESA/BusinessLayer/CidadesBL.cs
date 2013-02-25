@@ -48,6 +48,13 @@ namespace BusinessLayer
             return cidadesDA.PesquisaDA(id_cid);
         }
 
+        public List<Cidades> PesquisarBL(string campo, string valor)
+        {
+            CidadesDA cidadesDA = new CidadesDA();
+
+            return cidadesDA.PesquisaDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             CidadesDA cidDA = new CidadesDA();
