@@ -17,7 +17,19 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("tabela");
             /*Cria as colunas do datatable*/
@@ -33,6 +45,11 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
+            if (campo != null && valor.Trim() != "")
+                categorias = catBL.PesquisarBL(campo, valor);
+            else
+                categorias = catBL.PesquisarBL();
+
             foreach (Categorias cat in categorias)
             {
                 DataRow linha = tabela.NewRow();
@@ -44,6 +61,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgCategorias.DataSource = tabela;
             dtgCategorias.DataBind();
         }
@@ -51,12 +69,12 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            Pesquisar(null, null);
         }
                
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);  
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -72,7 +90,7 @@ namespace Admin
                 Categorias categorias = new Categorias();
                 categorias.Id = utils.ComparaIntComZero(dtgCategorias.DataKeys[e.RowIndex][0].ToString());
                 catBL.ExcluirBL(categorias);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -84,6 +102,52 @@ namespace Admin
             int str_cat = 0;
             str_cat = Convert.ToInt32(dtgCategorias.SelectedDataKey[0].ToString());
             Response.Redirect("cadCategoria.aspx?id_cat=" + str_cat.ToString() + "&operacao=edit"); 
+        }
+
+        protected void dtgCategorias_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgCategorias.DataSource = m_DataView;
+                dtgCategorias.DataBind();
+            }
+        }
+
+        protected void dtgCategorias_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgCategorias.DataSource = dtbPesquisa;
+            dtgCategorias.PageIndex = e.NewPageIndex;
+            dtgCategorias.DataBind();
+        }
+
+        protected void dtgCategorias_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

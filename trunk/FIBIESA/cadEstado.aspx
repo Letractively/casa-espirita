@@ -14,6 +14,7 @@
                 <table>
                     <tr>
                         <td style="width: 140px">
+                            *
                            UF:
                         </td>
                         <td style="width: 400px">
@@ -26,6 +27,7 @@
                     </tr>
                     <tr>
                         <td style="width: 140px">
+                            *
                            Descrição:    
                         </td>
                         <td style="width: 400px">

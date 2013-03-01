@@ -17,7 +17,19 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("tabela");
             /*Cria as colunas do datatable*/
@@ -35,6 +47,11 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             //Esta pesquisando todos os livros sempre
             List<Estados> estados = estBL.PesquisarBL();
+
+            if (campo != null && valor.Trim() != "")
+                estados = estBL.PesquisarBL(campo, valor);
+            else
+                estados = estBL.PesquisarBL();
 
             /*Preenche as linhas do datatable com o retorno da consulta*/
             foreach (Estados est in estados)
@@ -58,12 +75,12 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            Pesquisar(null,null);
         }
                           
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -77,7 +94,7 @@ namespace Admin
             Estados estados = new Estados();
             estados.Id = int.Parse(dtgEstados.DataKeys[e.RowIndex][0].ToString());
             estBL.ExcluirBL(estados);
-            Pesquisar();
+            Pesquisar(null,null);
         }
 
         protected void dtgEstados_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,6 +102,52 @@ namespace Admin
             int str_Est = 0;
             str_Est = utils.ComparaIntComZero(dtgEstados.SelectedDataKey[0].ToString());
             Response.Redirect("cadEstado.aspx?id_est=" + str_Est.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgEstados_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgEstados.DataSource = dtbPesquisa;
+            dtgEstados.PageIndex = e.NewPageIndex;
+            dtgEstados.DataBind();
+        }
+
+        protected void dtgEstados_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgEstados_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgEstados.DataSource = m_DataView;
+                dtgEstados.DataBind();
+            }
         }
 
     }
