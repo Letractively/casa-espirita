@@ -62,7 +62,7 @@
                             <asp:Button ID="btnPesquisar" runat="server"  Text="Pesquisar" CssClass="btn" onclick="btnPesquisar_Click" 
                                  />  
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="btnInserir" runat="server"  Text="Inserir" CssClass="btn" 
+                            <asp:Button ID="btnInserir" runat="server"  Text="Salvar" CssClass="btn" 
                                 onclick="btnInserir_Click" />  
                         </td>
                     </tr>

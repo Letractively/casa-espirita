@@ -48,15 +48,18 @@
                                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID"                                    
                                     PageSize="7" AllowSorting="True" 
-                                onrowdeleting="dtgParticipantes_RowDeleting">
+                                onrowdeleting="dtgParticipantes_RowDeleting" GridLines="None" 
+                                onrowdatabound="dtgParticipantes_RowDataBound" ShowHeaderWhenEmpty="True" 
+                                onpageindexchanging="dtgParticipantes_PageIndexChanging" 
+                                onsorting="dtgParticipantes_Sorting">
                                    <Columns>
                                        <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
                                             <ItemStyle CssClass="grd_delete" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                       <asp:BoundField DataField="NOME" HeaderText="Nome" />
+                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                       <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

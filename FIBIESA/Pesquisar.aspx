@@ -23,7 +23,7 @@
                     </asp:DropDownList>
                     &nbsp;
                     <asp:ImageButton ID="btnPesquisa" runat="server"  CssClass="btnPes"
-                        onclick="btnPesquisa_Click" />  
+                        onclick="btnPesquisa_Click" ImageUrl="~/images/icons/icone_lupa.jpg" />  
                 </td>
             </tr>
              <tr>

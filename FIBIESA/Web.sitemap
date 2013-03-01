@@ -33,7 +33,9 @@
           <siteMapNode url="cadEvento.aspx" title="Cadastro de Eventos"  description="" />
         </siteMapNode>
         <siteMapNode url="viewTurma.aspx" title="Turmas"  description="">
-          <siteMapNode url="cadTurma.aspx" title="Cadastro de Turmas"  description="" />
+          <siteMapNode url="cadTurma.aspx" title="Cadastro de Turmas"  description="" >
+            <siteMapNode url="cadTurmaParticipantes.aspx" title="Cadastro de Participantes"  description="" />
+          </siteMapNode>
         </siteMapNode>
         <siteMapNode url="cadChamada.aspx" title="Registro de Frequências"  description=""/>
         <siteMapNode url="cadVenda.aspx" title="Vendas"  description=""/>

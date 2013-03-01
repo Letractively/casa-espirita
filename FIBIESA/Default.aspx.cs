@@ -14,5 +14,15 @@ namespace Admin
             if (Session["usuario"] == null)
                 Response.Redirect("~/login.aspx");
         }
+
+        protected void imgAtaVendas_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/cadVenda.aspx");
+        }
+
+        protected void imgAtaFrequencia_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/cadChamada.aspx");
+        }
     }
 }

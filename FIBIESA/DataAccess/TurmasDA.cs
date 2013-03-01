@@ -81,7 +81,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@codigo", tur.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", tur.Descricao);
-            paramsToSP[2] = new SqlParameter("@cursoId", tur.EventoId);
+            paramsToSP[2] = new SqlParameter("@eventoid", tur.EventoId);
             paramsToSP[3] = new SqlParameter("@dtini", tur.DataInicial);
             paramsToSP[4] = new SqlParameter("@dtfim", tur.DataFinal);
             paramsToSP[5] = new SqlParameter("@nromax", tur.Nromax);
@@ -104,7 +104,7 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@id", tur.Id);
             paramsToSP[1] = new SqlParameter("@codigo", tur.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", tur.Descricao);
-            paramsToSP[3] = new SqlParameter("@cursoId", tur.EventoId);
+            paramsToSP[3] = new SqlParameter("@eventoid", tur.EventoId);
             paramsToSP[4] = new SqlParameter("@dtini", tur.DataInicial);
             paramsToSP[5] = new SqlParameter("@dtfim", tur.DataFinal);
             paramsToSP[6] = new SqlParameter("@nromax", tur.Nromax);
@@ -159,6 +159,31 @@ namespace DataAccess
                                                                                        " FROM TURMAS " +
                                                                                        " WHERE ID = {0} " +
                                                                                        " AND EVENTOID = {1}", id_tur, id_eve));
+
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+
+            return turmas;
+        }
+
+        public List<Turmas> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM TURMAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM TURMAS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
 
             List<Turmas> turmas = CarregarObjTurmas(dr);
 
