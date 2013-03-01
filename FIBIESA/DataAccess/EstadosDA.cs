@@ -7,11 +7,30 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
+using FG;
 
 namespace DataAccess
 {
     public class EstadosDA : BaseDA
     {
+        Utils utils = new Utils();
+        #region funcoes
+        private List<Estados> CarregarObjEstado(SqlDataReader dr)
+        {
+           List<Estados> estados = new List<Estados>();
+
+            while (dr.Read())
+            {
+                Estados est = new Estados();
+                est.Id = int.Parse(dr["ID"].ToString());
+                est.Uf = dr["UF"].ToString();
+                est.Descricao = dr["DESCRICAO"].ToString();
+
+                estados.Add(est);
+            }
+            return estados;
+        }
+        #endregion
         public bool InserirDA(Estados est)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
@@ -53,17 +72,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
                                                                CommandType.Text, @"SELECT * FROM ESTADOS ");
                        
-            List<Estados> estados = new List<Estados>();
-
-            while (dr.Read())
-            {
-                Estados est = new Estados();
-                est.Id = int.Parse(dr["ID"].ToString());
-                est.Uf = dr["UF"].ToString();
-                est.Descricao = dr["DESCRICAO"].ToString();
-                                
-                estados.Add(est);
-            }
+            List<Estados> estados = CarregarObjEstado(dr);
+                       
             return estados;
         }
 
@@ -73,20 +83,36 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM ESTADOS WHERE ID = {0}", id_est));
 
-            List<Estados> estados = new List<Estados>();
+            List<Estados> estados = CarregarObjEstado(dr);
 
-            while (dr.Read())
-            {
-                Estados est = new Estados();
-                est.Id = int.Parse(dr["ID"].ToString());
-                est.Uf = dr["UF"].ToString();
-                est.Descricao = dr["DESCRICAO"].ToString();
-
-                estados.Add(est);
-            }
             return estados;
         }
-                
+
+        public List<Estados> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM ESTADOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM ESTADOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Estados> estados = CarregarObjEstado(dr);
+
+            return estados;
+        }
+
         public override List<Base> Pesquisar(string descricao, string tipo)
         {
             SqlDataReader dr;

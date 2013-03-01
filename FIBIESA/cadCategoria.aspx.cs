@@ -15,7 +15,7 @@ namespace Admin
         Utils utils = new Utils();
         string v_operacao = "";
 
-        #region funcoes
+        #region funcoes        
         private void carregarDados(int id_cat)
         {
             CategoriasBL catBL = new CategoriasBL();

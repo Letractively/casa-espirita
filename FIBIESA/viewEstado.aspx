@@ -11,6 +11,11 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
+                </asp:DropDownList>
+                &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     OnClick="btnBusca_Click" />&nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
@@ -25,7 +30,10 @@
                                         onselectedindexchanged="dtgEstados_SelectedIndexChanged" 
                                         AllowSorting="True" DataKeyNames="ID" AllowPaging="True" BackColor="White" 
                                         BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-                                        onrowdeleting="dtgEstados_RowDeleting" PageSize="7">
+                                        onrowdeleting="dtgEstados_RowDeleting" GridLines="None" 
+                                        onpageindexchanging="dtgEstados_PageIndexChanging" 
+                                        onrowdatabound="dtgEstados_RowDataBound" onsorting="dtgEstados_Sorting" 
+                                        ShowFooter="True" ShowHeaderWhenEmpty="True">
                                         <Columns>
                                             <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                                 <HeaderStyle CssClass="grd_cmd_header" />
@@ -36,8 +44,8 @@
                                                 <ItemStyle CssClass="grd_delete" />
                                             </asp:CommandField>
                                             <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="UF" HeaderText="UF" />
-                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                       <asp:BoundField DataField="UF" HeaderText="UF" SortExpression="UF"/>
+                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
                                         </Columns>
                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
