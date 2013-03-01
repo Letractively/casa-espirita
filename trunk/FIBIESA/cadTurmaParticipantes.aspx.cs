@@ -16,6 +16,18 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+
         private void Pesquisar(int turmaId)
         {          
             DataTable tabela = new DataTable();
@@ -41,6 +53,7 @@ namespace Admin
                 tabela.Rows.Add(linha);               
             }
 
+            dtbPesquisa = tabela;
             dtgParticipantes.DataSource = tabela;
             dtgParticipantes.DataBind();
 
@@ -146,6 +159,52 @@ namespace Admin
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
+
+        protected void dtgParticipantes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgParticipantes_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgParticipantes.DataSource = m_DataView;
+                dtgParticipantes.DataBind();
+            }
+        }
+
+        protected void dtgParticipantes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgParticipantes.DataSource = dtbPesquisa;
+            dtgParticipantes.PageIndex = e.NewPageIndex;
+            dtgParticipantes.DataBind();
         }
 
        

@@ -11,7 +11,13 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
+                </asp:DropDownList>
+                &nbsp;&nbsp;
+                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                    onclick="btnBusca_Click" />
                 &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
@@ -23,7 +29,10 @@
                                 <asp:GridView ID="dtgTurmas" runat="server" AutoGenerateColumns="False" 
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                     CellPadding="3" DataKeyNames="ID" onrowdeleting="dtgTurmas_RowDeleting" 
-                                    onselectedindexchanged="dtgTurma_SelectedIndexChanged">
+                                    onselectedindexchanged="dtgTurma_SelectedIndexChanged" GridLines="None" 
+                                    onpageindexchanging="dtgTurmas_PageIndexChanging" 
+                                    onrowdatabound="dtgTurmas_RowDataBound" onsorting="dtgTurmas_Sorting" 
+                                    ShowHeaderWhenEmpty="True">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">                                            
                                             <ItemStyle CssClass="grd_edit" />

@@ -84,8 +84,9 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM CHAMADAS " +
-                                                                                       " WHERE TURMAPARTICIPANTEID = {0}" +
-                                                                                       "   AND DATA = {1}", id_tPar,data));
+                                                                                       " WHERE TURMAPARTICIPANTEID = {0}",id_tPar));
+                                                                                      
+                                                                                       /*"   AND DATA = {1}", id_tPar,data));*/
 
             List<Chamadas> Chamadas = CarregarObjChamada(dr);
         

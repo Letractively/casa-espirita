@@ -15,7 +15,19 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -34,7 +46,12 @@ namespace Admin
             tabela.Columns.Add(coluna6);
 
             TurmasBL turBL = new TurmasBL();
-            List<Turmas> turmas = turBL.PesquisarBL();
+            List<Turmas> turmas;
+
+            if (campo != null && valor.Trim() != "")
+                turmas = turBL.PesquisarBL(campo, valor);
+            else
+                turmas = turBL.PesquisarBL();
 
             foreach (Turmas tur in turmas)
             {
@@ -64,7 +81,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            Pesquisar(null, null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -73,7 +90,7 @@ namespace Admin
         }
 
         protected void dtgTurmas_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {       
+        {
 
             if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
             {
@@ -81,12 +98,12 @@ namespace Admin
                 Turmas turmas = new Turmas();
                 turmas.Id = utils.ComparaIntComZero(dtgTurmas.DataKeys[e.RowIndex][0].ToString());
                 turBL.ExcluirBL(turmas);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
-                         
+
 
         protected void dtgTurma_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -95,8 +112,56 @@ namespace Admin
             Response.Redirect("cadTurma.aspx?id_tur=" + str_tur.ToString() + "&operacao=edit");
         }
 
-        
+        protected void dtgTurmas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
 
+        protected void dtgTurmas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgTurmas.DataSource = dtbPesquisa;
+            dtgTurmas.PageIndex = e.NewPageIndex;
+            dtgTurmas.DataBind();
+        }
 
+        protected void dtgTurmas_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgTurmas.DataSource = m_DataView;
+                dtgTurmas.DataBind();
+            }
+
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+        }
     }
 }
