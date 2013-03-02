@@ -67,6 +67,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
             /*Vincula o datatable ao gridview para ser possivel visualizar o resultado da pesquisa */
+            dtbPesquisa = tabela;
             dtgEstados.DataSource = tabela;
             /*efetua a atualização da datagrid para exibir os dados da consulta.*/
             dtgEstados.DataBind();
@@ -149,6 +150,10 @@ namespace Admin
                 dtgEstados.DataBind();
             }
         }
+
+        protected void GridProduto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                    }
 
     }
 }

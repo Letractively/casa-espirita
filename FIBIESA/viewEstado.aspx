@@ -10,9 +10,10 @@
                 <h2>Cadastro de Estados</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por"></asp:TextBox>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
-                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="UF">UF</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;&nbsp;
@@ -33,7 +34,7 @@
                                         onrowdeleting="dtgEstados_RowDeleting" GridLines="None" 
                                         onpageindexchanging="dtgEstados_PageIndexChanging" 
                                         onrowdatabound="dtgEstados_RowDataBound" onsorting="dtgEstados_Sorting" 
-                                        ShowFooter="True" ShowHeaderWhenEmpty="True">
+                                        ShowHeaderWhenEmpty="True">
                                         <Columns>
                                             <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                                 <HeaderStyle CssClass="grd_cmd_header" />
@@ -60,28 +61,8 @@
                                 </asp:Panel>
                             </td>
                        </tr>                      
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                        <asp:ImageButton ID="ImageButton1" runat="server" 
-                            ImageUrl="~/images/icons/icon_edit.png" />
-                    </div>
-                </div>
-                <!-- grid modelo finaliza aqui -->
-                <br />
-                <br />
-                <asp:GridView ID="GridProduto" runat="server">
-                </asp:GridView>
-                <br />
-                <br />
-                <br />
+                    </table>                    
+                </div>               
             </div>
         </div>
         <div class="status">

@@ -94,8 +94,8 @@ namespace DataAccess
 
             switch (campo.ToUpper())
             {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM ESTADOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                case "UF":
+                    consulta = string.Format("SELECT * FROM ESTADOS WHERE UF = '{0}'", valor);
                     break;
                 case "DESCRICAO":
                     consulta = string.Format("SELECT * FROM ESTADOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
