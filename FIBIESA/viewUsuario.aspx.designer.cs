@@ -22,6 +22,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtBusca;
         
         /// <summary>
+        /// ddlCampo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCampo;
+        
+        /// <summary>
         /// btnBusca control.
         /// </summary>
         /// <remarks>
@@ -47,15 +56,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dtgUsuarios;
-        
-        /// <summary>
-        /// GridProduto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridProduto;
         
         /// <summary>
         /// Master property.

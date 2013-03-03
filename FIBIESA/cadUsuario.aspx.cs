@@ -25,13 +25,26 @@ namespace Admin
             {
                 hfId.Value = usu.Id.ToString();
                 hfIdPessoa.Value = usu.PessoaId.ToString();
+                hfIdCategoria.Value = usu.CategoriaId.ToString();
                 txtNome.Text = usu.Nome;
                 txtEmail.Text = usu.Email;
                 txtLogin.Text = usu.Login;
                 txtSenha.Text = usu.Senha;
                 txtDtInicio.Text = usu.DtInicio.ToString();
                 txtDtFim.Text = usu.DtFim.ToString();
-                ddlStatus.SelectedValue = usu.Status.ToString();                
+                ddlStatus.SelectedValue = usu.Status.ToString();
+
+                if (usu.Categoria != null )
+                {
+                    txtCategoria.Text = usu.Categoria.Codigo.ToString();
+                    lblDesCategoria.Text = usu.Categoria.Descricao;
+                }
+
+                if (usu.Pessoa != null)
+                {
+                    txtPessoa.Text = usu.Pessoa.Codigo.ToString();
+                    lblDesPessoa.Text = usu.Pessoa.Nome;
+                }
             }
 
         }
@@ -116,7 +129,7 @@ namespace Admin
             Usuarios usuarios = new Usuarios();
 
             usuarios.Id = utils.ComparaIntComZero(hfId.Value);
-            usuarios.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
+            usuarios.PessoaId = utils.ComparaIntComNull(hfIdPessoa.Value);
             usuarios.Nome = txtNome.Text;
             usuarios.Email = txtEmail.Text;
             usuarios.Login = txtLogin.Text;

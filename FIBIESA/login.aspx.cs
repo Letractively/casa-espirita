@@ -24,7 +24,7 @@ namespace Admin
         protected void btnAcessar_Click(object sender, EventArgs e)
         {
             UsuariosBL usuBL = new UsuariosBL();
-            List<Usuarios> usuarios  = usuBL.PesquisarBL(txtLogin.Text, txtSenha.Text);
+            List<Usuarios> usuarios  = usuBL.PesquisarBL(txtLogin.Text, txtSenha.Text, DateTime.Now);
            
 
             if (usuarios.Count == 0)

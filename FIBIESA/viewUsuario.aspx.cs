@@ -16,7 +16,19 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadUsu"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadUsu"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadUsu"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -27,9 +39,9 @@ namespace Admin
             DataColumn coluna5 = new DataColumn("STATUS", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("DTINICIO", Type.GetType("System.DateTime"));
             DataColumn coluna7 = new DataColumn("DTFIM", Type.GetType("System.DateTime"));
-            DataColumn coluna8 = new DataColumn("LOGIN", Type.GetType("System.String"));
-            DataColumn coluna9 = new DataColumn("SENHA", Type.GetType("System.String"));
-            
+            DataColumn coluna8 = new DataColumn("CODCAT", Type.GetType("System.Int32"));
+            DataColumn coluna9 = new DataColumn("DESCAT", Type.GetType("System.String"));
+                       
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
@@ -39,9 +51,14 @@ namespace Admin
             tabela.Columns.Add(coluna7);
             tabela.Columns.Add(coluna8);
             tabela.Columns.Add(coluna9);
-
+           
             UsuariosBL usuBL = new UsuariosBL();           
-            List<Usuarios> usuarios = usuBL.PesquisarBL();
+            List<Usuarios> usuarios;
+
+            if (campo != null && valor.Trim() != "")
+                usuarios = usuBL.PesquisarBL(campo, valor);
+            else
+                usuarios = usuBL.PesquisarBL();
 
             foreach (Usuarios usu in usuarios)
             {
@@ -54,12 +71,13 @@ namespace Admin
                 linha["STATUS"] = usu.Status;
                 linha["DTINICIO"] = usu.DtInicio;
                 linha["DTFIM"] = usu.DtFim;
-                linha["LOGIN"] = usu.Login;
-                linha["SENHA"] = usu.Senha;
-
+                linha["CODCAT"] = usu.Categoria.Codigo;
+                linha["DESCAT"] = usu.Categoria.Descricao;
+              
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgUsuarios.DataSource = tabela;
             dtgUsuarios.DataBind();
         }
@@ -67,46 +85,13 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            if(!IsPostBack)
+                Pesquisar(null, null);
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            //ProdutoBL BL = new ProdutoBL();
-            //List<Produto> PRODUTO = BL.ConsultarProduto(txtBusca.Text);
-
-            //DataTable tabela = new DataTable("PRODUTO");            
-
-            //DataColumn coluna1 = new DataColumn("Código", Type.GetType("System.String"));
-            //tabela.Columns.Add(coluna1);
-
-            //DataColumn coluna2 = new DataColumn("Nome", Type.GetType("System.String"));
-            //tabela.Columns.Add(coluna2);
-
-            //DataColumn coluna3 = new DataColumn("Tipo", Type.GetType("System.String"));
-            //tabela.Columns.Add(coluna3);
-
-            //DataColumn coluna4 = new DataColumn("Preço", Type.GetType("System.String"));
-            //tabela.Columns.Add(coluna4);
-
-            //DataColumn coluna5 = new DataColumn("Preço de Custo", Type.GetType("System.String"));
-            //tabela.Columns.Add(coluna5);
-
-            //foreach (Produto liv in PRODUTO)
-            //{
-            //    DataRow linha = tabela.NewRow();
-            //    linha["Código"] = liv.Codigo;
-            //    linha["Nome"] = liv.Nome;
-            //    linha["Tipo"] = liv.Tipo;
-            //    linha["Preço"] = liv.Preco;
-            //    linha["Preço de Custo"] = liv.PrecoCusto;
-
-
-            //    tabela.Rows.Add(linha);
-            //}
-
-            //GridProduto.DataSource = tabela;
-            //GridProduto.DataBind();
+           Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -123,7 +108,7 @@ namespace Admin
 
                 usuarios.Id = utils.ComparaIntComZero(dtgUsuarios.DataKeys[e.RowIndex][0].ToString());
                 usuBL.ExcluirBL(usuarios);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -134,6 +119,52 @@ namespace Admin
             int str_usu = 0;
             str_usu = utils.ComparaIntComZero(dtgUsuarios.SelectedDataKey[0].ToString());
             Response.Redirect("cadUsuario.aspx?id_usu=" + str_usu.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgUsuarios.DataSource = dtbPesquisa;
+            dtgUsuarios.PageIndex = e.NewPageIndex;
+            dtgUsuarios.DataBind();
+        }
+
+        protected void dtgUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgUsuarios_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgUsuarios.DataSource = m_DataView;
+                dtgUsuarios.DataBind();
+            }
         }
 
     

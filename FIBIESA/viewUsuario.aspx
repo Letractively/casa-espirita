@@ -11,6 +11,10 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">                 
+                    <asp:ListItem Value="NOME">Nome</asp:ListItem>
+                </asp:DropDownList>
+                &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     OnClick="btnBusca_Click" />
                 &nbsp;&nbsp;&nbsp
@@ -24,12 +28,15 @@
                                 <asp:GridView ID="dtgUsuarios" runat="server" AutoGenerateColumns="False" 
                                     AllowPaging="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" 
                                     BorderWidth="1px" CellPadding="3" onrowdeleting="dtgUsuarios_RowDeleting" 
-                                    onselectedindexchanged="dtgUsuarios_SelectedIndexChanged" PageSize="7" 
-                                    DataKeyNames="ID">
+                                    onselectedindexchanged="dtgUsuarios_SelectedIndexChanged" 
+                                    DataKeyNames="ID" AllowSorting="True" GridLines="None" 
+                                    onpageindexchanging="dtgUsuarios_PageIndexChanging" 
+                                    ShowHeaderWhenEmpty="True" onrowdatabound="dtgUsuarios_RowDataBound" 
+                                    onsorting="dtgUsuarios_Sorting">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">
                                             <HeaderStyle  CssClass="grd_cmd_header"/>
-                                            <ItemStyle CssClass="grd_select" />
+                                            <ItemStyle CssClass="grd_edit" />
                                         </asp:CommandField>
                                         <asp:CommandField ShowDeleteButton="True">
                                             <HeaderStyle  CssClass="grd_cmd_header"/>
@@ -37,14 +44,13 @@
                                         </asp:CommandField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                         <asp:BoundField DataField="PESSOAID" HeaderText="PESSOAID" Visible="False" />
-                                        <asp:BoundField DataField="Nome" HeaderText="Nome" />
-                                        <asp:BoundField DataField="EMAIL" HeaderText="E-mail" />
-                                        <asp:BoundField DataField="Nome" HeaderText="Nome" />
-                                        <asp:BoundField DataField="STATUS" HeaderText="Status" />
-                                        <asp:BoundField DataField="DTINICIO" HeaderText="Dt. Inicio" />
-                                        <asp:BoundField DataField="DTFIM" HeaderText="Dt. Fim" />
-                                        <asp:BoundField DataField="LOGIN" HeaderText="Login" />
-                                        <asp:BoundField DataField="SENHA" HeaderText="Senha" />
+                                        <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
+                                        <asp:BoundField DataField="CODCAT" HeaderText="Cód. Cat." />
+                                        <asp:BoundField DataField="DESCAT" HeaderText="Desc. Categoria" />
+                                        <asp:BoundField DataField="EMAIL" HeaderText="E-mail" SortExpression="EMAIL" />                                     
+                                        <asp:BoundField DataField="STATUS" HeaderText="Status" SortExpression="STATUS"/>
+                                        <asp:BoundField DataField="DTINICIO" HeaderText="Dt. Inicio" SortExpression="DTINICIO" />
+                                        <asp:BoundField DataField="DTFIM" HeaderText="Dt. Fim" SortExpression="DTFIM" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -58,26 +64,8 @@
                                 </asp:GridView>
                             </td>
                        </tr>  
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- grid modelo finaliza aqui -->
-                <br />
-                <br />
-                <asp:GridView ID="GridProduto" runat="server">
-                </asp:GridView>
-                <br />
-                <br />
-                <br />
+                    </table>          
+                </div>              
             </div>
         </div>
         <div class="status">

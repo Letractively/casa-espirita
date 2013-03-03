@@ -103,7 +103,14 @@ namespace DataObjects
         {
             get { return _categoria; }
             set { _categoria = value; }
-        }     
+        }
+
+        private Pessoas _pessoa;
+        public Pessoas Pessoa
+        {
+            get { return _pessoa; }
+            set { _pessoa = value; }
+        }
 
     }
 }
