@@ -147,6 +147,7 @@
             <asp:ImageButton ID="imgHome" runat="server" 
                 ImageUrl="~/images/icons/icon_home.png" onclick="imgHome_Click" 
                 AlternateText="Home" ToolTip="Home"  />
+
         </div>
         <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" 
             Font-Size="Medium" PathSeparator=":">
@@ -154,9 +155,9 @@
             <NodeStyle Font-Bold="True" ForeColor="#990000" />
             <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
             <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
-        </asp:SiteMapPath>
-        
+        </asp:SiteMapPath>        
         <div>
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>

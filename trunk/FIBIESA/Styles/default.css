@@ -75,7 +75,10 @@
 }
 
 .validacao{ color:#CC0000}
+
+.titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}   	
 	
    	
-.titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}   	
+
+
    

@@ -47,10 +47,23 @@ namespace DataAccess
                 {                    
                     cat.Id = ltcat.Id;
                     cat.Codigo = ltcat.Codigo;
-                    cat.Descricao = ltcat.Descricao;                    
+                    cat.Descricao = ltcat.Descricao;
+                    usu.Categoria = cat;
                 }
 
-                usu.Categoria = cat;
+                PessoasDA pesDA = new PessoasDA();
+
+                List<Pessoas> pessoas = pesDA.PesquisarDA(utils.ComparaIntComZero(usu.PessoaId.ToString()));
+                Pessoas pes = new Pessoas();
+
+                foreach (Pessoas ltpes in pessoas)
+                {
+                    pes.Id = ltpes.Id;
+                    pes.Codigo = ltpes.Codigo;
+                    pes.Nome = ltpes.Nome;
+                    usu.Pessoa = pes;
+                }
+                          
 
                 usuarios.Add(usu);
             }
@@ -61,7 +74,7 @@ namespace DataAccess
 
         public bool InserirDA(Usuarios usu)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[11];
+            SqlParameter[] paramsToSP = new SqlParameter[12];
 
             paramsToSP[0] = new SqlParameter("@login", usu.Login);
             paramsToSP[1] = new SqlParameter("@senha", usu.Senha);
@@ -74,7 +87,7 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@pessoaid", usu.PessoaId);
             paramsToSP[9] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[10] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
-            //paramsToSP[11] = new SqlParameter("@categoriaid", usu.CategoriaId);
+            paramsToSP[11] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_usuarios", paramsToSP);
 
@@ -83,7 +96,7 @@ namespace DataAccess
 
         public bool EditarDA(Usuarios usu)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[12];
+            SqlParameter[] paramsToSP = new SqlParameter[13];
 
             paramsToSP[0] = new SqlParameter("@id", usu.Id);
             paramsToSP[1] = new SqlParameter("@login", usu.Login);
@@ -97,7 +110,7 @@ namespace DataAccess
             paramsToSP[9] = new SqlParameter("@pessoaid", usu.PessoaId);
             paramsToSP[10] = new SqlParameter("@nrtentlogin", usu.NrTentLogin);
             paramsToSP[11] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
-            //paramsToSP[12] = new SqlParameter("@categoriaid", usu.CategoriaId);
+            paramsToSP[12] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_usuarios", paramsToSP);
 
@@ -125,6 +138,28 @@ namespace DataAccess
             return usuarios;
         }
 
+        public List<Usuarios> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "NOME":
+                    consulta = string.Format("SELECT * FROM USUARIOS WHERE NOME LIKE '%{0}%'", valor);
+                    break;             
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                              CommandType.Text, consulta);
+
+            List<Usuarios> usuarios = CarregarObjUsuario(dr);
+
+            return usuarios;
+        }
+
         public List<Usuarios> PesquisarDA(int id_usu)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -135,7 +170,7 @@ namespace DataAccess
             return usuarios;
         }
 
-        public List<Usuarios> PesquisarDA(string login, string senha)
+        public List<Usuarios> PesquisarDA(string login, string senha, DateTime data)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +

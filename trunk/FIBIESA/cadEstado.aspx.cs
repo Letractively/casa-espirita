@@ -62,10 +62,21 @@ namespace Admin
             estados.Descricao = txtDescricao.Text;
 
             if (estados.Id > 0)
-                estBL.EditarBL(estados);
-            else
-                estBL.InserirBL(estados);
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    estBL.EditarBL(estados);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
+            }
+            else
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    estBL.InserirBL(estados);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
+                        
             Response.Redirect("viewEstado.aspx");
         }
 

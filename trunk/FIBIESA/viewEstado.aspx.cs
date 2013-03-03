@@ -21,12 +21,12 @@ namespace Admin
         {
             get
             {
-                if (Session["_dtbPesquisa_cadForm"] != null)
-                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                if (Session["_dtbPesquisa_cadEst"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadEst"];
                 else
                     return null;
             }
-            set { Session["_dtbPesquisa_cadForm"] = value; }
+            set { Session["_dtbPesquisa_cadEst"] = value; }
         }
 
         private void Pesquisar(string campo, string valor)
@@ -46,7 +46,7 @@ namespace Admin
             /*Efetua a pesquisa dos estados recebendo como retorno uma lista de estados*/
             EstadosBL estBL = new EstadosBL();
             //Esta pesquisando todos os livros sempre
-            List<Estados> estados = estBL.PesquisarBL();
+            List<Estados> estados;
 
             if (campo != null && valor.Trim() != "")
                 estados = estBL.PesquisarBL(campo, valor);
@@ -66,17 +66,17 @@ namespace Admin
                 /*Adiciona a linha vazia no datatable*/
                 tabela.Rows.Add(linha);
             }
-            /*Vincula o datatable ao gridview para ser possivel visualizar o resultado da pesquisa */
+          
             dtbPesquisa = tabela;
-            dtgEstados.DataSource = tabela;
-            /*efetua a atualização da datagrid para exibir os dados da consulta.*/
+            dtgEstados.DataSource = tabela;          
             dtgEstados.DataBind();
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar(null,null);
+            if(!IsPostBack)
+                Pesquisar(null,null);
         }
                           
         protected void btnBusca_Click(object sender, EventArgs e)
@@ -91,11 +91,16 @@ namespace Admin
 
         protected void dtgEstados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            EstadosBL estBL = new EstadosBL();
-            Estados estados = new Estados();
-            estados.Id = int.Parse(dtgEstados.DataKeys[e.RowIndex][0].ToString());
-            estBL.ExcluirBL(estados);
-            Pesquisar(null,null);
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                EstadosBL estBL = new EstadosBL();
+                Estados estados = new Estados();
+                estados.Id = utils.ComparaIntComZero(dtgEstados.DataKeys[e.RowIndex][0].ToString());
+                estBL.ExcluirBL(estados);
+                Pesquisar(null, null);
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
 
         protected void dtgEstados_SelectedIndexChanged(object sender, EventArgs e)
