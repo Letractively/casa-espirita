@@ -17,8 +17,8 @@ namespace FIBIESA
         private void PesquisarConteudo()
         {
             
-           // DataTable dt = new DataTable();
-           /* DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            /*DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
@@ -28,7 +28,7 @@ namespace FIBIESA
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
             dt.Columns.Add(coluna4);
-            dt.Columns.Add(coluna5);*/
+            dt.Columns.Add(coluna5);
 
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
@@ -36,7 +36,7 @@ namespace FIBIESA
             grdPesquisa.DataSource = dt;
             grdPesquisa.DataBind();
 
-            /*List<ItensEstoque> itensEstoque = itEstBL.Pesquisar();
+            List<ItensEstoque> itensEstoque = itEstBL.Pesquisar();
 
             foreach (ItensEstoque itEst in itensEstoque)
             {

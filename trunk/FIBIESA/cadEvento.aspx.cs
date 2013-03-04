@@ -26,8 +26,8 @@ namespace Admin
                 hfId.Value = eve.Id.ToString();
                 txtCodigo.Text = eve.Codigo.ToString();
                 txtDescricao.Text = eve.Descricao;
-                txtDtInicio.Text = eve.DtInicio.ToString();
-                txtDtFim.Text = eve.DtFim.ToString();
+                txtDtInicio.Text = eve.DtInicio.ToString("dd/MM/yyyy");
+                txtDtFim.Text = eve.DtFim.ToString("dd/MM/yyyy");
             }
             
         }

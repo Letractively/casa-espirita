@@ -18,6 +18,18 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
+        private void CarregarDdlEventos()
+        {
+            EventosBL eveBL = new EventosBL();
+            List<Eventos> eventos = eveBL.PesquisarBL();
+
+            ddlEvento.Items.Add(new ListItem());
+            foreach (Eventos ltEve in eventos)            
+                ddlEvento.Items.Add(new ListItem(ltEve.Codigo+" - "+ ltEve.Descricao, ltEve.Id.ToString()));
+
+            ddlEvento.SelectedIndex = 0;
+        }
+
         private void CarregarDados(int id_tur)
         {
             TurmasBL turBL = new TurmasBL();
@@ -35,7 +47,7 @@ namespace Admin
                 txtDtInicio.Text = ltTur.DataInicial.ToString();
                 txtHoraFim.Text = ltTur.HoraFim.ToString();
                 txtHoraInicio.Text = ltTur.HoraIni.ToString();
-                hfIdEvento.Value = ltTur.EventoId.ToString();
+                ddlEvento.SelectedValue = ltTur.EventoId.ToString();               
                 hfIdPessoa.Value = ltTur.PessoaId.ToString();
 
             }
@@ -65,6 +77,8 @@ namespace Admin
                             id_tur = Convert.ToInt32(Request.QueryString["id_tur"].ToString());
                 }
 
+                CarregarDdlEventos();
+
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_tur);
 
@@ -82,7 +96,7 @@ namespace Admin
             turmas.Descricao = txtDescricao.Text;
             turmas.DiaSemana = txtDiaSemana.Text;
             turmas.Nromax = utils.ComparaIntComZero(txtNroMax.Text);
-            turmas.EventoId = utils.ComparaIntComZero(hfIdEvento.Value);
+            turmas.EventoId = utils.ComparaIntComZero(ddlEvento.SelectedValue);
             turmas.HoraFim = utils.ComparaDataComNull(txtHoraFim.Text);
             turmas.HoraIni = utils.ComparaDataComNull(txtHoraInicio.Text);
             turmas.DataFinal = utils.ComparaDataComNull(txtDtFim.Text);
@@ -112,44 +126,6 @@ namespace Admin
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewTurma.aspx");
-        }
-
-        protected void btnPesEvento_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            EventosBL eveBL = new EventosBL();
-            List<Eventos> eventos = eveBL.PesquisarBL();
-
-            foreach (Eventos eve in eventos)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = eve.Id;
-                linha["CODIGO"] = eve.Codigo;
-                linha["DESCRICAO"] = eve.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-           
-            Eventos ev = new Eventos();
-
-            Session["objBLPesquisa"] = eveBL;
-            Session["objPesquisa"] = ev;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtEvento.ClientID + "&id=" + hfIdEvento.ClientID + "&lbl=" + lblDesEvento.ClientID + "','',600,500);", true);
         }
 
         protected void btnPesInstrutor_Click(object sender, EventArgs e)

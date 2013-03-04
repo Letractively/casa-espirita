@@ -29,8 +29,8 @@ namespace DataAccess
                 usu.Senha = dr["SENHA"].ToString();
                 usu.Nome = dr["NOME"].ToString();
                 usu.Status = dr["STATUS"].ToString();
-                usu.DtInicio = utils.ComparaDataComNull(dr["DTINICIO"].ToString());
-                usu.DtFim = utils.ComparaDataComNull(dr["DTFIM"].ToString());
+                usu.DtInicio = Convert.ToDateTime(dr["DTINICIO"].ToString());
+                usu.DtFim = Convert.ToDateTime(dr["DTFIM"].ToString());
                 usu.Tipo = dr["TIPO"].ToString();
                 usu.Email = dr["EMAIL"].ToString();
                 usu.PessoaId = utils.ComparaIntComNull(dr["PESSOAID"].ToString());

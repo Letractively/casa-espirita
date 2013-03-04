@@ -42,13 +42,11 @@
                             *
                             Estado:
                         </td>
-                        <td style="width: 400px">                            
-                            <asp:TextBox ID="txtEstado" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesEstado" runat="server" Text="..."  CssClass="btn" 
-                                onclick="btnPesEstado_Click" />
-                            <asp:Label ID="lblDesEstado" runat="server"></asp:Label>
+                        <td style="width: 400px">   
+                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>                       
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtEstado" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlEstado" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -68,7 +66,6 @@
                 </table>               
             </div>
              <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdEstado" runat="server" />
         </div>
         <div class="status">
         </div>

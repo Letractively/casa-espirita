@@ -19,7 +19,7 @@
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -29,25 +29,39 @@
                                 MaxLength="70" Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">* Dt. Início:</td>
                         <td>
-                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
-                            </asp:CalendarExtender>
+                            </asp:CalendarExtender>                           
                         </td>
-                        <td style="width: 140px">* Dt. Fim:</td>
+                        <td style="width: 100px">* Dt. Fim:</td>
                         <td>
-                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
                             </asp:CalendarExtender>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtDtInicio" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                        <td colspan="2">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="txtDtFim" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -60,7 +74,7 @@
                                 onclick="btnVoltar_Click" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" />                            
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />                            
                         </td>
                     </tr>
                 </table>

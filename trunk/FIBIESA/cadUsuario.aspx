@@ -30,13 +30,10 @@
                             Categoria:
                         </td>
                         <td style="width: 300px" >
-                            <asp:TextBox ID="txtCategoria" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>  
-                            <asp:Button ID="btnPesCategoria" runat="server" Text="..." CssClass="btn" 
-                                onclick="btnPesCategoria_Click" />     
-                            &nbsp;
-                            <asp:Label ID="lblDesCategoria" runat="server"></asp:Label>                                       
+                            <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="dropdownlist" >
+                            </asp:DropDownList>                                    
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                                ControlToValidate="txtCategoria" CssClass="validacao" 
+                                ControlToValidate="ddlCategoria" CssClass="validacao" 
                                 ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -53,7 +50,7 @@
                             Status:
                         </td>
                         <td style="width: 250px">
-                            <asp:DropDownList ID="ddlStatus" runat="server" Width="95px">
+                            <asp:DropDownList ID="ddlStatus" runat="server" Width="95px" CssClass="dropdownlist">
                                 <asp:ListItem Value="A">Ativo</asp:ListItem>
                                 <asp:ListItem Value="I">Inativo</asp:ListItem>
                             </asp:DropDownList>
@@ -77,7 +74,7 @@
                             <asp:TextBox ID="txtLogin" runat="server" CssClass="inputbox" MaxLength="20"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtLogin" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -87,10 +84,10 @@
                         </td>
                         <td style="width: 300px" colspan="3">
                             <asp:TextBox ID="txtSenha" runat="server" CssClass="inputbox" MaxLength="100" 
-                                Width="300px" ></asp:TextBox>                              
+                                Width="300px" TextMode="Password" ></asp:TextBox>                              
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtSenha" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>  
                      <tr>
@@ -103,8 +100,9 @@
                                 MaxLength="100" Width="300px" TextMode="Password"></asp:TextBox>                               
                             <asp:CompareValidator ID="CompareValidator1" runat="server" 
                                 ControlToCompare="txtSenha" ControlToValidate="txtConfirmarSenha" 
+                                
                                 ErrorMessage="Os valores dos campo Senha e Confirmar Senha devem ser iguais" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:CompareValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:CompareValidator>
                         </td>
                     </tr>                     
                     <tr>                                           
@@ -113,23 +111,23 @@
                             Data Início:
                         </td>
                         <td style="width: 300px" >
-                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="115px"></asp:TextBox>
+                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDtInicio_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtInicio">
                             </asp:CalendarExtender>                         
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtDtInicio" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>                   
                         <td style="width: 80px">
                             *
                             Data Fim:
                         </td>
                         <td style="width: 250px">
-                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="115px"></asp:TextBox>
+                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtDtFim" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                             <asp:CalendarExtender ID="txtDtFim_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtFim">
                             </asp:CalendarExtender>                            
@@ -152,7 +150,6 @@
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
-            <asp:HiddenField ID="hfIdCategoria" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>

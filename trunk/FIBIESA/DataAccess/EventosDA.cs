@@ -7,11 +7,14 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
+using FG;
 
 namespace DataAccess
 {
     public class EventosDA : BaseDA
     {
+        Utils utils = new Utils();
+
         #region funcoes
         private List<Eventos> CarregarObjEventos(SqlDataReader dr)
         {
@@ -92,6 +95,31 @@ namespace DataAccess
 
             return eventos;
                       
+        }
+
+        public List<Eventos> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM EVENTOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM EVENTOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Eventos> eventos = CarregarObjEventos(dr);
+
+            return eventos;
         }
 
         public override List<Base> Pesquisar(string descricao, string tipo)

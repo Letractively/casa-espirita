@@ -15,6 +15,54 @@ namespace DataAccess
     {
         Utils utils = new Utils();
 
+        #region funcoes
+        private List<Pessoas> CarregarObjPessoa(SqlDataReader dr)
+        {
+            List<Pessoas> pessoas = new List<Pessoas>();
+
+            while (dr.Read())
+            {
+                Pessoas pes = new Pessoas();
+                pes.Id = utils.ComparaIntComZero(dr["ID"].ToString());
+                pes.Codigo = utils.ComparaIntComZero(dr["CODIGO"].ToString());
+                pes.Nome = dr["NOME"].ToString();
+                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
+                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
+                pes.Rg = dr["RG"].ToString();
+                pes.NomeMae = dr["NOMEMAE"].ToString();
+                pes.NomePai = dr["NOMEPAI"].ToString();
+                pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
+                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());
+                pes.Endereco = dr["ENDERECO"].ToString();
+                pes.Numero = dr["NUMERO"].ToString();
+                pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
+                pes.Cep = dr["CEP"].ToString();
+                pes.CidadeId = Convert.ToInt32(dr["CIDADEID"].ToString());
+                pes.Complemento = dr["COMPLEMENTO"].ToString();
+                pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
+                pes.NumeroProf = dr["NUMEROPROF"].ToString();
+                pes.CepProf = dr["CEPPROF"].ToString();
+                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROF"].ToString());
+                pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
+                pes.Empresa = dr["EMPRESA"].ToString();
+                pes.Email = dr["EMAIL"].ToString();
+                pes.Tipo = dr["TIPO"].ToString();
+                pes.Obs = dr["OBS"].ToString();
+                pes.CategoriaId = Convert.ToInt32(dr["CATEGORIAID"].ToString());
+                pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
+                pes.RefNome = dr["REFNOME"].ToString();
+                pes.RefTelefone = utils.ComparaShortComNull(dr["REFTELEFONE"].ToString());
+                pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
+                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
+                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
+
+                pessoas.Add(pes);
+            }
+            return pessoas; 
+        }
+        #endregion
+
         public int InserirDA(Pessoas pes)
         {
             SqlParameter[] paramsToSP = new SqlParameter[32];
@@ -121,46 +169,8 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, @"SELECT * FROM PESSOAS ");
-            List<Pessoas> pessoas = new List<Pessoas>();
-
-            while (dr.Read())
-            {
-                Pessoas pes = new Pessoas();
-                pes.Id = int.Parse(dr["ID"].ToString());
-                pes.Nome = dr["NOME"].ToString();
-                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
-                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
-                pes.Rg = dr["RG"].ToString();
-                pes.NomeMae = dr["NOMEMAE"].ToString();
-                pes.NomePai = dr["NOMEPAI"].ToString();
-                pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());                
-                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();                                             
-                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());                
-                pes.Endereco = dr["ENDERECO"].ToString();
-                pes.Numero = dr["NUMERO"].ToString();
-                pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
-                pes.Cep = dr["CEP"].ToString();
-                pes.CidadeId = Convert.ToInt32(dr["CIDADEID"].ToString());
-                pes.Complemento = dr["COMPLEMENTO"].ToString();
-                pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
-                pes.NumeroProf = dr["NUMEROPROF"].ToString();
-                pes.CepProf = dr["CEPPROF"].ToString();   
-                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROF"].ToString());                
-                pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
-                pes.Empresa = dr["EMPRESA"].ToString();
-                pes.Email = dr["EMAIL"].ToString();
-                pes.Tipo = dr["TIPO"].ToString();
-                pes.Obs = dr["OBS"].ToString();                
-                pes.CategoriaId = Convert.ToInt32(dr["CATEGORIAID"].ToString());                
-                pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
-                pes.RefNome = dr["REFNOME"].ToString();
-                pes.RefTelefone = utils.ComparaShortComNull(dr["REFTELEFONE"].ToString());
-                pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
-                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
-                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
-
-                pessoas.Add(pes);
-            }
+            List<Pessoas> pessoas = CarregarObjPessoa(dr);
+                       
             return pessoas; 
         }
 
@@ -168,46 +178,8 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE ID = {0}",id_pes));
-            List<Pessoas> pessoas = new List<Pessoas>();
-
-            while (dr.Read())
-            {
-                Pessoas pes = new Pessoas();
-                pes.Id = int.Parse(dr["ID"].ToString());
-                pes.Nome = dr["NOME"].ToString();
-                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
-                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
-                pes.Rg = dr["RG"].ToString();
-                pes.NomeMae = dr["NOMEMAE"].ToString();
-                pes.NomePai = dr["NOMEPAI"].ToString();
-                pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());
-                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
-                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());
-                pes.Endereco = dr["ENDERECO"].ToString();
-                pes.Numero = dr["NUMERO"].ToString();
-                pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
-                pes.Cep = dr["CEP"].ToString();
-                pes.CidadeId = Convert.ToInt32(dr["CIDADEID"].ToString());
-                pes.Complemento = dr["COMPLEMENTO"].ToString();
-                pes.EnderecoProf = dr["ENDERECOPROF"].ToString();
-                pes.NumeroProf = dr["NUMEROPROF"].ToString();
-                pes.CepProf = dr["CEPPROF"].ToString();
-                pes.CidadeProfId = utils.ComparaIntComNull(dr["CIDADEPROF"].ToString());
-                pes.ComplementoProf = dr["COMPLEMENTOPROF"].ToString();
-                pes.Empresa = dr["EMPRESA"].ToString();
-                pes.Email = dr["EMAIL"].ToString();
-                pes.Tipo = dr["TIPO"].ToString();
-                pes.Obs = dr["OBS"].ToString();
-                pes.CategoriaId =Convert.ToInt32(dr["CATEGORIAID"].ToString());
-                pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
-                pes.RefNome = dr["REFNOME"].ToString();
-                pes.RefTelefone = utils.ComparaIntComNull(dr["REFTELEFONE"].ToString());
-                pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
-                pes.DtCadastro = utils.ComparaDataComNull(dr["DTCADASTRO"].ToString());
-                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
-
-                pessoas.Add(pes);
-            }
+            List<Pessoas> pessoas = CarregarObjPessoa(dr);
+                       
             return pessoas;
         }
 

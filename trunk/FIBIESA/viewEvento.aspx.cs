@@ -16,7 +16,19 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadEve"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadEve"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadEve"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("cursos");
 
@@ -30,7 +42,12 @@ namespace Admin
 
             EventosBL eveBL = new EventosBL();
 
-            List<Eventos> eventos = eveBL.PesquisarBL();
+            List<Eventos> eventos;
+
+            if (campo != null && valor.Trim() != "")
+                eventos = eveBL.PesquisarBL(campo, valor);
+            else
+                eventos = eveBL.PesquisarBL();
 
             foreach (Eventos cur in eventos)
             {
@@ -45,6 +62,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgEventos.DataSource = tabela;
             dtgEventos.DataBind();
         }
@@ -53,7 +71,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
 
@@ -65,7 +83,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
         }
 
         protected void dtgCursos_SelectedIndexChanged(object sender, EventArgs e)
@@ -81,7 +99,53 @@ namespace Admin
             Eventos eventos = new Eventos();
             eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
             eveBL.ExcluirBL(eventos);
-            Pesquisar();
+            Pesquisar(null,null);
+        }
+
+        protected void dtgEventos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgEventos.DataSource = dtbPesquisa;
+            dtgEventos.PageIndex = e.NewPageIndex;
+            dtgEventos.DataBind();
+        }
+
+        protected void dtgEventos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgEventos_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgEventos.DataSource = m_DataView;
+                dtgEventos.DataBind();
+            }
         }
 
 

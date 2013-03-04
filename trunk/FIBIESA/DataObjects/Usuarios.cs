@@ -42,15 +42,15 @@ namespace DataObjects
             set { _status = value; }
         }
 
-        private DateTime? _dtInicio;
-        public DateTime? DtInicio
+        private DateTime _dtInicio;
+        public DateTime DtInicio
         {
             get { return _dtInicio; }
             set { _dtInicio = value; }
         }
 
-        private DateTime? _dtFim;
-        public DateTime? DtFim
+        private DateTime _dtFim;
+        public DateTime DtFim
         {
             get { return _dtFim; }
             set { _dtFim = value; }

@@ -12,7 +12,7 @@
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
                     ToolTip="Pesquisar por"></asp:TextBox>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
                 </asp:DropDownList>
@@ -26,7 +26,7 @@
                             <td>                       
                                <asp:GridView ID="dtgPermissoes" runat="server" AutoGenerateColumns="False" 
                                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                   CellPadding="3" AllowPaging="True" DataKeyNames="ID" PageSize="7" 
+                                   CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
                                     AllowSorting="True" 
                                     onselectedindexchanged="dtgPermissoes_SelectedIndexChanged" 
                                     onpageindexchanging="dtgPermissoes_PageIndexChanging" 

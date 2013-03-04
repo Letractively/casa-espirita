@@ -105,7 +105,12 @@ namespace Admin
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
-        {  
+        {
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["descategoria"] != null)
+                    lblDesCategoria.Text = Request.QueryString["descategoria"].ToString();
+            }
            
         }
 

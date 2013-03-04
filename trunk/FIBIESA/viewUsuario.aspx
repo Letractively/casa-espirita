@@ -10,8 +10,9 @@
                 <h2>Cadastro de Usuários</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">                 
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por"></asp:TextBox>
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">                 
                     <asp:ListItem Value="NOME">Nome</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;&nbsp;
@@ -45,8 +46,8 @@
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                         <asp:BoundField DataField="PESSOAID" HeaderText="PESSOAID" Visible="False" />
                                         <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
-                                        <asp:BoundField DataField="CODCAT" HeaderText="Cód. Cat." />
-                                        <asp:BoundField DataField="DESCAT" HeaderText="Desc. Categoria" />
+                                        <asp:BoundField DataField="CODCAT" HeaderText="Cód. Cat." SortExpression="CODCAT" />
+                                        <asp:BoundField DataField="DESCAT" HeaderText="Desc. Categoria" SortExpression="DESCAT"/>
                                         <asp:BoundField DataField="EMAIL" HeaderText="E-mail" SortExpression="EMAIL" />                                     
                                         <asp:BoundField DataField="STATUS" HeaderText="Status" SortExpression="STATUS"/>
                                         <asp:BoundField DataField="DTINICIO" HeaderText="Dt. Inicio" SortExpression="DTINICIO" />

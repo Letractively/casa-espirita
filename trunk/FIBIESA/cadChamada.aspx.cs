@@ -38,7 +38,7 @@ namespace Admin
             DataColumn coluna2 = new DataColumn("CODPARTICIPANTE", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCPARTICIPANTE", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("PRESENCA", Type.GetType("System.Boolean"));
-            DataColumn coluna5 = new DataColumn("DATA", Type.GetType("System.DateTime"));
+            DataColumn coluna5 = new DataColumn("DATA", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("ID", Type.GetType("System.Int32"));
 
             tabela.Columns.Add(coluna1);
@@ -73,14 +73,14 @@ namespace Admin
                         {
                             linha["ID"] = ltCha.Id;
                             linha["PRESENCA"] = ltCha.Presenca;
-                            linha["DATA"] = ltCha.Data;
+                            linha["DATA"] = ltCha.Data.ToString("dd/MM/yyyy");
                         }
                     }
                     else
                     {
                         linha["ID"] = 0;
                         linha["PRESENCA"] = false;
-                        linha["DATA"] = DateTime.Now; 
+                        linha["DATA"] = DateTime.Now.ToString("dd/MM/yyyy"); 
                     }
 
                     tabela.Rows.Add(linha);
@@ -94,7 +94,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                txtSelData.Text = DateTime.Now.ToString();
+                txtSelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         protected void btnPesEvento_Click(object sender, EventArgs e)
@@ -197,5 +197,7 @@ namespace Admin
         {
             Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value), utils.ComparaIntComZero(hfIdEvento.Value));
         }
+
+        
     }
 }

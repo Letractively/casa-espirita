@@ -12,11 +12,19 @@
             <div class="contentbox">
                 <table>
                     <tr>
+                    <td  style="width: 80px" >
+                           <strong>Categoria:</strong>     
+                        </td>
+                        <td>
+                            <asp:Label ID="lblDesCategoria" runat="server"></asp:Label>
+                        </td>
+                   </tr>
+                    <tr>                        
                         <td  style="width: 80px" >
                            <strong>Módulo:</strong>     
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlModulo" runat="server" CssClass="inputbox">
+                            <asp:DropDownList ID="ddlModulo" runat="server" CssClass="dropdownlist">
                                 <asp:ListItem Value="F">Financeiro</asp:ListItem>
                                 <asp:ListItem Value="B">Biblioteca</asp:ListItem>
                                 <asp:ListItem Value="E">Estoque</asp:ListItem>

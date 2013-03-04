@@ -70,7 +70,7 @@ namespace DataAccess
         public List<Estados> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
-                                                               CommandType.Text, @"SELECT * FROM ESTADOS ");
+                                                               CommandType.Text, @"SELECT * FROM ESTADOS ORDER BY UF ");
                        
             List<Estados> estados = CarregarObjEstado(dr);
                        
