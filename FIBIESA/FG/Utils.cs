@@ -265,5 +265,32 @@ namespace FG
             e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='" + prm_cor_out + "'");
             e.Row.Style.Add("cursor", "pointer");
         }
+        /// <summary>
+        /// Remove os acentos de uma string os caracteres especiais sao substituidos por _ e @ por A
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public string RemoveAcentos(string str)
+        {
+            string C_acentos = "ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç!#$%¨&*@ºª°";
+            string S_acentos = "AAAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUuuuuCc_______A___";
+
+            for (int i = 0; i < C_acentos.Length; i++)
+                str = str.Replace(C_acentos[i].ToString(), S_acentos[i].ToString()).Trim();
+
+            return str;
+        }
+
+        public string ConvertHtmlToString(string pTexto)
+        {
+            byte[] car = new byte[pTexto.Length];
+
+            car = ASCIIEncoding.Unicode.GetBytes(pTexto);
+
+            string str;
+            str = System.Text.ASCIIEncoding.UTF8.GetString(car);
+
+            return str;
+        }
     }
 }

@@ -11,7 +11,7 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="inputbox">
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
                 </asp:DropDownList>
@@ -32,7 +32,7 @@
                                     onselectedindexchanged="dtgTurma_SelectedIndexChanged" GridLines="None" 
                                     onpageindexchanging="dtgTurmas_PageIndexChanging" 
                                     onrowdatabound="dtgTurmas_RowDataBound" onsorting="dtgTurmas_Sorting" 
-                                    ShowHeaderWhenEmpty="True">
+                                    ShowHeaderWhenEmpty="True" AllowSorting="True">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">                                            
                                             <ItemStyle CssClass="grd_edit" />
@@ -41,12 +41,12 @@
                                             <ItemStyle CssClass="grd_delete" />
                                         </asp:CommandField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO"/>
+                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO"/>
                                         <asp:BoundField DataField="EVENTOID" HeaderText="EVENTOID" 
                                             Visible="False" />
-                                        <asp:BoundField DataField="DTINICIAL" HeaderText="Dt. Inicial" />
-                                        <asp:BoundField DataField="DTFINAL" HeaderText="Dt. Final" />
+                                        <asp:BoundField DataField="DTINICIAL" HeaderText="Dt. Inicial" SortExpression="DTINICIAL" />
+                                        <asp:BoundField DataField="DTFINAL" HeaderText="Dt. Final" SortExpression="DTFINAL" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -60,26 +60,8 @@
                                 </asp:GridView>                            
                             </td>
                         </tr>
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- grid modelo finaliza aqui -->
-                <br />
-                <br />
-                <asp:GridView ID="GridProduto" runat="server">
-                </asp:GridView>
-                <br />
-                <br />
-                <br />
+                    </table>                  
+                </div>               
             </div>
         </div>
         <div class="status">

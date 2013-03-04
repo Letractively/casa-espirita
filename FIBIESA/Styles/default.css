@@ -77,6 +77,20 @@
 .validacao{ color:#CC0000}
 
 .titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}   	
+
+.labeldesc
+{
+	display:inline;		
+	font-style:normal;
+	font-weight:bold;
+	color:#6699FF;
+	width:200px;	
+	padding-left:3px;
+	margin-bottom:5px;	
+}
+
+.dropdownlist {float: left; padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
+.dropdownlist {font-family: Arial, Helvetica, sans-serif; color: #666; font-size: 13px;background: #fff url(../images/bg_input_normal.png) repeat-x top}
 	
    	
 

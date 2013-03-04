@@ -37,8 +37,8 @@ namespace Admin
             DataColumn coluna3 = new DataColumn("NOME", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("EMAIL", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("STATUS", Type.GetType("System.String"));
-            DataColumn coluna6 = new DataColumn("DTINICIO", Type.GetType("System.DateTime"));
-            DataColumn coluna7 = new DataColumn("DTFIM", Type.GetType("System.DateTime"));
+            DataColumn coluna6 = new DataColumn("DTINICIO", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("DTFIM", Type.GetType("System.String"));
             DataColumn coluna8 = new DataColumn("CODCAT", Type.GetType("System.Int32"));
             DataColumn coluna9 = new DataColumn("DESCAT", Type.GetType("System.String"));
                        
@@ -69,8 +69,8 @@ namespace Admin
                 linha["NOME"] = usu.Nome;
                 linha["EMAIL"] = usu.Email;
                 linha["STATUS"] = usu.Status;
-                linha["DTINICIO"] = usu.DtInicio;
-                linha["DTFIM"] = usu.DtFim;
+                linha["DTINICIO"] = usu.DtInicio.ToString("dd/MM/yyyy");
+                linha["DTFIM"] = usu.DtFim.ToString("dd/MM/yyyy");
                 linha["CODCAT"] = usu.Categoria.Codigo;
                 linha["DESCAT"] = usu.Categoria.Descricao;
               
@@ -167,8 +167,7 @@ namespace Admin
             }
         }
 
-    
-
+       
         
     }
 }

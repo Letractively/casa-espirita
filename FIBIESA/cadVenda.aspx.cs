@@ -12,7 +12,7 @@ namespace FIBIESA
 {
     public partial class cadVenda : System.Web.UI.Page
     {
-        DataTable dtItens = new DataTable();
+       
 
         #region funcoes
         private DataTable CriarTabelaPesquisa()
@@ -31,23 +31,13 @@ namespace FIBIESA
         }
         private void CriarDtItens()
         {
-            if (dtItens.Columns.Count == 0)
-            {                
-                DataColumn coluna1 = new DataColumn("ITEMESTOQUEID", Type.GetType("System.Int32"));
-                DataColumn coluna2 = new DataColumn("QUANTIDADE", Type.GetType("System.Int32"));
-                DataColumn coluna3 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
-                DataColumn coluna4 = new DataColumn("DESCONTO", Type.GetType("System.Decimal"));
-              
-                dtItens.Columns.Add(coluna1);
-                dtItens.Columns.Add(coluna2);
-                dtItens.Columns.Add(coluna3);
-                dtItens.Columns.Add(coluna4);               
-            }
+            
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            CriarDtItens();
+            if(!IsPostBack)
+                CriarDtItens();
         }
 
        
@@ -89,11 +79,44 @@ namespace FIBIESA
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
+            DataTable dtItens = new DataTable();
+                        DataColumn coluna1 = new DataColumn("ITEMESTOQUEID", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("QUANTIDADE", Type.GetType("System.Int32"));
+                DataColumn coluna3 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+                DataColumn coluna4 = new DataColumn("DESCONTO", Type.GetType("System.Decimal"));
+                DataColumn coluna5 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+                DataColumn coluna6 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+                dtItens.Columns.Add(coluna1);
+                dtItens.Columns.Add(coluna2);
+                dtItens.Columns.Add(coluna3);
+                dtItens.Columns.Add(coluna4);
+                dtItens.Columns.Add(coluna5);
+                dtItens.Columns.Add(coluna6);
+           
             DataRow linha = dtItens.NewRow();
-            linha["ITEMESTOQUEID"] = hfIdItem.Value;
+            /*linha["ITEMESTOQUEID"] = hfIdItem.Value;
             linha["QUANTIDADE"] = txtQuantidade.Text;
             linha["VALOR"] = txtValor.Text;
             linha["DESCONTO"] = txtDesconto.Text;
+            linha["CODIGO"] = txtItem.Text;
+            linha["DESCRICAO"] = lblDesItem.Text;*/
+                   
+            linha["ITEMESTOQUEID"] = 1;
+           linha["QUANTIDADE"] = 1;
+           linha["VALOR"] = 10;
+           linha["DESCONTO"] = 0;
+           linha["CODIGO"] = 231;
+           linha["DESCRICAO"] = "O amor venceu";
+           dtItens.Rows.Add(linha);
+           linha = dtItens.NewRow();
+           linha["ITEMESTOQUEID"] = 1;
+           linha["QUANTIDADE"] = 1;
+           linha["VALOR"] = 20;
+           linha["DESCONTO"] = 0;
+           linha["CODIGO"] = 234;
+
+           linha["DESCRICAO"] = "O livro dos espíritos";
 
             dtItens.Rows.Add(linha);
 

@@ -42,14 +42,11 @@
                         <td style="width: 140px">
                             * Evento:
                         </td>
-                        <td style="width: 400px" colspan="3">                            
-                            <asp:TextBox ID="txtEvento" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesEvento" runat="server" Text="..."  CssClass="btn" 
-                                onclick="btnPesEvento_Click"/>
-                            <asp:Label ID="lblDesEvento" runat="server"></asp:Label>
-                            <br />
+                        <td style="width: 400px" colspan="3">   
+                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtEvento" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlEvento" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -128,7 +125,6 @@
                 </table>                
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdEvento" runat="server" />
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
                 EnableScriptLocalization="true">

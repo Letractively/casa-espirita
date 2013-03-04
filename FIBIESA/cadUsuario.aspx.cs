@@ -16,6 +16,20 @@ namespace Admin
         Utils utils = new Utils();
         string v_operacao = "";
         #region funcoes
+        private void CarregarDDLCategoria()
+        {
+            CategoriasBL catBL = new CategoriasBL();
+            List<Categorias> categorias = catBL.PesquisarBL();
+
+            foreach (Categorias ltCat in categorias)
+            {               
+                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao,ltCat.Id.ToString()));                
+            }
+
+            ddlCategoria.SelectedIndex = 0;
+
+            
+        }
         private void CarregarDados(int id_usu)
         {
             UsuariosBL usuBL = new UsuariosBL();
@@ -24,21 +38,17 @@ namespace Admin
             foreach (Usuarios usu in usuarios)
             {
                 hfId.Value = usu.Id.ToString();
-                hfIdPessoa.Value = usu.PessoaId.ToString();
-                hfIdCategoria.Value = usu.CategoriaId.ToString();
+                hfIdPessoa.Value = usu.PessoaId.ToString();                
                 txtNome.Text = usu.Nome;
                 txtEmail.Text = usu.Email;
                 txtLogin.Text = usu.Login;
                 txtSenha.Text = usu.Senha;
-                txtDtInicio.Text = usu.DtInicio.ToString();
-                txtDtFim.Text = usu.DtFim.ToString();
+                txtDtInicio.Text = usu.DtInicio.ToString("dd/MM/yyyy");
+                txtDtFim.Text = usu.DtFim.ToString("dd/MM/yyyy");
                 ddlStatus.SelectedValue = usu.Status.ToString();
 
-                if (usu.Categoria != null )
-                {
-                    txtCategoria.Text = usu.Categoria.Codigo.ToString();
-                    lblDesCategoria.Text = usu.Categoria.Descricao;
-                }
+                if (usu.Categoria != null)
+                    ddlCategoria.SelectedValue = usu.CategoriaId.ToString();
 
                 if (usu.Pessoa != null)
                 {
@@ -83,6 +93,8 @@ namespace Admin
                         if (Request.QueryString["id_usu"] != null)
                             id_usu = Convert.ToInt32(Request.QueryString["id_usu"].ToString());
                 }
+
+                CarregarDDLCategoria();
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_usu);
@@ -137,7 +149,7 @@ namespace Admin
             usuarios.Status = ddlStatus.SelectedItem.Text;
             usuarios.DtInicio = Convert.ToDateTime(txtDtInicio.Text);
             usuarios.DtFim = Convert.ToDateTime(txtDtFim.Text);
-            usuarios.CategoriaId = utils.ComparaIntComZero(hfIdCategoria.Value);
+            usuarios.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
 
             if (usuarios.Id > 0)
             {
@@ -152,38 +164,12 @@ namespace Admin
                     usuBL.InserirBL(usuarios);
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }        
-        }
-
-        protected void btnPesCategoria_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            CategoriasBL catBL = new CategoriasBL();
-            Categorias ca = new Categorias();
-            List<Categorias> categorias = catBL.PesquisarBL();
-
-            foreach (Categorias cat in categorias)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cat.Id;
-                linha["CODIGO"] = cat.Codigo;
-                linha["DESCRICAO"] = cat.Descricao;
-
-                dt.Rows.Add(linha);
             }
 
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = catBL;
-            Session["objPesquisa"] = ca;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCategoria.ClientID + "&id=" + hfIdCategoria.ClientID + "&lbl=" + lblDesCategoria.ClientID + "','',600,500);", true);
+            Response.Redirect("viewUsuario.aspx");
         }
-              
+
+                     
                
     }
 }

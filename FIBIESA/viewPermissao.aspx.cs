@@ -95,10 +95,11 @@ namespace Admin
         }
 
         protected void dtgPermissoes_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {         
             int str_per_cat = 0;
             str_per_cat = utils.ComparaIntComZero(dtgPermissoes.SelectedDataKey[0].ToString());
-            Response.Redirect("cadPermissao.aspx?id_per_cat=" + str_per_cat.ToString());
+            string descategoria = utils.ConvertHtmlToString(dtgPermissoes.SelectedRow.Cells[3].Text); 
+            Response.Redirect("cadPermissao.aspx?id_per_cat=" + str_per_cat.ToString() + "&descategoria=" + descategoria );
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)

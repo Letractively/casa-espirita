@@ -75,7 +75,7 @@ namespace DataAccess
         public List<Cidades> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                               CommandType.Text, @"SELECT * FROM CIDADES ");
+                                                               CommandType.Text, @"SELECT * FROM CIDADES ORDER BY CODIGO ");
 
             List<Cidades> cidades = CarregarObjCidade(dr);
 
