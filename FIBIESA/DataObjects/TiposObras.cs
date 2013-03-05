@@ -29,5 +29,13 @@ namespace DataObjects
             set { _descricao = value; }
         }
 
+        private int _qtdDias;
+
+        public int QtdDias
+        {
+            get { return _qtdDias; }
+            set { _qtdDias = value; }
+        }
+
     }
 }
