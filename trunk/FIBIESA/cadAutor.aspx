@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadAutor.aspx.cs" Inherits="Admin.cadAutor" %>
+    <%@ MasterType VirtualPath="~/home.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
@@ -12,33 +13,37 @@
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td style="width: 140px">Tipo:</td>
+                        <td style="width: 140px">
+                            * Código:
+                        </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_tipo" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Obra:</td>
+                        <td style="width: 140px">
+                            * Descrição:
+                        </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_obra" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
+                                MaxLength="40" Width="335px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">Código:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_codigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">Descrição:</td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_descricao" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td>
+                            * Tipo de Autor:</td>
+                        <td>
+                            <asp:DropDownList ID="ddlTiposAutores" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>                       
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="ddlTiposAutores" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>                        
                         </td>
                     </tr>
                 </table>
@@ -47,13 +52,18 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="btnVoltar_Click" />                             
+                             &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />   
                         </td>
                     </tr>
-                </table>
+                </table>                
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
         </div>
-    </div>    
+    </div>
 </asp:Content>

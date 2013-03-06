@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="default.aspx" title="Home"  description="">
-        <siteMapNode url="viewInstituicao.aspx" title="Instituições"  description="">
+
+      <siteMapNode url="viewAutor.aspx" title="Tipos de Autores"  description="">
+        <siteMapNode url="cadAutor.aspx" title="Cadastro de Autores"  description="" />
+      </siteMapNode>
+      <siteMapNode url="viewTipoAutor.aspx" title="Tipos de Autores"  description="">
+        <siteMapNode url="cadTipoAutor.aspx" title="Cadastro de Tipos de Autores"  description="" />
+      </siteMapNode>      
+      
+      <siteMapNode url="viewInstituicao.aspx" title="Instituições"  description="">
           <siteMapNode url="cadInstituicao.aspx" title="Cadastro de Instituições"  description="" />
         </siteMapNode>
         <siteMapNode url="viewPessoa.aspx" title="Pessoas"  description="">
