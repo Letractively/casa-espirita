@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class TiposDeAutoresBL
+    public class TiposDeAutoresBL : BaseBL
     {
         public bool InserirBL(TiposDeAutores instancia)
         {
@@ -36,9 +36,30 @@ namespace BusinessLayer
         public List<TiposDeAutores> PesquisarBL()
         {
             /*criar as regras de negocio*/
-            TiposDeAutoresDA varDA = new TiposDeAutoresDA();
+            TiposDeAutoresDA TiposDeAutoresDA = new TiposDeAutoresDA();
 
-            return varDA.PesquisarDA();
+            return TiposDeAutoresDA.PesquisarDA();
+        }
+
+        public List<TiposDeAutores> PesquisarBL(int bai)
+        {
+            TiposDeAutoresDA TiposDeAutoresDA = new TiposDeAutoresDA();
+
+            return TiposDeAutoresDA.PesquisarDA(bai);
+        }
+
+        public List<TiposDeAutores> PesquisarBL(string campo, string valor)
+        {
+            TiposDeAutoresDA TiposDeAutoresDA = new TiposDeAutoresDA();
+
+            return TiposDeAutoresDA.PesquisarDA(campo, valor);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            TiposDeAutoresDA baiDA = new TiposDeAutoresDA();
+
+            return baiDA.Pesquisar(codDes, tipo);
         }
     }
 }

@@ -26,6 +26,7 @@ namespace DataAccess
                 aut.Id = int.Parse(dr["ID"].ToString());
                 aut.Codigo = int.Parse(dr["CODIGO"].ToString());
                 aut.Descricao = dr["DESCRICAO"].ToString();
+                aut.TipoId = int.Parse(dr["TIPOID"].ToString());
 
                 autor.Add(aut);
             }
@@ -42,9 +43,10 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
             paramsToSP[2] = new SqlParameter("@tipoId", instancia.TipoId);
 
-            return (SqlHelper.ExecuteNonQuery(
+            int i = SqlHelper.ExecuteNonQuery(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_autores", paramsToSP) > 0); 
+                CommandType.StoredProcedure, "stp_insert_autores", paramsToSP);
+            return (i > 0); 
         }
 
         public bool EditarDA(Autores instancia)

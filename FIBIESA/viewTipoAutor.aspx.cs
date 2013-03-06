@@ -5,20 +5,150 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using DataObjects;
+using BusinessLayer;
+using FG;
 
 
 namespace Admin
 {
     public partial class viewTipoAutor : System.Web.UI.Page
     {
+        Utils utils = new Utils();
+
+        #region funcoes
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadTipoAutor"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadTipoAutor"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadTipoAutor"] = value; }
+        }
+        private void Pesquisar(string campo, string valor)
+        {
+            DataTable tabela = new DataTable("tabela");
+            
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            tabela.Columns.Add(coluna1);
+            tabela.Columns.Add(coluna2);
+            tabela.Columns.Add(coluna3);
+
+            TiposDeAutoresBL tautorBL = new TiposDeAutoresBL();
+            List<TiposDeAutores> tiposAutores;
+
+            if (campo != null && valor.Trim() != "")
+                tiposAutores = tautorBL.PesquisarBL(campo, valor);
+            else
+                tiposAutores = tautorBL.PesquisarBL();
+                       
+            foreach (TiposDeAutores tipA in tiposAutores)
+            {
+                
+                DataRow linha = tabela.NewRow();
+                
+                linha["ID"] = tipA.Id;
+                linha["CODIGO"] = tipA.Codigo;
+                linha["DESCRICAO"] = tipA.Descricao;
+               
+                tabela.Rows.Add(linha);
+            }
+
+            dtbPesquisa = tabela;
+            dtgTiposAutores.DataSource = tabela;
+            dtgTiposAutores.DataBind();
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+                Pesquisar(null, null);
         }
 
-        protected void Busca_Click(object sender, EventArgs e)
+     
+        protected void btnInserir_Click(object sender, EventArgs e)
         {
-            
+            Response.Redirect("cadTipoAutor.aspx?operacao=new");
         }
+            
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
+        }
+
+        protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int str_bai = 0;
+            str_bai = utils.ComparaIntComZero(dtgTiposAutores.SelectedDataKey[0].ToString());
+            Response.Redirect("cadTipoAutor.aspx?id_bai=" + str_bai.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgBairros_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                TiposDeAutoresBL tiposaBL = new TiposDeAutoresBL();
+                TiposDeAutores tiposAu = new TiposDeAutores();
+                tiposAu.Id = utils.ComparaIntComZero(dtgTiposAutores.DataKeys[e.RowIndex][0].ToString());
+                tiposaBL.ExcluirBL(tiposAu);
+                Pesquisar(null, null);
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
+
+        protected void dtgBairros_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgTiposAutores.DataSource = dtbPesquisa;
+            dtgTiposAutores.PageIndex = e.NewPageIndex;
+            dtgTiposAutores.DataBind();
+        }
+
+        protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgBairros_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgTiposAutores.DataSource = m_DataView;
+                dtgTiposAutores.DataBind();
+            }
+        }
+
     }
 }
