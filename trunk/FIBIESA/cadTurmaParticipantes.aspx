@@ -28,6 +28,9 @@
                                 />
                             &nbsp;
                             <asp:Label ID="lblDesParticipante" runat="server"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtParticipante" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório"></asp:RequiredFieldValidator>
                         </td>
                        
                     </tr>

@@ -14,7 +14,7 @@ namespace Admin
 {
     public partial class viewAutor : System.Web.UI.Page
     {
-        Utils utils = new Utils();
+       /* Utils utils = new Utils();
 
         #region funcoes
         public DataTable dtbPesquisa
@@ -148,7 +148,7 @@ namespace Admin
                 dtgAutores.DataBind();
             }
         }
-
+        */
 
     }
 }

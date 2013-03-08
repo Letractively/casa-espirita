@@ -13,13 +13,22 @@ namespace Admin {
     public partial class viewPessoa {
         
         /// <summary>
-        /// txtBuscas control.
+        /// txtBusca control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscas;
+        protected global::System.Web.UI.WebControls.TextBox txtBusca;
+        
+        /// <summary>
+        /// ddlCampo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCampo;
         
         /// <summary>
         /// btnBusca control.
@@ -29,6 +38,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBusca;
+        
+        /// <summary>
+        /// rblPesJurFis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPesJurFis;
         
         /// <summary>
         /// btnInserir control.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataAccess;
 using DataObjects;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -48,7 +49,7 @@ namespace BusinessLayer
             return parametrosDA.PesquisarDA(id_par);
         }
 
-        public List<Parametros> PesquisarBL(int codigo, string modulo)
+        public DataSet PesquisarBL(int codigo, string modulo)
         {
             ParametrosDA parametrosDA = new ParametrosDA();
 

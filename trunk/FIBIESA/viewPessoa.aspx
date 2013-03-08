@@ -11,11 +11,35 @@
                 <h2>Cadastro de Pessoas</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBuscas" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
-                &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="btnInserir_Click" />
+                <table>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                         ToolTip="Pesquisar por"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
+                        <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                        <asp:ListItem Value="NOME">Nome</asp:ListItem>
+                        </asp:DropDownList> 
+                    </td>
+                    <td>
+                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                         onclick="btnBusca_Click" />
+                    </td>
+                    <td>
+                        <asp:RadioButtonList ID="rblPesJurFis" runat="server" RepeatColumns="2">
+                            <asp:ListItem Selected="True" Value="F">Física</asp:ListItem>
+                            <asp:ListItem Value="J">Jurídica</asp:ListItem>
+                       
+                        </asp:RadioButtonList>
+                    </td>
+                    <td>
+                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                         onclick="btnInserir_Click" />
+                    </td>
+                </tr>
+                </table>
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
@@ -24,7 +48,10 @@
                                 <asp:GridView ID="dtgPessoas" runat="server" AutoGenerateColumns="False" 
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                     CellPadding="3" DataKeyNames="ID" onrowdeleting="dtgPessoas_RowDeleting" 
-                                    onselectedindexchanged="dtgPessoas_SelectedIndexChanged">
+                                    onselectedindexchanged="dtgPessoas_SelectedIndexChanged" GridLines="None" 
+                                    ShowHeaderWhenEmpty="True" AllowPaging="True" AllowSorting="True" 
+                                    onpageindexchanging="dtgPessoas_PageIndexChanging" 
+                                    onrowdatabound="dtgPessoas_RowDataBound" onsorting="dtgPessoas_Sorting">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">                                            
                                             <ItemStyle CssClass="grd_edit" />
@@ -33,14 +60,14 @@
                                             <ItemStyle CssClass="grd_delete" />
                                         </asp:CommandField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                        <asp:BoundField DataField="NOME" HeaderText="Nome" />
-                                        <asp:BoundField DataField="CPFCNPJ" HeaderText="CPF/CNPJ" />
-                                        <asp:BoundField DataField="TIPO" HeaderText="Tipo" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                        <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
+                                        <asp:BoundField DataField="CPFCNPJ" HeaderText="CPF/CNPJ" SortExpression="CPFCNPJ" />
+                                        <asp:BoundField DataField="TIPO" HeaderText="Tipo" SortExpression="TIPO" />
                                         <asp:BoundField DataField="CATEGORIAID" HeaderText="CATEGORIAID" 
                                             Visible="False" />
-                                        <asp:BoundField DataField="DESCATEGORIA" HeaderText="Categoria" />
-                                        <asp:BoundField DataField="DTCADASTRO" HeaderText="Dt. Cadastro" />
+                                        <asp:BoundField DataField="DESCATEGORIA" HeaderText="Categoria" SortExpression="DESCATEGORIA" />
+                                        <asp:BoundField DataField="DTCADASTRO" HeaderText="Dt. Cadastro" SortExpression="DTCADASTRO" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -54,24 +81,8 @@
                                 </asp:GridView>                            
                             </td>
                         </tr>
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- grid modelo finaliza aqui -->
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+                    </table>                   
+                </div>              
             </div>
         </div>
         <div class="status">

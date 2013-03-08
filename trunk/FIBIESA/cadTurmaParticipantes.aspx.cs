@@ -143,6 +143,8 @@ namespace Admin
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
 
+            txtParticipante.Text = "";
+            lblDesParticipante.Text = "";
             Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value)); 
 
         }

@@ -41,11 +41,26 @@ namespace BusinessLayer
             return pessoasDA.PesquisarDA();
         }
 
+        public List<Pessoas> PesquisarPorGeneroDA(int id_cat)
+        {
+            /*criar as regras de negocio*/
+            PessoasDA pessoasDA = new PessoasDA();
+
+            return pessoasDA.PesquisarPorGeneroDA(id_cat);
+        }
+
         public List<Pessoas> PesquisarBL(int id_pes)
         {
             PessoasDA pessoasDA = new PessoasDA();
 
             return pessoasDA.PesquisarDA(id_pes);
+        }
+
+        public List<Pessoas> PesquisarBL(string campo, string valor)
+        {
+            PessoasDA pessoasDA = new PessoasDA();
+
+            return pessoasDA.PesquisarDA(campo, valor);
         }
 
         public override List<Base> Pesquisar(string codDes, string tipo)

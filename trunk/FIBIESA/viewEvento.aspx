@@ -10,7 +10,8 @@
                 <h2>Cadastro de Eventos</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por"></asp:TextBox>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>

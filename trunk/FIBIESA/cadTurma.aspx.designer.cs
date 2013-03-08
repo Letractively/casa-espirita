@@ -67,31 +67,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
-        /// txtInstrutor control.
+        /// ddlInstrutor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInstrutor;
-        
-        /// <summary>
-        /// btnPesInstrutor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesInstrutor;
-        
-        /// <summary>
-        /// lblDesInstrutor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesInstrutor;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInstrutor;
         
         /// <summary>
         /// txtDtInicio control.
@@ -157,15 +139,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtSala;
         
         /// <summary>
-        /// txtDiaSemana control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDiaSemana;
-        
-        /// <summary>
         /// txtNroMax control.
         /// </summary>
         /// <remarks>
@@ -173,6 +146,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNroMax;
+        
+        /// <summary>
+        /// txtDiaSemana control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDiaSemana;
         
         /// <summary>
         /// btnVoltar control.

@@ -21,13 +21,11 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            foreach (Categorias ltCat in categorias)
-            {               
-                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao,ltCat.Id.ToString()));                
-            }
-
+            ddlCategoria.Items.Add(new ListItem());
+            foreach (Categorias ltCat in categorias)                        
+               ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao,ltCat.Id.ToString()));                
+            
             ddlCategoria.SelectedIndex = 0;
-
             
         }
         private void CarregarDados(int id_usu)

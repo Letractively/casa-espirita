@@ -6,41 +6,47 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
+using System.Data;
 
 namespace Admin
 {
     public partial class cadParametro : System.Web.UI.Page
     {
         #region funcoes
+        private void CarregarDdlCategoria()
+        {
+            CategoriasBL catBL = new CategoriasBL();
+            List<Categorias> categorias = catBL.PesquisarBL();
+
+            ddlCategoria.Items.Add(new ListItem());
+            foreach (Categorias ltPes in categorias)
+                ddlCategoria.Items.Add(new ListItem(ltPes.Codigo + " - " + ltPes.Descricao, ltPes.Id.ToString()));
+
+            ddlCategoria.SelectedIndex = 0;
+        }
         private void SalvarParametro(int codigo, string modulo, string descricao, string valor)
         {
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
 
-            List<Parametros> ltPar = parBL.PesquisarBL(codigo, modulo);
+            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
 
-            if (ltPar.Count > 0)
+            if (dsPar.Tables[0].Rows.Count != 0)
+                parametros.Valor = (string)dsPar.Tables[0].Rows[0]["valor"];
+
+            parametros.Codigo = codigo;
+            parametros.Descricao = descricao.Trim();
+            parametros.Valor = valor;
+            parametros.Modulo = modulo;
+
+            if (dsPar.Tables[0].Rows.Count > 0)
             {
-                foreach (Parametros par in ltPar)
-                {
-                    parametros.Id = par.Id;
-                    parametros.Codigo = codigo;
-                    parametros.Descricao = par.Descricao;
-                    parametros.Valor = valor;
-                    parametros.Modulo = par.Modulo;
-
-                    parBL.EditarBL(parametros);
-                }
+                parametros.Id =  (int)dsPar.Tables[0].Rows[0]["id"];
+                parBL.EditarBL(parametros);                
             }
             else
-            {
-                parametros.Codigo = codigo;
-                parametros.Descricao = descricao.Trim();
-                parametros.Valor = valor;
-                parametros.Modulo = modulo;
- 
                 parBL.InserirBL(parametros);
-            }          
+                      
 
         }
         private string CarregarParametro(int codigo, string modulo)
@@ -48,18 +54,20 @@ namespace Admin
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
             string v_valor = "";
-            List<Parametros> ltPar = parBL.PesquisarBL(codigo, modulo);
+            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
 
-            foreach (Parametros par in ltPar)
-            {
-                v_valor = par.Valor;
-            }
+            if (dsPar.Tables[0].Rows.Count != 0)
+                v_valor = (string)dsPar.Tables[0].Rows[0]["valor"];
 
             return v_valor;         
  
         }
         private void CarregarDados()
         {
+            #region eventos
+            ddlCategoria.SelectedValue = CarregarParametro(1, "E");
+            #endregion
+
             #region biblioteca
             txtQtdMaxEmp.Text = CarregarParametro(1, "B");
             txtQtdMaxRen.Text = CarregarParametro(2, "B");
@@ -89,7 +97,11 @@ namespace Admin
             CarregarAtributos();
 
             if (!IsPostBack)
+            {
+                CarregarDdlCategoria();
                 CarregarDados();
+               
+            }
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -102,6 +114,10 @@ namespace Admin
 
             if (this.Master.VerificaPermissaoUsuario("INSERIR"))
             {
+                #region eventos
+                SalvarParametro(1, "E", lblCategoria.Text, ddlCategoria.SelectedValue);
+                #endregion
+
                 #region biblioteca
                 SalvarParametro(1, "B", lblQtdMaxEmp.Text, txtQtdMaxEmp.Text);
                 SalvarParametro(2, "B", lblQtdMaxRen.Text, txtQtdMaxRen.Text);

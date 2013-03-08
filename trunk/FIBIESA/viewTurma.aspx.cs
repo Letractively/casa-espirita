@@ -35,8 +35,8 @@ namespace Admin
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("EVENTOID", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("DTINICIAL", Type.GetType("System.DateTime"));
-            DataColumn coluna6 = new DataColumn("DTFINAL", Type.GetType("System.DateTime"));
+            DataColumn coluna5 = new DataColumn("DTINICIAL", Type.GetType("System.String"));
+            DataColumn coluna6 = new DataColumn("DTFINAL", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -56,13 +56,13 @@ namespace Admin
             foreach (Turmas tur in turmas)
             {
                 DataRow linha = tabela.NewRow();
-
+                
                 linha["ID"] = tur.Id;
                 linha["CODIGO"] = tur.Codigo;
                 linha["DESCRICAO"] = tur.Descricao;
                 linha["EVENTOID"] = tur.EventoId;
-                linha["DTINICIAL"] = tur.DataInicial;
-                linha["DTFINAL"] = tur.DataFinal;
+                linha["DTINICIAL"] = tur.DataInicial.ToString("dd/MM/yyyy");
+                linha["DTFINAL"] = tur.DataFinal.ToString("dd/MM/yyyy");
 
                 EventosBL curBL = new EventosBL();
                 List<Eventos> eventos = curBL.PesquisarBL(tur.EventoId);
@@ -74,6 +74,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgTurmas.DataSource = tabela;
             dtgTurmas.DataBind();
         }

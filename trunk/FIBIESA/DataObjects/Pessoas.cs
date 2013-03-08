@@ -231,8 +231,8 @@ namespace DataObjects
             set { _refDDD = value; }
         }
 
-        private DateTime? _dtCadastro;
-        public DateTime? DtCadastro
+        private DateTime _dtCadastro;
+        public DateTime DtCadastro
         {
             get { return _dtCadastro; }
             set { _dtCadastro = value; }

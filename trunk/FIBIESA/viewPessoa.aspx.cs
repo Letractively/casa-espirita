@@ -15,7 +15,18 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -25,7 +36,7 @@ namespace Admin
             DataColumn coluna4 = new DataColumn("CPFCNPJ", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("TIPO", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("CATEGORIAID", Type.GetType("System.Int32"));
-            DataColumn coluna7 = new DataColumn("DTCADASTRO", Type.GetType("System.DateTime"));
+            DataColumn coluna7 = new DataColumn("DTCADASTRO", Type.GetType("System.String"));
             DataColumn coluna8 = new DataColumn("DESCATEGORIA", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
@@ -38,7 +49,12 @@ namespace Admin
             tabela.Columns.Add(coluna8);
 
             PessoasBL pesBL = new PessoasBL();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
+            List<Pessoas> pessoas;
+
+            if (campo != null && valor.Trim() != "")
+                pessoas = pesBL.PesquisarBL(campo, valor);
+            else
+                pessoas = pesBL.PesquisarBL();
 
             foreach (Pessoas pes in pessoas)
             {
@@ -50,7 +66,7 @@ namespace Admin
                 linha["CPFCNPJ"] = pes.CpfCnpj;
                 linha["TIPO"] = pes.Tipo;
                 linha["CATEGORIAID"] = pes.CategoriaId;
-                linha["DTCADASTRO"] = pes.DtCadastro;
+                linha["DTCADASTRO"] = pes.DtCadastro.ToString("dd/MM/yyyy");
 
                 CategoriasBL catBL = new CategoriasBL();
                 List<Categorias> categorias = catBL.PesquisarBL(pes.CategoriaId);
@@ -62,6 +78,7 @@ namespace Admin
                 tabela.Rows.Add(linha);                
             }
 
+            dtbPesquisa = tabela;
             dtgPessoas.DataSource = tabela;
             dtgPessoas.DataBind();
         }
@@ -69,7 +86,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar();
+            Pesquisar(null,null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -86,7 +103,7 @@ namespace Admin
 
                 pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
                 pesBL.ExcluirBL(pessoas);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -97,6 +114,57 @@ namespace Admin
             int str_pes = 0;
             str_pes = utils.ComparaIntComZero(dtgPessoas.SelectedDataKey[0].ToString());
             Response.Redirect("cadPessoa.aspx?id_pes=" + str_pes.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgPessoas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgPessoas.DataSource = dtbPesquisa;
+            dtgPessoas.PageIndex = e.NewPageIndex;
+            dtgPessoas.DataBind();
+        }
+
+        protected void dtgPessoas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgPessoas_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgPessoas.DataSource = m_DataView;
+                dtgPessoas.DataBind();
+            }
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
         }
 
        
