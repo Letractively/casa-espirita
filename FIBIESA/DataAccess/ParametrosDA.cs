@@ -91,24 +91,13 @@ namespace DataAccess
             }
             return parametros;
         }
-
-        public List<Parametros> PesquisarDA(int codigo, string modulo)
+                
+        public DataSet PesquisarDA(int codigo, string modulo)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            DataSet lds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * FROM PARAMETROS WHERE CODIGO = {0} AND MODULO = '{1}'",codigo, modulo));
 
-            List<Parametros> parametros = new List<Parametros>();
-
-            while (dr.Read())
-            {
-                Parametros par = new Parametros();
-                par.Id = int.Parse(dr["ID"].ToString());
-                par.Descricao = dr["DESCRICAO"].ToString();
-                par.Valor = dr["VALOR"].ToString();               
-
-                parametros.Add(par);
-            }
-            return parametros;
+            return lds;          
         }
     }
 }

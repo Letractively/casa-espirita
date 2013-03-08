@@ -19,13 +19,24 @@
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
-                                        
+                                            
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
-                                <asp:TabPanel runat="server" HeaderText="Módulo Acadêmico" ID="tpAcademico">
+                                <asp:TabPanel runat="server" HeaderText="Módulo Eventos" ID="tpEvento">
                                 <ContentTemplate>
                                     <table>
+                                        <tr>
+                                            <td style="width: 400px"> 
+                                            <asp:Label ID="lblCategoria" runat="server">
+                                            Categoria definida como instrutor : 
+                                            </asp:Label>
+                                        </td>
+                                        <td style="width: 140px">
+                                            <asp:DropDownList ID="ddlCategoria" CssClass="dropdownlist" runat="server">
+                                            </asp:DropDownList>
+                                        </td>
+                                        </tr>
                                     </table>
                                 </ContentTemplate>
                                 </asp:TabPanel>

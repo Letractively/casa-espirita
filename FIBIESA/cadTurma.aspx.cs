@@ -30,6 +30,29 @@ namespace Admin
             ddlEvento.SelectedIndex = 0;
         }
 
+        private void CarregarDdlInstrutor()
+        {
+            ParametrosBL parBL = new ParametrosBL();
+            Parametros parametros = new Parametros();
+
+            DataSet dsPar = parBL.PesquisarBL(1,"E");
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+               parametros.Valor = (string)dsPar.Tables[0].Rows[0]["valor"];
+
+            if (utils.ComparaIntComZero(parametros.Valor) > 0)
+            {
+                PessoasBL pesBL = new PessoasBL();
+                List<Pessoas> pessoas = pesBL.PesquisarPorGeneroDA(utils.ComparaIntComZero(parametros.Valor));
+
+                ddlInstrutor.Items.Add(new ListItem());
+                foreach (Pessoas ltPes in pessoas)
+                    ddlInstrutor.Items.Add(new ListItem(ltPes.Codigo + " - " + ltPes.Nome, ltPes.Id.ToString()));
+
+                ddlInstrutor.SelectedIndex = 0;
+            }
+        }
+
         private void CarregarDados(int id_tur)
         {
             TurmasBL turBL = new TurmasBL();
@@ -43,12 +66,12 @@ namespace Admin
                 txtSala.Text = ltTur.Sala;
                 txtNroMax.Text = ltTur.Nromax.ToString();
                 txtDiaSemana.Text = ltTur.DiaSemana;
-                txtDtFim.Text = ltTur.DataFinal.ToString();
-                txtDtInicio.Text = ltTur.DataInicial.ToString();
-                txtHoraFim.Text = ltTur.HoraFim.ToString();
-                txtHoraInicio.Text = ltTur.HoraIni.ToString();
+                txtDtFim.Text = ltTur.DataFinal.ToString("dd/MM/yyyy");
+                txtDtInicio.Text = ltTur.DataInicial.ToString("dd/MM/yyyy");
+                txtHoraFim.Text = ltTur.HoraFim != null ? Convert.ToDateTime(ltTur.HoraFim).ToString("HH:mm") : "";
+                txtHoraInicio.Text = ltTur.HoraIni != null ? Convert.ToDateTime(ltTur.HoraIni).ToString("HH:mm") : "";   
                 ddlEvento.SelectedValue = ltTur.EventoId.ToString();               
-                hfIdPessoa.Value = ltTur.PessoaId.ToString();
+                ddlInstrutor.SelectedValue = ltTur.PessoaId.ToString();
 
             }
 
@@ -56,6 +79,9 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNroMax.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtHoraInicio.Attributes.Add("onKeyPress", "return(formatar(this,'##:##',event))");
+            txtHoraFim.Attributes.Add("onKeyPress", "return(formatar(this,'##:##',event))");
         }
         #endregion
 
@@ -78,6 +104,7 @@ namespace Admin
                 }
 
                 CarregarDdlEventos();
+                CarregarDdlInstrutor();
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_tur);
@@ -99,10 +126,10 @@ namespace Admin
             turmas.EventoId = utils.ComparaIntComZero(ddlEvento.SelectedValue);
             turmas.HoraFim = utils.ComparaDataComNull(txtHoraFim.Text);
             turmas.HoraIni = utils.ComparaDataComNull(txtHoraInicio.Text);
-            turmas.DataFinal = utils.ComparaDataComNull(txtDtFim.Text);
-            turmas.DataInicial = utils.ComparaDataComNull(txtDtInicio.Text);
+            turmas.DataFinal = Convert.ToDateTime(txtDtFim.Text);
+            turmas.DataInicial = Convert.ToDateTime(txtDtInicio.Text);
             turmas.Sala = txtSala.Text;
-            turmas.PessoaId = utils.ComparaIntComNull(hfIdPessoa.Value);
+            turmas.PessoaId = utils.ComparaIntComNull(ddlInstrutor.SelectedValue);
             
             if (turmas.Id > 0)
             {
@@ -127,49 +154,13 @@ namespace Admin
         {
             Response.Redirect("viewTurma.aspx");
         }
-
-        protected void btnPesInstrutor_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            PessoasBL pesBL = new PessoasBL();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Pessoas pe = new Pessoas();
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtInstrutor.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesInstrutor.ClientID + "','',600,500);", true);
-        }
-
+               
         protected void btnParticipantes_Click(object sender, EventArgs e)
         {
             Response.Redirect("cadTurmaParticipantes.aspx?turmaId=" + hfId.Value + "&lblDesTurma=" + txtDescricao.Text);
-        }        
+        }
+
+         
       
     }
 }

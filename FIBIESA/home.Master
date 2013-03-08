@@ -91,14 +91,14 @@
             </li>
             <li><a class="collapsed heading">Biblioteca</a>
                 <ul class="navigation">
-                    <li><a href="viewExemplar.aspx" title="">Exemplar</a></li>
-                    <li><a href="viewOrigem.aspx" title="">Origem</a></li>                    
-                    <li><a href="viewReserva.aspx" title="">Reserva</a></li>
-                    <li><a href="viewEditora.aspx" title="">Editora</a></li>
-                    <li><a href="viewObra.aspx" title="">Obra</a></li>
-                    <li><a href="viewAutor.aspx" title="">Autor</a></li>
-                    <li><a href="viewTipoAutor.aspx" title="">Tipo de Autor</a></li>
-                    <li><a href="viewTipoObra.aspx" title="">Tipo de Obra</a></li>
+                    <li><a href="viewExemplar.aspx" title="">Exemplares</a></li>
+                    <li><a href="viewOrigem.aspx" title="">Origens</a></li>                    
+                    <li><a href="viewReserva.aspx" title="">Reservas</a></li>
+                    <li><a href="viewEditora.aspx" title="">Editoras</a></li>
+                    <li><a href="viewObra.aspx" title="">Obras</a></li>
+                    <li><a href="viewAutor.aspx" title="">Autores</a></li>
+                    <li><a href="viewTipoAutor.aspx" title="">Tipos de Autor</a></li>
+                    <li><a href="viewTipoObra.aspx" title="">Tipos de Obra</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Estoque</a>

@@ -183,6 +183,40 @@ namespace DataAccess
             return pessoas;
         }
 
+        public List<Pessoas> PesquisarPorGeneroDA(int id_cat)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE CATEGORIAID = {0}", id_cat));
+            List<Pessoas> pessoas = CarregarObjPessoa(dr);
+
+            return pessoas;
+        }
+
+        public List<Pessoas> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM PESSOAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "NOME":
+                    consulta = string.Format("SELECT * FROM PESSOAS WHERE NOME  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Pessoas> pessoas = CarregarObjPessoa(dr);
+
+            return pessoas;
+        }
+
         public override List<Base> Pesquisar(string descricao, string tipo)
         {
             SqlDataReader dr;

@@ -35,15 +35,15 @@ namespace DataObjects
             set { _eventoId = value; }
         }
 
-        private DateTime? _dataInicial;
-        public DateTime? DataInicial
+        private DateTime _dataInicial;
+        public DateTime DataInicial
         {
             get { return _dataInicial; }
             set { _dataInicial = value; }
         }
 
-        private DateTime? _dataFinal;
-        public DateTime? DataFinal
+        private DateTime _dataFinal;
+        public DateTime DataFinal
         {
             get { return _dataFinal; }
             set { _dataFinal = value; }

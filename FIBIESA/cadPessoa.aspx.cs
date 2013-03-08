@@ -22,6 +22,18 @@ namespace Admin
         #endregion
 
         #region funcoes
+        private void CarregarDDLCategoria()
+        {
+            CategoriasBL catBL = new CategoriasBL();
+            List<Categorias> categorias = catBL.PesquisarBL();
+
+            ddlCategoria.Items.Add(new ListItem());
+            foreach (Categorias ltCat in categorias)            
+               ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
+            
+            ddlCategoria.SelectedIndex = 0;
+        }
+
         private void CarregarDadosPessoas(int id_pes)
         {
             string[] v_pesquisa;
@@ -92,15 +104,7 @@ namespace Admin
                     lblDesBairroProf.Text = v_pesquisa[1];
                 }
 
-                hfIdCategoria.Value = pes.CategoriaId.ToString();
-                if (utils.ComparaIntComZero(hfIdCategoria.Value) > 0)
-                {
-                    CategoriasBL catBL = new CategoriasBL();
-                    List<Categorias> categorias = catBL.PesquisarBL(utils.ComparaIntComZero(hfIdCategoria.Value));
-                                        
-                    txtCategoria.Text = categorias[0].Codigo.ToString();
-                    lblDesCategoria.Text = categorias[0].Descricao;
-                }                         
+                ddlCategoria.SelectedValue = pes.CategoriaId.ToString();                       
                 
             }          
  
@@ -238,8 +242,7 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtDtCadastro.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtCategoria.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
             txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCidadeProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
@@ -249,6 +252,8 @@ namespace Admin
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
+            txtCepProf.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
         private void GravarTelefones(int idPes)
         {
@@ -314,7 +319,9 @@ namespace Admin
                             id_pes = Convert.ToInt32(Request.QueryString["id_pes"].ToString());
                 }
 
-                txtDtCadastro.Text = DateTime.Now.ToString();
+                txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                
+                CarregarDDLCategoria();
 
                 if (v_operacao.ToLower() == "edit")
                 {
@@ -324,37 +331,7 @@ namespace Admin
             }
 
         }
-
-        protected void btnPesCategoria_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            
-            CategoriasBL catBL = new CategoriasBL();
-            Categorias ca = new Categorias();
-            List<Categorias> categorias = catBL.PesquisarBL();
-
-            foreach (Categorias cat in categorias)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cat.Id;
-                linha["CODIGO"] = cat.Codigo;
-                linha["DESCRICAO"] = cat.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = catBL;
-            Session["objPesquisa"] = ca;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCategoria.ClientID + "&id=" + hfIdCategoria.ClientID + "&lbl=" + lblDesCategoria.ClientID + "','',600,500);", true);
-        }
-
+                
         protected void btnPesBairro_Click(object sender, EventArgs e)
         {
             Session["tabelaPesquisa"] = null;
@@ -417,7 +394,7 @@ namespace Admin
             pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text); 
             pessoas.Nome = txtNome.Text;
             pessoas.NomeFantasia = txtNomeFantasia.Text;
-            pessoas.CategoriaId = utils.ComparaIntComZero(hfIdCategoria.Value);
+            pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
             pessoas.CpfCnpj = txtCpfCnpj.Text;
             pessoas.Rg = txtRg.Text;
             pessoas.DtNascimento = utils.ComparaDataComNull(txtDataNascimento.Text);

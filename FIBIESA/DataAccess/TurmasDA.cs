@@ -29,8 +29,8 @@ namespace DataAccess
                 tur.Codigo = int.Parse(dr["codigo"].ToString());
                 tur.Descricao = dr["descricao"].ToString();
                 tur.EventoId = int.Parse(dr["eventoid"].ToString());
-                tur.DataInicial = utils.ComparaDataComNull(dr["dtini"].ToString());
-                tur.DataFinal = utils.ComparaDataComNull(dr["dtfim"].ToString());
+                tur.DataInicial = Convert.ToDateTime(dr["dtini"].ToString());
+                tur.DataFinal = Convert.ToDateTime(dr["dtfim"].ToString());
                 tur.Nromax = utils.ComparaIntComZero(dr["nromax"].ToString());
                 tur.HoraIni = utils.ComparaDataComNull(dr["horaini"].ToString());
                 tur.HoraFim = utils.ComparaDataComNull(dr["horafim"].ToString());

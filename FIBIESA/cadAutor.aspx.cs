@@ -13,7 +13,7 @@ namespace Admin
 {
     public partial class cadAutor : System.Web.UI.Page
     {
-        Utils utils = new Utils();
+        /*Utils utils = new Utils();
         string v_operacao = "";
 
         #region funcoes
@@ -117,7 +117,7 @@ namespace Admin
             }
 
             Response.Redirect("viewAutor.aspx");
-        }
+        */
 
     }
 }
