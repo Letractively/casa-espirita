@@ -11,7 +11,7 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                    ToolTip="Pesquisar por"></asp:TextBox>
+                    ToolTip="Pesquisar por"></asp:TextBox>&nbsp;&nbsp;
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>

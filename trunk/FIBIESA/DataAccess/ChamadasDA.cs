@@ -81,12 +81,12 @@ namespace DataAccess
 
         public List<Chamadas> PesquisarDA(int id_tPar, DateTime data)
         {
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM CHAMADAS " +
-                                                                                       " WHERE TURMAPARTICIPANTEID = {0}",id_tPar));
-                                                                                      
-                                                                                       /*"   AND DATA = {1}", id_tPar,data));*/
+                                                                                       " WHERE TURMAPARTICIPANTEID = {0}" +
+                                                                                       "   AND DATA = '{1}'", id_tPar,data.ToString("MM/dd/yyyy")));
 
             List<Chamadas> Chamadas = CarregarObjChamada(dr);
         

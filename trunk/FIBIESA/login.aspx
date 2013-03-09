@@ -18,6 +18,6 @@
                 <asp:Button ID="btnAcessar" Text="Acessar" CssClass="loginsubmit" 
                     runat="server" onclick="btnAcessar_Click" ValidationGroup="salvar" />            
                 <p><asp:Label ID="lblMensagem" runat="server" ForeColor="#CC0000"></asp:Label> </p>
-                <p><a href="#">Esqueceu sua senha?</a></p>
+                <p><a href="recuperacaoLogin.aspx">Esqueceu sua senha?</a></p>
             </form>
 </asp:Content>

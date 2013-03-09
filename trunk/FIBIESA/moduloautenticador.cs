@@ -25,7 +25,7 @@ namespace FIBIESA
             context = application.Context;
             //obtem o nome do arquivo que está sendo acessado
             string origem = context.Request.FilePath;
-            if (!origem.Contains("aspx") || origem.Contains("default.aspx") || origem.Contains("Pesquisar.aspx") || origem.Contains("PesquisarItens.aspx"))
+            if (!origem.Contains("aspx") || origem.Contains("default.aspx") || origem.Contains("Pesquisar.aspx") || origem.Contains("PesquisarItens.aspx") || origem.Contains("recuperacaoLogin.aspx"))
             {
                 return;
             }

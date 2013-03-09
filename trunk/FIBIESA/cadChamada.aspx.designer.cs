@@ -31,58 +31,22 @@ namespace Admin {
         protected global::AjaxControlToolkit.CalendarExtender txtSelData_CalendarExtender;
         
         /// <summary>
-        /// txtEvento control.
+        /// ddlEvento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEvento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEvento;
         
         /// <summary>
-        /// btnPesEvento control.
+        /// ddlTurmas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesEvento;
-        
-        /// <summary>
-        /// lblDesEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesEvento;
-        
-        /// <summary>
-        /// txtTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTurma;
-        
-        /// <summary>
-        /// btnPesTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesTurma;
-        
-        /// <summary>
-        /// lblDesTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesTurma;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTurmas;
         
         /// <summary>
         /// btnPesquisar control.
@@ -146,24 +110,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
-        
-        /// <summary>
-        /// hfIdEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdEvento;
-        
-        /// <summary>
-        /// hfIdTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdTurma;
         
         /// <summary>
         /// ScriptManager1 control.

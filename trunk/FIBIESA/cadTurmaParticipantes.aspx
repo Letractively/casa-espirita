@@ -30,7 +30,7 @@
                             <asp:Label ID="lblDesParticipante" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtParticipante" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                        
                     </tr>
@@ -42,7 +42,7 @@
                                 onclick="btnVoltar_Click" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                                onclick="btnInserir_Click" />
+                                onclick="btnInserir_Click" ValidationGroup="salvar" />
                         </td>
                     </tr>
                     <tr>

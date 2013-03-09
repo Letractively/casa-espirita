@@ -173,6 +173,7 @@
     <Content Include="login.aspx" />
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
+    <Content Include="recuperacaoLogin.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\functions.js" />
@@ -565,6 +566,13 @@
       <DependentUpon>PesquisarItens.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="recuperacaoLogin.aspx.cs">
+      <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recuperacaoLogin.aspx.designer.cs">
+      <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="viewAgencia.aspx.cs">
       <DependentUpon>viewAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -25,18 +25,12 @@
                         </asp:CalendarExtender>                           
                         </td>  
                         <td style="width: 280px">                                                         
-                            <asp:TextBox ID="txtEvento" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
-                            <asp:Button ID="btnPesEvento" runat="server" Text="..."  CssClass="btn" onclick="btnPesEvento_Click" 
-                                />
-                            <asp:Label ID="lblDesEvento" runat="server"></asp:Label>
-                                                      
+                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>       
                         </td>                        
-                        <td style="width: 280px">  
-                            <asp:TextBox ID="txtTurma" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
-                            <asp:Button ID="btnPesTurma" runat="server" Text="..."  CssClass="btn" onclick="btnPesTurma_Click" 
-                                />
-                            <asp:Label ID="lblDesTurma" runat="server"></asp:Label>
-                                                   
+                        <td style="width: 280px"> 
+                            <asp:DropDownList ID="ddlTurmas" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>                                                                               
                         </td>
                         <td>                           
                             <asp:Button ID="btnPesquisar" runat="server"  Text="Pesquisar" CssClass="btn" 
@@ -46,10 +40,10 @@
                     <tr>
                         <td></td>
                          <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtEvento" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlEvento" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
                           <td colspan="2"><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtTurma" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlTurmas" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
                     </tr>               
                     <tr>                        
@@ -94,8 +88,6 @@
                 </table>                
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdEvento" runat="server" />
-            <asp:HiddenField ID="hfIdTurma" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>

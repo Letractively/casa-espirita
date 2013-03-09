@@ -32,7 +32,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 200px">
-                                                   * Nome:
+                                                   <asp:Label ID="lblDesNome" runat="server"></asp:Label>
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox><asp:RequiredFieldValidator
@@ -46,16 +46,7 @@
                                                     <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox" 
                                                         ReadOnly="True" Width="110px"></asp:TextBox>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Nome Fantasia:
-                                                </td>
-                                                <td style="width: 400px" colspan="3">
-                                                    <asp:TextBox ID="txtNomeFantasia" runat="server" CssClass="inputbox" MaxLength="70"
-                                                        Width="334px"></asp:TextBox>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td style="width: 200px">
                                                    * Categoria:
@@ -99,7 +90,7 @@
                                                     Estado Civil:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:DropDownList ID="ddlEstadoCivil" runat="server">
+                                                    <asp:DropDownList ID="ddlEstadoCivil" runat="server" CssClass="dropdownlist" >
                                                         <asp:ListItem>Solteiro</asp:ListItem>
                                                         <asp:ListItem>Casado</asp:ListItem>
                                                         <asp:ListItem>Separado</asp:ListItem>
@@ -222,7 +213,7 @@
                                                     Tipo:
                                                 </td>
                                                 <td style="width: 200px">
-                                                    <asp:DropDownList ID="ddlTipo" runat="server">
+                                                    <asp:DropDownList ID="ddlTipo" runat="server" CssClass="dropdownlist">
                                                         <asp:ListItem>Celular</asp:ListItem>
                                                         <asp:ListItem>Comercial</asp:ListItem>
                                                         <asp:ListItem>Residencial</asp:ListItem>

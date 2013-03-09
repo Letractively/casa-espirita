@@ -16,6 +16,29 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
+        private void CarregarDdlEventos()
+        {
+            EventosBL eveBL = new EventosBL();
+            List<Eventos> eventos = eveBL.PesquisarBL();
+
+            ddlEvento.Items.Add(new ListItem());
+            foreach (Eventos ltEve in eventos)
+                ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
+
+            ddlEvento.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlTurmas()
+        {
+            TurmasBL turBL = new TurmasBL();
+            List<Turmas> turmas = turBL.PesquisarBL();
+
+            ddlTurmas.Items.Add(new ListItem());
+            foreach (Turmas ltTur in turmas)
+                ddlTurmas.Items.Add(new ListItem(ltTur.Codigo + " - " + ltTur.Descricao, ltTur.Id.ToString()));
+
+            ddlTurmas.SelectedIndex = 0;
+        }
         private DataTable CriarDtPesquisa()
         {
             DataTable tabela = new DataTable();
@@ -80,7 +103,7 @@ namespace Admin
                     {
                         linha["ID"] = 0;
                         linha["PRESENCA"] = false;
-                        linha["DATA"] = DateTime.Now.ToString("dd/MM/yyyy"); 
+                        linha["DATA"] = txtSelData.Text; 
                     }
 
                     tabela.Rows.Add(linha);
@@ -94,67 +117,12 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
                 txtSelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-        }
-
-        protected void btnPesEvento_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable tabela = CriarDtPesquisa();
-
-            EventosBL eveBL = new EventosBL();
-            Eventos ev = new Eventos();
-            List<Eventos> eventos = eveBL.PesquisarBL();
-
-            foreach (Eventos eve in eventos)
-            {
-                DataRow linha = tabela.NewRow();
-
-                linha["ID"] = eve.Id;
-                linha["CODIGO"] = eve.Codigo;
-                linha["DESCRICAO"] = eve.Descricao;
-
-                tabela.Rows.Add(linha);
+                CarregarDdlEventos();
+                CarregarDdlTurmas();
             }
-
-            if (tabela.Rows.Count > 0)
-                Session["tabelaPesquisa"] = tabela;
-
-
-            Session["objBLPesquisa"] = eveBL;
-            Session["objPesquisa"] = ev;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtEvento.ClientID + "&id=" + hfIdEvento.ClientID + "&lbl=" + lblDesEvento.ClientID + "','',600,500);", true);
-        }
-
-        protected void btnPesTurma_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable tabela = CriarDtPesquisa();
-
-            TurmasBL turBL = new TurmasBL();
-            Turmas tu = new Turmas();
-            List<Turmas> turmas = turBL.PesquisarBL();
-
-            foreach (Turmas tur in turmas)
-            {
-                DataRow linha = tabela.NewRow();
-
-                linha["ID"] = tur.Id;
-                linha["CODIGO"] = tur.Codigo;
-                linha["DESCRICAO"] = tur.Descricao;
-
-                tabela.Rows.Add(linha);
-            }
-
-            if (tabela.Rows.Count > 0)
-                Session["tabelaPesquisa"] = tabela;
-
-            Session["objBLPesquisa"] = turBL;
-            Session["objPesquisa"] = tu;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtTurma.ClientID + "&id=" + hfIdTurma.ClientID + "&lbl=" + lblDesTurma.ClientID + "','',600,500);", true);
-        }
+        }           
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -190,12 +158,12 @@ namespace Admin
                 }
             }
 
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value), utils.ComparaIntComZero(hfIdEvento.Value));
+            Pesquisar(utils.ComparaIntComZero(ddlTurmas.SelectedValue), utils.ComparaIntComZero(ddlEvento.SelectedValue));
         }
 
         protected void btnPesquisar_Click(object sender, EventArgs e)
         {
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value), utils.ComparaIntComZero(hfIdEvento.Value));
+            Pesquisar(utils.ComparaIntComZero(ddlTurmas.SelectedValue), utils.ComparaIntComZero(ddlEvento.SelectedValue));
         }
 
         
