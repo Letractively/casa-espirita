@@ -91,7 +91,7 @@ namespace Admin
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("cadPessoa.aspx?operacao=new");
+            Response.Redirect("cadPessoa.aspx?operacao=new&tipoPessoa="+rblPesJurFis.SelectedValue);
         }
 
         protected void dtgPessoas_RowDeleting(object sender, GridViewDeleteEventArgs e)

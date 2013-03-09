@@ -44,8 +44,7 @@ namespace Admin
             {
                 hfId.Value = pes.Id.ToString();
                 txtCodigo.Text = pes.Codigo.ToString();
-                txtNome.Text = pes.Nome;
-                txtNomeFantasia.Text = pes.NomeFantasia;                
+                txtNome.Text = pes.Nome;                             
                 txtCpfCnpj.Text =  pes.CpfCnpj;
                 txtRg.Text = pes.Rg;
                 txtDataNascimento.Text =  pes.DtNascimento.ToString();
@@ -307,7 +306,7 @@ namespace Admin
             CarregarAtributos();
             CriarDtTelefones();
             CriaDtExcluidos();
-            
+                        
             if (!IsPostBack)
             {                
                 if (Request.QueryString["operacao"] != null)
@@ -317,6 +316,19 @@ namespace Admin
                     if (v_operacao == "edit")
                         if (Request.QueryString["id_pes"] != null)
                             id_pes = Convert.ToInt32(Request.QueryString["id_pes"].ToString());
+                }
+
+                if (Request.QueryString["tipoPessoa"] != null)
+                {
+                    if (Request.QueryString["tipoPessoa"].ToString() == "F")
+                    {
+                        lblDesNome.Text = "* Nome";
+                    }
+                    else
+                    {
+                        lblDesNome.Text = "* Nome Fantasia";
+                    }
+
                 }
 
                 txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -392,8 +404,7 @@ namespace Admin
 
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
             pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text); 
-            pessoas.Nome = txtNome.Text;
-            pessoas.NomeFantasia = txtNomeFantasia.Text;
+            pessoas.Nome = txtNome.Text;           
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
             pessoas.CpfCnpj = txtCpfCnpj.Text;
             pessoas.Rg = txtRg.Text;
