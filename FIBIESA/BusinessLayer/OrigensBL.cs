@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class OrigensBL
+    public class OrigensBL : BaseBL
     {
         public bool InserirBL(Origens instancia)
         {
@@ -36,9 +36,30 @@ namespace BusinessLayer
         public List<Origens> PesquisarBL()
         {
             /*criar as regras de negocio*/
-            OrigensDA varDA = new OrigensDA();
+            OrigensDA origensDA = new OrigensDA();
 
-            return varDA.PesquisarDA();
+            return origensDA.PesquisarDA();
+        }
+
+        public List<Origens> PesquisarBL(int bai)
+        {
+            OrigensDA origensDA = new OrigensDA();
+
+            return origensDA.PesquisarDA(bai);
+        }
+
+        public List<Origens> PesquisarBL(string campo, string valor)
+        {
+            OrigensDA origensDA = new OrigensDA();
+
+            return origensDA.PesquisarDA(campo, valor);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            OrigensDA origensDA = new OrigensDA();
+
+            return origensDA.Pesquisar(codDes, tipo);
         }
 
     }

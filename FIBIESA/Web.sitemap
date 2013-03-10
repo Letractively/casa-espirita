@@ -2,6 +2,15 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="default.aspx" title="Home"  description="">
 
+      <siteMapNode url="viewOrigem.aspx" title="Tipos de Origens"  description="">
+        <siteMapNode url="cadOrigem.aspx" title="Cadastro de Origens"  description="" />
+      </siteMapNode>
+      <siteMapNode url="viewTipoObra.aspx" title="Tipos de Obras"  description="">
+        <siteMapNode url="cadTipoObra.aspx" title="Cadastro de Tipos de Obras"  description="" />
+      </siteMapNode>
+      <siteMapNode url="viewEditora.aspx" title="Tipos de Editoras"  description="">
+        <siteMapNode url="cadEditora.aspx" title="Cadastro de Editoras"  description="" />
+      </siteMapNode>
       <siteMapNode url="viewAutor.aspx" title="Tipos de Autores"  description="">
         <siteMapNode url="cadAutor.aspx" title="Cadastro de Autores"  description="" />
       </siteMapNode>
