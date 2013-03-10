@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadExemplar.aspx.cs" Inherits="Admin.cadExemplar" %>
+    <%@ MasterType VirtualPath="~/home.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
@@ -7,36 +8,28 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>
-                    Exemplar</h2>
+                <h2>Exemplar</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            Obra:
+                            * Tombo:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_obra" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtTombo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="valTombo" runat="server" 
+                                ControlToValidate="txtTombo" ErrorMessage="*Preenchimento Obrigatório" 
+                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Tombo:
+                            * Status:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_tombo" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Status:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_status" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:CheckBox ID="chkStatus" runat="server" />
+
                         </td>
                     </tr>
                 </table>
@@ -45,13 +38,18 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="btnVoltar_Click" />                             
+                             &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />   
                         </td>
                     </tr>
-                </table>
+                </table>                
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
         </div>
-    </div>    
+    </div>
 </asp:Content>
