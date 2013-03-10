@@ -27,7 +27,7 @@
                             <tr>
                                 <td style="width: 140px">% Juro Dia:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
                                 </td>   
                              </tr>
                             <tr>                       

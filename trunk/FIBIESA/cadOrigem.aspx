@@ -6,7 +6,7 @@
 <div id="content">
         		<div class="container half left">
                 	<div class="conthead">
-                    	<h2>Origem</h2>
+                    	<h2>Cadastro de Origens</h2>
             </div>
             <div class="contentbox">
                 <table>

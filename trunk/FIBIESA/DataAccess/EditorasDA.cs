@@ -73,7 +73,7 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM EDITORAS "));
+                CommandType.Text, string.Format(@"SELECT * FROM EDITORAS ORDER BY CODIGO "));
             return CarregarObjEditoras(dr);
         }
 

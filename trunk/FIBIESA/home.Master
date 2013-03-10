@@ -97,8 +97,8 @@
                     <li><a href="viewEditora.aspx" title="">Editoras</a></li>
                     <li><a href="viewObra.aspx" title="">Obras</a></li>
                     <li><a href="viewAutor.aspx" title="">Autores</a></li>
-                    <li><a href="viewTipoAutor.aspx" title="">Tipos de Autor</a></li>
-                    <li><a href="viewTipoObra.aspx" title="">Tipos de Obra</a></li>
+                    <li><a href="viewTipoAutor.aspx" title="">Tipos de Autores</a></li>
+                    <li><a href="viewTipoObra.aspx" title="">Tipos de Obras</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Estoque</a>

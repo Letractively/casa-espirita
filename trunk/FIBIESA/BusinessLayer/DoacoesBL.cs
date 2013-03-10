@@ -32,14 +32,20 @@ namespace BusinessLayer
 
             return doacoesDA.ExcluirDA(doa);
         }
-
-
+        
         public List<Doacoes> PesquisarBL()
         {
             /*criar as regras de negocio*/
             DoacoesDA doacoesDA = new DoacoesDA();
 
             return doacoesDA.PesquisarDA();
+        }
+
+        public List<Doacoes> PesquisarBL(string campo, string valor)
+        {
+            DoacoesDA doacoesDA = new DoacoesDA();
+
+            return doacoesDA.PesquisarDA(campo, valor);
         }
 
         public List<Doacoes> PesquisarBL(int id_doa)

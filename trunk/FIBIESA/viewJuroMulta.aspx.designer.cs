@@ -22,6 +22,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtBusca;
         
         /// <summary>
+        /// txtBusca_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender txtBusca_CalendarExtender;
+        
+        /// <summary>
         /// ddlCampo control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dtgJurosMultas;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// Master property.
