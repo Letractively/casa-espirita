@@ -13,111 +13,294 @@ namespace Admin {
     public partial class cadObra {
         
         /// <summary>
-        /// _tipoObra control.
+        /// txtCodigo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _tipoObra;
+        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
         
         /// <summary>
-        /// _codigo control.
+        /// valCodigo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _codigo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valCodigo;
         
         /// <summary>
-        /// _titulo control.
+        /// txtTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _titulo;
+        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
         
         /// <summary>
-        /// _numeroEdicao control.
+        /// valTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroEdicao;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valTitulo;
         
         /// <summary>
-        /// _localPublicacao control.
+        /// txtNroEdicao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _localPublicacao;
+        protected global::System.Web.UI.WebControls.TextBox txtNroEdicao;
         
         /// <summary>
-        /// _dataPublicacao control.
+        /// valNroEdicao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _dataPublicacao;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valNroEdicao;
         
         /// <summary>
-        /// _numeroPagina control.
+        /// ddlEditora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numeroPagina;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEditora;
         
         /// <summary>
-        /// _isbn control.
+        /// valEditora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _isbn;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valEditora;
         
         /// <summary>
-        /// _assuntoAborda control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _assuntoAborda;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// _dataReimpressao control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _dataReimpressao;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// _volume control.
+        /// txtDataPublicacao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _volume;
+        protected global::System.Web.UI.WebControls.TextBox txtDataPublicacao;
         
         /// <summary>
-        /// _origem control.
+        /// txtData_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _origem;
+        protected global::AjaxControlToolkit.CalendarExtender txtData_CalendarExtender;
+        
+        /// <summary>
+        /// valDataPublicacao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valDataPublicacao;
+        
+        /// <summary>
+        /// txtNroPags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNroPags;
+        
+        /// <summary>
+        /// valNroPags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valNroPags;
+        
+        /// <summary>
+        /// txtISBN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtISBN;
+        
+        /// <summary>
+        /// valISBN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valISBN;
+        
+        /// <summary>
+        /// txtAssuntosAborda control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAssuntosAborda;
+        
+        /// <summary>
+        /// valAssuntosAborda control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valAssuntosAborda;
+        
+        /// <summary>
+        /// ddlTipoObra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoObra;
+        
+        /// <summary>
+        /// valTipoObra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valTipoObra;
+        
+        /// <summary>
+        /// txtDataReimpressao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataReimpressao;
+        
+        /// <summary>
+        /// CalendarExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+        
+        /// <summary>
+        /// valDataReimpressao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valDataReimpressao;
+        
+        /// <summary>
+        /// txtVolume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVolume;
+        
+        /// <summary>
+        /// valVolume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valVolume;
+        
+        /// <summary>
+        /// txtOrigem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOrigem;
+        
+        /// <summary>
+        /// valOrigem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valOrigem;
+        
+        /// <summary>
+        /// btnVoltar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
+        
+        /// <summary>
+        /// btnSalvar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// hfId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfId;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new FIBIESA.Principal Master {
+            get {
+                return ((FIBIESA.Principal)(base.Master));
+            }
+        }
     }
 }

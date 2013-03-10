@@ -77,7 +77,7 @@ namespace DataObjects
             set { _assuntosAborda = value; }
         }
         
-        private int _Obraid;
+        private int _Obraid; //tipo de obra
         public int Obraid
         {
             get { return _Obraid; }
