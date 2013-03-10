@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>Tipo de Obra</h2>
+                <h2>Tipos de Obras</h2>
             </div>
             <div class="contentbox">
                 <table>

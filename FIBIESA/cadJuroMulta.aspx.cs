@@ -37,20 +37,19 @@ namespace Admin
         {
             txtMesAno.Attributes.Add("onkeypress", "return(formatar(this,'##/####',event))");
             txtMultaDia.Attributes.Add("onkeyup", "formataValor(this,event);");
-            txtMultaDia.Attributes.Add("onDblClick", "javascript:this.value='';");
-            txtMultaMes.Attributes.Add("onkeyup", "formataValor(this,event);");
-            txtMultaMes.Attributes.Add("onDblClick", "javascript:this.value='';");
+            txtMultaMes.Attributes.Add("onkeyup", "formataValor(this,event);");           
+            txtJuroDia.Attributes.Add("onkeyup", "return(formataValor(this,event))");
+            txtJuroMes.Attributes.Add("onkeyup", "return(formataValor(this,event))");
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_jm = 0;
-
-            CarregarAtributos();
+            int id_jm = 0;           
 
             if (!IsPostBack)
             {
+                CarregarAtributos();
 
                 if (Request.QueryString["operacao"] != null)
                 {

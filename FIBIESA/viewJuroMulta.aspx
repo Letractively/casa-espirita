@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="viewJuroMulta.aspx.cs" Inherits="Admin.viewJuroMulta" %>
 <%@ MasterType VirtualPath="~/home.Master" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -11,6 +12,9 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                <asp:CalendarExtender ID="txtBusca_CalendarExtender" runat="server" 
+                    TargetControlID="txtBusca">
+                </asp:CalendarExtender>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="MESANO">Mês/Ano</asp:ListItem>                   
                 </asp:DropDownList>
@@ -64,6 +68,8 @@
                     </table>                   
                 </div>             
             </div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
         </div>
         <div class="status">
         </div>

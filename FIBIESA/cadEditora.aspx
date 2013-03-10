@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>Editora</h2>
+                <h2>Cadastro de Editoras</h2>
             </div>
             <div class="contentbox">
                 <table>

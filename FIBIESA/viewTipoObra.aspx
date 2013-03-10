@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Tipo de Obra</h2>
+                <h2>Tipos de Obras</h2>
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
@@ -50,6 +50,7 @@
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
+                                       <asp:BoundField DataField="QTDDIAS" HeaderText="Qtde. Dias" SortExpression="QTDDIAS"/>
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

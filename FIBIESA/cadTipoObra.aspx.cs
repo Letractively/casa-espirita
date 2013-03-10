@@ -47,6 +47,7 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtQtdDias.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         #endregion
 

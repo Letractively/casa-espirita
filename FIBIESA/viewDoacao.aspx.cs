@@ -17,11 +17,23 @@ namespace FIBIESA
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadDoa"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadDoa"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadDoa"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("DATA", Type.GetType("System.DateTime"));
+            DataColumn coluna2 = new DataColumn("DATA", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("CODPESSOA", Type.GetType("System.Int32"));
             DataColumn coluna4 = new DataColumn("NOME", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
@@ -33,14 +45,19 @@ namespace FIBIESA
             tabela.Columns.Add(coluna5);
 
             DoacoesBL doaBL = new DoacoesBL();
-            List<Doacoes> doacoes = doaBL.PesquisarBL();
+            List<Doacoes> doacoes;
+
+            if (campo != null && valor.Trim() != "")
+                doacoes = doaBL.PesquisarBL(campo, valor);
+            else
+                doacoes = doaBL.PesquisarBL();
 
             foreach (Doacoes ltDoa in doacoes)
             {
                 DataRow linha = tabela.NewRow();
 
                 linha["ID"] = ltDoa.Id;
-                linha["DATA"] = ltDoa.Data;
+                linha["DATA"] = ltDoa.Data.ToString("dd/MM/yyyy");
                 linha["CODPESSOA"] = ltDoa.Pessoa.Codigo;
                 linha["NOME"] = ltDoa.Pessoa.Nome;
                 linha["VALOR"] = ltDoa.Valor;
@@ -48,6 +65,7 @@ namespace FIBIESA
                 tabela.Rows.Add(linha);               
             }
 
+            dtbPesquisa = tabela;
             dtgDoacao.DataSource = tabela;
             dtgDoacao.DataBind(); 
         }
@@ -56,7 +74,7 @@ namespace FIBIESA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -72,10 +90,61 @@ namespace FIBIESA
                 Doacoes doacoes = new Doacoes();
                 doacoes.Id = utils.ComparaIntComZero(dtgDoacao.DataKeys[e.RowIndex][0].ToString());
                 doaBL.ExcluirBL(doacoes);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
+
+        protected void dtgDoacao_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgDoacao.DataSource = dtbPesquisa;
+            dtgDoacao.PageIndex = e.NewPageIndex;
+            dtgDoacao.DataBind();
+        }
+
+        protected void dtgDoacao_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgDoacao_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgDoacao.DataSource = m_DataView;
+                dtgDoacao.DataBind();
+            }
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
         }
 
         
