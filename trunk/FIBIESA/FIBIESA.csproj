@@ -212,9 +212,7 @@
     <Content Include="viewExemplar.aspx" />
     <Content Include="viewFormulario.aspx" />
     <Content Include="viewInstituicao.aspx" />
-    <Content Include="viewItemEstoque.aspx" />
     <Content Include="viewJuroMulta.aspx" />
-    <Content Include="viewMovimentoEstoque.aspx" />
     <Content Include="viewNotaEntrada.aspx" />
     <Content Include="viewObra.aspx" />
     <Content Include="viewOrigem.aspx" />
@@ -678,26 +676,12 @@
     <Compile Include="viewInstituicao.aspx.designer.cs">
       <DependentUpon>viewInstituicao.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewItemEstoque.aspx.cs">
-      <DependentUpon>viewItemEstoque.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewItemEstoque.aspx.designer.cs">
-      <DependentUpon>viewItemEstoque.aspx</DependentUpon>
-    </Compile>
     <Compile Include="viewJuroMulta.aspx.cs">
       <DependentUpon>viewJuroMulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="viewJuroMulta.aspx.designer.cs">
       <DependentUpon>viewJuroMulta.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewMovimentoEstoque.aspx.cs">
-      <DependentUpon>viewMovimentoEstoque.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewMovimentoEstoque.aspx.designer.cs">
-      <DependentUpon>viewMovimentoEstoque.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewNotaEntrada.aspx.cs">
       <DependentUpon>viewNotaEntrada.aspx</DependentUpon>
