@@ -104,8 +104,8 @@
             <li><a class="collapsed heading">Estoque</a>
                 <ul class="navigation">                    
                     <li><a href="viewNotaEntrada.aspx" title="">Nota de Entrada</a></li>
-                    <li><a href="viewMovimentoEstoque.aspx" title="">Movimento de Estoque</a></li>
-                    <li><a href="viewItemEstoque.aspx" title="">Item de Estoque</a></li>
+                    <li><a href="cadMovimentoEstoque.aspx" title="">Movimentos do Estoque</a></li>
+                    <li><a href="cadItemEstoque.aspx" title="">Acerto de Estoque</a></li>
                 </ul>
             </li>
             <li><a class="collapsed heading">Eventos</a>

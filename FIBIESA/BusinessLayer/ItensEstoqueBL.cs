@@ -42,11 +42,11 @@ namespace BusinessLayer
             return itensEstoqueDA.PesquisarDA();
         }
 
-        public DataTable PesquisarItensEstoqueBL()
+        public DataSet PesquisarItensEstoqueBL(int id_movEst)
         {
             ItensEstoqueDA itEstDA = new ItensEstoqueDA();
 
-            return itEstDA.PesquisarItensEstoqueDA();
+            return itEstDA.PesquisarItensEstoqueDA(id_movEst);
         }
     }
 }

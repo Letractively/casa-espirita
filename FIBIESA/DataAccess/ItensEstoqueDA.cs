@@ -33,7 +33,7 @@ namespace DataAccess
             return itensEstoque;
         }
 
-        public DataTable PesquisarItensEstoqueDA()
+        public DataSet PesquisarItensEstoqueDA(int id_movEst)
         {
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT ITEST.ID, ITEST.CONTROLAESTOQUE, ITEST.QTDMINIMA " +
@@ -45,12 +45,11 @@ namespace DataAccess
                                                                                         "    , OBRAS OB " +
                                                                                         " WHERE ITEST.ID = MEST.ITEMESTOQUEID " +
                                                                                         "   AND ITEST.EXEMPLARID = EXE.ID " +
-                                                                                        "   AND OB.ID = EXE.OBRAID "));
+                                                                                        "   AND OB.ID = EXE.OBRAID " +
+                                                                                        "   AND MEST.ID = {0} ",id_movEst));
 
                  
-            DataTable tabela = ds.Tables[0];
-
-            return tabela;
+            return ds;
         }
     }
 }

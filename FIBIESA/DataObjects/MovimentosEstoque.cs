@@ -14,8 +14,8 @@ namespace DataObjects
             set { _id = value; }
         }
 
-        private Int32 _vendaid;
-        public Int32 VendaId
+        private Int32? _vendaid;
+        public Int32? VendaId
         {
             get { return _vendaid; }
             set { _vendaid = value; }
@@ -28,8 +28,8 @@ namespace DataObjects
             set { _usuarioid = value; }
         }
 
-        private float _valor;
-        public float Valor
+        private decimal _valor;
+        public decimal Valor
         {
             get { return _valor; }
             set { _valor = value; }
@@ -49,11 +49,46 @@ namespace DataObjects
             set { _quantidade = value; }
         }
 
-        private Int32 _notaentradaid;
-        public Int32 NotaEntradaId
+        private Int32? _notaentradaid;
+        public Int32? NotaEntradaId
         {
             get { return _notaentradaid; }
             set { _notaentradaid = value; }
+        }
+
+        private string _tipo;
+        public string Tipo
+        {
+            get { return _tipo; }
+            set { _tipo = value; }
+        }
+
+        private Vendas _vendas;
+        public Vendas Vendas
+        {
+            get { return _vendas; }
+            set { _vendas = value; }
+        }
+
+        private Usuarios _usuarios;
+        public Usuarios Usuarios
+        {
+            get { return _usuarios; }
+            set { _usuarios = value; }
+        }
+
+        private NotasEntrada _notaEntrada;
+        public NotasEntrada NotaEntrada
+        {
+            get { return _notaEntrada; }
+            set { _notaEntrada = value; }
+        }
+
+        private DateTime _data;
+        public DateTime Data
+        {
+            get { return _data; }
+            set { _data = value; }
         }
     
     }

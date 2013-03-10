@@ -8,18 +8,21 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Entrada / Saída de Itens no Estoque</h2>
+                    Acerto de Estoque</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 141px">
-                            Item:
+                           * Item:
                         </td>
                         <td style="width: 400px">
                             
-                            <asp:TextBox ID="txtItem" runat="server" Width="181px"></asp:TextBox>
-                            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" class="btn" />
+                            <asp:TextBox ID="txtItem" runat="server" Width="75px" CssClass="inputbox"></asp:TextBox>
+                            <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
+                                 />
+                            &nbsp;
+                            <asp:Label ID="lblDesItem" runat="server"></asp:Label>                         
                             
                         </td>
                     </tr>
@@ -36,22 +39,22 @@
                 <table>
                     <tr>
                         <td>
-                            Quantidade:
+                           * Quantidade:
                         </td>
                         <td>
-                            &nbsp;<asp:TextBox ID="TextBox1" runat="server" Width="67px"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="TextBox1" runat="server" Width="67px" CssClass="inputbox"></asp:TextBox>
                         </td>
                         <td>
                             Valor:
                         </td>
                         <td>
-                            &nbsp;<asp:TextBox ID="TextBox2" runat="server" Width="67px"></asp:TextBox>
+                            &nbsp;<asp:TextBox ID="TextBox2" runat="server" Width="67px" CssClass="inputbox"></asp:TextBox>
                         </td>
                         <td style="width: 84px">
                             Valor Venda:
                         </td>
                         <td>
-                            <asp:TextBox ID="TextBox3" runat="server" Width="67px"></asp:TextBox>
+                            <asp:TextBox ID="TextBox3" runat="server" Width="67px" CssClass="inputbox"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Button ID="btnIncluir" runat="server" Text="Incluir" class="btn" />
@@ -70,8 +73,10 @@
                     </tr>
                 </table>
             </div>
+             <asp:HiddenField ID="hfIdItem" runat="server" />
         </div>
         <div class="status">
+           
         </div>
     </div>    
 </asp:Content>

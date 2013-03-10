@@ -68,7 +68,7 @@ namespace Admin
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/defautl.aspx");
+            Response.Redirect("~/viewDoacao.aspx");
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
