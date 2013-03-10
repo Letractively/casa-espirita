@@ -8,52 +8,64 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Item em Estoque</h2>
+                    Entrada / Saída de Itens no Estoque</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td style="width: 140px">
-                            Exemplar:
+                        <td style="width: 141px">
+                            Item:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_exemplar" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            
+                            <asp:TextBox ID="txtItem" runat="server" Width="181px"></asp:TextBox>
+                            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" class="btn" />
+                            
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
-                            Status:
+                        <td style="width: 141px">
+                            
+                            <asp:RadioButton ID="btnEntrada" runat="server" Text="Entrada" />
                         </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_status" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Controla Estoque:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_controlaEstoque" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            Quantidade Mínima:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="_quantidadeMinima" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td>
+                           <asp:RadioButton ID="btnSaida" runat="server" Text="Saída" />    
                         </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td style="width: 140px">
+                        <td>
+                            Quantidade:
                         </td>
-                        <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                        <td>
+                            &nbsp;<asp:TextBox ID="TextBox1" runat="server" Width="67px"></asp:TextBox>
+                        </td>
+                        <td>
+                            Valor:
+                        </td>
+                        <td>
+                            &nbsp;<asp:TextBox ID="TextBox2" runat="server" Width="67px"></asp:TextBox>
+                        </td>
+                        <td style="width: 84px">
+                            Valor Venda:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextBox3" runat="server" Width="67px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnIncluir" runat="server" Text="Incluir" class="btn" />
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            Movimentações:
+                        </td>
+                        <td>
+                        &nbsp;<asp:GridView ID="GridView1" runat="server">
+                            </asp:GridView>
                         </td>
                     </tr>
                 </table>
