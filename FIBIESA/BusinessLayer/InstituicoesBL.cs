@@ -41,6 +41,13 @@ namespace BusinessLayer
             return instituicoesDA.PesquisarDA();
         }
 
+        public List<Instituicoes> PesquisarBL(string campo, string valor)
+        {
+            InstituicoesDA instDA = new InstituicoesDA();
+
+            return instDA.PesquisarDA(campo, valor);
+        }
+
         public List<Instituicoes> PesquisarBL(int ins)
         {
             InstituicoesDA instituicoesDA = new InstituicoesDA();

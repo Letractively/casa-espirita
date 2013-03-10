@@ -44,7 +44,7 @@
                             Aplicação:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlAplicacao" runat="server">
+                            <asp:DropDownList ID="ddlAplicacao" runat="server" CssClass="dropdownlist">
                                 <asp:ListItem Value="CP">Contas a Pagar</asp:ListItem>
                                 <asp:ListItem Value="CR">Contas a Receber</asp:ListItem>
                             </asp:DropDownList>

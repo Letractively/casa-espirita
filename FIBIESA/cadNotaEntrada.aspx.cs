@@ -17,6 +17,20 @@ namespace Admin
         DataTable dtItens = new DataTable();
 
         #region funcoes
+
+        private void CarregarAtributos()
+        {            
+            txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtSerie.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtQtde.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtValor.Attributes.Add("onkeypress", "return(Real(this,event))");
+            txtValorVenda.Attributes.Add("onkeypress", "return(Real(this,event))");
+            txtTotItens.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtTotal.Attributes.Add("onkeypress", "return(Real(this,event))");
+           
+        }
+
         private void CriarDtItens()
         {
             if (dtgItens.Columns.Count > 0)
@@ -49,7 +63,10 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+            }
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)

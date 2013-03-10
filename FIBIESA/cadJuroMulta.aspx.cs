@@ -37,7 +37,9 @@ namespace Admin
         {
             txtMesAno.Attributes.Add("onkeypress", "return(formatar(this,'##/####',event))");
             txtMultaDia.Attributes.Add("onkeyup", "formataValor(this,event);");
+            txtMultaDia.Attributes.Add("onDblClick", "javascript:this.value='';");
             txtMultaMes.Attributes.Add("onkeyup", "formataValor(this,event);");
+            txtMultaMes.Attributes.Add("onDblClick", "javascript:this.value='';");
         }
         #endregion
 

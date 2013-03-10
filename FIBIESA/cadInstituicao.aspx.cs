@@ -29,6 +29,7 @@ namespace FIBIESA
                 hfId.Value = ltIns.Id.ToString();
                 txtCodigo.Text = ltIns.Codigo.ToString();
                 txtRazao.Text = ltIns.Razao;
+                txtNomeFantasia.Text = ltIns.NomeFantasia.ToString();
                 txtEmail.Text = ltIns.Email;
                 txtCnpj.Text = ltIns.Cnpj;
                 txtCep.Text = ltIns.Cep;
@@ -60,6 +61,7 @@ namespace FIBIESA
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtBairro.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
         private DataTable CriarDtPesquisa()
         {
@@ -214,6 +216,8 @@ namespace FIBIESA
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
+
+            Response.Redirect("~/viewInstituicao");
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -283,5 +287,7 @@ namespace FIBIESA
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBairro.ClientID + "&id=" + hfIdBairro.ClientID + "&lbl=" + lblDesBairro.ClientID + "','',600,500);", true);
         }
+
+                
     }
 }

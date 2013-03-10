@@ -48,6 +48,13 @@ namespace BusinessLayer
             return porDA.PesquisarDA(por);
         }
 
+        public List<Portadores> PesquisarBL(string campo, string valor)
+        {
+            PortadoresDA portadoresDA = new PortadoresDA();
+
+            return portadoresDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             PortadoresDA porDA = new PortadoresDA();

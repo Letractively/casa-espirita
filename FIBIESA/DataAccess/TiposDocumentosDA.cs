@@ -7,11 +7,14 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
+using FG;
 
 namespace DataAccess
 {
     public class TiposDocumentosDA : BaseDA
     {
+        Utils utils = new Utils();
+
         #region funcoes
         private List<TiposDocumentos> CarregarObjTiposDocumentos(SqlDataReader dr)
         {
@@ -89,6 +92,31 @@ namespace DataAccess
             List<TiposDocumentos> tiposDocumentos = CarregarObjTiposDocumentos(dr);
 
             return tiposDocumentos;
+        }
+
+        public List<TiposDocumentos> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM TIPOSDOCUMENTOS WHERE  CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM TIPOSDOCUMENTOS WHERE DESCRICAO LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<TiposDocumentos> tiposDoc = CarregarObjTiposDocumentos(dr);
+
+            return tiposDoc;
         }
 
         public override List<Base> Pesquisar(string descricao, string tipo)

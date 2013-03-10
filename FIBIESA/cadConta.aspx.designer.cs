@@ -67,31 +67,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
         
         /// <summary>
-        /// txtAgencia control.
+        /// ddlAgencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAgencia;
-        
-        /// <summary>
-        /// btnPesAgencia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesAgencia;
-        
-        /// <summary>
-        /// lblDesAgencia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesAgencia;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAgencia;
         
         /// <summary>
         /// RequiredFieldValidator3 control.
@@ -146,15 +128,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
-        
-        /// <summary>
-        /// hfIdAgencia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdAgencia;
         
         /// <summary>
         /// Master property.

@@ -18,6 +18,18 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
+        private void CarregarDDLBanco()
+        {
+            BancosBL banBL = new BancosBL();
+            List<Bancos> bancos = banBL.PesquisarBL();
+
+            ddlBanco.Items.Add(new ListItem());
+            foreach (Bancos ltBan in bancos)
+                ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
+
+            ddlBanco.SelectedIndex = 0;
+        }
+
         private void carregarDados(int id_age)
         {
             AgenciasBL ageBL = new AgenciasBL();
@@ -33,18 +45,13 @@ namespace Admin
                 txtEndereco.Text = ltAge.Endereco;
                 txtRanking.Text = ltAge.Ranking.ToString();
                 txtComplemento.Text = ltAge.Complemento.ToString();
-                hfIdBairro.Value = ltAge.BairroId.ToString();
+                ddlBanco.SelectedValue = ltAge.BairroId.ToString();
                 if (ltAge.Bairro != null)
                 {
                     txtBairro.Text = ltAge.Bairro.Codigo.ToString();
                     lblDesBairro.Text = ltAge.Bairro.Descricao;
                 }
-                hfIdBanco.Value = ltAge.BancoId.ToString();
-                if (ltAge.Banco != null)
-                {
-                    txtBanco.Text = ltAge.Banco.Codigo.ToString();
-                    lblDesBanco.Text = ltAge.Banco.Descricao;
-                }
+                             
                 hfIdCidade.Value = ltAge.CidadeId.ToString();
                 if (ltAge.Cidade != null)
                 {                    
@@ -58,6 +65,8 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
         private DataTable CriarDtPesquisa()
         {
@@ -91,6 +100,8 @@ namespace Admin
                             id_age = Convert.ToInt32(Request.QueryString["id_age"].ToString());
                 }
 
+                CarregarDDLBanco();
+
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_age);
             }
@@ -112,7 +123,7 @@ namespace Admin
             agencias.Cep = txtCep.Text;
             agencias.CidadeId = utils.ComparaIntComNull(hfIdCidade.Value);
             agencias.BairroId = utils.ComparaIntComNull(hfIdBairro.Value);
-            agencias.BancoId = utils.ComparaIntComZero(hfIdBanco.Value);
+            agencias.BancoId = utils.ComparaIntComZero(ddlBanco.SelectedValue);
             agencias.Endereco = txtEndereco.Text;
             agencias.Complemento = txtComplemento.Text;
             agencias.Ranking = utils.ComparaIntComZero(txtRanking.Text);
@@ -201,38 +212,7 @@ namespace Admin
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBairro.ClientID + "&id=" + hfIdBairro.ClientID + "&lbl=" + lblDesBairro.ClientID + "','',600,500);", true);
         }
 
-        protected void btnPesBanco_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-
-            BancosBL banBL = new BancosBL();
-            Bancos ba = new Bancos();
-            List<Bancos> bancos = banBL.PesquisarBL();
-
-            foreach (Bancos cat in bancos)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cat.Id;
-                linha["CODIGO"] = cat.Codigo;
-                linha["DESCRICAO"] = cat.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            Session["tabelaPesquisa"] = null;
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = banBL;
-            Session["objPesquisa"] = ba;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBanco.ClientID + "&id=" + hfIdBanco.ClientID + "&lbl=" + lblDesBanco.ClientID + "','',600,500);", true);
-        }
-
+        
               
     }
 }

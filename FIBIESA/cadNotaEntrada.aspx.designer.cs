@@ -58,6 +58,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtData;
         
         /// <summary>
+        /// txtData_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender txtData_CalendarExtender;
+        
+        /// <summary>
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfIdItem;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// Master property.

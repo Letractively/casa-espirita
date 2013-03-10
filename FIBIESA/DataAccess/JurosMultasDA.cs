@@ -24,10 +24,10 @@ namespace DataAccess
                 JurosMultas jm = new JurosMultas();
                 jm.Id = int.Parse(dr["ID"].ToString());
                 jm.MesAno = Convert.ToDateTime(dr["MESANO"].ToString());
-                jm.PercJurosDias = utils.ComparaDecimalComZero(dr["PERCJUROSDIAS"].ToString());
+                jm.PercJurosDias = utils.ComparaDecimalComZero(dr["PERCJUROSDIA"].ToString());
                 jm.PercJurosMes = utils.ComparaDecimalComZero(dr["PERCJUROSMES"].ToString());
-                jm.PercMultaDias = utils.ComparaDecimalComZero(dr["PERCMULTADIAS"].ToString());
-                jm.PercMultaMes = utils.ComparaDecimalComZero(dr["PERCMULTASMES"].ToString());
+                jm.PercMultaDias = utils.ComparaDecimalComZero(dr["PERCMULTADIA"].ToString());
+                jm.PercMultaMes = utils.ComparaDecimalComZero(dr["PERCMULTAMES"].ToString());
 
                 jurosMultas.Add(jm);
             }
@@ -94,6 +94,28 @@ namespace DataAccess
             List<JurosMultas> jurosMultas = CarregarObjJurosMultas(dr);
 
             return jurosMultas; 
+        }
+
+        public List<JurosMultas> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "MESANO":
+                    consulta = string.Format("SELECT * FROM JUROSMULTAS WHERE MESANO = '{0}'", valor != null? Convert.ToDateTime(valor).ToString("MM/dd/yyyy") : "");
+                    break;                
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<JurosMultas> jurosMultas = CarregarObjJurosMultas(dr);
+
+            return jurosMultas;
         }
     }
 }

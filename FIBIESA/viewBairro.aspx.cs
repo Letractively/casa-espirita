@@ -20,12 +20,12 @@ namespace Admin
         {
             get
             {
-                if (Session["_dtbPesquisa_cadForm"] != null)
-                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                if (Session["_dtbPesquisa_cadBai"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadBai"];
                 else
                     return null;
             }
-            set { Session["_dtbPesquisa_cadForm"] = value; }
+            set { Session["_dtbPesquisa_cadBai"] = value; }
         }
         private void Pesquisar(string campo, string valor)
         {

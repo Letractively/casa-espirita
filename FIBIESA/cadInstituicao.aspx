@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="content">
-        <div class="container half left">
+        <div class="container half3 left">
             <div class="conthead">
                 <h2>
                     Cadastro de Instituições</h2>
@@ -21,7 +21,7 @@
                                         <table>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    Código:
+                                                    * Código:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
@@ -31,7 +31,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    Razão Social:
+                                                    * Razão Social:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtRazao" runat="server" CssClass="inputbox" MaxLength="70" 
@@ -42,7 +42,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    Nome Fantasia:
+                                                    * Nome Fantasia:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtNomeFantasia" runat="server" CssClass="inputbox" MaxLength="70" 
@@ -53,7 +53,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    CNPJ:
+                                                    * CNPJ:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCnpj" runat="server" CssClass="inputbox" MaxLength="14"></asp:TextBox>
@@ -63,7 +63,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    E-mail:
+                                                    * E-mail:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
@@ -83,7 +83,7 @@
                                                     CEP:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="10"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>

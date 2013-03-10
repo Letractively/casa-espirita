@@ -90,6 +90,34 @@ namespace DataAccess
 
         }
 
+        public List<NotasEntrada> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "NUMERO":
+                    consulta = string.Format("SELECT * FROM NOTAENTRADA WHERE NUMERO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "SERIE":
+                    consulta = string.Format("SELECT * FROM NOTAENTRADA WHERE SERIE  LIKE {0}'", utils.ComparaShortComZero(valor));
+                    break;
+                case "DATA":
+                    consulta = string.Format("SELECT * FROM NOTAENTRADA WHERE DATA  LIKE '{0}'", valor != null ? Convert.ToDateTime(valor).ToString("MM/dd/yyyy") : "");
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<NotasEntrada> notaEnt = CarregarObjNotaEntrada(dr);
+
+            return notaEnt;
+        }
+
         public List<NotasEntrada> PesquisarDA(int id_ntE)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

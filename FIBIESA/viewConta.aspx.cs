@@ -16,7 +16,19 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadCon"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadCon"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadCon"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -32,7 +44,12 @@ namespace Admin
             tabela.Columns.Add(coluna5);
 
             ContasBL conBL = new ContasBL();
-            List<Contas> contas = conBL.PesquisarBL();
+            List<Contas> contas;
+
+            if (campo != null && valor.Trim() != "")
+                contas = conBL.PesquisarBL(campo, valor);
+            else
+                contas = conBL.PesquisarBL();
 
             foreach (Contas ltCon in contas)
             {
@@ -57,7 +74,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -80,10 +97,61 @@ namespace Admin
                 Contas contas = new Contas();
                 contas.Id = utils.ComparaIntComZero(dtgContas.DataKeys[e.RowIndex][0].ToString());
                 conBL.ExcluirBL(contas);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+        }
+
+        protected void dtgContas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgContas.DataSource = dtbPesquisa;
+            dtgContas.PageIndex = e.NewPageIndex;
+            dtgContas.DataBind();
+        }
+
+        protected void dtgContas_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgContas.DataSource = m_DataView;
+                dtgContas.DataBind();
+            }
+        }
+
+        protected void dtgContas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

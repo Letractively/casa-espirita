@@ -119,6 +119,31 @@ namespace DataAccess
             return Contas;
         }
 
+        public List<Contas> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM CONTAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM CONTAS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Contas> contas = CarregarObjContas(dr);
+
+            return contas;
+        }
+
         public override List<Base> Pesquisar(string descricao, string tipo)
         {
             SqlDataReader dr;

@@ -10,8 +10,14 @@
                 <h2>Cadastro de Instituições</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
+                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                    ToolTip="Pesquisar por"></asp:TextBox>
+                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
+                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
+                    <asp:ListItem Value="RAZAO">Razão Social</asp:ListItem>
+                </asp:DropDownList>
+                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                    onclick="btnBusca_Click" />
                 &nbsp;&nbsp;&nbsp
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
@@ -25,7 +31,10 @@
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
                                    onrowdeleting="dtgInstituicao_RowDeleting" 
                                    onselectedindexchanged="dtgInstituicao_SelectedIndexChanged" PageSize="7" 
-                                    AllowSorting="True">
+                                    AllowSorting="True" GridLines="None" 
+                                    onpageindexchanging="dtgInstituicao_PageIndexChanging" 
+                                    onrowdatabound="dtgInstituicao_RowDataBound" onsorting="dtgInstituicao_Sorting" 
+                                    ShowHeaderWhenEmpty="True">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -36,10 +45,10 @@
                                             <ItemStyle CssClass="grd_delete" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                       <asp:BoundField DataField="RAZAO" HeaderText="Razão Social" />
-                                       <asp:BoundField DataField="EMAIL" HeaderText="E-mail" />
-                                       <asp:BoundField DataField="CNPJ" HeaderText="CNPJ" />
+                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                       <asp:BoundField DataField="RAZAO" HeaderText="Razão Social" SortExpression="RAZAO"/>
+                                       <asp:BoundField DataField="EMAIL" HeaderText="E-mail" SortExpression="EMAIL" />
+                                       <asp:BoundField DataField="CNPJ" HeaderText="CNPJ" SortExpression="CNPJ"/>
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -53,17 +62,7 @@
                                </asp:GridView>                       
                             </td>
                        </tr>
-                    </table>
-                    <div class="extrabottom">
-                        <ul class="pagination">
-                            <li class="text">Anterior</li>
-                            <li class="page"><a href="#" title="">1</a></li>
-                            <li><a href="#" title="">2</a></li>
-                            <li><a href="#" title="">3</a></li>
-                            <li><a href="#" title="">4</a></li>
-                            <li class="text"><a href="#" title="">Próximo</a></li>
-                        </ul>
-                    </div>
+                    </table>                   
                 </div>
                 <!-- grid modelo finaliza aqui -->               
             </div>

@@ -30,16 +30,36 @@ namespace Admin
                 hfId.Value = ltPor.Id.ToString();
                 txtCodigo.Text = ltPor.Codigo.ToString();
                 txtDescricao.Text = ltPor.Descricao;
-                hfIdBanco.Value = ltPor.BancoId.ToString();
-                txtBanco.Text = ltPor.Banco.Codigo.ToString();
-                lblDesBanco.Text = ltPor.Banco.Descricao;
-                hfIdAgencia.Value = ltPor.AgenciaId.ToString();
-                txtAgencia.Text = ltPor.Agencia.Codigo.ToString();
-                lblDesAgencia.Text = ltPor.Agencia.Descricao;
-                           
+                ddlBanco.SelectedValue = ltPor.BancoId.ToString(); 
+                ddlAgencia.SelectedValue = ltPor.AgenciaId.ToString();                           
             }
 
         }
+        
+        private void CarregarDDLAgencia()
+        {
+            AgenciasBL ageBL = new AgenciasBL();
+            List<Agencias> agencias = ageBL.PesquisarBL();
+
+            ddlAgencia.Items.Add(new ListItem());
+            foreach (Agencias ltAge in agencias)
+                ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
+
+            ddlAgencia.SelectedIndex = 0;
+        }
+        
+        private void CarregarDDLBanco()
+        {
+            BancosBL banBL = new BancosBL();
+            List<Bancos> bancos = banBL.PesquisarBL();
+
+            ddlBanco.Items.Add(new ListItem());
+            foreach (Bancos ltBan in bancos)
+                ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
+
+            ddlBanco.SelectedIndex = 0;
+        }
+        
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
@@ -62,6 +82,9 @@ namespace Admin
                             id_por = Convert.ToInt32(Request.QueryString["id_por"].ToString());
                 }
 
+                CarregarDDLAgencia();
+                CarregarDDLBanco();
+
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_por);
             }
@@ -81,8 +104,8 @@ namespace Admin
             portadores.Id = utils.ComparaIntComZero(hfId.Value);
             portadores.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             portadores.Descricao = txtDescricao.Text;
-            portadores.AgenciaId = utils.ComparaIntComNull(hfIdAgencia.Value);
-            portadores.BancoId = utils.ComparaIntComNull(hfIdBanco.Value);
+            portadores.AgenciaId = utils.ComparaIntComNull(ddlAgencia.SelectedValue);
+            portadores.BancoId = utils.ComparaIntComNull(ddlBanco.SelectedValue);
 
             if (portadores.Id > 0)
             {
@@ -104,84 +127,6 @@ namespace Admin
 
         }
 
-        protected void btnPesBanco_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            BancosBL banBL = new BancosBL();
-            List<Bancos> bancos = banBL.PesquisarBL();
-
-            foreach (Bancos ban in bancos)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = ban.Id;
-                linha["CODIGO"] = ban.Codigo;
-                linha["DESCRICAO"] = ban.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            Session["tabelaPesquisa"] = null;
-            
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-            BancosBL baBL = new BancosBL();
-            Bancos bs = new Bancos();
-
-            Session["objBLPesquisa"] = baBL;
-            Session["objPesquisa"] = bs;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBanco.ClientID + "&id=" + hfIdBanco.ClientID + "&lbl=" + lblDesBanco.ClientID + "','',600,500);", true);
-        }
-
-        protected void btnPesAgencia_Click(object sender, EventArgs e)
-        {
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            AgenciasBL ageBL = new AgenciasBL();
-            List<Agencias> agencias = ageBL.PesquisarBL();
-
-            foreach (Agencias age in agencias)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = age.Id;
-                linha["CODIGO"] = age.Codigo;
-                linha["DESCRICAO"] = age.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            Session["tabelaPesquisa"] = null;
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-            AgenciasBL agBL = new AgenciasBL();
-            Agencias ag = new Agencias();
-
-            Session["objBLPesquisa"] = agBL;
-            Session["objPesquisa"] = ag;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtAgencia.ClientID + "&id=" + hfIdAgencia.ClientID + "&lbl=" + lblDesAgencia.ClientID + "','',600,500);", true);
-            
-        }
+                
     }
 }

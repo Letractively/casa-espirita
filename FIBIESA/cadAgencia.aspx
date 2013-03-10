@@ -38,13 +38,10 @@
                     <tr>
                         <td style="width: 140px">* Banco:</td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtBanco" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesBanco" runat="server" Text="..."  CssClass="btn" onclick="btnPesBanco_Click" 
-                                 />
-                            <asp:Label ID="lblDesBanco" runat="server"></asp:Label>
-                            <br />
+                            <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist">
+                             </asp:DropDownList>                           
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtBanco" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlBanco" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -116,7 +113,6 @@
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdCidade" runat="server" />
-            <asp:HiddenField ID="hfIdBanco" runat="server" />
             <asp:HiddenField ID="hfIdBairro" runat="server" />
         </div>
         <div class="status">            
