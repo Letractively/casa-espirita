@@ -70,9 +70,9 @@ namespace DataAccess
             paramsToSP[7] = new SqlParameter("@bairroid", ins.BairroId);
             paramsToSP[8] = new SqlParameter("@endereco", ins.Endereco);
             paramsToSP[9] = new SqlParameter("@numero", ins.Numero);
-            paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);                      
+            paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
 
             return true;
         }
@@ -92,9 +92,9 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@bairroid", ins.BairroId);
             paramsToSP[9] = new SqlParameter("@endereco", ins.Endereco);
             paramsToSP[10] = new SqlParameter("@numero", ins.Numero);
-            paramsToSP[11] = new SqlParameter("@complemento", ins.Complemento);      
+            paramsToSP[11] = new SqlParameter("@complemento", ins.Complemento);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoes", paramsToSP);
 
             return true;
         }
@@ -105,7 +105,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", ins.Id);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_instituicoes", paramsToSP);
 
             return true;
         }
@@ -119,6 +119,31 @@ namespace DataAccess
 
             return instituicoes;
 
+        }
+
+        public List<Instituicoes> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM INSTITUICOES WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "RAZAO":
+                    consulta = string.Format("SELECT * FROM INSTITUICOES WHERE RAZAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Instituicoes> instituicoes = CarregarObjInstituicoes(dr);
+
+            return instituicoes;
         }
 
         public List<Instituicoes> PesquisarDA(int id_ins)

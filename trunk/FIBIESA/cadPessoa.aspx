@@ -52,7 +52,7 @@
                                                    * Categoria:
                                                 </td>
                                                 <td style="width: 400px" colspan="3">                                                   
-                                                    <asp:DropDownList ID="ddlCategoria" runat="server">
+                                                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="dropdownlist">
                                                     </asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
                                                                 runat="server" ControlToValidate="ddlCategoria" ErrorMessage="*Preenchimento Obrigatório"

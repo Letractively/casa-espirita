@@ -113,7 +113,7 @@ namespace Admin
         {
             int str_pes = 0;
             str_pes = utils.ComparaIntComZero(dtgPessoas.SelectedDataKey[0].ToString());
-            Response.Redirect("cadPessoa.aspx?id_pes=" + str_pes.ToString() + "&operacao=edit");
+            Response.Redirect("cadPessoa.aspx?id_pes=" + str_pes.ToString() + "&operacao=edit&tipoPessoa="+rblPesJurFis.SelectedValue);
         }
 
         protected void dtgPessoas_PageIndexChanging(object sender, GridViewPageEventArgs e)

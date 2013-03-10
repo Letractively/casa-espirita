@@ -48,6 +48,13 @@ namespace BusinessLayer
             return ageDA.PesquisarDA(bai);
         }
 
+        public List<Agencias> PesquisarBL(string campo, string valor)
+        {
+            AgenciasDA agenciaDA = new AgenciasDA();
+
+            return agenciaDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             AgenciasDA ageDA = new AgenciasDA();

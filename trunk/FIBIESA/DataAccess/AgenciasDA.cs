@@ -140,7 +140,7 @@ namespace DataAccess
         public List<Agencias> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM AGENCIAS "));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM AGENCIAS ORDER BY CODIGO "));
 
             List<Agencias> agencias = CarregarObjAgencias(dr);
 
@@ -153,6 +153,31 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM AGENCIAS WHERE ID = {0}", id_age));
+
+            List<Agencias> agencias = CarregarObjAgencias(dr);
+
+            return agencias;
+        }
+
+        public List<Agencias> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM AGENCIAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM AGENCIAS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
 
             List<Agencias> agencias = CarregarObjAgencias(dr);
 

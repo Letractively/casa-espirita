@@ -42,20 +42,19 @@
                     </tr>
                     <tr>
                         <td style="width: 140px">* Agência:</td>
-                        <td style="width: 400px">                            
-                            <asp:TextBox ID="txtAgencia" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:Button ID="btnPesAgencia" runat="server" Text="..."  CssClass="btn" onclick="btnPesAgencia_Click" 
-                                 />
-                            <asp:Label ID="lblDesAgencia" runat="server"></asp:Label>
+                        <td style="width: 400px">      
+                            <asp:DropDownList ID="ddlAgencia" runat="server" CssClass="dropdownlist">
+                             </asp:DropDownList>   
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="txtAgencia" ErrorMessage="*Preenchimento Obrigatório" 
+                                ControlToValidate="ddlAgencia" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>   
                     <tr>
                         <td style="width: 140px">* Dígito:</td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtDigito" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtDigito" runat="server" CssClass="inputbox" MaxLength="2" 
+                                Width="50px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtDigito" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -78,7 +77,6 @@
                 </table>
             </div>
              <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdAgencia" runat="server" />
         </div>
         <div class="status">
         </div>

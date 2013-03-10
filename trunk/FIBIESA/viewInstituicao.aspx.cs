@@ -16,7 +16,19 @@ namespace FIBIESA
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadForm"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadForm"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadForm"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -43,7 +55,12 @@ namespace FIBIESA
             tabela.Columns.Add(coluna10);
 
             InstituicoesBL insBL = new InstituicoesBL();
-            List<Instituicoes> instituicoes = insBL.PesquisarBL();
+            List<Instituicoes> instituicoes;
+
+            if (campo != null && valor.Trim() != "")
+                instituicoes = insBL.PesquisarBL(campo, valor);
+            else
+                instituicoes = insBL.PesquisarBL();
 
             foreach (Instituicoes ins in instituicoes)
             {
@@ -63,6 +80,7 @@ namespace FIBIESA
                 tabela.Rows.Add(linha);   
             }
 
+            dtbPesquisa = tabela;
             dtgInstituicao.DataSource = tabela;
             dtgInstituicao.DataBind();
 
@@ -72,7 +90,7 @@ namespace FIBIESA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
 
         }
 
@@ -89,7 +107,7 @@ namespace FIBIESA
                 Instituicoes instituicoes = new Instituicoes();
                 instituicoes.Id = utils.ComparaIntComZero(dtgInstituicao.DataKeys[e.RowIndex][0].ToString());
                 insBL.ExcluirBL(instituicoes);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -100,6 +118,57 @@ namespace FIBIESA
             int str_ins = 0;
             str_ins = utils.ComparaIntComZero(dtgInstituicao.SelectedDataKey[0].ToString());
             Response.Redirect("cadInstituicao.aspx?id_ins=" + str_ins.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgInstituicao_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgInstituicao.DataSource = dtbPesquisa;
+            dtgInstituicao.PageIndex = e.NewPageIndex;
+            dtgInstituicao.DataBind();
+        }
+
+        protected void dtgInstituicao_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgInstituicao_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgInstituicao.DataSource = m_DataView;
+                dtgInstituicao.DataBind();
+            }
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);  
         }
     }
 }

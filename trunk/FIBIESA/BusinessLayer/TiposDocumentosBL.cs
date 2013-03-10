@@ -48,6 +48,13 @@ namespace BusinessLayer
             return tdoDA.PesquisarDA(tdo);
         }
 
+        public List<TiposDocumentos> PesquisarBL(string campo, string valor)
+        {
+            TiposDocumentosDA tiposDocDA = new TiposDocumentosDA();
+
+            return tiposDocDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             TiposDocumentosDA tdoDA = new TiposDocumentosDA();

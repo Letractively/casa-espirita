@@ -16,7 +16,20 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadPor"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadPor"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadPor"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -36,7 +49,12 @@ namespace Admin
             tabela.Columns.Add(coluna7);
 
             PortadoresBL porBL = new PortadoresBL();
-            List<Portadores> portadores = porBL.PesquisarBL();
+            List<Portadores> portadores;
+
+            if (campo != null && valor.Trim() != "")
+                portadores = porBL.PesquisarBL(campo, valor);
+            else
+                portadores = porBL.PesquisarBL();
 
             foreach (Portadores ltPor in portadores)
             {
@@ -53,6 +71,7 @@ namespace Admin
                 tabela.Rows.Add(linha);                
             }
 
+            dtbPesquisa = tabela;
             dtgPortadores.DataSource = tabela;
             dtgPortadores.DataBind();
  
@@ -61,9 +80,8 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
-        }
-           
+                Pesquisar(null,null);
+        }           
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
@@ -78,7 +96,7 @@ namespace Admin
                 Portadores por = new Portadores();
                 por.Id = utils.ComparaIntComZero(dtgPortadores.DataKeys[e.RowIndex][0].ToString());
                 porBL.ExcluirBL(por);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -89,6 +107,57 @@ namespace Admin
             int str_por = 0;
             str_por = utils.ComparaIntComZero(dtgPortadores.SelectedDataKey[0].ToString());
             Response.Redirect("cadPortador.aspx?id_por=" + str_por.ToString() + "&operacao=edit");
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);    
+        }
+
+        protected void dtgPortadores_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgPortadores.DataSource = dtbPesquisa;
+            dtgPortadores.PageIndex = e.NewPageIndex;
+            dtgPortadores.DataBind();
+        }
+
+        protected void dtgPortadores_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgPortadores_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgPortadores.DataSource = m_DataView;
+                dtgPortadores.DataBind();
+            }
         }
     }
 }

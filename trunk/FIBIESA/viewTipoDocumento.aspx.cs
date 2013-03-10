@@ -16,7 +16,19 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadTipD"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadTipD"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadTipD"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -30,7 +42,12 @@ namespace Admin
             tabela.Columns.Add(coluna4);
 
             TiposDocumentosBL tdoBL = new TiposDocumentosBL();           
-            List<TiposDocumentos> tDoc = tdoBL.PesquisarBL();
+            List<TiposDocumentos> tDoc;
+
+            if (campo != null && valor.Trim() != "")
+                tDoc = tdoBL.PesquisarBL(campo, valor);
+            else
+                tDoc = tdoBL.PesquisarBL();
             
             foreach (TiposDocumentos ltTdoc in tDoc)
             {
@@ -43,6 +60,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgTipoDocumento.DataSource = tabela;
             dtgTipoDocumento.DataBind();
         }
@@ -50,7 +68,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
                
 
@@ -67,7 +85,7 @@ namespace Admin
                 TiposDocumentos tiposDocumento = new TiposDocumentos();
                 tiposDocumento.Id = utils.ComparaIntComZero(dtgTipoDocumento.DataKeys[e.RowIndex][0].ToString());
                 tdoBL.ExcluirBL(tiposDocumento);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -78,6 +96,58 @@ namespace Admin
             int str_tdo = 0;
             str_tdo = utils.ComparaIntComZero(dtgTipoDocumento.SelectedDataKey[0].ToString());
             Response.Redirect("cadTipoDocumento.aspx?id_tdo=" + str_tdo.ToString() + "&operacao=edit");
+        }
+
+        protected void dtgTipoDocumento_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgTipoDocumento.DataSource = dtbPesquisa;
+            dtgTipoDocumento.PageIndex = e.NewPageIndex;
+            dtgTipoDocumento.DataBind();
+        }
+
+        protected void dtgTipoDocumento_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgTipoDocumento_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgTipoDocumento.DataSource = m_DataView;
+                dtgTipoDocumento.DataBind();
+            }
+
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
         }
     }
 }

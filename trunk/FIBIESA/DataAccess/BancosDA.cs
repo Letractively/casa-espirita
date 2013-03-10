@@ -7,11 +7,14 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
+using FG;
 
 namespace DataAccess
 {
     public class BancosDA : BaseDA
     {
+        Utils utils = new Utils();
+
         #region funcoes
         private List<Bancos> CarregarObjBanco(SqlDataReader dr)
         {
@@ -70,7 +73,7 @@ namespace DataAccess
         public List<Bancos> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM BANCOS "));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM BANCOS ORDER BY CODIGO "));
 
             List<Bancos> bancos = CarregarObjBanco(dr);
             
@@ -86,6 +89,31 @@ namespace DataAccess
 
             List<Bancos> bancos = CarregarObjBanco(dr);
                    
+            return bancos;
+        }
+
+        public List<Bancos> PesquisarDA(string campo, string valor)
+        {
+            string consulta;
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta = string.Format("SELECT * FROM BANCOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    break;
+                case "DESCRICAO":
+                    consulta = string.Format("SELECT * FROM BANCOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
+                    break;
+                default:
+                    consulta = "";
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            List<Bancos> bancos = CarregarObjBanco(dr);
+
             return bancos;
         }
 

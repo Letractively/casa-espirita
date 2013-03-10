@@ -17,7 +17,19 @@ namespace Admin
         Utils utils = new Utils();
 
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadBan"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadBan"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadBan"] = value; }
+        }
+
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -31,7 +43,12 @@ namespace Admin
 
             BancosBL banBL = new BancosBL();
 
-            List<Bancos> bancos = banBL.PesquisarBL();
+            List<Bancos> bancos;
+
+            if (campo != null && valor.Trim() != "")
+                bancos = banBL.PesquisarBL(campo, valor);
+            else
+                bancos = banBL.PesquisarBL();
 
             foreach (Bancos ban in bancos)
             {
@@ -46,6 +63,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgBancos.DataSource = tabela;
             dtgBancos.DataBind();
         }
@@ -53,7 +71,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
      
@@ -65,7 +83,7 @@ namespace Admin
                 Bancos bancos = new Bancos();
                 bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
                 banBL.ExcluirBL(bancos);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -82,6 +100,57 @@ namespace Admin
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             Response.Redirect("cadBanco.aspx?operacao=new");
+        }
+
+        protected void dtgBancos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgBancos.DataSource = dtbPesquisa;
+            dtgBancos.PageIndex = e.NewPageIndex;
+            dtgBancos.DataBind();
+        }
+
+        protected void dtgBancos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void dtgBancos_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgBancos.DataSource = m_DataView;
+                dtgBancos.DataBind();
+            }
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
         }
     }
 }

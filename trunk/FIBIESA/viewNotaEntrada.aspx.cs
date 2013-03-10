@@ -16,7 +16,18 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Pesquisar()
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadNotaE"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadNotaE"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadNotaE"] = value; }
+        }
+        private void Pesquisar(string campo, string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -32,6 +43,11 @@ namespace Admin
             NotasEntradaBL ntEBL = new NotasEntradaBL();
             List<NotasEntrada> notasEntrada = ntEBL.PesquisarBL();
 
+            if (campo != null && valor.Trim() != "")
+                notasEntrada = ntEBL.PesquisarBL(campo, valor);
+            else
+                notasEntrada = ntEBL.PesquisarBL();
+
             foreach (NotasEntrada ltNtE in notasEntrada)
             {
                 DataRow linha = tabela.NewRow();
@@ -44,6 +60,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgNotaEntrada.DataSource = tabela;
             dtgNotaEntrada.DataBind();
 
@@ -52,7 +69,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar();
+                Pesquisar(null,null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -68,7 +85,7 @@ namespace Admin
                 NotasEntrada notaEntrada = new NotasEntrada();
                 notaEntrada.Id = utils.ComparaIntComZero(dtgNotaEntrada.DataKeys[e.RowIndex][0].ToString());
                 ntEBL.ExcluirBL(notaEntrada);
-                Pesquisar();
+                Pesquisar(null,null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -79,6 +96,18 @@ namespace Admin
             int str_ntE = 0;
             str_ntE = utils.ComparaIntComZero(dtgNotaEntrada.SelectedDataKey[0].ToString());
             Response.Redirect("cadBairro.aspx?id_ntE=" + str_ntE.ToString() + "&operacao=edit");
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+        }
+
+        protected void dtgNotaEntrada_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgNotaEntrada.DataSource = dtbPesquisa;
+            dtgNotaEntrada.PageIndex = e.NewPageIndex;
+            dtgNotaEntrada.DataBind();
         }
                
     }

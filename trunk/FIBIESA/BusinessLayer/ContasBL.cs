@@ -48,6 +48,13 @@ namespace BusinessLayer
             return conDA.PesquisarDA(con);
         }
 
+        public List<Contas> PesquisarBL(string campo, string valor)
+        {
+            ContasDA contasDA = new ContasDA();
+
+            return contasDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             ContasDA conDA = new ContasDA();

@@ -48,6 +48,13 @@ namespace BusinessLayer
             return bancosDA.PesquisarDA(ban);
         }
 
+        public List<Bancos> PesquisarBL(string campo, string valor)
+        {
+            BancosDA bancosDA = new BancosDA();
+
+            return bancosDA.PesquisarDA(campo, valor);
+        }
+
         public override List<Base> Pesquisar(string codDes, string tipo)
         {
             BancosDA banDA = new BancosDA();

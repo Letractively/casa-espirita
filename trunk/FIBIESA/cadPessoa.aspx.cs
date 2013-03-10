@@ -47,7 +47,7 @@ namespace Admin
                 txtNome.Text = pes.Nome;                             
                 txtCpfCnpj.Text =  pes.CpfCnpj;
                 txtRg.Text = pes.Rg;
-                txtDataNascimento.Text =  pes.DtNascimento.ToString();
+                txtDataNascimento.Text = pes.DtNascimento != null ? Convert.ToDateTime(pes.DtNascimento).ToString("dd/MM/yyyy") : "";
                 ddlEstadoCivil.SelectedValue =  pes.EstadoCivil;
                 txtNomeMae.Text =  pes.NomeMae;
                 txtNomePai.Text = pes.NomePai;                
@@ -61,7 +61,7 @@ namespace Admin
                 txtComplementoProf.Text = pes.ComplementoProf;                
                 txtCepProf.Text = pes.CepProf;
                 txtObservacao.Text = pes.Obs;
-                txtDtCadastro.Text = pes.DtCadastro.ToString();
+                txtDtCadastro.Text = pes.DtCadastro.ToString("dd/MM/yyyy");
                                
                 hfIdCidade.Value = pes.CidadeId.ToString();
                 if (utils.ComparaIntComZero(hfIdCidade.Value) > 0)

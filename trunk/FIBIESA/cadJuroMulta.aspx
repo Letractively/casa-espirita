@@ -14,7 +14,7 @@
                             <tr>
                                 <td style="width: 140px">* Mês / Ano:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtMesAno" runat="server" CssClass="inputbox"></asp:TextBox>
+                                    <asp:TextBox ID="txtMesAno" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                         ControlToValidate="txtMesAno" ErrorMessage="*Preenchimento Obrigatório" 
                                         ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -27,25 +27,25 @@
                             <tr>
                                 <td style="width: 140px">% Juro Dia:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputbox"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
+                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                                </td>   
+                             </tr>
+                            <tr>                       
                                 <td style="width: 140px">% Juro Mês:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtJuroMes" runat="server" CssClass="inputbox"></asp:TextBox>
+                                    <asp:TextBox ID="txtJuroMes" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: 140px">Valor Multa Dia:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtMultaDia" runat="server" CssClass="inputbox"></asp:TextBox>
-                                </td>
+                                    <asp:TextBox ID="txtMultaDia" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                                </td> 
                             </tr>
-                            <tr>
+                            <tr>                          
                                 <td style="width: 140px">Valor Multa Mês:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtMultaMes" runat="server" CssClass="inputbox"></asp:TextBox>
+                                    <asp:TextBox ID="txtMultaMes" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                                 </td>
                             </tr>
 

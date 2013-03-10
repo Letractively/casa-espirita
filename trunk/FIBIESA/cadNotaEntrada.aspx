@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadNotaEntrada.aspx.cs" Inherits="Admin.cadNotaEntrada" %>
 <%@ MasterType VirtualPath="~/home.Master" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">   
@@ -10,7 +11,7 @@
                 <h2>Nota de Entrada</h2>
             </div>
             <div class="contentbox">
-                <table>
+                <table style="width: 80%">
                     <tr>
                         <td style="width: 120px">
                             * Número:
@@ -34,7 +35,10 @@
                             * Data:
                         </td>
                         <td style="width: 300px">
-                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                           
+                            <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" 
+                                TargetControlID="txtData">
+                            </asp:CalendarExtender>                           
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ErrorMessage="*Preenchimento Obrigatório" CssClass="validacao" 
                                 ControlToValidate="txtData" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -85,7 +89,8 @@
                         <td colspan="6">
                             <asp:Panel ID="pnlItens" runat="server" ScrollBars="Auto" >
                                 <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" 
-                                    onselectedindexchanged="dtgItens_SelectedIndexChanged">
+                                    onselectedindexchanged="dtgItens_SelectedIndexChanged" GridLines="None" 
+                                    ShowHeaderWhenEmpty="True">
                                     <Columns>
                                         <asp:CommandField ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -127,6 +132,8 @@
                 </table>
             </div>
             <asp:HiddenField ID="hfIdItem" runat="server" />
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
         </div>
         <div class="status">
         </div>

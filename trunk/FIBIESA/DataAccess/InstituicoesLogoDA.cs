@@ -23,7 +23,7 @@ namespace DataAccess
                 insL.Id = int.Parse(dr["ID"].ToString());
                 insL.InstituicoesId = int.Parse(dr["INSTITUICOESID"].ToString());
                 insL.Extensao = dr["EXTENSAO"].ToString();
-                //insL.Imagem = dr["IMAGEM"].ToString();
+                //.Imagem = dr["IMAGEM"].ToString();
                 
                 instituicoesLogo.Add(insL);
             }
@@ -38,8 +38,8 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@instituicoesid", insL.InstituicoesId);
             paramsToSP[1] = new SqlParameter("@imagem", insL.Imagem);
             paramsToSP[2] = new SqlParameter("@extensao", insL.Extensao);
-                       
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_instituicoeslogo", paramsToSP);
 
             return true;
         }
@@ -52,8 +52,8 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@instituicoesid", insL.InstituicoesId);
             paramsToSP[2] = new SqlParameter("@imagem", insL.Imagem);
             paramsToSP[3] = new SqlParameter("@extensao", insL.Extensao);
-           
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoeslogo", paramsToSP);
 
             return true;
         }
@@ -64,7 +64,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", insL.Id);
 
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "", paramsToSP);
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_instituicoeslogo", paramsToSP);
 
             return true;
         }
