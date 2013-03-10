@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DataObjects;
+using DataAccess;
+using System.Data;
+
+namespace BusinessLayer
+{
+    class ExemplaresBL : BaseBL
+    {        
+        public bool InserirBL(Exemplares instancia)
+        {
+            /*criar as regras de negocio*/
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.InserirDA(instancia);
+        }
+
+        public bool EditarBL(Exemplares instancia)
+        {
+            /*criar as regras de negocio*/
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.EditarDA(instancia);
+        }
+
+        public bool ExcluirBL(Exemplares instancia)
+        {
+            /*criar as regras de negocio*/
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.ExcluirDA(instancia);
+        }
+
+        public List<Exemplares> PesquisarBL()
+        {
+            /*criar as regras de negocio*/
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.PesquisarDA();
+        }
+
+        public List<Exemplares> PesquisarBL(int bai)
+        {
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.PesquisarDA(bai);
+        }
+
+        public List<Exemplares> PesquisarBL(string campo, string valor)
+        {
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.PesquisarDA(campo, valor);
+        }
+
+        public override List<Base> Pesquisar(string codDes, string tipo)
+        {
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.Pesquisar(codDes, tipo);
+        }
+    }
+}
