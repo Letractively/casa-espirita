@@ -12,7 +12,7 @@
                 <h2>Parâmetros do Sistema</h2>
             </div>
             <div class="contentbox">
-                <table>
+                <table Width="100%">
                     <tr>
                         <td>                            
                             <asp:TabContainer ID="tcParametros" runat="server" ActiveTabIndex="0" >
