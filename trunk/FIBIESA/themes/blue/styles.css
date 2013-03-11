@@ -1,11 +1,11 @@
 /* Toolbox and Stats Button */
 
-	 #toolbox {background: #0EB4C8 url(images/bg_toolbox_tab.png) repeat-x bottom; }
-	 #toolbox a, ul.summarystats p.statview a {color: #0F525B; text-shadow: 1px 1px 1px #68C5D1;}
+	 #toolbox {background:url(images/bg_toolbox_tab.png) repeat-x bottom; }
+	 #toolbox a, ul.summarystats p.statview a {color: #FFFFFF; text-shadow: 1px 1px 1px #00aeef;}
 	 
 	 ul#sliderContent li a {color: #fff; background: url(images/toolbox_row.png) repeat-x top}
 		ul#sliderContent li.alt a {color: #fff; background: url(images/toolbox_alt_row.png) repeat-x top}
-		ul#sliderContent li a:hover, ul#sliderContent li.alt a:hover {background: #138392}
+		ul#sliderContent li a:hover, ul#sliderContent li.alt a:hover {background: #00aeef}
 		
 	/* Stats */	
 	ul.summarystats p.statview a {background:url(images/bg_btns.png) repeat-x top}
