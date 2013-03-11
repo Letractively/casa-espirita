@@ -40,7 +40,7 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		
 		#slider {position: absolute; background-repeat: no-repeat; margin-top: -150px; z-index: 100}
 			ul#sliderContent {margin-left: 15px; position: absolute; z-index: 1}
-				ul#sliderContent li a {width: 160px; padding: 5px 10px; height: 20px; display: block; text-decoration: none}
+				ul#sliderContent li a {width: 160px; padding: 5px 10px; height: 20px; display: block; text-decoration: none;}
 			#openCloseWrap {position:relative; margin: 150px 0 0 15px}	
 	
 	#userbox {width: 180px; position: absolute; top: 40px; left: 15px; padding: 20px 0 0 0; text-align: center; font-size: 16px; text-shadow: 1px 1px 1px #fff; font-weight: 700}
