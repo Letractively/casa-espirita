@@ -110,14 +110,14 @@
 
                     <li><a href="#">Biblioteca</a><span class="active_end"></span><div class="clear"></div>
                         <ul>
+                            <li><a href="viewReserva.aspx" title="">Empréstimos</a></li>
                             <li><a href="viewExemplar.aspx" title="">Exemplares</a></li>
-                            <li><a href="viewOrigem.aspx" title="">Origens</a></li>                    
-                            <li><a href="viewReserva.aspx" title="">Reservas</a></li>
+                            <li><a href="viewOrigem.aspx" title="">Origens</a></li> 
                             <li><a href="viewEditora.aspx" title="">Editoras</a></li>
                             <li><a href="viewObra.aspx" title="">Obras</a></li>
                             <li><a href="viewAutor.aspx" title="">Autores</a></li>
-                            <li><a href="viewTipoAutor.aspx" title="">Tipos de Autores</a></li>
-                            <li><a href="viewTipoObra.aspx" title="">Tipos de Obras</a></li>
+                            <li><a href="viewTipoAutor.aspx" title="">Categorias de Autores</a></li>
+                            <li><a href="viewTipoObra.aspx" title="">Categorias de Obras</a></li>
                         </ul>
                     </li>
 
@@ -129,7 +129,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="#">Estoque</a><span class="active_end"></span><div class="clear"></div>
+                    <li><a href="#">Evento</a><span class="active_end"></span><div class="clear"></div>
                         <ul>
                             <li><a href="viewEvento.aspx" title="">Eventos</a></li>
                             <li><a href="viewTurma.aspx" title="">Turmas</a></li>                    

@@ -109,6 +109,11 @@ namespace Admin
             dtgNotaEntrada.PageIndex = e.NewPageIndex;
             dtgNotaEntrada.DataBind();
         }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
                
     }
 }

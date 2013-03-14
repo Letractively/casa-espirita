@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgenciasBL.cs" />
+    <Compile Include="AutoresBL.cs" />
     <Compile Include="BairrosBL.cs" />
     <Compile Include="BancosBL.cs" />
     <Compile Include="BaseBL.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DoacoesBL.cs" />
     <Compile Include="NotasEntradaBL.cs" />
     <Compile Include="NotasEntradaItensBL.cs" />
+    <Compile Include="ObrasAutoresBL.cs" />
     <Compile Include="PortadoresBL.cs" />
     <Compile Include="TiposDocumentosBL.cs" />
     <Compile Include="TurmasParticipantesBL.cs" />

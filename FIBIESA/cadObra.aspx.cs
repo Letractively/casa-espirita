@@ -30,6 +30,30 @@ namespace Admin
             set { Session["_dtbPesquisa_cadObras"] = value; }
         }
 
+        private void CarregarDdlTiposObra()
+        {
+            TiposObrasBL tpObBL = new TiposObrasBL();
+            List<TiposObras> tiposObras = tpObBL.PesquisarBL();
+
+            ddlTipoObra.Items.Add(new ListItem());
+            foreach (TiposObras lttpOb in tiposObras)
+                ddlTipoObra.Items.Add(new ListItem(lttpOb.Codigo + " - " + lttpOb.Descricao, lttpOb.Id.ToString()));
+
+            ddlTipoObra.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlEditora()
+        {
+            EditorasBL edBL = new EditorasBL();
+            List<Editoras> editoras = edBL.PesquisarBL();
+
+            ddlEditora.Items.Add(new ListItem());
+            foreach (Editoras ltEd in editoras)
+                ddlEditora.Items.Add(new ListItem(ltEd.Codigo + " - " + ltEd.Descricao, ltEd.Id.ToString()));
+
+            ddlEditora.SelectedIndex = 0;
+        }
+
         private void CarregarDados(int id_bai)
         {
             ObrasBL obraBL = new ObrasBL();
@@ -67,6 +91,9 @@ namespace Admin
                             id_bai = Convert.ToInt32(Request.QueryString["id_bai"].ToString());
                 }
 
+                CarregarDdlEditora();
+                CarregarDdlTiposObra();
+
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
             }
@@ -74,7 +101,7 @@ namespace Admin
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("viewBairro.aspx");
+            Response.Redirect("viewObra.aspx");
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
