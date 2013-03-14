@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>Autor</h2>
+                <h2>Cadastro de Autores</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            * Descrição:
+                            * Nome:
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
