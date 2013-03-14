@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Tipos de Obras</h2>
+                <h2>Cadastro de Categorias de Obras</h2>
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 

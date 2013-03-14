@@ -25,6 +25,7 @@ namespace Admin
         {
             UsuariosBL usuBL = new UsuariosBL();
             List<Usuarios> usuarios  = usuBL.PesquisarBL(txtLogin.Text, txtSenha.Text, DateTime.Now);
+            //List<Usuarios> usuarios = usuBL.PesquisarBL();
            
 
             if (usuarios.Count == 0)

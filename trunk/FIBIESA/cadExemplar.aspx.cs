@@ -39,14 +39,14 @@ namespace Admin
             foreach (Bairros ltBai in bairros)
             {
                 hfId.Value = ltBai.Id.ToString();
-                txtCodigo.Text = ltBai.Codigo.ToString();
-                txtDescricao.Text = ltBai.Descricao;
+                //txtCodigo.Text = ltBai.Codigo.ToString();
+                //txtDescricao.Text = ltBai.Descricao;
             }
 
         }
         private void CarregarAtributos()
         {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+           // txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         #endregion
 
@@ -84,8 +84,8 @@ namespace Admin
             BairrosBL baiBL = new BairrosBL();
             Bairros bairros = new Bairros();
             bairros.Id = utils.ComparaIntComZero(hfId.Value);
-            bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
-            bairros.Descricao = txtDescricao.Text;
+           // bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+           // bairros.Descricao = txtDescricao.Text;
 
             if (bairros.Id > 0)
             {

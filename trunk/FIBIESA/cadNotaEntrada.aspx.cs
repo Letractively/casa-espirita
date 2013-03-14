@@ -27,7 +27,7 @@ namespace Admin
             txtValor.Attributes.Add("onkeypress", "return(Real(this,event))");
             txtValorVenda.Attributes.Add("onkeypress", "return(Real(this,event))");
             txtTotItens.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtTotal.Attributes.Add("onkeypress", "return(Real(this,event))");
+            //txtTotal.Attributes.Add("onkeypress", "return(Real(this,event))");
            
         }
 
@@ -122,12 +122,43 @@ namespace Admin
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
 
-            DataRow linha = dtItens.NewRow();
+           /* DataRow linha = dtItens.NewRow();
             linha["IDITEM"] = utils.ComparaIntComZero(hfIdItem.ToString());
             linha["QUANTIDADE"] = utils.ComparaIntComZero(txtQtde.Text);            
             linha["VALOR"] = utils.ComparaDecimalComZero(txtValor.Text);
             linha["VALORTOTAL"] = utils.ComparaDecimalComZero(txtValor.Text) * utils.ComparaIntComZero(txtQtde.Text);
             linha["VALORVENDA"] = utils.ComparaDecimalComZero(txtValorVenda.Text);
+
+            dtItens.Rows.Add(linha);*/
+            DataColumn coluna1 = new DataColumn("IDITEM", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("DESCITEM", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("QUANTIDADE", Type.GetType("System.Int32"));
+            DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+            DataColumn coluna5 = new DataColumn("VALORTOTAL", Type.GetType("System.Decimal"));
+            DataColumn coluna6 = new DataColumn("VALORVENDA", Type.GetType("System.Decimal"));
+
+            dtItens.Columns.Add(coluna1);
+            dtItens.Columns.Add(coluna2);
+            dtItens.Columns.Add(coluna3);
+            dtItens.Columns.Add(coluna4);
+            dtItens.Columns.Add(coluna5);
+            dtItens.Columns.Add(coluna6);
+
+            DataRow linha = dtItens.NewRow();
+            linha["IDITEM"] = 1;
+            linha["QUANTIDADE"] = 12;
+            linha["VALOR"] = 25;
+            linha["VALORTOTAL"] = 300;
+            linha["VALORVENDA"] = 35;
+
+            dtItens.Rows.Add(linha);
+
+            linha = dtItens.NewRow();
+            linha["IDITEM"] = 2;
+            linha["QUANTIDADE"] = 10;
+            linha["VALOR"] = 20;
+            linha["VALORTOTAL"] = 200;
+            linha["VALORVENDA"] = 30;
 
             dtItens.Rows.Add(linha);
             

@@ -813,10 +813,10 @@
     <Content Include="index.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="home.Master" />
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.sitemap" />
+    <Content Include="home.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

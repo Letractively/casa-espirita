@@ -202,6 +202,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnSalvar;
         
         /// <summary>
+        /// ValidationSummary2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
+        
+        /// <summary>
         /// hfIdItem control.
         /// </summary>
         /// <remarks>

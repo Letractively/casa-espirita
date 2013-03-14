@@ -8,54 +8,54 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Nota de Entrada</h2>
+                <h2>Cadastro de Nota de Entrada</h2>
             </div>
             <div class="contentbox">
-                <table style="width: 80%">
+                <table style="width: 75%">
                     <tr>
                         <td style="width: 120px">
                             * Número:
                         </td>
                         <td style="width: 250px">
-                            <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtNumero" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtNumero" ErrorMessage="Informe o número da nota" 
+                                ValidationGroup="salvar" CssClass="validacao" EnableViewState="False">*</asp:RequiredFieldValidator>
                         </td>                    
                         <td style="width: 120px">
                             * Série:
                         </td>
                         <td style="width: 100px">
-                            <asp:TextBox ID="txtSerie" runat="server" CssClass="inputbox" Width="71px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtSerie" ErrorMessage="*Preenchimento Obrigatório" 
-                                CssClass="validacao" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="txtSerie" runat="server" CssClass="inputbox" Width="50px"></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtSerie" ErrorMessage="Informe o número de série" 
+                                CssClass="validacao" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>                  
                         <td style="width: 200px">
                             * Data:
                         </td>
-                        <td style="width: 300px">
-                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                           
+                        <td style="width: 300px" colspan="2">
+                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox>                           
                             <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" 
                                 TargetControlID="txtData">
-                            </asp:CalendarExtender>                           
+                            </asp:CalendarExtender>  
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ErrorMessage="*Preenchimento Obrigatório" CssClass="validacao" 
-                                ControlToValidate="txtData" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="Informe a data da nota" CssClass="validacao" 
+                                ControlToValidate="txtData" ValidationGroup="salvar">*</asp:RequiredFieldValidator>  
                         </td>
-                    </tr>
+                    </tr>           
                     <tr>
                         <td style="width: 100px">
                             * Item:
                         </td>
-                        <td  colspan="5">
-                            <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox"></asp:TextBox> 
+                        <td  colspan="7">
+                            <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="60px"></asp:TextBox> 
                             <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click"/>
                             &nbsp;
                             <asp:Label ID="lblDesItem" runat="server"></asp:Label>                           
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                 ControlToValidate="txtItem" CssClass="validacao" 
-                                ErrorMessage="* Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="Informe o item" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -63,27 +63,28 @@
                             * Qtde:
                         </td>
                         <td style="width: 250px">
-                            <asp:TextBox ID="txtQtde" runat="server" CssClass="inputbox" Width="91px"></asp:TextBox>
+                            <asp:TextBox ID="txtQtde" runat="server" CssClass="inputbox" Width="80px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtQtde" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="Informe a quantidade do item" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>                   
                         <td style="width: 100px">
                             Valor:
                         </td>
                         <td style="width: 200px">
-                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox" Width="111px"></asp:TextBox>
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox>
                         </td>                    
                         <td style="width: 180px">
                             Valor Venda:
                         </td>
                         <td style="width: 300px">
                             <asp:TextBox ID="txtValorVenda" runat="server" CssClass="inputbox" 
-                                Width="111px"></asp:TextBox>
-                            &nbsp;&nbsp;
+                                Width="100px"></asp:TextBox>                            
+                        </td> 
+                        <td>
                             <asp:Button ID="btnInserir" CssClass="btn" Text="Inserir" runat="server" 
-                                onclick="btnInserir_Click" />
-                        </td>                      
+                                onclick="btnInserir_Click" ValidationGroup="salvar" />
+                        </td>                     
                     </tr>
                     <tr>
                         <td colspan="6">
@@ -103,7 +104,7 @@
                                         <asp:BoundField DataField="VALORTOTAL" HeaderText="Valor Total" />
                                         <asp:BoundField DataField="VALORVENDA" HeaderText="Valor Venda" />
                                     </Columns>
-                                </asp:GridView>
+                                </asp:GridView>                                
                             </asp:Panel>
                         </td>
                     </tr>
@@ -115,14 +116,14 @@
                         </td>
                         <td style="width: 150px">
                             <asp:TextBox ID="txtTotItens" runat="server" CssClass="inputbox" 
-                                Font-Bold="True" ForeColor="#CC0000"></asp:TextBox>
+                                Font-Bold="True" ForeColor="#CC0000" Width="120px"></asp:TextBox>
                         </td>
                         <td style="width: 80px">
                             Valor Total: 
                         </td>
                         <td style="width: 200px">
                             <asp:TextBox ID="txtTotal" runat="server" CssClass="inputbox" Font-Bold="True" 
-                                ForeColor="#CC0000"></asp:TextBox>
+                                ForeColor="#CC0000" Width="120px"></asp:TextBox>
                         </td>
                         <td  style="width: 100px">
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar"  CssClass="btn" 
@@ -131,11 +132,14 @@
                     </tr>
                 </table>
             </div>
+             <asp:ValidationSummary ID="ValidationSummary2" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfIdItem" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
         </div>
         <div class="status">
+           
         </div>
     </div>   
 </asp:Content>

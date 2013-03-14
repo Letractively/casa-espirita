@@ -57,6 +57,7 @@
     <Compile Include="Doacoes.cs" />
     <Compile Include="NotasEntrada.cs" />
     <Compile Include="NotasEntradaItens.cs" />
+    <Compile Include="ObrasAutores.cs" />
     <Compile Include="Portadores.cs" />
     <Compile Include="TiposDocumentos.cs" />
     <Compile Include="TurmasParticipantes.cs" />

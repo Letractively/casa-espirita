@@ -4,64 +4,57 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
-using System.Data;
 
 namespace BusinessLayer
 {
-    public class AutoresBL : BaseBL
+    public class AutoresBL
     {
-        public bool InserirBL(Autores instancia)
+        public bool InserirBL(Autores bai)
         {
-            
             /*criar as regras de negocio*/
-            AutoresDA varDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return varDA.InserirDA(instancia);
+            return autoresDA.InserirDA(bai);
         }
 
-        public bool EditarBL(Autores instancia)
+        public bool EditarBL(Autores bai)
         {
             /*criar as regras de negocio*/
-            AutoresDA varDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return varDA.EditarDA(instancia);
+            return autoresDA.EditarDA(bai);
         }
 
-        public bool ExcluirBL(Autores instancia)
+        public bool ExcluirBL(Autores bai)
         {
             /*criar as regras de negocio*/
-            AutoresDA varDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return varDA.ExcluirDA(instancia);
+            return autoresDA.ExcluirDA(bai);
         }
 
         public List<Autores> PesquisarBL()
         {
             /*criar as regras de negocio*/
-            AutoresDA AutoresDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return AutoresDA.PesquisarDA();
+            return autoresDA.PesquisarDA();
         }
 
         public List<Autores> PesquisarBL(int bai)
         {
-            AutoresDA AutoresDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return AutoresDA.PesquisarDA(bai);
+            return autoresDA.PesquisarDA(bai);
         }
 
         public List<Autores> PesquisarBL(string campo, string valor)
         {
-            AutoresDA AutoresDA = new AutoresDA();
+            AutoresDA autoresDA = new AutoresDA();
 
-            return AutoresDA.PesquisarDA(campo, valor);
+            return autoresDA.PesquisarDA(campo, valor);
         }
 
-        public override List<Base> Pesquisar(string codDes, string tipo)
-        {
-            AutoresDA baiDA = new AutoresDA();
-
-            return baiDA.Pesquisar(codDes, tipo);
-        }
+      
     }
 }

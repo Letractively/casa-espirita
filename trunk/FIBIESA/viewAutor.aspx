@@ -8,7 +8,7 @@
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Autor</h2>
+                <h2>Cadastro de Autores</h2>
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
@@ -18,8 +18,7 @@
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;&nbsp;
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                    OnClick="btnBusca_Click" />                 
+                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />                 
                 &nbsp;&nbsp;&nbsp
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
