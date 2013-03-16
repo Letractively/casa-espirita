@@ -17,7 +17,7 @@
                         <td style="width: 140px">
                             * Código:
                         </td>
-                        <td style="width: 180px" colspan="3">
+                        <td style="width: 120px" colspan="3">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="valCodigo" runat="server" 
                                 ControlToValidate="txtCodigo" ErrorMessage="Informe o Código da Obra" 
@@ -28,7 +28,7 @@
                         <td style="width: 140px" >
                             * Título:
                         </td>
-                        <td style="width: 180px"  colspan="3">
+                        <td style="width: 120px"  colspan="3">
                             <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputbox" 
                                 MaxLength="40" Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
@@ -46,11 +46,12 @@
                                 ControlToValidate="ddlTipoObra" ErrorMessage="Informe o Tipo de Obra" 
                                 ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>                        
                         </td>
-                        <td style="width: 140px">
+                        <td style="width: 120px">
                             &nbsp;Origem:
                         </td>
-                        <td style="width: 180px">
-                            <asp:TextBox ID="txtOrigem" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td style="width: 120px">
+                            <asp:DropDownList ID="ddlOrigem" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -68,37 +69,37 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="width: 120px">
+                            &nbsp;ISBN:
+                        </td>
+                        <td style="width: 150px">
+                            <asp:TextBox ID="txtISBN" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                        <td style="width: 140px">
+                            &nbsp;Número de Páginas:
+                        </td>
+                        <td style="width: 120px">
+                            <asp:TextBox ID="txtNroPags" runat="server" CssClass="inputbox" Width="70px"></asp:TextBox>
+                        </td>                        
+                    </tr>
+                    <tr>
                         <td style="width: 140px">
                             &nbsp;Local Publicação:
                         </td>
                         <td style="width: 180px">
-                            <asp:TextBox ID="TextBox1" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtLocalPublic" runat="server" CssClass="inputbox" Width="204px" 
+                                MaxLength="100"></asp:TextBox>
                         </td>                    
-                        <td style="width: 140px">
+                        <td style="width: 120px">
                             &nbsp;Data Publicação:
                         </td>
-                        <td style="width: 180px">
+                        <td style="width: 120px">
                             <asp:TextBox ID="txtDataPublicacao" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                           
                             <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" 
                                 TargetControlID="txtDataPublicacao">
                             </asp:CalendarExtender>                           
                         </td>  
-                        </tr>
-                    <tr>
-                        <td style="width: 140px">
-                            &nbsp;Número de Páginas:
-                        </td>
-                        <td style="width: 180px">
-                            <asp:TextBox ID="txtNroPags" runat="server" CssClass="inputbox" Width="70px"></asp:TextBox>
-                        </td>
-                    
-                        <td style="width: 140px">
-                            &nbsp;ISBN:
-                        </td>
-                        <td style="width: 180px">
-                            <asp:TextBox ID="txtISBN" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                    </tr>                                      
+                        </tr>                                                          
                     <tr>
                         <td style="width: 140px">
                             &nbsp;Data Reimpressão:
@@ -109,20 +110,20 @@
                                 TargetControlID="txtDataReimpressao">
                             </asp:CalendarExtender>                           
                         </td>  
-                        <td style="width: 140px">
+                        <td style="width: 120px">
                             &nbsp;Volume:
                         </td>
-                        <td style="width: 180px">
-                            <asp:TextBox ID="txtVolume" runat="server" CssClass="inputbox"></asp:TextBox>
+                        <td style="width: 120px">
+                            <asp:TextBox ID="txtVolume" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
                             &nbsp;Assuntos abordados:
                         </td>
-                        <td style="width: 180px" colspan="3">
+                        <td style="width: 120px" colspan="3">
                             <asp:TextBox ID="txtAssuntosAborda" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="335px"></asp:TextBox>
+                                MaxLength="1000" Width="485px" Height="79px" TextMode="MultiLine"></asp:TextBox>
                         </td>
                     </tr>  
                     

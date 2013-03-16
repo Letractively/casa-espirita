@@ -49,12 +49,24 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
-        /// dtgBairros control.
+        /// dtgExemplar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dtgBairros;
+        protected global::System.Web.UI.WebControls.GridView dtgExemplar;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new FIBIESA.Principal Master {
+            get {
+                return ((FIBIESA.Principal)(base.Master));
+            }
+        }
     }
 }

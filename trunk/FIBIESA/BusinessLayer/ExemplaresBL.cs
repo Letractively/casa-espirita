@@ -8,7 +8,7 @@ using System.Data;
 
 namespace BusinessLayer
 {
-    class ExemplaresBL : BaseBL
+    public class ExemplaresBL : BaseBL
     {        
         public bool InserirBL(Exemplares instancia)
         {

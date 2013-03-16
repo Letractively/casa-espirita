@@ -54,6 +54,18 @@ namespace Admin
             ddlEditora.SelectedIndex = 0;
         }
 
+        private void CarregarDdlOrigem()
+        {
+            OrigensBL oriBL = new OrigensBL();
+            List<Origens> origens = oriBL.PesquisarBL();
+
+            ddlOrigem.Items.Add(new ListItem());
+            foreach (Origens ltOri in origens)
+                ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
+
+            ddlOrigem.SelectedIndex = 0;
+        }
+
         private void CarregarDados(int id_bai)
         {
             ObrasBL obraBL = new ObrasBL();
@@ -64,9 +76,23 @@ namespace Admin
                 hfId.Value = ltObra.Id.ToString();
                 txtCodigo.Text = ltObra.Codigo.ToString();
                 txtTitulo.Text = ltObra.Titulo;
+                txtISBN.Text = ltObra.Isbn.ToString();
+                txtLocalPublic.Text = ltObra.LocalPublicacao.ToString();
+                txtNroEdicao.Text = ltObra.NroEdicao.ToString();
+                txtNroPags.Text = ltObra.NroPaginas.ToString();
+                txtVolume.Text = ltObra.Volume.ToString();
+                txtDataReimpressao.Text = ltObra.DataReimpressao != null? Convert.ToDateTime(ltObra.DataReimpressao).ToString("dd/MM/yyyy") : "";
+                txtDataPublicacao.Text = ltObra.DataPublicacao != null ? Convert.ToDateTime(ltObra.DataPublicacao).ToString("dd/MM/yyyy") : "";
+                txtAssuntosAborda.Text = ltObra.AssuntosAborda.ToString();
+                ddlEditora.SelectedValue = ltObra.EditoraId.ToString();
+                ddlOrigem.SelectedValue = ltObra.OrigemId.ToString();
+                ddlTipoObra.SelectedValue = ltObra.TiposObraId.ToString();
+                
             }
 
         }
+
+
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
@@ -93,6 +119,7 @@ namespace Admin
 
                 CarregarDdlEditora();
                 CarregarDdlTiposObra();
+                CarregarDdlOrigem();
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
@@ -112,6 +139,18 @@ namespace Admin
             obras.Id = utils.ComparaIntComZero(hfId.Value);
             obras.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             obras.Titulo = txtTitulo.Text;
+            obras.NroEdicao = utils.ComparaIntComNull(txtNroEdicao.Text);
+            obras.EditoraId = utils.ComparaIntComNull(ddlEditora.SelectedValue);
+            obras.NroPaginas = utils.ComparaIntComNull(txtNroPags.Text);
+            obras.Volume = utils.ComparaIntComNull(txtVolume.Text);
+            obras.Isbn = txtISBN.Text;
+            obras.AssuntosAborda = txtAssuntosAborda.Text;
+            obras.DataPublicacao = utils.ComparaDataComNull(txtDataPublicacao.Text);
+            obras.DataReimpressao = utils.ComparaDataComNull(txtDataReimpressao.Text);
+            obras.TiposObraId = utils.ComparaIntComNull(ddlTipoObra.SelectedValue);
+            obras.LocalPublicacao = txtLocalPublic.Text;
+            obras.OrigemId = utils.ComparaIntComNull(ddlOrigem.SelectedValue);
+
 
             if (obras.Id > 0)
             {
@@ -129,7 +168,10 @@ namespace Admin
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
 
-            Response.Redirect("viewBairro.aspx");
+            Response.Redirect("viewObra.aspx");
         }
+
+      
+        
     }
 }

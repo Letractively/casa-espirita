@@ -15,7 +15,7 @@
                     ToolTip="Pesquisar por"></asp:TextBox>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
-                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
+                    <asp:ListItem Value="TITULO">Título</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
@@ -49,7 +49,9 @@
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
-                                       <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
+                                       <asp:BoundField DataField="TITULO" HeaderText="Título" 
+                                           SortExpression="TITULO" />
+                                       <asp:BoundField DataField="ISBN" HeaderText="ISBN" SortExpression="ISBN" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
