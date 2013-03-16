@@ -25,18 +25,18 @@ namespace DataAccess
                 obrinha.Id = int.Parse(dr["ID"].ToString());
                 obrinha.Codigo = int.Parse(dr["CODIGO"].ToString());
                 obrinha.Titulo = dr["TITULO"].ToString();
-                obrinha.NroEdicao = int.Parse(dr["NROEDICAO"].ToString());
-                obrinha.EditoraId = int.Parse(dr["EDITORAID"].ToString());
-                obrinha.LocalPublicacao = int.Parse(dr["LOCALPUBLICACAO"].ToString());
-                obrinha.NroPaginas = int.Parse(dr["NROPAGINAS"].ToString());
-                obrinha.DataPublicacao = Convert.ToDateTime(dr["DATAPUBLICACAO"].ToString());
-                obrinha.Isbn = int.Parse(dr["ISBN"].ToString());
-                obrinha.AssuntosAborda = dr["ASSUNTOSABORDA"].ToString();
-                obrinha.Obraid = int.Parse(dr["OBRAID"].ToString());
-                obrinha.DataReimpressao = Convert.ToDateTime(dr["DATAREIMPRESSAO"].ToString());
-                obrinha.ImagemCapa = int.Parse(dr["IMAGEMCAPA"].ToString());
-                obrinha.Volume = int.Parse(dr["VOLUME"].ToString());
-                obrinha.Origem = int.Parse(dr["ORIGEM"].ToString());
+                obrinha.NroEdicao = utils.ComparaShortComNull(dr["NROEDICAO"].ToString());
+                obrinha.EditoraId = utils.ComparaIntComNull(dr["EDITORAID"].ToString());
+                obrinha.LocalPublicacao = dr["LOCALPUBLICACAO"].ToString();
+                obrinha.NroPaginas = utils.ComparaIntComNull(dr["NROPAGINAS"].ToString());
+                obrinha.DataPublicacao = utils.ComparaDataComNull(dr["DATAPUBLICACAO"].ToString());
+                obrinha.Isbn = dr["ISBN"].ToString();
+                obrinha.AssuntosAborda = dr["ASSUNTOSABORDA"].ToString();               
+                obrinha.DataReimpressao = utils.ComparaDataComNull(dr["DATAREIMPRESSAO"].ToString());
+                //obrinha.ImagemCapa = utils.ComparaIntComNull(dr["IMAGEMCAPA"].ToString());
+                obrinha.Volume = utils.ComparaIntComNull(dr["VOLUME"].ToString());
+                obrinha.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
+                obrinha.TiposObraId = utils.ComparaIntComNull(dr["TIPOSOBRAID"].ToString());
 
                 obra.Add(obrinha);
             }
@@ -47,7 +47,7 @@ namespace DataAccess
 
         public bool InserirDA(Obras instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[13];
+            SqlParameter[] paramsToSP = new SqlParameter[14];
 
             paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[1] = new SqlParameter("@titulo", instancia.Titulo);
@@ -55,19 +55,20 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@editoraId", instancia.EditoraId);
             paramsToSP[4] = new SqlParameter("@localPublicacao", instancia.LocalPublicacao);
             paramsToSP[5] = new SqlParameter("@datapublicacao", instancia.DataPublicacao);
-            paramsToSP[6] = new SqlParameter("@nroPaginas", instancia.NroPaginas);
-            paramsToSP[7] = new SqlParameter("@isbn", instancia.Isbn);
-            //TODO: TIPO?? Que campo eh esse?
-            paramsToSP[8] = new SqlParameter("@obraid", instancia.Obraid); 
-            paramsToSP[9] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
-            paramsToSP[10] = new SqlParameter("@volume", instancia.Volume);
-            paramsToSP[11] = new SqlParameter("@origem", instancia.Origem);
-            paramsToSP[12] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
-
-
+            paramsToSP[6] = new SqlParameter("@nroPaginas", instancia.NroPaginas);            
+            paramsToSP[7] = new SqlParameter("@isbn", instancia.Isbn);                     
+            paramsToSP[8] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
+            paramsToSP[9] = new SqlParameter("@tipo", 0);
+            paramsToSP[10] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
+            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);
+            paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);            
+            paramsToSP[13] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
+           
+            
+            
             return (SqlHelper.ExecuteNonQuery(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP) > 0);
+                CommandType.StoredProcedure, "stp_insert_Obras", paramsToSP) > 0);
         }
 
         public bool EditarDA(Obras instancia)
@@ -83,11 +84,10 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@datapublicacao", instancia.DataPublicacao);
             paramsToSP[7] = new SqlParameter("@nroPaginas", instancia.NroPaginas);
             paramsToSP[8] = new SqlParameter("@isbn", instancia.Isbn);
-            //TODO: TIPO?? Que campo eh esse?
-            paramsToSP[9] = new SqlParameter("@obraid", instancia.Obraid);
+            paramsToSP[9] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
             paramsToSP[10] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);
-            paramsToSP[12] = new SqlParameter("@origem", instancia.Origem);
+            paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);
             paramsToSP[13] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
 
             return (SqlHelper.ExecuteNonQuery(
@@ -131,8 +131,8 @@ namespace DataAccess
                 case "CODIGO":
                     consulta.Append(string.Format("WHERE CODIGO = {0}", utils.ComparaIntComZero(valor)));
                     break;
-                case "DESCRICAO":
-                    consulta.Append(string.Format("WHERE DESCRICAO  LIKE '%{0}%'", valor));
+                case "TITULO":
+                    consulta.Append(string.Format("WHERE TITULO  LIKE '%{0}%'", valor));
                     break;
                 default:
                     break;

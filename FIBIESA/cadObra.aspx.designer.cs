@@ -67,13 +67,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valTipoObra;
         
         /// <summary>
-        /// txtOrigem control.
+        /// ddlOrigem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrigem;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOrigem;
         
         /// <summary>
         /// txtNroEdicao control.
@@ -94,13 +94,31 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlEditora;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtISBN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtISBN;
+        
+        /// <summary>
+        /// txtNroPags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNroPags;
+        
+        /// <summary>
+        /// txtLocalPublic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLocalPublic;
         
         /// <summary>
         /// txtDataPublicacao control.
@@ -119,24 +137,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtData_CalendarExtender;
-        
-        /// <summary>
-        /// txtNroPags control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNroPags;
-        
-        /// <summary>
-        /// txtISBN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtISBN;
         
         /// <summary>
         /// txtDataReimpressao control.

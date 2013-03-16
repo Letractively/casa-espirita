@@ -35,10 +35,12 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("ISBN", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
+            tabela.Columns.Add(coluna4);
 
             ObrasBL obraBL = new ObrasBL();
             List<Obras> obras;
@@ -56,6 +58,7 @@ namespace Admin
                 linha["ID"] = obrinha.Id;
                 linha["CODIGO"] = obrinha.Codigo;
                 linha["TITULO"] = obrinha.Titulo;
+                linha["ISBN"] = obrinha.Isbn;
 
 
                 tabela.Rows.Add(linha);
