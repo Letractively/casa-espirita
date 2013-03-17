@@ -15,8 +15,7 @@ namespace Admin
     public partial class cadPessoa : System.Web.UI.Page
     {
         #region variaveis
-        Utils utils = new Utils();
-        DataTable dtTelefones = new DataTable();
+        Utils utils = new Utils();        
         DataTable dtExcluidos = new DataTable();
         string v_operacao = "";
         #endregion
@@ -34,6 +33,44 @@ namespace Admin
             ddlCategoria.SelectedIndex = 0;
         }
 
+        private void CarregarDdlUF()
+        {
+            EstadosBL estBL = new EstadosBL();
+            List<Estados> estados = estBL.PesquisarBL();
+
+            ddlUF.Items.Add(new ListItem());
+            foreach (Estados ltUF in estados)
+                ddlUF.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
+
+            ddlUF.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlCidade(int id_uf)
+        {
+            CidadesBL cidBL = new CidadesBL();
+            List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
+
+            ddlCidades.Items.Clear();
+            ddlCidades.Items.Add(new ListItem());
+            foreach (Cidades ltCid in cidades)
+                ddlCidades.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+
+            ddlCidades.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlBairro(int id_cid)
+        {
+            BairrosBL baiBL = new BairrosBL();
+            List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
+
+            ddlBairro.Items.Clear();
+            ddlBairro.Items.Add(new ListItem());
+            foreach (Bairros ltBai in bairros)
+                ddlBairro.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
+
+            ddlBairro.SelectedIndex = 0;
+        }
+
         private void CarregarDadosPessoas(int id_pes)
         {
             string[] v_pesquisa;
@@ -43,8 +80,12 @@ namespace Admin
             foreach (Pessoas pes in pessoas)
             {
                 hfId.Value = pes.Id.ToString();
-                txtCodigo.Text = pes.Codigo.ToString();
-                txtNome.Text = pes.Nome;                             
+                txtCodigo.Text = pes.Codigo.ToString();                
+                txtNome.Text = pes.Nome;
+                
+                if (pes.NomeFantasia.Trim() != "")
+                    txtNome.Text = pes.NomeFantasia;
+
                 txtCpfCnpj.Text =  pes.CpfCnpj;
                 txtRg.Text = pes.Rg;
                 txtDataNascimento.Text = pes.DtNascimento != null ? Convert.ToDateTime(pes.DtNascimento).ToString("dd/MM/yyyy") : "";
@@ -62,14 +103,18 @@ namespace Admin
                 txtCepProf.Text = pes.CepProf;
                 txtObservacao.Text = pes.Obs;
                 txtDtCadastro.Text = pes.DtCadastro.ToString("dd/MM/yyyy");
-                               
-                hfIdCidade.Value = pes.CidadeId.ToString();
-                if (utils.ComparaIntComZero(hfIdCidade.Value) > 0)
+
+                if (pes.Cidade != null)
                 {
-                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidade.Value));
-                    txtCidade.Text = v_pesquisa[0];
-                    lblDesCidade.Text = v_pesquisa[1];
+                    ddlUF.SelectedValue = pes.Cidade.EstadoId.ToString();
+                    CarregarDdlCidade(pes.Cidade.EstadoId);
+                    CarregarDdlBairro(pes.CidadeId);
                 }
+
+                hfIdCidade.Value = pes.CidadeId.ToString();
+                ddlCidades.SelectedValue = hfIdCidade.Value;
+                ddlBairro.SelectedValue = pes.BairroId.ToString();
+
 
                 hfIdNaturalidade.Value = pes.Naturalidade.ToString();
                 if (utils.ComparaIntComZero(hfIdNaturalidade.Value) > 0)
@@ -88,12 +133,7 @@ namespace Admin
                 }
                 
                 hfIdBairro.Value = pes.BairroId.ToString();
-                if (utils.ComparaIntComZero(hfIdBairro.Value) > 0)
-                {
-                    v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairro.Value));
-                    txtBairro.Text = v_pesquisa[0];
-                    lblDesBairro.Text = v_pesquisa[1];
-                }
+                ddlBairro.SelectedValue = hfIdBairro.Value;                            
                 
                 hfIdBairroProf.Value = pes.BairroProf.ToString();
                 if (utils.ComparaIntComZero(hfIdBairroProf.Value) > 0)
@@ -137,20 +177,19 @@ namespace Admin
         }
         private void CarregarDadosTelefones(int id_pes)
         {
-            DataTable dt = new DataTable();
+            DataTable dt = CriarDtTelefones();
 
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));           
-            DataColumn coluna2 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
-            DataColumn coluna4 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("NUMERO", Type.GetType("System.String"));
+            /*DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));           
+            DataColumn coluna2 = new DataColumn("DESCRICAO", Type.GetType("System.String"));          
+            DataColumn coluna3 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna4 = new DataColumn("NUMERO", Type.GetType("System.String"));
 
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
-            dt.Columns.Add(coluna4);
-            dt.Columns.Add(coluna5);
-            
+            dt.Columns.Add(coluna4);*/
+           
+                        
             TelefonesBL telBL = new TelefonesBL();
 
             List<Telefones> telefones = telBL.PesquisarBL(id_pes);
@@ -160,14 +199,14 @@ namespace Admin
                 DataRow linha = dt.NewRow();
 
                 linha["ID"] = tel.Id;                
-                linha["DESCRICAO"] = tel.Descricao;
-                linha["PESSOAID"] = tel.PessoaId;
+                linha["DESCRICAO"] = tel.Descricao;               
                 linha["CODIGO"] = tel.Codigo;
                 linha["NUMERO"] = tel.Numero;
 
                 dt.Rows.Add(linha);
             }
-            
+
+            Session["dtTelefone"] = dt;
             dtgTelefones.DataSource = dt;
             dtgTelefones.DataBind();
             hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
@@ -177,11 +216,16 @@ namespace Admin
         {
             string[] v_cidade = new string[2];
             CidadesBL cidBL = new CidadesBL();
-            List<Cidades> cidades =  cidBL.PesquisarBL(id_cid);
 
-            v_cidade[0] = cidades[0].Codigo.ToString();
-            v_cidade[1] = cidades[0].Descricao;		 
-	        
+            DataSet dsCid = cidBL.PesquisarBL(id_cid);
+
+            if (dsCid.Tables[0].Rows.Count != 0)
+            {
+                v_cidade[0] = (string)dsCid.Tables[0].Rows[0]["codigo"].ToString();
+                v_cidade[1] = (string)dsCid.Tables[0].Rows[0]["descricao"];
+
+            }
+
             return v_cidade;
         }
         private string[] RetornarCodigoDecricaoBairro(int id_bai)
@@ -190,29 +234,35 @@ namespace Admin
             BairrosBL baiBL = new BairrosBL();
             List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
 
-            v_bairro[0] = bairros[0].Codigo.ToString();
-            v_bairro[1] = bairros[0].Descricao;
+            if (bairros.Count > 0)
+            {
+                v_bairro[0] = bairros[0].Codigo.ToString();
+                v_bairro[1] = bairros[0].Descricao;
+            }
            
             return v_bairro;
         }
-        private void CriarDtTelefones()
-        {  
-            if (dtTelefones.Columns.Count == 0)
-            {
-                DataColumn[] keys = new DataColumn[1];
-                DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-                DataColumn coluna2 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
-                DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
-                DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
-                dtTelefones.Columns.Add(coluna1);
-                dtTelefones.Columns.Add(coluna2);
-                dtTelefones.Columns.Add(coluna3);
-                dtTelefones.Columns.Add(coluna4);
-                keys[0] = coluna2;                        
+        private DataTable CriarDtTelefones()
+        {
+            DataTable dtTelefones = new DataTable();
+            
+            DataColumn[] keys = new DataColumn[1];
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
+            DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
-                dtTelefones.PrimaryKey = keys;
-            }
+            dtTelefones.Columns.Add(coluna1);
+            dtTelefones.Columns.Add(coluna2);
+            dtTelefones.Columns.Add(coluna3);
+            dtTelefones.Columns.Add(coluna4);
+            keys[0] = coluna2;                        
+
+            dtTelefones.PrimaryKey = keys;
+
+            return dtTelefones;
+
         }
         private void CriaDtExcluidos()
         {
@@ -242,10 +292,8 @@ namespace Admin
         {
             txtDtCadastro.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
-            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtCidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtCidadeProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtBairro.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");           
+            txtCidadeProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
             txtBairroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
@@ -258,6 +306,7 @@ namespace Admin
         {
             TelefonesBL telBL = new TelefonesBL();
             Telefones telefones = new Telefones();
+            DataTable dtTelefones = CriarDtTelefones();
 
             if (Session["dtTelefone"] != null)
                 dtTelefones = (DataTable)Session["dtTelefone"];
@@ -306,7 +355,7 @@ namespace Admin
             CarregarAtributos();
             CriarDtTelefones();
             CriaDtExcluidos();
-                        
+                                   
             if (!IsPostBack)
             {                
                 if (Request.QueryString["operacao"] != null)
@@ -330,10 +379,11 @@ namespace Admin
                     }
 
                 }
-
+               
                 txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 
                 CarregarDDLCategoria();
+                CarregarDdlUF();
 
                 if (v_operacao.ToLower() == "edit")
                 {
@@ -343,48 +393,13 @@ namespace Admin
             }
 
         }
-                
-        protected void btnPesBairro_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            
-            BairrosBL baiBL = new BairrosBL();
-            Bairros ba = new Bairros();
-            List<Bairros> bairros = baiBL.PesquisarBL();
-
-            foreach (Bairros cat in bairros)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cat.Id;
-                linha["CODIGO"] = cat.Codigo;
-                linha["DESCRICAO"] = cat.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = baiBL;
-            Session["objPesquisa"] = ba;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBairro.ClientID + "&id=" + hfIdBairro.ClientID + "&lbl=" + lblDesBairro.ClientID + "','',600,500);", true);
-        }
-
+        
         protected void btnPesNaturalidade_Click(object sender, EventArgs e)
         {
             CarregarTabelaPesquisaCidade();
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtNaturalidade.ClientID + "&id=" + hfIdNaturalidade.ClientID + "&lbl=" + lblDesNaturalidade.ClientID + "','',600,500);", true);
         }
-
-        protected void btnPesCidade_Click(object sender, EventArgs e)
-        {
-            CarregarTabelaPesquisaCidade();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCidade.ClientID + "&id=" + hfIdCidade.ClientID + "&lbl=" + lblDesCidade.ClientID + "','',600,500);", true);
-        }
+              
 
         protected void btnPesCidProf_Click(object sender, EventArgs e)
         {
@@ -403,8 +418,13 @@ namespace Admin
             Pessoas pessoas = new Pessoas();
 
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
-            pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text); 
-            pessoas.Nome = txtNome.Text;           
+            pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            
+            if (lblDesNome.Text.Trim() == "* Nome")
+                pessoas.Nome = txtNome.Text;
+            else
+                pessoas.NomeFantasia = txtNome.Text;
+           
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
             pessoas.CpfCnpj = txtCpfCnpj.Text;
             pessoas.Rg = txtRg.Text;
@@ -465,6 +485,7 @@ namespace Admin
             bool altera = false;
             int codigo = 0;
             TelefonesBL telBL = new TelefonesBL();
+            DataTable dtTelefones = CriarDtTelefones();
 
             if (Session["dtTelefone"] != null)
                 dtTelefones = (DataTable)Session["dtTelefone"];
@@ -529,6 +550,7 @@ namespace Admin
 
         protected void dtgTelefones_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            DataTable dtTelefones = CriarDtTelefones();
             int codigo = 0;
             codigo = utils.ComparaIntComZero(dtgTelefones.DataKeys[e.RowIndex][0].ToString());
 
@@ -542,6 +564,22 @@ namespace Admin
             dtgTelefones.DataSource = dtTelefones;
             dtgTelefones.DataBind();
           
+        }       
+
+        protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlCidade(utils.ComparaIntComZero(ddlUF.SelectedValue));
+        }
+
+        protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlBairro(utils.ComparaIntComZero(ddlCidades.SelectedValue));
+        }
+
+        protected void dtgTelefones_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
                             

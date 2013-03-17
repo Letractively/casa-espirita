@@ -27,6 +27,20 @@ namespace DataObjects
             get { return _descricao; }
             set { _descricao = value; }
         }
+
+        private Int32? _cidadeId;
+        public Int32? CidadeId
+        {
+            get { return _cidadeId; }
+            set { _cidadeId = value; }
+        }
+
+        private Cidades _cidade;
+        public Cidades Cidade
+        {
+            get { return _cidade; }
+            set { _cidade = value; }
+        }
     
     }
 }

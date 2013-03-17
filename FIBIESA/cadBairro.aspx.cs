@@ -39,6 +39,14 @@ namespace Admin
                 hfId.Value = ltBai.Id.ToString();
                 txtCodigo.Text = ltBai.Codigo.ToString();
                 txtDescricao.Text = ltBai.Descricao;
+
+                if (ltBai.Cidade != null)
+                {
+                    ddlUf.SelectedValue = ltBai.Cidade.EstadoId.ToString();
+                    CarregarDdlCidade(utils.ComparaIntComZero(ddlUf.SelectedValue));
+                }
+
+                ddlCidade.SelectedValue = ltBai.CidadeId.ToString();
             }
 
         }
@@ -46,6 +54,32 @@ namespace Admin
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
+
+        private void CarregarDdlUF()
+        {
+            EstadosBL estBL = new EstadosBL();
+            List<Estados> estados = estBL.PesquisarBL();
+
+            ddlUf.Items.Add(new ListItem());
+            foreach (Estados ltUF in estados)
+                ddlUf.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
+
+            ddlUf.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlCidade(int id_uf)
+        {
+            CidadesBL cidBL = new CidadesBL();
+            List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
+
+            ddlCidade.Items.Clear();
+            ddlCidade.Items.Add(new ListItem());
+            foreach (Cidades ltCid in cidades)
+                ddlCidade.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+
+            ddlCidade.SelectedIndex = 0;
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -66,6 +100,8 @@ namespace Admin
                             id_bai = Convert.ToInt32(Request.QueryString["id_bai"].ToString());
                 }
 
+                CarregarDdlUF();
+                
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
             }
@@ -84,6 +120,7 @@ namespace Admin
             bairros.Id = utils.ComparaIntComZero(hfId.Value);
             bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             bairros.Descricao = txtDescricao.Text;
+            bairros.CidadeId = utils.ComparaIntComNull(ddlCidade.SelectedValue);
 
             if (bairros.Id > 0)
             {
@@ -103,5 +140,13 @@ namespace Admin
 
             Response.Redirect("viewBairro.aspx");
         }
+
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlCidade(utils.ComparaIntComZero(ddlUf.SelectedValue));
+        }
+
+             
+       
     }
 }

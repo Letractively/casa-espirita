@@ -33,17 +33,21 @@ namespace Admin
         {
             CidadesBL cidBL = new CidadesBL();
             EstadosBL estBL = new EstadosBL();
-            
-            List<Cidades> cid = cidBL.PesquisarBL(id_cid);
 
-            foreach (Cidades ltCid in cid)
+
+            DataSet dsCid = cidBL.PesquisarBL(id_cid);
+
+            if (dsCid.Tables[0].Rows.Count != 0)
             {
-                hfId.Value = ltCid.Id.ToString();
-                txtCodigo.Text = ltCid.Codigo.ToString();
-                txtDescricao.Text = ltCid.Descricao;
-                ddlEstado.SelectedValue = ltCid.EstadoId.ToString();                
-            }
+                Cidades cid = new Cidades();
 
+                hfId.Value  = (string)dsCid.Tables[0].Rows[0]["id"].ToString();
+                txtCodigo.Text = (string)dsCid.Tables[0].Rows[0]["codigo"].ToString();
+                txtDescricao.Text = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                ddlEstado.SelectedValue = (string)dsCid.Tables[0].Rows[0]["estadoid"].ToString();
+                                
+            }
+           
         }
         private void CarregarAtributos()
         {           

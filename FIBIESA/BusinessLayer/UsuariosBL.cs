@@ -9,12 +9,22 @@ namespace BusinessLayer
 {
     public class UsuariosBL
     {
+        private bool IsValid(Usuarios usu)
+        {
+            bool valido;
+            valido = usu.Senha != null;            
+            return valido;
+        }
+
         public bool InserirBL(Usuarios usu)
         {
-            /*criar as regras de negocio*/
-            UsuariosDA pessoasDA = new UsuariosDA();
+            if (IsValid(usu))
+            {              
+                UsuariosDA pessoasDA = new UsuariosDA();
 
-            return pessoasDA.InserirDA(usu);
+                return pessoasDA.InserirDA(usu);
+            }
+            return false;
         }
 
         public bool EditarBL(Usuarios usu)

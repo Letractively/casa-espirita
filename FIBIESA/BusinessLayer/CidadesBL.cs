@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -41,11 +42,18 @@ namespace BusinessLayer
             return cidadesDA.PesquisarDA();
         }
 
-        public List<Cidades> PesquisarBL(int id_cid)
+        public DataSet PesquisarBL(int id_cid)
         {
             CidadesDA cidadesDA = new CidadesDA();
 
             return cidadesDA.PesquisaDA(id_cid);
+        }
+
+        public List<Cidades> PesquisaCidUfDA(int id_uf)
+        {
+            CidadesDA cidadesDA = new CidadesDA();
+
+            return cidadesDA.PesquisaCidUfDA(id_uf);
         }
 
         public List<Cidades> PesquisarBL(string campo, string valor)

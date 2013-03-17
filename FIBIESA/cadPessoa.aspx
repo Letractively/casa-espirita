@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="2">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -24,30 +24,31 @@
                                                 <td style="width: 200px">
                                                    * Código:
                                                 </td>
-                                                <td style="width: 400px" colspan="3">
-                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" ></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator10" runat="server" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ControlToValidate="txtCodigo" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                                                </td>                                                
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                   <asp:Label ID="lblDesNome" runat="server"></asp:Label>
-                                                </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ControlToValidate="txtNome" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                                                </td>
+                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" ></asp:TextBox>
+                                                    <asp:RequiredFieldValidator
+                                                        ID="RequiredFieldValidator10" runat="server" ErrorMessage="Informe o Código"
+                                                        ControlToValidate="txtCodigo" ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                </td> 
                                                 <td style="width: 200px">
                                                    * Data Cadastro:
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox" 
                                                         ReadOnly="True" Width="110px"></asp:TextBox>
-                                                </td>
-                                            </tr>                                            
+                                                </td>                                               
+                                            </tr>
                                             <tr>
+                                                <td style="width: 200px">
+                                                   <asp:Label ID="lblDesNome" runat="server"></asp:Label>
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
+                                                        Width="300px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator
+                                                        ID="RequiredFieldValidator1" runat="server" ErrorMessage="Infome o Nome/Razão social"
+                                                        ControlToValidate="txtNome" ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                </td> 
                                                 <td style="width: 200px">
                                                    * Categoria:
                                                 </td>
@@ -55,18 +56,19 @@
                                                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="dropdownlist">
                                                     </asp:DropDownList>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
-                                                                runat="server" ControlToValidate="ddlCategoria" ErrorMessage="*Preenchimento Obrigatório"
-                                                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                                                </td>
-                                            </tr>
+                                                                runat="server" ControlToValidate="ddlCategoria" ErrorMessage="Informe a Categoria"
+                                                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                </td>                                               
+                                            </tr>                                            
                                             <tr>
                                                 <td style="width: 200px">
                                                    * CPF/CNPJ:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCpfCnpj" runat="server" CssClass="inputbox" MaxLength="14"></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCpfCnpj" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                    <asp:TextBox ID="txtCpfCnpj" runat="server" CssClass="inputbox" MaxLength="14"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator
+                                                        ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCpfCnpj" ErrorMessage="Informe o CPF/CNPJ"
+                                                        ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                                 <td style="width: 200px">
                                                     RG:
@@ -104,25 +106,9 @@
                                                     E-mail:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" Width="335px"></asp:TextBox>
+                                                    <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
+                                                        Width="300px"></asp:TextBox>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Nome da Mãe:
-                                                </td>
-                                                <td style="width: 400px">
-                                                    <asp:TextBox ID="txtNomeMae" runat="server" CssClass="inputbox" MaxLength="70" 
-                                                        Width="335px"></asp:TextBox>
-                                                </td>                                            
-                                                <td style="width: 200px">
-                                                    Nome do Pai:
-                                                </td>
-                                                <td style="width: 400px">
-                                                    <asp:TextBox ID="txtNomePai" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td style="width: 140px">
                                                     Naturalidade:
                                                 </td>
@@ -132,22 +118,48 @@
                                                             ID="lblDesNaturalidade" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    Nome da Mãe:
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtNomeMae" runat="server" CssClass="inputbox" MaxLength="70" 
+                                                        Width="300px"></asp:TextBox>
+                                                </td>                                            
+                                                <td style="width: 200px">
+                                                    Nome do Pai:
+                                                </td>
+                                                <td style="width: 400px">
+                                                    <asp:TextBox ID="txtNomePai" runat="server" CssClass="inputbox" MaxLength="70" 
+                                                        Width="300px"></asp:TextBox>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
                                 <asp:TabPanel ID="tpEndereco" runat="server" HeaderText="Endereço">
                                     <ContentTemplate>
                                         <table>
+                                             <tr>
+                                                <td style="width: 140px">
+                                                   * UF:
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" 
+                                                        onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td style="width: 140px">
                                                    * Cidade:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtCidade" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                                        ID="btnPesCidade" runat="server" CssClass="btn" Text="..." OnClick="btnPesCidade_Click" />&nbsp;&nbsp;<asp:Label
-                                                            ID="lblDesCidade" runat="server"></asp:Label><asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-                                                                runat="server" ControlToValidate="txtCidade" ErrorMessage="*Preenchimento Obrigatório"
-                                                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                    <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist" 
+                                                        onselectedindexchanged="ddlCidades_SelectedIndexChanged" 
+                                                        AutoPostBack="True"></asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                                                                runat="server" ControlToValidate="ddlCidades" ErrorMessage="Informe a Cidade - Aba Endereço"
+                                                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -156,9 +168,10 @@
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" 
-                                                        Width="110px"></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCep" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        Width="110px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator
+                                                        ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCep" ErrorMessage="Informe o CEP - Aba Endereço"
+                                                        ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -166,11 +179,11 @@
                                                    * Bairro:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtBairro" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                                        ID="btnPesBairro" runat="server" CssClass="btn" Text="..." OnClick="btnPesBairro_Click" />&nbsp;&nbsp;<asp:Label
-                                                            ID="lblDesBairro" runat="server"></asp:Label><asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-                                                                runat="server" ControlToValidate="txtBairro" ErrorMessage="*Preenchimento Obrigatório"
-                                                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                    <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" 
+                                                        onselectedindexchanged="ddlUF_SelectedIndexChanged" ></asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                                                                runat="server" ControlToValidate="ddlBairro" ErrorMessage="Informe o Bairro - Aba Endereço"
+                                                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -179,8 +192,9 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                     <asp:TextBox ID="txtEndereco" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEndereco" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ID="RequiredFieldValidator3" runat="server" 
+                                                        ControlToValidate="txtEndereco" ErrorMessage="Informe o Endereço - Aba Endereço"
+                                                        ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -189,9 +203,10 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                     <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox" MaxLength="20" 
-                                                        Width="110px"></asp:TextBox><asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtNumero" ErrorMessage="*Preenchimento Obrigatório"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        Width="110px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator
+                                                        ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtNumero" ErrorMessage="Informe o Número - Aba Endereço"
+                                                        ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -234,7 +249,9 @@
                                                 <td colspan="4">
                                                     <asp:GridView ID="dtgTelefones" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                         BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="CODIGO"
-                                                        OnSelectedIndexChanged="dtgTelefones_SelectedIndexChanged" OnRowDeleting="dtgTelefones_RowDeleting">
+                                                        OnSelectedIndexChanged="dtgTelefones_SelectedIndexChanged" 
+                                                        OnRowDeleting="dtgTelefones_RowDeleting" GridLines="None" 
+                                                        onrowdatabound="dtgTelefones_RowDataBound">
                                                         <Columns>
                                                             <asp:CommandField ShowSelectButton="True">
                                                                 <HeaderStyle CssClass="grd_cmd_header" />
@@ -371,7 +388,10 @@
                         </td>
                     </tr>
                 </table>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             </div>
+            
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
                 EnableScriptLocalization="true">
             </asp:ScriptManager>

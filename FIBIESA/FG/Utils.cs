@@ -292,5 +292,11 @@ namespace FG
 
             return str;
         }
+
+        public void CarregarJsExclusao(string prm_mensagem, int int_coluna, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[int_coluna].Attributes.Add("onclick", "javascript:return " +
+                "confirm('\\n" + prm_mensagem + "')");
+        }
     }
 }
