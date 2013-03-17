@@ -80,10 +80,15 @@ namespace FIBIESA
         {
             string[] v_cidade = new string[2];
             CidadesBL cidBL = new CidadesBL();
-            List<Cidades> cidades = cidBL.PesquisarBL(id_cid);
 
-            v_cidade[0] = cidades[0].Codigo.ToString();
-            v_cidade[1] = cidades[0].Descricao;
+            DataSet dsCid = cidBL.PesquisarBL(id_cid);
+
+            if (dsCid.Tables[0].Rows.Count != 0)
+            {               
+                v_cidade[0] = (string)dsCid.Tables[0].Rows[0]["codigo"];
+                v_cidade[1] = (string)dsCid.Tables[0].Rows[0]["descricao"];
+
+            }
 
             return v_cidade;
         }

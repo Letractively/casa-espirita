@@ -244,6 +244,13 @@ namespace DataObjects
             get { return _status; }
             set { _status = value; }
         }
+
+        private Cidades _cidade;
+        public Cidades Cidade
+        {
+            get { return _cidade; }
+            set { _cidade = value; }
+        }
                
     }
 }

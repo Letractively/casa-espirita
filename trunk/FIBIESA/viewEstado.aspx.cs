@@ -121,6 +121,11 @@ namespace Admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            {
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
+            }
         }
 
         protected void dtgEstados_Sorting(object sender, GridViewSortEventArgs e)

@@ -57,6 +57,23 @@ namespace DataAccess
                 pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
                 pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
 
+                if (pes.CidadeId != null)
+                {
+                    CidadesDA cidDA = new CidadesDA();
+                    Cidades cid = new Cidades();
+                    DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId != null ? utils.ComparaIntComZero(pes.CidadeId.ToString()) : 0);
+
+                    if (dsCid.Tables[0].Rows.Count != 0)
+                    {
+                        cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                        cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                        cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                        cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+                    }
+
+                    pes.Cidade = cid;
+                }
+
                 pessoas.Add(pes);
             }
             return pessoas; 

@@ -117,6 +117,11 @@ namespace Admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            {
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
+            }
         }
 
         protected void dtgTurmas_PageIndexChanging(object sender, GridViewPageEventArgs e)

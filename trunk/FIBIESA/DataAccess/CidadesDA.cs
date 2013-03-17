@@ -82,13 +82,22 @@ namespace DataAccess
             return cidades;
         }
 
-        public List<Cidades> PesquisaDA(int id_cid)
+        public DataSet PesquisaDA(int id_cid)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                               CommandType.Text, string.Format( @"SELECT * FROM CIDADES WHERE ID = {0}", id_cid));
 
+            return ds;
+
+        }
+
+        public List<Cidades> PesquisaCidUfDA(int id_uf)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                              CommandType.Text, string.Format(@"SELECT * FROM CIDADES WHERE ESTADOID = {0}", id_uf));
+
             List<Cidades> cidades = CarregarObjCidade(dr);
-                      
+
             return cidades;
 
         }

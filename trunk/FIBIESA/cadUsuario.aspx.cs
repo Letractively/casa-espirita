@@ -39,11 +39,13 @@ namespace Admin
                 hfIdPessoa.Value = usu.PessoaId.ToString();                
                 txtNome.Text = usu.Nome;
                 txtEmail.Text = usu.Email;
-                txtLogin.Text = usu.Login;
-                txtSenha.Text = usu.Senha;
+                txtLogin.Text = usu.Login;                
                 txtDtInicio.Text = usu.DtInicio.ToString("dd/MM/yyyy");
                 txtDtFim.Text = usu.DtFim.ToString("dd/MM/yyyy");
                 ddlStatus.SelectedValue = usu.Status.ToString();
+                txtSenha.Attributes.Add("value", usu.Senha);
+                txtConfirmarSenha.Attributes.Add("value", usu.Senha);
+
 
                 if (usu.Categoria != null)
                     ddlCategoria.SelectedValue = usu.CategoriaId.ToString();

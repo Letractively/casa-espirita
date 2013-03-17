@@ -37,17 +37,15 @@ namespace DataAccess
                 age.BancoId = utils.ComparaIntComZero(dr["BANCOID"].ToString());
 
                 int id = 0;
-                if (age.CidadeId != null)
-                { 
-                    id = Convert.ToInt32(age.CidadeId);
-                    List<Cidades> cidades = cidDA.PesquisaDA(id);
+                DataSet dsCid = cidDA.PesquisaDA(age.CidadeId != null ? utils.ComparaIntComZero(age.CidadeId.ToString()) : 0);
+
+                if (dsCid.Tables[0].Rows.Count != 0)
+                {
                     Cidades cid = new Cidades();
 
-                    foreach (Cidades ltCid in cidades)
-                    {
-                        cid.Codigo = ltCid.Codigo;
-                        cid.Descricao = ltCid.Descricao;                        
-                    }
+                    cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                    cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                    cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
 
                     age.Cidade = cid;
                 }

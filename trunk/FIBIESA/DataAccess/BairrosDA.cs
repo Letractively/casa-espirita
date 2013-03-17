@@ -26,6 +26,24 @@ namespace DataAccess
                 bai.Id = int.Parse(dr["ID"].ToString());
                 bai.Codigo = int.Parse(dr["CODIGO"].ToString());
                 bai.Descricao = dr["DESCRICAO"].ToString();
+                bai.CidadeId = utils.ComparaIntComNull(dr["CIDADEID"].ToString());
+
+                if (bai.CidadeId != null)
+                {
+                    CidadesDA cidDA = new CidadesDA();
+                    Cidades cid = new Cidades();
+                    DataSet dsCid = cidDA.PesquisaDA(bai.CidadeId != null? utils.ComparaIntComZero(bai.CidadeId.ToString()) : 0);
+
+                    if (dsCid.Tables[0].Rows.Count != 0)
+                    {
+                        cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                        cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                        cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                        cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+                    }
+
+                    bai.Cidade =  cid;    
+                }
 
                 bairros.Add(bai);
             }
@@ -35,10 +53,11 @@ namespace DataAccess
         #endregion
         public bool InserirDA(Bairros bai)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[2];
+            SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@codigo", bai.Codigo); 
-            paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao);       
+            paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao);
+            paramsToSP[2] = new SqlParameter("@cidadeid", bai.CidadeId);  
             
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_bairros", paramsToSP);
                            
@@ -47,11 +66,12 @@ namespace DataAccess
 
         public bool EditarDA(Bairros bai)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[3];
+            SqlParameter[] paramsToSP = new SqlParameter[4];
 
             paramsToSP[0] = new SqlParameter("@id", bai.Id);
             paramsToSP[1] = new SqlParameter("@codigo", bai.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", bai.Descricao);
+            paramsToSP[3] = new SqlParameter("@cidadeid", bai.CidadeId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_bairros", paramsToSP);
 
@@ -88,6 +108,17 @@ namespace DataAccess
 
             List<Bairros> bairros = CarregarObjBairro(dr);
                         
+            return bairros;
+        }
+
+        public List<Bairros> PesquisarCidDA(int id_cid)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM BAIRROS WHERE CIDADEID = {0}", id_cid));
+
+            List<Bairros> bairros = CarregarObjBairro(dr);
+
             return bairros;
         }
 

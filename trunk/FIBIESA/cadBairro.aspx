@@ -36,6 +36,29 @@
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            * UF:
+                        </td>  
+                        <td style="width: 400px">
+                           <asp:DropDownList ID="ddlUf" runat="server" CssClass="dropdownlist" 
+                                AutoPostBack="True" onselectedindexchanged="ddlUf_SelectedIndexChanged"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="ddlUf" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            * Cidade:
+                        </td>  
+                        <td style="width: 400px">
+                           <asp:DropDownList ID="ddlCidade" runat="server" CssClass="dropdownlist"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="ddlCidade" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td> 
+                    </tr>
                 </table>
                 <table>
                     <tr>
@@ -48,7 +71,7 @@
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" />   
                         </td>
-                    </tr>
+                    </tr>                   
                 </table>                
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
