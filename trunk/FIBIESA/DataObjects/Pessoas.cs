@@ -251,6 +251,20 @@ namespace DataObjects
             get { return _cidade; }
             set { _cidade = value; }
         }
+
+        private Cidades _cidadeProf;
+        public Cidades CidadeProf
+        {
+            get { return _cidadeProf; }
+            set { _cidadeProf = value; }
+        }
+
+        private string _sexo;
+        public string Sexo
+        {
+            get { return _sexo; }
+            set { _sexo = value; }
+        }
                
     }
 }

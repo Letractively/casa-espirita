@@ -89,9 +89,16 @@ namespace DataAccess
             paramsToSP[10] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
             paramsToSP[11] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_usuarios", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_usuarios", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Usuarios usu)
@@ -112,9 +119,17 @@ namespace DataAccess
             paramsToSP[11] = new SqlParameter("@dhtentlogin", usu.DhTentLogin);
             paramsToSP[12] = new SqlParameter("@categoriaid", usu.CategoriaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_usuarios", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_usuarios", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool ExcluirDA(Usuarios usu)
@@ -123,9 +138,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", usu.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_usuarios", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_usuarios", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Usuarios> PesquisarDA()

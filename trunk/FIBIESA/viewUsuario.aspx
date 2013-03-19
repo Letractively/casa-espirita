@@ -10,18 +10,28 @@
                 <h2>Cadastro de Usuários</h2>
             </div>
             <div class="contentbox">
+                <table>
+                <tr>
+                <td>
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
                     ToolTip="Pesquisar por"></asp:TextBox>
+                </td>
+                <td>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">                 
                     <asp:ListItem Value="NOME">Nome</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     OnClick="btnBusca_Click" />
-                &nbsp;&nbsp;&nbsp
+                </td>
+                <td>
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
+                </td>
                 <!-- grid modelo começa aqui -->
+                </tr>
+                </table>
                 <div class="contentbox">
                     <table width="100%">
                        <tr>

@@ -14,12 +14,12 @@ namespace DataAccess
     {
         public bool InserirDA(Telefones tel)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[4];
+            SqlParameter[] paramsToSP = new SqlParameter[3];
 
-            paramsToSP[0] = new SqlParameter("@codigo", tel.Codigo);
-            paramsToSP[1] = new SqlParameter("@descricao", tel.Descricao);            
-            paramsToSP[2] = new SqlParameter("@numero", tel.Numero);
-            paramsToSP[3] = new SqlParameter("@pessoaid", tel.PessoaId);
+          
+            paramsToSP[0] = new SqlParameter("@descricao", tel.Descricao);            
+            paramsToSP[1] = new SqlParameter("@numero", tel.Numero);
+            paramsToSP[2] = new SqlParameter("@pessoaid", tel.PessoaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_telefones", paramsToSP);
 
@@ -28,13 +28,12 @@ namespace DataAccess
 
         public bool EditarDA(Telefones tel)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[4];
 
-            paramsToSP[0] = new SqlParameter("@id", tel.Id);
-            paramsToSP[1] = new SqlParameter("@codigo", tel.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", tel.Descricao);            
-            paramsToSP[3] = new SqlParameter("@numero", tel.Numero);
-            paramsToSP[4] = new SqlParameter("@pessoaid", tel.PessoaId);
+            paramsToSP[0] = new SqlParameter("@id", tel.Id);         
+            paramsToSP[1] = new SqlParameter("@descricao", tel.Descricao);            
+            paramsToSP[2] = new SqlParameter("@numero", tel.Numero);
+            paramsToSP[3] = new SqlParameter("@pessoaid", tel.PessoaId);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_telefones", paramsToSP);
 
@@ -91,8 +90,7 @@ namespace DataAccess
             while (dr.Read())
             {
                 Telefones tel = new Telefones();
-                tel.Id = int.Parse(dr["ID"].ToString());
-                tel.Codigo = int.Parse(dr["CODIGO"].ToString());
+                tel.Id = int.Parse(dr["ID"].ToString());               
                 tel.Descricao = dr["DESCRICAO"].ToString();               
                 tel.Numero = dr["NUMERO"].ToString();
                 tel.PessoaId = int.Parse(dr["PESSOAID"].ToString());
