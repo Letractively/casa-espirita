@@ -56,12 +56,29 @@ namespace DataAccess
                 pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
                 pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
                 pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
+                pes.BairroProf = utils.ComparaIntComZero(dr["BAIRROPROFID"].ToString());
+                pes.Sexo = dr["SEXO"].ToString();
 
-                if (pes.CidadeId != null)
+                
+                CidadesDA cidDA = new CidadesDA();
+                Cidades cid = new Cidades();
+                DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
+
+                if (dsCid.Tables[0].Rows.Count != 0)
                 {
-                    CidadesDA cidDA = new CidadesDA();
-                    Cidades cid = new Cidades();
-                    DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId != null ? utils.ComparaIntComZero(pes.CidadeId.ToString()) : 0);
+                    cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                    cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                    cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                    cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+                }
+
+                pes.Cidade = cid;
+                
+
+                if (pes.CidadeProfId != null)
+                {
+                    dsCid.Clear();
+                    dsCid = cidDA.PesquisaDA(pes.CidadeProfId != null ? utils.ComparaIntComZero(pes.CidadeProfId.ToString()) : 0);
 
                     if (dsCid.Tables[0].Rows.Count != 0)
                     {
@@ -71,7 +88,7 @@ namespace DataAccess
                         cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
                     }
 
-                    pes.Cidade = cid;
+                    pes.CidadeProf = cid;
                 }
 
                 pessoas.Add(pes);
@@ -82,7 +99,7 @@ namespace DataAccess
 
         public int InserirDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[32];
+            SqlParameter[] paramsToSP = new SqlParameter[34];
                         
             paramsToSP[0] = new SqlParameter("@nome", pes.Nome);
             paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
@@ -116,20 +133,28 @@ namespace DataAccess
             paramsToSP[29] = new SqlParameter("@reftelefone", pes.RefTelefone);
             paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);       
             paramsToSP[31] = new SqlParameter("@codigo", pes.Codigo);
-            //paramsToSP[17] = new SqlParameter("@bairroprof", pes.BairroProf);
-                        
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
+            paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
+            paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
 
-            DataTable tabela = ds.Tables[0];
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_pessoas", paramsToSP);
 
-            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
-            
-            return id;
+                DataTable tabela = ds.Tables[0];
+
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public bool EditarDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[33];
+            SqlParameter[] paramsToSP = new SqlParameter[35];
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
             paramsToSP[1] = new SqlParameter("@codigo", pes.Codigo);
@@ -164,11 +189,19 @@ namespace DataAccess
             paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
             paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
             paramsToSP[32] = new SqlParameter("@status", pes.Status);
-            //paramsToSP[19] = new SqlParameter("@bairroprof", pes.BairroProf);
+            paramsToSP[33] = new SqlParameter("@bairroProfId", pes.BairroProf);
+            paramsToSP[34] = new SqlParameter("@sexo", pes.Sexo);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_pessoas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_pessoas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Pessoas pes)
@@ -177,9 +210,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_pessoas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_pessoas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Pessoas> PesquisarDA()

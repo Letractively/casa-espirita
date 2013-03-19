@@ -43,9 +43,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@dtinicio", eve.DtInicio);
             paramsToSP[3] = new SqlParameter("@dtfim", eve.DtFim);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_eventos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_eventos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Eventos eve)
@@ -58,9 +65,17 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@dtinicio", eve.DtInicio);
             paramsToSP[4] = new SqlParameter("@dtfim", eve.DtFim);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_eventos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_eventos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool ExcluirDA(Eventos eve)
@@ -69,9 +84,17 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", eve.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_eventos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_eventos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public List<Eventos> PesquisarDA()

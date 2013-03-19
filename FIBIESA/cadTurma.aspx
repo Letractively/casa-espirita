@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
     <div id="content">
-        <div class="container half2 left">
+        <div class="container half3 left">
             <div class="conthead">
                 <h2>
                     Cadastro de Turmas</h2>
@@ -21,8 +21,8 @@
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtCodigo" ErrorMessage="Informe o código" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -34,8 +34,8 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="40" Width="300px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="Informe da descrição" 
+                                ValidationGroup="salvar" CssClass="validacao" Enabled="False">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                      <tr>
@@ -46,8 +46,8 @@
                             <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlEvento" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="ddlEvento" ErrorMessage="Informe o evento" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -67,6 +67,9 @@
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                ControlToValidate="txtDtInicio" CssClass="validacao" 
+                                ErrorMessage="Informe da data de início" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                         <td style="width: 140px">* Dt. Fim:</td>
                         <td>
@@ -75,6 +78,9 @@
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                ControlToValidate="txtDtFim" CssClass="validacao" 
+                                ErrorMessage="Informe da data final" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -96,6 +102,9 @@
                         <td style="width: 140px">* Nro. Máximo:</td>
                         <td style="width: 400px" colspan="3"> 
                             <asp:TextBox ID="txtNroMax" runat="server" CssClass="inputbox" Width="80px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="txtNroMax" CssClass="validacao" 
+                                ErrorMessage="Informe o número máximo de alunos" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>                        
                     </tr>
                     <tr>                        
@@ -121,8 +130,10 @@
                                 CssClass="btn" onclick="btnParticipantes_Click" /> 
                         </td>
                     </tr>
-                </table>                
+                </table>                                                
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                    CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"

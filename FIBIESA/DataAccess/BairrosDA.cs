@@ -57,11 +57,19 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@codigo", bai.Codigo); 
             paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao);
-            paramsToSP[2] = new SqlParameter("@cidadeid", bai.CidadeId);  
-            
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_bairros", paramsToSP);
-                           
-            return true;
+            paramsToSP[2] = new SqlParameter("@cidadeid", bai.CidadeId);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_bairros", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool EditarDA(Bairros bai)
@@ -73,9 +81,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@descricao", bai.Descricao);
             paramsToSP[3] = new SqlParameter("@cidadeid", bai.CidadeId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_bairros", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_bairros", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Bairros bai)
@@ -84,9 +99,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", bai.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_bairros", paramsToSP); 
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_bairros", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Bairros> PesquisarDA()

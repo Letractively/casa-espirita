@@ -130,6 +130,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtRg;
         
         /// <summary>
+        /// ddlSexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSexo;
+        
+        /// <summary>
         /// txtDataNascimento control.
         /// </summary>
         /// <remarks>
@@ -220,6 +229,24 @@ namespace Admin {
         protected global::AjaxControlToolkit.TabPanel tpEndereco;
         
         /// <summary>
+        /// txtCep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCep;
+        
+        /// <summary>
+        /// RequiredFieldValidator6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        
+        /// <summary>
         /// ddlUF control.
         /// </summary>
         /// <remarks>
@@ -245,24 +272,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
-        
-        /// <summary>
-        /// txtCep control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCep;
-        
-        /// <summary>
-        /// RequiredFieldValidator6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
         
         /// <summary>
         /// ddlBairro control.
@@ -409,58 +418,31 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtCepProf;
         
         /// <summary>
-        /// txtCidadeProf control.
+        /// ddlUfProf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCidadeProf;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUfProf;
         
         /// <summary>
-        /// btnPesCidProf control.
+        /// ddlCidadeProf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesCidProf;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidadeProf;
         
         /// <summary>
-        /// lblDesCidProf control.
+        /// ddlBairroProf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesCidProf;
-        
-        /// <summary>
-        /// txtBairroProf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBairroProf;
-        
-        /// <summary>
-        /// btnPesBairroProf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesBairroProf;
-        
-        /// <summary>
-        /// lblDesBairroProf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesBairroProf;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBairroProf;
         
         /// <summary>
         /// txtEnderecoProf control.
@@ -544,24 +526,6 @@ namespace Admin {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// hfIdBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdBairro;
-        
-        /// <summary>
-        /// hfIdCidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdCidade;
-        
-        /// <summary>
         /// hfIdNaturalidade control.
         /// </summary>
         /// <remarks>
@@ -569,15 +533,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfIdNaturalidade;
-        
-        /// <summary>
-        /// hfIdCidProf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdCidProf;
         
         /// <summary>
         /// hfId control.
@@ -589,33 +544,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.HiddenField hfId;
         
         /// <summary>
-        /// hfIdBairroProf control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdBairroProf;
-        
-        /// <summary>
-        /// hfCodTel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCodTel;
-        
-        /// <summary>
-        /// hfCodTelAlt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCodTelAlt;
-        
-        /// <summary>
         /// hfIdTelefone control.
         /// </summary>
         /// <remarks>
@@ -623,6 +551,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfIdTelefone;
+        
+        /// <summary>
+        /// hfOrdemFone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfOrdemFone;
         
         /// <summary>
         /// Master property.

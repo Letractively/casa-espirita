@@ -17,6 +17,7 @@ namespace Admin
         #region variaveis
         Utils utils = new Utils();        
         DataTable dtExcluidos = new DataTable();
+        DataTable dtFone = new DataTable();
         string v_operacao = "";
         #endregion
 
@@ -32,45 +33,41 @@ namespace Admin
             
             ddlCategoria.SelectedIndex = 0;
         }
-
-        private void CarregarDdlUF()
+        private void CarregarDdlUF(DropDownList ddl)
         {
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddlUF.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem());
             foreach (Estados ltUF in estados)
-                ddlUF.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
-            ddlUF.SelectedIndex = 0;
+            ddl.SelectedIndex = 0;
         }
-
-        private void CarregarDdlCidade(int id_uf)
+        private void CarregarDdlCidade(DropDownList ddl, int id_uf)
         {
             CidadesBL cidBL = new CidadesBL();
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
-            ddlCidades.Items.Clear();
-            ddlCidades.Items.Add(new ListItem());
+            ddl.Items.Clear();
+            ddl.Items.Add(new ListItem());
             foreach (Cidades ltCid in cidades)
-                ddlCidades.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
-            ddlCidades.SelectedIndex = 0;
+            ddl.SelectedIndex = 0;
         }
-
-        private void CarregarDdlBairro(int id_cid)
+        private void CarregarDdlBairro(DropDownList ddl, int id_cid)
         {
             BairrosBL baiBL = new BairrosBL();
             List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
 
-            ddlBairro.Items.Clear();
-            ddlBairro.Items.Add(new ListItem());
+            ddl.Items.Clear();
+            ddl.Items.Add(new ListItem());
             foreach (Bairros ltBai in bairros)
-                ddlBairro.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
 
-            ddlBairro.SelectedIndex = 0;
+            ddl.SelectedIndex = 0;
         }
-
         private void CarregarDadosPessoas(int id_pes)
         {
             string[] v_pesquisa;
@@ -103,18 +100,26 @@ namespace Admin
                 txtCepProf.Text = pes.CepProf;
                 txtObservacao.Text = pes.Obs;
                 txtDtCadastro.Text = pes.DtCadastro.ToString("dd/MM/yyyy");
+                ddlSexo.SelectedValue = pes.Sexo;
+                txtEmail.Text = pes.Email;
 
-                if (pes.Cidade != null)
+                if (pes.Cidade != null )
                 {
                     ddlUF.SelectedValue = pes.Cidade.EstadoId.ToString();
-                    CarregarDdlCidade(pes.Cidade.EstadoId);
-                    CarregarDdlBairro(pes.CidadeId);
+                    CarregarDdlCidade(ddlCidades, pes.Cidade.EstadoId);
+                    CarregarDdlBairro(ddlBairro, pes.CidadeId);
+                    ddlCidades.SelectedValue = pes.CidadeId.ToString();
+                    ddlBairro.SelectedValue = pes.BairroId.ToString();
                 }
 
-                hfIdCidade.Value = pes.CidadeId.ToString();
-                ddlCidades.SelectedValue = hfIdCidade.Value;
-                ddlBairro.SelectedValue = pes.BairroId.ToString();
-
+                if (pes.CidadeProf != null)
+                {
+                    ddlUfProf.SelectedValue = pes.CidadeProf.EstadoId.ToString();
+                    CarregarDdlCidade(ddlCidadeProf, pes.CidadeProf.EstadoId);
+                    CarregarDdlBairro(ddlBairroProf, utils.ComparaIntComZero(pes.CidadeProfId.ToString()));
+                    ddlCidadeProf.SelectedValue = pes.CidadeProfId.ToString();
+                    ddlBairroProf.SelectedValue = pes.BairroProf.ToString();
+                }      
 
                 hfIdNaturalidade.Value = pes.Naturalidade.ToString();
                 if (utils.ComparaIntComZero(hfIdNaturalidade.Value) > 0)
@@ -122,28 +127,18 @@ namespace Admin
                     v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdNaturalidade.Value));
                     txtNaturalidade.Text = v_pesquisa[0];
                     lblDesNaturalidade.Text = v_pesquisa[1];
-                }
-
-                hfIdCidProf.Value = pes.CidadeProfId.ToString();
-                if (utils.ComparaIntComZero(hfIdCidProf.Value) > 0)
-                {
-                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdCidProf.Value));
-                    txtCidadeProf.Text = v_pesquisa[0];
-                    lblDesCidProf.Text = v_pesquisa[1];
-                }
+                }               
                 
-                hfIdBairro.Value = pes.BairroId.ToString();
-                ddlBairro.SelectedValue = hfIdBairro.Value;                            
-                
-                hfIdBairroProf.Value = pes.BairroProf.ToString();
-                if (utils.ComparaIntComZero(hfIdBairroProf.Value) > 0)
+                ddlCategoria.SelectedValue = pes.CategoriaId.ToString();  
+                             
+                if (pes.Tipo == "F")
                 {
-                    v_pesquisa = RetornarCodigoDecricaoBairro(utils.ComparaIntComZero(hfIdBairroProf.Value));
-                    txtBairroProf.Text = v_pesquisa[0];
-                    lblDesBairroProf.Text = v_pesquisa[1];
+                    lblDesNome.Text = "* Nome";
                 }
-
-                ddlCategoria.SelectedValue = pes.CategoriaId.ToString();                       
+                else
+                {
+                    lblDesNome.Text = "* Nome Fantasia";
+                }
                 
             }          
  
@@ -176,41 +171,31 @@ namespace Admin
             Session["objPesquisa"] = ci;
         }
         private void CarregarDadosTelefones(int id_pes)
-        {
-            DataTable dt = CriarDtTelefones();
-
-            /*DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));           
-            DataColumn coluna2 = new DataColumn("DESCRICAO", Type.GetType("System.String"));          
-            DataColumn coluna3 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
-            DataColumn coluna4 = new DataColumn("NUMERO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-            dt.Columns.Add(coluna4);*/
-           
-                        
+        {           
+            int ordem = 0;
+             
             TelefonesBL telBL = new TelefonesBL();
-
             List<Telefones> telefones = telBL.PesquisarBL(id_pes);
-
+        
             foreach (Telefones tel in telefones)
             {
-                DataRow linha = dt.NewRow();
+                ordem++;
+                DataRow linha = dtFone.NewRow();
 
+                linha["IDORDEM"] = ordem;    
                 linha["ID"] = tel.Id;                
-                linha["DESCRICAO"] = tel.Descricao;               
-                linha["CODIGO"] = tel.Codigo;
+                linha["DESCRICAO"] = tel.Descricao;  
                 linha["NUMERO"] = tel.Numero;
 
-                dt.Rows.Add(linha);
+                dtFone.Rows.Add(linha);
             }
 
-            Session["dtTelefone"] = dt;
-            dtgTelefones.DataSource = dt;
+            Session["tbfone"] = dtFone;
+            dtgTelefones.DataSource = dtFone;
             dtgTelefones.DataBind();
-            hfCodTel.Value = telBL.RetornarMaxCodigoBL().ToString();
-                           
+            ordem++;
+            hfOrdemFone.Value = ordem.ToString(); //proxima ordem 
+                                 
         }       
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
@@ -242,33 +227,33 @@ namespace Admin
            
             return v_bairro;
         }
-
-        private DataTable CriarDtTelefones()
+        private void CriaTabFone()
         {
-            DataTable dtTelefones = new DataTable();
-            
             DataColumn[] keys = new DataColumn[1];
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO",Type.GetType("System.Int32"));                
-            DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
-            dtTelefones.Columns.Add(coluna1);
-            dtTelefones.Columns.Add(coluna2);
-            dtTelefones.Columns.Add(coluna3);
-            dtTelefones.Columns.Add(coluna4);
-            keys[0] = coluna2;                        
+            if (dtFone.Columns.Count == 0)
+            {
+                DataColumn coluna1 = new DataColumn("IDORDEM", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("ID", Type.GetType("System.Int32"));
+                DataColumn coluna3 = new DataColumn("NUMERO", Type.GetType("System.String"));
+                DataColumn coluna4 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
-            dtTelefones.PrimaryKey = keys;
+                dtFone.Columns.Add(coluna1);
+                dtFone.Columns.Add(coluna2);
+                dtFone.Columns.Add(coluna3);
+                dtFone.Columns.Add(coluna4);
 
-            return dtTelefones;
+                keys[0] = coluna1;
 
-        }
+                dtFone.PrimaryKey = keys;
+            }
+           
+        }       
         private void CriaDtExcluidos()
         {
             if (dtExcluidos.Columns.Count == 0)
             {
-                DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+                DataColumn coluna1 = new DataColumn("IDCODIGO", Type.GetType("System.String"));
                 DataColumn coluna2 = new DataColumn("TIPO", Type.GetType("System.String"));
 
                 dtExcluidos.Columns.Add(coluna1);
@@ -292,9 +277,7 @@ namespace Admin
         {
             txtDtCadastro.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
-            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");           
-            txtCidadeProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
-            txtBairroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");  
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
@@ -306,15 +289,13 @@ namespace Admin
         {
             TelefonesBL telBL = new TelefonesBL();
             Telefones telefones = new Telefones();
-            DataTable dtTelefones = CriarDtTelefones();
+           
+            if (Session["tbfone"] != null)
+                dtFone = (DataTable)Session["tbfone"];
 
-            if (Session["dtTelefone"] != null)
-                dtTelefones = (DataTable)Session["dtTelefone"];
-
-            foreach (DataRow linha in dtTelefones.Rows)
+            foreach (DataRow linha in dtFone.Rows)
             {
-                telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());
-                telefones.Codigo = utils.ComparaIntComZero(linha["CODIGO"].ToString());
+                telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());                
                 telefones.Numero = linha["NUMERO"].ToString();
                 telefones.Descricao = linha["DESCRICAO"].ToString();
                 telefones.PessoaId = idPes;
@@ -339,7 +320,7 @@ namespace Admin
                     {
                         case "T": //telefones
                             {
-                                telefones.Id = utils.ComparaIntComZero(row["ID"].ToString());
+                                telefones.Id = utils.ComparaIntComZero(row["IDCODIGO"].ToString());
                                 telBL.ExcluirBL(telefones);
                                 break;
                             }  
@@ -353,8 +334,8 @@ namespace Admin
         {
             int id_pes = 0;           
             CarregarAtributos();
-            CriarDtTelefones();
-            CriaDtExcluidos();
+            this.CriaTabFone();
+            this.CriaDtExcluidos();
                                    
             if (!IsPostBack)
             {                
@@ -363,27 +344,33 @@ namespace Admin
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
+                    {
                         if (Request.QueryString["id_pes"] != null)
                             id_pes = Convert.ToInt32(Request.QueryString["id_pes"].ToString());
-                }
-
-                if (Request.QueryString["tipoPessoa"] != null)
-                {
-                    if (Request.QueryString["tipoPessoa"].ToString() == "F")
-                    {
-                        lblDesNome.Text = "* Nome";
                     }
                     else
                     {
-                        lblDesNome.Text = "* Nome Fantasia";
-                    }
+                        if (Request.QueryString["tipoPessoa"] != null)
+                        {
+                            if (Request.QueryString["tipoPessoa"].ToString() == "F")
+                            {
+                                lblDesNome.Text = "* Nome";
+                            }
+                            else
+                            {
+                                lblDesNome.Text = "* Nome Fantasia";
+                            }
 
+                        }
+                    }
                 }
+                               
                
                 txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 
                 CarregarDDLCategoria();
-                CarregarDdlUF();
+                CarregarDdlUF(ddlUF);
+                CarregarDdlUF(ddlUfProf);
 
                 if (v_operacao.ToLower() == "edit")
                 {
@@ -399,14 +386,7 @@ namespace Admin
             CarregarTabelaPesquisaCidade();
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtNaturalidade.ClientID + "&id=" + hfIdNaturalidade.ClientID + "&lbl=" + lblDesNaturalidade.ClientID + "','',600,500);", true);
         }
-              
-
-        protected void btnPesCidProf_Click(object sender, EventArgs e)
-        {
-            CarregarTabelaPesquisaCidade();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCidadeProf.ClientID + "&id=" + hfIdCidProf.ClientID + "&lbl=" + lblDesCidProf.ClientID + "','',600,500);", true);
-        }
-                
+                               
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewPessoa.aspx");
@@ -420,11 +400,8 @@ namespace Admin
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
             pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             
-            if (lblDesNome.Text.Trim() == "* Nome")
-                pessoas.Nome = txtNome.Text;
-            else
-                pessoas.NomeFantasia = txtNome.Text;
-           
+            pessoas.Nome = txtNome.Text;
+                       
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
             pessoas.CpfCnpj = txtCpfCnpj.Text;
             pessoas.Rg = txtRg.Text;
@@ -433,21 +410,28 @@ namespace Admin
             pessoas.NomeMae = txtNomeMae.Text;
             pessoas.NomePai = txtNomePai.Text;
             pessoas.Naturalidade = utils.ComparaIntComNull(hfIdNaturalidade.Value);
-            pessoas.CidadeId = utils.ComparaIntComZero(hfIdCidade.Value);
+            pessoas.CidadeId = utils.ComparaIntComZero(ddlCidades.SelectedValue);
             pessoas.Cep = txtCep.Text;
             pessoas.Endereco = txtEndereco.Text;
             pessoas.Numero = txtNumero.Text;
-            pessoas.BairroId = utils.ComparaIntComZero(hfIdBairro.Value);
+            pessoas.BairroId = utils.ComparaIntComZero(ddlBairro.SelectedValue);
             pessoas.Complemento = txtComplemento.Text;
             pessoas.Empresa = txtEmpresa.Text;
             pessoas.EnderecoProf = txtEnderecoProf.Text;
             pessoas.NumeroProf = txtNumeroProf.Text;
-            pessoas.CidadeProfId = utils.ComparaIntComNull(hfIdCidProf.Value);
+            pessoas.CidadeProfId = utils.ComparaIntComNull(ddlCidadeProf.SelectedValue);
             pessoas.ComplementoProf = txtComplementoProf.Text;
-            pessoas.BairroProf = utils.ComparaIntComNull(hfIdBairroProf.Value);
+            pessoas.BairroProf = utils.ComparaIntComNull(ddlBairroProf.SelectedValue);
             pessoas.CepProf = txtCepProf.Text;
             pessoas.Obs = txtObservacao.Text;
             pessoas.DtCadastro = DateTime.Now;
+            pessoas.Sexo = ddlSexo.SelectedValue;
+            pessoas.Email = txtEmail.Text;
+
+            if (lblDesNome.Text == "* Nome")
+                pessoas.Tipo = "F";
+            else
+                pessoas.Tipo = "J";
 
             int idPes = 0;
 
@@ -482,98 +466,70 @@ namespace Admin
 
         protected void btnInserirTelefone_Click(object sender, EventArgs e)
         {
-            bool altera = false;
-            int codigo = 0;
-            TelefonesBL telBL = new TelefonesBL();
-            DataTable dtTelefones = CriarDtTelefones();
+            if (Session["tbfone"] != null)
+                dtFone = (DataTable)Session["tbfone"];
+           
+            DataRow linha = dtFone.NewRow();
 
-            if (Session["dtTelefone"] != null)
-                dtTelefones = (DataTable)Session["dtTelefone"];
+            object key = new object();
+            key = utils.ComparaIntComZero(hfOrdemFone.Value);           
 
-            DataRow linha = dtTelefones.NewRow();
-
-            if (hfCodTelAlt.Value != "")
-                codigo = utils.ComparaIntComZero(hfCodTelAlt.Value);
-            else
-                codigo = utils.ComparaIntComZero(hfCodTel.Value);
-                   
-            
-            if (dtTelefones.Rows.Contains(codigo))
-            {
-                linha = dtTelefones.Rows.Find(codigo);
-                linha.BeginEdit();
-                altera = true;
-            }
-            else
-                altera = false;
-
-            linha["ID"] = utils.ComparaIntComZero(hfIdTelefone.ToString());
-            linha["CODIGO"] = codigo.ToString();          
+            linha["IDORDEM"] = key.ToString();
+            linha["ID"] = utils.ComparaIntComZero(hfIdTelefone.ToString());           
             linha["NUMERO"] = txtTelefone.Text;
             linha["DESCRICAO"] = ddlTipo.SelectedValue;
 
-            if (altera)
-                linha.EndEdit();
-            else
-                dtTelefones.Rows.Add(linha);
+            dtFone.Rows.Add(linha);
 
-            Session["dtTelefone"] = dtTelefones;
-            dtgTelefones.DataSource = dtTelefones;
+            Session["tbfone"] = dtFone;
+            dtgTelefones.DataSource = dtFone;
+            dtgTelefones.DataBind();
+            txtTelefone.Text = "";
+            ddlTipo.SelectedIndex = 0;
+
+            hfOrdemFone.Value = (Convert.ToInt32(hfOrdemFone.Value) + 1).ToString(); //proxima ordem  
+            
+        }
+                
+        protected void dtgTelefones_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            object key = new object();
+            object key2 = new object();
+            key = dtgTelefones.DataKeys[e.RowIndex][0];
+            key2 = dtgTelefones.DataKeys[e.RowIndex][1];
+
+            if (Session["tbfone"] != null)
+                dtFone = (DataTable)Session["tbfone"];
+
+            if (dtFone.Rows.Contains(key))
+                dtFone.Rows.Remove(dtFone.Rows.Find(key));
+
+            Session["tbfone"] = dtFone;
+            dtgTelefones.DataSource = dtFone;
             dtgTelefones.DataBind();
 
-            txtTelefone.Text = "";         
-            ddlTipo.SelectedIndex = 0;
-            hfCodTel.Value = (utils.ComparaIntComZero(hfCodTel.Value) + 1).ToString();
-
-            if (utils.ComparaIntComZero(hfIdTelefone.Value) > 0)
+            if (utils.ComparaIntComZero(key2.ToString()) > 0  )
             {
                 if (Session["tbexcluidos"] != null)
                     dtExcluidos = (DataTable)Session["tbexcluidos"];
 
                 DataRow row = dtExcluidos.NewRow();
-                row["ID"] = hfIdTelefone.Value;
+                row["IDCODIGO"] = key2.ToString();
                 row["TIPO"] = "T";
                 dtExcluidos.Rows.Add(row);
                 Session["tbexcluidos"] = dtExcluidos;
             }
-        }
-
-        protected void dtgTelefones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GridViewRow row = dtgTelefones.SelectedRow;
-
-            hfCodTelAlt.Value = dtgTelefones.SelectedDataKey[0].ToString();
-            hfIdTelefone.Value = row.Cells[1].Text;
-            ddlTipo.SelectedValue = row.Cells[3].Text;          
-            txtTelefone.Text = row.Cells[4].Text;          
-        }
-
-        protected void dtgTelefones_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            DataTable dtTelefones = CriarDtTelefones();
-            int codigo = 0;
-            codigo = utils.ComparaIntComZero(dtgTelefones.DataKeys[e.RowIndex][0].ToString());
-
-            if (Session["dtTelefone"] != null)
-                dtTelefones = (DataTable)Session["dtTelefone"];
-
-            if (dtTelefones.Rows.Contains(codigo))
-                dtTelefones.Rows.Remove(dtTelefones.Rows.Find(codigo));
-
-            Session["dtTelefone"] = dtTelefones;
-            dtgTelefones.DataSource = dtTelefones;
-            dtgTelefones.DataBind();
           
         }       
 
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CarregarDdlCidade(utils.ComparaIntComZero(ddlUF.SelectedValue));
+            CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
         }
 
         protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CarregarDdlBairro(utils.ComparaIntComZero(ddlCidades.SelectedValue));
+            CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ddlCidades.SelectedValue));
         }
 
         protected void dtgTelefones_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -582,6 +538,18 @@ namespace Admin
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
-                            
+        protected void ddlUfProf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlCidade(ddlCidadeProf, utils.ComparaIntComZero(ddlUfProf.SelectedValue));
+        }
+
+        protected void ddlCidadeProf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlBairro(ddlBairroProf, utils.ComparaIntComZero(ddlCidadeProf.SelectedValue));
+        }
+
+             
+
+                                                   
     }
 }
