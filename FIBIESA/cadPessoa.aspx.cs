@@ -525,6 +525,7 @@ namespace Admin
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
+            ddlBairro.Items.Clear();
         }
 
         protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)

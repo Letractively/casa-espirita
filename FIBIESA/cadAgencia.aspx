@@ -55,22 +55,37 @@
                     </tr>                   
                     <tr>
                         <td style="width: 140px">
-                            Cidade:
+                            * UF:
                         </td>
-                        <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtCidade" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                ID="btnPesCidade" runat="server" CssClass="btn" Text="..." OnClick="btnPesCidade_Click" />&nbsp;&nbsp;<asp:Label
-                                    ID="lblDesCidade" runat="server"></asp:Label>
+                        <td style="width: 500px">
+                            <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" 
+                                onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Bairro:
+                            * Cidade:
                         </td>
-                        <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtBairro" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                ID="btnPesBairro" runat="server" CssClass="btn" Text="..." OnClick="btnPesBairro_Click" />&nbsp;&nbsp;<asp:Label
-                                    ID="lblDesBairro" runat="server"></asp:Label>
+                        <td style="width: 500px">
+                            <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist" 
+                                onselectedindexchanged="ddlCidades_SelectedIndexChanged" 
+                                AutoPostBack="True"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                                        runat="server" ControlToValidate="ddlCidades" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" 
+                                CssClass="validacao"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>                                            
+                    <tr>
+                        <td style="width: 140px">
+                            * Bairro:
+                        </td>
+                        <td style="width: 500px">
+                            <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                                        runat="server" ControlToValidate="ddlBairro" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" 
+                                CssClass="validacao"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                      <tr>
@@ -112,8 +127,6 @@
                 </table>
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdCidade" runat="server" />
-            <asp:HiddenField ID="hfIdBairro" runat="server" />
         </div>
         <div class="status">            
         </div>

@@ -30,17 +30,19 @@ namespace Admin
                 hfId.Value = ltPor.Id.ToString();
                 txtCodigo.Text = ltPor.Codigo.ToString();
                 txtDescricao.Text = ltPor.Descricao;
-                ddlBanco.SelectedValue = ltPor.BancoId.ToString(); 
+                ddlBanco.SelectedValue = ltPor.BancoId.ToString();
+                CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
                 ddlAgencia.SelectedValue = ltPor.AgenciaId.ToString();                           
             }
 
         }
         
-        private void CarregarDDLAgencia()
+        private void CarregarDDLAgencia(int id_ban)
         {
             AgenciasBL ageBL = new AgenciasBL();
-            List<Agencias> agencias = ageBL.PesquisarBL();
+            List<Agencias> agencias = ageBL.PesquisarBanDA(id_ban);
 
+            ddlAgencia.Items.Clear();
             ddlAgencia.Items.Add(new ListItem());
             foreach (Agencias ltAge in agencias)
                 ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
@@ -81,8 +83,7 @@ namespace Admin
                         if (Request.QueryString["id_por"] != null)
                             id_por = Convert.ToInt32(Request.QueryString["id_por"].ToString());
                 }
-
-                CarregarDDLAgencia();
+                                
                 CarregarDDLBanco();
 
                 if (v_operacao.ToLower() == "edit")
@@ -125,6 +126,11 @@ namespace Admin
             Response.Redirect("viewPortador.aspx");
             
 
+        }
+
+        protected void ddlBanco_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
         }
 
                 

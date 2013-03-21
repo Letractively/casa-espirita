@@ -76,58 +76,49 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtCep;
         
         /// <summary>
-        /// txtCidade control.
+        /// ddlUF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCidade;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUF;
         
         /// <summary>
-        /// btnPesCidade control.
+        /// ddlCidades control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesCidade;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidades;
         
         /// <summary>
-        /// lblDesCidade control.
+        /// RequiredFieldValidator7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesCidade;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
-        /// txtBairro control.
+        /// ddlBairro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBairro;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBairro;
         
         /// <summary>
-        /// btnPesBairro control.
+        /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesBairro;
-        
-        /// <summary>
-        /// lblDesBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesBairro;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
         
         /// <summary>
         /// txtEndereco control.
@@ -182,24 +173,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
-        
-        /// <summary>
-        /// hfIdCidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdCidade;
-        
-        /// <summary>
-        /// hfIdBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdBairro;
         
         /// <summary>
         /// Master property.
