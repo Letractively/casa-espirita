@@ -29,7 +29,41 @@ namespace Admin
 
             ddlBanco.SelectedIndex = 0;
         }
+        private void CarregarDdlUF(DropDownList ddl)
+        {
+            EstadosBL estBL = new EstadosBL();
+            List<Estados> estados = estBL.PesquisarBL();
 
+            ddl.Items.Add(new ListItem());
+            foreach (Estados ltUF in estados)
+                ddl.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
+
+            ddl.SelectedIndex = 0;
+        }
+        private void CarregarDdlCidade(DropDownList ddl, int id_uf)
+        {
+            CidadesBL cidBL = new CidadesBL();
+            List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
+
+            ddl.Items.Clear();
+            ddl.Items.Add(new ListItem());
+            foreach (Cidades ltCid in cidades)
+                ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+
+            ddl.SelectedIndex = 0;
+        }
+        private void CarregarDdlBairro(DropDownList ddl, int id_cid)
+        {
+            BairrosBL baiBL = new BairrosBL();
+            List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
+
+            ddl.Items.Clear();
+            ddl.Items.Add(new ListItem());
+            foreach (Bairros ltBai in bairros)
+                ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
+
+            ddl.SelectedIndex = 0;
+        }
         private void carregarDados(int id_age)
         {
             AgenciasBL ageBL = new AgenciasBL();
@@ -45,19 +79,16 @@ namespace Admin
                 txtEndereco.Text = ltAge.Endereco;
                 txtRanking.Text = ltAge.Ranking.ToString();
                 txtComplemento.Text = ltAge.Complemento.ToString();
-                ddlBanco.SelectedValue = ltAge.BairroId.ToString();
-                if (ltAge.Bairro != null)
-                {
-                    txtBairro.Text = ltAge.Bairro.Codigo.ToString();
-                    lblDesBairro.Text = ltAge.Bairro.Descricao;
-                }
-                             
-                hfIdCidade.Value = ltAge.CidadeId.ToString();
+                ddlBanco.SelectedValue = ltAge.BancoId.ToString();
+
                 if (ltAge.Cidade != null)
-                {                    
-                    txtCidade.Text = ltAge.Cidade.Codigo.ToString();
-                    lblDesCidade.Text = ltAge.Cidade.Descricao;
-                }
+                {
+                    ddlUF.SelectedValue = ltAge.Cidade.EstadoId.ToString();
+                    CarregarDdlCidade(ddlCidades, ltAge.Cidade.EstadoId);
+                    CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ltAge.CidadeId.ToString()));
+                    ddlCidades.SelectedValue = ltAge.CidadeId.ToString();
+                    ddlBairro.SelectedValue = ltAge.BairroId.ToString();
+                }                      
                              
             }
 
@@ -101,6 +132,7 @@ namespace Admin
                 }
 
                 CarregarDDLBanco();
+                CarregarDdlUF(ddlUF);
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_age);
@@ -121,8 +153,8 @@ namespace Admin
             agencias.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             agencias.Descricao = txtDescricao.Text;
             agencias.Cep = txtCep.Text;
-            agencias.CidadeId = utils.ComparaIntComNull(hfIdCidade.Value);
-            agencias.BairroId = utils.ComparaIntComNull(hfIdBairro.Value);
+            agencias.CidadeId = utils.ComparaIntComNull(ddlCidades.SelectedValue);
+            agencias.BairroId = utils.ComparaIntComNull(ddlBairro.SelectedValue);
             agencias.BancoId = utils.ComparaIntComZero(ddlBanco.SelectedValue);
             agencias.Endereco = txtEndereco.Text;
             agencias.Complemento = txtComplemento.Text;
@@ -148,71 +180,19 @@ namespace Admin
 
             Response.Redirect("viewAgencia.aspx");
         }
-
-        protected void btnPesCidade_Click(object sender, EventArgs e)
+                     
+        protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-
-            CidadesBL cidBL = new CidadesBL();
-            Cidades ci = new Cidades();
-            List<Cidades> cidades = cidBL.PesquisarBL();
-
-            foreach (Cidades cid in cidades)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cid.Id;
-                linha["CODIGO"] = cid.Codigo;
-                linha["DESCRICAO"] = cid.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            Session["tabelaPesquisa"] = null;
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = cidBL;
-            Session["objPesquisa"] = ci;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCidade.ClientID + "&id=" + hfIdCidade.ClientID + "&lbl=" + lblDesCidade.ClientID + "','',600,500);", true);
+            CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
+            ddlBairro.Items.Clear();
         }
 
-        protected void btnPesBairro_Click(object sender, EventArgs e)
+        protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-
-            BairrosBL baiBL = new BairrosBL();
-            Bairros ba = new Bairros();
-            List<Bairros> bairros = baiBL.PesquisarBL();
-
-            foreach (Bairros cat in bairros)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = cat.Id;
-                linha["CODIGO"] = cat.Codigo;
-                linha["DESCRICAO"] = cat.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            Session["tabelaPesquisa"] = null;
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = baiBL;
-            Session["objPesquisa"] = ba;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtBairro.ClientID + "&id=" + hfIdBairro.ClientID + "&lbl=" + lblDesBairro.ClientID + "','',600,500);", true);
+            CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ddlCidades.SelectedValue));
         }
 
-        
+               
               
     }
 }

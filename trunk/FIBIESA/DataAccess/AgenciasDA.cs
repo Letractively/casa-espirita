@@ -46,6 +46,7 @@ namespace DataAccess
                     cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
                     cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
                     cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                    cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
 
                     age.Cidade = cid;
                 }
@@ -99,9 +100,16 @@ namespace DataAccess
             paramsToSP[7] = new SqlParameter("@ranking", age.Ranking);
             paramsToSP[8] = new SqlParameter("@bancoid", age.BancoId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_agencias", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_agencias", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Agencias age)
@@ -119,9 +127,16 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@ranking", age.Ranking);
             paramsToSP[9] = new SqlParameter("@bancoid", age.BancoId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_agencias", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_agencias", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Agencias age)
@@ -130,9 +145,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", age.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_agencias", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_agencias", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Agencias> PesquisarDA()
@@ -151,6 +173,17 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM AGENCIAS WHERE ID = {0}", id_age));
+
+            List<Agencias> agencias = CarregarObjAgencias(dr);
+
+            return agencias;
+        }
+
+        public List<Agencias> PesquisarBanDA(int id_ban)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM AGENCIAS WHERE BANCOID = {0}", id_ban));
 
             List<Agencias> agencias = CarregarObjAgencias(dr);
 

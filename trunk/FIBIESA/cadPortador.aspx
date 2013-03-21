@@ -34,7 +34,8 @@
                     <tr>
                         <td style="width: 140px">* Banco:</td>
                         <td style="width: 400px">
-                             <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist">
+                             <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist" 
+                                 AutoPostBack="True" onselectedindexchanged="ddlBanco_SelectedIndexChanged">
                              </asp:DropDownList>                          
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="ddlBanco" ErrorMessage="*Preenchimento Obrigatório" 
