@@ -40,7 +40,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
-            paramsToSP[2] = new SqlParameter("@qtdDias", instancia.Codigo);
+            paramsToSP[2] = new SqlParameter("@qtdDias", instancia.QtdDias);
 
             return (SqlHelper.ExecuteNonQuery(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
