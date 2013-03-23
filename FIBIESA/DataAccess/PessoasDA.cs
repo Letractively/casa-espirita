@@ -261,6 +261,9 @@ namespace DataAccess
                 case "NOME":
                     consulta = string.Format("SELECT * FROM PESSOAS WHERE NOME  LIKE '%{0}%'", valor);
                     break;
+                case "NOMECODIGO":
+                    consulta = string.Format("SELECT * FROM PESSOAS WHERE NOME  LIKE '%{0}%' OR CODIGO = {1}", valor, utils.ComparaIntComZero(valor));
+                    break;
                 default:
                     consulta = "";
                     break;
