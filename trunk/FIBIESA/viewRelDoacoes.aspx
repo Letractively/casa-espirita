@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script language=javascript type='text/javascript' src='Scripts/formatacao.js'></script>
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </asp:ScriptManager>
@@ -19,8 +20,11 @@
                             Nome:
                         </td>
                         <td style="width: 530px" colspan="2">
-                            <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" Width="410px"></asp:TextBox>
-                            <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..."  />
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                            <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..." 
+                                onclick="btnPesNome_Click"  />
+                                &nbsp;
+                            <asp:Label ID="lblDesPessoa" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -31,17 +35,14 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox"></asp:TextBox>
-                                        <asp:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="txtValor" Mask="#.###,##" ClearMaskOnLostFocus="true">
-                                        </asp:MaskedEditExtender>
+                                        <asp:TextBox ID="txtValorIni" runat="server" CssClass="inputbox"></asp:TextBox>
                                     </td>
                                     <td>
                                         &nbsp;a&nbsp;&nbsp;
                                     </td>
                                     <td>    
-                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="inputbox"></asp:TextBox>
-                                        <asp:MaskedEditExtender ID="MaskedEditExtender2" runat="server" TargetControlID="txtValor" Mask="#.###,##" ClearMaskOnLostFocus="true">
-                                        </asp:MaskedEditExtender>
+                                        <asp:TextBox ID="txtValorFim" runat="server" CssClass="inputbox"   ></asp:TextBox>
+                                       
                                      </td>
                                 </tr>
                             </table>
@@ -75,12 +76,15 @@
                     </tr>
                     <tr>
                         <td colspan="2" valign="middle" style="text-align:center;">
-                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" />
+                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
+                                onclick="btnRelatorio_Click" />
                         </td>                                    
                     </tr>
                 </table>
             </div>
         </div>
+        <asp:HiddenField ID="hfIdPessoa" runat="server" />
+        <asp:HiddenField ID="hfIdItem" runat="server" />
         <div class="status">
         </div>
     </div>
