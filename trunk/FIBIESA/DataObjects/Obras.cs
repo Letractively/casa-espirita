@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataObjects
 {
-    public class Obras
+    public class Obras : Base
     {
         private int _id;
         public int Id
