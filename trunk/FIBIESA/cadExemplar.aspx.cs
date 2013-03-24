@@ -18,41 +18,52 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
-        public DataTable dtbPesquisa
+       
+        private void CarregarDados(int id_exe)
         {
-            get
-            {
-                if (Session["_dtbPesquisa_cadExemp"] != null)
-                    return (DataTable)Session["_dtbPesquisa_cadExemp"];
-                else
-                    return null;
-            }
-            set { Session["_dtbPesquisa_cadExemp"] = value; }
-        }
 
-        private void CarregarDados(int id_bai)
-        {
-            
-            BairrosBL baiBL = new BairrosBL();
-            List<Bairros> bairros = baiBL.PesquisarBL(id_bai);
+            ExemplaresBL exeBL = new ExemplaresBL();
+            List<Exemplares> exemplares = exeBL.PesquisarBL(id_exe);
 
-            foreach (Bairros ltBai in bairros)
+            foreach (Exemplares ltExe in exemplares)
             {
-                hfId.Value = ltBai.Id.ToString();
-                //txtCodigo.Text = ltBai.Codigo.ToString();
-                //txtDescricao.Text = ltBai.Descricao;
+                hfId.Value = ltExe.Id.ToString();
+                txtTombo.Text = ltExe.Tombo.ToString();
+                ddlStatus.SelectedValue = ltExe.Status;
+                hfIdObra.Value = ltExe.Obraid.ToString();
+
+                if (ltExe.Obras != null)
+                {                   
+                    txtObra.Text = ltExe.Obras.Codigo.ToString();
+                    lblDesObra.Text = ltExe.Obras.Titulo;
+                }
             }
 
         }
+
         private void CarregarAtributos()
         {
-           // txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+           txtTombo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        }
+
+        private DataTable CriarDtPesquisa()
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            return dt;
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_bai = 0;
+            int id_exe = 0;
 
             CarregarAtributos();
 
@@ -64,33 +75,34 @@ namespace Admin
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
-                        if (Request.QueryString["id_bai"] != null)
-                            id_bai = Convert.ToInt32(Request.QueryString["id_bai"].ToString());
+                        if (Request.QueryString["id_exem"] != null)
+                            id_exe = Convert.ToInt32(Request.QueryString["id_exem"].ToString());
                 }
 
                 if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_bai);
+                    CarregarDados(id_exe);
             }
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("viewBairro.aspx");
+            Response.Redirect("viewExemplar.aspx");
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
 
-            BairrosBL baiBL = new BairrosBL();
-            Bairros bairros = new Bairros();
-            bairros.Id = utils.ComparaIntComZero(hfId.Value);
-           // bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
-           // bairros.Descricao = txtDescricao.Text;
+            ExemplaresBL exeBL = new ExemplaresBL();
+            Exemplares exemplares = new Exemplares();
+            exemplares.Id = utils.ComparaIntComZero(hfId.Value);
+            exemplares.Obraid = utils.ComparaIntComZero(hfIdObra.Value);
+            exemplares.Tombo = utils.ComparaIntComZero(txtTombo.Text);
+            exemplares.Status = ddlStatus.SelectedValue;
 
-            if (bairros.Id > 0)
+            if (exemplares.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    baiBL.EditarBL(bairros);
+                    exeBL.EditarBL(exemplares);
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -98,12 +110,43 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    baiBL.InserirBL(bairros);
+                    exeBL.InserirBL(exemplares);
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
 
-            Response.Redirect("viewBairro.aspx");
+            Response.Redirect("viewExemplar.aspx");
         }
+
+        protected void btnPesObra_Click(object sender, EventArgs e)
+        {
+            Session["tabelaPesquisa"] = null;
+            DataTable dt = CriarDtPesquisa();
+            ObrasBL obBL = new ObrasBL();
+            Obras obr = new Obras();
+            List<Obras> obras = obBL.PesquisarBL();
+
+            foreach (Obras ltobr in obras)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = ltobr.Id;
+                linha["CODIGO"] = ltobr.Codigo;
+                linha["DESCRICAO"] = ltobr.Titulo;
+
+                dt.Rows.Add(linha);
+            }
+
+            if (dt.Rows.Count > 0)
+                Session["tabelaPesquisa"] = dt;
+
+
+            Session["objBLPesquisa"] = obBL;
+            Session["objPesquisa"] = obr;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtObra.ClientID + "&id=" + hfIdObra.ClientID + "&lbl=" + lblDesObra.ClientID + "','',600,500);", true);
+        }
+
+       
     }
 }

@@ -8,10 +8,24 @@
     <div id="content">
         <div class="container half left">
             <div class="conthead">
-                <h2>Exemplar</h2>
+                <h2>Cadastro de Exemplares</h2>
             </div>
             <div class="contentbox">
                 <table>
+                    <tr>
+                        <td style="width: 130px">
+                            * Obra:
+                        </td>
+                        <td style="width: 300px">                      
+                            <asp:TextBox ID="txtObra" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
+                            <asp:Button ID="btnPesObra" runat="server" Text="..." CssClass="btn" 
+                                onclick="btnPesObra_Click"/>
+                            <asp:Label ID="lblDesObra" runat="server"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtObra" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>    
+                    </tr>
                     <tr>
                         <td style="width: 140px">
                             * Tombo:
@@ -28,8 +42,10 @@
                             * Status:
                         </td>
                         <td style="width: 400px">
-                            <asp:CheckBox ID="chkStatus" runat="server" />
-
+                            <asp:DropDownList ID="ddlStatus" runat="server" CssClass="dropdownlist">
+                                <asp:ListItem Value="A">Ativo</asp:ListItem>
+                                <asp:ListItem Value="I">Inativo</asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
                 </table>
@@ -48,6 +64,7 @@
                 </table>                
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
+            <asp:HiddenField ID="hfIdObra" runat="server" />
         </div>
         <div class="status">
         </div>
