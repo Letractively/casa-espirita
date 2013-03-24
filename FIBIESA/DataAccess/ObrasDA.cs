@@ -196,7 +196,7 @@ namespace DataAccess
             {
                 dr = SqlHelper.ExecuteReader(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, string.Format(@"SELECT * FROM OBRAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+                    CommandType.Text, string.Format(@"SELECT * FROM OBRAS WHERE TITULO LIKE '%{0}%'", descricao));
             }
 
             List<Base> ba = new List<Base>();

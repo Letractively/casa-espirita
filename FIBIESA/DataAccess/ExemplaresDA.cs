@@ -60,7 +60,7 @@ namespace DataAccess
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                           CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP);
+                                           CommandType.StoredProcedure, "stp_insert_exemplares", paramsToSP);
                 return true;
             }
             catch (Exception e)
@@ -82,7 +82,7 @@ namespace DataAccess
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                            CommandType.StoredProcedure, "stp_update_tiposObras", paramsToSP);
+                                            CommandType.StoredProcedure, "stp_update_exemplares", paramsToSP);
                 return true;
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace DataAccess
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                            CommandType.StoredProcedure, "stp_delete_tiposObras", paramsToSP);
+                                            CommandType.StoredProcedure, "stp_delete_exemplares", paramsToSP);
                 return true;
             }
             catch (Exception e)
@@ -114,7 +114,7 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM EXEMPLARES "));
+                CommandType.Text, string.Format(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ORDER BY O.CODIGO  "));
             return CarregarObjExemplares(dr);
         }
 
@@ -128,15 +128,15 @@ namespace DataAccess
 
         public List<Exemplares> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM EXEMPLARES ");
+            StringBuilder consulta = new StringBuilder("SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             switch (campo.ToUpper())
             {
                 case "CODIGO":
-                    consulta.Append(string.Format("WHERE CODIGO = {0}", utils.ComparaIntComZero(valor)));
+                    consulta.Append(string.Format(" AND O.CODIGO = {0}", utils.ComparaIntComZero(valor)));
                     break;
-                case "DESCRICAO":
-                    consulta.Append(string.Format("WHERE DESCRICAO  LIKE '%{0}%'", valor));
+                case "TITULO":
+                    consulta.Append(string.Format(" AND O.TITULO  LIKE '%{0}%'", valor));
                     break;
                 default:
                     break;

@@ -158,5 +158,10 @@ namespace Admin
             str_exem = utils.ComparaIntComZero(dtgExemplar.SelectedDataKey[0].ToString());
             Response.Redirect("cadExemplar.aspx?id_exem=" + str_exem.ToString() + "&operacao=edit");
         }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+        }
     }
 }
