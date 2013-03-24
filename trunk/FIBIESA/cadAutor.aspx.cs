@@ -16,19 +16,7 @@ namespace Admin
         Utils utils = new Utils();
         string v_operacao = "";
 
-        #region funcoes
-        public DataTable dtbPesquisa
-        {
-            get
-            {
-                if (Session["_dtbPesquisa_cadAutores"] != null)
-                    return (DataTable)Session["_dtbPesquisa_cadAutores"];
-                else
-                    return null;
-            }
-            set { Session["_dtbPesquisa_cadAutores"] = value; }
-        }
-
+        #region funcoes        
         private void CarregarDados(int id_bai)
         {
             AutoresBL auBL = new AutoresBL();
@@ -65,6 +53,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            CarregarAtributos();
             if (!IsPostBack)
             {
                 this.CarregaTiposAutores();

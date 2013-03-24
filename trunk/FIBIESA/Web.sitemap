@@ -2,22 +2,21 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="default.aspx" title="Home"  description="">
 
-      <siteMapNode url="viewOrigem.aspx" title="Origens"  description="">
-        <siteMapNode url="cadOrigem.aspx" title="Cadastro de Origens"  description="" />
+      <siteMapNode url="viewOrigem.aspx" title="Origens de Exemplares"  description="">
+        <siteMapNode url="cadOrigem.aspx" title="Cadastro de Origens de Exemplares"  description="" />
       </siteMapNode>
-      <siteMapNode url="viewTipoObra.aspx" title="Tipos de Obras"  description="">
-        <siteMapNode url="cadTipoObra.aspx" title="Cadastro de Tipos de Obras"  description="" />
+      <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras"  description="">
+        <siteMapNode url="cadTipoObra.aspx" title="Cadastro de Categorias de Obras"  description="" />
       </siteMapNode>
       <siteMapNode url="viewEditora.aspx" title="Editoras"  description="">
         <siteMapNode url="cadEditora.aspx" title="Cadastro de Editoras"  description="" />
       </siteMapNode>
-      <siteMapNode url="viewAutor.aspx" title="Tipos de Autores"  description="">
+      <siteMapNode url="viewAutor.aspx" title="Autores"  description="">
         <siteMapNode url="cadAutor.aspx" title="Cadastro de Autores"  description="" />
       </siteMapNode>
-      <siteMapNode url="viewTipoAutor.aspx" title="Tipos de Autores"  description="">
-        <siteMapNode url="cadTipoAutor.aspx" title="Cadastro de Tipos de Autores"  description="" />
-      </siteMapNode>      
-      
+      <siteMapNode url="viewTipoAutor.aspx" title="Categorias de Autores"  description="">
+        <siteMapNode url="cadTipoAutor.aspx" title="Cadastro de Categorias de Autores"  description="" />
+      </siteMapNode>          
       <siteMapNode url="viewInstituicao.aspx" title="Instituições"  description="">
           <siteMapNode url="cadInstituicao.aspx" title="Cadastro de Instituições"  description="" />
         </siteMapNode>
@@ -73,6 +72,15 @@
         </siteMapNode>
         <siteMapNode url="viewNotaEntrada.aspx" title="Notas de Entrada"  description="">
           <siteMapNode url="cadNotaEntrada.aspx" title="Cadastro de Notas de Entrada"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewTipoDocumento.aspx" title="Tipos de Documento"  description="">
+          <siteMapNode url="cadTipoDocumento.aspx" title="Cadastro de Tipos de Documento"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewJuroMulta.aspx" title="Juros e Multas"  description="">
+          <siteMapNode url="cadJuroMulta.aspx" title="Cadastro de Juros e Multas"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewExemplar.aspx" title="Exemplares"  description="">
+          <siteMapNode url="cadExemplar.aspx" title="Cadastro de Exemplares"  description="" />
         </siteMapNode>
         
     </siteMapNode>

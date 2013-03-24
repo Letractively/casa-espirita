@@ -67,6 +67,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
             }
 
+            dtbPesquisa = tabela;
             dtgContas.DataSource = tabela;
             dtgContas.DataBind();
         }   

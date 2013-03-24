@@ -10,16 +10,26 @@
                 <h2>Cadastro de Exemplares</h2>
             </div>
             <div class="contentbox">
+                <table>
+                <tr>
+                <td>
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                </td>
+                <td>
                  <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />
-                &nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
+                </td>
+                </tr>
+                </table>
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                      <table width="100%">
@@ -46,6 +56,8 @@
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
+                                       <asp:BoundField DataField="TOMBO" HeaderText="Tombo" SortExpression="TOMBO"/>
+                                       <asp:BoundField DataField="STATUS" HeaderText="Status" SortExpression="STATUS" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

@@ -39,9 +39,16 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_tiposdeAutores", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_insert_tiposdeAutores", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(TiposDeAutores instancia)
@@ -52,9 +59,18 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_tiposdeAutores", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_update_tiposdeAutores", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(TiposDeAutores instancia)
@@ -63,9 +79,18 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
-                CommandType.StoredProcedure, "stp_delete_tiposdeAutores", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_delete_tiposdeAutores", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<TiposDeAutores> PesquisarDA()
@@ -86,7 +111,7 @@ namespace DataAccess
 
         public List<TiposDeAutores> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM TIPOSDEAUTORES ");
+            StringBuilder consulta = new StringBuilder("SELECT * FROM TIPOSDEAUTORES ORDER BY CODIGO ");
 
             switch (campo.ToUpper())
             {

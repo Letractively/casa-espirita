@@ -40,9 +40,17 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_editoras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_insert_editoras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Editoras instancia)
@@ -53,9 +61,17 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_editoras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_update_editoras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Editoras instancia)
@@ -64,9 +80,18 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_editoras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_delete_editoras", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Editoras> PesquisarDA()

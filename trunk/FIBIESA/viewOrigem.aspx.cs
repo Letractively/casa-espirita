@@ -114,8 +114,11 @@ namespace Admin
 
         protected void dtgOrigens_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgOrigens_Sorting(object sender, GridViewSortEventArgs e)

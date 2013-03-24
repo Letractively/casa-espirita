@@ -11,19 +11,28 @@
                 <h2>Cadastro de Obras</h2>
             </div>
             <div class="contentbox">
+                <table>
+                <tr>
+                <td>
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
                     ToolTip="Pesquisar por"></asp:TextBox>
+                </td>
+                <td>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="CODIGO">Código</asp:ListItem>
                     <asp:ListItem Value="TITULO">Título</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     OnClick="btnBusca_Click" />                 
-                &nbsp;&nbsp;&nbsp
+                </td>
+                <td>
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
-
+                </td>
+                </tr>
+                </table>
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
@@ -52,6 +61,7 @@
                                        <asp:BoundField DataField="TITULO" HeaderText="Título" 
                                            SortExpression="TITULO" />
                                        <asp:BoundField DataField="ISBN" HeaderText="ISBN" SortExpression="ISBN" />
+                                       <asp:BoundField DataField="TIPODESC" HeaderText="Tipo" SortExpression="TIPODESC" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

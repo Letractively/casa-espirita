@@ -25,7 +25,7 @@ namespace Admin
             foreach (JurosMultas ltJm in jurosMultas)
             {
                 hfId.Value = ltJm.Id.ToString();
-                txtMesAno.Text = ltJm.MesAno.ToString();
+                txtMesAno.Text = ltJm.MesAno.ToString("MM/yyyy");
                 txtJuroDia.Text = ltJm.PercJurosDias.ToString();
                 txtJuroMes.Text = ltJm.PercJurosMes.ToString();
                 txtMultaDia.Text = ltJm.PercMultaDias.ToString();

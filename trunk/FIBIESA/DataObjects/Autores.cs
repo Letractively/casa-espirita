@@ -35,12 +35,19 @@ namespace DataObjects
             get { return _tipoId; }
             set { _tipoId = value; }
         }
-        private int _obraId;
 
+        private int _obraId;
         public int ObraId
         {
             get { return _obraId; }
             set { _obraId = value; }
+        }
+
+        private TiposDeAutores _tiposDeAutores;
+        public TiposDeAutores TiposDeAutores
+        {
+            get { return _tiposDeAutores; }
+            set { _tiposDeAutores = value; }
         }
     }
 }

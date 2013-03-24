@@ -36,11 +36,13 @@ namespace Admin
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("ISBN", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("TIPODESC", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
+            tabela.Columns.Add(coluna5);
 
             ObrasBL obraBL = new ObrasBL();
             List<Obras> obras;
@@ -59,6 +61,10 @@ namespace Admin
                 linha["CODIGO"] = obrinha.Codigo;
                 linha["TITULO"] = obrinha.Titulo;
                 linha["ISBN"] = obrinha.Isbn;
+                if (obrinha.TiposObras != null)
+                    linha["TIPODESC"] = obrinha.TiposObras.Descricao;
+                else
+                    linha["TIPODESC"] = "";
 
 
                 tabela.Rows.Add(linha);
@@ -117,8 +123,11 @@ namespace Admin
 
         protected void dtgObras_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgObras_Sorting(object sender, GridViewSortEventArgs e)
