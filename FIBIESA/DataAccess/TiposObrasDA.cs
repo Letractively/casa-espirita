@@ -42,9 +42,18 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
             paramsToSP[2] = new SqlParameter("@qtdDias", instancia.QtdDias);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP);
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+
         }
 
         public bool EditarDA(TiposObras instancia)
@@ -56,9 +65,15 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@descricao", instancia.Descricao);
             paramsToSP[3] = new SqlParameter("@qtdDias", instancia.QtdDias);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.StoredProcedure, "stp_update_tiposObras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(TiposObras instancia)
@@ -67,16 +82,22 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_tiposObras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<TiposObras> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS "));
+                CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS ORDER BY CODIGO ")); 
             return CarregarObjTiposObra(dr);
         }
 

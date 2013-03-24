@@ -38,6 +38,19 @@ namespace DataAccess
                 obrinha.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
                 obrinha.TiposObraId = utils.ComparaIntComNull(dr["TIPOSOBRAID"].ToString());
 
+                TiposObrasDA tObDA = new TiposObrasDA();
+                List<TiposObras> tOb = tObDA.PesquisarDA(utils.ComparaIntComZero(obrinha.TiposObraId.ToString()));
+                TiposObras tiposObras = new TiposObras();
+
+                foreach (TiposObras lttObr in tOb)
+                {
+                    tiposObras.Id = lttObr.Id;
+                    tiposObras.Codigo = lttObr.Codigo;
+                    tiposObras.Descricao = lttObr.Descricao;
+
+                    obrinha.TiposObras = tiposObras;
+                }
+
                 obra.Add(obrinha);
             }
 
@@ -63,12 +76,18 @@ namespace DataAccess
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);
             paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);            
             paramsToSP[13] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
-           
-            
-            
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_Obras", paramsToSP) > 0);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_insert_Obras", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Obras instancia)
@@ -90,9 +109,17 @@ namespace DataAccess
             paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);
             paramsToSP[13] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_obras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                CommandType.StoredProcedure, "stp_update_obras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool ExcluirDA(Obras instancia)
@@ -101,9 +128,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_obras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                CommandType.StoredProcedure, "stp_delete_obras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Obras> PesquisarDA()

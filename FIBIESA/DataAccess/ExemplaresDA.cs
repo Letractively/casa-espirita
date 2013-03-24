@@ -29,6 +29,19 @@ namespace DataAccess
                 tipo.Tombo = int.Parse(dr["TOMBO"].ToString());
                 tipo.Status = dr["STATUS"].ToString();
 
+                ObrasDA obDA = new ObrasDA();
+                List<Obras> ob = obDA.PesquisarDA(tipo.Obraid);
+                Obras obras = new Obras();
+
+                foreach (Obras ltObr in ob)
+                {
+                    obras.Id = ltObr.Id;
+                    obras.Codigo = ltObr.Codigo;
+                    obras.Titulo = ltObr.Titulo;
+
+                    tipo.Obras = obras;
+                }
+
                 tipoObra.Add(tipo);
             }
 
@@ -44,9 +57,17 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@status", instancia.Status);
             paramsToSP[2] = new SqlParameter("@tombo", instancia.Tombo);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                           CommandType.StoredProcedure, "stp_insert_tiposObras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool EditarDA(Exemplares instancia)
@@ -58,9 +79,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@status", instancia.Status);
             paramsToSP[3] = new SqlParameter("@tombo", instancia.Tombo);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_update_tiposObras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Exemplares instancia)
@@ -69,9 +97,17 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_tiposObras", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_delete_tiposObras", paramsToSP);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public List<Exemplares> PesquisarDA()

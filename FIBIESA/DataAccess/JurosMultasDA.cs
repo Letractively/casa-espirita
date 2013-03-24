@@ -96,14 +96,15 @@ namespace DataAccess
             return jurosMultas; 
         }
 
-        public List<JurosMultas> PesquisarDA(string campo, string valor)
+        public List<JurosMultas> PesquisarDA(string campo, DateTime? valor)
         {
             string consulta;
-
+            
+            
             switch (campo.ToUpper())
             {
                 case "MESANO":
-                    consulta = string.Format("SELECT * FROM JUROSMULTAS WHERE MESANO = '{0}'", valor != null? Convert.ToDateTime(valor).ToString("MM/dd/yyyy") : "");
+                    consulta = string.Format("SELECT * FROM JUROSMULTAS WHERE MESANO = '{0}'", valor != null? Convert.ToDateTime(valor).ToString("MM/yyyy") : "");
                     break;                
                 default:
                     consulta = "";

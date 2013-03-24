@@ -35,10 +35,15 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("TOMBO", Type.GetType("System.Int32"));
+            DataColumn coluna5 = new DataColumn("STATUS", Type.GetType("System.String"));
+
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
+            tabela.Columns.Add(coluna4);
+            tabela.Columns.Add(coluna5);
 
             ExemplaresBL exemBL = new ExemplaresBL();
             List<Exemplares> exemplares;
@@ -48,18 +53,23 @@ namespace Admin
             else
                 exemplares = exemBL.PesquisarBL();
 
-            /*foreach (Exemplares exem in exemplares)
+            foreach (Exemplares exem in exemplares)
             {
 
                 DataRow linha = tabela.NewRow();
 
-                linha["ID"] = exem.Id;
-                linha["CODIGO"] = exem.Codigo;
-                linha["DESCRICAO"] = exem.Descricao;
+                linha["ID"] = exem.Id;              
+                linha["TOMBO"] = exem.Tombo;
+                linha["STATUS"] = exem.Status;
+                if (exem.Obras != null)
+                {
+                    linha["CODIGO"] = exem.Obras.Codigo;
+                    linha["DESCRICAO"] = exem.Obras.Titulo;
+                }
 
 
                 tabela.Rows.Add(linha);
-            }*/
+            }
 
             dtbPesquisa = tabela;
             dtgExemplar.DataSource = tabela;
@@ -102,8 +112,11 @@ namespace Admin
 
         protected void dtgExemplar_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgExemplar_Sorting(object sender, GridViewSortEventArgs e)

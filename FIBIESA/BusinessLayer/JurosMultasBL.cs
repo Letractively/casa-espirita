@@ -49,7 +49,7 @@ namespace BusinessLayer
             return jurosmultasDA.PesquisarDA(id_jm);
         }
 
-        public List<JurosMultas> PesquisarBL(string campo, string valor)
+        public List<JurosMultas> PesquisarBL(string campo, DateTime? valor)
         {
             JurosMultasDA jurosMultasDA = new JurosMultasDA();
 

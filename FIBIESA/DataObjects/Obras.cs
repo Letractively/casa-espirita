@@ -111,5 +111,14 @@ namespace DataObjects
             get { return _tiposObraId; }
             set { _tiposObraId = value; }
         }
+
+        private TiposObras _tiposObras;
+        public TiposObras TiposObras
+        {
+            get { return _tiposObras; }
+            set { _tiposObras = value; }
+        }
+        
+
     }
 }

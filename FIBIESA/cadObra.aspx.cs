@@ -94,9 +94,17 @@ namespace Admin
 
 
         private void CarregarAtributos()
-        {
+        {            
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNroEdicao.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNroPags.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtVolume.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+
+            txtDataPublicacao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+           
         }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)

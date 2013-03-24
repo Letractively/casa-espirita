@@ -11,19 +11,29 @@
                 <h2>Cadastro de Juros e Multas</h2>
             </div>
             <div class="contentbox">
+                <table>
+                <tr>
+                <td>
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
                 <asp:CalendarExtender ID="txtBusca_CalendarExtender" runat="server" 
                     TargetControlID="txtBusca">
                 </asp:CalendarExtender>
+                </td>
+                <td>
                 <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
                     <asp:ListItem Value="MESANO">Mês/Ano</asp:ListItem>                   
                 </asp:DropDownList>
-                &nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     onclick="btnBusca_Click" />
-                &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
                 <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
                     onclick="btnInserir_Click" />
+                </td>
+                </tr>
+                </table>
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
@@ -68,7 +78,7 @@
                     </table>                   
                 </div>             
             </div>
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" >
             </asp:ScriptManager>
         </div>
         <div class="status">

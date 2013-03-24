@@ -35,5 +35,12 @@ namespace DataObjects
             set { _status = value; }
         }
 
+        private Obras _obras;
+        public Obras Obras
+        {
+            get { return _obras; }
+            set { _obras = value; }
+        }
+
     }
 }

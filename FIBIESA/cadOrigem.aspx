@@ -6,14 +6,14 @@
 <div id="content">
         		<div class="container half left">
                 	<div class="conthead">
-                    	<h2>Cadastro de Origens</h2>
+                    	<h2>CadaCadastro de Origens de Exemplares</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 140px">
                             * Código:
-                        </td>
+                        >
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 

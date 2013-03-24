@@ -35,10 +35,12 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("TIPODESC", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
+            tabela.Columns.Add(coluna4);
 
             AutoresBL autorBL = new AutoresBL();
             List<Autores> autores;
@@ -56,6 +58,10 @@ namespace Admin
                 linha["ID"] = autor.Id;
                 linha["CODIGO"] = autor.Codigo;
                 linha["DESCRICAO"] = autor.Descricao;
+                if(autor.TiposDeAutores != null)
+                    linha["TIPODESC"] = autor.TiposDeAutores.Descricao;
+                else
+                    linha["TIPODESC"] = "";
 
                 tabela.Rows.Add(linha);
             }
@@ -112,8 +118,11 @@ namespace Admin
 
         protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgBairros_Sorting(object sender, GridViewSortEventArgs e)

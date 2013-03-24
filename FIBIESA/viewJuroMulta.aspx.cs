@@ -52,7 +52,7 @@ namespace Admin
             List<JurosMultas> jurosMultas;
 
             if (campo != null && valor.Trim() != "")
-                jurosMultas = jmBL.PesquisarBL(campo, valor);
+                jurosMultas = jmBL.PesquisarBL(campo, utils.ComparaDataComNull(valor));
             else
                 jurosMultas = jmBL.PesquisarBL();
 
@@ -118,8 +118,11 @@ namespace Admin
 
         protected void dtgJurosMultas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgJurosMultas_Sorting(object sender, GridViewSortEventArgs e)

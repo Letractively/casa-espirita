@@ -40,9 +40,18 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_origens", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_insert_origens", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Origens instancia)
@@ -53,9 +62,18 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", instancia.Descricao);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_origens", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_update_origens", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Origens instancia)
@@ -64,16 +82,25 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_origens", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_delete_origens", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Origens> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM ORIGENS "));
+                CommandType.Text, string.Format(@"SELECT * FROM ORIGENS ORDER BY CODIGO "));
             return CarregarObjOrigem(dr);
         }
 
