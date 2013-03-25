@@ -35,11 +35,12 @@ namespace Admin
         }
         private void CarregarAtributos()
         {
-            txtMesAno.Attributes.Add("onkeypress", "return(formatar(this,'##/####',event))");
-            txtMultaDia.Attributes.Add("onkeyup", "formataValor(this,event);");
-            txtMultaMes.Attributes.Add("onkeyup", "formataValor(this,event);");           
-            txtJuroDia.Attributes.Add("onkeyup", "return(formataValor(this,event))");
-            txtJuroMes.Attributes.Add("onkeyup", "return(formataValor(this,event))");
+            txtMesAno.Attributes.Add("onkeypress", "return(formatar(this,'##/####',event))");           
+            txtMultaDia.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtMultaMes.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtJuroDia.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtJuroMes.Attributes.Add("onkeypress", "return(Reais(this,event))");
+                     
         }
         #endregion
 

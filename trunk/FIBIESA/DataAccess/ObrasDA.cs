@@ -148,12 +148,11 @@ namespace DataAccess
             return CarregarObjObras(dr);
         }
 
-        public List<Obras> PesquisarDA(int id)
+        public DataSet PesquisarDA(int obra_id)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM OBRAS  WHERE ID = {0}", id));
-            return CarregarObjObras(dr);
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                  CommandType.Text, string.Format(@"SELECT * FROM OBRAS  WHERE ID = {0}", obra_id));
+            return ds;
         }
 
         public List<Obras> PesquisarDA(string campo, string valor)

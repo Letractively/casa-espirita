@@ -42,7 +42,7 @@ namespace BusinessLayer
             return varDA.PesquisarDA();
         }
 
-        public List<Exemplares> PesquisarBL(int bai)
+        public DataSet PesquisarBL(int bai)
         {
             ExemplaresDA varDA = new ExemplaresDA();
 

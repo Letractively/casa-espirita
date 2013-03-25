@@ -21,24 +21,18 @@ namespace Admin
        
         private void CarregarDados(int id_exe)
         {
-
             ExemplaresBL exeBL = new ExemplaresBL();
-            List<Exemplares> exemplares = exeBL.PesquisarBL(id_exe);
+            DataSet dsPar = exeBL.PesquisarBL(id_exe);
 
-            foreach (Exemplares ltExe in exemplares)
+            if (dsPar.Tables[0].Rows.Count != 0)
             {
-                hfId.Value = ltExe.Id.ToString();
-                txtTombo.Text = ltExe.Tombo.ToString();
-                ddlStatus.SelectedValue = ltExe.Status;
-                hfIdObra.Value = ltExe.Obraid.ToString();
-
-                if (ltExe.Obras != null)
-                {                   
-                    txtObra.Text = ltExe.Obras.Codigo.ToString();
-                    lblDesObra.Text = ltExe.Obras.Titulo;
-                }
+                hfId.Value = (string)dsPar.Tables[0].Rows[0]["id"].ToString(); 
+                txtTombo.Text = (string)dsPar.Tables[0].Rows[0]["tombo"].ToString();
+                ddlStatus.SelectedValue = (string)dsPar.Tables[0].Rows[0]["status"]; 
+                hfIdObra.Value = (string)dsPar.Tables[0].Rows[0]["obraid"].ToString();
+                txtObra.Text = (string)dsPar.Tables[0].Rows[0]["codigo"].ToString();
+                lblDesObra.Text = (string)dsPar.Tables[0].Rows[0]["titulo"];
             }
-
         }
 
         private void CarregarAtributos()
@@ -145,6 +139,19 @@ namespace Admin
             Session["objPesquisa"] = obr;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtObra.ClientID + "&id=" + hfIdObra.ClientID + "&lbl=" + lblDesObra.ClientID + "','',600,500);", true);
+        }
+
+        protected void txtObra_TextChanged(object sender, EventArgs e)
+        {
+            ObrasBL obrBL = new ObrasBL();
+            List<Obras> obras = obrBL.PesquisarBL("CODIGO",txtObra.Text);
+
+            foreach (Obras ltObr in obras)
+            {
+                hfIdObra.Value = ltObr.Id.ToString();
+                lblDesObra.Text = ltObr.Titulo;
+            }
+            
         }
 
        
