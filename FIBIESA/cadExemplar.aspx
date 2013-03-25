@@ -17,7 +17,8 @@
                             * Obra:
                         </td>
                         <td style="width: 300px">                      
-                            <asp:TextBox ID="txtObra" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
+                            <asp:TextBox ID="txtObra" runat="server" CssClass="inputbox" Width="75px" 
+                                ontextchanged="txtObra_TextChanged" AutoPostBack="True"></asp:TextBox>
                             <asp:Button ID="btnPesObra" runat="server" Text="..." CssClass="btn" 
                                 onclick="btnPesObra_Click"/>
                             <asp:Label ID="lblDesObra" runat="server"></asp:Label>

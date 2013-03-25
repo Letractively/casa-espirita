@@ -30,18 +30,19 @@ namespace DataAccess
                 tipo.Status = dr["STATUS"].ToString();
 
                 ObrasDA obDA = new ObrasDA();
-                List<Obras> ob = obDA.PesquisarDA(tipo.Obraid);
+                DataSet dsOb = obDA.PesquisarDA(tipo.Obraid);
                 Obras obras = new Obras();
-
-                foreach (Obras ltObr in ob)
+                
+                if (dsOb.Tables[0].Rows.Count != 0)
                 {
-                    obras.Id = ltObr.Id;
-                    obras.Codigo = ltObr.Codigo;
-                    obras.Titulo = ltObr.Titulo;
+                    obras.Id = (Int32)dsOb.Tables[0].Rows[0]["id"];
+                    obras.Codigo = (Int32)dsOb.Tables[0].Rows[0]["codigo"];
+                    obras.Titulo = (string)dsOb.Tables[0].Rows[0]["titulo"];
 
                     tipo.Obras = obras;
                 }
 
+              
                 tipoObra.Add(tipo);
             }
 
@@ -118,12 +119,13 @@ namespace DataAccess
             return CarregarObjExemplares(dr);
         }
 
-        public List<Exemplares> PesquisarDA(int id)
+        public DataSet PesquisarDA(int id)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(
+            DataSet ds = SqlHelper.ExecuteDataset(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM EXEMPLARES  WHERE ID = {0}", id));
-            return CarregarObjExemplares(dr);
+                CommandType.Text, string.Format(@"SELECT E.*, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
+
+            return ds;
         }
 
         public List<Exemplares> PesquisarDA(string campo, string valor)

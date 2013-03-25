@@ -69,27 +69,26 @@ namespace Admin
         private void CarregarDados(int id_bai)
         {
             ObrasBL obraBL = new ObrasBL();
-            List<Obras> obras = obraBL.PesquisarBL(id_bai);
+            DataSet dsOb = obraBL.PesquisarBL(id_bai);
 
-            foreach (Obras ltObra in obras)
+            if (dsOb.Tables[0].Rows.Count != 0)
             {
-                hfId.Value = ltObra.Id.ToString();
-                txtCodigo.Text = ltObra.Codigo.ToString();
-                txtTitulo.Text = ltObra.Titulo;
-                txtISBN.Text = ltObra.Isbn.ToString();
-                txtLocalPublic.Text = ltObra.LocalPublicacao.ToString();
-                txtNroEdicao.Text = ltObra.NroEdicao.ToString();
-                txtNroPags.Text = ltObra.NroPaginas.ToString();
-                txtVolume.Text = ltObra.Volume.ToString();
-                txtDataReimpressao.Text = ltObra.DataReimpressao != null? Convert.ToDateTime(ltObra.DataReimpressao).ToString("dd/MM/yyyy") : "";
-                txtDataPublicacao.Text = ltObra.DataPublicacao != null ? Convert.ToDateTime(ltObra.DataPublicacao).ToString("dd/MM/yyyy") : "";
-                txtAssuntosAborda.Text = ltObra.AssuntosAborda.ToString();
-                ddlEditora.SelectedValue = ltObra.EditoraId.ToString();
-                ddlOrigem.SelectedValue = ltObra.OrigemId.ToString();
-                ddlTipoObra.SelectedValue = ltObra.TiposObraId.ToString();
+                hfId.Value = (string)dsOb.Tables[0].Rows[0]["id"].ToString();
+                txtCodigo.Text = (string)dsOb.Tables[0].Rows[0]["codigo"].ToString();
+                txtTitulo.Text = (string)dsOb.Tables[0].Rows[0]["titulo"].ToString();
+                txtISBN.Text = (string)dsOb.Tables[0].Rows[0]["isbn"].ToString();
+                txtLocalPublic.Text = (string)dsOb.Tables[0].Rows[0]["localpublicacao"].ToString();
+                txtNroEdicao.Text = (string)dsOb.Tables[0].Rows[0]["nroedicao"].ToString();
+                txtNroPags.Text = (string)dsOb.Tables[0].Rows[0]["nropaginas"].ToString();
+                txtVolume.Text = (string)dsOb.Tables[0].Rows[0]["volume"].ToString();
+                txtDataReimpressao.Text = (DateTime)dsOb.Tables[0].Rows[0]["datareimpressao"] != null ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datareimpressao"]).ToString("dd/MM/yyyy") : "";
+                txtDataPublicacao.Text = (DateTime)dsOb.Tables[0].Rows[0]["datapublicacao"] != null ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datapublicacao"]).ToString("dd/MM/yyyy") : "";
+                txtAssuntosAborda.Text = (string)dsOb.Tables[0].Rows[0]["assuntosaborda"].ToString();
+                ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();
+                ddlOrigem.SelectedValue = (string)dsOb.Tables[0].Rows[0]["origemid"].ToString();
+                ddlTipoObra.SelectedValue = (string)dsOb.Tables[0].Rows[0]["tiposobraid"].ToString();
                 
-            }
-
+            }           
         }
 
 
