@@ -73,7 +73,7 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS "));
+                CommandType.Text, string.Format(@"SELECT * FROM emprestimos "));
             return CarregarObjEmprestimos(dr);
         }
 
@@ -81,13 +81,13 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS  WHERE ID = {0}", id));
+                CommandType.Text, string.Format(@"SELECT * FROM emprestimos  WHERE ID = {0}", id));
             return CarregarObjEmprestimos(dr);
         }
 
         public List<Emprestimos> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM TIPOSOBRAS ");
+            StringBuilder consulta = new StringBuilder("SELECT * FROM emprestimos ");
 
             switch (campo.ToUpper())
             {
@@ -119,13 +119,13 @@ namespace DataAccess
 
                 dr = SqlHelper.ExecuteReader(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS WHERE CODIGO = '{0}'", codigo));
+                    CommandType.Text, string.Format(@"SELECT * FROM emprestimos WHERE CODIGO = '{0}'", codigo));
             }
             else
             {
                 dr = SqlHelper.ExecuteReader(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+                    CommandType.Text, string.Format(@"SELECT * FROM emprestimos WHERE DESCRICAO LIKE '%{0}%'", descricao));
             }
 
             List<Base> ba = new List<Base>();
