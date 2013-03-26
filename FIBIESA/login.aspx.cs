@@ -13,7 +13,8 @@ namespace Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                txtLogin.Focus();
         }
 
         protected void txtLogin_TextChanged(object sender, EventArgs e)
