@@ -91,6 +91,20 @@ namespace DataObjects
             set { _complemento = value; }
         }
 
+        private string _DDD;
+        public string DDD
+        {
+            get { return _DDD; }
+            set { _DDD = value; }
+        }
+
+        private string _telefone;
+        public string telefone
+        {
+            get { return _telefone; }
+            set { _telefone = value; }
+        }
+
         private InstituicoesLogo _instituicaoLogo;
         public InstituicoesLogo InstituicaoLogo
         {
