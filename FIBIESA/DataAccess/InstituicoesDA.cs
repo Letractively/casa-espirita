@@ -71,6 +71,8 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@endereco", ins.Endereco);
             paramsToSP[9] = new SqlParameter("@numero", ins.Numero);
             paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);
+            paramsToSP[11] = new SqlParameter("@DDD", ins.DDD);
+            paramsToSP[12] = new SqlParameter("@telefone", ins.telefone);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
 
@@ -93,6 +95,8 @@ namespace DataAccess
             paramsToSP[9] = new SqlParameter("@endereco", ins.Endereco);
             paramsToSP[10] = new SqlParameter("@numero", ins.Numero);
             paramsToSP[11] = new SqlParameter("@complemento", ins.Complemento);
+            paramsToSP[12] = new SqlParameter("@DDD", ins.DDD);
+            paramsToSP[13] = new SqlParameter("@telefone", ins.telefone);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoes", paramsToSP);
 
