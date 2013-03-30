@@ -41,6 +41,14 @@ namespace BusinessLayer
             return movimentosestoqueDA.PesquisarDA();
         }
 
+        public List<MovimentosEstoque> PesquisarBL(Int32 id_ItEst)
+        {
+            /*criar as regras de negocio*/
+            MovimentosEstoqueDA movimentosestoqueDA = new MovimentosEstoqueDA();
+
+            return movimentosestoqueDA.PesquisarDA(id_ItEst);
+        }
+
         public List<MovimentosEstoque> PesquisarBL(int item_id, DateTime? data)
         {
             /*criar as regras de negocio*/

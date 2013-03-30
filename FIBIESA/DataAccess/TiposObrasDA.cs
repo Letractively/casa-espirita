@@ -132,26 +132,12 @@ namespace DataAccess
             return CarregarObjTiposObra(dr);
         }
 
-        public override List<Base> Pesquisar(string descricao, string tipo)
+        public override List<Base> Pesquisar(string descricao)
         {
-            SqlDataReader dr;
-
-            if (tipo == "C")
-            {
-                int codigo = 0;
-                Int32.TryParse(descricao, out codigo);
-
-                dr = SqlHelper.ExecuteReader(
+            SqlDataReader dr = SqlHelper.ExecuteReader(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS WHERE CODIGO = '{0}'", codigo));
-            }
-            else
-            {
-                dr = SqlHelper.ExecuteReader(
-                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
-            }
-
+                    CommandType.Text, string.Format(@"SELECT * FROM TIPOSOBRAS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'",utils.ComparaIntComZero(descricao),  descricao));
+            
             List<Base> ba = new List<Base>();
 
             while (dr.Read())

@@ -145,7 +145,9 @@ namespace Admin
         {
             ObrasBL obrBL = new ObrasBL();
             List<Obras> obras = obrBL.PesquisarBL("CODIGO",txtObra.Text);
-
+            
+            lblDesObra.Text = "";
+            hfIdObra.Value = "";
             foreach (Obras ltObr in obras)
             {
                 hfIdObra.Value = ltObr.Id.ToString();

@@ -79,23 +79,87 @@ namespace DataAccess
 
         public bool InserirDA(MovimentosEstoque movEst)
         {
-            return true;
+            SqlParameter[] paramsToSP = new SqlParameter[7];
+
+            paramsToSP[0] = new SqlParameter("@vendaid", movEst.VendaId);
+            paramsToSP[1] = new SqlParameter("@usuarioid", movEst.UsuarioId);
+            paramsToSP[2] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
+            paramsToSP[3] = new SqlParameter("@quantidade", movEst.Quantidade);
+            paramsToSP[4] = new SqlParameter("@notaentradaid", movEst.NotaEntradaId);
+            paramsToSP[5] = new SqlParameter("@tipo", movEst.Tipo);
+            paramsToSP[6] = new SqlParameter("@data", movEst.Data);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_MovimentosEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(MovimentosEstoque movEst)
         {
-            return true;
+            SqlParameter[] paramsToSP = new SqlParameter[8];
+
+            paramsToSP[0] = new SqlParameter("@id", movEst.Id);
+            paramsToSP[1] = new SqlParameter("@vendaid", movEst.VendaId);
+            paramsToSP[2] = new SqlParameter("@usuarioid", movEst.UsuarioId);
+            paramsToSP[3] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
+            paramsToSP[4] = new SqlParameter("@quantidade", movEst.Quantidade);
+            paramsToSP[5] = new SqlParameter("@notaentradaid", movEst.NotaEntradaId);
+            paramsToSP[6] = new SqlParameter("@tipo", movEst.Tipo);
+            paramsToSP[7] = new SqlParameter("@data", movEst.Data);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_MovimentosEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(MovimentosEstoque movEst)
         {
-            return true;
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@id", movEst.Id);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_MovimentosEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<MovimentosEstoque> PesquisarDA()
         {
             List<MovimentosEstoque> movimentosEstoque = new List<MovimentosEstoque>();
             return movimentosEstoque;
+        }
+
+        public List<MovimentosEstoque> PesquisarDA(Int32 id_ItEst)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@" SELECT * FROM MOVIMENTOSESTOQUE " +
+                                                                                                 " WHERE ITEMESTOQUEID = '{0}'", id_ItEst));
+
+
+            List<MovimentosEstoque> movEstoque = CarregarObjMovimentoEstoque(dr);
+
+            return movEstoque;
         }
 
         public List<MovimentosEstoque> PesquisarDA(int item_id, DateTime? data)

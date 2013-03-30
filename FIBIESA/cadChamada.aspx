@@ -12,39 +12,40 @@
             </div>
             <div class="contentbox">
                 <table>                                  
-                    <tr>
-                        <td style="width: 130px"> * Data: </td>  
+                    <tr>                         
                         <td style="width: 150px"> * Evento: </td> 
-                        <td style="width: 150px" colspan="2"> * Turma: </td>                         
+                        <td style="width: 150px"> * Turma: </td> 
+                        <td style="width: 130px" colspan="2"> * Data: </td>                         
                     </tr>
-                    <tr>    
-                        <td style="width: 130px"> 
-                        <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px"></asp:TextBox>
-                        <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData"
-                            Enabled="True">
-                        </asp:CalendarExtender>                           
-                        </td>  
+                    <tr>                           
                         <td style="width: 280px">                                                         
-                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
+                                AutoPostBack="True" onselectedindexchanged="ddlEvento_SelectedIndexChanged">
                             </asp:DropDownList>       
                         </td>                        
                         <td style="width: 280px"> 
                             <asp:DropDownList ID="ddlTurmas" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>                                                                               
                         </td>
+                        <td style="width: 130px"> 
+                        <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px"></asp:TextBox>
+                        <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData"
+                            Enabled="True">
+                        </asp:CalendarExtender>                           
+                        </td>  
                         <td>                           
                             <asp:Button ID="btnPesquisar" runat="server"  Text="Pesquisar" CssClass="btn" 
                               onclick="btnPesquisar_Click"/>  
                         </td>
                     </tr>    
-                    <tr>
-                        <td></td>
+                    <tr>                        
                          <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlEvento" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
                           <td colspan="2"><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="ddlTurmas" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
+                          <td></td>
                     </tr>               
                     <tr>                        
                         <td colspan="4">

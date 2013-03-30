@@ -64,6 +64,13 @@ namespace Admin
             dtgBairros.DataSource = tabela;           
             dtgBairros.DataBind();
         }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -74,12 +81,12 @@ namespace Admin
 
      
         protected void btnInserir_Click(object sender, EventArgs e)
-        {
+        {            
             Response.Redirect("cadBairro.aspx?operacao=new");
         }
             
         protected void btnBusca_Click(object sender, EventArgs e)
-        {
+        {          
             Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
         }
 

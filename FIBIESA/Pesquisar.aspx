@@ -15,24 +15,21 @@
         <table>
             <tr>
                 <td>
-                    <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
-                    &nbsp;
-                    <asp:DropDownList ID="ddlPesCampo" runat="server" CssClass="inputbox">
-                        <asp:ListItem Value="C">Código</asp:ListItem>
-                        <asp:ListItem Value="D">Descrição</asp:ListItem>
-                    </asp:DropDownList>
-                    &nbsp;
+                    <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>                
+                </td>
+                <td>
                     <asp:ImageButton ID="btnPesquisa" runat="server"  CssClass="btnPes"
                         onclick="btnPesquisa_Click" ImageUrl="~/images/icons/icone_lupa.jpg" />  
                 </td>
             </tr>
              <tr>
-                <td>
+                <td colspan ="2">
                  <asp:GridView ID="grdPesquisa" runat="server" CellPadding="3" 
                         AutoGenerateColumns="False" DataKeyNames="ID" 
                         onselectedindexchanged="grdPesquisa_SelectedIndexChanged" 
                         BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" 
-                        BorderWidth="1px">
+                        BorderWidth="1px" GridLines="None" 
+                        onrowdatabound="grdPesquisa_RowDataBound">
                      <Columns>
                          <asp:CommandField ShowSelectButton="True">
                            <HeaderStyle CssClass="grd_cmd_header" />

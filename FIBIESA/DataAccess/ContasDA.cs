@@ -166,26 +166,12 @@ namespace DataAccess
             return contas;
         }
 
-        public override List<Base> Pesquisar(string descricao, string tipo)
+        public override List<Base> Pesquisar(string descricao)
         {
-            SqlDataReader dr;
-
-            if (tipo == "C")
-            {
-                int codigo = 0;
-                Int32.TryParse(descricao, out codigo);
-
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM CONTAS WHERE CODIGO = '{0}'", codigo));
-            }
-            else
-            {
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM CONTAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
-            }
-
+                                                                                       " FROM CONTAS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'",utils.ComparaIntComZero(descricao),  descricao));
+            
             List<Base> ba = new List<Base>();
 
             while (dr.Read())

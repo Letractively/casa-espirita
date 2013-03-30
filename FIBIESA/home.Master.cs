@@ -49,8 +49,12 @@ namespace FIBIESA
             {
                 lblNomeEmpresa.Text = inst.NomeFantasia;
             }
+            
  
         }
+
+                 
+        
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -82,6 +82,7 @@
         <siteMapNode url="viewExemplar.aspx" title="Exemplares"  description="">
           <siteMapNode url="cadExemplar.aspx" title="Cadastro de Exemplares"  description="" />
         </siteMapNode>
+        <siteMapNode url="caditemEstoque.aspx" title="Implantação do Estoque"  description=""/>
         
     </siteMapNode>
 </siteMap>

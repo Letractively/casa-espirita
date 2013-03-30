@@ -100,7 +100,7 @@ ul,li
   background:url(../images/nav_sub.png) repeat-x scroll;
   display:block;
   float:none;
-  margin:0 0 1px;
+  margin:0;
   padding-left:10px;
 }
 
@@ -116,7 +116,7 @@ ul,li
   float:none!important;
   font-size:12px;
   height:30px;
-  line-height:30px;
+  
   min-width:190px;
   padding:0!important;
   width:100%

@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using DataObjects;
 using BusinessLayer;
+using FG;
 
 namespace StarFestaEventos
 {
@@ -15,8 +16,9 @@ namespace StarFestaEventos
     {
         private BaseBL baBL;
         private Base ba;
+        Utils utils = new Utils();
         #region funcoes
-        private void PesquisarConteudo(string pesquisa, string tipo)
+        private void PesquisarConteudo(string pesquisa)
         {
             Session["tabelaPesquisa"] = null;
             
@@ -34,7 +36,7 @@ namespace StarFestaEventos
             baBL =(BaseBL)Session["objBLPesquisa"];
             ba = (Base)Session["objPesquisa"];
             
-            List<Base> baPes = baBL.Pesquisar(pesquisa,tipo);
+            List<Base> baPes = baBL.Pesquisar(pesquisa);
 
             foreach (Base bas in baPes)
             {
@@ -99,7 +101,13 @@ namespace StarFestaEventos
 
         protected void btnPesquisa_Click(object sender, ImageClickEventArgs e)
         {
-            PesquisarConteudo(txtPesquisa.Text,ddlPesCampo.SelectedValue);
+            PesquisarConteudo(txtPesquisa.Text);
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
       
