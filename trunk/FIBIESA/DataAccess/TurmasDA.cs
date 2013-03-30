@@ -168,6 +168,16 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM TURMAS WHERE ID = {0}", id_tur));
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+
+            return turmas;
+        }
+
+        public List<Turmas> PesquisarEveDA(int id_eve)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM TURMAS WHERE EVENTOID = {0}", id_eve));
 
             List<Turmas> turmas = CarregarObjTurmas(dr);
 
@@ -212,26 +222,12 @@ namespace DataAccess
             return turmas;
         }
 
-        public override List<Base> Pesquisar(string descricao, string tipo)
+        public override List<Base> Pesquisar(string descricao)
         {
-            SqlDataReader dr;
-
-            if (tipo == "C")
-            {
-                int codigo = 0;
-                Int32.TryParse(descricao, out codigo);
-
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TURMAS WHERE CODIGO = '{0}'", codigo));
-            }
-            else
-            {
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TURMAS WHERE DESCRICAO LIKE '%{0}%'", descricao));
-            }
-
+                                                                                       " FROM TURMAS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'",utils.ComparaIntComZero(descricao), descricao));
+            
             List<Base> ba = new List<Base>();
 
             while (dr.Read())

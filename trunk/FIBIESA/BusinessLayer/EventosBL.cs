@@ -56,11 +56,11 @@ namespace BusinessLayer
             return eveDA.PesquisarDA(campo,valor);
         }
 
-        public override List<Base> Pesquisar(string codDes, string tipo)
+        public override List<Base> Pesquisar(string codDes)
         {
             EventosDA eveDA = new EventosDA();
 
-            return eveDA.Pesquisar(codDes, tipo);
+            return eveDA.Pesquisar(codDes);
         }
 
     }

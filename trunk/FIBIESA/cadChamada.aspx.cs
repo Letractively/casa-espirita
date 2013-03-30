@@ -20,20 +20,21 @@ namespace Admin
         {
             EventosBL eveBL = new EventosBL();
             List<Eventos> eventos = eveBL.PesquisarBL();
-
-            ddlEvento.Items.Add(new ListItem());
+                       
+            ddlEvento.Items.Add(new ListItem("Selecione"));
             foreach (Eventos ltEve in eventos)
                 ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
 
             ddlEvento.SelectedIndex = 0;
         }
 
-        private void CarregarDdlTurmas()
+        private void CarregarDdlTurmas(Int32 id_tur)
         {
             TurmasBL turBL = new TurmasBL();
-            List<Turmas> turmas = turBL.PesquisarBL();
+            List<Turmas> turmas = turBL.PesquisarEveBL(id_tur);
 
-            ddlTurmas.Items.Add(new ListItem());
+            ddlTurmas.Items.Clear();
+            ddlTurmas.Items.Add(new ListItem("Selecione"));
             foreach (Turmas ltTur in turmas)
                 ddlTurmas.Items.Add(new ListItem(ltTur.Codigo + " - " + ltTur.Descricao, ltTur.Id.ToString()));
 
@@ -113,14 +114,20 @@ namespace Admin
             repPermissao.DataSource = tabela;
             repPermissao.DataBind();
         }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 txtSelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                CarregarDdlEventos();
-                CarregarDdlTurmas();
+                CarregarDdlEventos();                
             }
         }           
 
@@ -144,7 +151,12 @@ namespace Admin
                 if (chamadas.Id > 0)
                 {
                     if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                        chaBL.EditarBL(chamadas);
+                    {
+                        if (chaBL.EditarBL(chamadas))
+                            ExibirMensagem("Registros salvos com sucesso!");
+                        else
+                            ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
+                    }
                     else
                         Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -152,7 +164,12 @@ namespace Admin
                 else
                 {
                     if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                        chaBL.InserirBL(chamadas);
+                    {
+                        if(chaBL.InserirBL(chamadas))
+                            ExibirMensagem("Registros salvos com sucesso!");
+                        else
+                            ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
+                    }
                     else
                         Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
                 }
@@ -166,6 +183,10 @@ namespace Admin
             Pesquisar(utils.ComparaIntComZero(ddlTurmas.SelectedValue), utils.ComparaIntComZero(ddlEvento.SelectedValue));
         }
 
+        protected void ddlEvento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDdlTurmas(utils.ComparaIntComZero(ddlEvento.SelectedValue));
+        }       
         
     }
 }

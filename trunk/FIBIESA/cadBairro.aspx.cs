@@ -39,6 +39,7 @@ namespace Admin
             }
 
         }
+
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");

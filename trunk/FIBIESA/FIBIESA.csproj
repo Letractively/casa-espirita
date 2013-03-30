@@ -64,6 +64,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="ajax\libs\jqueryui\1.8.6\jquery-ui.min.js" />
     <Content Include="ajax\libs\jquery\1.5.1\jquery.min.js" />
+    <Content Include="cadAcertoEstoque.aspx" />
     <Content Include="cadAgencia.aspx" />
     <Content Include="cadAutor.aspx" />
     <Content Include="cadBairro.aspx" />
@@ -98,9 +99,9 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="erroPermissao.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="default.aspx" />
     <Content Include="images\bg_breadcrumb.png" />
     <Content Include="images\bg_btns.png" />
     <Content Include="images\bg_btns_alt.png" />
@@ -189,6 +190,7 @@
     <Content Include="Styles\login.css" />
     <Content Include="Styles\main.css" />
     <Content Include="Styles\Site.css" />
+    <Content Include="Styles\style.css" />
     <Content Include="Styles\wysiwyg.css" />
     <Content Include="svn\trunk\charting\js\excanvas.js" />
     <Content Include="svn\trunk\_shared\EnhanceJS\enhance.js" />
@@ -271,6 +273,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadAcertoEstoque.aspx.cs">
+      <DependentUpon>cadAcertoEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadAcertoEstoque.aspx.designer.cs">
+      <DependentUpon>cadAcertoEstoque.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadAgencia.aspx.cs">
       <DependentUpon>cadAgencia.aspx</DependentUpon>
@@ -510,6 +519,13 @@
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="erroPermissao.aspx.cs">
       <DependentUpon>erroPermissao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -519,13 +535,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="home.Master.cs">
       <DependentUpon>home.Master</DependentUpon>

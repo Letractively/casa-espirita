@@ -8,7 +8,7 @@ namespace DataAccess
 {
     public class BaseDA
     {
-        public virtual List<Base> Pesquisar(string descricao, string tipo)
+        public virtual List<Base> Pesquisar(string descricao)
         {
             List<Base> ba = new List<Base>();
 

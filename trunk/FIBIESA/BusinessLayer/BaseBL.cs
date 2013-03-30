@@ -9,11 +9,11 @@ namespace BusinessLayer
 {
     public class BaseBL
     {
-        public virtual List<Base> Pesquisar(string descricao,string tipo)
+        public virtual List<Base> Pesquisar(string descricao)
         {
             BaseDA baDA = new BaseDA();
 
-            return baDA.Pesquisar(descricao, tipo);
+            return baDA.Pesquisar(descricao);
         }
     }
 }

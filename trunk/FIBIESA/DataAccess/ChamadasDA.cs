@@ -39,9 +39,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@presenca", cha.Presenca);
             paramsToSP[2] = new SqlParameter("@data", cha.Data);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Chamadas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Chamadas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Chamadas cha)
@@ -53,9 +60,17 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@presenca", cha.Presenca);
             paramsToSP[3] = new SqlParameter("@data", cha.Data);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_Chamadas", paramsToSP);
+            try
+            {
 
-            return true;
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_Chamadas", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Chamadas cha)
@@ -64,9 +79,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", cha.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Chamadas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Chamadas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Chamadas> PesquisarDA()

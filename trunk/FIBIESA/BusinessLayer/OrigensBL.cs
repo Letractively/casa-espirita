@@ -55,11 +55,11 @@ namespace BusinessLayer
             return origensDA.PesquisarDA(campo, valor);
         }
 
-        public override List<Base> Pesquisar(string codDes, string tipo)
+        public override List<Base> Pesquisar(string codDes)
         {
             OrigensDA origensDA = new OrigensDA();
 
-            return origensDA.Pesquisar(codDes, tipo);
+            return origensDA.Pesquisar(codDes);
         }
 
     }

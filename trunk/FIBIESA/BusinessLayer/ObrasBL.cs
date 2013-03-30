@@ -56,11 +56,11 @@ namespace BusinessLayer
             return obrasDA.PesquisarDA(campo, valor);
         }
 
-        public override List<Base> Pesquisar(string codDes, string tipo)
+        public override List<Base> Pesquisar(string codDes)
         {
             ObrasDA obraDA = new ObrasDA();
 
-            return obraDA.Pesquisar(codDes, tipo);
+            return obraDA.Pesquisar(codDes);
         }
     }
 }

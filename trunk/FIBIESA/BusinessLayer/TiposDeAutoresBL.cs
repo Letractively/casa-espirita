@@ -55,11 +55,11 @@ namespace BusinessLayer
             return TiposDeAutoresDA.PesquisarDA(campo, valor);
         }
 
-        public override List<Base> Pesquisar(string codDes, string tipo)
+        public override List<Base> Pesquisar(string codDes)
         {
             TiposDeAutoresDA baiDA = new TiposDeAutoresDA();
 
-            return baiDA.Pesquisar(codDes, tipo);
+            return baiDA.Pesquisar(codDes);
         }
     }
 }

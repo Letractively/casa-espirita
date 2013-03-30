@@ -7,29 +7,134 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
+using FG;
 
 namespace DataAccess
 {
     public class ItensEstoqueDA
     {
-        public bool InserirDA(ItensEstoque itenes)
+        Utils utils = new Utils();
+        #region funcoes
+        private List<ItensEstoque> CarregarObjItemEstoque(SqlDataReader dr)
         {
-            return true;
+            List<ItensEstoque> itensEstoque = new List<ItensEstoque>();
+
+            while (dr.Read())
+            {
+                ItensEstoque itEst = new ItensEstoque();
+                itEst.Id = int.Parse(dr["ID"].ToString());
+                itEst.Status = bool.Parse(dr["STATUS"].ToString());
+                itEst.ControlaEstoque = bool.Parse(dr["CONTROLAESTOQUE"].ToString());
+                itEst.QtdMinima = utils.ComparaIntComZero(dr["QTDMINIMA"].ToString());
+                itEst.ObraId = utils.ComparaIntComZero(dr["OBRAID"].ToString());
+                itEst.VlrCusto = utils.ComparaDecimalComZero(dr["VLRCUSTO"].ToString());
+                itEst.VlrVenda = utils.ComparaDecimalComZero(dr["VLRVENDA"].ToString());
+                itEst.Data = Convert.ToDateTime(dr["DATA"].ToString());
+
+                ObrasDA obDA = new ObrasDA();
+                DataSet dsOb = obDA.PesquisarDA(itEst.ObraId);
+                Obras obras = new Obras();
+
+                if (dsOb.Tables[0].Rows.Count != 0)
+                {
+                    obras.Id = (Int32)dsOb.Tables[0].Rows[0]["id"];
+                    obras.Codigo = (Int32)dsOb.Tables[0].Rows[0]["codigo"];
+                    obras.Titulo = (string)dsOb.Tables[0].Rows[0]["titulo"];
+
+                    itEst.Obra = obras;
+                }
+               
+                itensEstoque.Add(itEst);
+            }
+
+            return itensEstoque;
+        }
+        #endregion
+
+        public bool InserirDA(ItensEstoque itEst)
+        {
+            SqlParameter[] paramsToSP = new SqlParameter[7];
+
+            paramsToSP[0] = new SqlParameter("@status", itEst.Status);
+            paramsToSP[1] = new SqlParameter("@controlaestoque", itEst.ControlaEstoque);
+            paramsToSP[2] = new SqlParameter("@qtdminima", itEst.QtdMinima);
+            paramsToSP[3] = new SqlParameter("@obraid", itEst.ObraId);
+            paramsToSP[4] = new SqlParameter("@vlrcusto", itEst.VlrCusto);
+            paramsToSP[5] = new SqlParameter("@vlrvenda", itEst.VlrVenda);
+            paramsToSP[6] = new SqlParameter("@data", itEst.Data);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_ItensEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
-        public bool EditarDA(ItensEstoque itenes)
+        public bool EditarDA(ItensEstoque itEst)
         {
-            return true;
+            SqlParameter[] paramsToSP = new SqlParameter[8];
+
+            paramsToSP[0] = new SqlParameter("@id", itEst.Id);
+            paramsToSP[1] = new SqlParameter("@status", itEst.Status);
+            paramsToSP[2] = new SqlParameter("@controlaestoque", itEst.ControlaEstoque);
+            paramsToSP[3] = new SqlParameter("@qtdminima", itEst.QtdMinima);
+            paramsToSP[4] = new SqlParameter("@obraid", itEst.ObraId);
+            paramsToSP[5] = new SqlParameter("@vlrcusto", itEst.VlrCusto);
+            paramsToSP[6] = new SqlParameter("@vlrvenda", itEst.VlrVenda);
+            paramsToSP[7] = new SqlParameter("@data", itEst.Data);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_ItensEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
-        public bool ExcluirDA(ItensEstoque itenes)
+        public bool ExcluirDA(ItensEstoque itEst)
         {
-            return true;
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@id", itEst.Id);
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_ItensEstoque", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<ItensEstoque> PesquisarDA()
         {
-            List<ItensEstoque> itensEstoque = new List<ItensEstoque>();
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM ITENSESTOQUE "));
+
+            List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
+
+            return itensEstoque; 
+        }
+
+        public List<ItensEstoque> PesquisarDA(Int32 id_obra)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM ITENSESTOQUE WHERE OBRAID={0} ", id_obra));
+
+            List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
+
             return itensEstoque;
         }
 

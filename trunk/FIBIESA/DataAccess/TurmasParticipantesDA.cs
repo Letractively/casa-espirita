@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 
+
 namespace DataAccess
 {
     public class TurmasParticipantesDA
@@ -54,7 +55,8 @@ namespace DataAccess
                 turmasParticipantes.Add(turP);
             }
             return turmasParticipantes;
-        }
+        }      
+
         #endregion
         public bool InserirDA(TurmasParticipantes turP)
         {

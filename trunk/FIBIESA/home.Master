@@ -125,8 +125,9 @@
                     <li><a href="#">Estoque</a><span class="active_end"></span><div class="clear"></div>
                         <ul>
                             <li><a href="viewNotaEntrada.aspx" title="">Nota de Entrada</a></li>
+                            <li><a href="cadAcertoEstoque.aspx" title="">Acerto do Estoque</a></li>
                             <li><a href="cadMovimentoEstoque.aspx" title="">Movimentos do Estoque</a></li>
-                            <li><a href="cadItemEstoque.aspx" title="">Acerto de Estoque</a></li>
+                            <li><a href="cadItemEstoque.aspx" title="">Implantação do Estoque</a></li>
                         </ul>
                     </li>
 

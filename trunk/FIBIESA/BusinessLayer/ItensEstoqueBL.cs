@@ -10,28 +10,28 @@ namespace BusinessLayer
 {
     public class ItensEstoqueBL
     {
-        public bool InserirBL(ItensEstoque itenes)
+        public bool InserirBL(ItensEstoque id_itEst)
         {
             /*criar as regras de negocio*/
             ItensEstoqueDA itenEstoqueDA = new ItensEstoqueDA();
 
-            return itenEstoqueDA.InserirDA(itenes);
+            return itenEstoqueDA.InserirDA(id_itEst);
         }
 
-        public bool EditarBL(ItensEstoque itenes)
+        public bool EditarBL(ItensEstoque id_itEst)
         {
             /*criar as regras de negocio*/
             ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
 
-            return itensEstoqueDA.EditarDA(itenes);
+            return itensEstoqueDA.EditarDA(id_itEst);
         }
 
-        public bool ExcluirBL(ItensEstoque itenes)
+        public bool ExcluirBL(ItensEstoque id_itEst)
         {
             /*criar as regras de negocio*/
             ItensEstoqueDA ItensEstoqueDA = new ItensEstoqueDA();
 
-            return ItensEstoqueDA.ExcluirDA(itenes);
+            return ItensEstoqueDA.ExcluirDA(id_itEst);
         }
 
         public List<ItensEstoque> PesquisarBL()
@@ -40,6 +40,14 @@ namespace BusinessLayer
             ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
 
             return itensEstoqueDA.PesquisarDA();
+        }
+
+        public List<ItensEstoque> PesquisarBL(Int32 id_obra)
+        {
+            /*criar as regras de negocio*/
+            ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
+
+            return itensEstoqueDA.PesquisarDA(id_obra);
         }
 
         public DataSet PesquisarItensEstoqueBL(int id_movEst)

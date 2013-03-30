@@ -6,16 +6,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
-using System.Data;
 using FG;
+using System.Data;
 
-namespace Admin
+namespace FIBIESA
 {
-    public partial class cadItemEstoque : System.Web.UI.Page
+    public partial class cadAcertoEstoque : System.Web.UI.Page
     {
         Utils utils = new Utils();
-  
-        #region
+        #region funcoes
         private DataTable CriarDtPesquisa()
         {
             DataTable dt = new DataTable();
@@ -29,63 +28,61 @@ namespace Admin
 
             return dt;
         }
+
         private void CarregarAtributos()
         {
             txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtQtd.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtQtdMin.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtVlrMedio.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");         
-            btnExcluir.Attributes.Add("onclick", "return confirm('Deseja excluir as informações ?');"); 
-        }
-        private void CarregarDados(int id_obra)
-        {
-            ItensEstoqueBL itEsBL = new ItensEstoqueBL();
-            List<ItensEstoque> itensEstoque = itEsBL.PesquisarBL(id_obra);
+            txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtQtdAtual.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtItem.Attributes.Add("onkeypress", "return(Reais(this,event))");
 
-            if (itensEstoque.Count > 0)
+        }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            hfId.Value = "";
+            lblDesItem.Text = "";
+            txtData.Text = "";
+            txtQtdAtual.Text = "";
+            txtQtde.Text = "";            
+        }
+        private void CarregarDados(int id_ItEst)
+        {
+            MovimentosEstoqueBL movEsBL = new MovimentosEstoqueBL();
+            List<MovimentosEstoque> movEstoque = movEsBL.PesquisarBL(id_ItEst);
+
+            if (movEstoque.Count > 0)
             {
-                foreach (ItensEstoque ltItEs in itensEstoque)
+                foreach (MovimentosEstoque ltItEs in movEstoque)
                 {
                     hfId.Value = ltItEs.Id.ToString();
-                    hfIdItem.Value = ltItEs.ObraId.ToString();
+                   // hfIdItem.Value = ltItEs.ObraId.ToString();
                     txtData.Text = ltItEs.Data.ToString("dd/MM/yyyy");
-                    txtQtdMin.Text = ltItEs.QtdMinima.ToString();
-                    txtVlrMedio.Text = ltItEs.VlrCusto.ToString();
-                    txtVlrVenda.Text = ltItEs.VlrVenda.ToString();
-                    chkControlaEstoque.Checked = ltItEs.ControlaEstoque;
-                    ddlStatus.SelectedValue = ltItEs.Status == true ? "A" : "I";
+                   // txtQtdAtual.Text = ltItEs.QtdMinima.ToString();                    
                 }
             }
             else
             {
                 hfIdItem.Value = "";
                 txtItem.Text = "";
+                LimparCampos();
                 ExibirMensagem("Item não cadastrado !");
             }
 
         }
-        private void LimparCampos()
-        {
-            hfId.Value = "";
-            lblDesItem.Text = "";
-            txtData.Text = "";            
-            txtQtd.Text = "";
-            txtQtdMin.Text = "";
-            txtVlrMedio.Text = "";
-            txtVlrVenda.Text = "";
-            chkControlaEstoque.Checked = false;
-            ddlStatus.SelectedValue = "I";
-        }
-        public void ExibirMensagem(string mensagem)
-        {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
-        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarAtributos();
+            if (!IsPostBack)
+            {
+                txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            }
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
@@ -115,7 +112,12 @@ namespace Admin
             Session["objPesquisa"] = obr;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
-    
+
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
@@ -135,29 +137,22 @@ namespace Admin
             CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
         }
 
-        protected void btnVoltar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/default.aspx");
-        }
-
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            ItensEstoqueBL itEsBL = new ItensEstoqueBL();
-            ItensEstoque itEstoque = new ItensEstoque();
-            itEstoque.Id = utils.ComparaIntComZero(hfId.Value);
-            itEstoque.ObraId = utils.ComparaIntComZero(hfIdItem.Value);
-            itEstoque.Data = Convert.ToDateTime(txtData.Text);
-            itEstoque.QtdMinima = utils.ComparaIntComZero(txtQtdMin.Text);
-            itEstoque.VlrCusto = utils.ComparaDecimalComZero(txtVlrMedio.Text);
-            itEstoque.VlrVenda = utils.ComparaDecimalComZero(txtVlrVenda.Text);
-            itEstoque.ControlaEstoque = chkControlaEstoque.Checked;
-            itEstoque.Status = ddlStatus.SelectedValue == "A"? true : false;
-            
-            if (itEstoque.Id > 0)
+            MovimentosEstoqueBL mvEstBL = new MovimentosEstoqueBL();
+            MovimentosEstoque movEstoque = new MovimentosEstoque();
+
+            movEstoque.Id = utils.ComparaIntComZero(hfId.Value);
+            movEstoque.ItemEstoqueId = utils.ComparaIntComZero(hfIdItem.Value);
+            movEstoque.Quantidade = utils.ComparaIntComZero(txtQtde.Text);
+            movEstoque.Data = Convert.ToDateTime(txtData.Text);
+            movEstoque.Tipo = rblTipoMov.SelectedValue;
+
+            if (movEstoque.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
-                    if (itEsBL.EditarBL(itEstoque))
+                    if (mvEstBL.EditarBL(movEstoque))
                         ExibirMensagem("Atualização realizada com sucesso !");
                     else
                         ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
@@ -169,34 +164,13 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(itEsBL.InserirBL(itEstoque))
+                    if (mvEstBL.InserirBL(movEstoque))
                         ExibirMensagem("Atualização realizada com sucesso !");
                     else
                         ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-                       
-        }
-
-        protected void btnExcluir_Click(object sender, EventArgs e)
-        {   
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-               ItensEstoqueBL itEsBL = new ItensEstoqueBL();
-               ItensEstoque itEstoque = new ItensEstoque();
-               itEstoque.Id = utils.ComparaIntComZero(hfId.Value);
-               if (itEstoque.Id > 0)
-               {
-                   if (itEsBL.ExcluirBL(itEstoque))
-                       ExibirMensagem("Informações excluídas com sucesso !");
-                   hfIdItem.Value = "";
-                   txtItem.Text = "";                   
-                   LimparCampos();
-               }
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
     }
 }
