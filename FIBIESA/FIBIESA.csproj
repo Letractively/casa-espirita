@@ -218,7 +218,6 @@
     <Content Include="viewNotaEntrada.aspx" />
     <Content Include="viewObra.aspx" />
     <Content Include="viewOrigem.aspx" />
-    <Content Include="viewParametro.aspx" />
     <Content Include="viewPermissao.aspx" />
     <Content Include="viewPessoa.aspx" />
     <Content Include="viewPortador.aspx" />
@@ -712,13 +711,6 @@
     </Compile>
     <Compile Include="viewOrigem.aspx.designer.cs">
       <DependentUpon>viewOrigem.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewParametro.aspx.cs">
-      <DependentUpon>viewParametro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewParametro.aspx.designer.cs">
-      <DependentUpon>viewParametro.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewPermissao.aspx.cs">
       <DependentUpon>viewPermissao.aspx</DependentUpon>

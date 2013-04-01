@@ -63,6 +63,7 @@ namespace DataAccess
             paramsToSP[5] = new SqlParameter("@vlrvenda", itEst.VlrVenda);
             paramsToSP[6] = new SqlParameter("@data", itEst.Data);
 
+            
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_ItensEstoque", paramsToSP);
@@ -136,6 +137,29 @@ namespace DataAccess
             List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
 
             return itensEstoque;
+        }
+
+        public List<ItensEstoque> PesquisarDA(string campo, string valor)
+        {
+            StringBuilder consulta = new StringBuilder("SELECT * FROM ITENSESTOQUE IE, OBRAS O ");
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.CODIGO = {0}", utils.ComparaIntComZero(valor)));
+                    break;
+                case "TITULO":
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.TITULO LIKE '%{0}%'", valor));
+                    break;
+                default:
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString());
+
+            return CarregarObjItemEstoque(dr);
         }
 
         public DataSet PesquisarItensEstoqueDA(int id_movEst)

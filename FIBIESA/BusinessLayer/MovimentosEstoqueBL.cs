@@ -56,5 +56,13 @@ namespace BusinessLayer
 
             return movimentosestoqueDA.PesquisarDA(item_id, data);
         }
+
+        public Int32 PesquisarTotalMovimentosBL(Int32 id_ItEst)
+        {
+            /*criar as regras de negocio*/
+            MovimentosEstoqueDA movimentosestoqueDA = new MovimentosEstoqueDA();
+
+            return movimentosestoqueDA.PesquisarTotalMovimentosDA(id_ItEst);
+        }
     }
 }
