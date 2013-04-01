@@ -24,7 +24,7 @@ namespace Admin
             foreach (Eventos eve in eventos)
             {
                 hfId.Value = eve.Id.ToString();
-                txtCodigo.Text = eve.Codigo.ToString();
+                lblCodigo.Text = eve.Codigo.ToString();
                 txtDescricao.Text = eve.Descricao;
                 txtDtInicio.Text = eve.DtInicio.ToString("dd/MM/yyyy");
                 txtDtFim.Text = eve.DtFim.ToString("dd/MM/yyyy");
@@ -33,8 +33,22 @@ namespace Admin
         }
 
         private void CarregarAtributos()
+        {            
+            txtDtInicio.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
+
+        private void ExibirMensagem(string mensagem)
         {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            txtDtInicio.Text = "";
+            txtDtFim.Text = "";
         }
         #endregion
 
@@ -47,17 +61,19 @@ namespace Admin
             if (!IsPostBack)
             {
 
-                if (Request.QueryString["operacao"] != null)
+                if (Request.QueryString["operacao"] != null  && (Request.QueryString["id_eve"] != null))
                 {
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
-                        if (Request.QueryString["id_eve"] != null)
-                            id_eve = Convert.ToInt32(Request.QueryString["id_eve"].ToString());
+                    {
+                        id_eve = Convert.ToInt32(Request.QueryString["id_eve"].ToString());
+                        CarregarDados(id_eve);
+                    }
                 }
-
-                if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_eve);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";             
+                    
             }
         }
 
@@ -67,7 +83,7 @@ namespace Admin
             Eventos eventos = new Eventos();
 
             eventos.Id = utils.ComparaIntComZero(hfId.Value);
-            eventos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            eventos.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             eventos.Descricao = txtDescricao.Text;
             eventos.DtInicio = Convert.ToDateTime(txtDtInicio.Text);
             eventos.DtFim = Convert.ToDateTime(txtDtFim.Text);
@@ -75,7 +91,12 @@ namespace Admin
             if (eventos.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    eveBL.EditarBL(eventos);
+                {
+                    if (eveBL.EditarBL(eventos))
+                        ExibirMensagem("Evento atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o evento. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -83,12 +104,19 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    eveBL.InserirBL(eventos);
+                {
+                    if (eveBL.InserirBL(eventos))
+                    {
+                        ExibirMensagem("Evento gravado com sucesso !");
+                        LimparCampos();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o evento. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewEvento.aspx");
+                        
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
