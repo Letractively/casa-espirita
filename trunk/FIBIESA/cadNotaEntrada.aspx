@@ -135,7 +135,7 @@
              <asp:ValidationSummary ID="ValidationSummary2" runat="server" 
                 CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfIdItem" runat="server" />
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>
         <div class="status">

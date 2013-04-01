@@ -109,9 +109,9 @@ namespace Admin
                 formularios.Id = utils.ComparaIntComZero(dtgFormularios.DataKeys[e.RowIndex][0].ToString());
 
                 if (formBL.ExcluirBL(formularios))
-                    ExibirMensagem("Registro excluído com sucesso !");
+                    ExibirMensagem("Formulário excluído com sucesso !");
                 else
-                    ExibirMensagem("Não foi possível excluir o registro.");
+                    ExibirMensagem("Não foi possível excluir o formulário.");
 
                 Pesquisar(null);
             }
@@ -178,7 +178,7 @@ namespace Admin
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
-                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
+                utils.CarregarJsExclusao("Deseja excluir este formulário?", 1, e);
         }
 
                 

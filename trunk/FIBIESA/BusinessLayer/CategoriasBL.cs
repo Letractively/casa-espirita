@@ -61,5 +61,12 @@ namespace BusinessLayer
 
             return catDA.Pesquisar(codDes);
         }
+
+        public List<Categorias> PesquisarBuscaBL(string valor)
+        {
+            CategoriasDA categoriaDA = new CategoriasDA();
+
+            return categoriaDA.PesquisarBuscaDA(valor);
+        }
     }
 }

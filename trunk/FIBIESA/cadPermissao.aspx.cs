@@ -108,8 +108,8 @@ namespace Admin
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["descategoria"] != null)
-                    lblDesCategoria.Text = Request.QueryString["descategoria"].ToString();
+                if (Session["descategoria"] != null)
+                    lblDesCategoria.Text = Session["descategoria"].ToString();
             }
            
         }

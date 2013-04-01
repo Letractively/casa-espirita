@@ -24,7 +24,7 @@ namespace Admin
             foreach (Formularios ltFor in formularios)
             {
                 hfId.Value = ltFor.Id.ToString();
-                txtCodigo.Text = ltFor.Codigo.ToString();
+                lblCodigo.Text = ltFor.Codigo.ToString();
                 txtDescricao.Text = ltFor.Descricao;
                 txtNome.Text = ltFor.Nome;
                 ddlTipo.SelectedValue = ltFor.Tipo;
@@ -32,37 +32,43 @@ namespace Admin
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
-        public void ExibirMensagem(string mensagem)
+        
+        private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
+
+        private void LimparCampos()
+        {
+            lblCodigo.Text = "";
+            txtDescricao.Text = "";
+            txtNome.Text = "";
+            ddlModulo.SelectedIndex = 0;
+            ddlTipo.SelectedIndex = 0;
+            txtDescricao.Focus();
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_for = 0;
-
-            CarregarAtributos();
-
+                        
             if (!IsPostBack)
             {
-
-                if (Request.QueryString["operacao"] != null)
+                if (Request.QueryString["operacao"] != null && Request.QueryString["id_for"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
-                        if (Request.QueryString["id_for"] != null)
-                            id_for = Convert.ToInt32(Request.QueryString["id_for"].ToString());
+                    {
+                        id_for = Convert.ToInt32(Request.QueryString["id_for"].ToString());
+                        CarregarDados(id_for);
+                    }                   
                 }
-
-                if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_for);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente";    
             }
         }
 
@@ -76,8 +82,7 @@ namespace Admin
             FormulariosBL forBL = new FormulariosBL();
             Formularios formulario = new Formularios();
 
-            formulario.Id = utils.ComparaIntComZero(hfId.Value);
-            formulario.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            formulario.Id = utils.ComparaIntComZero(hfId.Value);            
             formulario.Descricao = txtDescricao.Text;
             formulario.Nome = txtNome.Text;
             formulario.Tipo = ddlTipo.SelectedValue;
@@ -90,13 +95,17 @@ namespace Admin
                     ExibirMensagem("Não foi possível salvar o formulário. Revise as informações !");
             else
             {
-                if (forBL.InserirBL(formulario))                
+                if (forBL.InserirBL(formulario))
+                {
                     ExibirMensagem("Dados gravados com sucesso !");
+                    LimparCampos();
+                }
                 else
                     ExibirMensagem("Não foi possível salvar o formulário. Revise as informações !");
             }
                         
         }
+                
                 
     }
 }

@@ -34,12 +34,26 @@ namespace DataAccess
 
             return formularios;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT MAX(CODIGO) + 1 COD FROM FORMULARIOS ")); 
+                                                                                           
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+
+        }
+
         #endregion
         public bool InserirDA(Formularios formu)
         {
             SqlParameter[] paramsToSP = new SqlParameter[5];
 
-            paramsToSP[0] = new SqlParameter("@codigo", formu.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", formu.Descricao);
             paramsToSP[2] = new SqlParameter("@nome", formu.Nome);
             paramsToSP[3] = new SqlParameter("@tipo", formu.Tipo);
@@ -121,8 +135,7 @@ namespace DataAccess
 
             List<Formularios> formularios = CarregarObjFormulario(dr);
 
-            return formularios;
-                        
+            return formularios;                        
         }
     }
 }

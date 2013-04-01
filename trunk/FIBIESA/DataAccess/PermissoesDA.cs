@@ -7,11 +7,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using InfrastructureSqlServer.Helpers;
+using FG;
 
 namespace DataAccess
 {
     public class PermissoesDA
     {
+        Utils utils = new Utils();
         #region funcoes
         private List<Permissoes> CarregarObjPermissao(SqlDataReader dr)
         {
@@ -133,7 +135,7 @@ namespace DataAccess
             
 
             return permissoes;
-        }
+        }        
                 
     }
 }

@@ -10,18 +10,28 @@
                 <h2>Cadastro de Notas de Entrada</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                    <asp:ListItem Value="NUMERO">Número</asp:ListItem>
-                    <asp:ListItem Value="SERIE">Série</asp:ListItem>
-                    <asp:ListItem Value="DATA">Data</asp:ListItem>
-                </asp:DropDownList>
-                &nbsp;&nbsp;
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                    onclick="btnBusca_Click" />
-                &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="btnInserir_Click" />
+                <table>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
+                                <asp:ListItem Value="NUMERO">Número</asp:ListItem>
+                                <asp:ListItem Value="SERIE">Série</asp:ListItem>
+                                <asp:ListItem Value="DATA">Data</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                                onclick="btnBusca_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                                onclick="btnInserir_Click" />
+                        </td>
+                    </tr>
+                </table>
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
@@ -33,7 +43,8 @@
                                    onrowdeleting="dtgNotaEntrada_RowDeleting" 
                                    onselectedindexchanged="dtgNotaEntrada_SelectedIndexChanged" 
                                     AllowSorting="True" GridLines="None" ShowHeaderWhenEmpty="True" 
-                                    onpageindexchanging="dtgNotaEntrada_PageIndexChanging">
+                                    onpageindexchanging="dtgNotaEntrada_PageIndexChanging" 
+                                    onrowdatabound="dtgNotaEntrada_RowDataBound">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

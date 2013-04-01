@@ -19,7 +19,8 @@
                             Item:
                         </td>
                         <td style="width: 400px">
-                           <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
+                           <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="75px" 
+                                AutoPostBack="True" ontextchanged="txtItem_TextChanged"></asp:TextBox>
                            <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
                                  />
                             &nbsp;
@@ -39,7 +40,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan ="4">                            
+                        <td colspan ="4">   
+                            <asp:Panel runat="server" ID="pnlGrid" ScrollBars="Auto">                         
                             <asp:GridView ID="dtgMovItem" runat="server" AutoGenerateColumns="False" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                 CellPadding="3" GridLines="None">
@@ -47,10 +49,11 @@
                                     <asp:BoundField DataField="CODITEM" HeaderText="Cód. Item" />
                                     <asp:BoundField DataField="DESCITEM" HeaderText="Descrição" />
                                     <asp:BoundField DataField="DATA" HeaderText="Data" />
-                                    <asp:BoundField DataField="VALOR" HeaderText="Valor" />
-                                    <asp:BoundField DataField="QTDE" HeaderText="Qtde" />
-                                    <asp:BoundField DataField="USUNOME" HeaderText="Usuário" />
                                     <asp:BoundField DataField="TIPO" HeaderText="Tipo" />
+                                    <asp:BoundField DataField="QTDE" HeaderText="Qtde" />
+                                    <asp:BoundField DataField="VLRCUSTO" HeaderText="Vlr. Custo" />
+                                    <asp:BoundField DataField="VLRVENDA" HeaderText="Vlr. Venda" />
+                                    <asp:BoundField DataField="USUNOME" HeaderText="Usuário" />
                                     <asp:BoundField DataField="VENDANUM" HeaderText="Venda" />
                                     <asp:BoundField DataField="NOTAENT" HeaderText="Nota " />
                                     <asp:BoundField DataField="NOTAENTSERIE" HeaderText="Série" />
@@ -65,7 +68,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
-                            
+                            </asp:Panel>
                         </td>
                     </tr>
                 </table>
@@ -73,15 +76,21 @@
                     <tr>
                         <td style="width: 140px">
                         </td>
-                        <td style="width: 400px">
+                        <td style="width: 180px">
                             <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
                                 onclick="btnVoltar_Click"></asp:Button>
+                        </td>
+                        <td>
+                            Quantidade Total:     
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtQtdTotal" runat="server" CssClass="inputboxRight"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
             </div>
              <asp:HiddenField ID="hfIdItem" runat="server" />
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>
         <div class="status">

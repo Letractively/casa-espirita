@@ -134,7 +134,24 @@ namespace DataAccess
                 ba.Add(bas);
             }
             return ba;
-        }    
+        }
+
+        public List<Categorias> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM CATEGORIAS ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Categorias> categorias = CarregarObjCategoria(dr);
+
+            return categorias;
+        }
 
     }
 }
