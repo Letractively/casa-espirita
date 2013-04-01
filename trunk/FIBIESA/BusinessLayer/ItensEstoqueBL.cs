@@ -50,6 +50,14 @@ namespace BusinessLayer
             return itensEstoqueDA.PesquisarDA(id_obra);
         }
 
+        public List<ItensEstoque> PesquisarBL(string campo, string valor)
+        {
+            /*criar as regras de negocio*/
+            ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
+
+            return itensEstoqueDA.PesquisarDA(campo, valor);
+        }
+
         public DataSet PesquisarItensEstoqueBL(int id_movEst)
         {
             ItensEstoqueDA itEstDA = new ItensEstoqueDA();

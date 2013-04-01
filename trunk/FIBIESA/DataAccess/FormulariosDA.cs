@@ -80,7 +80,7 @@ namespace DataAccess
         public List<Formularios> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, @"SELECT * FROM FORMULARIOS ");
+                                                                CommandType.Text, @"SELECT * FROM FORMULARIOS ORDER BY CODIGO ");
 
             List<Formularios> formularios = CarregarObjFormulario(dr);
 
@@ -107,29 +107,22 @@ namespace DataAccess
             return formularios;
         }
 
-        public List<Formularios> PesquisarDA(string campo, string valor)
+        public List<Formularios> PesquisarBuscaDA(string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM FORMULARIOS ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta =  string.Format("SELECT * FROM FORMULARIOS WHERE CODIGO = {0}",utils.ComparaIntComZero(valor));
-                    break;
-                case "DESCRICAO":
-                    consulta = string.Format("SELECT * FROM FORMULARIOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
             
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Formularios> formularios = CarregarObjFormulario(dr);
 
             return formularios;
+                        
         }
     }
 }

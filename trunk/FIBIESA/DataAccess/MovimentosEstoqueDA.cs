@@ -89,16 +89,16 @@ namespace DataAccess
             paramsToSP[5] = new SqlParameter("@tipo", movEst.Tipo);
             paramsToSP[6] = new SqlParameter("@data", movEst.Data);
 
-            try
-            {
+           // try
+            //{
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_MovimentosEstoque", paramsToSP);
 
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            //}
+           // catch (Exception e)
+            //{
+             //   return false;
+           // }
         }
 
         public bool EditarDA(MovimentosEstoque movEst)
@@ -192,6 +192,26 @@ namespace DataAccess
             List<MovimentosEstoque> movEstoque = CarregarObjMovimentoEstoque(dr);
 
             return movEstoque;
+        }
+
+        public Int32 PesquisarTotalMovimentosDA(Int32 id_ItEst)
+        {
+            Int32 total = 0;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT SUM(ME.QUANTIDADE) " +
+                                                                                           " - (SELECT SUM(M.QUANTIDADE) FROM MOVIMENTOSESTOQUE M WHERE M.ITEMESTOQUEID = {0} AND M.TIPO ='S') TOTAL " +
+                                                                                           "         FROM MOVIMENTOSESTOQUE ME " + 
+                                                                                           "         WHERE ME.ITEMESTOQUEID = {0} " +
+                                                                                           "         AND ME.TIPO = 'E' ",id_ItEst)); 
+
+
+
+
+            if (ds.Tables[0].Rows.Count != 0)
+               total = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["TOTAL"].ToString());
+                       
+            return total;
+ 
         }
     }
 }

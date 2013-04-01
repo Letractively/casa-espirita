@@ -6,8 +6,7 @@
                 <div class="inputcontainer">
                     <img src="images/icons/icon_username.png" alt="Username" />
                     <label for="username">Usuário:</label>
-                    <asp:TextBox ID="txtLogin" runat="server" MaxLength="20" 
-                        ontextchanged="txtLogin_TextChanged"></asp:TextBox>  
+                    <asp:TextBox ID="txtLogin" runat="server" MaxLength="20"></asp:TextBox>  
                 </div>
                 <div class="inputcontainer">
                     <img src="images/icons/icon_locked.png" alt="Password" />

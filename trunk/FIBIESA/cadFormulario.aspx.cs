@@ -36,6 +36,11 @@ namespace Admin
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -79,13 +84,19 @@ namespace Admin
             formulario.Modulo = ddlModulo.SelectedValue;
 
             if (formulario.Id > 0)
-                forBL.EditarBL(formulario);
+                if(forBL.EditarBL(formulario))                
+                    ExibirMensagem("Dados atualizados com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível salvar o formulário. Revise as informações !");
             else
-                forBL.InserirBL(formulario);
-
-            Response.Redirect("~/viewFormulario.aspx");
+            {
+                if (forBL.InserirBL(formulario))                
+                    ExibirMensagem("Dados gravados com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível salvar o formulário. Revise as informações !");
+            }
+                        
         }
-
-        
+                
     }
 }

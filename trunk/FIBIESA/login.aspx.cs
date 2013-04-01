@@ -15,12 +15,7 @@ namespace Admin
         {
             if (!IsPostBack)
                 txtLogin.Focus();
-        }
-
-        protected void txtLogin_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        }              
 
         protected void btnAcessar_Click(object sender, EventArgs e)
         {
@@ -40,5 +35,7 @@ namespace Admin
                 Response.Redirect("~/default.aspx");
             }
         }
+       
+       
     }
 }
