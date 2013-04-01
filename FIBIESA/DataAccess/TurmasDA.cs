@@ -74,12 +74,25 @@ namespace DataAccess
             }
             return turmas;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT MAX(CODIGO) + 1 COD FROM TURMAS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+
+        }
         #endregion
         public bool InserirDA(Turmas tur)
         {
             SqlParameter[] paramsToSP = new SqlParameter[11];
 
-            paramsToSP[0] = new SqlParameter("@codigo", tur.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", tur.Descricao);
             paramsToSP[2] = new SqlParameter("@eventoid", tur.EventoId);
             paramsToSP[3] = new SqlParameter("@dtini", tur.DataInicial);
@@ -222,6 +235,23 @@ namespace DataAccess
             return turmas;
         }
 
+        public List<Turmas> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TURMAS ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Turmas> turmas = CarregarObjTurmas(dr);
+
+            return turmas;
+        }
+        
         public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

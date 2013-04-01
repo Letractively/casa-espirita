@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="viewEvento.aspx.cs" Inherits="Admin.viewCurso" %>
-
+<%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -12,24 +12,18 @@
             <div class="contentbox">
                 <table>
                 <tr>
-                <td>
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                    ToolTip="Pesquisar por"></asp:TextBox>
-                </td>
-                <td>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
-                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
-                </asp:DropDownList>
-                </td>
-                <td>
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                    OnClick="btnBusca_Click" />
-                </td>
-                <td>
-                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="btnInserir_Click" />
-                </td>
+                    <td>
+                        <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                            ToolTip="Pesquisar por"></asp:TextBox>
+                    </td>               
+                    <td>
+                    <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                        OnClick="btnBusca_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                            onclick="btnInserir_Click" />
+                    </td>
                 </tr>
                 </table>
                 <!-- grid modelo começa aqui -->

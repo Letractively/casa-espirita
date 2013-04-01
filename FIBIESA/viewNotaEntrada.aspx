@@ -42,9 +42,10 @@
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
                                    onrowdeleting="dtgNotaEntrada_RowDeleting" 
                                    onselectedindexchanged="dtgNotaEntrada_SelectedIndexChanged" 
-                                    AllowSorting="True" GridLines="None" ShowHeaderWhenEmpty="True" 
+                                    AllowSorting="True" GridLines="None" 
                                     onpageindexchanging="dtgNotaEntrada_PageIndexChanging" 
-                                    onrowdatabound="dtgNotaEntrada_RowDataBound">
+                                    onrowdatabound="dtgNotaEntrada_RowDataBound" 
+                                    onsorting="dtgNotaEntrada_Sorting">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

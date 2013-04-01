@@ -70,6 +70,13 @@ namespace BusinessLayer
             return turmasDA.PesquisarDA(campo, valor);
         }
 
+        public List<Turmas> PesquisarBuscaBL(string valor)
+        {
+            TurmasDA eveDA = new TurmasDA();
+
+            return eveDA.PesquisarBuscaDA(valor);
+        }
+
         public override List<Base> Pesquisar(string codDes)
         {
             TurmasDA turDA = new TurmasDA();

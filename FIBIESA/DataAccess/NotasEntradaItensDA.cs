@@ -27,6 +27,11 @@ namespace DataAccess
                 ntEi.Valor = utils.ComparaDecimalComZero(dr["VALOR"].ToString());
                 ntEi.Quantidade = utils.ComparaIntComZero(dr["QUANTIDADE"].ToString());
                 ntEi.ItemEstoqueId = utils.ComparaIntComZero(dr["ITEMESTOQUEID"].ToString());
+                
+                Obras obra = new Obras();
+                obra.Codigo = utils.ComparaIntComZero(dr["CODIGO"].ToString());
+                obra.Titulo = dr["TITULO"].ToString();
+                ntEi.Obra = obra;
 
                 NotasEntradaItens.Add(ntEi);
             }
@@ -79,7 +84,13 @@ namespace DataAccess
         public List<NotasEntradaItens> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM NOTAENTRADAITENS "));
+                                                                CommandType.Text, string.Format(@"SELECT NI.*, O.CODIGO, O.TITULO " +
+                                                                                                 " FROM NOTAENTRADAITENS NI" +
+                                                                                                 "     ,ITENSESTOQUE IE " +
+                                                                                                 "     ,OBRAS O " +
+                                                                                                 " WHERE NI.ITEMESTOQUEID = IE.ID " +
+                                                                                                 "   AND IE.OBRAID = O.ID "));
+                                                                                                
 
             List<NotasEntradaItens> NotasEntradaItens = CarregarObjNotaEntrada(dr);
 
@@ -90,8 +101,13 @@ namespace DataAccess
         public List<NotasEntradaItens> PesquisarDA(int id_ntEi)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM NOTAENTRADAITENS WHERE ID = {0}", id_ntEi));
+                                                       CommandType.Text, string.Format(@"SELECT NI.*, O.CODIGO, O.TITULO " +
+                                                                                       " FROM NOTAENTRADAITENS NI" +
+                                                                                       "     ,ITENSESTOQUE IE " +
+                                                                                       "     ,OBRAS O " +
+                                                                                       " WHERE NI.ITEMESTOQUEID = IE.ID " +
+                                                                                       "   AND IE.OBRAID = O.ID " +
+                                                                                       "   AND NI.ID = {0} ", id_ntEi));
 
             List<NotasEntradaItens> NotasEntradaItens = CarregarObjNotaEntrada(dr);
 

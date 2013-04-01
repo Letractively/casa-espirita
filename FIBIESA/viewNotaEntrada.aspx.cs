@@ -95,7 +95,7 @@ namespace Admin
         {
             int str_ntE = 0;
             str_ntE = utils.ComparaIntComZero(dtgNotaEntrada.SelectedDataKey[0].ToString());
-            Response.Redirect("cadBairro.aspx?id_ntE=" + str_ntE.ToString() + "&operacao=edit");
+            Response.Redirect("cadNotaEntrada.aspx?id_ntE=" + str_ntE.ToString() + "&operacao=edit");
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
@@ -117,6 +117,39 @@ namespace Admin
 
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
+        }
+
+        protected void dtgNotaEntrada_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgNotaEntrada.DataSource = m_DataView;
+                dtgNotaEntrada.DataBind();
+            }
         }
                
     }

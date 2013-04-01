@@ -27,7 +27,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -48,11 +48,8 @@ namespace Admin
             TurmasBL turBL = new TurmasBL();
             List<Turmas> turmas;
 
-            if (campo != null && valor.Trim() != "")
-                turmas = turBL.PesquisarBL(campo, valor);
-            else
-                turmas = turBL.PesquisarBL();
-
+            turmas = turBL.PesquisarBuscaBL(valor);
+            
             foreach (Turmas tur in turmas)
             {
                 DataRow linha = tabela.NewRow();
@@ -78,11 +75,16 @@ namespace Admin
             dtgTurmas.DataSource = tabela;
             dtgTurmas.DataBind();
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar(null, null);
+            Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -98,8 +100,12 @@ namespace Admin
                 TurmasBL turBL = new TurmasBL();
                 Turmas turmas = new Turmas();
                 turmas.Id = utils.ComparaIntComZero(dtgTurmas.DataKeys[e.RowIndex][0].ToString());
-                turBL.ExcluirBL(turmas);
-                Pesquisar(null,null);
+                if (turBL.ExcluirBL(turmas))
+                    ExibirMensagem("Turma excluída com sucesso!");
+                else
+                    ExibirMensagem("Não foi possível excluir a turma.");
+
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -167,7 +173,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
     }
 }

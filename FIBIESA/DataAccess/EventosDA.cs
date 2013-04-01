@@ -33,12 +33,25 @@ namespace DataAccess
             }
             return eventos;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT MAX(CODIGO) + 1 COD FROM EVENTOS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+
+        }
         #endregion
         public bool InserirDA(Eventos eve)
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
-            paramsToSP[0] = new SqlParameter("@codigo", eve.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", eve.Descricao);
             paramsToSP[2] = new SqlParameter("@dtinicio", eve.DtInicio);
             paramsToSP[3] = new SqlParameter("@dtfim", eve.DtFim);
@@ -139,6 +152,23 @@ namespace DataAccess
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta);
+
+            List<Eventos> eventos = CarregarObjEventos(dr);
+
+            return eventos;
+        }
+
+        public List<Eventos> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM EVENTOS ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
 
             List<Eventos> eventos = CarregarObjEventos(dr);
 

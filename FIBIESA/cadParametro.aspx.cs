@@ -13,6 +13,12 @@ namespace Admin
     public partial class cadParametro : System.Web.UI.Page
     {
         #region funcoes
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         private void CarregarDdlCategoria()
         {
             CategoriasBL catBL = new CategoriasBL();
@@ -41,11 +47,19 @@ namespace Admin
 
             if (dsPar.Tables[0].Rows.Count > 0)
             {
-                parametros.Id =  (int)dsPar.Tables[0].Rows[0]["id"];
-                parBL.EditarBL(parametros);                
+                parametros.Id = (int)dsPar.Tables[0].Rows[0]["id"];
+                if(parBL.EditarBL(parametros))
+                    ExibirMensagem("Parâmetros gravados com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível gravar os parâmetros. Revise as informações.");
             }
             else
-                parBL.InserirBL(parametros);
+            {
+                if (parBL.InserirBL(parametros))
+                    ExibirMensagem("Parâmetros gravados com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível gravar os parâmetros. Revise as informações.");
+            }
                       
 
         }

@@ -14,15 +14,11 @@
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td style="width: 140px">
-                            *
+                        <td style="width: 140px">                           
                             Código:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="Informe o código" 
-                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="lblcodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

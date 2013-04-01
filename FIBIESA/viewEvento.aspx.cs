@@ -28,7 +28,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadEve"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("cursos");
 
@@ -44,11 +44,8 @@ namespace Admin
 
             List<Eventos> eventos;
 
-            if (campo != null && valor.Trim() != "")
-                eventos = eveBL.PesquisarBL(campo, valor);
-            else
-                eventos = eveBL.PesquisarBL();
-
+            eventos = eveBL.PesquisarBuscaBL(valor);
+            
             foreach (Eventos cur in eventos)
             {
 
@@ -66,12 +63,18 @@ namespace Admin
             dtgEventos.DataSource = tabela;
             dtgEventos.DataBind();
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }
 
 
@@ -83,7 +86,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
+            Pesquisar(txtBusca.Text);     
         }
 
         protected void dtgCursos_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,12 +97,20 @@ namespace Admin
         }
 
         protected void dtgCursos_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            EventosBL eveBL = new EventosBL();
-            Eventos eventos = new Eventos();
-            eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
-            eveBL.ExcluirBL(eventos);
-            Pesquisar(null,null);
+        {            
+            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
+            {
+                EventosBL eveBL = new EventosBL();
+                Eventos eventos = new Eventos();
+                eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
+                if (eveBL.ExcluirBL(eventos))
+                    ExibirMensagem("Evento excluído com sucesso!");
+                else
+                    ExibirMensagem("Não foi possível excluir o evento.");
+                Pesquisar(null);
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
 
         protected void dtgEventos_PageIndexChanging(object sender, GridViewPageEventArgs e)
