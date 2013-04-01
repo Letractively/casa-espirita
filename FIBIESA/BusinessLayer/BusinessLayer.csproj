@@ -49,6 +49,7 @@
     <Compile Include="CidadesBL.cs" />
     <Compile Include="ChamadasBL.cs" />
     <Compile Include="ContasBL.cs" />
+    <Compile Include="EmprestimoMovBL.cs" />
     <Compile Include="ExemplaresBL.cs" />
     <Compile Include="InstituicoesBL.cs" />
     <Compile Include="InstituicoesLogoBL.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="CidadesDA.cs" />
     <Compile Include="ChamadasDA.cs" />
     <Compile Include="ContasDA.cs" />
+    <Compile Include="EmprestimoMovDA.cs" />
     <Compile Include="EventosDA.cs" />
     <Compile Include="InstituicoesDA.cs" />
     <Compile Include="InstituicoesLogoDA.cs" />
