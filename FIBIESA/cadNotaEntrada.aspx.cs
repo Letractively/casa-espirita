@@ -19,15 +19,15 @@ namespace Admin
         #region funcoes
 
         private void CarregarAtributos()
-        {            
-            txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtSerie.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtQtde.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtValor.Attributes.Add("onkeypress", "return(Real(this,event))");
-            txtValorVenda.Attributes.Add("onkeypress", "return(Real(this,event))");
-            txtTotItens.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            //txtTotal.Attributes.Add("onkeypress", "return(Real(this,event))");
+        {
+            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtSerie.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtValor.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtValorVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtTotItens.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtTotal.Attributes.Add("onkeypress", "return(Reais(this,event))");
            
         }
 

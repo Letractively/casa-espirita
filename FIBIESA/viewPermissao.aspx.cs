@@ -27,7 +27,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadPer"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -43,11 +43,8 @@ namespace Admin
 
             List<Categorias> categorias;
 
-            if (campo != null && valor.Trim() != "")
-                categorias = catBL.PesquisarBL(campo, valor);
-            else
-                categorias = catBL.PesquisarBL();
-
+            categorias = catBL.PesquisarBuscaBL(valor);
+            
             foreach (Categorias cat in categorias)
             {
 
@@ -86,7 +83,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -98,13 +95,14 @@ namespace Admin
         {         
             int str_per_cat = 0;
             str_per_cat = utils.ComparaIntComZero(dtgPermissoes.SelectedDataKey[0].ToString());
-            string descategoria = utils.ConvertHtmlToString(dtgPermissoes.SelectedRow.Cells[3].Text); 
-            Response.Redirect("cadPermissao.aspx?id_per_cat=" + str_per_cat.ToString() + "&descategoria=" + descategoria );
+            string descategoria = utils.ConvertHtmlToString(dtgPermissoes.SelectedRow.Cells[3].Text);
+            Session["descategoria"] = utils.RemoveAcentos(descategoria);
+            Response.Redirect("cadPermissao.aspx?id_per_cat=" + str_per_cat.ToString());
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgPermissoes_Sorting(object sender, GridViewSortEventArgs e)
@@ -151,7 +149,7 @@ namespace Admin
 
         protected void dtgPermissoes_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 

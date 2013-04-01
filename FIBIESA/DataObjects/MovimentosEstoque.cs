@@ -90,6 +90,27 @@ namespace DataObjects
             get { return _data; }
             set { _data = value; }
         }
+
+        private Obras _obras;
+        public Obras Obras
+        {
+            get { return _obras; }
+            set { _obras = value; }
+        }
+
+        private Decimal _vlrCusto;
+        public Decimal VlrCusto
+        {
+            get { return _vlrCusto; }
+            set { _vlrCusto = value; }
+        }
+
+        private Decimal _vlrVenda;
+        public Decimal VlrVenda
+        {
+            get { return _vlrVenda; }
+            set { _vlrVenda = value; }
+        }
     
     }
 }

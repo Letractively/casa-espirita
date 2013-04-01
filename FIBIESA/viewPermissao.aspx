@@ -10,15 +10,18 @@
                 <h2>Cadastro de Permissões</h2>
             </div>
             <div class="contentbox">
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                    ToolTip="Pesquisar por"></asp:TextBox>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
-                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
-                </asp:DropDownList>
-                 &nbsp;&nbsp;
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                    onclick="btnBusca_Click" />                
+                <table>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                            ToolTip="Pesquisar por"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                            onclick="btnBusca_Click" />   
+                    </td>
+                </tr> 
+                </table>            
                 <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">

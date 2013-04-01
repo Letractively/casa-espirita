@@ -46,7 +46,7 @@ namespace BusinessLayer
             PermissoesDA permissoesDA = new PermissoesDA();
 
             return permissoesDA.PesquisarDA(id_cat);
-        }
+        }        
 
         public List<Permissoes> PesquisarBL(int id_categoria, int id_formulario)
         {
@@ -60,7 +60,7 @@ namespace BusinessLayer
             PermissoesDA permissoesDA = new PermissoesDA();
 
             return permissoesDA.PesquisarDA(id_categoria, nome);
-        }
+        }        
                
     }
 }
