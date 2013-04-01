@@ -35,6 +35,8 @@ namespace DataAccess
                 ins.Endereco = dr["ENDERECO"].ToString();
                 ins.Numero = dr["NUMERO"].ToString();
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
+                ins.DDD = dr["DDD"].ToString();
+                ins.telefone = dr["telefone"].ToString();
                 
                 InstituicoesLogoDA insLDA = new InstituicoesLogoDA();
 
