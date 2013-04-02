@@ -34,7 +34,7 @@ namespace FIBIESA
         {
             if (!IsPostBack)
             {
-                
+
             }
             if (this.txtCodigo.Text != string.Empty)
             {
@@ -135,7 +135,7 @@ namespace FIBIESA
             {
                 pessoas = pesBL.PesquisarBL();
             }
-           
+
 
             foreach (Pessoas pes in pessoas)
             {
@@ -157,6 +157,25 @@ namespace FIBIESA
         }
 
         #endregion
+
+        protected void btnRelatorio_Click(object sender, EventArgs e)
+        {
+            //EmprestimoMovBL empMovBL = new EmprestimoMovBL();
+            EmprestimoMov empMov = new EmprestimoMov();
+            EmprestimosBL empBL = new EmprestimosBL();
+            Emprestimos emp = new Emprestimos();
+
+
+            empMov.EmprestimoId = int.Parse(txtCodigo.Text);
+            emp.PessoaId = int.Parse(txtAssociado.Text);
+            emp.ExemplarId = int.Parse(txtCodigo.Text);
+            
+
+            //emp. txtDataRetiradaIni.Text
+
+
+
+        }
 
     }
 }

@@ -22,9 +22,10 @@
                                     Codigo:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
                                     <asp:Button ID="btnPesCodigo" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesCodigo_Click"  />
+                                    &nbsp;
                                     <asp:Label ID="lblDesCodigo" runat="server"></asp:Label>
                                 </td>
                             </tr>
@@ -105,16 +106,18 @@
                             <tr>
                                 <td style="width: 530px" colspan="2" style="text-align:center;">
                                     <center>
-                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" value="1" Text="Livros Mais Retirados">                                                                                    
+                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Mais Retirados">                                                                                    
                                         </asp:RadioButton>
-                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" CssClass="input" value="0" Text="Livros Menos Retirados">
+                                        &nbsp;
+                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Menos Retirados">
                                         </asp:RadioButton>
                                     </center>
                                 </td>                                                                      
                             </tr>
                             <tr>
                                 <td colspan="2" valign="middle" style="text-align:center;">
-                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" />
+                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
+                                        onclick="btnRelatorio_Click" />
                                 </td>                                    
                             </tr>
                         </table>
