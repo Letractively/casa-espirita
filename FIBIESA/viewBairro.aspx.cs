@@ -27,7 +27,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadBai"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
             
@@ -41,12 +41,9 @@ namespace Admin
             
             BairrosBL baiBL = new BairrosBL();            
             List<Bairros> bairros;
-
-            if (campo != null && valor.Trim() != "")
-                bairros = baiBL.PesquisarBL(campo, valor);
-            else
-                bairros = baiBL.PesquisarBL();
-                       
+                        
+            bairros = baiBL.PesquisarBuscaBL(valor);
+                                   
             foreach (Bairros bai in bairros)
             {
                 
@@ -70,13 +67,13 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-
+      
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
      
@@ -87,7 +84,7 @@ namespace Admin
             
         protected void btnBusca_Click(object sender, EventArgs e)
         {          
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
+            Pesquisar(txtBusca.Text);     
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,8 +101,12 @@ namespace Admin
                 BairrosBL baiBL = new BairrosBL();
                 Bairros bairros = new Bairros();
                 bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
-                baiBL.ExcluirBL(bairros);
-                Pesquisar(null, null);
+                if (baiBL.ExcluirBL(bairros))
+                    ExibirMensagem("Bairro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o bairro.");
+                
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

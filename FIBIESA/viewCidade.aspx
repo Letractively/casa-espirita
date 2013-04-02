@@ -11,26 +11,20 @@
             </div>
             <div class="contentbox">
                 <table>
-                <tr>
-                <td>
-                <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                    ToolTip="Pesquisar por" />
-                </td>
-                <td>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                    <asp:ListItem Value="CODIGO">Código</asp:ListItem>
-                    <asp:ListItem Value="DESCRICAO">Descrição</asp:ListItem>
-                </asp:DropDownList>
-                </td>
-                <td>                
-                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />
-                </td>
-                <td>
-                <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                    onclick="btnInserir_Click" /> 
-                <!-- grid modelo começa aqui -->
-                </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                                ToolTip="Pesquisar por" />
+                        </td>              
+                        <td>                
+                            <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" OnClick="Busca_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                                onclick="btnInserir_Click" /> 
+                        <!-- grid modelo começa aqui -->
+                        </td>
+                    </tr>
                 </table>
                 <div class="contentbox">
                     <table width="100%">

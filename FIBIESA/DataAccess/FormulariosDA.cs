@@ -45,7 +45,6 @@ namespace DataAccess
                 codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
 
             return codigo;
-
         }
 
         #endregion
