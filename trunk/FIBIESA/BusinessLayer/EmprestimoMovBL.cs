@@ -9,7 +9,7 @@ using System.Data;
 
 namespace BusinessLayer
 {
-    class EmprestimoMovBL
+    public class EmprestimoMovBL
     {
 
         public bool InserirBL(EmprestimoMov instancia)
@@ -34,6 +34,14 @@ namespace BusinessLayer
             EmprestimoMovDA varDA = new EmprestimoMovDA();
 
             return varDA.ExcluirDA(instancia);
+        }
+
+        public DataSet PesquisarRelatorioBL(Emprestimos instancia)
+        {
+            /*criar as regras de negocio*/
+            EmprestimoMovDA varDA = new EmprestimoMovDA();
+
+            return varDA.PesquisarRelatorioDA(instancia, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
         }
 
     }
