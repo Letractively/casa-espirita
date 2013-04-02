@@ -55,8 +55,7 @@ namespace BusinessLayer
             FormulariosDA formulariosDA = new FormulariosDA();
 
             return formulariosDA.PesquisarDA(id_for);
-        }
-              
+        }              
 
         public List<Formularios> PesquisarBuscaBL(string valor)
         {

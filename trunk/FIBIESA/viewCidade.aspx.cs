@@ -29,7 +29,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -52,11 +52,8 @@ namespace Admin
             CidadesBL cidBL = new CidadesBL();
             EstadosBL estBL = new EstadosBL();
 
-            if (campo != null && valor.Trim() != "")
-                cidades = cidBL.PesquisarBL(campo, valor);
-            else
-                cidades = cidBL.PesquisarBL();
-            
+            cidades = cidBL.PesquisarBuscaBL(valor);
+                        
             List<Estados> estados;
             
             foreach (Cidades cid in cidades)
@@ -82,12 +79,18 @@ namespace Admin
             dtgCidades.DataSource = tabela;
             dtgCidades.DataBind();
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
                
         protected void dtgCidades_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,8 +107,11 @@ namespace Admin
                 CidadesBL cidBL = new CidadesBL();
                 Cidades cidades = new Cidades();
                 cidades.Id = utils.ComparaIntComZero(dtgCidades.DataKeys[e.RowIndex][0].ToString());
-                cidBL.ExcluirBL(cidades);
-                Pesquisar(null, null);
+                if (cidBL.ExcluirBL(cidades))
+                    ExibirMensagem("Cidade excluída com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir a cidade.");
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -118,7 +124,7 @@ namespace Admin
 
         protected void Busca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);   
+            Pesquisar(txtBusca.Text);   
         }
 
         protected void dtgCidades_PageIndexChanging(object sender, GridViewPageEventArgs e)

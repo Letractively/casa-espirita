@@ -55,12 +55,13 @@ namespace BusinessLayer
 
             return bairrosDA.PesquisarCidDA(id_cid);
         }
-
-        public List<Bairros> PesquisarBL(string campo, string valor)
+        
+        public List<Bairros> PesquisarBuscaBL(string valor)
         {
+            /*criar as regras de negocio*/
             BairrosDA bairrosDA = new BairrosDA();
 
-            return bairrosDA.PesquisarDA(campo, valor);
+            return bairrosDA.PesquisarBuscaDA(valor);
         }
 
         public override List<Base> Pesquisar(string codDes)

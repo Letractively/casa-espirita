@@ -101,6 +101,8 @@ namespace Admin
             ddlEvento.SelectedIndex = 0;
             ddlInstrutor.SelectedIndex = 0;
             txtDiaSemana.Text = "";
+            txtHoraFim.Text = "";
+            txtHoraInicio.Text = "";
 
         }
         #endregion
@@ -110,12 +112,11 @@ namespace Admin
             int id_tur = 0;
 
             CarregarAtributos();
-            CarregarDdlEventos();
-            CarregarDdlInstrutor();
-
+            
             if (!IsPostBack)
             {
-
+                CarregarDdlEventos();
+                CarregarDdlInstrutor();
                 if (Request.QueryString["operacao"] != null && (Request.QueryString["id_tur"] != null))
                 {
                     v_operacao = Request.QueryString["operacao"];
@@ -174,8 +175,7 @@ namespace Admin
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewTurma.aspx");
+            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

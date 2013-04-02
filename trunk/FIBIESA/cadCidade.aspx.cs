@@ -53,6 +53,12 @@ namespace Admin
         {           
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)

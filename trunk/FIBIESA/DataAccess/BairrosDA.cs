@@ -50,12 +50,25 @@ namespace DataAccess
 
             return bairros;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT MAX(CODIGO) + 1 COD FROM BAIRROS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
         public bool InserirDA(Bairros bai)
         {
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
-            paramsToSP[0] = new SqlParameter("@codigo", bai.Codigo); 
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo()); 
             paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao);
             paramsToSP[2] = new SqlParameter("@cidadeid", bai.CidadeId);
 
@@ -144,25 +157,17 @@ namespace DataAccess
             return bairros;
         }
 
-        public List<Bairros> PesquisarDA(string campo, string valor)
+        public List<Bairros> PesquisarBuscaDA(string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM BAIRROS ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM BAIRROS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
-                    break;
-                case "DESCRICAO":
-                    consulta = string.Format("SELECT * FROM BAIRROS WHERE DESCRICAO  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Bairros> bairros = CarregarObjBairro(dr);
 

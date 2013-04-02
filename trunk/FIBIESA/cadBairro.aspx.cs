@@ -26,7 +26,7 @@ namespace Admin
             foreach (Bairros ltBai in bairros)
             {
                 hfId.Value = ltBai.Id.ToString();
-                txtCodigo.Text = ltBai.Codigo.ToString();
+                lblCodigo.Text = ltBai.Codigo.ToString();
                 txtDescricao.Text = ltBai.Descricao;
 
                 if (ltBai.Cidade != null)
@@ -39,12 +39,7 @@ namespace Admin
             }
 
         }
-
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
-
+        
         private void CarregarDdlUF()
         {
             EstadosBL estBL = new EstadosBL();
@@ -70,30 +65,41 @@ namespace Admin
             ddlCidade.SelectedIndex = 0;
         }
 
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            ddlUf.SelectedIndex = 0;
+            ddlCidade.SelectedIndex = 0;
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_bai = 0;
 
-            CarregarAtributos();
-
             if (!IsPostBack)
             {
+                CarregarDdlUF();
 
-                if (Request.QueryString["operacao"] != null)
+                if (Request.QueryString["operacao"] != null && Request.QueryString["id_bai"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
-                        if (Request.QueryString["id_bai"] != null)
-                            id_bai = Convert.ToInt32(Request.QueryString["id_bai"].ToString());
+                    {
+                        id_bai = Convert.ToInt32(Request.QueryString["id_bai"].ToString());
+                        CarregarDados(id_bai);
+                    }
                 }
-
-                CarregarDdlUF();
-                
-                if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_bai);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";                   
             }
         }
 
@@ -108,14 +114,19 @@ namespace Admin
             BairrosBL baiBL = new BairrosBL();
             Bairros bairros = new Bairros();
             bairros.Id = utils.ComparaIntComZero(hfId.Value);
-            bairros.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            bairros.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             bairros.Descricao = txtDescricao.Text;
             bairros.CidadeId = utils.ComparaIntComNull(ddlCidade.SelectedValue);
 
             if (bairros.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    baiBL.EditarBL(bairros);
+                {
+                    if (baiBL.EditarBL(bairros))
+                        ExibirMensagem("Bairro atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o bairro. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -123,20 +134,25 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    baiBL.InserirBL(bairros);
+                {
+                    if (baiBL.InserirBL(bairros))
+                    {
+                        ExibirMensagem("Bairro gravado com sucesso !");
+                        LimparCampos();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o bairro. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewBairro.aspx");
+                        
         }
 
         protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(utils.ComparaIntComZero(ddlUf.SelectedValue));
-        }
-
-             
+        }                            
        
     }
 }

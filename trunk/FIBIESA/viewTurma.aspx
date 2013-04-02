@@ -50,6 +50,8 @@
                                         <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO"/>
                                         <asp:BoundField DataField="EVENTOID" HeaderText="EVENTOID" 
                                             Visible="False" />
+                                        <asp:BoundField DataField="CODEVENTO" HeaderText="Cód. Evento" SortExpression="CODEVENTO"/>
+                                        <asp:BoundField DataField="DESCEVENTO" HeaderText="Descrição" SortExpression="DESCEVENTO"/>
                                         <asp:BoundField DataField="DTINICIAL" HeaderText="Dt. Inicial" SortExpression="DTINICIAL" />
                                         <asp:BoundField DataField="DTFINAL" HeaderText="Dt. Final" SortExpression="DTFINAL" />
                                     </Columns>

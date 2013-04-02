@@ -37,6 +37,8 @@ namespace Admin
             DataColumn coluna4 = new DataColumn("EVENTOID", Type.GetType("System.Int32"));
             DataColumn coluna5 = new DataColumn("DTINICIAL", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("DTFINAL", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("CODEVENTO", Type.GetType("System.Int32"));
+            DataColumn coluna8 = new DataColumn("DESCEVENTO", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -44,6 +46,8 @@ namespace Admin
             tabela.Columns.Add(coluna4);
             tabela.Columns.Add(coluna5);
             tabela.Columns.Add(coluna6);
+            tabela.Columns.Add(coluna7);
+            tabela.Columns.Add(coluna8);
 
             TurmasBL turBL = new TurmasBL();
             List<Turmas> turmas;
@@ -65,7 +69,8 @@ namespace Admin
                 List<Eventos> eventos = curBL.PesquisarBL(tur.EventoId);
                 foreach (Eventos eve in eventos)
                 {
-                    linha["DESCRICAO"] = eve.Descricao;
+                    linha["DESCEVENTO"] = eve.Descricao;
+                    linha["CODEVENTO"] = eve.Codigo;
                 }
 
                 tabela.Rows.Add(linha);
