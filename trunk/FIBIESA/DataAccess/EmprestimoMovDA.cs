@@ -54,7 +54,25 @@ namespace DataAccess
             return (SqlHelper.ExecuteNonQuery(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
-        }        
+        }
+
+        public DataSet PesquisarRelatorioDA(Emprestimos instancia, DateTime dataRetiradaIni, DateTime dataRetiradaFim, DateTime dataDevolucaoIni, DateTime dataDevolucaoFim)
+        {
+            DataSet lDs;
+            try
+            {
+                string sqlQuery = "";
+                lDs = SqlHelper.ExecuteDataset(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.Text, sqlQuery);
+                return lDs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
 
     }
 }
