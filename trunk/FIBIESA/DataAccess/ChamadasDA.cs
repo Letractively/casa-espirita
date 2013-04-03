@@ -108,7 +108,7 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM CHAMADAS " +
                                                                                        " WHERE TURMAPARTICIPANTEID = {0}" +
-                                                                                       "   AND DATA = '{1}'", id_tPar,data.ToString("MM/dd/yyyy")));
+                                                                                       "   AND DATA = CONVERT(DATETIME,'{1}',101)", id_tPar, data.ToString("MM/dd/yyyy")));
 
             List<Chamadas> Chamadas = CarregarObjChamada(dr);
         

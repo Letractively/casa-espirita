@@ -55,7 +55,7 @@ namespace DataAccess
         {
             Int32 codigo = 1;
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                          CommandType.Text, string.Format(@" SELECT MAX(CODIGO) + 1 COD FROM BAIRROS "));
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM BAIRROS "));
 
             if (ds.Tables[0].Rows.Count != 0)
                 codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
