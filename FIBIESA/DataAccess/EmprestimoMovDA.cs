@@ -56,12 +56,52 @@ namespace DataAccess
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
         }
 
-        public DataSet PesquisarRelatorioDA(Emprestimos instancia, DateTime dataRetiradaIni, DateTime dataRetiradaFim, DateTime dataDevolucaoIni, DateTime dataDevolucaoFim)
+        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             DataSet lDs;
             try
             {
-                string sqlQuery = "";
+                string sqlQuery = "SELECT " +
+                                  "    descricao " +
+                                  "    ,Associado " +
+                                  "    ,renovacoes " +
+                                  "    ,dataRetirada " +
+                                  "    ,dataDevolucao " +
+                                  "    ,pessoaid " +
+                                  "    ,exemplarid " +
+                                  "    ,status " +
+                                  "FROM dbo.VIEW_REL_EMPRESTIMO " +
+                                  " WHERE 1 = 1 ";
+                if (instancia.PessoaId != 0)
+                {
+
+                    sqlQuery += " AND pessoaid = " + instancia.PessoaId;
+                }
+
+                if (instancia.ExemplarId != 0)
+                {
+
+                    sqlQuery += " AND exemplarid = " + instancia.ExemplarId;
+                }
+
+                if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
+                {
+
+                    sqlQuery += " AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)";
+                }
+
+                if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
+                {
+
+                    sqlQuery += " AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)";
+                }
+
+                if (Status != string.Empty)
+                {
+
+                    sqlQuery += " AND Status = " + Status;
+                }
+
                 lDs = SqlHelper.ExecuteDataset(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                     CommandType.Text, sqlQuery);
