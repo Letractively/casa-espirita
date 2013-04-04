@@ -35,8 +35,8 @@ namespace DataAccess
                 ins.Endereco = dr["ENDERECO"].ToString();
                 ins.Numero = dr["NUMERO"].ToString();
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
-                //ins.DDD = dr["DDD"].ToString();
-                //ins.telefone = dr["telefone"].ToString();
+                ins.DDD = dr["DDD"].ToString();
+                ins.telefone = dr["telefone"].ToString();
                 
                 InstituicoesLogoDA insLDA = new InstituicoesLogoDA();
 
@@ -60,7 +60,7 @@ namespace DataAccess
 
         public bool InserirDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[11];
+            SqlParameter[] paramsToSP = new SqlParameter[13];
 
             paramsToSP[0] = new SqlParameter("@codigo", ins.Codigo);
             paramsToSP[1] = new SqlParameter("@razao", ins.Razao);
@@ -83,7 +83,7 @@ namespace DataAccess
 
         public bool EditarDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[12];
+            SqlParameter[] paramsToSP = new SqlParameter[14];
 
             paramsToSP[0] = new SqlParameter("@id", ins.Id);
             paramsToSP[1] = new SqlParameter("@codigo", ins.Codigo);
@@ -160,6 +160,29 @@ namespace DataAccess
 
             List<Instituicoes> instituicoes = CarregarObjInstituicoes(dr);
 
+            return instituicoes;
+        }
+
+        public DataSet PesquisarDsDA()
+        {
+            DataSet instituicoes = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT [id] " +
+                                                                                        "      ,[codigo] " +
+                                                                                        "      ,[razao] " +
+                                                                                        "      ,[nomefantasia] " +
+                                                                                        "      ,[email] " +
+                                                                                        "      ,[cnpj] " +
+                                                                                        "      ,[cidadeid] " +
+                                                                                        "      ,[cep] " +
+                                                                                        "      ,[bairroid] " +
+                                                                                        "      ,[endereco] " +
+                                                                                        "      ,[numero] " +
+                                                                                        "      ,[complemento] " +
+                                                                                        "      ,[DDD] " +
+                                                                                        "      ,[telefone] " +
+                                                                                        "  FROM [FIBIESE].[dbo].[Instituicoes]"));
+
+            
             return instituicoes;
         }
                

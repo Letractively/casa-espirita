@@ -80,6 +80,19 @@ namespace DataAccess
 
         }
 
+        public DataSet PesquisarDsDA()
+        {
+            DataSet lDs = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT id " +
+                                                                                                 "   ,instituicoesid " +
+                                                                                                 "   ,imagem " +
+                                                                                                 "   ,extencao  " +
+                                                                                                 " FROM INSTITUICOESLOGO "));
+
+            return lDs;
+
+        }
+
         public List<InstituicoesLogo> PesquisarDA(int id_insL)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
