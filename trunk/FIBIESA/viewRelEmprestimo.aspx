@@ -99,7 +99,10 @@
                                 </td>
                                 <td style="width: 530px">
                                     <asp:DropDownList ID="ddlStatus" runat="server" AppendDataBoundItems="True">
-                                        <asp:ListItem Text="Selecione" Value="0" Selected="True"></asp:ListItem>                                            
+                                        <asp:ListItem Text="Selecione" Value="" Selected="True"></asp:ListItem>                                            
+                                        <asp:ListItem Text="D - Devolvido" Value="D" ></asp:ListItem>                                            
+                                        <asp:ListItem Text="E - Emprestado" Value="E" ></asp:ListItem>                                            
+                                        <asp:ListItem Text="A - Atrasado" Value="A" ></asp:ListItem>                                            
                                     </asp:DropDownList>
                                 </td>
                             </tr>
