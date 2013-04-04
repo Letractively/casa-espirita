@@ -85,7 +85,7 @@ namespace FIBIESA
 
             if (dsCid.Tables[0].Rows.Count != 0)
             {               
-                v_cidade[0] = (string)dsCid.Tables[0].Rows[0]["codigo"];
+                v_cidade[0] = Convert.ToString(dsCid.Tables[0].Rows[0]["codigo"]);
                 v_cidade[1] = (string)dsCid.Tables[0].Rows[0]["descricao"];
 
             }
@@ -195,6 +195,7 @@ namespace FIBIESA
             instituicoes.Endereco = txtEndereco.Text;
             instituicoes.Numero = txtNumero.Text;
             instituicoes.Complemento = txtComplemento.Text;
+            instituicoes.DDD = txtDDD.Text;
 
             int idIns = 0;
 
@@ -222,7 +223,7 @@ namespace FIBIESA
 
             }
 
-            Response.Redirect("~/viewInstituicao");
+            Response.Redirect("~/viewInstituicao.aspx");
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
