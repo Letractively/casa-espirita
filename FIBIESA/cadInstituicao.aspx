@@ -72,6 +72,28 @@
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
+                                            <tr valign="middle">
+                                                <td colspan="2">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 135px">
+                                                                DDD:
+                                                            </td>
+                                                            <td style="width: 100px">
+                                                                <asp:TextBox ID="txtDDD" runat="server" CssClass="inputbox" MaxLength="10" 
+                                                                    Width="35px"></asp:TextBox>                                                                                                                    
+                                                            </td>
+                                                            <td style="width: 80px">
+                                                                Telefone:
+                                                            </td>
+                                                            <td style="width: 100px">
+                                                                <asp:TextBox ID="txttelefone" runat="server" CssClass="inputbox" MaxLength="20" 
+                                                                    Width="100px"></asp:TextBox>   
+                                                            </td>                                                            
+                                                        </tr>
+                                                    </table>
+                                                </td>                                                
+                                            </tr>
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
