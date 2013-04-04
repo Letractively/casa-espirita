@@ -160,15 +160,29 @@ namespace FIBIESA
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
-            //EmprestimoMovBL empMovBL = new EmprestimoMovBL();
+            EmprestimoMovBL empMovBL = new EmprestimoMovBL();
             EmprestimoMov empMov = new EmprestimoMov();
             EmprestimosBL empBL = new EmprestimosBL();
             Emprestimos emp = new Emprestimos();
+            
+            if (txtAssociado.Text != string.Empty)
+            {
+                emp.PessoaId = int.Parse(txtAssociado.Text);
+            }
+            if (txtCodigo.Text != string.Empty)
+            {
+                emp.ExemplarId = int.Parse(txtCodigo.Text);
+            }
 
-
-            empMov.EmprestimoId = int.Parse(txtCodigo.Text);
-            emp.PessoaId = int.Parse(txtAssociado.Text);
-            emp.ExemplarId = int.Parse(txtCodigo.Text);
+             Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text,ddlStatus.SelectedValue.ToString()).Tables[0];
+             if (Session["ldsRel"] != null)
+             {
+                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelEmprestimos.aspx?PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,500);", true);
+             }
+             else
+             {
+                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+             }
             
 
             //emp. txtDataRetiradaIni.Text
