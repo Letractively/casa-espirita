@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataAccess;
 using DataObjects;
+using System.Data;
 
 
 namespace BusinessLayer
@@ -40,6 +41,14 @@ namespace BusinessLayer
             InstituicoesLogoDA instituicoesLogoDA = new InstituicoesLogoDA();
 
             return instituicoesLogoDA.PesquisarDA();
+        }
+
+        public DataSet PesquisarDsBL()
+        {
+            /*criar as regras de negocio*/
+            InstituicoesLogoDA instituicoesLogoDA = new InstituicoesLogoDA();
+
+            return instituicoesLogoDA.PesquisarDsDA();
         }
 
         public List<InstituicoesLogo> PesquisarBL(int insL)

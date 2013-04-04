@@ -36,12 +36,12 @@ namespace BusinessLayer
             return varDA.ExcluirDA(instancia);
         }
 
-        public DataSet PesquisarRelatorioBL(Emprestimos instancia)
+        public DataSet PesquisarRelatorioBL(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             /*criar as regras de negocio*/
             EmprestimoMovDA varDA = new EmprestimoMovDA();
 
-            return varDA.PesquisarRelatorioDA(instancia, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
+            return varDA.PesquisarRelatorioDA(instancia, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status);
         }
 
     }
