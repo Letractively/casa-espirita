@@ -86,7 +86,7 @@ namespace DataAccess
                                                                 CommandType.Text, string.Format(@"SELECT id " +
                                                                                                  "   ,instituicoesid " +
                                                                                                  "   ,imagem " +
-                                                                                                 "   ,extencao  " +
+                                                                                                 "   ,extensao  " +
                                                                                                  " FROM INSTITUICOESLOGO "));
 
             return lDs;
