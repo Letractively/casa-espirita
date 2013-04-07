@@ -33,13 +33,6 @@
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>BusinessLayer</rd:DataSetName>
-        <rd:TableName>InstituicoesLogoBL</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>PesquisarBL</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[DataObjects.InstituicoesLogo] PesquisarBL(Int32)</rd:ObjectDataSourceSelectMethodSignature>
-        <rd:ObjectDataSourceType>BusinessLayer.InstituicoesLogoBL, BusinessLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
-      </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet_Instituicao">
       <Fields>
@@ -99,26 +92,16 @@
           <DataField>telefone</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="InstituicaoLogo">
-          <DataField>InstituicaoLogo</DataField>
-          <rd:TypeName>DataObjects.InstituicoesLogo</rd:TypeName>
-        </Field>
       </Fields>
       <Query>
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>BusinessLayer</rd:DataSetName>
-        <rd:TableName>InstituicoesBL</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>PesquisarBL</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>BusinessLayer.InstituicoesBL, BusinessLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
-      </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet_Emprestimo">
       <Fields>
-        <Field Name="codigo">
-          <DataField>codigo</DataField>
+        <Field Name="exemplarid">
+          <DataField>exemplarid</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="descricao">
@@ -150,12 +133,6 @@
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>BusinessLayer</rd:DataSetName>
-        <rd:TableName>EmprestimosBL</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>PesquisarBL</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>BusinessLayer.EmprestimosBL, BusinessLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
-      </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <Body>
@@ -424,14 +401,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="codigo">
+                    <Textbox Name="exemplarid">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!codigo.Value</Value>
+                              <Value>=Fields!exemplarid.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -440,7 +417,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>codigo</rd:DefaultName>
+                      <rd:DefaultName>exemplarid</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -556,7 +533,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!dataretirada.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>d</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -588,7 +567,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!datadevolucao.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>d</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -683,28 +664,46 @@
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="dataIni">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="dataRetiradaIni">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="dataFim">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="dataRetiradaFim">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Status">
       <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Todos</Value>
-        </Values>
-      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dataDevolucaoIni">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PessoaId">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ExemplarId">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dataDevolucaoFim">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>11.02083in</Width>
   <Page>
     <PageHeader>
-      <Height>4.81542cm</Height>
+      <Height>5.97959cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -718,7 +717,7 @@
           <Height>3.34222cm</Height>
           <Width>3.41313cm</Width>
           <Visibility>
-            <Hidden>=IIf(IsNothing(First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")), True, False)</Hidden>
+            <Hidden>=iIf(isNothing(First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")),true,false)</Hidden>
           </Visibility>
           <Style>
             <Border>
@@ -795,7 +794,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=First(Fields!Razao.Value, "DataSet_Instituicao").ToString()</Value>
+                  <Value>=iIf(First(Fields!Razao.Value, "DataSet_Instituicao") = "","Instituição",First(Fields!Razao.Value, "DataSet_Instituicao"))</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -824,7 +823,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Telefone: " + "(" + First(Fields!DDD.Value, "DataSet_Instituicao").ToString() + ")" + First(Fields!telefone.Value, "DataSet_Instituicao").ToString()</Value>
+                  <Value>="Telefone: " + "(" + IIf(First(Fields!DDD.Value, "DataSet_Instituicao") = "","xx",First(Fields!DDD.Value, "DataSet_Instituicao")) + ")" + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -853,14 +852,14 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Período Retirada " + Parameters!dataIni.Value + " à " + Parameters!dataFim.Value</Value>
+                  <Value>="Período Retirada " + IIf(Parameters!dataRetiradaIni.Value = "","-/-/-",Parameters!dataRetiradaIni.Value) + " a " + IIf(Parameters!dataRetiradaFim.Value = "","-/-/-",Parameters!dataRetiradaFim.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>3.26715cm</Top>
+          <Top>4.21965cm</Top>
           <Left>4.31271cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
@@ -882,18 +881,105 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Status: " + Parameters!Status.Value.ToString()</Value>
+                  <Value>="Status: " + IIf(Parameters!Status.Value = "","Todos",Parameters!Status.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>4.07431cm</Top>
+          <Top>4.99604cm</Top>
           <Left>4.31271cm</Left>
-          <Height>0.6cm</Height>
+          <Height>0.63927cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>6</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="txtPessoaId">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Usuário: " + IIf(Parameters!PessoaId.Value = 0, "-",Parameters!PessoaId.Value)</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>3.37771cm</Top>
+          <Left>4.31271cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.22312cm</Width>
+          <ZIndex>7</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="txtExemplarId">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Exemplar: " + IIf(Parameters!ExemplarId.Value = 0, "-",Parameters!ExemplarId.Value)</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>3.37771cm</Top>
+          <Left>12.3825cm</Left>
+          <Height>0.6cm</Height>
+          <Width>6.87917cm</Width>
+          <ZIndex>8</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="txtDataFiltro2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Período de Devolução " + IIf(Parameters!dataDevolucaoIni.Value = "","-/-/-",Parameters!dataDevolucaoIni.Value) + " a " + IIf(Parameters!dataDevolucaoFim.Value = "","-/-/-",Parameters!dataDevolucaoFim.Value)</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>4.21965cm</Top>
+          <Left>16.06021cm</Left>
+          <Height>0.60886cm</Height>
+          <Width>11.43cm</Width>
+          <ZIndex>9</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
