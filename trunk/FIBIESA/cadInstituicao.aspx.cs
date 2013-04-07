@@ -36,6 +36,8 @@ namespace FIBIESA
                 txtEndereco.Text = ltIns.Endereco;
                 txtNumero.Text = ltIns.Numero.ToString();
                 txtComplemento.Text = ltIns.Complemento;
+                txtDDD.Text = ltIns.DDD;
+                txttelefone.Text = ltIns.telefone;
 
                 hfIdCidade.Value = ltIns.CidadeId.ToString();
                 if (utils.ComparaIntComZero(hfIdCidade.Value) > 0)
@@ -138,8 +140,15 @@ namespace FIBIESA
                     break;
 
                 case ".jpg":
+                    fileType = "jpg";
+                    bRetorno = true;
+                    break;
                 case ".jpeg":
                     fileType = "jpeg";
+                    bRetorno = true;
+                    break;
+                case ".png":
+                    fileType = "png";
                     bRetorno = true;
                     break;
 
@@ -196,6 +205,7 @@ namespace FIBIESA
             instituicoes.Numero = txtNumero.Text;
             instituicoes.Complemento = txtComplemento.Text;
             instituicoes.DDD = txtDDD.Text;
+            instituicoes.telefone = txttelefone.Text;
 
             int idIns = 0;
 

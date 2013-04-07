@@ -176,8 +176,8 @@ namespace FIBIESA
 
              Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text,ddlStatus.SelectedValue.ToString()).Tables[0];
              if (Session["ldsRel"] != null)
-             {
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelEmprestimos.aspx?PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,500);", true);
+             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelEmprestimos.aspx?PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,1125);", true);
              }
              else
              {
