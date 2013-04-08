@@ -129,27 +129,44 @@ namespace DataAccess
             return itensEstoque; 
         }
 
-        public List<ItensEstoque> PesquisarDA(Int32 id_obra)
+        public List<ItensEstoque> PesquisarDA(int status)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM ITENSESTOQUE WHERE OBRAID={0} ", id_obra));
+                                                                CommandType.Text, string.Format(@"SELECT * " +
+                                                                                                 " FROM ITENSESTOQUE " +
+                                                                                                 " WHERE STATUS = {0} ",status));
+                                                                                               
+
 
             List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
 
             return itensEstoque;
         }
 
-        public List<ItensEstoque> PesquisarDA(string campo, string valor)
+        public List<ItensEstoque> PesquisarMovObraDA(Int32 id_obra)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * " +
+                                                                                                 " FROM ITENSESTOQUE " +
+                                                                                                 " WHERE OBRAID = {0} " , id_obra)); 
+                                                                                                 
+
+            List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
+
+            return itensEstoque;
+        }
+
+        public List<ItensEstoque> PesquisarDA(string campo, string valor, int status)
         {
             StringBuilder consulta = new StringBuilder("SELECT * FROM ITENSESTOQUE IE, OBRAS O ");
 
             switch (campo.ToUpper())
             {
                 case "CODIGO":
-                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.CODIGO = {0}", utils.ComparaIntComZero(valor)));
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.CODIGO = {0} AND IE.STATUS = {1}", utils.ComparaIntComZero(valor), status));
                     break;
                 case "TITULO":
-                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.TITULO LIKE '%{0}%'", valor));
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.TITULO LIKE '%{0}%' AND IE.STATUS = {1}", valor, status));
                     break;
                 default:
                     break;

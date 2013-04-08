@@ -41,7 +41,7 @@ namespace Admin
         private void CarregarDados(int id_obra)
         {
             ItensEstoqueBL itEsBL = new ItensEstoqueBL();
-            List<ItensEstoque> itensEstoque = itEsBL.PesquisarBL(id_obra);
+            List<ItensEstoque> itensEstoque = itEsBL.PesquisarMovObraBL(id_obra);
 
             if (itensEstoque.Count > 0)
             {
