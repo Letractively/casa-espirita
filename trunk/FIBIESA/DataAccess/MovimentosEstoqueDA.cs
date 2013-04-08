@@ -211,15 +211,36 @@ namespace DataAccess
             return movEstoque;
         }
 
-        public Int32 PesquisarTotalMovimentosDA(Int32 id_ItEst)
+        public Int32 PesquisarTotalMovimentosDA(Int32 id_ItEst, string data)
         {
             Int32 total = 0;
+            string consulta;
+
+            if (data == "")
+            {
+                consulta = string.Format(@" SELECT SUM(ME.QUANTIDADE) " +
+                                          " - (SELECT ISNULL(SUM(M.QUANTIDADE),0) FROM MOVIMENTOSESTOQUE M WHERE M.ITEMESTOQUEID = {0} AND M.TIPO ='S') TOTAL " +
+                                          "         FROM MOVIMENTOSESTOQUE ME " + 
+                                          "         WHERE ME.ITEMESTOQUEID = {0} " +
+                                          "         AND ME.TIPO = 'E' ",id_ItEst);
+            }
+            else
+            {
+                consulta = string.Format(@" SELECT SUM(ME.QUANTIDADE) " +
+                                          " - (SELECT ISNULL(SUM(M.QUANTIDADE),0) FROM MOVIMENTOSESTOQUE M WHERE M.ITEMESTOQUEID = {0} "+
+                                          "    AND M.TIPO ='S' AND M.DATA <= CONVERT(DATETIME,'{1}',101)) TOTAL " +
+                                          "         FROM MOVIMENTOSESTOQUE ME " + 
+                                          "         WHERE ME.ITEMESTOQUEID = {0} " +
+                                          "           AND ME.DATA = CONVERT(DATETIME,'{1}',101)" +
+                                          "           AND ME.TIPO = 'E' ",id_ItEst, Convert.ToDateTime(data).ToString("MM/dd/yyyy"));
+
+                
+
+            }
+
+
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                          CommandType.Text, string.Format(@" SELECT SUM(ME.QUANTIDADE) " +
-                                                                                           " - (SELECT SUM(M.QUANTIDADE) FROM MOVIMENTOSESTOQUE M WHERE M.ITEMESTOQUEID = {0} AND M.TIPO ='S') TOTAL " +
-                                                                                           "         FROM MOVIMENTOSESTOQUE ME " + 
-                                                                                           "         WHERE ME.ITEMESTOQUEID = {0} " +
-                                                                                           "         AND ME.TIPO = 'E' ",id_ItEst)); 
+                                                          CommandType.Text, consulta ); 
 
 
 

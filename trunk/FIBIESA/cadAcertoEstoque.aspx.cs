@@ -53,7 +53,7 @@ namespace FIBIESA
         private void CarregarDados(int id_ItEst)
         {
             MovimentosEstoqueBL movEsBL = new MovimentosEstoqueBL();
-            Int32 total = movEsBL.PesquisarTotalMovimentosBL(id_ItEst);
+            Int32 total = movEsBL.PesquisarTotalMovimentosBL(id_ItEst,"");
 
             lblQtdAtual.Text = total.ToString(); 
         }
@@ -109,7 +109,7 @@ namespace FIBIESA
         {            
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text);
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text,1);
           
             foreach (ItensEstoque ltItEstoque in ltItEst)
             {                
@@ -134,7 +134,7 @@ namespace FIBIESA
             DataTable dt = CriarDtPesquisa();
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL(1);
 
             foreach (ItensEstoque litE in ltItEst)
             {

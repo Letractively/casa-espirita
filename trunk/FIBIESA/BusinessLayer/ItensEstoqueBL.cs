@@ -42,20 +42,28 @@ namespace BusinessLayer
             return itensEstoqueDA.PesquisarDA();
         }
 
-        public List<ItensEstoque> PesquisarBL(Int32 id_obra)
+        public List<ItensEstoque> PesquisarBL(int status)
         {
             /*criar as regras de negocio*/
             ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
 
-            return itensEstoqueDA.PesquisarDA(id_obra);
+            return itensEstoqueDA.PesquisarDA(status);
+        }
+                       
+        public List<ItensEstoque> PesquisarMovObraBL(Int32 id_obra)
+        {
+            /*criar as regras de negocio*/
+            ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
+
+            return itensEstoqueDA.PesquisarMovObraDA(id_obra);
         }
 
-        public List<ItensEstoque> PesquisarBL(string campo, string valor)
+        public List<ItensEstoque> PesquisarBL(string campo, string valor, int status)
         {
             /*criar as regras de negocio*/
             ItensEstoqueDA itensEstoqueDA = new ItensEstoqueDA();
 
-            return itensEstoqueDA.PesquisarDA(campo, valor);
+            return itensEstoqueDA.PesquisarDA(campo, valor, status);
         }
 
         public DataSet PesquisarItensEstoqueBL(int id_movEst)

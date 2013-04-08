@@ -19,7 +19,7 @@
                             Item:
                         </td>
                         <td style="width: 400px">
-                           <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="75px" 
+                           <asp:TextBox ID="txtItem" runat="server" CssClass="inputboxRight" Width="75px" 
                                 AutoPostBack="True" ontextchanged="txtItem_TextChanged"></asp:TextBox>
                            <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
                                  />
