@@ -648,6 +648,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet_Emprestimo</DataSetName>
         <Top>0.30903cm</Top>
         <Left>0.28222cm</Left>
@@ -695,6 +697,21 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="dataDevolucaoFim">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nrAtrasos">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nrEmprestimos">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="totalEmprestimos">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
@@ -1009,7 +1026,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value />
+                  <Value>="Total de Emprestimos: " + Parameters!nrEmprestimos.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1037,7 +1054,8 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value />
+                  <Label>lblTotalEmprestimos</Label>
+                  <Value>="Total Geral: " + Parameters!totalEmprestimos.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1066,7 +1084,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value />
+                  <Value>="Total de Atrasos: " + Parameters!nrAtrasos.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>

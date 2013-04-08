@@ -30,6 +30,22 @@ namespace FIBIESA.Relatorios
                 string dataDevolucaoFim = Request.QueryString["DevolucaoFim"].ToString();
                 string dataDevolucaoIni = Request.QueryString["DevolucaoIni"].ToString();
                 string Status = Request.QueryString["Status"].ToString();
+                int nrAtrasos = 0;
+                int nrEmprestimos = 0;
+                int totalEmprestimos = lDtPesquisa.Rows.Count;
+                for (int i = 0; i <= lDtPesquisa.Rows.Count - 1; i++)
+                {
+                    if (lDtPesquisa.Rows[i]["status"] == "A")
+                    {
+                        nrAtrasos += 1;
+                    }
+                    if (lDtPesquisa.Rows[i]["status"] == "E")
+                    {
+                        nrEmprestimos += 1;
+                    }
+                    
+                }
+
 
 
                 InstituicoesBL instBL = new InstituicoesBL();
@@ -43,7 +59,7 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceEmprestimos = new ReportDataSource("DataSet_Emprestimo", lDtPesquisa);
 
 
-                ReportParameter[] param = new ReportParameter[7];
+                ReportParameter[] param = new ReportParameter[10];
                 param[0] = new ReportParameter("PessoaId", PessoaId);
                 param[1] = new ReportParameter("ExemplarId", ExemplarId);
                 param[2] = new ReportParameter("dataRetiradaIni", dataRetiradaIni);
@@ -51,6 +67,9 @@ namespace FIBIESA.Relatorios
                 param[4] = new ReportParameter("dataDevolucaoIni", dataDevolucaoIni);
                 param[5] = new ReportParameter("dataDevolucaoFim", dataDevolucaoFim);
                 param[6] = new ReportParameter("Status", Status);
+                param[7] = new ReportParameter("nrAtrasos", nrAtrasos.ToString());
+                param[8] = new ReportParameter("nrEmprestimos", nrEmprestimos.ToString());
+                param[9] = new ReportParameter("totalEmprestimos", totalEmprestimos.ToString());
 
                 //rpvEmprestimos.ProcessingMode = ProcessingMode.Local;
                 rpvEmprestimos.LocalReport.SetParameters(param);
