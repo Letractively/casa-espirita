@@ -26,15 +26,15 @@ namespace FIBIESA
                 switch (tipoPermissao.ToUpper())
                 {
                     case "INSERIR":
-                        return permissoes.Inserir;                      
+                        return permissoes.Inserir;
 
                     case "EXCLUIR":
-                        return permissoes.Excluir;                        
+                        return permissoes.Excluir;
 
                     case "EDITAR":
                         return permissoes.Editar;
-                       
-                    default: return false;                        
+
+                    default: return false;
                 }
             }
             else
@@ -49,20 +49,83 @@ namespace FIBIESA
             {
                 lblNomeEmpresa.Text = inst.NomeFantasia;
             }
-            
- 
+
         }
 
-                 
-        
+
+
         #endregion
+
+        //habilita o menu ou nao
+        private bool IsAllMenuItemsVisible = true;
+
+        protected void rptControl_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            if (!IsAllMenuItemsVisible)
+            {
+                foreach (RepeaterItem item in rptControl.Items)
+                {
+                    if (item.ItemType == ListItemType.Item || item.ItemType ==
+                                                                                      ListItemType.AlternatingItem)
+                    {
+                        SiteMapNode thisMapNode = (SiteMapNode)e.Item.DataItem;
+                        if (thisMapNode != null)
+                        {
+                            if (thisMapNode["visibility"] != null &&
+                               thisMapNode["visibility"].ToLower().Equals(bool.FalseString.ToLower()))
+                            {
+                                rptControl.Controls.Remove(e.Item);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["FromPage"] = "About";
+            Session["FromPage"] = "Home";
+            Session["FromPage"] = "Contact";
+
+
+            if (!IsPostBack)
+            {
+                IsAllMenuItemsVisible = true;
+            }
+            if (Session["FromPage"] != null && Convert.ToString(Session["FromPage"])
+                                                                                                             != "")
+            {
+                switch (Convert.ToString(Session["FromPage"]))
+                {
+                    case "About":
+                        {
+                            IsAllMenuItemsVisible = false;
+                            break;
+                        }
+                    case "Contact":
+                        {
+                            IsAllMenuItemsVisible = false;
+                            break;
+                        }
+                    case "Home":
+                        {
+                            IsAllMenuItemsVisible = true;
+                            break;
+                        }
+                }
+            }
+
+
+            rptControl.DataBind();
+
+
             if (!IsPostBack)
             {
                 if (Session["usuario"] != null)
                 {
-                    List <Usuarios> usuarios;
+                    List<Usuarios> usuarios;
                     usuarios = (List<Usuarios>)Session["usuario"];
 
                     foreach (Usuarios usu in usuarios)
