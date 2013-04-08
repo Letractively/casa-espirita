@@ -106,7 +106,8 @@ namespace FIBIESA
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
-        {            
+        {
+            hfIdItem.Value = ""; 
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
             List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text,1);

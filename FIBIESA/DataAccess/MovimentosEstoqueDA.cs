@@ -231,7 +231,7 @@ namespace DataAccess
                                           "    AND M.TIPO ='S' AND M.DATA <= CONVERT(DATETIME,'{1}',101)) TOTAL " +
                                           "         FROM MOVIMENTOSESTOQUE ME " + 
                                           "         WHERE ME.ITEMESTOQUEID = {0} " +
-                                          "           AND ME.DATA = CONVERT(DATETIME,'{1}',101)" +
+                                          "           AND ME.DATA <= CONVERT(DATETIME,'{1}',101)" +
                                           "           AND ME.TIPO = 'E' ",id_ItEst, Convert.ToDateTime(data).ToString("MM/dd/yyyy"));
 
                 
