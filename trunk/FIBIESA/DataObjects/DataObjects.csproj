@@ -82,6 +82,7 @@
     <Compile Include="TiposObras.cs" />
     <Compile Include="Usuarios.cs" />
     <Compile Include="Vendas.cs" />
+    <Compile Include="VendaItens.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

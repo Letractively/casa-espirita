@@ -83,6 +83,7 @@
     <Compile Include="TiposDeAutoresDA.cs" />
     <Compile Include="TiposObrasDA.cs" />
     <Compile Include="UsuariosDA.cs" />
+    <Compile Include="VendaItensDA.cs" />
     <Compile Include="VendasDA.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,13 +17,9 @@
                 <td>
                     <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
                     &nbsp;
-                    <asp:DropDownList ID="ddlPesCampo" runat="server" CssClass="inputbox">
-                        <asp:ListItem Value="C">Código</asp:ListItem>
-                        <asp:ListItem Value="D">Descrição</asp:ListItem>
-                    </asp:DropDownList>
                     &nbsp;
-                    <asp:ImageButton ID="btnPesquisa" runat="server"  CssClass="btnPes"
-                        onclick="btnPesquisa_Click" ImageUrl="~/images/icons/icone_lupa.jpg" />  
+                    <asp:Button ID="btnPesquisa" runat="server" CssClass="btn" Text="Buscar"  />
+                    
                 </td>
             </tr>
              <tr>
@@ -32,7 +28,8 @@
                         AutoGenerateColumns="False" DataKeyNames="ID" 
                         onselectedindexchanged="grdPesquisa_SelectedIndexChanged" 
                         BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" 
-                        BorderWidth="1px">
+                        BorderWidth="1px" GridLines="None" 
+                        onrowdatabound="grdPesquisa_RowDataBound">
                      <Columns>
                          <asp:CommandField ShowSelectButton="True">
                            <HeaderStyle CssClass="grd_cmd_header" />
@@ -40,7 +37,7 @@
                          </asp:CommandField>
                          <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                          <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                         <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                         <asp:BoundField DataField="TITULO" HeaderText="Título" />
                          <asp:BoundField DataField="VALOR" HeaderText="Valor" />
                          <asp:BoundField DataField="QUANTIDADE" HeaderText="Quantidade Estoque" />
                      </Columns>

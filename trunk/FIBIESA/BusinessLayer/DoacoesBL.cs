@@ -41,11 +41,11 @@ namespace BusinessLayer
             return doacoesDA.PesquisarDA();
         }
 
-        public List<Doacoes> PesquisarBL(string campo, string valor)
+        public List<Doacoes> PesquisarBuscaBL(string valor)
         {
             DoacoesDA doacoesDA = new DoacoesDA();
 
-            return doacoesDA.PesquisarDA(campo, valor);
+            return doacoesDA.PesquisarBuscaDA(valor);
         }
 
         public List<Doacoes> PesquisarBL(int id_doa)

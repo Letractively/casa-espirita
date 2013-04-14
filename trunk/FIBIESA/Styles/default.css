@@ -91,8 +91,28 @@
 
 .dropdownlist { padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
 .dropdownlist {font-family: Arial, Helvetica, sans-serif; color: #666; font-size: 13px;background: #fff url(../images/bg_input_normal.png) repeat-x top}
-	
+
+.window{
+    display:none;
+    width:300px;
+    height:300px;
+    position:absolute;
+    left:0;
+    top:0;
+    background:#FFF;
+    z-index:9900;
+    padding:10px;
+    border-radius:10px;
+}
+ 
+#mascara{
+    display:none;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    background-color:#000;
+}
+ 
+.fechar{display:block; text-align:right;}
    	
-
-
-   

@@ -8,16 +8,17 @@ using DataObjects;
 using BusinessLayer;
 using System.Data;
 using System.Text;
+using FG;
 
 namespace FIBIESA
 {
     public partial class PesquisarItens : System.Web.UI.Page
     {
+        Utils utils = new Utils();
         #region funcoes
-        private void PesquisarConteudo()
+        private void PesquisarConteudo(string valor)
         {
-            
-            /*DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
@@ -31,43 +32,39 @@ namespace FIBIESA
             dt.Columns.Add(coluna5);
 
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
-            MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
-            DataTable dt = itEstBL.PesquisarItensEstoqueBL();
-            grdPesquisa.DataSource = dt;
-            grdPesquisa.DataBind();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBuscaBL(valor);
 
-            List<ItensEstoque> itensEstoque = itEstBL.Pesquisar();
-
-            foreach (ItensEstoque itEst in itensEstoque)
+            foreach (ItensEstoque litE in ltItEst)
             {
                 DataRow linha = dt.NewRow();
 
-                linha["ID"] = itEst.Id;
-                linha["CODIGO"] = itEst.PesCodigo;
-                linha["TITULO"] = bas.PesDescricao;
+                if (litE.Obra != null)
+                {
+                    linha["ID"] = litE.Id;
+                    linha["CODIGO"] = litE.Obra.Codigo;
+                    linha["TITULO"] = litE.Obra.Titulo;
+                    linha["VALOR"] = litE.VlrVenda.ToString();
+                    linha["QUANTIDADE"] = litE.QtdEstoque.ToString();
 
-                dt.Rows.Add(linha);
+                    dt.Rows.Add(linha);
+                }
             }
 
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-            DataTable tabela;
-
-            
-            grdPesquisa.DataSource = tabela;
-            grdPesquisa.DataBind();*/
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();                               
 
         }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            PesquisarConteudo();
+            PesquisarConteudo(txtPesquisa.Text);
         }
 
         protected void btnPesquisa_Click(object sender, ImageClickEventArgs e)
         {
-
+            PesquisarConteudo(txtPesquisa.Text);
         }
 
         protected void grdPesquisa_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,16 +74,18 @@ namespace FIBIESA
             string str_nome_lbl = Request.QueryString["lbl"].ToString();
             string str_nome_id = Request.QueryString["id"].ToString();
             string str_nome_valor = Request.QueryString["valor"].ToString();
+            string str_nome_valor_uni = Request.QueryString["valoruni"].ToString();
             string str_id = grdPesquisa.SelectedDataKey[0].ToString();
             GridViewRow row = grdPesquisa.SelectedRow;
             string str_cod = row.Cells[2].Text;
             string str_des = row.Cells[3].Text;
             string str_valor = row.Cells[4].Text;
-
+           
             js.Append("<script language='javascript'>");
             js.Append("window.opener.document.getElementById('" + str_nome_caixa + "').value = '" + str_cod + "';");
             js.Append("window.opener.document.getElementById('" + str_nome_id + "').value = '" + str_id + "';");
             js.Append("window.opener.document.getElementById('" + str_nome_valor + "').value = '" + str_valor + "';");
+            js.Append("window.opener.document.getElementById('" + str_nome_valor_uni + "').value = '" + str_valor + "';");
             js.Append("window.opener.document.getElementById('" + str_nome_lbl + "').innerHTML = '" + str_des + "';");
 
             if (Request.QueryString["caixaPost"] != null)
@@ -96,6 +95,12 @@ namespace FIBIESA
             js.Append("</script>");
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), js.ToString(), false);
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

@@ -43,7 +43,10 @@ namespace DataAccess
 
                     itEst.Obra = obras;
                 }
-               
+
+                MovimentosEstoqueDA movEsDA = new MovimentosEstoqueDA();
+                itEst.QtdEstoque = movEsDA.PesquisarTotalMovimentosDA(itEst.Id, "");
+
                 itensEstoque.Add(itEst);
             }
 
@@ -154,6 +157,24 @@ namespace DataAccess
             List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
 
             return itensEstoque;
+        }
+
+        public List<ItensEstoque> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM ITENSESTOQUE IE, OBRAS O WHERE IE.OBRAID = O.ID ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND ( O.CODIGO = {0} OR O.TITULO LIKE '%{1}%') AND IE.STATUS = 1 ", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY O.CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
+
+            return itensEstoque;  
+            
         }
 
         public List<ItensEstoque> PesquisarDA(string campo, string valor, int status)

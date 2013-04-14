@@ -81,6 +81,7 @@
     <Compile Include="TiposDeAutoresBL.cs" />
     <Compile Include="TiposObrasBL.cs" />
     <Compile Include="UsuariosBL.cs" />
+    <Compile Include="VendaItensBL.cs" />
     <Compile Include="VendasBL.cs" />
   </ItemGroup>
   <ItemGroup>

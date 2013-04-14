@@ -313,6 +313,22 @@ namespace Admin
             Response.Redirect("~/viewNotaEntrada.aspx");
         }
 
+        protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            object key = new object();
+            key = dtgItens.DataKeys[e.RowIndex][0];
+
+            if (Session["dtItens"] != null)
+                dtItens = (DataTable)Session["dtItens"];
+
+            if (dtItens.Rows.Contains(key))
+                dtItens.Rows.Remove(dtItens.Rows.Find(key));
+
+            Session["dtItens"] = dtItens;
+            dtgItens.DataSource = dtItens;
+            dtgItens.DataBind();
+        }
+
         
     }
 }

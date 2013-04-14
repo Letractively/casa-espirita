@@ -19,19 +19,24 @@ namespace Admin
         #region funcoes
         private void CarregarAtributos()
         {
-            txtValor.Attributes.Add("onkeypress", "return(Real(this,event))");
-        }
-        #endregion
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
+            txtValor.Attributes.Add("onkeypress", "return(Reais(this,event))");
         }
 
-        protected void btnPesCliente_Click(object sender, EventArgs e)
+        public void ExibirMensagem(string mensagem)
         {
-            Session["tabelaPesquisa"] = null;
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
 
+        public void LimparCampos()
+        {
+            txtCliente.Text = "";
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtValor.Text = "";
+        }
+
+        public void CarregarPesquisaItem(string conteudo)
+        {
             DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
@@ -43,7 +48,7 @@ namespace Admin
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
 
             foreach (Pessoas pes in pessoas)
             {
@@ -56,14 +61,27 @@ namespace Admin
                 dt.Rows.Add(linha);
             }
 
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
 
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();
+        }
+        #endregion
 
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            CarregarAtributos();
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCliente.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesCliente.ClientID + "','',600,500);", true);
+            if (!IsPostBack)
+            {
+                txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                CarregarPesquisaItem(null);
+            }
+        }
+
+        protected void btnPesCliente_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(null);
+           // ModalPopupExtenderPesquisa.Show();            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -89,11 +107,51 @@ namespace Admin
             }
 
             if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                doaBL.InserirBL(doacoes);
+            {
+                if(doaBL.InserirBL(doacoes))
+                {
+                    ExibirMensagem("Doação gravada com sucesso!");
+                    LimparCampos();
+                }
+                else
+                    ExibirMensagem("Não foi possível gravar a doação.");
+            }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
-            Response.Redirect("~/viewDoacao.aspx");
+            
         }
+               
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+             
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisa.Text);
+        }
+                              
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+            
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();            
+            txtCliente.Text = gvrow.Cells[2].Text;            
+            lblDesCliente.Text = gvrow.Cells[3].Text;            
+            //ModalPopupExtenderPesquisa.Hide();
+                       
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+           //ModalPopupExtenderPesquisa.Hide();
+        }       
+
+
     }
 }
