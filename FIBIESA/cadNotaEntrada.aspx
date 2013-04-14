@@ -96,7 +96,7 @@
                         <td colspan="6">
                             <asp:Panel ID="pnlItens" runat="server" ScrollBars="Auto" >
                                 <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                                    ShowHeaderWhenEmpty="True">
+                                    ShowHeaderWhenEmpty="True" onrowdeleting="dtgItens_RowDeleting">
                                     <Columns>
                                         <asp:CommandField ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

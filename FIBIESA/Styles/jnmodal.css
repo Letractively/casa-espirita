@@ -1,0 +1,24 @@
+﻿
+.window{
+			display:none;
+			width:400px;
+			height:400px;
+			position:fixed;
+			left:0;
+			top:0;
+			background:#FFF;
+			z-index:9900;
+			padding:10px;
+			border-radius:10px;
+		}
+
+		#mascara{
+			position:absolute;
+  			left:0;
+  			top:0;
+  			z-index:9000;
+  			background-color:#000;
+  			display:none;
+		}
+
+		.fechar{display:block; text-align:right;}

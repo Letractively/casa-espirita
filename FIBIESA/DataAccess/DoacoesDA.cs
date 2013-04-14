@@ -117,31 +117,23 @@ namespace DataAccess
 
         }
 
-        public List<Doacoes> PesquisarDA(string campo, string valor)
+        public List<Doacoes> PesquisarBuscaDA(string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM DOACOES D, PESSOAS P  WHERE D.PESSOAID = P.ID ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM DOACOES D, PESSOAS P WHERE D.PESSOAID = P.ID AND P.CODIGO = {0}", utils.ComparaIntComZero(valor));
-                    break;
-                case "NOME":
-                    consulta = string.Format("SELECT * FROM DOACOES D, PESSOAS P WHERE D.PESSOAID = P.ID AND P.NOME  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Doacoes> doacoes = CarregarObjDoacoes(dr);
 
             return doacoes;
         }
-
+        
         public List<Doacoes> PesquisarDA(int id_doa)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

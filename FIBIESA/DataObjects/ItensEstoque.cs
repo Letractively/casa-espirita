@@ -70,6 +70,13 @@ namespace DataObjects
             get { return _obra; }
             set { _obra = value; }
         }
+
+        private Int32 _qtdEstoque;
+        public Int32 QtdEstoque
+        {
+            get { return _qtdEstoque; }
+            set { _qtdEstoque = value; }
+        }
     
     }
 }
