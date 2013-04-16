@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </asp:ScriptManager>
@@ -109,10 +109,10 @@
                             <tr>
                                 <td style="width: 530px" colspan="2" style="text-align:center;">
                                     <center>
-                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Mais Retirados">                                                                                    
+                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Menos Retirados">                                                                                    
                                         </asp:RadioButton>
                                         &nbsp;
-                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Menos Retirados">
+                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Mais Retirados">
                                         </asp:RadioButton>
                                     </center>
                                 </td>                                                                      
