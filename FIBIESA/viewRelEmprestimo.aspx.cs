@@ -164,7 +164,7 @@ namespace FIBIESA
             EmprestimoMov empMov = new EmprestimoMov();
             EmprestimosBL empBL = new EmprestimosBL();
             Emprestimos emp = new Emprestimos();
-            
+
             if (txtAssociado.Text != string.Empty)
             {
                 emp.PessoaId = int.Parse(txtAssociado.Text);
@@ -174,21 +174,42 @@ namespace FIBIESA
                 emp.ExemplarId = int.Parse(txtCodigo.Text);
             }
 
-             Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text,ddlStatus.SelectedValue.ToString()).Tables[0];
-             if (Session["ldsRel"] != null)
-             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelEmprestimos.aspx?PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,1125);", true);
-             }
-             else
-             {
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
-             }
-            
+            string PaginaRelatorio = "";
+
+            if (rbLivrosMais.Checked)
+            {
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(),"desc").Tables[0];
+                PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Mais&";
+            }
+            else if (rbLivrosMenos.Checked)
+            {
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(),"asc").Tables[0];
+                PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Menos&";
+            }
+            else
+            {
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString()).Tables[0];
+                PaginaRelatorio = "/Relatorios/RelEmprestimos.aspx?";
+            }
+            if (Session["ldsRel"] != null)
+            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('" + PaginaRelatorio + "PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,1125);", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+            }
+
 
             //emp. txtDataRetiradaIni.Text
 
 
 
+        }
+
+        protected void btnteste_Click(object sender, EventArgs e)
+        {
+            Div1.Visible = true;
         }
 
     }
