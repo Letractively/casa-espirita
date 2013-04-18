@@ -44,5 +44,13 @@ namespace BusinessLayer
             return varDA.PesquisarRelatorioDA(instancia, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status);
         }
 
+        public DataSet PesquisarRelatorioBL(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string ordenacao)
+        {
+            /*criar as regras de negocio*/
+            EmprestimoMovDA varDA = new EmprestimoMovDA();
+
+            return varDA.PesquisarRelatorioDA(instancia, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status, ordenacao);
+        }
+
     }
 }
