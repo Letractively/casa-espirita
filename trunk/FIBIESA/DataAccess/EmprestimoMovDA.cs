@@ -114,5 +114,58 @@ namespace DataAccess
 
         }
 
+
+        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
+        {
+            DataSet lDs;
+            try
+            {
+                string sqlQuery = "SELECT " +
+                                  "    descricao " +
+                                  "    ,exemplarid " +
+                                  "    ,COUNT(exemplarid) quantidade " +
+                                  "FROM dbo.VIEW_REL_EMPRESTIMO " +
+                                  " WHERE 1 = 1 ";
+                if (instancia.PessoaId != 0)
+                {
+
+                    sqlQuery += " AND pessoaid = " + instancia.PessoaId;
+                }
+
+                if (instancia.ExemplarId != 0)
+                {
+
+                    sqlQuery += " AND exemplarid = " + instancia.ExemplarId;
+                }
+
+                if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
+                {
+
+                    sqlQuery += " AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)";
+                }
+
+                if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
+                {
+
+                    sqlQuery += " AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)";
+                }
+
+                if (Status != string.Empty)
+                {
+
+                    sqlQuery += " AND Status = " + Status;
+                }
+                sqlQuery += " GROUP BY exemplarid, descricao order by quantidade " + retirados;
+                lDs = SqlHelper.ExecuteDataset(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.Text, sqlQuery);
+                return lDs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
     }
 }
