@@ -6,6 +6,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+        EnableScriptLocalization="true">
+    </asp:ScriptManager>
+    <%--<asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upnlPrincipal">
+        <ContentTemplate>--%>
     <div id="content">
         <div class="container half left">
             <div class="conthead">
@@ -19,11 +24,10 @@
                             * Cliente:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" 
-                                Width="110px" AutoPostBack="True"></asp:TextBox>
+                            <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" Width="110px"
+                                AutoPostBack="True"></asp:TextBox>
                             <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
-                           <a href="#janela1" rel="modal">Clientes</a>
-                            &nbsp;
+                            <a href="#janela1" rel="modal">Clientes</a> &nbsp;
                             <asp:Label ID="lblDesCliente" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCliente"
                                 CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -62,33 +66,31 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" OnClick="btnSalvar_Click"
                                 ValidationGroup="salvar" />
-                                
                         </td>
                     </tr>
                 </table>
             </div>
-            <%--<asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfPesquisa"
-                PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
-                OkControlID="btnCancel" />--%>
-            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
-                EnableScriptLocalization="true">
-            </asp:ScriptManager>
+            
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
             <asp:HiddenField ID="hfPesquisa" runat="server" />
         </div>
         <div class="status">
         </div>
-         <div class="window" id="janela1">
-        <asp:Panel runat="server" ID="pnlCliente" Width="400px">  
-                    <table>                        
-                        <tr>
+                
+        <asp:Panel runat="server" ID="pnlCliente" Width="400px" CssClass="modalPopup" Style="display: none">            
+            <%--<iframe id="ifPesquisaGeral" runat="server" src="" >--%>
+            
+               
+                <table>
+                  
+                       <tr>
                             <td>
                                 <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
                                     AutoPostBack="True"></asp:TextBox>
                             </td>
-                        </tr>                         
+                        </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2"<>
                                 <asp:GridView ID="grdPesquisa" runat="server" CellPadding="3" AutoGenerateColumns="False"
                                     DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
                                     BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisa_RowDataBound"
@@ -116,31 +118,26 @@
                                 </asp:GridView>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                    CssClass="fechar" />
-                            </td>
-                        </tr>
-                    </table>
-                       
-            
-        </asp:Panel>
-        </div>
-      
- 
-      <%--  <div class="window" id="janela1">
+                   
+                <tr>
+                    <td>
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
+                            CssClass="btn" />
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>        
+        <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfPesquisa"
+                PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
+                OkControlID="btnCancel" Enabled="false"/>
+        <%--  <div class="window" id="janela1">
             <a href="#" class="fechar">X Fechar</a>
             <h4>Primeira janela moda</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
             <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>
+        </div>
+            <!-- mascara para cobrir o site -->
         </div>--%>
- 
- 
-        <!-- mascara para cobrir o site -->  
-        
-    </div>
-   
+        <%-- </ContentTemplate>
+    </asp:UpdatePanel>--%>
 </asp:Content>
-
-

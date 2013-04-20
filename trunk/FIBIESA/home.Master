@@ -30,7 +30,7 @@
     <script type='text/javascript' src='Scripts/jquery.wysiwyg.js'></script>
     <script type='text/javascript' src='Scripts/visualize.jQuery.js'></script>
     <script type='text/javascript' src='Scripts/functions.js'></script>
-    <script type='text/javascript' src='Scripts/default.js'></script>
+    <script type='text/javascript' src='Scripts/default.js'></script>   
     <!-- Fim Java Script - Funcionalidade -->
     <!-- Menu -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu|Muli:300' rel='stylesheet' type='text/css' />

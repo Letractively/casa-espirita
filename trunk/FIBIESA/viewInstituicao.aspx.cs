@@ -28,7 +28,7 @@ namespace FIBIESA
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -57,11 +57,8 @@ namespace FIBIESA
             InstituicoesBL insBL = new InstituicoesBL();
             List<Instituicoes> instituicoes;
 
-            if (campo != null && valor.Trim() != "")
-                instituicoes = insBL.PesquisarBL(campo, valor);
-            else
-                instituicoes = insBL.PesquisarBL();
-
+            instituicoes = insBL.PesquisarBuscaBL(valor);
+            
             foreach (Instituicoes ins in instituicoes)
             {
                 DataRow linha = tabela.NewRow();
@@ -90,7 +87,7 @@ namespace FIBIESA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
 
         }
 
@@ -107,7 +104,7 @@ namespace FIBIESA
                 Instituicoes instituicoes = new Instituicoes();
                 instituicoes.Id = utils.ComparaIntComZero(dtgInstituicao.DataKeys[e.RowIndex][0].ToString());
                 insBL.ExcluirBL(instituicoes);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -129,8 +126,11 @@ namespace FIBIESA
 
         protected void dtgInstituicao_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void dtgInstituicao_Sorting(object sender, GridViewSortEventArgs e)
@@ -168,7 +168,7 @@ namespace FIBIESA
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);  
+            Pesquisar(txtBusca.Text);  
         }
     }
 }

@@ -14,14 +14,10 @@
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            *
                             Código:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

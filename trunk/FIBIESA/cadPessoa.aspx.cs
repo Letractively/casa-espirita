@@ -77,7 +77,7 @@ namespace Admin
             foreach (Pessoas pes in pessoas)
             {
                 hfId.Value = pes.Id.ToString();
-                txtCodigo.Text = pes.Codigo.ToString();                
+                lblCodigo.Text = pes.Codigo.ToString();                
                 txtNome.Text = pes.Nome;
                 
                 if (pes.NomeFantasia.Trim() != "")
@@ -280,8 +280,7 @@ namespace Admin
             txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");  
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");         
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
             txtCepProf.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
@@ -350,6 +349,7 @@ namespace Admin
                     }
                     else
                     {
+                        lblCodigo.Text = "Código gerado automaticamente.";
                         if (Request.QueryString["tipoPessoa"] != null)
                         {
                             if (Request.QueryString["tipoPessoa"].ToString() == "F")
@@ -398,8 +398,7 @@ namespace Admin
             Pessoas pessoas = new Pessoas();
 
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
-            pessoas.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
-            
+            pessoas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);            
             pessoas.Nome = txtNome.Text;
                        
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
@@ -535,8 +534,11 @@ namespace Admin
 
         protected void dtgTelefones_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
 
         protected void ddlUfProf_SelectedIndexChanged(object sender, EventArgs e)

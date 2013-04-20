@@ -33,10 +33,24 @@ namespace DataAccess
                 ins.Cep = dr["CEP"].ToString();
                 ins.BairroId = utils.ComparaIntComNull(dr["BAIRROID"].ToString());
                 ins.Endereco = dr["ENDERECO"].ToString();
-                //ins.Numero = dr["NUMERO"].ToString();
-                //ins.Complemento = dr["COMPLEMENTO"].ToString();
-                //ins.DDD = dr["DDD"].ToString();
-                //ins.telefone = dr["telefone"].ToString();
+                ins.Numero = dr["NUMERO"].ToString();
+                ins.Complemento = dr["COMPLEMENTO"].ToString();
+                ins.DDD = dr["DDD"].ToString();
+                ins.telefone = dr["telefone"].ToString();
+
+                CidadesDA cidDA = new CidadesDA();
+                Cidades cid = new Cidades();
+                DataSet dsCid = cidDA.PesquisaDA(ins.CidadeId != null ? Convert.ToInt32(ins.CidadeId.ToString()) : 0);
+
+                if (dsCid.Tables[0].Rows.Count != 0)
+                {
+                    cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                    cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                    cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                    cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+                }
+
+                ins.Cidades = cid;
                 
                 InstituicoesLogoDA insLDA = new InstituicoesLogoDA();
 
@@ -183,6 +197,23 @@ namespace DataAccess
                                                                                         "  FROM [FIBIESE].[dbo].[Instituicoes]"));
 
             
+            return instituicoes;
+        }
+
+        public List<Instituicoes> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM INSTITUICOES ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  RAZAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Instituicoes> instituicoes = CarregarObjInstituicoes(dr);
+
             return instituicoes;
         }
                

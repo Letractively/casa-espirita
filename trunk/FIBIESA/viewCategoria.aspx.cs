@@ -29,7 +29,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
             /*Cria as colunas do datatable*/
@@ -45,11 +45,9 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            if (campo != null && valor.Trim() != "")
-                categorias = catBL.PesquisarBL(campo, valor);
-            else
-                categorias = catBL.PesquisarBL();
-
+           
+            categorias = catBL.PesquisarBuscaBL(valor);
+           
             foreach (Categorias cat in categorias)
             {
                 DataRow linha = tabela.NewRow();
@@ -69,12 +67,13 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar(null, null);
+            if(!IsPostBack)
+                Pesquisar(null);
         }
                
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);  
+            Pesquisar(txtBusca.Text);  
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -90,7 +89,7 @@ namespace Admin
                 Categorias categorias = new Categorias();
                 categorias.Id = utils.ComparaIntComZero(dtgCategorias.DataKeys[e.RowIndex][0].ToString());
                 catBL.ExcluirBL(categorias);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -146,8 +145,11 @@ namespace Admin
 
         protected void dtgCategorias_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
         }
     }
 }

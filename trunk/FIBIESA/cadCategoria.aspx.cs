@@ -25,22 +25,17 @@ namespace Admin
             foreach (Categorias ltCat in cat)
 	        {
                 hfId.Value = ltCat.Id.ToString();
-                txtCodigo.Text = ltCat.Codigo.ToString();
+                lblCodigo.Text = ltCat.Codigo.ToString();
                 txtDescricao.Text = ltCat.Descricao;	 
 	        }            
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
-        }
+       
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cat = 0;
-
-            CarregarAtributos();
-
+                      
             if (!Page.IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -54,6 +49,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_cat);
+                else                    
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
 
         }
@@ -70,7 +67,7 @@ namespace Admin
             Categorias categorias = new Categorias();
 
             categorias.Id = utils.ComparaIntComZero(hfId.Value);
-            categorias.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            categorias.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             categorias.Descricao = txtDescricao.Text;
 
             if (categorias.Id > 0)

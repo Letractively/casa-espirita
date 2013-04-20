@@ -111,5 +111,12 @@ namespace DataObjects
             get { return _instituicaoLogo; }
             set { _instituicaoLogo = value; }
         }
+
+        private Cidades _cidades;
+        public Cidades Cidades
+        {
+            get { return _cidades; }
+            set { _cidades = value; }
+        }
     }
 }

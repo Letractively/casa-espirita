@@ -32,13 +32,25 @@ namespace DataAccess
 
             return cidades;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM CIDADES "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
         #endregion
 
         public bool InserirDA(Cidades cid)
         {
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
-            paramsToSP[0] = new SqlParameter("@codigo", cid.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", cid.Descricao);
             paramsToSP[2] = new SqlParameter("@estadoId", cid.EstadoId);
 
