@@ -98,7 +98,7 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
     </DataSet>
-    <DataSet Name="DataSet_ReciboVenda">
+    <DataSet Name="DataSet_Venda">
       <Fields>
         <Field Name="Id">
           <DataField>Id</DataField>
@@ -112,17 +112,17 @@
           <DataField>PessoaId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="nmCliente">
-          <DataField>nmCliente</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="item">
-          <DataField>item</DataField>
+        <Field Name="pessoa">
+          <DataField>pessoa</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="UsuarioId">
           <DataField>UsuarioId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="usuario">
+          <DataField>usuario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Data">
           <DataField>Data</DataField>
@@ -130,6 +130,46 @@
         </Field>
         <Field Name="Situacao">
           <DataField>Situacao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>BusinessLayer</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+    </DataSet>
+    <DataSet Name="DataSet_VendaItens">
+      <Fields>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="vendaId">
+          <DataField>vendaId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="quantidade">
+          <DataField>quantidade</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="valor">
+          <DataField>valor</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="desconto">
+          <DataField>desconto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Situacao">
+          <DataField>Situacao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="itemEstoqueId">
+          <DataField>itemEstoqueId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="titulo">
+          <DataField>titulo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -148,7 +188,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Cliente: " + First(Fields!nmCliente.Value, "DataSet_ReciboVenda")</Value>
+                <Value>="Cliente: " + First(Fields!pessoa.Value, "DataSet_Venda")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -173,13 +213,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.42758in</Width>
+              <Width>3.71825in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.42758in</Width>
+              <Width>1.09425in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.42758in</Width>
+              <Width>0.92088in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.92758in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -248,6 +291,36 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Desconto</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox5">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -283,21 +356,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="item">
+                    <Textbox Name="titulo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!item.Value</Value>
+                              <Value>=Fields!titulo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>item</rd:DefaultName>
+                      <rd:DefaultName>titulo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -313,21 +386,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Numero">
+                    <Textbox Name="quantidade">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Numero.Value</Value>
+                              <Value>=Fields!quantidade.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Numero</rd:DefaultName>
+                      <rd:DefaultName>quantidade</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -343,21 +416,51 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox6">
+                    <Textbox Name="desconto">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!desconto.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <rd:DefaultName>desconto</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="valor">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!valor.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>valor</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -380,6 +483,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -392,11 +496,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet_ReciboVenda</DataSetName>
+        <DataSetName>DataSet_VendaItens</DataSetName>
         <Top>1.67119cm</Top>
         <Left>1.03188cm</Left>
-        <Height>1.41167cm</Height>
-        <Width>18.49819cm</Width>
+        <Height>1.41168cm</Height>
+        <Width>16.91884cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -408,7 +512,7 @@
     <Height>4.20833in</Height>
     <Style />
   </Body>
-  <Width>8.48958in</Width>
+  <Width>8.67324in</Width>
   <Page>
     <PageHeader>
       <Height>4.6968cm</Height>
@@ -417,7 +521,7 @@
       <ReportItems>
         <Image Name="imgLogo">
           <Source>Database</Source>
-          <Value>=First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")</Value>
+          <Value>=First(Fields!Imagem.Value, "DataSet_instituicaoLogo")</Value>
           <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
           <Top>0.56083cm</Top>
@@ -425,7 +529,7 @@
           <Height>3.34222cm</Height>
           <Width>3.41313cm</Width>
           <Visibility>
-            <Hidden>=iIf(isNothing(First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")),true,false)</Hidden>
+            <Hidden>=iIf(isNothing(First(Fields!Imagem.Value, "DataSet_instituicaoLogo")),true,false)</Hidden>
           </Visibility>
           <Style>
             <Border>
@@ -531,7 +635,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Data: " + First(Fields!Data.Value, "DataSet_ReciboVenda")</Value>
+                  <Value>="Data: " + First(Fields!Data.Value, "DataSet_Venda")</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
