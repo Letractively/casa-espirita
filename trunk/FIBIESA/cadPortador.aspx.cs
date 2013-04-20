@@ -28,7 +28,7 @@ namespace Admin
             foreach (Portadores ltPor in por)
             {
                 hfId.Value = ltPor.Id.ToString();
-                txtCodigo.Text = ltPor.Codigo.ToString();
+                lblCodigo.Text = ltPor.Codigo.ToString();
                 txtDescricao.Text = ltPor.Descricao;
                 ddlBanco.SelectedValue = ltPor.BancoId.ToString();
                 CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
@@ -61,18 +61,12 @@ namespace Admin
 
             ddlBanco.SelectedIndex = 0;
         }
-        
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+                
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_por = 0;
-
-            CarregarAtributos();
-
+            
             if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -88,6 +82,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_por);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";   
             }
 
         }
@@ -103,7 +99,7 @@ namespace Admin
             Portadores portadores = new Portadores();
 
             portadores.Id = utils.ComparaIntComZero(hfId.Value);
-            portadores.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            portadores.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             portadores.Descricao = txtDescricao.Text;
             portadores.AgenciaId = utils.ComparaIntComNull(ddlAgencia.SelectedValue);
             portadores.BancoId = utils.ComparaIntComNull(ddlBanco.SelectedValue);

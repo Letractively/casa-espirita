@@ -55,6 +55,14 @@ namespace BusinessLayer
             return TiposDeAutoresDA.PesquisarDA(campo, valor);
         }
 
+        public List<TiposDeAutores> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            TiposDeAutoresDA tiposDeAutoresDA = new TiposDeAutoresDA();
+
+            return tiposDeAutoresDA.PesquisarBuscaDA(valor);
+        }
+
         public override List<Base> Pesquisar(string codDes)
         {
             TiposDeAutoresDA baiDA = new TiposDeAutoresDA();

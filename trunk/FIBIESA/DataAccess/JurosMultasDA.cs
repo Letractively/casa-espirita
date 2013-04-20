@@ -104,7 +104,7 @@ namespace DataAccess
             switch (campo.ToUpper())
             {
                 case "MESANO":
-                    consulta = string.Format("SELECT * FROM JUROSMULTAS WHERE MESANO = '{0}'", valor != null? Convert.ToDateTime(valor).ToString("MM/yyyy") : "");
+                    consulta = string.Format("SELECT * FROM JUROSMULTAS WHERE MESANO = CONVERT(DATETIME,'{0}',101)", valor != null? Convert.ToDateTime(valor).ToString("MM/yyyy") : "");
                     break;                
                 default:
                     consulta = "";

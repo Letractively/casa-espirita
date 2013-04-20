@@ -54,12 +54,25 @@ namespace DataAccess
 
             return Contas;
         }
+        
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM CONTAS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
         public bool InserirDA(Contas con)
         {
             SqlParameter[] paramsToSP = new SqlParameter[5];
 
-            paramsToSP[0] = new SqlParameter("@codigo", con.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", con.Descricao);
             paramsToSP[2] = new SqlParameter("@digito", con.Digito);
             paramsToSP[3] = new SqlParameter("@agenciaid", con.AgenciaId);
@@ -140,26 +153,18 @@ namespace DataAccess
                       
             return Contas;
         }
-
-        public List<Contas> PesquisarDA(string campo, string valor)
+                
+        public List<Contas> PesquisarBuscaDA(string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM CONTAS ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM CONTAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
-                    break;
-                case "DESCRICAO":
-                    consulta = string.Format("SELECT * FROM CONTAS WHERE DESCRICAO  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Contas> contas = CarregarObjContas(dr);
 

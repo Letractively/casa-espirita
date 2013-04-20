@@ -15,13 +15,10 @@
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            * Código:
+                            Código:
                         </td>
                         <td style="width: 120px" colspan="3">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="valCodigo" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="Informe o Código da Obra" 
-                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
+                           <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +35,7 @@
                     </tr>
                     <tr>
                         <td>
-                            &nbsp;Tipo de Obra:</td>
+                            * Tipo de Obra:</td>
                         <td>
                             <asp:DropDownList ID="ddlTipoObra" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>                       
@@ -47,7 +44,7 @@
                                 ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>                        
                         </td>
                         <td style="width: 120px">
-                            &nbsp;Origem:
+                            Origem:
                         </td>
                         <td style="width: 120px">
                             <asp:DropDownList ID="ddlOrigem" runat="server" CssClass="dropdownlist">
@@ -59,10 +56,10 @@
                             &nbsp;Número Edição:
                         </td>
                         <td style="width: 180px" >
-                            <asp:TextBox ID="txtNroEdicao" runat="server" CssClass="inputbox" Width="70px"></asp:TextBox>
+                            <asp:TextBox ID="txtNroEdicao" runat="server" CssClass="inputboxRight" Width="70px"></asp:TextBox>
                         </td>                    
                         <td>
-                            &nbsp;Editora:</td>
+                            Editora:</td>
                         <td>
                             <asp:DropDownList ID="ddlEditora" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>                       
@@ -70,28 +67,28 @@
                     </tr>
                     <tr>
                         <td style="width: 120px">
-                            &nbsp;ISBN:
+                            ISBN:
                         </td>
                         <td style="width: 150px">
                             <asp:TextBox ID="txtISBN" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                         <td style="width: 140px">
-                            &nbsp;Número de Páginas:
+                            Número de Páginas:
                         </td>
                         <td style="width: 120px">
-                            <asp:TextBox ID="txtNroPags" runat="server" CssClass="inputbox" Width="70px"></asp:TextBox>
+                            <asp:TextBox ID="txtNroPags" runat="server" CssClass="inputboxRight" Width="70px"></asp:TextBox>
                         </td>                        
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            &nbsp;Local Publicação:
+                            Local Publicação:
                         </td>
                         <td style="width: 180px">
                             <asp:TextBox ID="txtLocalPublic" runat="server" CssClass="inputbox" Width="204px" 
                                 MaxLength="100"></asp:TextBox>
                         </td>                    
                         <td style="width: 120px">
-                            &nbsp;Data Publicação:
+                            Data Publicação:
                         </td>
                         <td style="width: 120px">
                             <asp:TextBox ID="txtDataPublicacao" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                           
@@ -102,7 +99,7 @@
                         </tr>                                                          
                     <tr>
                         <td style="width: 140px">
-                            &nbsp;Data Reimpressão:
+                            Data Reimpressão:
                         </td>
                         <td style="width: 180px">
                             <asp:TextBox ID="txtDataReimpressao" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                           
@@ -111,15 +108,15 @@
                             </asp:CalendarExtender>                           
                         </td>  
                         <td style="width: 120px">
-                            &nbsp;Volume:
+                            Volume:
                         </td>
                         <td style="width: 120px">
-                            <asp:TextBox ID="txtVolume" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                            <asp:TextBox ID="txtVolume" runat="server" CssClass="inputboxRight" Width="110px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            &nbsp;Assuntos abordados:
+                            Assuntos abordados:
                         </td>
                         <td style="width: 120px" colspan="3">
                             <asp:TextBox ID="txtAssuntosAborda" runat="server" CssClass="inputbox" 

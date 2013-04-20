@@ -8,27 +8,21 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Cadastro de
-                    Tipos de Documentos</h2>
+                    Cadastro de Tipos de Documentos</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            *
                             Código:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                           <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            *
-                            Descrição:
+                            * Descrição:
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 

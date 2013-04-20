@@ -50,9 +50,16 @@ namespace BusinessLayer
 
         public List<NotasEntrada> PesquisarBL(int ntE)
         {
-            NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
+            NotasEntradaDA notasEntradaDA = new NotasEntradaDA();
 
-            return NotasEntradaDA.PesquisarDA(ntE);
+            return notasEntradaDA.PesquisarDA(ntE);
+        }
+
+        public List<NotasEntrada> PesquisarBuscaBL(string valor)
+        {
+            NotasEntradaDA notasEntradaDA = new NotasEntradaDA();
+
+            return notasEntradaDA.PesquisarBuscaDA(valor);
         }
                 
     }

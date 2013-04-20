@@ -17,10 +17,7 @@
                             * Código:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

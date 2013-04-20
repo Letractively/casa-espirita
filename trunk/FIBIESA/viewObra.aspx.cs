@@ -28,7 +28,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadObras"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -47,11 +47,8 @@ namespace Admin
             ObrasBL obraBL = new ObrasBL();
             List<Obras> obras;
 
-            if (campo != null && valor.Trim() != "")
-                obras = obraBL.PesquisarBL(campo, valor);
-            else
-                obras = obraBL.PesquisarBL();
-
+            obras = obraBL.PesquisarBuscaBL(valor);
+            
             foreach (Obras obrinha in obras)
             {
 
@@ -79,7 +76,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
 
@@ -90,7 +87,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgObras_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,7 +105,7 @@ namespace Admin
                 Obras obras = new Obras();
                 obras.Id = utils.ComparaIntComZero(dtgObras.DataKeys[e.RowIndex][0].ToString());
                 obraBL.ExcluirBL(obras);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

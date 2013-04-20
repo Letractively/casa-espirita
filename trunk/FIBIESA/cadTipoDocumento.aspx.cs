@@ -24,24 +24,20 @@ namespace Admin
             foreach (TiposDocumentos ltTdo in tiposDocumentos)
             {
                 hfId.Value = ltTdo.Id.ToString();
-                txtCodigo.Text = ltTdo.Codigo.ToString();
+                lblCodigo.Text = ltTdo.Codigo.ToString();
                 txtDescricao.Text = ltTdo.Descricao;
                 ddlAplicacao.SelectedValue = ltTdo.Aplicacao;
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+        
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_tdo = 0;
 
-            CarregarAtributos();
-
+        
             if (!IsPostBack)
             {
 
@@ -56,6 +52,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_tdo);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
 
@@ -70,7 +68,7 @@ namespace Admin
             TiposDocumentos tiposDocumentos = new TiposDocumentos();
 
             tiposDocumentos.Id = utils.ComparaIntComZero(hfId.Value);
-            tiposDocumentos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            tiposDocumentos.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             tiposDocumentos.Descricao = txtDescricao.Text;
             tiposDocumentos.Aplicacao = ddlAplicacao.SelectedValue;
 

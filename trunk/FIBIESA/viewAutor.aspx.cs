@@ -28,7 +28,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadAutores"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -45,11 +45,8 @@ namespace Admin
             AutoresBL autorBL = new AutoresBL();
             List<Autores> autores;
 
-            if (campo != null && valor.Trim() != "")
-                autores = autorBL.PesquisarBL(campo, valor);
-            else
-                autores = autorBL.PesquisarBL();
-
+            autores = autorBL.PesquisarBuscaBL(valor);
+            
             foreach (Autores autor in autores)
             {
 
@@ -75,7 +72,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -85,7 +82,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +100,7 @@ namespace Admin
                 Autores au = new Autores();
                 au.Id = utils.ComparaIntComZero(dtgAutores.DataKeys[e.RowIndex][0].ToString());
                 autBL.ExcluirBL(au);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -157,9 +154,7 @@ namespace Admin
                 dtgAutores.DataBind();
             }
         }
-       
 
-
-       
+               
     }
 }

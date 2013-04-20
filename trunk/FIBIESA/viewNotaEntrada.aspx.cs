@@ -27,7 +27,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadNotaE"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -43,11 +43,8 @@ namespace Admin
             NotasEntradaBL ntEBL = new NotasEntradaBL();
             List<NotasEntrada> notasEntrada = ntEBL.PesquisarBL();
 
-            if (campo != null && valor.Trim() != "")
-                notasEntrada = ntEBL.PesquisarBL(campo, valor);
-            else
-                notasEntrada = ntEBL.PesquisarBL();
-
+            notasEntrada = ntEBL.PesquisarBuscaBL(valor);
+            
             foreach (NotasEntrada ltNtE in notasEntrada)
             {
                 DataRow linha = tabela.NewRow();
@@ -69,7 +66,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -85,7 +82,7 @@ namespace Admin
                 NotasEntrada notaEntrada = new NotasEntrada();
                 notaEntrada.Id = utils.ComparaIntComZero(dtgNotaEntrada.DataKeys[e.RowIndex][0].ToString());
                 ntEBL.ExcluirBL(notaEntrada);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -100,7 +97,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+            Pesquisar(txtBusca.Text); 
         }
 
         protected void dtgNotaEntrada_PageIndexChanging(object sender, GridViewPageEventArgs e)

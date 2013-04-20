@@ -38,7 +38,7 @@ namespace Admin
             foreach (TiposObras ltBai in tipos)
             {
                 hfId.Value = ltBai.Id.ToString();
-                txtCodigo.Text = ltBai.Codigo.ToString();
+                lblCodigo.Text = ltBai.Codigo.ToString();
                 txtDescricao.Text = ltBai.Descricao;
                 txtQtdDias.Text = ltBai.QtdDias.ToString();
             }
@@ -46,7 +46,6 @@ namespace Admin
         }
         private void CarregarAtributos()
         {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtQtdDias.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         #endregion
@@ -71,6 +70,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
 
@@ -85,7 +86,7 @@ namespace Admin
             TiposObrasBL tipoBL = new TiposObrasBL();
             TiposObras tipos = new TiposObras();
             tipos.Id = utils.ComparaIntComZero(hfId.Value);
-            tipos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            tipos.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             tipos.Descricao = txtDescricao.Text;
             tipos.QtdDias = utils.ComparaIntComZero(txtQtdDias.Text);
 
