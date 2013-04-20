@@ -81,8 +81,8 @@ namespace Admin
                 txtNroEdicao.Text = (string)dsOb.Tables[0].Rows[0]["nroedicao"].ToString();
                 txtNroPags.Text = (string)dsOb.Tables[0].Rows[0]["nropaginas"].ToString();
                 txtVolume.Text = (string)dsOb.Tables[0].Rows[0]["volume"].ToString();
-                txtDataReimpressao.Text = (DateTime)dsOb.Tables[0].Rows[0]["datareimpressao"] != null ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datareimpressao"]).ToString("dd/MM/yyyy") : "";
-                txtDataPublicacao.Text = (DateTime)dsOb.Tables[0].Rows[0]["datapublicacao"] != null ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datapublicacao"]).ToString("dd/MM/yyyy") : "";
+                txtDataReimpressao.Text = dsOb.Tables[0].Rows[0]["datareimpressao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datareimpressao"]).ToString("dd/MM/yyyy") : "";
+                txtDataPublicacao.Text = dsOb.Tables[0].Rows[0]["datapublicacao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datapublicacao"]).ToString("dd/MM/yyyy") : "";
                 txtAssuntosAborda.Text = (string)dsOb.Tables[0].Rows[0]["assuntosaborda"].ToString();
                 ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();
                 ddlOrigem.SelectedValue = (string)dsOb.Tables[0].Rows[0]["origemid"].ToString();
