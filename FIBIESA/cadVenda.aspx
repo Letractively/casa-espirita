@@ -12,7 +12,7 @@
             <div class="contentbox">
                 <table>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 150px">
                             Cliente:
                         </td>
                         <td style="width: 400px" colspan="3">
@@ -28,7 +28,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 150px">
+                            *
                             Item:
                         </td>
                         <td style="width: 400px" colspan="3">
@@ -44,13 +45,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 150px">
+                            *
                             Valor Unitário:
                         </td>
                         <td style="width: 400px" >
                             <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxRight" Width="110px"></asp:TextBox>   
                         </td>                         
-                        <td style="width: 140px">
+                        <td style="width: 150px">
                             Desconto:
                         </td>
                         <td style="width: 400px"> 
@@ -59,7 +61,8 @@
                        
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 150px">
+                            *
                             Quantidade:
                         </td>
                         <td style="width: 400px" colspan="3">
@@ -72,7 +75,8 @@
                         </td>                          
                     </tr>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 150px">
+                            *
                             Valor:
                         </td>
                         <td style="width: 400px">

@@ -28,7 +28,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadTipoAutor"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
             
@@ -43,10 +43,7 @@ namespace Admin
             TiposDeAutoresBL tautorBL = new TiposDeAutoresBL();
             List<TiposDeAutores> tiposAutores;
 
-            if (campo != null && valor.Trim() != "")
-                tiposAutores = tautorBL.PesquisarBL(campo, valor);
-            else
-                tiposAutores = tautorBL.PesquisarBL();
+            tiposAutores = tautorBL.PesquisarBuscaBL(valor);
                        
             foreach (TiposDeAutores tipA in tiposAutores)
             {
@@ -69,7 +66,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
      
@@ -80,7 +77,7 @@ namespace Admin
             
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
+            Pesquisar(txtBusca.Text);     
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,7 +95,7 @@ namespace Admin
                 TiposDeAutores tiposAu = new TiposDeAutores();
                 tiposAu.Id = utils.ComparaIntComZero(dtgTiposAutores.DataKeys[e.RowIndex][0].ToString());
                 tiposaBL.ExcluirBL(tiposAu);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

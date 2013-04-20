@@ -28,7 +28,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadCon"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -45,12 +45,9 @@ namespace Admin
 
             ContasBL conBL = new ContasBL();
             List<Contas> contas;
-
-            if (campo != null && valor.Trim() != "")
-                contas = conBL.PesquisarBL(campo, valor);
-            else
-                contas = conBL.PesquisarBL();
-
+                        
+            contas = conBL.PesquisarBuscaBL(valor);
+            
             foreach (Contas ltCon in contas)
             {
                 DataRow linha = tabela.NewRow();
@@ -75,7 +72,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -98,7 +95,7 @@ namespace Admin
                 Contas contas = new Contas();
                 contas.Id = utils.ComparaIntComZero(dtgContas.DataKeys[e.RowIndex][0].ToString());
                 conBL.ExcluirBL(contas);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -106,7 +103,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+            Pesquisar(txtBusca.Text); 
         }
 
         protected void dtgContas_PageIndexChanging(object sender, GridViewPageEventArgs e)

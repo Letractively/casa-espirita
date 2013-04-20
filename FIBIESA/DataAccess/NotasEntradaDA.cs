@@ -118,6 +118,25 @@ namespace DataAccess
             return notaEnt;
         }
 
+        public List<NotasEntrada> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM NOTAENTRADA ");
+                      
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE NUMERO = {0} OR  SERIE = {1} ", utils.ComparaIntComZero(valor), 
+                                                                                       utils.ComparaShortComZero(valor)));
+                                                                                                                
+
+            consulta.Append(" ORDER BY NUMERO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<NotasEntrada> notaEntrada = CarregarObjNotaEntrada(dr);
+
+            return notaEntrada;
+        }
+
         public List<NotasEntrada> PesquisarDA(int id_ntE)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

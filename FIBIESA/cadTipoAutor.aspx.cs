@@ -37,23 +37,18 @@ namespace Admin
             foreach (TiposDeAutores ltBai in tipos)
             {
                 hfId.Value = ltBai.Id.ToString();
-                txtCodigo.Text = ltBai.Codigo.ToString();
+                lblCodigo.Text = ltBai.Codigo.ToString();
                 txtDescricao.Text = ltBai.Descricao;
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+        
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_bai = 0;
-
-            CarregarAtributos();
-
+                       
             if (!IsPostBack)
             {
 
@@ -68,6 +63,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
 
@@ -82,7 +79,7 @@ namespace Admin
             TiposDeAutoresBL tipoauBL = new TiposDeAutoresBL();
             TiposDeAutores tipos = new TiposDeAutores();
             tipos.Id = utils.ComparaIntComZero(hfId.Value);
-            tipos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            tipos.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             tipos.Descricao = txtDescricao.Text;
 
             if (tipos.Id > 0)

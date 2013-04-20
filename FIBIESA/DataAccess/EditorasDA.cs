@@ -31,13 +31,26 @@ namespace DataAccess
 
             return editoras;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM EDITORAS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
 
         public bool InserirDA(Editoras instancia)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
 
             try
@@ -109,28 +122,22 @@ namespace DataAccess
                 CommandType.Text, string.Format(@"SELECT * FROM EDITORAS  WHERE ID = {0}", id));
             return CarregarObjEditoras(dr);
         }
-
-        public List<Editoras> PesquisarDA(string campo, string valor)
+                
+        public List<Editoras> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM EDITORAS ");
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM EDITORAS ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta.Append(string.Format("WHERE CODIGO = {0}", utils.ComparaIntComZero(valor)));
-                    break;
-                case "DESCRICAO":
-                    consulta.Append(string.Format("WHERE DESCRICAO  LIKE '%{0}%'", valor));
-                    break;
-                default:
-                    break;
-            }
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
-            SqlDataReader dr = SqlHelper.ExecuteReader(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, consulta.ToString());
+            consulta.Append(" ORDER BY CODIGO ");
 
-            return CarregarObjEditoras(dr);
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Editoras> editoras = CarregarObjEditoras(dr);
+
+            return editoras;
         }
 
         public override List<Base> Pesquisar(string descricao)

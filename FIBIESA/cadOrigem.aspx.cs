@@ -36,22 +36,17 @@ namespace Admin
             foreach (Origens orig in origens)
             {
                 hfId.Value = orig.Id.ToString();
-                txtCodigo.Text = orig.Codigo.ToString();
+                lblCodigo.Text = orig.Codigo.ToString();
                 txtDescricao.Text = orig.Descricao;
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+        
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_origem = 0;
-
-            CarregarAtributos();
 
             if (!IsPostBack)
             {
@@ -67,6 +62,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_origem);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
 
@@ -81,7 +78,7 @@ namespace Admin
             OrigensBL origemBL = new OrigensBL();
             Origens origens = new Origens();
             origens.Id = utils.ComparaIntComZero(hfId.Value);
-            origens.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            origens.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             origens.Descricao = txtDescricao.Text;
 
             if (origens.Id > 0)

@@ -28,7 +28,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadTipD"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -44,11 +44,8 @@ namespace Admin
             TiposDocumentosBL tdoBL = new TiposDocumentosBL();           
             List<TiposDocumentos> tDoc;
 
-            if (campo != null && valor.Trim() != "")
-                tDoc = tdoBL.PesquisarBL(campo, valor);
-            else
-                tDoc = tdoBL.PesquisarBL();
-            
+            tDoc = tdoBL.PesquisarBuscaBL(valor);
+                        
             foreach (TiposDocumentos ltTdoc in tDoc)
             {
                 DataRow linha = tabela.NewRow();
@@ -68,7 +65,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }
                
 
@@ -85,7 +82,7 @@ namespace Admin
                 TiposDocumentos tiposDocumento = new TiposDocumentos();
                 tiposDocumento.Id = utils.ComparaIntComZero(dtgTipoDocumento.DataKeys[e.RowIndex][0].ToString());
                 tdoBL.ExcluirBL(tiposDocumento);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -150,7 +147,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
     }
 }

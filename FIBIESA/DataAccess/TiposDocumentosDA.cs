@@ -32,13 +32,26 @@ namespace DataAccess
             }
             return tiposDocumentos;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM TIPOSDOCUMENTOS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
 
         public bool InserirDA(TiposDocumentos tdo)
         {
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
-            paramsToSP[0] = new SqlParameter("@codigo", tdo.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", tdo.Descricao);
             paramsToSP[2] = new SqlParameter("@aplicacao", tdo.Aplicacao);
 
@@ -117,6 +130,23 @@ namespace DataAccess
             List<TiposDocumentos> tiposDoc = CarregarObjTiposDocumentos(dr);
 
             return tiposDoc;
+        }
+
+        public List<TiposDocumentos> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TIPOSDOCUMENTOS ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<TiposDocumentos> tipoDoc = CarregarObjTiposDocumentos(dr);
+
+            return tipoDoc;
         }
 
         public override List<Base> Pesquisar(string descricao)

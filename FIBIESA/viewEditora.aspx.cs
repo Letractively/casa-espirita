@@ -29,7 +29,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadEditoras"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
             
@@ -45,11 +45,8 @@ namespace Admin
             EditorasBL ediBL = new EditorasBL();            
             List<Editoras> editoras;
 
-            if (campo != null && valor.Trim() != "")
-                editoras = ediBL.PesquisarBL(campo, valor);
-            else
-                editoras = ediBL.PesquisarBL();
-                       
+            editoras = ediBL.PesquisarBuscaBL(valor);
+                                  
             foreach (Editoras bai in editoras)
             {
                 
@@ -72,9 +69,8 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
-
      
         protected void btnInserir_Click(object sender, EventArgs e)
         {
@@ -83,7 +79,7 @@ namespace Admin
             
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);     
+            Pesquisar(txtBusca.Text);     
         }
 
         protected void dtgEditoras_SelectedIndexChanged(object sender, EventArgs e)
@@ -101,7 +97,7 @@ namespace Admin
                 Editoras editoras = new Editoras();
                 editoras.Id = utils.ComparaIntComZero(dtgEditoras.DataKeys[e.RowIndex][0].ToString());
                 edBL.ExcluirBL(editoras);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

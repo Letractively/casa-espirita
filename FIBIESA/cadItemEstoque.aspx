@@ -70,15 +70,7 @@
                         <td colspan="2">
                             <asp:CheckBox ID="chkControlaEstoque" runat="server" Text="Controla Estoque" />
                         </td>                       
-                    </tr>
-                    <tr>
-                        <td style="width: 120px">
-                           Quantidade:
-                        </td>
-                        <td colspan="3">
-                            <asp:TextBox ID="txtQtd" runat="server" Width="100px" CssClass="inputboxRight"></asp:TextBox>
-                        </td>
-                    </tr>                
+                    </tr>                                  
                     <tr>                        
                         <td style="width: 120px">
                             Custo Médio:

@@ -9,28 +9,28 @@ namespace BusinessLayer
 {
     public class AutoresBL
     {
-        public bool InserirBL(Autores bai)
+        public bool InserirBL(Autores aut)
         {
             /*criar as regras de negocio*/
             AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.InserirDA(bai);
+            return autoresDA.InserirDA(aut);
         }
 
-        public bool EditarBL(Autores bai)
+        public bool EditarBL(Autores aut)
         {
             /*criar as regras de negocio*/
             AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.EditarDA(bai);
+            return autoresDA.EditarDA(aut);
         }
 
-        public bool ExcluirBL(Autores bai)
+        public bool ExcluirBL(Autores aut)
         {
             /*criar as regras de negocio*/
             AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.ExcluirDA(bai);
+            return autoresDA.ExcluirDA(aut);
         }
 
         public List<Autores> PesquisarBL()
@@ -41,11 +41,19 @@ namespace BusinessLayer
             return autoresDA.PesquisarDA();
         }
 
-        public List<Autores> PesquisarBL(int bai)
+        public List<Autores> PesquisarBL(int aut)
         {
             AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.PesquisarDA(bai);
+            return autoresDA.PesquisarDA(aut);
+        }
+
+        public List<Autores> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            AutoresDA autoresDA = new AutoresDA();
+
+            return autoresDA.PesquisarBuscaDA(valor);
         }
 
         public List<Autores> PesquisarBL(string campo, string valor)

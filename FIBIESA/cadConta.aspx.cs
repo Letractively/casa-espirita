@@ -38,7 +38,7 @@ namespace Admin
             foreach (Contas ltCon in contas)
             {
                 hfId.Value = ltCon.Id.ToString();
-                txtCodigo.Text = ltCon.Codigo.ToString();
+                lblCodigo.Text = ltCon.Codigo.ToString();
                 txtDescricao.Text = ltCon.Descricao;
                 txtTitular.Text = ltCon.Titular;
                 txtDigito.Text = ltCon.Digito;
@@ -46,17 +46,12 @@ namespace Admin
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+       
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_con = 0;
-
-            CarregarAtributos();
 
             if (!IsPostBack)
             {
@@ -74,6 +69,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_con);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
                
@@ -88,7 +85,7 @@ namespace Admin
             Contas contas = new Contas();
 
             contas.Id = utils.ComparaIntComZero(hfId.Value);
-            contas.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            contas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             contas.Descricao = txtDescricao.Text;
             contas.Titular = txtTitular.Text;
             contas.AgenciaId = utils.ComparaIntComZero(ddlAgencia.SelectedValue);

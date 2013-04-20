@@ -29,7 +29,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadPor"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -50,12 +50,9 @@ namespace Admin
 
             PortadoresBL porBL = new PortadoresBL();
             List<Portadores> portadores;
-
-            if (campo != null && valor.Trim() != "")
-                portadores = porBL.PesquisarBL(campo, valor);
-            else
-                portadores = porBL.PesquisarBL();
-
+                        
+            portadores = porBL.PesquisarBuscaBL(valor);
+            
             foreach (Portadores ltPor in portadores)
             {
                 DataRow linha = tabela.NewRow();
@@ -80,7 +77,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }           
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -96,7 +93,7 @@ namespace Admin
                 Portadores por = new Portadores();
                 por.Id = utils.ComparaIntComZero(dtgPortadores.DataKeys[e.RowIndex][0].ToString());
                 porBL.ExcluirBL(por);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -111,7 +108,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);    
+            Pesquisar(txtBusca.Text);    
         }
 
         protected void dtgPortadores_PageIndexChanging(object sender, GridViewPageEventArgs e)

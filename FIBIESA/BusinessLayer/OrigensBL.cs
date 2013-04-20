@@ -55,6 +55,14 @@ namespace BusinessLayer
             return origensDA.PesquisarDA(campo, valor);
         }
 
+        public List<Origens> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            OrigensDA origensDA = new OrigensDA();
+
+            return origensDA.PesquisarBuscaDA(valor);
+        }
+
         public override List<Base> Pesquisar(string codDes)
         {
             OrigensDA origensDA = new OrigensDA();

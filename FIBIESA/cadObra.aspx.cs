@@ -74,7 +74,7 @@ namespace Admin
             if (dsOb.Tables[0].Rows.Count != 0)
             {
                 hfId.Value = (string)dsOb.Tables[0].Rows[0]["id"].ToString();
-                txtCodigo.Text = (string)dsOb.Tables[0].Rows[0]["codigo"].ToString();
+                lblCodigo.Text = (string)dsOb.Tables[0].Rows[0]["codigo"].ToString();
                 txtTitulo.Text = (string)dsOb.Tables[0].Rows[0]["titulo"].ToString();
                 txtISBN.Text = (string)dsOb.Tables[0].Rows[0]["isbn"].ToString();
                 txtLocalPublic.Text = (string)dsOb.Tables[0].Rows[0]["localpublicacao"].ToString();
@@ -93,15 +93,12 @@ namespace Admin
 
 
         private void CarregarAtributos()
-        {            
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        {   
             txtNroEdicao.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNroPags.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtVolume.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-
             txtDataPublicacao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-           
+            txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");           
         }
 
         #endregion
@@ -130,6 +127,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";
             }
         }
 
@@ -144,7 +143,7 @@ namespace Admin
             ObrasBL obraBL = new ObrasBL();
             Obras obras = new Obras();
             obras.Id = utils.ComparaIntComZero(hfId.Value);
-            obras.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            obras.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             obras.Titulo = txtTitulo.Text;
             obras.NroEdicao = utils.ComparaIntComNull(txtNroEdicao.Text);
             obras.EditoraId = utils.ComparaIntComNull(ddlEditora.SelectedValue);

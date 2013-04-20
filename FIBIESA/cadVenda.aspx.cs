@@ -73,6 +73,18 @@ namespace FIBIESA
             lblDesItem.Text = "";
         }
 
+        private void LimparCamposGeral()
+        {
+            LimparCampos();
+            txtValorTotal.Text = "";
+            txtQtdItens.Text = "";
+            txtCliente.Text = "";
+            lblDesCliente.Text = "";
+            hfIdPessoa.Value = "";
+            dtgItens.DataSource = null;
+            dtgItens.DataBind(); 
+        }
+
         public void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
@@ -204,6 +216,7 @@ namespace FIBIESA
                             if (venItBL.InserirBL(vendaItens))
                             {
                                 ExibirMensagem("Venda gravada com sucesso !");
+                                LimparCamposGeral();
                             }
                             else
                                 ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");

@@ -48,11 +48,12 @@ namespace BusinessLayer
             return editorasDA.PesquisarDA(bai);
         }
 
-        public List<Editoras> PesquisarBL(string campo, string valor)
+        public List<Editoras> PesquisarBuscaBL(string valor)
         {
+            /*criar as regras de negocio*/
             EditorasDA editorasDA = new EditorasDA();
 
-            return editorasDA.PesquisarDA(campo, valor);
+            return editorasDA.PesquisarBuscaDA(valor);
         }
 
         public override List<Base> Pesquisar(string codDes)

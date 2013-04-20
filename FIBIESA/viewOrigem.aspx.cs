@@ -28,7 +28,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadOrigem"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -42,12 +42,9 @@ namespace Admin
             
             OrigensBL origemBL = new OrigensBL();
             List<Origens> origens;
-
-            if (campo != null && valor.Trim() != "")
-                origens = origemBL.PesquisarBL(campo, valor);
-            else
-                origens = origemBL.PesquisarBL();
-
+                        
+            origens = origemBL.PesquisarBuscaBL(valor);
+            
             foreach (Origens bai in origens)
             {
 
@@ -70,7 +67,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
 
@@ -81,7 +78,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgOrigens_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +96,7 @@ namespace Admin
                 Origens origens = new Origens();
                 origens.Id = utils.ComparaIntComZero(dtgOrigens.DataKeys[e.RowIndex][0].ToString());
                 origemBL.ExcluirBL(origens);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

@@ -32,13 +32,26 @@ namespace DataAccess
 
             return bancos;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM BANCOS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
 
         public bool InserirDA(Bancos ban)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", ban.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao);
 
             try
@@ -113,25 +126,17 @@ namespace DataAccess
             return bancos;
         }
 
-        public List<Bancos> PesquisarDA(string campo, string valor)
+        public List<Bancos> PesquisarBuscaDA(string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM BANCOS ");
 
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM BANCOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
-                    break;
-                case "DESCRICAO":
-                    consulta = string.Format("SELECT * FROM BANCOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Bancos> bancos = CarregarObjBanco(dr);
 

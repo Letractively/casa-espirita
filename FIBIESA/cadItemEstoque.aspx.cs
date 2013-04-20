@@ -31,8 +31,7 @@ namespace Admin
         }
         private void CarregarAtributos()
         {
-            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtQtd.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
             txtQtdMin.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtVlrMedio.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");         
@@ -69,8 +68,7 @@ namespace Admin
         {
             hfId.Value = "";
             lblDesItem.Text = "";
-            txtData.Text = "";            
-            txtQtd.Text = "";
+            txtData.Text = ""; 
             txtQtdMin.Text = "";
             txtVlrMedio.Text = "";
             txtVlrVenda.Text = "";

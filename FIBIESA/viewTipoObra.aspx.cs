@@ -29,7 +29,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadTiposObras"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -46,12 +46,9 @@ namespace Admin
 
             TiposObrasBL tiposBL = new TiposObrasBL();
             List<TiposObras> tipos;
-
-            if (campo != null && valor.Trim() != "")
-                tipos = tiposBL.PesquisarBL(campo, valor);
-            else
-                tipos = tiposBL.PesquisarBL();
-
+                        
+            tipos = tiposBL.PesquisarBuscaBL(valor);
+            
             foreach (TiposObras tipoObra in tipos)
             {
 
@@ -74,7 +71,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
 
@@ -85,7 +82,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgTiposObras_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +100,7 @@ namespace Admin
                 TiposObras tipos = new TiposObras();
                 tipos.Id = utils.ComparaIntComZero(dtgTiposObras.DataKeys[e.RowIndex][0].ToString());
                 tipoBL.ExcluirBL(tipos);
-                Pesquisar(null, null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

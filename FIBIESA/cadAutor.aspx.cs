@@ -25,19 +25,14 @@ namespace Admin
             foreach (Autores ltAutor in autores)
             {
                 hfId.Value = ltAutor.Id.ToString();
-                txtCodigo.Text = ltAutor.Codigo.ToString();
+                lblCodigo.Text = ltAutor.Codigo.ToString();
                 txtDescricao.Text = ltAutor.Descricao;
                 ddlTiposAutores.SelectedValue = ltAutor.TipoId.ToString();
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
         #endregion
-
-
+        
         private void CarregaTiposAutores()
         {
             TiposDeAutoresBL tipos = new TiposDeAutoresBL();
@@ -52,8 +47,7 @@ namespace Admin
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            CarregarAtributos();
+        {            
             if (!IsPostBack)
             {
                 this.CarregaTiposAutores();
@@ -71,6 +65,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";  
             }
         }
 
@@ -85,7 +81,7 @@ namespace Admin
             AutoresBL auBL = new AutoresBL();
             Autores aut = new Autores();
             aut.Id = utils.ComparaIntComZero(hfId.Value);
-            aut.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            aut.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             aut.Descricao = txtDescricao.Text;
             aut.TipoId = utils.ComparaIntComZero(ddlTiposAutores.SelectedValue);
 

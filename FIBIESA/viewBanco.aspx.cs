@@ -29,7 +29,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadBan"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
 
@@ -45,11 +45,8 @@ namespace Admin
 
             List<Bancos> bancos;
 
-            if (campo != null && valor.Trim() != "")
-                bancos = banBL.PesquisarBL(campo, valor);
-            else
-                bancos = banBL.PesquisarBL();
-
+            bancos = banBL.PesquisarBuscaBL(valor);
+            
             foreach (Bancos ban in bancos)
             {
 
@@ -71,7 +68,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                Pesquisar(null,null);
+                Pesquisar(null);
         }
 
      
@@ -83,7 +80,7 @@ namespace Admin
                 Bancos bancos = new Bancos();
                 bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
                 banBL.ExcluirBL(bancos);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -155,7 +152,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
+            Pesquisar(txtBusca.Text);
         }
     }
 }

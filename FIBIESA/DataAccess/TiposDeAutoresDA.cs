@@ -31,12 +31,25 @@ namespace DataAccess
 
             return tipoAutor;
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM TIPOSDEAUTORES "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
         public bool InserirDA(TiposDeAutores instancia)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", instancia.Codigo);
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", instancia.Descricao);
 
             try
@@ -130,6 +143,23 @@ namespace DataAccess
                 CommandType.Text, consulta.ToString());
 
             return CarregarObjTiposAu(dr);
+        }
+
+        public List<TiposDeAutores> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TIPOSDEAUTORES ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<TiposDeAutores> tipoAutor = CarregarObjTiposAu(dr);
+
+            return tipoAutor;
         }
 
         public override List<Base> Pesquisar(string descricao)

@@ -56,6 +56,14 @@ namespace BusinessLayer
             return varDA.PesquisarDA(campo, valor);
         }
 
+        public List<Exemplares> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            ExemplaresDA exeDA = new ExemplaresDA();
+
+            return exeDA.PesquisarBuscaDA(valor);
+        }
+
         public override List<Base> Pesquisar(string codDes)
         {
             ExemplaresDA varDA = new ExemplaresDA();

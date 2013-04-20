@@ -41,6 +41,14 @@ namespace BusinessLayer
             return ageDA.PesquisarDA();
         }
 
+        public List<Agencias> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            AgenciasDA ageDA = new AgenciasDA();
+
+            return ageDA.PesquisarBuscaDA(valor);
+        }
+
         public List<Agencias> PesquisarBL(int age)
         {
             AgenciasDA ageDA = new AgenciasDA();
@@ -54,14 +62,7 @@ namespace BusinessLayer
 
             return ageDA.PesquisarBanDA(id_ban); 
         }
-
-        public List<Agencias> PesquisarBL(string campo, string valor)
-        {
-            AgenciasDA agenciaDA = new AgenciasDA();
-
-            return agenciaDA.PesquisarDA(campo, valor);
-        }
-
+        
         public override List<Base> Pesquisar(string codDes)
         {
             AgenciasDA ageDA = new AgenciasDA();

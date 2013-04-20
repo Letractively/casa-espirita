@@ -6,19 +6,16 @@
 <div id="content">
         		<div class="container half left">
                 	<div class="conthead">
-                    	<h2>CadaCadastro de Origens de Exemplares</h2>
+                    	<h2>Cadastro de Origens de Exemplares</h2>
             </div>
             <div class="contentbox">
                 <table>
                     <tr>
                         <td style="width: 140px">
-                            * Código:
-                        >
+                            Código:
+                        </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="txtCodigo" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

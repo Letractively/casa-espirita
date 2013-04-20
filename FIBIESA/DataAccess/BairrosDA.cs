@@ -161,7 +161,7 @@ namespace DataAccess
         {
             StringBuilder consulta = new StringBuilder(@"SELECT * FROM BAIRROS ");
 
-            if (valor != "")
+            if (valor != "" && valor != null)
                 consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
             consulta.Append(" ORDER BY CODIGO ");

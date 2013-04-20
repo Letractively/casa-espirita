@@ -14,14 +14,7 @@
                     <tr>
                         <td>
                             <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox"></asp:TextBox>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                                <asp:ListItem Value="NUMERO">Número</asp:ListItem>
-                                <asp:ListItem Value="SERIE">Série</asp:ListItem>
-                                <asp:ListItem Value="DATA">Data</asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
+                        </td>                        
                         <td>
                             <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                                 onclick="btnBusca_Click" />
@@ -45,7 +38,7 @@
                                     AllowSorting="True" GridLines="None" 
                                     onpageindexchanging="dtgNotaEntrada_PageIndexChanging" 
                                     onrowdatabound="dtgNotaEntrada_RowDataBound" 
-                                    onsorting="dtgNotaEntrada_Sorting">
+                                    onsorting="dtgNotaEntrada_Sorting" Width="350px">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

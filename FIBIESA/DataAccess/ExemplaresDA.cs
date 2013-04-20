@@ -151,6 +151,23 @@ namespace DataAccess
             return CarregarObjExemplares(dr);
         }
 
+        public List<Exemplares> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY O.CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Exemplares> exemplares = CarregarObjExemplares(dr);
+
+            return exemplares;
+        }
+
         public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(

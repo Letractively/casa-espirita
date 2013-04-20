@@ -24,23 +24,18 @@ namespace Admin
             foreach (Bancos ltBan in bancos)
             {
                 hfId.Value = ltBan.Id.ToString();
-                txtCodigo.Text = ltBan.Codigo.ToString();
+                lblCodigo.Text = ltBan.Codigo.ToString();
                 txtDescricao.Text = ltBan.Descricao;
             }
 
         }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
+        
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_ban = 0;
-
-            CarregarAtributos();
-
+                        
             if (!IsPostBack)
             {
 
@@ -55,6 +50,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_ban);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente."; 
             }
         }
 
@@ -69,7 +66,7 @@ namespace Admin
             Bancos bancos = new Bancos();
 
             bancos.Id = utils.ComparaIntComZero(hfId.Value);
-            bancos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            bancos.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             bancos.Descricao = txtDescricao.Text;
 
             if (bancos.Id > 0)
