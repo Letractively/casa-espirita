@@ -17,11 +17,6 @@
                     ToolTip="Pesquisar por"></asp:TextBox>
                 </td>
                 <td>
-                <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">                 
-                    <asp:ListItem Value="NOME">Nome</asp:ListItem>
-                </asp:DropDownList>
-                </td>
-                <td>
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     OnClick="btnBusca_Click" />
                 </td>
@@ -41,8 +36,7 @@
                                     BorderWidth="1px" CellPadding="3" onrowdeleting="dtgUsuarios_RowDeleting" 
                                     onselectedindexchanged="dtgUsuarios_SelectedIndexChanged" 
                                     DataKeyNames="ID" AllowSorting="True" GridLines="None" 
-                                    onpageindexchanging="dtgUsuarios_PageIndexChanging" 
-                                    ShowHeaderWhenEmpty="True" onrowdatabound="dtgUsuarios_RowDataBound" 
+                                    onpageindexchanging="dtgUsuarios_PageIndexChanging" onrowdatabound="dtgUsuarios_RowDataBound" 
                                     onsorting="dtgUsuarios_Sorting">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">

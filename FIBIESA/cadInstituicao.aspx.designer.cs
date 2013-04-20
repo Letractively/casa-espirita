@@ -121,15 +121,6 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
-        /// txtDDD control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDDD;
-        
-        /// <summary>
         /// txttelefone control.
         /// </summary>
         /// <remarks>
@@ -157,58 +148,31 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtCep;
         
         /// <summary>
-        /// txtCidade control.
+        /// ddlUF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCidade;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUF;
         
         /// <summary>
-        /// btnPesCidade control.
+        /// ddlCidades control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesCidade;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidades;
         
         /// <summary>
-        /// lblDesCidade control.
+        /// ddlBairro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesCidade;
-        
-        /// <summary>
-        /// txtBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBairro;
-        
-        /// <summary>
-        /// btnPesBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesBairro;
-        
-        /// <summary>
-        /// lblDesBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesBairro;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBairro;
         
         /// <summary>
         /// txtEndereco control.
@@ -290,24 +254,6 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
-        
-        /// <summary>
-        /// hfIdCidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdCidade;
-        
-        /// <summary>
-        /// hfIdBairro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdBairro;
         
         /// <summary>
         /// hfIdInstLogo control.

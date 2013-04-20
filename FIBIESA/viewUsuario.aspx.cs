@@ -28,7 +28,7 @@ namespace Admin
             set { Session["_dtbPesquisa_cadUsu"] = value; }
         }
 
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -55,11 +55,8 @@ namespace Admin
             UsuariosBL usuBL = new UsuariosBL();           
             List<Usuarios> usuarios;
 
-            if (campo != null && valor.Trim() != "")
-                usuarios = usuBL.PesquisarBL(campo, valor);
-            else
-                usuarios = usuBL.PesquisarBL();
-
+            usuarios = usuBL.PesquisarBuscaBL(valor);
+           
             foreach (Usuarios usu in usuarios)
             {
                 DataRow linha = tabela.NewRow();
@@ -86,12 +83,12 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-                Pesquisar(null, null);
+                Pesquisar(null);
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-           Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+           Pesquisar(txtBusca.Text); 
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -108,7 +105,7 @@ namespace Admin
 
                 usuarios.Id = utils.ComparaIntComZero(dtgUsuarios.DataKeys[e.RowIndex][0].ToString());
                 usuBL.ExcluirBL(usuarios);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

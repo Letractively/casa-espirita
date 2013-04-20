@@ -12,7 +12,7 @@
                     Cadastro de Instituições</h2>
             </div>
             <div class="contentbox">
-                <table>
+               <table>
                     <tr>
                         <td>
                             <asp:TabContainer ID="tcInstituicao" runat="server" ActiveTabIndex="0">
@@ -72,28 +72,15 @@
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
-                                            <tr valign="middle">
-                                                <td colspan="2">
-                                                    <table>
-                                                        <tr>
-                                                            <td style="width: 135px">
-                                                                DDD:
-                                                            </td>
-                                                            <td style="width: 100px">
-                                                                <asp:TextBox ID="txtDDD" runat="server" CssClass="inputbox" MaxLength="10" 
-                                                                    Width="35px"></asp:TextBox>                                                                                                                    
-                                                            </td>
-                                                            <td style="width: 80px">
-                                                                Telefone:
-                                                            </td>
-                                                            <td style="width: 100px">
-                                                                <asp:TextBox ID="txttelefone" runat="server" CssClass="inputbox" MaxLength="20" 
-                                                                    Width="100px"></asp:TextBox>   
-                                                            </td>                                                            
-                                                        </tr>
-                                                    </table>
-                                                </td>                                                
-                                            </tr>
+                                            <tr>
+                                                <td style="width: 80px">
+                                                    Telefone:
+                                                </td>
+                                                <td style="width: 100px">
+                                                    <asp:TextBox ID="txttelefone" runat="server" CssClass="inputbox" MaxLength="20" 
+                                                        Width="100px"></asp:TextBox>   
+                                                </td> 
+                                            </tr>                                            
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
@@ -102,10 +89,20 @@
                                         <table>
                                             <tr>
                                                 <td style="width: 140px">
-                                                    CEP:
+                                                   CEP:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" 
+                                                        Width="110px"></asp:TextBox>                                                  
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td style="width: 140px">
+                                                    UF:
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" 
+                                                        onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -113,9 +110,9 @@
                                                     Cidade:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtCidade" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                                        ID="btnPesCidade" runat="server" CssClass="btn" Text="..." OnClick="btnPesCidade_Click" />&nbsp;&nbsp;<asp:Label
-                                                            ID="lblDesCidade" runat="server"></asp:Label>
+                                                    <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist" 
+                                                        onselectedindexchanged="ddlCidades_SelectedIndexChanged" 
+                                                        AutoPostBack="True"></asp:DropDownList>
                                                 </td>
                                             </tr>                                            
                                             <tr>
@@ -123,9 +120,7 @@
                                                     Bairro:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtBairro" runat="server" CssClass="inputbox"></asp:TextBox><asp:Button
-                                                        ID="btnPesBairro" runat="server" CssClass="btn" Text="..." OnClick="btnPesBairro_Click" />&nbsp;&nbsp;<asp:Label
-                                                            ID="lblDesBairro" runat="server"></asp:Label>
+                                                    <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ></asp:DropDownList>                                                    
                                                 </td>
                                             </tr>
                                             <tr>
@@ -195,8 +190,6 @@
                 </table>
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
-            <asp:HiddenField ID="hfIdCidade" runat="server" />
-            <asp:HiddenField ID="hfIdBairro" runat="server" />
             <asp:HiddenField ID="hfIdInstLogo" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>

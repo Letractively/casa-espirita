@@ -70,6 +70,7 @@ namespace DataAccess
 
             return usuarios;        
         }
+                
         #endregion
 
         public bool InserirDA(Usuarios usu)
@@ -189,6 +190,23 @@ namespace DataAccess
                         
             List<Usuarios> usuarios = CarregarObjUsuario(dr);             
             
+            return usuarios;
+        }
+
+        public List<Usuarios> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM USUARIOS ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE NOME  LIKE '%{0}%'", valor));
+
+            consulta.Append(" ORDER BY NOME ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Usuarios> usuarios = CarregarObjUsuario(dr);
+
             return usuarios;
         }
 

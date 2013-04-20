@@ -16,13 +16,7 @@
                     <td>
                         <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
                          ToolTip="Pesquisar por"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:DropDownList ID="ddlCampo" runat="server" CssClass="dropdownlist">
-                        <asp:ListItem Value="CODIGO">Código</asp:ListItem>
-                        <asp:ListItem Value="NOME">Nome</asp:ListItem>
-                        </asp:DropDownList> 
-                    </td>
+                    </td>                    
                     <td>
                         <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                          onclick="btnBusca_Click" />

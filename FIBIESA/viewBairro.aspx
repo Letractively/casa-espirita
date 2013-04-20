@@ -40,7 +40,7 @@
                                     AllowSorting="True" GridLines="None" 
                                     onpageindexchanging="dtgBairros_PageIndexChanging" 
                                     onrowdatabound="dtgBairros_RowDataBound" onsorting="dtgBairros_Sorting" 
-                                    ShowHeaderWhenEmpty="True">
+                                    Width="350px">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

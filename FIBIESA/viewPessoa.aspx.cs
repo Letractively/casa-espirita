@@ -26,7 +26,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
-        private void Pesquisar(string campo, string valor)
+        private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable();
 
@@ -51,11 +51,8 @@ namespace Admin
             PessoasBL pesBL = new PessoasBL();
             List<Pessoas> pessoas;
 
-            if (campo != null && valor.Trim() != "")
-                pessoas = pesBL.PesquisarBL(campo, valor);
-            else
-                pessoas = pesBL.PesquisarBL();
-
+            pessoas = pesBL.PesquisarBuscaBL(valor);
+            
             foreach (Pessoas pes in pessoas)
             {
                 DataRow linha = tabela.NewRow();
@@ -86,7 +83,8 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Pesquisar(null,null);
+            if(!IsPostBack)
+                Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -103,7 +101,7 @@ namespace Admin
 
                 pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
                 pesBL.ExcluirBL(pessoas);
-                Pesquisar(null,null);
+                Pesquisar(null);
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -125,10 +123,10 @@ namespace Admin
 
         protected void dtgPessoas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
-            if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
+            if (e.Row.RowType == DataControlRowType.DataRow) 
             {
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
             }
@@ -169,7 +167,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(ddlCampo.SelectedValue, txtBusca.Text); 
+            Pesquisar(txtBusca.Text); 
         }
 
        

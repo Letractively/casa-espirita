@@ -30,6 +30,7 @@ namespace DataAccess
             }
             return estados;
         }
+        
         #endregion
         public bool InserirDA(Estados est)
         {
@@ -128,6 +129,23 @@ namespace DataAccess
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta);
+
+            List<Estados> estados = CarregarObjEstado(dr);
+
+            return estados;
+        }
+
+        public List<Estados> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM ESTADOS ");
+
+            if (valor != "")
+                consulta.Append(string.Format(" WHERE UF= '{0}' OR  DESCRICAO  LIKE '%{0}%'", valor));
+
+            consulta.Append(" ORDER BY UF ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
 
             List<Estados> estados = CarregarObjEstado(dr);
 

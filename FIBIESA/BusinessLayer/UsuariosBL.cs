@@ -65,6 +65,13 @@ namespace BusinessLayer
             return usuariosDA.PesquisarDA(campo, valor);
         }
 
+        public List<Usuarios> PesquisarBuscaBL(string valor)
+        {
+            UsuariosDA usuariosDA = new UsuariosDA();
+
+            return usuariosDA.PesquisarBuscaDA(valor); 
+        }
+
         public List<Usuarios> PesquisarBL(string login, string senha, DateTime data)
         {
             UsuariosDA usuariosDA = new UsuariosDA();

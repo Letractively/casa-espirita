@@ -42,18 +42,14 @@ namespace Admin
                 Cidades cid = new Cidades();
 
                 hfId.Value  = (string)dsCid.Tables[0].Rows[0]["id"].ToString();
-                txtCodigo.Text = (string)dsCid.Tables[0].Rows[0]["codigo"].ToString();
+                lblCodigo.Text = (string)dsCid.Tables[0].Rows[0]["codigo"].ToString();
                 txtDescricao.Text = (string)dsCid.Tables[0].Rows[0]["descricao"];
                 ddlEstado.SelectedValue = (string)dsCid.Tables[0].Rows[0]["estadoid"].ToString();
                                 
             }
            
         }
-        private void CarregarAtributos()
-        {           
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
-
+       
         private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
@@ -64,9 +60,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cid = 0;
-
-            CarregarAtributos();
-
+                        
             if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -82,6 +76,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_cid);
+                else
+                    lblCodigo.Text = "Código gerado automaticamente.";   
             }
         }
 
@@ -96,7 +92,7 @@ namespace Admin
             Cidades cidades = new Cidades();
 
             cidades.Id = utils.ComparaIntComZero(hfId.Value);
-            cidades.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            cidades.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             cidades.Descricao = txtDescricao.Text;
             cidades.EstadoId = utils.ComparaIntComZero(ddlEstado.SelectedValue.ToString());
 

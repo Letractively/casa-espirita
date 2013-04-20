@@ -22,3 +22,24 @@
 		}
 
 		.fechar{display:block; text-align:right;}
+		
+		
+		.modalBackground
+		{
+			background-color: #000;     
+			filter: alpha(opacity=60);     
+			opacity: 0.6;
+			
+			
+		}
+		.modalPopup
+		{
+		background-color: #ffffff;
+		padding: 3px;
+		z-index: 10001;
+		} 	
+		
+
+ #dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+ #dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+

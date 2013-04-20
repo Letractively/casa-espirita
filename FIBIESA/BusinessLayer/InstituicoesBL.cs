@@ -64,5 +64,13 @@ namespace BusinessLayer
             return instituicoesDA.PesquisarDA(ins);
         }
 
+        public List<Instituicoes> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            InstituicoesDA instituicoesDA = new InstituicoesDA();
+
+            return instituicoesDA.PesquisarBuscaDA(valor);
+        }
+
     }
 }

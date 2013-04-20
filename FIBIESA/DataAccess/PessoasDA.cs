@@ -95,6 +95,18 @@ namespace DataAccess
             }
             return pessoas; 
         }
+
+        private Int32 RetornaMaxCodigo()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM PESSOAS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
         #endregion
 
         public int InserirDA(Pessoas pes)
@@ -132,7 +144,7 @@ namespace DataAccess
             paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
             paramsToSP[29] = new SqlParameter("@reftelefone", pes.RefTelefone);
             paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);       
-            paramsToSP[31] = new SqlParameter("@codigo", pes.Codigo);
+            paramsToSP[31] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
 

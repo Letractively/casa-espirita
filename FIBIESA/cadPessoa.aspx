@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="2">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -25,10 +25,7 @@
                                                    * Código:
                                                 </td>
                                                 <td style="width: 150px" >
-                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" ></asp:TextBox>
-                                                    <asp:RequiredFieldValidator
-                                                        ID="RequiredFieldValidator10" runat="server" ErrorMessage="Informe o Código"
-                                                        ControlToValidate="txtCodigo" ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                    <asp:Label ID="lblCodigo" runat="server"></asp:Label>   
                                                 </td> 
                                                 <td style="width: 200px">
                                                    * Data Cadastro:
