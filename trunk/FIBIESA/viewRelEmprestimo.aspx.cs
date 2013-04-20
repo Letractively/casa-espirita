@@ -207,10 +207,5 @@ namespace FIBIESA
 
         }
 
-        protected void btnteste_Click(object sender, EventArgs e)
-        {
-            Div1.Visible = true;
-        }
-
     }
 }
