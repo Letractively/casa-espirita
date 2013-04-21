@@ -52,14 +52,15 @@ namespace FIBIESA
             }
 
             grdPesquisa.DataSource = dt;
-            grdPesquisa.DataBind();                               
+            grdPesquisa.DataBind();
 
         }
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            PesquisarConteudo(txtPesquisa.Text);
+            if (!IsPostBack)
+                PesquisarConteudo(txtPesquisa.Text);
         }
 
         protected void btnPesquisa_Click(object sender, ImageClickEventArgs e)
@@ -80,7 +81,7 @@ namespace FIBIESA
             string str_cod = row.Cells[2].Text;
             string str_des = row.Cells[3].Text;
             string str_valor = row.Cells[4].Text;
-           
+
             js.Append("<script language='javascript'>");
             js.Append("window.opener.document.getElementById('" + str_nome_caixa + "').value = '" + str_cod + "';");
             js.Append("window.opener.document.getElementById('" + str_nome_id + "').value = '" + str_id + "';");
