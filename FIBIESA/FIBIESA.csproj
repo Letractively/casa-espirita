@@ -87,6 +87,7 @@
     <Content Include="cadInstituicao.aspx" />
     <Content Include="cadItemEstoque.aspx" />
     <Content Include="cadJuroMulta.aspx" />
+    <Content Include="cadManVenda.aspx" />
     <Content Include="cadMovimentoEstoque.aspx" />
     <Content Include="cadNotaEntrada.aspx" />
     <Content Include="cadObra.aspx" />
@@ -235,7 +236,7 @@
     <Content Include="viewTitulo.aspx" />
     <Content Include="viewTurma.aspx" />
     <Content Include="viewUsuario.aspx" />
-    <Content Include="viewVenda.aspx" />
+    <Content Include="viewManVenda.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -406,6 +407,13 @@
     </Compile>
     <Compile Include="cadJuroMulta.aspx.designer.cs">
       <DependentUpon>cadJuroMulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadManVenda.aspx.cs">
+      <DependentUpon>cadManVenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadManVenda.aspx.designer.cs">
+      <DependentUpon>cadManVenda.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadMovimentoEstoque.aspx.cs">
       <DependentUpon>cadMovimentoEstoque.aspx</DependentUpon>
@@ -790,12 +798,12 @@
     <Compile Include="viewUsuario.aspx.designer.cs">
       <DependentUpon>viewUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewVenda.aspx.cs">
-      <DependentUpon>viewVenda.aspx</DependentUpon>
+    <Compile Include="viewManVenda.aspx.cs">
+      <DependentUpon>viewManVenda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="viewVenda.aspx.designer.cs">
-      <DependentUpon>viewVenda.aspx</DependentUpon>
+    <Compile Include="viewManVenda.aspx.designer.cs">
+      <DependentUpon>viewManVenda.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
