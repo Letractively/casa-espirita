@@ -8,7 +8,7 @@ using System.Data;
 
 namespace BusinessLayer
 {
-    public class ItensEstoqueBL
+    public class ItensEstoqueBL : BaseBL
     {
         public bool InserirBL(ItensEstoque id_itEst)
         {
