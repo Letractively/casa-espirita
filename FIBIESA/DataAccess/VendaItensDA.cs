@@ -114,5 +114,23 @@ namespace DataAccess
 
             return vendaItens;
         }
+
+        public DataSet PesquisarDADataSet(int id_venda)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECTid " +
+                                                                                            ",vendaId " +
+                                                                                            ",quantidade " +
+                                                                                            ",valor " +
+                                                                                            ",desconto " +
+                                                                                            ",situacao " +
+                                                                                            ",itemEstoqueId " +
+                                                                                            ",titulo " +
+                                                                                       " FROM VIEW_vendasItens " +
+                                                                                       " WHERE vendaId = {0} ", id_venda));
+            
+
+            return ds;
+        }
     }
 }
