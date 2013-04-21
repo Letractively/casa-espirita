@@ -88,14 +88,8 @@ namespace FIBIESA
             ObrasBL obrasBl = new ObrasBL();
             Obras obras = new Obras();
             List<Obras> lObras;
-            if (this.txtCodigo.Text != string.Empty)
-            {
-                lObras = obrasBl.PesquisarBL(this.txtCodigo.Text, lCampoPesquisa);
-            }
-            else
-            {
-                lObras = obrasBl.PesquisarBL();
-            }
+
+            lObras = obrasBl.PesquisarBL();
 
             foreach (Obras obraItem in lObras)
             {
@@ -178,12 +172,12 @@ namespace FIBIESA
 
             if (rbLivrosMais.Checked)
             {
-                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(),"desc").Tables[0];
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "desc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Mais&";
             }
             else if (rbLivrosMenos.Checked)
             {
-                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(),"asc").Tables[0];
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "asc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Menos&";
             }
             else
