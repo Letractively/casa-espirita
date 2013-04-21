@@ -33,7 +33,7 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("NUMERO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("SERIE", Type.GetType("System.Int32"));
-            DataColumn coluna4 = new DataColumn("DATA", Type.GetType("System.DateTime"));
+            DataColumn coluna4 = new DataColumn("DATA", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -52,7 +52,7 @@ namespace Admin
                 linha["ID"] = ltNtE.Id;
                 linha["NUMERO"] = ltNtE.Numero;
                 linha["SERIE"] = ltNtE.Serie;
-                linha["DATA"] = ltNtE.Data;
+                linha["DATA"] = ltNtE.Data.ToString("dd/MM/yyyy");
 
                 tabela.Rows.Add(linha);
             }

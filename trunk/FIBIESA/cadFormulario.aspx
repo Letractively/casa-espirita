@@ -52,7 +52,7 @@
                     <tr>
                         <td style="width: 140px">* Modulo:</td>
                         <td><asp:DropDownList ID="ddlModulo" runat="server" CssClass="dropdownlist" >
-                            <asp:ListItem Selected="True"></asp:ListItem>
+                            <asp:ListItem Selected="True" Value="F">Financeiro</asp:ListItem>
                             <asp:ListItem Value="B">Biblioteca</asp:ListItem>
                             <asp:ListItem Value="C">Configuração</asp:ListItem>
                             <asp:ListItem Value="E">Estoque</asp:ListItem>

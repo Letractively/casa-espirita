@@ -76,7 +76,6 @@ namespace Admin
                 Pesquisar(null);
         }
 
-     
         protected void btnInserir_Click(object sender, EventArgs e)
         {            
             Response.Redirect("cadBairro.aspx?operacao=new");
@@ -161,12 +160,6 @@ namespace Admin
                 dtgBairros.DataBind();
             }
         }
-
-        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-               
-      
+        
     }
 }

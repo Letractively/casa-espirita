@@ -49,5 +49,19 @@ namespace DataObjects
             set { _situacao = value; }
         }
 
+        private Pessoas _pessoas;
+        public Pessoas Pessoas
+        {
+            get { return _pessoas; }
+            set { _pessoas = value; }
+        }
+
+        private Usuarios _usuarios;
+        public Usuarios Usuarios
+        {
+            get { return _usuarios; }
+            set { _usuarios = value; }
+        }
+
     }
 }

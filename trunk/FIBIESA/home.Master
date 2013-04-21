@@ -99,6 +99,7 @@
                         <ul>
                             <li><a href="cadVenda.aspx" title="">Vendas</a></li>
                             <li><a href="viewDoacao.aspx" title="">Doações</a></li>
+                            <li><a href="viewManVenda.aspx" title="">Manutenção Venda</a></li>
                             <li><a href="viewJuroMulta.aspx" title="">Juros / Multas</a></li>                            
                             <li><a href="viewTitulo.aspx" title="">Título</a></li>
                             <li><a href="viewPortador.aspx" title="">Portadores</a></li>

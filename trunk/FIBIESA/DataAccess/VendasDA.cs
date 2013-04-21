@@ -19,6 +19,8 @@ namespace DataAccess
         private List<Vendas> CarregarObjVenda(SqlDataReader dr)
         {
             List<Vendas> vendas = new List<Vendas>();
+            PessoasDA pesDA = new PessoasDA();
+            UsuariosDA usuDA = new UsuariosDA();
 
             while (dr.Read())
             {
@@ -29,19 +31,57 @@ namespace DataAccess
                 ven.UsuarioId = utils.ComparaIntComZero(dr["USUARIOID"].ToString());
                 ven.Data = Convert.ToDateTime(dr["DATA"].ToString());
                 ven.Situacao = dr["SITUACAO"].ToString();
+
+                
+                List<Pessoas> pes = pesDA.PesquisarDA(ven.PessoaId);
+                Pessoas pessoa = new Pessoas();
+
+                foreach (Pessoas ltPes in pes)
+                {
+                    pessoa.Id = ltPes.Id;
+                    pessoa.Codigo = ltPes.Codigo;
+                    pessoa.Nome = ltPes.Nome;
+                }
+
+                ven.Pessoas = pessoa;
+
+                List<Usuarios> usu = usuDA.PesquisarDA(ven.UsuarioId);
+                Usuarios usuarios = new Usuarios();
+
+                foreach (Usuarios ltUsu in usu)
+                {
+                    usuarios.Id = ltUsu.Id;
+                    usuarios.Login = ltUsu.Login;
+                    usuarios.Nome = ltUsu.Nome;
+                }
+
+                ven.Usuarios = usuarios;                
                 
                 vendas.Add(ven);
             }
 
             return vendas;
         }
+
+        private Int32 RetornaMaxNumero()
+        {
+            Int32 codigo = 1;
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(NUMERO),0) + 1 as COD FROM VENDAS "));
+
+            if (ds.Tables[0].Rows.Count != 0)
+                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
+
+            return codigo;
+        }
+
         #endregion
 
         public Int32 InserirDA(Vendas ven)
         {
             SqlParameter[] paramsToSP = new SqlParameter[5];
 
-            paramsToSP[0] = new SqlParameter("@numero", ven.Numero);
+            paramsToSP[0] = new SqlParameter("@numero", RetornaMaxNumero());
             paramsToSP[1] = new SqlParameter("@pessoaid", ven.PessoaId);
             paramsToSP[2] = new SqlParameter("@usuarioid", ven.UsuarioId);
             paramsToSP[3] = new SqlParameter("@data", ven.Data);
