@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -46,6 +47,13 @@ namespace BusinessLayer
             VendaItensDA venItDA = new VendaItensDA();
 
             return venItDA.PesquisarDA(venIt);
+        }
+
+        public DataSet PesquisarBLDataSet(int venda)
+        {
+            VendaItensDA venItDA = new VendaItensDA();
+
+            return venItDA.PesquisarDADataSet(venda);
         }
     }
 }
