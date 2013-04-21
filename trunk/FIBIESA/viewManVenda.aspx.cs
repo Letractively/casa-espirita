@@ -97,7 +97,7 @@ namespace Admin
         {
             int str_ven = 0;
             str_ven = utils.ComparaIntComZero(dtgVendas.SelectedDataKey[0].ToString());
-            Response.Redirect("cadManVenda.aspx?id_ven=" + str_ven.ToString() + "&operacao=edit");
+            Response.Redirect("cadManVenda.aspx?id_vend=" + str_ven.ToString() + "&operacao=edit");
         }
 
         protected void dtgVendas_PageIndexChanging(object sender, GridViewPageEventArgs e)

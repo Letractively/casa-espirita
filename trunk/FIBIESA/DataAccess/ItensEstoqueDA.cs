@@ -146,6 +146,20 @@ namespace DataAccess
             return itensEstoque;
         }
 
+        public List<ItensEstoque> PesquisarIemDA(int itEst_id)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * " +
+                                                                                                 " FROM ITENSESTOQUE " +
+                                                                                                 " WHERE ID = {0} ", itEst_id));
+
+
+
+            List<ItensEstoque> itensEstoque = CarregarObjItemEstoque(dr);
+
+            return itensEstoque;
+        }
+
         public List<ItensEstoque> PesquisarMovObraDA(Int32 id_obra)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

@@ -29,7 +29,14 @@ namespace DataAccess
                 venItEi.ItemEstoqueId = utils.ComparaIntComZero(dr["ITEMESTOQUEID"].ToString());
                 venItEi.Situacao = dr["SITUACAO"].ToString();
                 venItEi.Desconto = utils.ComparaDecimalComZero(dr["DESCONTO"].ToString());
-                               
+
+                Obras obra = new Obras();
+
+                obra.Codigo = int.Parse(dr["CODIGO"].ToString());
+                obra.Titulo = dr["TITULO"].ToString();
+
+                venItEi.Obras = obra;
+               
                 vendaItens.Add(venItEi);
             }
 
@@ -108,7 +115,7 @@ namespace DataAccess
                                                                                        "     ,OBRAS O " +
                                                                                        " WHERE VI.ITEMESTOQUEID = IE.ID " +
                                                                                        "   AND IE.OBRAID = O.ID " +
-                                                                                       "   AND VI.ID = {0} ", id_venItEi));
+                                                                                       "   AND VI.VENDAID = {0} ", id_venItEi));
 
             List<VendaItens> vendaItens = CarregarObjVendaItem(dr);
 

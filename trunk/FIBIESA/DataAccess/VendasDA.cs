@@ -144,8 +144,7 @@ namespace DataAccess
 
             return vendas;
         }
-
-
+        
         public DataSet PesquisarDADataSet(int id_ven)
         {
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
