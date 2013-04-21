@@ -55,5 +55,14 @@ namespace DataObjects
             get { return _itemEstoqueId; }
             set { _itemEstoqueId = value; }
         }
+
+        private Obras _obras;
+        public Obras Obras
+        {
+            get { return _obras; }
+            set { _obras = value; }
+        }
+        
+        
     }
 }
