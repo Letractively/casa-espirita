@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>FIBIESA - Relatório de Emprestimos Acumulados</title>
+    <title>FIBIESA - Relatório de Eventos</title>
     <style type="text/css" media="all">
         html, body
         {
@@ -15,7 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <div id="divRelatorio" runat="server">
             <rsweb:ReportViewer ID="rptEventos" runat="server" Height="770px" 
