@@ -194,6 +194,39 @@ namespace DataAccess
             return ba;
         }
 
+
+        public DataSet PesquisarDataSet(string codDes, string dataIni, string dataIniF, string dataFim, string dataFimF)
+        {
+            string sqlQuery = "SELECT codigo " +
+                                    ",descricao " +
+                                    ",dtInicio " +
+                                    ",dtfIM " +
+                                " FROM EVENTOS WHERE 1 = 1 ";
+            if (codDes != string.Empty)
+            {
+
+                sqlQuery += " AND (codigo = " + codDes + " OR decricao = '" + codDes +"')";
+            }
+
+            if ((dataIni != string.Empty) && (dataIniF != string.Empty))
+            {
+
+                sqlQuery += " AND dtInicio BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataIniF + "',103)";
+            }
+
+            if ((dataFim != string.Empty) && (dataFimF != string.Empty))
+            {
+
+                sqlQuery += " AND dtfIM BETWEEN CONVERT(DATETIME,'" + dataFim + "',103) AND CONVERT(DATETIME,'" + dataFimF + "',103)";
+            }
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, sqlQuery);
+
+            
+            return ds;
+        }
+
     }
     
 }
