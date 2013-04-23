@@ -14,11 +14,11 @@ namespace DataObjects
             set { _id = value; }
         }
 
-        private Int32? _vendaid;
-        public Int32? VendaId
+        private Int32? _vendaItensid;
+        public Int32? VendaItensId
         {
-            get { return _vendaid; }
-            set { _vendaid = value; }
+            get { return _vendaItensid; }
+            set { _vendaItensid = value; }
         }
 
         private Int32 _usuarioid;
@@ -62,14 +62,7 @@ namespace DataObjects
             get { return _tipo; }
             set { _tipo = value; }
         }
-
-        private Vendas _vendas;
-        public Vendas Vendas
-        {
-            get { return _vendas; }
-            set { _vendas = value; }
-        }
-
+                
         private Usuarios _usuarios;
         public Usuarios Usuarios
         {
@@ -110,6 +103,13 @@ namespace DataObjects
         {
             get { return _vlrVenda; }
             set { _vlrVenda = value; }
+        }
+
+        private Int32? _numeroVenda;
+        public Int32? NumeroVenda
+        {
+            get { return _numeroVenda; }
+            set { _numeroVenda = value; }
         }
     
     }

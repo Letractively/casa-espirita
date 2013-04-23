@@ -93,7 +93,9 @@
                     <tr>
                         <td colspan ="4">  
                             <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" 
-                                DataKeyNames="IDORDEM" onrowdeleting="dtgItens_RowDeleting">
+                                DataKeyNames="IDORDEM" onrowdeleting="dtgItens_RowDeleting" 
+                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
+                                CellPadding="3" GridLines="None" onrowdatabound="dtgItens_RowDataBound">
                                 <Columns>
                                     <asp:CommandField ShowDeleteButton="True">
                                      <HeaderStyle CssClass="grd_cmd_header" />
@@ -109,6 +111,15 @@
                                     <asp:BoundField DataField="VALOR" HeaderText="Valor " />
                                     <asp:BoundField DataField="IDORDEM" HeaderText="IDORDEM" Visible="False" />
                                 </Columns>
+                                <FooterStyle BackColor="White" ForeColor="#000066" />
+                                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                <RowStyle ForeColor="#000066" />
+                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
                         </td>
                     </tr>

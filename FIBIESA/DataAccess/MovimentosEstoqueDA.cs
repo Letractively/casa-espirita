@@ -24,7 +24,7 @@ namespace DataAccess
             {
                 MovimentosEstoque movEst = new MovimentosEstoque();
                 movEst.Id = int.Parse(dr["ID"].ToString());
-                movEst.VendaId = utils.ComparaIntComNull(dr["VENDAID"].ToString());
+                movEst.VendaItensId = utils.ComparaIntComNull(dr["VENDAITENSID"].ToString());
                 movEst.UsuarioId = utils.ComparaIntComZero(dr["USUARIOID"].ToString());
                 movEst.VlrVenda = utils.ComparaDecimalComZero(dr["VLRVENDA"].ToString());
                 movEst.VlrCusto = utils.ComparaDecimalComZero(dr["VLRCUSTO"].ToString());                
@@ -33,7 +33,8 @@ namespace DataAccess
                 movEst.NotaEntradaId = utils.ComparaIntComNull(dr["NOTAENTRADAID"].ToString());
                 movEst.Tipo = dr["TIPO"].ToString();
                 movEst.Data = Convert.ToDateTime(dr["DATA"].ToString());
-
+                movEst.NumeroVenda = utils.ComparaIntComNull(dr["NUMERO"].ToString());
+               
                 Usuarios usuarios = new Usuarios();
                 usuarios.Login = dr["LOGIN"].ToString();
                 movEst.Usuarios = usuarios;
@@ -43,18 +44,7 @@ namespace DataAccess
                 obras.Titulo = dr["TITULO"].ToString();
 
                 movEst.Obras = obras;
-
-                if (movEst.VendaId != null)
-                {
-                    VendasDA vendasDA = new VendasDA();
-                    List<Vendas> ven = vendasDA.PesquisarDA(movEst.VendaId != null ? (int)movEst.VendaId : 0);
-                    Vendas vendas = new Vendas();
-
-                    foreach (Vendas ltVen in ven)
-                       vendas.Numero = ltVen.Numero;
-
-                    movEst.Vendas = vendas;
-                }              
+                                          
                 
                 if (movEst.NotaEntradaId != null)
                 {
@@ -82,7 +72,7 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[7];
 
-            paramsToSP[0] = new SqlParameter("@vendaid", movEst.VendaId);
+            paramsToSP[0] = new SqlParameter("@vendaItensId", movEst.VendaItensId);
             paramsToSP[1] = new SqlParameter("@usuarioid", movEst.UsuarioId);
             paramsToSP[2] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
             paramsToSP[3] = new SqlParameter("@quantidade", movEst.Quantidade);
@@ -107,7 +97,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[8];
 
             paramsToSP[0] = new SqlParameter("@id", movEst.Id);
-            paramsToSP[1] = new SqlParameter("@vendaid", movEst.VendaId);
+            paramsToSP[1] = new SqlParameter("@vendaItensid", movEst.VendaItensId);
             paramsToSP[2] = new SqlParameter("@usuarioid", movEst.UsuarioId);
             paramsToSP[3] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@quantidade", movEst.Quantidade);
@@ -154,14 +144,17 @@ namespace DataAccess
         public List<MovimentosEstoque> PesquisarDA(Int32 id_ItEst)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@" SELECT M.*, IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN  " +
+                                                                CommandType.Text, string.Format(@" SELECT M.*, IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO  " +
                                                                                                  " FROM MOVIMENTOSESTOQUE M " +
                                                                                                  "     ,ITENSESTOQUE IE " +
                                                                                                  "     ,OBRAS O " +
                                                                                                  "     ,USUARIOS U " +
+                                                                                                 "     ,VENDAITENS VI " +
+                                                                                                 "     ,VENDA V       " +
                                                                                                  " WHERE M.ITEMESTOQUEID = '{0}'"  +
                                                                                                  "   AND M.ITEMESTOQUEID = IE.ID " +
                                                                                                  "   AND M.USUARIOID = U.ID " +
+                                                                                                 "   AND M.VENDAITENSID = VI.ID(+) " +
                                                                                                  "   AND IE.OBRAID = O.ID ", id_ItEst));
 
 
@@ -176,29 +169,32 @@ namespace DataAccess
 
             if (data != null )
             {
-                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN  " +
+                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO  " +
                                             " FROM MOVIMENTOSESTOQUE M " +
                                             "     ,ITENSESTOQUE IE " +
                                             "     ,OBRAS O " +
                                             "     ,USUARIOS U " +
+                                            "     ,VENDAITENS VI " +
+                                            "     ,VENDA V       " +
                                             " WHERE M.ITEMESTOQUEID = IE.ID " +
                                             "   AND M.USUARIOID = U.ID " +
                                             "   AND IE.OBRAID = O.ID " +
                                             "   AND IE.ID = {0} " +
+                                            "   AND M.VENDAITENSID = VI.ID(+) " +
                                             "   AND M.DATA = '{1}' ", item_id, data != null ? Convert.ToDateTime(data).ToString("MM/dd/yyyy") : ""); 
                      
             }
             else 
             {
-                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN  " +
-                                            " FROM MOVIMENTOSESTOQUE M " +
-                                            "     ,ITENSESTOQUE IE " +
-                                            "     ,OBRAS O " +
-                                            "     ,USUARIOS U " +
-                                            " WHERE M.ITEMESTOQUEID = IE.ID " +
-                                            "   AND M.USUARIOID = U.ID " +
-                                            "   AND IE.OBRAID = O.ID " +
-                                            "   AND IE.ID = {0} ", item_id);                                                                      
+                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
+                                          "   FROM MOVIMENTOSESTOQUE M  " +
+                                          "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
+                                          "        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  " +
+                                          "        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  " + 
+                                          "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
+                                          "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +
+                                          "  WHERE IE.ID = {0} ", item_id); 
+                                                                                    
             }
 
 

@@ -28,6 +28,8 @@ namespace FIBIESA
             DataColumn coluna4 = new DataColumn("DESCONTO", Type.GetType("System.Decimal"));
             DataColumn coluna5 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna6 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("SITUACAO", Type.GetType("System.String"));
+
 
             dtItens.Columns.Add(coluna1);
             dtItens.Columns.Add(coluna2);
@@ -35,6 +37,7 @@ namespace FIBIESA
             dtItens.Columns.Add(coluna4);
             dtItens.Columns.Add(coluna5);
             dtItens.Columns.Add(coluna6);
+            dtItens.Columns.Add(coluna7);
           
             VendasBL venBL = new VendasBL();
             List<Vendas> ltVenda = venBL.PesquisarBL(venId);
@@ -61,7 +64,7 @@ namespace FIBIESA
                 linha["DESCONTO"] = ltVenItens.Desconto;
                 linha["CODIGO"] = ltVenItens.Obras.Codigo;
                 linha["DESCRICAO"] = ltVenItens.Obras.Titulo;
-
+                linha["SITUACAO"] = ltVenItens.Situacao;
 
                 dtItens.Rows.Add(linha);
             }
@@ -99,6 +102,12 @@ namespace FIBIESA
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void dtgItens_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
 
