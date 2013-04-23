@@ -452,13 +452,14 @@
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="Status">
+    <ReportParameter Name="Eventos">
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
           <Value>Todos</Value>
         </Values>
       </DefaultValue>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="totalEventos">
@@ -483,8 +484,8 @@
           <Value>=First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")</Value>
           <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
-          <Top>0.36195cm</Top>
-          <Left>0.33549cm</Left>
+          <Top>0.67945cm</Top>
+          <Left>0.60007cm</Left>
           <Height>3.34222cm</Height>
           <Width>3.41313cm</Width>
           <Visibility>
@@ -514,8 +515,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>0.46778cm</Top>
-          <Left>6.18278cm</Left>
+          <Top>0.78528cm</Top>
+          <Left>6.44736cm</Left>
           <Height>0.6cm</Height>
           <Width>5.29167cm</Width>
           <ZIndex>1</ZIndex>
@@ -544,8 +545,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.57362cm</Top>
-          <Left>14.91403cm</Left>
+          <Top>0.89112cm</Top>
+          <Left>15.23153cm</Left>
           <Height>0.49417cm</Height>
           <Width>5.42396cm</Width>
           <ZIndex>2</ZIndex>
@@ -573,8 +574,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>1.55258cm</Top>
-          <Left>4.03966cm</Left>
+          <Top>1.87008cm</Top>
+          <Left>4.30424cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>3</ZIndex>
@@ -602,8 +603,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>2.32896cm</Top>
-          <Left>4.03966cm</Left>
+          <Top>2.64646cm</Top>
+          <Left>4.30424cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>4</ZIndex>
@@ -624,15 +625,15 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Status: " + Parameters!Status.Value.ToString()</Value>
+                  <Value>="Eventos: " + Parameters!Eventos.Value.ToString()</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>3.10417cm</Top>
-          <Left>4.03966cm</Left>
+          <Top>3.42167cm</Top>
+          <Left>4.3307cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>5</ZIndex>
