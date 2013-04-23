@@ -26,8 +26,7 @@
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" Width="110px"
                                 AutoPostBack="True"></asp:TextBox>
-                            <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
-                            <a href="#janela1" rel="modal">Clientes</a> &nbsp;
+                            <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />                           
                             <asp:Label ID="lblDesCliente" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCliente"
                                 CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>

@@ -58,10 +58,9 @@ namespace Admin
                     linha["NOTAENT"] = utils.ComparaIntComZero(ltMovEst.NotaEntrada.Numero.ToString());
                     linha["NOTAENTSERIE"] = utils.ComparaShortComZero(ltMovEst.NotaEntrada.Serie.ToString());
                 }
-                
-                if (ltMovEst.Vendas != null)
-                    linha["VENDANUM"] = utils.ComparaIntComZero(ltMovEst.Vendas.Numero.ToString());
                                 
+                linha["VENDANUM"] = ltMovEst.NumeroVenda != null ? utils.ComparaIntComNull(ltMovEst.NumeroVenda.ToString()): 0 ;
+                                               
                 linha["TIPO"] = ltMovEst.Tipo;
                 linha["VLRVENDA"] = ltMovEst.Valor;
                                 

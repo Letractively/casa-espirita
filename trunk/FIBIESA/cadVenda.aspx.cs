@@ -67,7 +67,7 @@ namespace FIBIESA
             txtItem.Text = "";
             hfIdItem.Value = "";
             txtValor.Text = "";
-            txtQuantidade.Text = "";
+            txtQuantidade.Text = "1";
             txtValorUni.Text = "";
             txtDesconto.Text = "";
             lblDesItem.Text = "";
@@ -100,6 +100,7 @@ namespace FIBIESA
             {
                 Session["dtItens"] = null;
                 hfOrdem.Value = "1";
+                txtQuantidade.Text = "1";
             }                
         }
 
@@ -177,6 +178,8 @@ namespace FIBIESA
             Vendas vendas = new Vendas();
             VendaItensBL venItBL = new VendaItensBL();
             VendaItens vendaItens = new VendaItens();
+            MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
+            MovimentosEstoque movEstoque = new MovimentosEstoque();
 
             vendas.Data = DateTime.Now;
             vendas.Situacao = "A";
@@ -213,14 +216,41 @@ namespace FIBIESA
                             vendaItens.Situacao = "A";
                             vendaItens.Desconto = utils.ComparaDecimalComZero(linha["DESCONTO"].ToString());
 
-                            if (venItBL.InserirBL(vendaItens))
+                            Int32 ven_item =  venItBL.InserirBL(vendaItens);
+
+                            if (ven_item > 0)
                             {
-                                ExibirMensagem("Venda gravada com sucesso !");
-                                LimparCamposGeral();
+                                if (Session["usuario"] != null)
+                                {
+                                    List<Usuarios> usuarios;
+                                    usuarios = (List<Usuarios>)Session["usuario"];
+
+                                    foreach (Usuarios usu in usuarios)
+                                    {
+                                        movEstoque.UsuarioId = usu.Id;
+                                    }
+                                }
+
+                                movEstoque.ItemEstoqueId = vendaItens.ItemEstoqueId;
+                                movEstoque.Quantidade = vendaItens.Quantidade;
+                                movEstoque.Data = DateTime.Now;
+                                movEstoque.Tipo = "S";
+                                movEstoque.VendaItensId = ven_item;
+
+                                if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
+                                    movEstBL.InserirBL(movEstoque);                               
                             }
-                            else
-                                ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
+                            
                         }
+
+                        if (id > 0)
+                        {
+                            ExibirMensagem("Venda gravada com sucesso !");
+                            LimparCamposGeral();
+                        }
+                        else
+                            ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
+                        
                     }
                 }
 
@@ -237,20 +267,44 @@ namespace FIBIESA
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
             List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text, 1);
+            bool controlaEstoque = false;
+            Int32 totalEstoque = 0;
+            Int32 qtdMinima = 0;
 
             foreach (ItensEstoque ltItEstoque in ltItEst)
             {
                 hfIdItem.Value = ltItEstoque.Id.ToString();
                 txtItem.Text = ltItEstoque.Obra.Codigo.ToString();
                 lblDesItem.Text = ltItEstoque.Obra.Titulo;
+                controlaEstoque = ltItEstoque.ControlaEstoque;
+                qtdMinima = ltItEstoque.QtdMinima;
+
+                if (controlaEstoque)
+                {
+                    MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
+                    totalEstoque = movEstBL.PesquisarTotalMovimentosBL(ltItEstoque.Id, "");
+                    if (totalEstoque <= 0)
+                    {
+                        ExibirMensagem("Estoque negativo, não será possível realizar a venda.");
+                        txtItem.Text = "";
+                        LimparCampos();
+                    }
+                    else
+                    {
+                        if (totalEstoque <= qtdMinima)
+                            ExibirMensagem("Restam apenas "+ totalEstoque + " itens no estoque."); 
+                    }
+                }
+
             }
 
-            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)           
+            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)
             {
                 ExibirMensagem("Item não cadastrado !");
                 txtItem.Text = "";
                 LimparCampos();
             }
+           
         }
 
         protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -291,7 +345,11 @@ namespace FIBIESA
             }
         }
 
-                               
+        protected void dtgItens_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }                               
                
     }
 }

@@ -45,7 +45,7 @@ namespace DataAccess
 
         #endregion
 
-        public bool InserirDA(VendaItens venItEi)
+        public Int32 InserirDA(VendaItens venItEi)
         {
             SqlParameter[] paramsToSP = new SqlParameter[6];
 
@@ -55,10 +55,14 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@itemestoqueid", venItEi.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@desconto", venItEi.Desconto);
             paramsToSP[5] = new SqlParameter("@situacao", venItEi.Situacao);
+                        
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
+            DataTable tabela = ds.Tables[0];
 
-            return true;
+            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+            return id;
         }
 
         public bool EditarDA(VendaItens venItEi)
