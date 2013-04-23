@@ -32,7 +32,7 @@
       <Query>
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
-      </Query>      
+      </Query>
     </DataSet>
     <DataSet Name="DataSet_instituicao">
       <Fields>
@@ -96,7 +96,7 @@
       <Query>
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
-      </Query>      
+      </Query>
     </DataSet>
     <DataSet Name="DataSet_Cursos">
       <Fields>
@@ -124,7 +124,7 @@
       <Query>
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
-      </Query>      
+      </Query>
     </DataSet>
   </DataSets>
   <Body>
@@ -133,16 +133,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.84028in</Width>
+              <Width>1.07339in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.01736in</Width>
+              <Width>4.25046in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.10069in</Width>
+              <Width>1.33379in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>1.21736in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -299,7 +299,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Codigo</rd:DefaultName>
@@ -329,7 +331,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Descricao</rd:DefaultName>
@@ -355,11 +359,13 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DtInicio.Value</Value>
+                              <Value>=Format(Fields!DtInicio.Value,"dd/MM/yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>DtInicio</rd:DefaultName>
@@ -385,11 +391,13 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DtFim.Value</Value>
+                              <Value>=Format(Fields!DtFim.Value,"dd/MM/yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>DtFim</rd:DefaultName>
@@ -432,7 +440,7 @@
         <Top>0.5207cm</Top>
         <Left>0.33549cm</Left>
         <Height>1.42875cm</Height>
-        <Width>17.63415cm</Width>
+        <Width>20.0025cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -440,7 +448,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>3.375in</Height>
+    <Height>4.75in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -471,8 +479,9 @@
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Image Name="imgLogo">
-          <Source>External</Source>
+          <Source>Database</Source>
           <Value>=First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")</Value>
+          <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
           <Top>0.36195cm</Top>
           <Left>0.33549cm</Left>
