@@ -20,7 +20,9 @@
                         </td>
                         <td style="width: 530px" colspan="2">
                             <asp:TextBox ID="txtcurso" runat="server" CssClass="inputbox" Width="410px"></asp:TextBox>
-                            <asp:Button ID="btnPesCurso" runat="server" CssClass="btn" Text="..."  />
+                            <asp:Button ID="btnPesCurso" runat="server" CssClass="btn" Text="..." 
+                                onclick="btnPesCurso_Click"  />
+                            <asp:Label ID="lblDesCodigo" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -77,12 +79,14 @@
                     </tr>
                     <tr>
                         <td colspan="2" valign="middle" style="text-align:center;">
-                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" />
+                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
+                                onclick="btnRelatorio_Click" />
                         </td>                                    
                     </tr>
                 </table>
             </div>
         </div>
+        <asp:HiddenField ID="hfIdCodigo" runat="server" />                
         <div class="status">
         </div>
     </div>
