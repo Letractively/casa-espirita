@@ -12,6 +12,39 @@
     <%--<asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upnlPrincipal">
         <ContentTemplate>--%>
     <div id="content">
+        
+        <!-- Atenção -->
+        <div class="status warning">
+            <p class="closestatus"><a href="" title="Close">x</a></p>
+            <p><img src="images/icons/icon_warning.png" alt="Warning" /><span>Atenção!</span> Mensagem.</p>
+        </div>
+        <!-- Atenção final -->
+                
+        <!-- Sucesso -->
+        <div class="status success">
+            <p class="closestatus"><a href="" title="Close">x</a></p>
+            <p><img src="images/icons/icon_success.png" alt="Success" /><span>Sucesso!</span> Mensagem.</p>
+        </div>
+        <!-- Sucesso Final -->
+                
+        <!-- Erro -->
+        <div class="status error">
+            <p class="closestatus"><a href="" title="Close">x</a></p>
+            <p><img src="images/icons/icon_error.png" alt="Error" /><span>Erro!</span> Mensagem.</p>
+        </div>
+        <!-- Erro Final -->
+                
+        <!-- Informação -->
+        <div class="status info">
+            <p class="closestatus"><a href="" title="Close">x</a></p>
+            <p><img src="images/icons/icon_info.png" alt="Information" /><span>Informação:</span> Mensagem.</p>
+        </div>
+        <!-- Blue Status Bar End -->   
+        
+        
+        
+        
+        
         <div class="container half left">
             <div class="conthead">
                 <h2>
