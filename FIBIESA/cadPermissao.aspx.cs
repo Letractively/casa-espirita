@@ -109,7 +109,7 @@ namespace Admin
             if (!IsPostBack)
             {
                 if (Session["descategoria"] != null)
-                    lblDesCategoria.Text = Session["descategoria"].ToString();
+                    lblDesCategoria.Text = Server.UrlDecode(Session["descategoria"].ToString());
             }
            
         }

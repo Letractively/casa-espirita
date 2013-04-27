@@ -17,7 +17,8 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" 
-                                Width="75px" AutoPostBack="True" ontextchanged="txtCliente_TextChanged"></asp:TextBox>
+                                Width="75px" AutoPostBack="True" ontextchanged="txtCliente_TextChanged" 
+                                ToolTip="Informe o cliente."></asp:TextBox>
                             <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." 
                                 onclick="btnPesCliente_Click" />
                             &nbsp;
@@ -34,7 +35,8 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtItem" runat="server" CssClass="inputboxRight" 
-                                ontextchanged="txtItem_TextChanged" Width="75px" AutoPostBack="True"></asp:TextBox> 
+                                ontextchanged="txtItem_TextChanged" Width="75px" AutoPostBack="True" 
+                                ToolTip="Informe o item a ser vendido."></asp:TextBox> 
                             <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
                                  />
                             &nbsp;
@@ -50,13 +52,15 @@
                             Valor Unitário:
                         </td>
                         <td style="width: 400px" >
-                            <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxRight" Width="110px"></asp:TextBox>   
+                            <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxRight" 
+                                Width="110px" ToolTip="Informe o valor unitário do item."></asp:TextBox>   
                         </td>                         
                         <td style="width: 150px">
                             Desconto:
                         </td>
                         <td style="width: 400px"> 
-                            <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputboxRight" Width="110px"></asp:TextBox>   
+                            <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputboxRight" 
+                                Width="110px" ToolTip="Informe o valor de desconto."></asp:TextBox>   
                         </td>
                        
                     </tr>
@@ -65,33 +69,35 @@
                             *
                             Quantidade:
                         </td>
-                        <td style="width: 400px" colspan="3">
+                        <td style="width: 400px">
                             <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputboxRight" 
-                                Width="110px"></asp:TextBox>   
+                                Width="110px" ToolTip="Informe a quantidade de itens a ser vendido."></asp:TextBox>   
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                 ErrorMessage="*Informe a quantidade do item" 
                                 ControlToValidate="txtQuantidade" CssClass="validacao" 
                                 ValidationGroup="inserir">*</asp:RequiredFieldValidator>
+                        </td> 
+                        <td style="width: 150px">
+                            Valor:
+                        </td> 
+                        <td style="width: 400px">
+                            <asp:Label ID="lblValor" runat="server"></asp:Label>    
                         </td>                          
                     </tr>
                     <tr>
-                        <td style="width: 150px">
-                            *
-                            Valor:
-                        </td>
-                        <td style="width: 400px">
-                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" Width="110px"></asp:TextBox>   
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
-                                ErrorMessage="*Informe o valor do item" ControlToValidate="txtValor" 
-                                CssClass="validacao" ValidationGroup="inserir">*</asp:RequiredFieldValidator>
+                        
+                        <td style="width: 400px" colspan="2">
+                            <asp:CheckBox ID="chkImprimirRec" runat="server" Checked="false" Text="Imprimir Recibo" />                            
                         </td>   
                         <td colspan="2">
-                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" 
-                                onclick="btnInserir_Click" ValidationGroup="inserir" />
+                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir Item" 
+                                onclick="btnInserir_Click" ValidationGroup="inserir" 
+                                ToolTip="Confirma a seleção do item e valores." />
                         </td>                       
                     </tr>
                     <tr>
                         <td colspan ="4">  
+                            <asp:Panel ID="pnlDtgItens" runat="server">
                             <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" 
                                 DataKeyNames="IDORDEM" onrowdeleting="dtgItens_RowDeleting" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
@@ -121,6 +127,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
+                            </asp:Panel>
                         </td>
                     </tr>
                 </table>
@@ -131,18 +138,20 @@
                         </td>
                         <td style="width: 300px">
                             <asp:TextBox ID="txtQtdItens" runat="server" CssClass="inputboxRight" 
-                                Font-Bold="True" ForeColor="Red" Width="110px"></asp:TextBox>    
+                                Font-Bold="True" ForeColor="Red" Width="110px" ReadOnly="True" 
+                                ToolTip="Quantidade total de itens."></asp:TextBox>    
                         </td>
                         <td style="width: 250px">
                             <strong>Valor Total:</strong>
                         </td>
                         <td style="width: 300px">
                             <asp:TextBox ID="txtValorTotal" runat="server" CssClass="inputboxRight" 
-                                Font-Bold="True" ForeColor="Red" Width="110px"></asp:TextBox>    
+                                Font-Bold="True" ForeColor="Red" Width="110px" ReadOnly="True" 
+                                ToolTip="Valor total da venda."></asp:TextBox>    
                         </td>
                         <td style="width: 280px">
                             <asp:Button ID="btnFinalizar" runat="server" CssClass="btn" Text="Finalizar" 
-                                onclick="btnFinalizar_Click" />
+                                onclick="btnFinalizar_Click" ToolTip="Confirma e finaliza a venda." />
                         </td>
                     </tr>
                 </table>     

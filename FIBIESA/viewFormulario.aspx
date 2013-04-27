@@ -38,7 +38,7 @@
                                     AllowSorting="True" onpageindexchanging="dtgFormularios_PageIndexChanging" 
                                     onsorting="dtgFormularios_Sorting" BackColor="White" BorderColor="#CCCCCC" 
                                     BorderStyle="None" BorderWidth="1px" CellPadding="0" GridLines="None" 
-                                    onrowdatabound="dtgFormularios_RowDataBound" ShowHeaderWhenEmpty="True">
+                                    onrowdatabound="dtgFormularios_RowDataBound" Width="350px">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">                                            
                                             <ItemStyle CssClass="grd_edit" />

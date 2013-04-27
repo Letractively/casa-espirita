@@ -135,10 +135,10 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		select {float: none}
 		.inputboxes  {padding: 5px; overflow: auto; margin-bottom: 5px}
 		.inputboxes label {width: 75px; display: block; float: left; padding-top: 8px}
-			.inputbox, .inputboxes select, select {float: left; padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
+			.inputbox, .inputboxes select, select {float: left; padding: 9px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
 				.inputbox,.inputboxRight {background: #fff url(../images/bg_input_normal.png) repeat-x top}
 			
-			.inputboxRight {float: left; padding: 10px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px; text-align:right}
+			.inputboxRight {float: left; padding: 9px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px; text-align:right}
 				
 				
 				
@@ -169,22 +169,22 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 			.status .closestatus {float: right; color: #fff; text-align: center; margin-left: 10px}
 				.status .closestatus a {position: relative; color: #fff; text-decoration: none; padding: 5px; width: 10px; height: 10px; display: block; border-radius: 5px; -moz-border-radius: 5px; line-height: .6em; top: -2px; text-shadow: none}
 		
-		.warning {border: 3px solid #BF9900; background: #FEEB9C url(../images/bg_fade_yellow_med.png) repeat-x top}
+		.warning {border: 3px solid #BF9900; display:none; background: #FEEB9C url(../images/bg_fade_yellow_med.png) repeat-x top}
 			.warning span {color: #BF9900}
 			.warning .closestatus a {background: #BF9900}
 				.warning .closestatus a:hover {background: #9B7C00}
 				
-		.success {border: 3px solid #8EA534; background: #CBDA8F url(../images/bg_fade_green_med.png) repeat-x top}
+		.success {border: 3px solid #8EA534; display:none; background: #CBDA8F url(../images/bg_fade_green_med.png) repeat-x top}
 			.success span {color: #8EA534}
 			.success .closestatus a {background: #8EA534}
 				.success .closestatus a:hover {background: #829829}
 				
-		.error {border: 3px solid #990000; background: #F5D0CD url(../images/bg_fade_red_med.png) repeat-x top}
+		.error {border: 3px solid #990000; display:none; background: #F5D0CD url(../images/bg_fade_red_med.png) repeat-x top}
 			.error span {color: #990000}
 			.error .closestatus a {background: #990000}
 				.error .closestatus a:hover {background: #730D0D}
 		
-		.info {border: 3px solid #2FADD7; background: #92D6ED url(../images/bg_fade_blue_med.png) repeat-x top}
+		.info {border: 3px solid #2FADD7; display:none; background: #92D6ED url(../images/bg_fade_blue_med.png) repeat-x top}
 			.info span {color: #0E7A9F}
 			.info .closestatus a {background: #2FADD7}
 				.info .closestatus a:hover {background: #228DB0}
@@ -206,7 +206,7 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 	/* Table Styles */
 	
 		table {border-collapse: collapse}
-			th,td {text-align: left; padding: 6px}
+			th,td {text-align: left; padding: 5px}
 			th {font-size: 14px}
 			tr.alt td{background: #F2F2F2; text-shadow: 1px 1px 1px #fff}
 		

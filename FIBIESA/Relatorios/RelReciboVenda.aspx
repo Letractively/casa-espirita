@@ -15,6 +15,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <div id="divRelatorio" runat="server">
             <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="570px" 
                 Width="710px" ShowRefreshButton="False" ShowPromptAreaButton="False" 

@@ -133,7 +133,6 @@
     <Content Include="images\fancybox-y.png" />
     <Content Include="images\fancybox\books.png" />
     <Content Include="images\fancybox\fancybox.png" />
-    <Content Include="images\icons\exit.png" />
     <Content Include="images\icons\icone_lupa.jpg" />
     <Content Include="images\icons\icon_approve.png" />
     <Content Include="images\icons\icon_arrow.png" />
@@ -153,7 +152,6 @@
     <Content Include="images\icons\icon_lrg_support.png" />
     <Content Include="images\icons\icon_lrg_user.png" />
     <Content Include="images\icons\icon_mail.png" />
-    <Content Include="images\icons\icon_save.png" />
     <Content Include="images\icons\icon_success.png" />
     <Content Include="images\icons\icon_tick.png" />
     <Content Include="images\icons\icon_tick_sq.png" />
@@ -170,7 +168,6 @@
     <Content Include="images\money2.png" />
     <Content Include="images\paste.png" />
     <Content Include="images\search_btn.png" />
-    <Content Include="images\sem_images.jpg" />
     <Content Include="images\status_high.png" />
     <Content Include="images\status_low.png" />
     <Content Include="images\status_med.png" />
@@ -181,6 +178,12 @@
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
+    <Content Include="Relatorios\RelCursos.aspx" />
+    <Content Include="Relatorios\RelDoacoes.aspx" />
+    <Content Include="Relatorios\RelEmprestimoAcumulado.aspx" />
+    <Content Include="Relatorios\RelEmprestimos.aspx" />
+    <Content Include="Relatorios\RelEmprestimosMaisMenos.aspx" />
+    <Content Include="Relatorios\RelReciboVenda.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\functions.js" />
@@ -229,6 +232,14 @@
     <Content Include="viewPermissao.aspx" />
     <Content Include="viewPessoa.aspx" />
     <Content Include="viewPortador.aspx" />
+    <Content Include="viewRelContasPagarReceber.aspx" />
+    <Content Include="viewRelCursos.aspx" />
+    <Content Include="viewRelDoacoes.aspx" />
+    <Content Include="viewRelEmprestimo.aspx" />
+    <Content Include="viewRelFrequencia.aspx" />
+    <Content Include="viewRelMovimentacaoEstoque.aspx" />
+    <Content Include="viewRelTurmas.aspx" />
+    <Content Include="viewRelVendas.aspx" />
     <Content Include="viewReserva.aspx" />
     <Content Include="viewTipoAutor.aspx" />
     <Content Include="viewTipoDocumento.aspx" />
@@ -237,7 +248,9 @@
     <Content Include="viewTurma.aspx" />
     <Content Include="viewUsuario.aspx" />
     <Content Include="viewManVenda.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -595,6 +608,48 @@
     <Compile Include="recuperacaoLogin.aspx.designer.cs">
       <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelCursos.aspx.cs">
+      <DependentUpon>RelCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelCursos.aspx.designer.cs">
+      <DependentUpon>RelCursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelDoacoes.aspx.cs">
+      <DependentUpon>RelDoacoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelDoacoes.aspx.designer.cs">
+      <DependentUpon>RelDoacoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimoAcumulado.aspx.cs">
+      <DependentUpon>RelEmprestimoAcumulado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimoAcumulado.aspx.designer.cs">
+      <DependentUpon>RelEmprestimoAcumulado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimos.aspx.cs">
+      <DependentUpon>RelEmprestimos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimos.aspx.designer.cs">
+      <DependentUpon>RelEmprestimos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimosMaisMenos.aspx.cs">
+      <DependentUpon>RelEmprestimosMaisMenos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelEmprestimosMaisMenos.aspx.designer.cs">
+      <DependentUpon>RelEmprestimosMaisMenos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelReciboVenda.aspx.cs">
+      <DependentUpon>RelReciboVenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelReciboVenda.aspx.designer.cs">
+      <DependentUpon>RelReciboVenda.aspx</DependentUpon>
+    </Compile>
     <Compile Include="viewAgencia.aspx.cs">
       <DependentUpon>viewAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -749,6 +804,62 @@
     <Compile Include="viewPortador.aspx.designer.cs">
       <DependentUpon>viewPortador.aspx</DependentUpon>
     </Compile>
+    <Compile Include="viewRelContasPagarReceber.aspx.cs">
+      <DependentUpon>viewRelContasPagarReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelContasPagarReceber.aspx.designer.cs">
+      <DependentUpon>viewRelContasPagarReceber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelCursos.aspx.cs">
+      <DependentUpon>viewRelCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelCursos.aspx.designer.cs">
+      <DependentUpon>viewRelCursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelDoacoes.aspx.cs">
+      <DependentUpon>viewRelDoacoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelDoacoes.aspx.designer.cs">
+      <DependentUpon>viewRelDoacoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelEmprestimo.aspx.cs">
+      <DependentUpon>viewRelEmprestimo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelEmprestimo.aspx.designer.cs">
+      <DependentUpon>viewRelEmprestimo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelFrequencia.aspx.cs">
+      <DependentUpon>viewRelFrequencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelFrequencia.aspx.designer.cs">
+      <DependentUpon>viewRelFrequencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelMovimentacaoEstoque.aspx.cs">
+      <DependentUpon>viewRelMovimentacaoEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelMovimentacaoEstoque.aspx.designer.cs">
+      <DependentUpon>viewRelMovimentacaoEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelTurmas.aspx.cs">
+      <DependentUpon>viewRelTurmas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelTurmas.aspx.designer.cs">
+      <DependentUpon>viewRelTurmas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelVendas.aspx.cs">
+      <DependentUpon>viewRelVendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelVendas.aspx.designer.cs">
+      <DependentUpon>viewRelVendas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="viewReserva.aspx.cs">
       <DependentUpon>viewReserva.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -841,6 +952,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="home.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

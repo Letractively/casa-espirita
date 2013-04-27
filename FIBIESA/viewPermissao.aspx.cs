@@ -96,7 +96,7 @@ namespace Admin
             int str_per_cat = 0;
             str_per_cat = utils.ComparaIntComZero(dtgPermissoes.SelectedDataKey[0].ToString());
             string descategoria = utils.ConvertHtmlToString(dtgPermissoes.SelectedRow.Cells[3].Text);
-            Session["descategoria"] = utils.RemoveAcentos(descategoria);
+            Session["descategoria"] = Server.UrlEncode(descategoria);
             Response.Redirect("cadPermissao.aspx?id_per_cat=" + str_per_cat.ToString());
         }
 
