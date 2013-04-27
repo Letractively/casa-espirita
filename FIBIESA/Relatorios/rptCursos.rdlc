@@ -625,7 +625,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Eventos: " + Parameters!Eventos.Value.ToString()</Value>
+                  <Value>="Eventos: " + IIf(IsNothing(Parameters!Eventos.Value.ToString()),"Todos",Parameters!Eventos.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
