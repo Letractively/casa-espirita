@@ -54,6 +54,9 @@
                         <td style="width: 400px" >
                             <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxRight" 
                                 Width="110px" ToolTip="Informe o valor unitário do item."></asp:TextBox>   
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                ControlToValidate="txtValorUni" CssClass="validacao" 
+                                ErrorMessage="*Informe o valor unitário" ValidationGroup="inserir">*</asp:RequiredFieldValidator>
                         </td>                         
                         <td style="width: 150px">
                             Desconto:
@@ -71,7 +74,8 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputboxRight" 
-                                Width="110px" ToolTip="Informe a quantidade de itens a ser vendido."></asp:TextBox>   
+                                Width="110px" ToolTip="Informe a quantidade de itens a ser vendido." 
+                                AutoPostBack="True" ontextchanged="txtQuantidade_TextChanged"></asp:TextBox>   
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                 ErrorMessage="*Informe a quantidade do item" 
                                 ControlToValidate="txtQuantidade" CssClass="validacao" 
@@ -97,7 +101,8 @@
                     </tr>
                     <tr>
                         <td colspan ="4">  
-                            <asp:Panel ID="pnlDtgItens" runat="server">
+                            <asp:Panel ID="pnlDtgItens" runat="server" Width="550px" Height="180px" 
+                                ScrollBars="Auto" BorderColor="#CCCCCC" GroupingText="Itens">
                             <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" 
                                 DataKeyNames="IDORDEM" onrowdeleting="dtgItens_RowDeleting" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
@@ -111,7 +116,7 @@
                                         Visible="False" />
                                     <asp:BoundField DataField="CODIGO" HeaderText="Código" />
                                     <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
-                                    <asp:BoundField DataField="QUANTIDADE" HeaderText="Quantidade" />
+                                    <asp:BoundField DataField="QUANTIDADE" HeaderText="Qtde." />
                                     <asp:BoundField DataField="VALORUNI" HeaderText="Valor Uni." />
                                     <asp:BoundField DataField="DESCONTO" HeaderText="Desconto" />
                                     <asp:BoundField DataField="VALOR" HeaderText="Valor " />
