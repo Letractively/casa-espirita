@@ -66,7 +66,7 @@ namespace FIBIESA
         {
             txtItem.Text = "";
             hfIdItem.Value = "";
-            lblValor.Text = "";
+            lblValor.Text = "0,00";
             txtQuantidade.Text = "1";
             txtValorUni.Text = "";
             txtDesconto.Text = "";
@@ -101,6 +101,7 @@ namespace FIBIESA
                 Session["dtItens"] = null;
                 hfOrdem.Value = "1";
                 txtQuantidade.Text = "1";
+                lblValor.Text = "0,00";
             }                
         }
 
@@ -243,10 +244,10 @@ namespace FIBIESA
                             
                         }
 
-                        if (id > 0 && chkImprimirRec.Checked)
+                        if (id > 0)
                         {                          
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //l//c 
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
+                            if(chkImprimirRec.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
                                                         
                             ExibirMensagem("Venda gravada com sucesso !");
                             LimparCamposGeral();
@@ -281,6 +282,8 @@ namespace FIBIESA
                 lblDesItem.Text = ltItEstoque.Obra.Titulo;
                 controlaEstoque = ltItEstoque.ControlaEstoque;
                 qtdMinima = ltItEstoque.QtdMinima;
+                txtValorUni.Text = ltItEstoque.VlrVenda.ToString();
+                lblValor.Text = (ltItEstoque.VlrVenda * utils.ComparaIntComZero(txtQuantidade.Text)).ToString();
 
                 if (controlaEstoque)
                 {
@@ -306,7 +309,10 @@ namespace FIBIESA
                 ExibirMensagem("Item não cadastrado !");
                 txtItem.Text = "";
                 LimparCampos();
+                txtItem.Focus();
             }
+            else
+                txtValorUni.Focus();
            
         }
 
@@ -324,6 +330,8 @@ namespace FIBIESA
             Session["dtItens"] = dtItens;
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
+            txtQtdItens.Text = dtItens.Compute("sum(QUANTIDADE)", "").ToString();
+            txtValorTotal.Text = dtItens.Compute("sum(VALOR)", "").ToString();
         }
 
         protected void txtCliente_TextChanged(object sender, EventArgs e)
@@ -338,6 +346,7 @@ namespace FIBIESA
                 hfIdPessoa.Value = ltpessoa.Id.ToString();
                 txtCliente.Text = ltpessoa.Codigo.ToString();
                 lblDesCliente.Text = ltpessoa.Nome;
+                txtItem.Focus();
             }
 
             if (utils.ComparaIntComZero(hfIdPessoa.Value) <= 0)
@@ -345,6 +354,7 @@ namespace FIBIESA
                 ExibirMensagem("Cliente não cadastrado !");
                 txtCliente.Text = "";
                 lblDesCliente.Text = "";
+                txtCliente.Focus();
             }
         }
 
@@ -352,6 +362,11 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void txtQuantidade_TextChanged(object sender, EventArgs e)
+        {
+            lblValor.Text = (utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaIntComZero(txtQuantidade.Text)).ToString();
         }                               
                
     }

@@ -194,7 +194,6 @@
     <Content Include="Scripts\jquery.wysiwyg.js" />
     <Content Include="Scripts\jnmodal.js" />
     <Content Include="Scripts\visualize.jQuery.js" />
-    <Content Include="Styles\default.css" />
     <Content Include="Styles\fullcalendar.css" />
     <Content Include="Styles\jquery.fancybox-1.3.4.css" />
     <Content Include="Styles\login.css" />
