@@ -66,7 +66,7 @@ namespace FIBIESA
         {
             txtItem.Text = "";
             hfIdItem.Value = "";
-            txtValor.Text = "";
+            lblValor.Text = "";
             txtQuantidade.Text = "1";
             txtValorUni.Text = "";
             txtDesconto.Text = "";
@@ -107,7 +107,7 @@ namespace FIBIESA
        
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/PesquisarItens.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID +"&valor="+ txtValor.ClientID + "&valoruni="+txtValorUni.ClientID +"','',600,500);", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/PesquisarItens.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID +"&valor="+ txtValorUni.ClientID + "&valoruni="+txtValorUni.ClientID +"','',600,500);", true);
         }
 
         protected void btnPesCliente_Click(object sender, EventArgs e)
@@ -154,8 +154,8 @@ namespace FIBIESA
             linha["IDORDEM"] = key.ToString();
             linha["ITEMESTOQUEID"] = hfIdItem.Value;
             linha["QUANTIDADE"] = txtQuantidade.Text;            
-            linha["VALOR"] = utils.ComparaDecimalComZero(txtValor.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
-            linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValor.Text); 
+            linha["VALOR"] = utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
+            linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValorUni.Text); 
             linha["DESCONTO"] = utils.ComparaIntComZero(txtDesconto.Text);
             linha["CODIGO"] = txtItem.Text;
             linha["DESCRICAO"] = lblDesItem.Text;
@@ -243,8 +243,11 @@ namespace FIBIESA
                             
                         }
 
-                        if (id > 0)
-                        {
+                        if (id > 0 && chkImprimirRec.Checked)
+                        {                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //l//c 
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
+                                                        
                             ExibirMensagem("Venda gravada com sucesso !");
                             LimparCamposGeral();
                         }

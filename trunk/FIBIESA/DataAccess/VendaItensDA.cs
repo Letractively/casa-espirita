@@ -129,7 +129,7 @@ namespace DataAccess
         public DataSet PesquisarDADataSet(int id_venda)
         {
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECTid " +
+                                                       CommandType.Text, string.Format(@"SELECT id " +
                                                                                             ",vendaId " +
                                                                                             ",quantidade " +
                                                                                             ",valor " +

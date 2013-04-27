@@ -34,14 +34,16 @@
                                     onselectedindexchanged="dtgPermissoes_SelectedIndexChanged" 
                                     onpageindexchanging="dtgPermissoes_PageIndexChanging" 
                                     onsorting="dtgPermissoes_Sorting" GridLines="None" 
-                                    onrowdatabound="dtgPermissoes_RowDataBound" ShowHeaderWhenEmpty="True">
+                                    onrowdatabound="dtgPermissoes_RowDataBound" Width="350px">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
                                             <ItemStyle CssClass="grd_edit" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                       <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" >
+                                       <ItemStyle CssClass="right" Width="50px" />
+                                       </asp:BoundField>
                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
