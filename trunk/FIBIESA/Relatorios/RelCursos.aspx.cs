@@ -25,7 +25,7 @@ namespace FIBIESA.Relatorios
             if (lDtPesquisa.Rows.Count > 0)
             {
 
-                string curso = Request.QueryString["curso"].ToString();
+                string Eventos = Request.QueryString["Eventos"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();
 
@@ -37,7 +37,7 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceCursos = new ReportDataSource("DataSet_Cursos", lDtPesquisa);
 
                 ReportParameter[] param = new ReportParameter[2];
-                param[0] = new ReportParameter("curso", curso);
+                param[0] = new ReportParameter("Eventos", Eventos);
                 param[1] = new ReportParameter("totalEventos", lDtPesquisa.Rows.Count.ToString());
 
                 rptEventos.LocalReport.SetParameters(param);
