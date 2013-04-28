@@ -503,7 +503,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet_VendaItens</DataSetName>
-        <Top>1.67119cm</Top>
+        <Top>2.94119cm</Top>
         <Left>1.03188cm</Left>
         <Height>1.41168cm</Height>
         <Width>19.46136cm</Width>
@@ -514,6 +514,35 @@
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="txtPessoaId2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Venda N°: " + Sum(Fields!Id.Value, "DataSet_Venda")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>1.55208cm</Top>
+        <Left>2.56646cm</Left>
+        <Height>0.6cm</Height>
+        <Width>10.18646cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>4.20833in</Height>
     <Style />
