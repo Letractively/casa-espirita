@@ -17,6 +17,76 @@ namespace FIBIESA
         DataTable dtItens = new DataTable();
         Utils utils = new Utils();
         #region funcoes
+        public void CarregarPesquisaPessoa(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pe = new Pessoas();
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Pessoas pes in pessoas)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["DESCRICAO"] = pes.Nome;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();
+        }
+
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+            DataColumn coluna5 = new DataColumn("QUANTIDADE", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+            dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
+
+            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque litE in ltItEst)
+            {
+                DataRow linha = dt.NewRow();
+
+                if (litE.Obra != null)
+                {
+                    linha["ID"] = litE.Id;
+                    linha["CODIGO"] = litE.Obra.Codigo;
+                    linha["TITULO"] = litE.Obra.Titulo;
+                    linha["VALOR"] = litE.VlrVenda.ToString();
+                    linha["QUANTIDADE"] = litE.QtdEstoque.ToString();
+
+                    dt.Rows.Add(linha);
+                }
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
+        }
+        
         private DataTable CriarTabelaPesquisa()
         {
             DataTable dt = new DataTable();
@@ -97,7 +167,7 @@ namespace FIBIESA
             CriarDtItens();
 
             if (!IsPostBack)
-            {
+            {                
                 Session["dtItens"] = null;
                 hfOrdem.Value = "1";
                 txtQuantidade.Text = "1";
@@ -108,38 +178,16 @@ namespace FIBIESA
        
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/PesquisarItens.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID +"&valor="+ txtValorUni.ClientID + "&valoruni="+txtValorUni.ClientID +"','',600,500);", true);
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();        
         }
 
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCliente.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesCliente.ClientID + "','',600,500);", true);
+            CarregarPesquisaPessoa(null);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show(); 
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -367,7 +415,76 @@ namespace FIBIESA
         protected void txtQuantidade_TextChanged(object sender, EventArgs e)
         {
             lblValor.Text = (utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaIntComZero(txtQuantidade.Text)).ToString();
-        }                               
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisa.Enabled = false;            
+        }
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaPessoa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtCliente.Text = gvrow.Cells[2].Text;
+            lblDesCliente.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesquisa.Enabled = false;
+            ModalPopupExtenderPesquisa.Hide();           
+
+        }
+
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtItem.Text = gvrow.Cells[2].Text;
+            lblDesItem.Text = gvrow.Cells[3].Text;
+            txtValorUni.Text = gvrow.Cells[4].Text;
+
+            ModalPopupExtenderPesItem.Enabled = false;
+            ModalPopupExtenderPesItem.Hide();        
+
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }           
                
     }
 }
