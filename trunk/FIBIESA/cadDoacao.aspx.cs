@@ -33,6 +33,7 @@ namespace Admin
             txtCliente.Text = "";
             txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             txtValor.Text = "";
+            lblDesCliente.Text = "";
         }
 
         public void CarregarPesquisaItem(string conteudo)
@@ -94,32 +95,7 @@ namespace Admin
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);
-           /* Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;*/
-
-           // ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
-            //ifPesquisaGeral.Attributes["src"] = "/Pesquisar.aspx?caixa=" + txtCliente.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesCliente.ClientID; 
+           
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show();            
         }
@@ -152,6 +128,9 @@ namespace Admin
                 {
                     ExibirMensagem("Doação gravada com sucesso!");
                     LimparCampos();
+
+                    //if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                      //  ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
                 }
                 else
                     ExibirMensagem("Não foi possível gravar a doação.");
@@ -174,6 +153,7 @@ namespace Admin
             CarregarPesquisaItem(txtPesquisa.Text);
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
         }
                               
         protected void btnSelect_Click(object sender, EventArgs e)
@@ -196,6 +176,35 @@ namespace Admin
         {
             ModalPopupExtenderPesquisa.Enabled = false;
             //ModalPopupExtenderPesquisa.Hide();
+        }
+
+        protected void txtCliente_TextChanged(object sender, EventArgs e)
+        {
+            hfIdPessoa.Value = "";
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pessoa = new Pessoas();
+            List<Pessoas> pes = pesBL.PesquisarBL("CODIGO", txtCliente.Text);
+
+            foreach (Pessoas ltpessoa in pes)
+            {
+                hfIdPessoa.Value = ltpessoa.Id.ToString();
+                txtCliente.Text = ltpessoa.Codigo.ToString();
+                lblDesCliente.Text = ltpessoa.Nome;
+                txtValor.Focus();
+            }
+
+            if (utils.ComparaIntComZero(hfIdPessoa.Value) <= 0)
+            {
+                ExibirMensagem("Cliente não cadastrado !");
+                txtCliente.Text = "";
+                lblDesCliente.Text = "";
+                txtCliente.Focus();
+            }
+        }
+
+        protected void txtValor_TextChanged(object sender, EventArgs e)
+        {
+            btnSalvar.Focus();
         }       
 
 

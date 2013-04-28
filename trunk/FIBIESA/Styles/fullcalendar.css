@@ -584,15 +584,4 @@ table.fc-header {
 	cursor: s-resize;
 	}
 
- .modalBackground
-  {
-     background-color: #CCFFFF;     
-     filter: alpha(opacity=60);     
-     opacity: 0.6;
-  }
-  .modalPopup
-  {
-    background-color: #fffddd;
-    padding: 3px;
-    z-index: 10001;
-  } 	
+
