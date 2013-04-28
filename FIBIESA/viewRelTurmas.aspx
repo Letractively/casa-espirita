@@ -21,7 +21,9 @@
                         </td>
                         <td style="width: 530px" colspan="2">
                             <asp:TextBox ID="txtCurso" runat="server" CssClass="inputbox" Width="410px"></asp:TextBox>
-                            <asp:Button ID="btnPesCurso" runat="server" CssClass="btn" Text="..."  />
+                            <asp:Button ID="btnPesCurso" runat="server" CssClass="btn" Text="..." 
+                                onclick="btnPesCurso_Click"  />
+                            <asp:Label ID="lblDesCurso" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -30,7 +32,9 @@
                         </td>
                         <td style="width: 530px" colspan="2">
                             <asp:TextBox ID="txtTurma" runat="server" CssClass="inputbox" MaxLength="10" Width="410px"></asp:TextBox>
-                            <asp:Button ID="btnPesTurma" runat="server" CssClass="btn" Text="..."  />
+                            <asp:Button ID="btnPesTurma" runat="server" CssClass="btn" Text="..." 
+                                onclick="btnPesTurma_Click"  />
+                            <asp:Label ID="lblDesTurma" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -88,19 +92,22 @@
                     <tr>
                         <td style="width: 530px" colspan="2" style="text-align:center;">
                             <center>
-                                <asp:CheckBox ID="ckbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" value="1" Text="Listar somente turmas em aberto.">                                                                                    
+                                <asp:CheckBox ID="ckbTurmasAbertos" runat="server" CssClass="input" Text="Listar somente turmas em aberto.">                                                                                    
                                 </asp:CheckBox>                                
                             </center>
                         </td>                                                                      
                     </tr>
                     <tr>
                         <td colspan="2" valign="middle" style="text-align:center;">
-                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" />
+                            <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
+                                onclick="btnRelatorio_Click" />
                         </td>                                    
                     </tr>
                 </table>
             </div>
         </div>
+        <asp:HiddenField ID="hfIdCurso" runat="server" />                
+        <asp:HiddenField ID="hfIdTurma" runat="server" />                
         <div class="status">
         </div>
     </div>

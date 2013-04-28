@@ -40,6 +40,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Button btnPesCurso;
         
         /// <summary>
+        /// lblDesCurso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDesCurso;
+        
+        /// <summary>
         /// txtTurma control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPesTurma;
+        
+        /// <summary>
+        /// lblDesTurma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDesTurma;
         
         /// <summary>
         /// txtDataIni control.
@@ -130,13 +148,13 @@ namespace FIBIESA {
         protected global::AjaxControlToolkit.CalendarExtender txtDataFim_CalendarExtender;
         
         /// <summary>
-        /// ckbLivrosMenos control.
+        /// ckbTurmasAbertos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbLivrosMenos;
+        protected global::System.Web.UI.WebControls.CheckBox ckbTurmasAbertos;
         
         /// <summary>
         /// btnRelatorio control.
@@ -146,6 +164,24 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRelatorio;
+        
+        /// <summary>
+        /// hfIdCurso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdCurso;
+        
+        /// <summary>
+        /// hfIdTurma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTurma;
         
         /// <summary>
         /// Master property.
