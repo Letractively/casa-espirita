@@ -74,7 +74,7 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
     </DataSet>
-    <DataSet Name="DataSet_instituicaoLogo">
+    <DataSet Name="DataSet_InstituicaoLogo">
       <Fields>
         <Field Name="Id">
           <DataField>Id</DataField>
@@ -97,6 +97,12 @@
         <DataSourceName>BusinessLayer</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>BusinessLayer</rd:DataSetName>
+        <rd:TableName>InstituicoesLogoBL</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>PesquisarBL</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>BusinessLayer.InstituicoesLogoBL, BusinessLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet_Venda">
       <Fields>
@@ -213,16 +219,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.71825in</Width>
+              <Width>5.28075in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.09425in</Width>
+              <Width>0.82862in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.92088in</Width>
+              <Width>0.76562in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.92758in</Width>
+              <Width>0.78695in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -500,7 +506,7 @@
         <Top>1.67119cm</Top>
         <Left>1.03188cm</Left>
         <Height>1.41168cm</Height>
-        <Width>16.91884cm</Width>
+        <Width>19.46136cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -512,7 +518,7 @@
     <Height>4.20833in</Height>
     <Style />
   </Body>
-  <Width>8.67324in</Width>
+  <Width>8.42188in</Width>
   <Page>
     <PageHeader>
       <Height>4.6968cm</Height>
@@ -521,7 +527,7 @@
       <ReportItems>
         <Image Name="imgLogo">
           <Source>Database</Source>
-          <Value>=First(Fields!Imagem.Value, "DataSet_instituicaoLogo")</Value>
+          <Value>=First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")</Value>
           <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
           <Top>0.56083cm</Top>
@@ -529,7 +535,7 @@
           <Height>3.34222cm</Height>
           <Width>3.41313cm</Width>
           <Visibility>
-            <Hidden>=iIf(isNothing(First(Fields!Imagem.Value, "DataSet_instituicaoLogo")),true,false)</Hidden>
+            <Hidden>=iIf(isNothing(First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")),true,false)</Hidden>
           </Visibility>
           <Style>
             <Border>
@@ -664,6 +670,107 @@
         </Border>
       </Style>
     </PageHeader>
+    <PageFooter>
+      <Height>2.8575cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Total de descontos R$" + Sum(Fields!desconto.Value, "DataSet_VendaItens").ToString()</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>0.4012cm</Top>
+          <Left>13.67049cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.72107cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox6">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Total s/desconto R$" + Sum(Fields!valor.Value, "DataSet_VendaItens").ToString()</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox6</rd:DefaultName>
+          <Top>1.24787cm</Top>
+          <Left>13.67049cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.72107cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox7">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Total c/desconto R$" + (Sum(Fields!valor.Value, "DataSet_VendaItens") - Sum(Fields!desconto.Value, "DataSet_VendaItens") ).ToString()</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Top>2.09453cm</Top>
+          <Left>13.67049cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.72107cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
