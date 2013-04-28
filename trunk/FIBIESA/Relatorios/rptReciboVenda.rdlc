@@ -521,7 +521,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Venda N°: " + Sum(Fields!Id.Value, "DataSet_Venda")</Value>
+                <Value>="Venda N°: " + First(Fields!Numero.Value, "DataSet_Instituicao")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
