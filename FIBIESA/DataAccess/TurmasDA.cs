@@ -271,5 +271,54 @@ namespace DataAccess
             return ba;
         }
 
+
+        public DataSet PesquisarDataSet(string codEvento,string codTurma, string dataIni, string dataIniF, string dataFim, string dataFimF,Boolean turmasAberto)
+        {
+            string sqlQuery = "SELECT codEvento " +
+                                "  ,EVENTO " +
+                                "  ,codTurma " +
+                                "  ,TURMA " +
+                                "  ,sala " +
+                                "  ,left(convert(varchar,[horaini],108),5) + ' as ' + left(convert(varchar,horafim,108),5) as horario " +
+                                "  ,CONVERT(DATETIME,dtIni,103) as dtini " +
+                                "  ,CONVERT(DATETIME,dtFim,103) as dtfim " +
+                                " FROM VIEW_EVENTOS WHERE 1 = 1 ";
+            if (codEvento != string.Empty)
+            {
+
+                sqlQuery += " AND (codevento in (" + codEvento + "))";
+            }
+
+            if (codTurma != string.Empty)
+            {
+
+                sqlQuery += " AND (codturma in (" + codTurma + "))";
+            }
+
+            if ((dataIni != string.Empty) && (dataIniF != string.Empty))
+            {
+
+                sqlQuery += " AND dtIni BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataIniF + "',103)";
+            }
+
+            if ((dataFim != string.Empty) && (dataFimF != string.Empty))
+            {
+
+                sqlQuery += " AND dtFim BETWEEN CONVERT(DATETIME,'" + dataFim + "',103) AND CONVERT(DATETIME,'" + dataFimF + "',103)";
+            }
+
+            if (turmasAberto != false)
+            {
+
+                sqlQuery += " AND CONVERT(DATETIME,GETDATE(),103) BETWEEN CONVERT(DATETIME,dtIni,103) AND CONVERT(DATETIME,dtFim,103)";
+            }
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, sqlQuery);
+
+
+            return ds;
+        }
+
     }
 }

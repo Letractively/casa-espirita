@@ -84,5 +84,12 @@ namespace BusinessLayer
             return turDA.Pesquisar(codDes);
         }
 
+        public DataSet PesquisarDataset(string codEvento,string codTurma, string dataIni, string dataIniF, string dataFim, string dataFimF,Boolean tumasAberto)
+        {
+            TurmasDA turmaDA = new TurmasDA();
+
+            return turmaDA.PesquisarDataSet(codEvento,codTurma, dataIni, dataIniF, dataFim, dataFimF,tumasAberto);
+        }
+
     }
 }
