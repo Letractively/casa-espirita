@@ -151,6 +151,7 @@ namespace FIBIESA
             txtCliente.Text = "";
             lblDesCliente.Text = "";
             hfIdPessoa.Value = "";
+            Session["dtItens"] = null;
             dtgItens.DataSource = null;
             dtgItens.DataBind(); 
         }
@@ -229,6 +230,7 @@ namespace FIBIESA
             VendaItens vendaItens = new VendaItens();
             MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
             MovimentosEstoque movEstoque = new MovimentosEstoque();
+            int usu_id = 0;
 
             vendas.Data = DateTime.Now;
             vendas.Situacao = "A";
@@ -238,11 +240,13 @@ namespace FIBIESA
             {
                 List<Usuarios> usuarios;
                 usuarios = (List<Usuarios>)Session["usuario"];
-
+                
                 foreach (Usuarios usu in usuarios)
                 {
-                    vendas.UsuarioId = usu.Id;
+                    usu_id = usu.Id;
                 }
+
+                vendas.UsuarioId = usu_id;
             }
       
             if (Session["dtItens"] != null)
@@ -269,17 +273,8 @@ namespace FIBIESA
 
                             if (ven_item > 0)
                             {
-                                if (Session["usuario"] != null)
-                                {
-                                    List<Usuarios> usuarios;
-                                    usuarios = (List<Usuarios>)Session["usuario"];
-
-                                    foreach (Usuarios usu in usuarios)
-                                    {
-                                        movEstoque.UsuarioId = usu.Id;
-                                    }
-                                }
-
+                                
+                                movEstoque.UsuarioId = usu_id;
                                 movEstoque.ItemEstoqueId = vendaItens.ItemEstoqueId;
                                 movEstoque.Quantidade = vendaItens.Quantidade;
                                 movEstoque.Data = DateTime.Now;
@@ -301,16 +296,15 @@ namespace FIBIESA
                             LimparCamposGeral();
                         }
                         else
-                            ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
-                        
+                            ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");                       
                     }
+                    else
+                        ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
                 }
-
             }
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-           
+                      
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)

@@ -77,13 +77,6 @@ namespace DataObjects
             set { _estadoCivil = value; }
         }
 
-        private Int32? _naturalidade;
-        public Int32? Naturalidade
-        {
-            get { return _naturalidade; }
-            set { _naturalidade = value; }
-        }
-
         private string _endereco;
         public string Endereco
         {

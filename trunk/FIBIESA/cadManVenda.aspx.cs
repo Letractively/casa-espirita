@@ -47,7 +47,9 @@ namespace FIBIESA
                 hfIdVenda.Value = vendas.Id.ToString();
                 lblNumero.Text = vendas.Numero.ToString();
                 lblCliente.Text = vendas.Pessoas.Nome;
-                lblData.Text = vendas.Data.ToString("dd/MM/yyyy");
+                lblData.Text = vendas.Data != null ? Convert.ToDateTime(vendas.Data).ToString("dd/MM/yyyy") : "";
+                    
+                    
             }
 
             VendaItensBL venItBl = new VendaItensBL();
@@ -101,6 +103,12 @@ namespace FIBIESA
 
         protected void btnSelect_Click(object sender, EventArgs e)
         {
+            VendaItensBL venItBL = new VendaItensBL();
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            int venIt_id = utils.ComparaIntComZero(dtgItens.DataKeys[gvrow.RowIndex].Value.ToString());
+            if (venIt_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                venItBL.CancelarVendaItemBL(venIt_id);
 
         }
 
@@ -108,6 +116,18 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (utils.ComparaIntComZero(hfIdVenda.Value) > 0)
+            {
+                VendasBL venBL = new VendasBL();
+                if (venBL.CancelarVendaBL(utils.ComparaIntComZero(hfIdVenda.Value)))
+                {
+                    CarregarDados(utils.ComparaIntComZero(hfIdVenda.Value));
+                }
+            }
         }
 
 

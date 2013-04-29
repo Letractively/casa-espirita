@@ -83,7 +83,7 @@
                                 onclick="btnVoltar_Click" />                             
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar Venda" CssClass="btn" 
-                                 ValidationGroup="salvar" />   
+                                 ValidationGroup="salvar" onclick="btnCancelar_Click" />   
                         </td>
                     </tr>                   
                 </table>                

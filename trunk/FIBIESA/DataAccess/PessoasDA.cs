@@ -32,8 +32,7 @@ namespace DataAccess
                 pes.NomeMae = dr["NOMEMAE"].ToString();
                 pes.NomePai = dr["NOMEPAI"].ToString();
                 pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());
-                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
-                pes.Naturalidade = utils.ComparaIntComNull(dr["NATURALIDADE"].ToString());
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();                
                 pes.Endereco = dr["ENDERECO"].ToString();
                 pes.Numero = dr["NUMERO"].ToString();
                 pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
@@ -111,7 +110,7 @@ namespace DataAccess
 
         public int InserirDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[34];
+            SqlParameter[] paramsToSP = new SqlParameter[33];
                         
             paramsToSP[0] = new SqlParameter("@nome", pes.Nome);
             paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
@@ -120,33 +119,32 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@nomemae", pes.NomeMae);
             paramsToSP[5] = new SqlParameter("@nomepai", pes.NomePai);
             paramsToSP[6] = new SqlParameter("@dtnascimento", pes.DtNascimento);
-            paramsToSP[7] = new SqlParameter("@estadocivil", pes.EstadoCivil);
-            paramsToSP[8] = new SqlParameter("@naturalidade", pes.Naturalidade);
-            paramsToSP[9] = new SqlParameter("@endereco", pes.Endereco);
-            paramsToSP[10] = new SqlParameter("@numero", pes.Numero);
-            paramsToSP[11] = new SqlParameter("@bairroid", pes.BairroId);
-            paramsToSP[12] = new SqlParameter("@cep", pes.Cep);
-            paramsToSP[13] = new SqlParameter("@cidadeid", pes.CidadeId);
-            paramsToSP[14] = new SqlParameter("@complemento", pes.Complemento);
-            paramsToSP[15] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[16] = new SqlParameter("@numeroprof", pes.NumeroProf);            
-            paramsToSP[17] = new SqlParameter("@cepprof", pes.CepProf);
-            paramsToSP[18] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
-            paramsToSP[19] = new SqlParameter("@complementoprof", pes.ComplementoProf);
-            paramsToSP[20] = new SqlParameter("@empresa", pes.Empresa);
-            paramsToSP[21] = new SqlParameter("@email", pes.Email);
-            paramsToSP[22] = new SqlParameter("@status", pes.Status);
-            paramsToSP[23] = new SqlParameter("@tipo", pes.Tipo);
-            paramsToSP[24] = new SqlParameter("@obs", pes.Obs);
-            paramsToSP[25] = new SqlParameter("@categoriaid", pes.CategoriaId);            
-            paramsToSP[26] = new SqlParameter("@envemail", pes.EnvEmail);
-            paramsToSP[27] = new SqlParameter("@dtcadastro", pes.DtCadastro);
-            paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
-            paramsToSP[29] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[30] = new SqlParameter("@refddd", pes.RefDDD);       
-            paramsToSP[31] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
-            paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
+            paramsToSP[7] = new SqlParameter("@estadocivil", pes.EstadoCivil);          
+            paramsToSP[8] = new SqlParameter("@endereco", pes.Endereco);
+            paramsToSP[9] = new SqlParameter("@numero", pes.Numero);
+            paramsToSP[10] = new SqlParameter("@bairroid", pes.BairroId);
+            paramsToSP[11] = new SqlParameter("@cep", pes.Cep);
+            paramsToSP[12] = new SqlParameter("@cidadeid", pes.CidadeId);
+            paramsToSP[13] = new SqlParameter("@complemento", pes.Complemento);
+            paramsToSP[14] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
+            paramsToSP[15] = new SqlParameter("@numeroprof", pes.NumeroProf);            
+            paramsToSP[16] = new SqlParameter("@cepprof", pes.CepProf);
+            paramsToSP[17] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
+            paramsToSP[18] = new SqlParameter("@complementoprof", pes.ComplementoProf);
+            paramsToSP[19] = new SqlParameter("@empresa", pes.Empresa);
+            paramsToSP[20] = new SqlParameter("@email", pes.Email);
+            paramsToSP[21] = new SqlParameter("@status", pes.Status);
+            paramsToSP[22] = new SqlParameter("@tipo", pes.Tipo);
+            paramsToSP[23] = new SqlParameter("@obs", pes.Obs);
+            paramsToSP[24] = new SqlParameter("@categoriaid", pes.CategoriaId);            
+            paramsToSP[25] = new SqlParameter("@envemail", pes.EnvEmail);
+            paramsToSP[26] = new SqlParameter("@dtcadastro", pes.DtCadastro);
+            paramsToSP[27] = new SqlParameter("@refnome", pes.RefNome);
+            paramsToSP[28] = new SqlParameter("@reftelefone", pes.RefTelefone);
+            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);       
+            paramsToSP[30] = new SqlParameter("@codigo", RetornaMaxCodigo());
+            paramsToSP[31] = new SqlParameter("@bairroProfId", pes.BairroProf);
+            paramsToSP[32] = new SqlParameter("@sexo", pes.Sexo);
 
             try
             {
@@ -166,7 +164,7 @@ namespace DataAccess
 
         public bool EditarDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[35];
+            SqlParameter[] paramsToSP = new SqlParameter[34];
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
             paramsToSP[1] = new SqlParameter("@codigo", pes.Codigo);
@@ -177,32 +175,31 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@nomemae", pes.NomeMae);
             paramsToSP[7] = new SqlParameter("@nomepai", pes.NomePai);
             paramsToSP[8] = new SqlParameter("@dtnascimento", pes.DtNascimento);
-            paramsToSP[9] = new SqlParameter("@estadocivil", pes.EstadoCivil);
-            paramsToSP[10] = new SqlParameter("@naturalidade", pes.Naturalidade);
-            paramsToSP[11] = new SqlParameter("@endereco", pes.Endereco);
-            paramsToSP[12] = new SqlParameter("@numero", pes.Numero);
-            paramsToSP[13] = new SqlParameter("@bairroid", pes.BairroId);
-            paramsToSP[14] = new SqlParameter("@cep", pes.Cep);
-            paramsToSP[15] = new SqlParameter("@cidadeid", pes.CidadeId);
-            paramsToSP[16] = new SqlParameter("@complemento", pes.Complemento);
-            paramsToSP[17] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[18] = new SqlParameter("@numeroprof", pes.NumeroProf);           
-            paramsToSP[19] = new SqlParameter("@cepprof", pes.CepProf);
-            paramsToSP[20] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
-            paramsToSP[21] = new SqlParameter("@complementoprof", pes.ComplementoProf);
-            paramsToSP[22] = new SqlParameter("@empresa", pes.Empresa);
-            paramsToSP[23] = new SqlParameter("@email", pes.Email);
-            paramsToSP[24] = new SqlParameter("@obs", pes.Obs);
-            paramsToSP[25] = new SqlParameter("@categoriaid", pes.CategoriaId);
-            paramsToSP[26] = new SqlParameter("@tipo", pes.Tipo);
-            paramsToSP[27] = new SqlParameter("@envemail", pes.EnvEmail);
-            paramsToSP[28] = new SqlParameter("@refnome", pes.RefNome);
-            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);
-            paramsToSP[30] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[31] = new SqlParameter("@dtcadastro", pes.DtCadastro);
-            paramsToSP[32] = new SqlParameter("@status", pes.Status);
-            paramsToSP[33] = new SqlParameter("@bairroProfId", pes.BairroProf);
-            paramsToSP[34] = new SqlParameter("@sexo", pes.Sexo);
+            paramsToSP[9] = new SqlParameter("@estadocivil", pes.EstadoCivil);            
+            paramsToSP[10] = new SqlParameter("@endereco", pes.Endereco);
+            paramsToSP[11] = new SqlParameter("@numero", pes.Numero);
+            paramsToSP[12] = new SqlParameter("@bairroid", pes.BairroId);
+            paramsToSP[13] = new SqlParameter("@cep", pes.Cep);
+            paramsToSP[14] = new SqlParameter("@cidadeid", pes.CidadeId);
+            paramsToSP[15] = new SqlParameter("@complemento", pes.Complemento);
+            paramsToSP[16] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
+            paramsToSP[17] = new SqlParameter("@numeroprof", pes.NumeroProf);           
+            paramsToSP[18] = new SqlParameter("@cepprof", pes.CepProf);
+            paramsToSP[19] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
+            paramsToSP[20] = new SqlParameter("@complementoprof", pes.ComplementoProf);
+            paramsToSP[21] = new SqlParameter("@empresa", pes.Empresa);
+            paramsToSP[22] = new SqlParameter("@email", pes.Email);
+            paramsToSP[23] = new SqlParameter("@obs", pes.Obs);
+            paramsToSP[24] = new SqlParameter("@categoriaid", pes.CategoriaId);
+            paramsToSP[25] = new SqlParameter("@tipo", pes.Tipo);
+            paramsToSP[26] = new SqlParameter("@envemail", pes.EnvEmail);
+            paramsToSP[27] = new SqlParameter("@refnome", pes.RefNome);
+            paramsToSP[28] = new SqlParameter("@refddd", pes.RefDDD);
+            paramsToSP[29] = new SqlParameter("@reftelefone", pes.RefTelefone);
+            paramsToSP[30] = new SqlParameter("@dtcadastro", pes.DtCadastro);
+            paramsToSP[31] = new SqlParameter("@status", pes.Status);
+            paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
+            paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
 
             try
             {

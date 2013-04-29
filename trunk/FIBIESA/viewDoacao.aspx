@@ -35,6 +35,12 @@
                                             <HeaderStyle CssClass="grd_cmd_header" />
                                             <ItemStyle CssClass="grd_delete" />
                                        </asp:CommandField>
+                                       <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_printer.png"
+                                                    OnClick="btnSelect_Click" ToolTip="Imprime o recibo de venda" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                        <asp:BoundField DataField="CODPESSOA" HeaderText="Código" SortExpression="CODPESSOA"/>
                                        <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME"/>

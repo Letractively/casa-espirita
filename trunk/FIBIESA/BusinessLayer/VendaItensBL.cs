@@ -10,28 +10,56 @@ namespace BusinessLayer
 {
     public class VendaItensBL
     {
+        private bool IsValid(VendaItens venIt)
+        {
+            bool valido;
+            valido = venIt.Situacao.Trim() == "A";
+            valido = valido && venIt.ItemEstoqueId > 0 && venIt.Quantidade > 0 && venIt.Valor > 0;
+            return valido;
+        }
+        
         public Int32 InserirBL(VendaItens venIt)
         {
-            /*criar as regras de negocio*/
-            VendaItensDA venItDA = new VendaItensDA();
+            if (IsValid(venIt))
+            {
+                VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.InserirDA(venIt);
+                return venItDA.InserirDA(venIt);
+            }
+            return 0;
         }
 
-        public bool EditarBL(VendaItens ntE)
+        public bool EditarBL(VendaItens venIt)
         {
-            /*criar as regras de negocio*/
-            VendaItensDA venItDA = new VendaItensDA();
+            if (venIt.Id > 0)
+            {
+                VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.EditarDA(ntE);
+                return venItDA.EditarDA(venIt);
+            }
+            return false;
         }
 
         public bool ExcluirBL(VendaItens venIt)
         {
-            /*criar as regras de negocio*/
-            VendaItensDA venItDA = new VendaItensDA();
+            if (venIt.Id > 0)
+            {
+                VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.ExcluirDA(venIt);
+                return venItDA.ExcluirDA(venIt);
+            }
+            return false;
+        }
+
+        public bool CancelarVendaItemBL(int id_venIt)
+        {
+            if (id_venIt > 0)
+            {
+                VendaItensDA venItDA = new VendaItensDA();
+
+                return venItDA.CancelarVendaItemDA(id_venIt);
+            }
+            return false;
         }
 
         public List<VendaItens> PesquisarBL()
