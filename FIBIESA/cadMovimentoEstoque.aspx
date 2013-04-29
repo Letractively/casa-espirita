@@ -41,10 +41,11 @@
                     </tr>
                     <tr>
                         <td colspan ="4">   
-                            <asp:Panel runat="server" ID="pnlGrid" ScrollBars="Auto">                         
+                            <asp:Panel runat="server" ID="pnlGrid" ScrollBars="Auto" Width="100%" 
+                                Height="350px" BorderColor="Silver" BorderWidth="1px">                         
                             <asp:GridView ID="dtgMovItem" runat="server" AutoGenerateColumns="False" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                CellPadding="3" GridLines="None">
+                                CellPadding="3" GridLines="None" onrowdatabound="dtgMovItem_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="CODITEM" HeaderText="Cód. Item" />
                                     <asp:BoundField DataField="DESCITEM" HeaderText="Descrição" />

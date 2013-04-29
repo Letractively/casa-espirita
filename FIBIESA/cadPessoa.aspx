@@ -27,7 +27,7 @@
                                                 <td style="width: 150px" >
                                                     <asp:Label ID="lblCodigo" runat="server"></asp:Label>   
                                                 </td> 
-                                                <td style="width: 200px">
+                                                <td style="width: 150px">
                                                    * Data Cadastro:
                                                 </td>
                                                 <td style="width: 150px" colspan="3">
@@ -39,23 +39,13 @@
                                                 <td style="width: 200px">
                                                     <asp:Label ID="lblDesNome" runat="server"></asp:Label>
                                                 </td>                                                   
-                                                <td style="width: 150px" colspan="2">
+                                                <td style="width: 100px" colspan="3">
                                                     <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="280px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator1" runat="server" ErrorMessage="Infome o Nome/Razão social"
                                                         ControlToValidate="txtNome" ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                                                </td> 
-                                                <td style="width: 150px">
-                                                   * Categoria:
-                                                </td>
-                                                <td style="width: 200px" colspan="2">                                                   
-                                                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="dropdownlist">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
-                                                                runat="server" ControlToValidate="ddlCategoria" ErrorMessage="Informe a Categoria"
-                                                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                                                </td>                                               
+                                                </td>                                                                                              
                                             </tr>                                            
                                             <tr>
                                                 <td style="width: 200px">
@@ -66,8 +56,20 @@
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCpfCnpj" ErrorMessage="Informe o CPF/CNPJ"
                                                         ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                </td>  
+                                                <td style="width: 150px">
+                                                   * Categoria:
                                                 </td>
-                                                <td style="width: 200px" >
+                                                <td style="width: 200px" colspan="2">                                                   
+                                                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="dropdownlist">
+                                                    </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
+                                                                runat="server" ControlToValidate="ddlCategoria" ErrorMessage="Informe a Categoria"
+                                                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                </td>  
+                                            </tr>
+                                            <tr>
+                                            <td style="width: 200px" >
                                                     RG:
                                                 </td>
                                                 <td style="width: 150px">
@@ -95,7 +97,7 @@
                                                         Enabled="True">
                                                     </asp:CalendarExtender>
                                                 </td>
-                                                <td style="width: 200px">
+                                                <td style="width: 150px">
                                                     Estado Civil:
                                                 </td>
                                                 <td style="width: 150px" colspan="3">
@@ -112,32 +114,25 @@
                                                 <td style="width: 200px">
                                                     E-mail:
                                                 </td>
-                                                <td style="width: 180px" colspan="2">
+                                                <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                                         Width="280px"></asp:TextBox>
-                                                </td>
-                                                <td style="width: 150px">
-                                                    Naturalidade:
-                                                </td>
-                                                <td style="width: 200px" colspan="2">
-                                                    <asp:TextBox ID="txtNaturalidade" runat="server" CssClass="inputbox" 
-                                                        Width="70px"></asp:TextBox><asp:Button
-                                                        ID="btnPesNaturalidade" runat="server" CssClass="btn" Text="..." OnClick="btnPesNaturalidade_Click" />&nbsp;&nbsp;<asp:Label
-                                                            ID="lblDesNaturalidade" runat="server"></asp:Label>
-                                                </td>
+                                                </td>                                                
                                             </tr>
                                             <tr>
                                                 <td style="width: 200px">
                                                     Nome da Mãe:
                                                 </td>
-                                                <td style="width: 180px" colspan="2">
+                                                <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtNomeMae" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="280px"></asp:TextBox>
-                                                </td>                                            
+                                                </td>     
+                                            </tr>
+                                            <tr>                                       
                                                 <td style="width: 150px">
                                                     Nome do Pai:
                                                 </td>
-                                                <td style="width: 200px" colspan="2">
+                                                <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtNomePai" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="280px"></asp:TextBox>
                                                 </td>
@@ -231,10 +226,10 @@
                                     <ContentTemplate>
                                         <table>
                                             <tr>
-                                                <td style="width: 100px">
+                                                <td style="width: 70px">
                                                     Tipo:
                                                 </td>
-                                                <td style="width: 200px">
+                                                <td style="width: 150px">
                                                     <asp:DropDownList ID="ddlTipo" runat="server" CssClass="dropdownlist">
                                                         <asp:ListItem>Celular</asp:ListItem>
                                                         <asp:ListItem>Comercial</asp:ListItem>
@@ -244,7 +239,7 @@
                                                 <td style="width: 100px">
                                                     Telefone:
                                                 </td>
-                                                <td style="width: 400px">
+                                                <td style="width: 300px">
                                                     <asp:TextBox ID="txtTelefone" runat="server" CssClass="inputbox" MaxLength="13"></asp:TextBox>&nbsp;&nbsp;
                                                     <asp:Button ID="btnInserirTelefone" runat="server" CssClass="btn" Text="Inserir"
                                                         OnClick="btnInserirTelefone_Click" ValidationGroup="salvarTelefone" /><asp:RequiredFieldValidator
@@ -405,7 +400,6 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
                 EnableScriptLocalization="true">
             </asp:ScriptManager>
-            <asp:HiddenField ID="hfIdNaturalidade" runat="server" />
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdTelefone" runat="server" />
             <asp:HiddenField ID="hfOrdemFone" runat="server" />

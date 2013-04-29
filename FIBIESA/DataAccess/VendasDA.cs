@@ -87,13 +87,21 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@data", ven.Data);
             paramsToSP[4] = new SqlParameter("@situacao", ven.Situacao);
 
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_vendas", paramsToSP);
+            try
+            {
 
-            DataTable tabela = ds.Tables[0];
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_vendas", paramsToSP);
 
-            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+                DataTable tabela = ds.Tables[0];
 
-            return id;
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public bool EditarDA(Vendas ven)
@@ -107,9 +115,16 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@data", ven.Data);
             paramsToSP[5] = new SqlParameter("@situacao", ven.Situacao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_vendas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_vendas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Vendas ven)
@@ -118,9 +133,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", ven.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_vendas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_vendas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Vendas> PesquisarDA()
@@ -134,6 +156,32 @@ namespace DataAccess
 
         }
 
+        public bool CancelarVendaDA(int id_ven)
+        {
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@vendaId", id_ven);
+
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.StoredProcedure, "stp_CANCELAR_VENDA", paramsToSP);
+
+                DataTable tabela = ds.Tables[0];
+
+                string resultado = tabela.Rows[0][0].ToString();
+
+                if (resultado == "true")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public List<Vendas> PesquisarDA(int id_ven)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -143,6 +191,31 @@ namespace DataAccess
             List<Vendas> vendas = CarregarObjVenda(dr);
 
             return vendas;
+        }
+
+        public List<Vendas> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * " +
+                                                        "   FROM VENDAS V " +
+                                                        "      , PESSOAS P " +
+                                                        "      , USUARIOS U " +
+                                                        "  WHERE V.PESSOAID = P.ID " +
+                                                        "    AND V.USUARIOID = U.ID ");
+                                                                
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND ( V.NUMERO = {0} OR P.NOME LIKE '%{1}%' OR P.NOMEFANTASIA LIKE '%{1}%' OR U.NOME LIKE '%{1}%' ) "
+                                                                                                      , utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY V.NUMERO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Vendas> vendas = CarregarObjVenda(dr);
+
+            return vendas;
+
         }
         
         public DataSet PesquisarDADataSet(int id_ven)
@@ -159,6 +232,7 @@ namespace DataAccess
                                                                                        " FROM dbo.VIEW_vendas WHERE ID = {0}", id_ven));            
             return ds;
         }
+         
                
     }
 }

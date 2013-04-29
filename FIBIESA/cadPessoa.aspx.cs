@@ -120,14 +120,6 @@ namespace Admin
                     ddlCidadeProf.SelectedValue = pes.CidadeProfId.ToString();
                     ddlBairroProf.SelectedValue = pes.BairroProf.ToString();
                 }      
-
-                hfIdNaturalidade.Value = pes.Naturalidade.ToString();
-                if (utils.ComparaIntComZero(hfIdNaturalidade.Value) > 0)
-                {
-                    v_pesquisa = RetornarCodigoDecricaoCidade(utils.ComparaIntComZero(hfIdNaturalidade.Value));
-                    txtNaturalidade.Text = v_pesquisa[0];
-                    lblDesNaturalidade.Text = v_pesquisa[1];
-                }               
                 
                 ddlCategoria.SelectedValue = pes.CategoriaId.ToString();  
                              
@@ -276,8 +268,7 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtDtCadastro.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
-            txtNaturalidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");  
+            txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");         
@@ -380,13 +371,7 @@ namespace Admin
             }
 
         }
-        
-        protected void btnPesNaturalidade_Click(object sender, EventArgs e)
-        {
-            CarregarTabelaPesquisaCidade();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtNaturalidade.ClientID + "&id=" + hfIdNaturalidade.ClientID + "&lbl=" + lblDesNaturalidade.ClientID + "','',600,500);", true);
-        }
-                               
+                                    
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewPessoa.aspx");
@@ -407,8 +392,7 @@ namespace Admin
             pessoas.DtNascimento = utils.ComparaDataComNull(txtDataNascimento.Text);
             pessoas.EstadoCivil = ddlEstadoCivil.SelectedValue;
             pessoas.NomeMae = txtNomeMae.Text;
-            pessoas.NomePai = txtNomePai.Text;
-            pessoas.Naturalidade = utils.ComparaIntComNull(hfIdNaturalidade.Value);
+            pessoas.NomePai = txtNomePai.Text;            
             pessoas.CidadeId = utils.ComparaIntComZero(ddlCidades.SelectedValue);
             pessoas.Cep = txtCep.Text;
             pessoas.Endereco = txtEndereco.Text;
@@ -486,7 +470,7 @@ namespace Admin
             txtTelefone.Text = "";
             ddlTipo.SelectedIndex = 0;
 
-            hfOrdemFone.Value = (Convert.ToInt32(hfOrdemFone.Value) + 1).ToString(); //proxima ordem  
+            hfOrdemFone.Value = (utils.ComparaIntComZero(hfOrdemFone.Value) + 1).ToString(); //proxima ordem  
             
         }
                 

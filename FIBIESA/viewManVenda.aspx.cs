@@ -51,7 +51,7 @@ namespace Admin
             VendasBL venBL = new VendasBL();
             List<Vendas> vendas;
 
-            vendas = venBL.PesquisarBL();
+            vendas = venBL.PesquisarBuscaBL(valor);
 
             foreach (Vendas ven in vendas)
             {
@@ -59,8 +59,8 @@ namespace Admin
                 DataRow linha = tabela.NewRow();
 
                 linha["ID"] = ven.Id;
-                linha["NUMERO"] = ven.Numero;               
-                linha["DATA"] = ven.Data.ToString("dd/MM/yyyy");
+                linha["NUMERO"] = ven.Numero;
+                linha["DATA"] = ven.Data != null ? Convert.ToDateTime(ven.Data).ToString("dd/MM/yyyy") : "";
                 linha["SITUACAO"] = ven.Situacao;
                 linha["NOMEPESSOA"] = ven.Pessoas.Nome;
                 linha["NOMEUSUARIO"] = ven.Usuarios.Login;
@@ -88,9 +88,14 @@ namespace Admin
 
         }
 
-        protected void Busca_Click(object sender, EventArgs e)
+        protected void btnSelect_Click(object sender, EventArgs e)
         {
-            
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            int ven_id = utils.ComparaIntComZero(dtgVendas.DataKeys[gvrow.RowIndex].Value.ToString());
+            if(ven_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                    "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,815);", true);            
         }
 
         protected void dtgVendas_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,7 +153,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-
+            Pesquisar(txtBusca.Text);
         }
               
     }

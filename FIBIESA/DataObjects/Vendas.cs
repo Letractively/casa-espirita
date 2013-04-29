@@ -35,8 +35,8 @@ namespace DataObjects
             set { _usuarioId = value; }
         }
 
-        private DateTime _data;
-        public DateTime Data
+        private DateTime? _data;
+        public DateTime? Data
         {
             get { return _data; }
             set { _data = value; }

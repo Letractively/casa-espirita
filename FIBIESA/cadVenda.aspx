@@ -205,7 +205,7 @@
         </asp:Panel>      
 
         <asp:ModalPopupExtender ID="ModalPopupExtenderPesItem" runat="server" PopupControlID="pnlItem"
-        TargetControlID="hfIdItem" DropShadow="true" BackgroundCssClass="modalBackground" 
+        TargetControlID="hfIdItem" DropShadow="true" BackgroundCssClass="modalBackground"
         CancelControlID="btnCanelItem">
         </asp:ModalPopupExtender>
 
@@ -249,7 +249,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
+                        <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />                       
                     </td>
                 </tr>
             </table>

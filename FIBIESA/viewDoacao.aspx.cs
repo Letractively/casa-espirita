@@ -159,6 +159,15 @@ namespace FIBIESA
             Pesquisar(txtBusca.Text);
         }
 
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+            /*ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            int ven_id = utils.ComparaIntComZero(dtgDoacao.DataKeys[gvrow.RowIndex].Value.ToString());
+            if (ven_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                    "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,815);", true);*/
+        }
         
     }
 }

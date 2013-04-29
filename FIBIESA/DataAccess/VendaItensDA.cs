@@ -93,6 +93,32 @@ namespace DataAccess
             return true;
         }
 
+        public bool CancelarVendaItemDA(int id_venIt)
+        {
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@vendaItemId", id_venIt);
+
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.StoredProcedure, "stp_CANCELAR_VENDA_ITEM", paramsToSP);
+
+                DataTable tabela = ds.Tables[0];
+
+                string resultado = tabela.Rows[0][0].ToString();
+
+                if (resultado == "true")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public List<VendaItens> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
