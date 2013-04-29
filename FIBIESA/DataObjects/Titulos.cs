@@ -35,15 +35,15 @@ namespace DataObjects
             set { _valor = value; }
         }
 
-        private Int32 _pessoaid;
-        public Int32 Pessoaid
+        private Int32? _pessoaid;
+        public Int32? Pessoaid
         {
             get { return _pessoaid; }
             set { _pessoaid = value; }
         }
 
-        private Int32 _portadorid;
-        public Int32 Portadorid
+        private Int32? _portadorid;
+        public Int32? Portadorid
         {
             get { return _portadorid; }
             set { _portadorid = value; }
@@ -63,8 +63,8 @@ namespace DataObjects
             set { _dataEmissao = value; }
         }
 
-        private Int32 _tipoDocumentoId;
-        public Int32 TipoDocumentoId
+        private Int32? _tipoDocumentoId;
+        public Int32? TipoDocumentoId
         {
             get { return _tipoDocumentoId; }
             set { _tipoDocumentoId = value; }
@@ -77,10 +77,15 @@ namespace DataObjects
             set { _tipo = value; }
         }
 
-
         public static void Add(Titulos tit)
         {
             throw new NotImplementedException();
         }
+
+        public Portadores Portador { get; set; }
+
+        public Pessoas Pessoas { get; set; }
+
+        public TiposDocumentos TiposDocumentos { get; set; }
     }
 }
