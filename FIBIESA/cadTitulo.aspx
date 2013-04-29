@@ -17,7 +17,7 @@
                             Pessoa:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_pessoa" runat="server">
+                            <asp:DropDownList ID="ddlPessoa" runat="server">
                                 <asp:ListItem>Ativo</asp:ListItem>
                                 <asp:ListItem>Desativado</asp:ListItem>
                             </asp:DropDownList>
@@ -28,7 +28,7 @@
                             Portador:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_portador" runat="server">
+                            <asp:DropDownList ID="ddlPortador" runat="server">
                                 <asp:ListItem>Ativo</asp:ListItem>
                                 <asp:ListItem>Desativado</asp:ListItem>
                             </asp:DropDownList>
@@ -39,7 +39,7 @@
                             Tipo de Documento:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_tipoDocumento" runat="server">
+                            <asp:DropDownList ID="ddlTipoDocumento" runat="server">
                                 <asp:ListItem>Ativo</asp:ListItem>
                                 <asp:ListItem>Desativado</asp:ListItem>
                             </asp:DropDownList>
@@ -50,7 +50,7 @@
                             Número:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_numero" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                             Parcela:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_parcela" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtParcela" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +66,15 @@
                             Valor:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_valor" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Data Vencimento:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtDataVencimento" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +82,7 @@
                             Data Emissão:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_dataEmissao" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtDataEmissao" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +90,7 @@
                             Tipo:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_tipo" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtTipo" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -91,11 +99,13 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
-                        </td>
+                            <asp:Button ID="btnSalvar" runat="server" Text ="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                        &nbsp;</td>
                     </tr>
                 </table>
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
         </div>

@@ -13,75 +13,102 @@ namespace Admin {
     public partial class cadTitulo {
         
         /// <summary>
-        /// _pessoa control.
+        /// ddlPessoa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _pessoa;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPessoa;
         
         /// <summary>
-        /// _portador control.
+        /// ddlPortador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _portador;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPortador;
         
         /// <summary>
-        /// _tipoDocumento control.
+        /// ddlTipoDocumento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList _tipoDocumento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
         
         /// <summary>
-        /// _numero control.
+        /// txtNumero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _numero;
+        protected global::System.Web.UI.WebControls.TextBox txtNumero;
         
         /// <summary>
-        /// _parcela control.
+        /// txtParcela control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _parcela;
+        protected global::System.Web.UI.WebControls.TextBox txtParcela;
         
         /// <summary>
-        /// _valor control.
+        /// txtValor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _valor;
+        protected global::System.Web.UI.WebControls.TextBox txtValor;
         
         /// <summary>
-        /// _dataEmissao control.
+        /// txtDataVencimento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _dataEmissao;
+        protected global::System.Web.UI.WebControls.TextBox txtDataVencimento;
         
         /// <summary>
-        /// _tipo control.
+        /// txtDataEmissao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _tipo;
+        protected global::System.Web.UI.WebControls.TextBox txtDataEmissao;
+        
+        /// <summary>
+        /// txtTipo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipo;
+        
+        /// <summary>
+        /// btnSalvar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// hfId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfId;
     }
 }
