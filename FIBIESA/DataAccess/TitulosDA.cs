@@ -93,7 +93,6 @@ namespace DataAccess
         public bool InserirDA(Titulos tit)
         {
             SqlParameter[] paramsToSP = new SqlParameter[9];
-
             paramsToSP[0] = new SqlParameter("@numero", tit.Numero);
             paramsToSP[1] = new SqlParameter("@parcela", tit.Parcela);
             paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
@@ -103,16 +102,13 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@dataemissao", tit.DataEmissao);
             paramsToSP[7] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
             paramsToSP[8] = new SqlParameter("@tipo", tit.Tipo);
-
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_titulos", paramsToSP);
-
             return true;
         }
 
         public bool EditarDA(Titulos tit)
         {
             SqlParameter[] paramsToSP = new SqlParameter[10];
-
             paramsToSP[0] = new SqlParameter("@id", tit.Id);
             paramsToSP[1] = new SqlParameter("@numero", tit.Numero);
             paramsToSP[2] = new SqlParameter("@parcela", tit.Parcela);
@@ -123,49 +119,35 @@ namespace DataAccess
             paramsToSP[7] = new SqlParameter("@dataemissao", tit.DataEmissao);
             paramsToSP[8] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
             paramsToSP[9] = new SqlParameter("@tipo", tit.Tipo);
-
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_titulos", paramsToSP);
-
             return true;
         }
 
         public bool ExcluirDA(Titulos tit)
         {
             SqlParameter[] paramsToSP = new SqlParameter[1];
-
             paramsToSP[0] = new SqlParameter("@id", tit.Id);
-
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_titulos", paramsToSP);
-
             return true;
         }
 
         public List<Titulos> PesquisarDA()
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY CODIGO "));
-
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY CODIGO "));
             List<Titulos> titulos = CarregarObjTitulos(dr);
-
             return titulos;
-
         }
 
         public List<Titulos> PesquisarDA(int id_tit)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TITULOS WHERE ID = {0}", id_tit));
-
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM TITULOS WHERE ID = {0}", id_tit));
             List<Titulos> titulos = CarregarObjTitulos(dr);
-
             return titulos;
         }
 
         public List<Titulos> PesquisarDA(string campo, string valor)
         {
             string consulta;
-
             switch (campo.ToUpper())
             {
                 case "CODIGO":
@@ -179,46 +161,37 @@ namespace DataAccess
                     break;
             }
 
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
-
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, consulta);
             List<Titulos> titulos = CarregarObjTitulos(dr);
-
             return titulos;
         }
 
-        public override List<Base> Pesquisar(string descricao, string tipo)
+        //public override List<Base> Pesquisar(string descricao, string tipo)
+        public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr;
-
             if (tipo == "C")
             {
                 int codigo = 0;
                 Int32.TryParse(descricao, out codigo);
-
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM  WHERE CODIGO = '{0}'", codigo));
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM  WHERE CODIGO = '{0}'", codigo));
             }
             else
             {
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                      CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TITULOS WHERE DESCRICAO LIKE '%{0}%'", descricao));
+                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM TITULOS WHERE DESCRICAO LIKE '%{0}%'", descricao));
             }
-
             List<Base> ba = new List<Base>();
-
             while (dr.Read())
             {
                 Base bas = new Base();
                 bas.PesId1 = int.Parse(dr["ID"].ToString());
                 bas.PesCodigo = dr["CODIGO"].ToString();
                 bas.PesDescricao = dr["DESCRICAO"].ToString();
-
                 ba.Add(bas);
             }
             return ba;
         }
+
+        public string tipo { get; set; }
     }
 }
