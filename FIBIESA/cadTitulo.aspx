@@ -17,10 +17,7 @@
                             Pessoa:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlPessoa" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:DropDownList ID="ddlPessoa" runat="server" CssClass="dropdownlist"></asp:DropDownList> 
                         </td>
                     </tr>
                     <tr>
@@ -28,10 +25,7 @@
                             Portador:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlPortador" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:DropDownList ID="ddlPortador" runat="server" CssClass="dropdownlist"></asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -39,10 +33,7 @@
                             Tipo de Documento:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlTipoDocumento" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="dropdownlist"></asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
