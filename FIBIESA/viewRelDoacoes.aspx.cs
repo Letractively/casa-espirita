@@ -64,11 +64,28 @@ namespace FIBIESA
             Session["objBLPesquisa"] = pesBL;
             Session["objPesquisa"] = pe;
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtNome.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCodPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
         }
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
+
+            DoacoesBL doacoesBL = new DoacoesBL();
+
+            Session["ldsRel"] = doacoesBL.PesquisarDataset(txtCodPessoa.Text, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            if (Session["ldsRel"] != null)
+            {
+                string periodo = "Todos";
+                if((txtDataIni.Text != string.Empty) && (txtDataFim.Text != string.Empty))
+                {
+                    periodo = txtDataIni.Text + " a " + txtDataFim.Text;
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelDoacoes.aspx?periodo=" + periodo + "','',590,805);", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+            }
 
         }
     }

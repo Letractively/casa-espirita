@@ -144,7 +144,41 @@ namespace DataAccess
                         
             return Doacoes;
         }
-              
 
+
+        public DataSet PesquisarDataset(string codPessoa, string valorIni, string valorFim, string dataIni, string dataFim)
+        {
+
+
+            string sqlQuery = "SELECT Nome " +
+                                "  ,data " +
+                                "  ,valor " +
+                                " FROM VIEW_DOACOES WHERE 1 = 1 ";
+            if (codPessoa != string.Empty)
+            {
+
+                sqlQuery += " AND (PESSOAID =" + codPessoa + ")";
+            }
+
+
+            if ((dataIni != string.Empty) && (dataFim != string.Empty))
+            {
+
+                sqlQuery += " AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)";
+            }
+
+            if ((valorIni != string.Empty) && (valorFim != string.Empty))
+            {
+
+                sqlQuery += " AND valor BETWEEN CONVERT(DATETIME,'" + valorIni + "',103) AND CONVERT(DATETIME,'" + valorFim + "',103)";
+            }
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, sqlQuery);
+            
+            return ds;
+
+        }
+        
     }
 }
