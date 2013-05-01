@@ -20,7 +20,7 @@
                             Nome:
                         </td>
                         <td style="width: 530px" colspan="2">
-                            <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                            <asp:TextBox ID="txtCodPessoa" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
                             <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..." 
                                 onclick="btnPesNome_Click"  />
                                 &nbsp;

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RelDoacoes.aspx.cs" Inherits="FIBIESA.Relatorios.viewRelDoacoes" %>
 
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,12 +16,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
         <div id="divRelatorio" runat="server">
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="570px" 
-                Width="710px" ShowRefreshButton="False" ShowPromptAreaButton="False" 
+            <rsweb:ReportViewer ID="rptDoacoes" runat="server" Height="570px" 
+                Width="800px" ShowRefreshButton="False" ShowPromptAreaButton="False" 
                 ShowDocumentMapButton="False" ShowFindControls="False" 
                 Font-Names="Arial" Font-Size="8pt" >
-                <LocalReport reportpath="Relatorios\rptRelDoacoes.rdlc">
+                <LocalReport reportpath="Relatorios\rptDoacoes.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>
         </div>
