@@ -78,6 +78,8 @@
     <Content Include="cadChamada.aspx" />
     <Content Include="cadCidade.aspx" />
     <Content Include="cadConta.aspx" />
+    <Content Include="cadContasApagar.aspx" />
+    <Content Include="cadContasReceber.aspx" />
     <Content Include="cadEvento.aspx" />
     <Content Include="cadDoacao.aspx" />
     <Content Include="cadEditora.aspx" />
@@ -218,6 +220,8 @@
     <Content Include="viewChamada.aspx" />
     <Content Include="viewCidade.aspx" />
     <Content Include="viewConta.aspx" />
+    <Content Include="viewContasApagar.aspx" />
+    <Content Include="viewContasReceber.aspx" />
     <Content Include="viewDoacao.aspx" />
     <Content Include="viewEvento.aspx" />
     <Content Include="viewEditora.aspx" />
@@ -357,6 +361,20 @@
     </Compile>
     <Compile Include="cadConta.aspx.designer.cs">
       <DependentUpon>cadConta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadContasApagar.aspx.cs">
+      <DependentUpon>cadContasApagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadContasApagar.aspx.designer.cs">
+      <DependentUpon>cadContasApagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadContasReceber.aspx.cs">
+      <DependentUpon>cadContasReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadContasReceber.aspx.designer.cs">
+      <DependentUpon>cadContasReceber.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadEvento.aspx.cs">
       <DependentUpon>cadEvento.aspx</DependentUpon>
@@ -705,6 +723,20 @@
     </Compile>
     <Compile Include="viewConta.aspx.designer.cs">
       <DependentUpon>viewConta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewContasApagar.aspx.cs">
+      <DependentUpon>viewContasApagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewContasApagar.aspx.designer.cs">
+      <DependentUpon>viewContasApagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewContasReceber.aspx.cs">
+      <DependentUpon>viewContasReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewContasReceber.aspx.designer.cs">
+      <DependentUpon>viewContasReceber.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewDoacao.aspx.cs">
       <DependentUpon>viewDoacao.aspx</DependentUpon>

@@ -33,12 +33,12 @@ namespace BusinessLayer
             return tdoDA.ExcluirDA(tdo);
         }
 
-        public List<TiposDocumentos> PesquisarBL()
+        public List<TiposDocumentos> PesquisarBL(string aplicacao)
         {
             /*criar as regras de negocio*/
             TiposDocumentosDA tdoDA = new TiposDocumentosDA();
 
-            return tdoDA.PesquisarDA();
+            return tdoDA.PesquisarDA(aplicacao);
         }
 
         public List<TiposDocumentos> PesquisarBL(int tdo)

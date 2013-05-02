@@ -76,16 +76,48 @@ namespace DataObjects
             get { return _tipo; }
             set { _tipo = value; }
         }
-
-        public static void Add(Titulos tit)
+               
+        private Portadores _portador;
+        public Portadores Portador
         {
-            throw new NotImplementedException();
+            get { return _portador; }
+            set { _portador = value; }
         }
 
-        public Portadores Portador { get; set; }
+        private Pessoas _pessoas;
+        public Pessoas Pessoas
+        {
+            get { return _pessoas; }
+            set { _pessoas = value; }
+        }
 
-        public Pessoas Pessoas { get; set; }
+        private TiposDocumentos _tiposDocumentos;
+        public TiposDocumentos TiposDocumentos
+        {
+            get { return _tiposDocumentos; }
+            set { _tiposDocumentos = value; }
+        }
 
-        public TiposDocumentos TiposDocumentos { get; set; }
+        private DateTime? _dtPagamento;
+        public DateTime? DtPagamento
+        {
+            get { return _dtPagamento; }
+            set { _dtPagamento = value; }
+        }
+
+        private Decimal? _valorPago;
+        public Decimal? ValorPago
+        {
+            get { return _valorPago; }
+            set { _valorPago = value; }
+        }
+
+        private string _obs;
+        public string Obs
+        {
+            get { return _obs; }
+            set { _obs = value; }
+        }
+                    
     }
 }

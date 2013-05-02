@@ -31,7 +31,7 @@ namespace BusinessLayer
 
         public bool EditarBL(VendaItens venIt)
         {
-            if (venIt.Id > 0)
+            if (venIt.Id > 0 && IsValid(venIt))
             {
                 VendaItensDA venItDA = new VendaItensDA();
 

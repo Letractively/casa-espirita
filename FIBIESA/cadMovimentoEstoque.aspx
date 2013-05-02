@@ -45,19 +45,22 @@
                                 Height="350px" BorderColor="Silver" BorderWidth="1px">                         
                             <asp:GridView ID="dtgMovItem" runat="server" AutoGenerateColumns="False" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                CellPadding="3" GridLines="None" onrowdatabound="dtgMovItem_RowDataBound">
+                                CellPadding="3" GridLines="None" onrowdatabound="dtgMovItem_RowDataBound" 
+                                    AllowPaging="True" AllowSorting="True" 
+                                    onpageindexchanging="dtgMovItem_PageIndexChanging" 
+                                    onsorting="dtgMovItem_Sorting">
                                 <Columns>
-                                    <asp:BoundField DataField="CODITEM" HeaderText="Cód. Item" />
-                                    <asp:BoundField DataField="DESCITEM" HeaderText="Descrição" />
-                                    <asp:BoundField DataField="DATA" HeaderText="Data" />
-                                    <asp:BoundField DataField="TIPO" HeaderText="Tipo" />
-                                    <asp:BoundField DataField="QTDE" HeaderText="Qtde" />
-                                    <asp:BoundField DataField="VLRCUSTO" HeaderText="Vlr. Custo" />
-                                    <asp:BoundField DataField="VLRVENDA" HeaderText="Vlr. Venda" />
-                                    <asp:BoundField DataField="USUNOME" HeaderText="Usuário" />
-                                    <asp:BoundField DataField="VENDANUM" HeaderText="Venda" />
-                                    <asp:BoundField DataField="NOTAENT" HeaderText="Nota " />
-                                    <asp:BoundField DataField="NOTAENTSERIE" HeaderText="Série" />
+                                    <asp:BoundField DataField="CODITEM" HeaderText="Cód. Item" SortExpression="CODITEM" />
+                                    <asp:BoundField DataField="DESCITEM" HeaderText="Descrição" SortExpression="DESCITEM" />
+                                    <asp:BoundField DataField="DATA" HeaderText="Data" SortExpression="DATA" />
+                                    <asp:BoundField DataField="TIPO" HeaderText="Tipo" SortExpression="TIPO" />
+                                    <asp:BoundField DataField="QTDE" HeaderText="Qtde"  SortExpression="QTDE"/>
+                                    <asp:BoundField DataField="VLRCUSTO" HeaderText="Vlr. Custo" SortExpression="VLRCUSTO" />
+                                    <asp:BoundField DataField="VLRVENDA" HeaderText="Vlr. Venda" SortExpression="VLRVENDA"/>
+                                    <asp:BoundField DataField="USUNOME" HeaderText="Usuário" SortExpression="USUNOME" />
+                                    <asp:BoundField DataField="VENDANUM" HeaderText="Venda" SortExpression="VENDANUM"/>
+                                    <asp:BoundField DataField="NOTAENT" HeaderText="Nota " SortExpression="NOTAENT" />
+                                    <asp:BoundField DataField="NOTAENTSERIE" HeaderText="Série" SortExpression="NOTAENTSERIE" />
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

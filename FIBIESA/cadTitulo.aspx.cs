@@ -44,7 +44,7 @@ namespace Admin
         {
 
             TiposDocumentosBL tidBL = new TiposDocumentosBL();
-            List<TiposDocumentos> tipodocumento = tidBL.PesquisarBL();
+            List<TiposDocumentos> tipodocumento = tidBL.PesquisarBL("CR");
 
             ddlTipoDocumento.Items.Add(new ListItem());
             foreach (TiposDocumentos ltTip in tipodocumento)

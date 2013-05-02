@@ -74,6 +74,12 @@ namespace FIBIESA
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
         }
+
+        private void CarregarAtributos()
+        {
+            btnCancelar.Attributes.Add("onclick", "javascript:return " + "confirm('\\n" + "Deseja realmente cancelar essa venda ?" + "')");       
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -81,8 +87,8 @@ namespace FIBIESA
             int id_vend = 0;
 
             if (!IsPostBack)
-            {                
-
+            {
+                CarregarAtributos();
                 if (Request.QueryString["operacao"] != null && Request.QueryString["id_vend"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
@@ -107,8 +113,11 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
             int venIt_id = utils.ComparaIntComZero(dtgItens.DataKeys[gvrow.RowIndex].Value.ToString());
-            if (venIt_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+            if (venIt_id > 0)
+            {
                 venItBL.CancelarVendaItemBL(venIt_id);
+                CarregarDados(venIt_id);
+            }
 
         }
 
@@ -116,6 +125,9 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja realmente cancelar esse item?", 0, e);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -128,8 +140,8 @@ namespace FIBIESA
                     CarregarDados(utils.ComparaIntComZero(hfIdVenda.Value));
                 }
             }
+           
         }
-
 
     }
 }

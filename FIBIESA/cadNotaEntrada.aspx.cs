@@ -86,9 +86,7 @@ namespace Admin
 
             NotasEntradaBL notEBL = new NotasEntradaBL();
             List<NotasEntrada> notasEntrada = notEBL.PesquisarBL(id_pes);
-
-            NotasEntradaItensBL notEitBL = new NotasEntradaItensBL();
-            List<NotasEntradaItens> notEit = notEitBL.PesquisarBL();
+                       
 
             foreach (NotasEntrada ltNotEn in notasEntrada)
             {
@@ -96,6 +94,9 @@ namespace Admin
                 txtSerie.Text = ltNotEn.Serie.ToString();
                 txtData.Text = ltNotEn.Data.ToString("dd/MM/yyyy");
             }
+
+            NotasEntradaItensBL notEitBL = new NotasEntradaItensBL();
+            List<NotasEntradaItens> notEit = notEitBL.PesquisarBL(id_pes);
 
             foreach (NotasEntradaItens ltNotEnt in notEit)
             {
@@ -118,6 +119,8 @@ namespace Admin
             Session["tbItens"] = dtItens;
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
+            txtTotItens.Text = dtItens.Compute("sum(QUANTIDADE)", "").ToString();
+            txtTotal.Text = dtItens.Compute("sum(VALORTOTAL)", "").ToString();
             ordem++;
             hfOrdem.Value = ordem.ToString(); //proxima ordem 
 
@@ -135,6 +138,45 @@ namespace Admin
             dt.Columns.Add(coluna3);
 
             return dt;
+        }
+
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+            DataColumn coluna5 = new DataColumn("QUANTIDADE", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+            dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
+
+            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque litE in ltItEst)
+            {
+                DataRow linha = dt.NewRow();
+
+                if (litE.Obra != null)
+                {
+                    linha["ID"] = litE.Id;
+                    linha["CODIGO"] = litE.Obra.Codigo;
+                    linha["TITULO"] = litE.Obra.Titulo;
+                    linha["VALOR"] = litE.VlrVenda.ToString();
+                    linha["QUANTIDADE"] = litE.QtdEstoque.ToString();
+
+                    dt.Rows.Add(linha);
+                }
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
         }
               
         #endregion
@@ -161,41 +203,17 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_notE);
+
+                txtNumero.Focus();
             }
+            
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
-            ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL();
-
-            foreach (ItensEstoque litE in ltItEst)
-            {
-                DataRow linha = dt.NewRow();
-
-                if (litE.Obra != null)
-                {
-                    linha["ID"] = litE.Id;
-                    linha["CODIGO"] = litE.Obra.Codigo;
-                    linha["DESCRICAO"] = litE.Obra.Titulo;
-
-                    dt.Rows.Add(linha);
-                }
-
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = itEstBL;
-            Session["objPesquisa"] = itEstoque;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
-            
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();      
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -204,10 +222,13 @@ namespace Admin
             NotasEntrada notaEntrada = new NotasEntrada();
             NotasEntradaItensBL ntEiBL = new NotasEntradaItensBL();
             NotasEntradaItens notaEntradaItens = new NotasEntradaItens();
+            MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
+            MovimentosEstoque movEstoque = new MovimentosEstoque();
 
             notaEntrada.Numero = utils.ComparaIntComZero(txtNumero.Text);
             notaEntrada.Serie = utils.ComparaShortComZero(txtSerie.Text);
             notaEntrada.Data = Convert.ToDateTime(txtData.Text);
+            int usu_id = 0;
 
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
@@ -227,7 +248,31 @@ namespace Admin
                             notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
                             notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
 
-                            ntEiBL.InserirBL(notaEntradaItens);
+                            Int32 notaE_item = ntEiBL.InserirBL(notaEntradaItens);
+
+                            if (Session["usuario"] != null)
+                            {
+                                List<Usuarios> usuarios;
+                                usuarios = (List<Usuarios>)Session["usuario"];
+
+                                foreach (Usuarios usu in usuarios)
+                                {
+                                    usu_id = usu.Id;
+                                }                                                                
+                            }
+
+                            if (notaE_item > 0)
+                            {
+                                movEstoque.UsuarioId = usu_id;
+                                movEstoque.ItemEstoqueId = notaEntradaItens.ItemEstoqueId;
+                                movEstoque.Quantidade = notaEntradaItens.Quantidade;
+                                movEstoque.Data = DateTime.Now;
+                                movEstoque.Tipo = "E";
+                                movEstoque.NotaEntradaId = notaE_item;
+
+                                if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
+                                    movEstBL.InserirBL(movEstoque);
+                            }
                         }
                     }
                 }
@@ -266,8 +311,8 @@ namespace Admin
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
             LimparCamposItem();
-
-            txtTotItens.Text = dtItens.Rows.Count.ToString();
+                       
+            txtTotItens.Text = dtItens.Compute("sum(QUANTIDADE)", "").ToString();
             txtTotal.Text = dtItens.Compute("sum(VALORTOTAL)","").ToString();
             hfOrdem.Value = (utils.ComparaIntComZero(hfOrdem.Value) + 1).ToString(); //proxima ordem 
           
@@ -287,11 +332,14 @@ namespace Admin
                 lblDesItem.Text = ltItEstoque.Obra.Titulo;
             }
 
+            txtQtde.Focus();
+
             if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)               
             {
                 ExibirMensagem("Item não cadastrado !");
                 txtItem.Text = "";
                 lblDesItem.Text = "";
+                txtItem.Focus();
             }
         }
 
@@ -329,6 +377,46 @@ namespace Admin
             dtgItens.DataBind();
         }
 
-        
+        protected void dtgItens_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtItem.Text = gvrow.Cells[2].Text;
+            lblDesItem.Text = gvrow.Cells[3].Text;
+            
+            ModalPopupExtenderPesItem.Enabled = false;
+            ModalPopupExtenderPesItem.Hide();
+
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }
+
+       
     }
 }

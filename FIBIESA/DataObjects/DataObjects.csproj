@@ -61,6 +61,7 @@
     <Compile Include="ObrasAutores.cs" />
     <Compile Include="Portadores.cs" />
     <Compile Include="TiposDocumentos.cs" />
+    <Compile Include="Titulos.cs" />
     <Compile Include="TurmasParticipantes.cs" />
     <Compile Include="Turmas.cs" />
     <Compile Include="Eventos.cs" />

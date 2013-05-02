@@ -85,6 +85,15 @@
         <siteMapNode url="caditemEstoque.aspx" title="Implantação do Estoque"  description=""/>
         <siteMapNode url="cadMovimentoEstoque.aspx" title="Implantação do Estoque"  description=""/>
         <siteMapNode url="cadAcertoEstoque.aspx" title="Implantação do Estoque"  description=""/>
+        <siteMapNode url="viewManVenda.aspx" title="Consulta Manutenção de Venda"  description="">
+          <siteMapNode url="cadManVenda.aspx" title="Manutenção de Venda"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewContasApagar.aspx" title="Contas a Pagar"  description="">
+          <siteMapNode url="cadContasApagar.aspx" title="Cadastro de Contas a Pagar"  description="" />
+        </siteMapNode>
+        <siteMapNode url="viewContasReceber.aspx" title="Contas a Receber"  description="">
+          <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber"  description="" />
+        </siteMapNode>
         
     </siteMapNode>
 </siteMap>

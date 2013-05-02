@@ -173,8 +173,9 @@ namespace DataAccess
                                           "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
                                           "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +
                                           "  WHERE IE.ID = {0} " +
-                                          "    AND M.DATA = CONVERT(DATETIME,'{1}',101) ", item_id, data != null ? Convert.ToDateTime(data).ToString("MM/dd/yyyy") : ""); 
-                     
+                                          "    AND M.DATA BETWEEN CONVERT(DATETIME,'{1} 00:00:00.001',103) AND CONVERT(DATETIME,'{1} 23:59:59.999',103) "
+                                                                             , item_id, data != null ? Convert.ToDateTime(data).ToString("dd/MM/yyyy") : ""); 
+                                         
             }
             else 
             {
@@ -219,10 +220,10 @@ namespace DataAccess
                                           "    AND M.TIPO ='S' AND M.DATA <= CONVERT(DATETIME,'{1}',101)) TOTAL " +
                                           "         FROM MOVIMENTOSESTOQUE ME " + 
                                           "         WHERE ME.ITEMESTOQUEID = {0} " +
-                                          "           AND ME.DATA <= CONVERT(DATETIME,'{1}',101)" +
-                                          "           AND ME.TIPO = 'E' ",id_ItEst, Convert.ToDateTime(data).ToString("MM/dd/yyyy"));
-
-                
+                                          "           AND ME.TIPO = 'E' " +
+                                          "           AND ME.DATA BETWEEN CONVERT(DATETIME,'{1} 00:00:00.001',103) AND CONVERT(DATETIME,'{1} 23:59:59.999',103) "
+                                                                             , id_ItEst, data != null ? Convert.ToDateTime(data).ToString("dd/MM/yyyy") : "");
+                                                        
 
             }
 
