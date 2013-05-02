@@ -85,10 +85,11 @@ namespace DataAccess
             return true;
         }
 
-        public List<TiposDocumentos> PesquisarDA()
+        public List<TiposDocumentos> PesquisarDA(string aplicacao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM TIPOSDOCUMENTOS "));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM TIPOSDOCUMENTOS " +
+                                                                                                 " WHERE APLICACAO = '{0}' ",aplicacao));
 
             List<TiposDocumentos> tiposDocumentos = CarregarObjTiposDocumentos(dr);
                         

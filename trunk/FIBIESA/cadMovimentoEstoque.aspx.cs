@@ -15,6 +15,19 @@ namespace Admin
     {
         Utils utils = new Utils();
         #region funcoes
+        
+        public DataTable dtbPesquisa
+        {
+            get
+            {
+                if (Session["_dtbPesquisa_cadMovEst"] != null)
+                    return (DataTable)Session["_dtbPesquisa_cadMovEst"];
+                else
+                    return null;
+            }
+            set { Session["_dtbPesquisa_cadMovEst"] = value; }
+        }
+
         private void Pesquisar(int item_id, DateTime? data)
         {              
             DataTable tabela = new DataTable();
@@ -76,6 +89,7 @@ namespace Admin
 
             dtgMovItem.DataSource = tabela;
             dtgMovItem.DataBind();
+            dtbPesquisa = tabela;
             txtQtdTotal.Text = movEst.PesquisarTotalMovimentosBL(item_id, txtData.Text).ToString();
             
         }
@@ -192,6 +206,46 @@ namespace Admin
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
-                       
+        protected void dtgMovItem_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dtgMovItem.DataSource = dtbPesquisa;
+            dtgMovItem.PageIndex = e.NewPageIndex;
+            dtgMovItem.DataBind();
+        }
+
+        protected void dtgMovItem_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (dtbPesquisa != null)
+            {
+                string ordem = e.SortExpression;
+
+                DataView m_DataView = new DataView(dtbPesquisa);
+
+                if (ViewState["dtbPesquisa_sort"] != null)
+                {
+                    if (ViewState["dtbPesquisa_sort"].ToString() == e.SortExpression)
+                    {
+                        m_DataView.Sort = ordem + " DESC";
+                        ViewState["dtbPesquisa_sort"] = null;
+                    }
+                    else
+                    {
+                        m_DataView.Sort = ordem;
+                        ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                    }
+                }
+                else
+                {
+                    m_DataView.Sort = ordem;
+                    ViewState["dtbPesquisa_sort"] = e.SortExpression;
+                }
+
+                dtbPesquisa = m_DataView.ToTable();
+                dtgMovItem.DataSource = m_DataView;
+                dtgMovItem.DataBind();
+            }
+        }
+
+                             
     }
 }

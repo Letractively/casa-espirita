@@ -1,45 +1,43 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
-    CodeBehind="viewNotaEntrada.aspx.cs" Inherits="Admin.viewNotaEntrada" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true" CodeBehind="viewContasReceber.aspx.cs" Inherits="FIBIESA.viewContasReceber" %>
 <%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
-    <div id="content">
-        <div class="container">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+     <div id="content">
+        <div class="container">            
             <div class="conthead">
-                <h2>Cadastro de Notas de Entrada</h2>
+                <h2>Cadastro de Títulos Contas a Receber</h2>
             </div>
             <div class="contentbox">
                 <table>
-                    <tr>
-                        <td>
-                            <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                                ToolTip="Pesquisar por"></asp:TextBox>
-                        </td>                        
-                        <td>
-                            <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
-                                onclick="btnBusca_Click" />
-                        </td>
-                        <td>
-                            <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                                onclick="btnInserir_Click" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
+                            ToolTip="Pesquisar por"></asp:TextBox>
+                   </td>               
+                   <td>
+                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                            OnClick="btnBusca_Click" />                 
+                    </td>
+                    <td>
+                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                            onclick="btnInserir_Click" />
+                     </td>
+                    <!-- grid modelo começa aqui -->
+                </tr>
                 </table>
-                <!-- grid modelo começa aqui -->
                 <div class="contentbox">
                     <table width="100%">
                        <tr>
                             <td>                       
-                               <asp:GridView ID="dtgNotaEntrada" runat="server" AutoGenerateColumns="False" 
+                               <asp:GridView ID="dtgTitulos" runat="server" AutoGenerateColumns="False" 
                                    BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID" 
-                                   onrowdeleting="dtgNotaEntrada_RowDeleting" 
-                                   onselectedindexchanged="dtgNotaEntrada_SelectedIndexChanged" 
+                                   onrowdeleting="dtgTitulos_RowDeleting" 
+                                   onselectedindexchanged="dtgTitulos_SelectedIndexChanged" 
                                     AllowSorting="True" GridLines="None" 
-                                    onpageindexchanging="dtgNotaEntrada_PageIndexChanging" 
-                                    onrowdatabound="dtgNotaEntrada_RowDataBound" 
-                                    onsorting="dtgNotaEntrada_Sorting" Width="350px">
+                                    onpageindexchanging="dtgTitulos_PageIndexChanging" 
+                                    onrowdatabound="dtgTitulos_RowDataBound" onsorting="dtgTitulos_Sorting">
                                    <Columns>
                                        <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -50,9 +48,15 @@
                                             <ItemStyle CssClass="grd_delete" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                       <asp:BoundField DataField="NUMERO" HeaderText="Número" SortExpression="NUMERO" />
-                                       <asp:BoundField DataField="SERIE" HeaderText="Série" SortExpression="SERIE"/>
-                                       <asp:BoundField DataField="DATA" HeaderText="Data" SortExpression="DATA"/>
+                                       <asp:BoundField DataField="TIPODOC" HeaderText="Tipo Doc." 
+                                           SortExpression="TIPODOC" />
+                                       <asp:BoundField DataField="NUMERO" HeaderText="Título" 
+                                           SortExpression="NUMERO" />
+                                       <asp:BoundField DataField="PARCELA" HeaderText="Parcela" 
+                                           SortExpression="PARCELA" />
+                                       <asp:BoundField DataField="VALOR" HeaderText="Valor" SortExpression="VALOR" />
+                                       <asp:BoundField DataField="DTEMISSAO" HeaderText="Dt. Emissão" 
+                                           SortExpression="DTEMISSAO" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -66,11 +70,12 @@
                                </asp:GridView>                       
                             </td>
                        </tr>
-                    </table>                    
-                </div>               
+                    </table>                   
+                </div>
+                <!-- grid modelo finaliza aqui -->               
             </div>
         </div>
         <div class="status">
         </div>
-    </div>    
+    </div>   
 </asp:Content>

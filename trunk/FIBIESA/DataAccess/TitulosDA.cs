@@ -26,14 +26,14 @@ namespace DataAccess
             while (dr.Read())
             {
                 Titulos tit = new Titulos();
-                tit.Id = int.Parse(dr["ID"].ToString());
-                tit.Numero = int.Parse(dr["NUMERO"].ToString());
-                tit.Parcela = int.Parse(dr["PARCELA"].ToString());
-                tit.Valor = int.Parse(dr["VALOR"].ToString());
+                tit.Id = utils.ComparaIntComZero(dr["ID"].ToString());
+                tit.Numero = utils.ComparaIntComZero(dr["NUMERO"].ToString());
+                tit.Parcela = utils.ComparaIntComZero(dr["PARCELA"].ToString());
+                tit.Valor = utils.ComparaDecimalComZero(dr["VALOR"].ToString());
                 tit.Pessoaid = utils.ComparaIntComNull(dr["PESSOAID"].ToString());
                 tit.Portadorid = utils.ComparaIntComNull(dr["PORTADORID"].ToString());
-                tit.DataVencimento = DateTime.Parse(dr["DATAVENCIMENTO"].ToString());
-                tit.DataEmissao = DateTime.Parse(dr["DATAEMISSAO"].ToString());
+                tit.DataVencimento = DateTime.Parse(dr["DTVENCIMENTO"].ToString());
+                tit.DataEmissao = DateTime.Parse(dr["DTEMISSAO"].ToString());
                 tit.TipoDocumentoId = utils.ComparaIntComNull(dr["TIPODOCUMENTOID"].ToString());
                 tit.Tipo = dr["TIPO"].ToString();
 
@@ -83,8 +83,9 @@ namespace DataAccess
                     tit.TiposDocumentos = tip;
                 }
 
-                
-                Titulos.Add(tit);
+
+                titulos.Add(tit);
+                    
             }
             return titulos;
         }
@@ -98,37 +99,71 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
             paramsToSP[3] = new SqlParameter("@pessoaid", tit.Pessoaid);
             paramsToSP[4] = new SqlParameter("@portadorid", tit.Portadorid);
-            paramsToSP[5] = new SqlParameter("@datavencimento", tit.DataVencimento);
-            paramsToSP[6] = new SqlParameter("@dataemissao", tit.DataEmissao);
+            paramsToSP[5] = new SqlParameter("@dtvencimento", tit.DataVencimento);
+            paramsToSP[6] = new SqlParameter("@dtemissao", tit.DataEmissao);
             paramsToSP[7] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
             paramsToSP[8] = new SqlParameter("@tipo", tit.Tipo);
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_titulos", paramsToSP);
-            return true;
+            paramsToSP[9] = new SqlParameter("@dtPagamento", tit.DtPagamento);
+            paramsToSP[10] = new SqlParameter("@valorPago", tit.ValorPago);
+            paramsToSP[11] = new SqlParameter("@obs", tit.Obs);
+            
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_titulos", paramsToSP);
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Titulos tit)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[10];
+            SqlParameter[] paramsToSP = new SqlParameter[13];
             paramsToSP[0] = new SqlParameter("@id", tit.Id);
             paramsToSP[1] = new SqlParameter("@numero", tit.Numero);
             paramsToSP[2] = new SqlParameter("@parcela", tit.Parcela);
             paramsToSP[3] = new SqlParameter("@valor", tit.Valor);
             paramsToSP[4] = new SqlParameter("@pessoaid", tit.Pessoaid);
             paramsToSP[5] = new SqlParameter("@portadorid", tit.Portadorid);
-            paramsToSP[6] = new SqlParameter("@datavencimento", tit.DataVencimento);
-            paramsToSP[7] = new SqlParameter("@dataemissao", tit.DataEmissao);
+            paramsToSP[6] = new SqlParameter("@dtvencimento", tit.DataVencimento);
+            paramsToSP[7] = new SqlParameter("@dtemissao", tit.DataEmissao);
             paramsToSP[8] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
             paramsToSP[9] = new SqlParameter("@tipo", tit.Tipo);
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_titulos", paramsToSP);
-            return true;
+            paramsToSP[10] = new SqlParameter("@dtPagamento", tit.DtPagamento);
+            paramsToSP[11] = new SqlParameter("@valorPago", tit.ValorPago);
+            paramsToSP[12] = new SqlParameter("@obs", tit.Obs);
+          
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_titulos", paramsToSP);
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool ExcluirDA(Titulos tit)
         {
             SqlParameter[] paramsToSP = new SqlParameter[1];
             paramsToSP[0] = new SqlParameter("@id", tit.Id);
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_titulos", paramsToSP);
-            return true;
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_titulos", paramsToSP);
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Titulos> PesquisarDA()
@@ -145,53 +180,26 @@ namespace DataAccess
             return titulos;
         }
 
-        public List<Titulos> PesquisarDA(string campo, string valor)
+        public List<Titulos> PesquisarBuscaDA(string tipo, string valor)
         {
-            string consulta;
-            switch (campo.ToUpper())
-            {
-                case "CODIGO":
-                    consulta = string.Format("SELECT * FROM TITULOS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
-                    break;
-                case "DESCRICAO":
-                    consulta = string.Format("SELECT * FROM TITULOS WHERE DESCRICAO  LIKE '%{0}%'", valor);
-                    break;
-                default:
-                    consulta = "";
-                    break;
-            }
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TITULOS WHERE 1 = 1 ");
 
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, consulta);
+            if (tipo != "" && tipo != null)
+                consulta.Append(string.Format(" AND TIPO = '{0}'", tipo));
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND NUMERO = {0}", utils.ComparaIntComZero(valor)));
+
+            consulta.Append(" ORDER BY NUMERO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
             List<Titulos> titulos = CarregarObjTitulos(dr);
+
             return titulos;
         }
-
-        //public override List<Base> Pesquisar(string descricao, string tipo)
-        public override List<Base> Pesquisar(string descricao)
-        {
-            SqlDataReader dr;
-            if (tipo == "C")
-            {
-                int codigo = 0;
-                Int32.TryParse(descricao, out codigo);
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM  WHERE CODIGO = '{0}'", codigo));
-            }
-            else
-            {
-                dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM TITULOS WHERE DESCRICAO LIKE '%{0}%'", descricao));
-            }
-            List<Base> ba = new List<Base>();
-            while (dr.Read())
-            {
-                Base bas = new Base();
-                bas.PesId1 = int.Parse(dr["ID"].ToString());
-                bas.PesCodigo = dr["CODIGO"].ToString();
-                bas.PesDescricao = dr["DESCRICAO"].ToString();
-                ba.Add(bas);
-            }
-            return ba;
-        }
-
-        public string tipo { get; set; }
+                
+        
     }
 }

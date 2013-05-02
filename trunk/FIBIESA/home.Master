@@ -100,6 +100,8 @@
                             <li><a href="cadVenda.aspx" title="">Vendas</a></li>
                             <li><a href="viewDoacao.aspx" title="">Doações</a></li>
                             <li><a href="viewManVenda.aspx" title="">Manutenção Venda</a></li>
+                            <li><a href="viewContasApagar.aspx" title="">Contas a Pagar</a></li> 
+                            <li><a href="viewContasReceber.aspx" title="">Contas a Receber</a></li> 
                             <li><a href="viewJuroMulta.aspx" title="">Juros / Multas</a></li>                            
                             <li><a href="viewTitulo.aspx" title="">Título</a></li>
                             <li><a href="viewPortador.aspx" title="">Portadores</a></li>
@@ -157,7 +159,7 @@
                         <ul>
                             <li><a href="cadParametro.aspx" title="">Parâmetros</a></li>
                             <li><a href="viewFormulario.aspx" title="">Formulários</a></li>
-                            <li><a href="viewPermissao.aspx" title="">Permissões</a></li> 
+                            <li><a href="viewPermissao.aspx" title="">Permissões</a></li>                             
                         </ul>
                     </li>
 

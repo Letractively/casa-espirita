@@ -26,12 +26,13 @@ namespace BusinessLayer
 
                 return vendasDA.InserirDA(ven);
             }
-            return 0;
+            else
+                return 0;
         }
 
         public bool EditarBL(Vendas ven)
         {
-            if (ven.Id > 0)
+            if (ven.Id > 0 && IsValid(ven))
             {
                 VendasDA vendasDA = new VendasDA();
 

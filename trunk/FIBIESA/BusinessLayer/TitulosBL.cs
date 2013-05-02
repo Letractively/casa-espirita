@@ -40,17 +40,13 @@ namespace BusinessLayer
             TitulosDA titDA = new TitulosDA();
             return titDA.PesquisarDA(pes);
         }
-
-        public List<Titulos> PesquisarBL(string campo, string valor)
+             
+        public List<Titulos> PesquisarBuscaBL(string tipo, string valor)
         {
+            /*criar as regras de negocio*/
             TitulosDA titulosDA = new TitulosDA();
-            return titulosDA.PesquisarDA(campo, valor);
-        }
 
-        public override List<Base> Pesquisar(string tipo)
-        {
-            TitulosDA titDA = new TitulosDA();
-            return titDA.Pesquisar(tipo);
+            return titulosDA.PesquisarBuscaDA(tipo,valor);
         }
 
     }

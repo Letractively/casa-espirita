@@ -82,7 +82,7 @@ namespace DataAccess
         public List<NotasEntrada> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM NOTAENTRADA "));
+                                                                CommandType.Text, string.Format(@"SELECT * FROM NOTAENTRADA ORDER BY NUMERO "));
 
             List<NotasEntrada> NotasEntrada = CarregarObjNotaEntrada(dr);
                        

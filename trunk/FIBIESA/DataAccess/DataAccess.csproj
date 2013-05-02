@@ -63,6 +63,7 @@
     <Compile Include="ObrasAutoresDA.cs" />
     <Compile Include="PortadoresDA.cs" />
     <Compile Include="TiposDocumentosDA.cs" />
+    <Compile Include="TitulosDA.cs" />
     <Compile Include="TurmasParticipantesDA.cs" />
     <Compile Include="TurmasDA.cs" />
     <Compile Include="EditorasDA.cs" />

@@ -41,7 +41,7 @@ namespace DataAccess
 
         #endregion
 
-        public bool InserirDA(NotasEntradaItens ntEi)
+        public Int32 InserirDA(NotasEntradaItens ntEi)
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
@@ -50,9 +50,13 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@quantidade", ntEi.Quantidade);
             paramsToSP[3] = new SqlParameter("@itemestoqueid", ntEi.ItemEstoqueId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
 
-            return true;
+            DataTable tabela = ds.Tables[0];
+
+            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+            return id;
         }
 
         public bool EditarDA(NotasEntradaItens ntEi)
@@ -107,11 +111,12 @@ namespace DataAccess
                                                                                        "     ,OBRAS O " +
                                                                                        " WHERE NI.ITEMESTOQUEID = IE.ID " +
                                                                                        "   AND IE.OBRAID = O.ID " +
-                                                                                       "   AND NI.ID = {0} ", id_ntEi));
+                                                                                       "   AND NI.NOTAENTRADAID = {0} ", id_ntEi));
 
             List<NotasEntradaItens> NotasEntradaItens = CarregarObjNotaEntrada(dr);
 
             return NotasEntradaItens;
         }
+                
     }
 }

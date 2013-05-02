@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class NotasEntradaBL
     {
+        private bool IsValid(NotasEntrada ntE)
+        {
+            bool valido;
+            valido = ntE.Numero > 0 && ntE.Serie > 0; 
+            valido = valido && ntE.Data != null;
+            return valido;
+        }
+
         public int InserirBL(NotasEntrada ntE)
         {
-            /*criar as regras de negocio*/
-            NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
+            if (IsValid(ntE))
+            {
+                NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
 
-            return NotasEntradaDA.InserirDA(ntE);
+                return NotasEntradaDA.InserirDA(ntE);
+            }
+            else
+                return 0;
         }
 
         public bool EditarBL(NotasEntrada ntE)
         {
-            /*criar as regras de negocio*/
-            NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
+            if (ntE.Id > 0 && IsValid(ntE))
+            {
+                NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
 
-            return NotasEntradaDA.EditarDA(ntE);
+                return NotasEntradaDA.EditarDA(ntE);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(NotasEntrada ntE)
         {
-            /*criar as regras de negocio*/
-            NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
+            if (ntE.Id > 0)
+            {
+                NotasEntradaDA NotasEntradaDA = new NotasEntradaDA();
 
-            return NotasEntradaDA.ExcluirDA(ntE);
+                return NotasEntradaDA.ExcluirDA(ntE);
+            }
+            else
+                return false;
         }
 
         public List<NotasEntrada> PesquisarBL()
