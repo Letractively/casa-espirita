@@ -1,16 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadTitulo.aspx.cs" Inherits="Admin.cadTitulo" %>
+<%@ MasterType VirtualPath="~/home.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">   
     <div id="content">
-        <div class="container half left">
+        <div class="container half2 left">
             <div class="conthead">
-                <h2>
-                    Título</h2>
+                <h2>Título</h2>
             </div>
-            <div class="contentbox">
+            <div class="contentbox" style="height: 1000px">
                 <table>
                     <tr>
                         <td style="width: 140px">
@@ -84,6 +86,30 @@
                             <asp:TextBox ID="txtTipo" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Data Pagamento:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtDataPagamento" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Valor Pago:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtValorPago" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Obs:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox"></asp:TextBox>
+                        </td>
+                    </tr>
                 </table>
                 <table>
                     <tr>
@@ -98,7 +124,6 @@
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
         </div>
-        <div class="status">
-        </div>
+        <div class="status"></div>
     </div>   
 </asp:Content>

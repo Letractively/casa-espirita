@@ -94,6 +94,33 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtTipo;
         
         /// <summary>
+        /// txtDataPagamento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataPagamento;
+        
+        /// <summary>
+        /// txtValorPago control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtValorPago;
+        
+        /// <summary>
+        /// txtObs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObs;
+        
+        /// <summary>
         /// btnSalvar control.
         /// </summary>
         /// <remarks>
@@ -110,5 +137,17 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new FIBIESA.Principal Master {
+            get {
+                return ((FIBIESA.Principal)(base.Master));
+            }
+        }
     }
 }
