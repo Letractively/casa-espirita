@@ -22,39 +22,30 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtBusca;
         
         /// <summary>
-        /// Busca control.
+        /// btnBusca control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Busca;
+        protected global::System.Web.UI.WebControls.Button btnBusca;
         
         /// <summary>
-        /// GridView1 control.
+        /// btnInserir control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Button btnInserir;
         
         /// <summary>
-        /// SqlTitulos control.
+        /// dtgTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlTitulos;
-        
-        /// <summary>
-        /// SqlTitulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlTitulo;
+        protected global::System.Web.UI.WebControls.GridView dtgTitulo;
     }
 }

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
 using FG;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Admin
 {
@@ -16,6 +18,7 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
+
         private void CarregarDDLPessoa()
         {
             PessoasBL pesBL = new PessoasBL();
@@ -27,8 +30,7 @@ namespace Admin
 
             ddlPessoa.SelectedIndex = 0;
         }
-
-        private void CarregarDDlPortador(DropDownList ddl)
+        private void CarregarDDlPortador()
         {
             PortadoresBL porBL = new PortadoresBL();
             List<Portadores> portador = porBL.PesquisarBL();
@@ -38,9 +40,7 @@ namespace Admin
                 ddlPortador.Items.Add(new ListItem(ltPor.Codigo.ToString() + " - " + ltPor.Descricao, ltPor.Id.ToString()));
             ddlPortador.SelectedIndex = 0;
         }
-
-
-        private void CarregarDDlTipoDocumento(DropDownList ddl)
+        private void CarregarDDlTipoDocumento()
         {
 
             TiposDocumentosBL tidBL = new TiposDocumentosBL();
@@ -51,10 +51,8 @@ namespace Admin
                 ddlTipoDocumento.Items.Add(new ListItem(ltTip.Codigo.ToString() + " - " + ltTip.Descricao, ltTip.Id.ToString()));
             ddlTipoDocumento.SelectedIndex = 0;
         }
-
         private void carregarDados(int id_tit)
         {
-
             TitulosBL titBL = new TitulosBL();
 
             List<Titulos> tit = titBL.PesquisarBL(id_tit);
@@ -70,16 +68,18 @@ namespace Admin
                 txtDataVencimento.Text = ltTit.DataVencimento.ToString();
                 txtDataEmissao.Text = ltTit.DataEmissao.ToString();
                 ddlTipoDocumento.SelectedValue = ltTit.TipoDocumentoId.ToString();
+                txtDataPagamento.Text = ltTit.DtPagamento.ToString();
+                txtValorPago.Text = ltTit.ValorPago.ToString();
+                txtObs.Text = ltTit.Obs.ToString();
             }
 
         }
-
 
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_age = 0;
+            int id_tit = 0;
 
             if (!IsPostBack)
             {
@@ -88,12 +88,16 @@ namespace Admin
                     v_operacao = Request.QueryString["operacao"];
 
                     if (v_operacao == "edit")
-                        if (Request.QueryString["id_age"] != null)
-                            id_age = Convert.ToInt32(Request.QueryString["id_age"].ToString());
+                        if (Request.QueryString["id_tit"] != null)
+                            id_tit = Convert.ToInt32(Request.QueryString["id_tit"].ToString());
                 }
 
                 CarregarDDLPessoa();
+                CarregarDDlPortador();
+                CarregarDDlTipoDocumento();
 
+                if (v_operacao.ToLower() == "edit")
+                    carregarDados(id_tit);
             }
         }
 
@@ -113,23 +117,26 @@ namespace Admin
             titulos.DataEmissao = Convert.ToDateTime(txtDataEmissao.Text);
             titulos.TipoDocumentoId = utils.ComparaIntComNull(ddlTipoDocumento.SelectedValue);
             titulos.Tipo = txtTipo.Text;
+            titulos.DtPagamento = Convert.ToDateTime(txtDataPagamento.Text);
+            titulos.ValorPago = Convert.ToDecimal(txtValorPago.Text);
+            titulos.Obs = txtObs.Text; 
 
-            //if (titulos.Id > 0)
-            //{
-            //    if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-            //        titBL.EditarBL(titulos);
-            //    else
-            //        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            if (titulos.Id > 0)
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    titBL.EditarBL(titulos);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
-            //}
-            //else
-            //{
-            //    if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-            //        titBL.InserirBL(titulos);
-            //    else
-            //        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
+            else
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    titBL.InserirBL(titulos);
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
-            //}
+            }
 
             Response.Redirect("viewTitulo.aspx");
         }

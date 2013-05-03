@@ -14,6 +14,7 @@ namespace DataAccess
     public class TitulosDA : BaseDA
     {
         Utils utils = new Utils();
+
         #region funcoes
 
        private List<Titulos> CarregarObjTitulos(SqlDataReader dr)
@@ -38,6 +39,7 @@ namespace DataAccess
                 tit.Tipo = dr["TIPO"].ToString();
 
                 int id = 0;
+
                 if (tit.Pessoaid != null)
                 {
                     id = Convert.ToInt32(tit.Pessoaid);
@@ -82,18 +84,21 @@ namespace DataAccess
 
                     tit.TiposDocumentos = tip;
                 }
-
-
-                titulos.Add(tit);
-                    
+                titulos.Add(tit);    
             }
             return titulos;
         }
         #endregion
 
+
+
+
+
+
+
         public bool InserirDA(Titulos tit)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[9];
+            SqlParameter[] paramsToSP = new SqlParameter[12];
             paramsToSP[0] = new SqlParameter("@numero", tit.Numero);
             paramsToSP[1] = new SqlParameter("@parcela", tit.Parcela);
             paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
@@ -168,14 +173,16 @@ namespace DataAccess
 
         public List<Titulos> PesquisarDA()
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY CODIGO "));
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                            CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY CODIGO "));
             List<Titulos> titulos = CarregarObjTitulos(dr);
             return titulos;
         }
 
         public List<Titulos> PesquisarDA(int id_tit)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),CommandType.Text, string.Format(@"SELECT * " +" FROM TITULOS WHERE ID = {0}", id_tit));
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                            CommandType.Text, string.Format(@"SELECT * " +" FROM TITULOS WHERE ID = {0}", id_tit));
             List<Titulos> titulos = CarregarObjTitulos(dr);
             return titulos;
         }
@@ -199,7 +206,62 @@ namespace DataAccess
 
             return titulos;
         }
-                
+
+        public override List<Base> Pesquisar(string obs)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM TITULOS WHERE NUMERO = '{0}' OR  OBS LIKE '%{1}%'", utils.ComparaIntComZero(obs), obs));
+
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Titulos tit = new Titulos();
+                tit.Id = int.Parse(dr["ID"].ToString());
+                tit.Numero = int.Parse(dr["NUMERO"].ToString());
+                tit.Obs = dr["OBS"].ToString();
+
+                ba.Add(tit);
+            }
+            return ba;
+        }
+
+        public List<Titulos> PesquisarBuscaDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TITULOS ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" WHERE NUMERO = {0} OR  OBS  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY NUMERO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Titulos> titulos = CarregarObjTitulos(dr);
+
+            return titulos;
+        }
+
+
+
+
+
+
+
+
+
         
+
+        
+
+        
+
+
+
+
+
     }
 }
