@@ -84,25 +84,14 @@ namespace DataAccess
             }
             return agencias;
         }
-
-        private Int32 RetornaMaxCodigo()
-        {
-            Int32 codigo = 1;
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM AGENCIAS "));
-
-            if (ds.Tables[0].Rows.Count != 0)
-                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
-
-            return codigo;
-        }
+                
         #endregion
 
         public bool InserirDA(Agencias age)
         {
             SqlParameter[] paramsToSP = new SqlParameter[9];
 
-            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
+            paramsToSP[0] = new SqlParameter("@codigo", age.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", age.Descricao);
             paramsToSP[2] = new SqlParameter("@cep", age.Cep);
             paramsToSP[3] = new SqlParameter("@bairroid", age.BairroId);

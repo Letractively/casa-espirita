@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
 using FG;
+using System.Data;
 
 namespace FIBIESA
 {
@@ -30,6 +31,9 @@ namespace FIBIESA
                 txtParcela.Text = ltTit.Parcela.ToString();
                 txtDataEmissao.Text = ltTit.DataEmissao.ToString("dd/MM/yyyy");
                 txtDataVencimento.Text = ltTit.DataVencimento.ToString("dd/MM/yyyy");
+                txtDtPagamento.Text = ltTit.DtPagamento != null ? Convert.ToDateTime(ltTit.DtPagamento).ToString("dd/MM/yyyy") : "";
+                txtVlrPago.Text = ltTit.ValorPago.ToString();
+                txtObs.Text = ltTit.Obs.ToString();
 
                 if (ltTit.Pessoas != null)
                 {
@@ -75,6 +79,37 @@ namespace FIBIESA
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
 
+        public void CarregarPesquisa(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pe = new Pessoas();
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Pessoas pes in pessoas)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["DESCRICAO"] = pes.Nome;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -116,6 +151,9 @@ namespace FIBIESA
             titulos.DataVencimento = Convert.ToDateTime(txtDataVencimento.Text);
             titulos.Valor = utils.ComparaDecimalComZero(txtValor.Text);
             titulos.TipoDocumentoId = utils.ComparaIntComZero(ddlTipoDoc.SelectedValue);
+            titulos.DtPagamento = utils.ComparaDataComNull(txtDtPagamento.Text);
+            titulos.ValorPago = utils.ComparaDecimalComZero(txtVlrPago.Text);
+            titulos.Obs = txtObs.Text;
             titulos.Tipo = "R";
 
             if (titulos.Id > 0)
@@ -170,6 +208,46 @@ namespace FIBIESA
                 lblDesFornecedor.Text = "";
                 txtFornecedor.Focus();
             }
+        }
+
+        protected void btnPesFornecedor_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisa(null);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show(); 
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtFornecedor.Text = gvrow.Cells[2].Text;
+            lblDesFornecedor.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesquisa.Hide();
+            ModalPopupExtenderPesquisa.Enabled = false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisa.Enabled = false;
+        }
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

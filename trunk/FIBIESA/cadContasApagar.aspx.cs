@@ -31,7 +31,10 @@ namespace FIBIESA
                 txtParcela.Text = ltTit.Parcela.ToString();
                 txtDataEmissao.Text = ltTit.DataEmissao.ToString("dd/MM/yyyy");
                 txtDataVencimento.Text = ltTit.DataVencimento.ToString("dd/MM/yyyy");
-
+                txtDtPagamento.Text = ltTit.DtPagamento != null ? Convert.ToDateTime(ltTit.DtPagamento).ToString("dd/MM/yyyy") : "";
+                txtVlrPago.Text = ltTit.ValorPago.ToString();
+                txtObs.Text = ltTit.Obs.ToString();
+                
                 if (ltTit.Pessoas != null)
                 {
                     hfIdPessoa.Value = ltTit.Pessoas.Id.ToString();
@@ -147,6 +150,9 @@ namespace FIBIESA
             titulos.DataVencimento = Convert.ToDateTime(txtDataVencimento.Text);
             titulos.Valor = utils.ComparaDecimalComZero(txtValor.Text);
             titulos.TipoDocumentoId = utils.ComparaIntComZero(ddlTipoDoc.SelectedValue);
+            titulos.DtPagamento = utils.ComparaDataComNull(txtDtPagamento.Text);
+            titulos.ValorPago = utils.ComparaDecimalComZero(txtVlrPago.Text);
+            titulos.Obs = txtObs.Text;
             titulos.Tipo = "P";
 
             if (titulos.Id > 0)

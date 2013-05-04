@@ -35,7 +35,7 @@ namespace FIBIESA
             DataColumn coluna2 = new DataColumn("NUMERO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("PARCELA", Type.GetType("System.Int32"));
             DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));           
-            DataColumn coluna5 = new DataColumn("DTEMISSAO", Type.GetType("System.DateTime"));
+            DataColumn coluna5 = new DataColumn("DTEMISSAO", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("TIPODOC", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
@@ -60,7 +60,7 @@ namespace FIBIESA
                 linha["PARCELA"] = tit.Parcela;
                 linha["VALOR"] = tit.Valor;
                 linha["PARCELA"] = tit.Parcela;
-                linha["DTEMISSAO"] = tit.DataEmissao;
+                linha["DTEMISSAO"] = tit.DataEmissao.ToString("dd/MM/yyyy");
                 if(tit.TiposDocumentos != null)
                     linha["TIPODOC"] = tit.TiposDocumentos.Descricao;
                 else

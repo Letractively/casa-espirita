@@ -17,7 +17,8 @@
                             * Tipo de Documento:
                         </td>
                         <td style="width: 400px" colspan="3">
-                          <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist">                               
+                          <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Informe o tipo de documento">                               
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="ddlTipoDoc" CssClass="validacao" 
@@ -30,7 +31,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputboxRight" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe o número do título"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                 ControlToValidate="txtTitulo" CssClass="validacao" 
                                 ErrorMessage="* Informe o número do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -40,7 +41,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtParcela" runat="server" CssClass="inputboxRight" 
-                                Width="50px"></asp:TextBox>
+                                Width="50px" ToolTip="Informe a parcela"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                 ControlToValidate="txtParcela" CssClass="validacao" 
                                 ErrorMessage="* Informe o número da parcela" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -53,7 +54,7 @@
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtFornecedor" runat="server" CssClass="inputboxRight" Width="70px"
                                 AutoPostBack="True" OnTextChanged="txtFornecedor_TextChanged" 
-                                ToolTip="Informe o cliente"></asp:TextBox>
+                                ToolTip="Informe o fornecedor"></asp:TextBox>
                             <asp:Button ID="btnPesFornecedor" runat="server" CssClass="btn" Text="..." 
                                 CausesValidation="False" onclick="btnPesFornecedor_Click" />
                             <asp:Label ID="lblDesFornecedor" runat="server"></asp:Label>
@@ -68,7 +69,7 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe o valor do título"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
                                 ControlToValidate="txtValor" CssClass="validacao" 
                                 ErrorMessage="* Informe o valor do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -80,7 +81,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDataEmissao" runat="server" CssClass="inputbox" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe a data de emissão"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDataEmissao_CalendarExtender" runat="server" 
                                 TargetControlID="txtDataEmissao">
                             </asp:CalendarExtender>
@@ -93,7 +94,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDataVencimento" runat="server" CssClass="inputbox" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe a data de vencimento"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDataVencimento_CalendarExtender" runat="server" 
                                 TargetControlID="txtDataVencimento">
                             </asp:CalendarExtender>
@@ -108,7 +109,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDtPagamento" runat="server" CssClass="inputbox" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe a data de pagamento"></asp:TextBox>
                             <asp:CalendarExtender ID="txtDtPagamento_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtPagamento">
                             </asp:CalendarExtender>
@@ -118,7 +119,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtVlrPago" runat="server" CssClass="inputboxRight" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe o valor pago"></asp:TextBox>
                         </td>
                     </tr> 
                      <tr>
@@ -127,7 +128,8 @@
                         </td>
                         <td colspan="3">
                             <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox" Height="42px" 
-                                MaxLength="200" TextMode="MultiLine" Width="421px"></asp:TextBox>
+                                MaxLength="200" TextMode="MultiLine" Width="421px" 
+                                ToolTip="Informe a observação"></asp:TextBox>
                         </td>
                     </tr>                                  
                 </table>
@@ -137,10 +139,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text ="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text ="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Salva o título contas a pagar" />
                             
                         </td>
                     </tr>                   

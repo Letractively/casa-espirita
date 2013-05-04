@@ -73,7 +73,7 @@ namespace Admin
             foreach (Agencias ltAge in age)
             {
                 hfId.Value = ltAge.Id.ToString();
-                lblCodigo.Text = ltAge.Codigo.ToString();
+                txtCodigo.Text = ltAge.Codigo.ToString();
                 txtDescricao.Text = ltAge.Descricao;
                 txtCep.Text = ltAge.Cep;
                 txtEndereco.Text = ltAge.Endereco;
@@ -135,8 +135,7 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_age);
-                else
-                    lblCodigo.Text = "Código gerado automaticamente."; 
+                
             }
         }
 
@@ -151,7 +150,7 @@ namespace Admin
             Agencias agencias = new Agencias();
 
             agencias.Id = utils.ComparaIntComZero(hfId.Value);
-            agencias.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
+            agencias.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             agencias.Descricao = txtDescricao.Text;
             agencias.Cep = txtCep.Text;
             agencias.CidadeId = utils.ComparaIntComNull(ddlCidades.SelectedValue);

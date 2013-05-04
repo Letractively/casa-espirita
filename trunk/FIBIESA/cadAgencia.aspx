@@ -13,11 +13,26 @@
             <div class="contentbox">
                 <table>
                     <tr>
+                        <td style="width: 140px">* Banco:</td>
+                        <td style="width: 400px" colspan="3">
+                            <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist">
+                             </asp:DropDownList>                           
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="ddlBanco" ErrorMessage="* Informe o banco" 
+                                ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="width: 140px">
+                            *
                             Código:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
+                                Width="100px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                                ControlToValidate="txtCodigo" CssClass="validacao" 
+                                ErrorMessage="Informe o código da agência">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -29,19 +44,10 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" MaxLength="70"
                                 Width="335px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescricao"
-                                ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Informe a descrição " ForeColor="#CC0000" 
+                                ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 140px">* Banco:</td>
-                        <td style="width: 400px" colspan="3">
-                            <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist">
-                             </asp:DropDownList>                           
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlBanco" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
+                    </tr>                    
                     <tr>
                         <td style="width: 140px">
                             CEP:
@@ -69,8 +75,8 @@
                                 AutoPostBack="True"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                                         runat="server" ControlToValidate="ddlCidades" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" 
-                                CssClass="validacao"></asp:RequiredFieldValidator>
+                                ErrorMessage="* Informe a cidade" ValidationGroup="salvar" 
+                                CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>                                            
                     <tr>
@@ -81,8 +87,8 @@
                             <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
                                         runat="server" ControlToValidate="ddlBairro" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" 
-                                CssClass="validacao"></asp:RequiredFieldValidator>
+                                ErrorMessage="* Informe o bairro" ValidationGroup="salvar" 
+                                CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                      <tr>
@@ -118,11 +124,13 @@
                                 onclick="btnVoltar_Click" /> 
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text ="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" />                            
                         </td>
                     </tr>
                 </table>
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">            
