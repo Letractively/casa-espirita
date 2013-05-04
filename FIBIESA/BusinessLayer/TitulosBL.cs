@@ -12,10 +12,11 @@ namespace BusinessLayer
     {
         private bool IsValid(Titulos tit)
         {
-            bool valido;
-            valido = tit.Tipo != "" && tit.Obs.Length <= 200;
-            valido = valido && tit.Numero > 0 && tit.Parcela > 0 && tit.TipoDocumentoId > 0;
-            valido = valido && tit.Valor != null;
+            bool valido;            
+            valido = tit.Tipo != "";
+            valido = valido && tit.Numero > 0 && tit.Parcela > 0 && tit.TipoDocumentoId > 0;        
+            if (tit.Obs != null)
+                valido = valido && tit.Obs.Length <= 200;
             return valido;
         }
 
@@ -66,14 +67,11 @@ namespace BusinessLayer
         }
              
         public List<Titulos> PesquisarBuscaBL(string tipo, string valor)
-        {
-            /*criar as regras de negocio*/
+        {            
             TitulosDA titulosDA = new TitulosDA();
 
             return titulosDA.PesquisarBuscaDA(tipo,valor);
         }
 
     }
-
-
 }

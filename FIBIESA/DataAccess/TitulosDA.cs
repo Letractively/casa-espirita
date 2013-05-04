@@ -37,13 +37,16 @@ namespace DataAccess
                 tit.DataEmissao = DateTime.Parse(dr["DTEMISSAO"].ToString());
                 tit.TipoDocumentoId = utils.ComparaIntComNull(dr["TIPODOCUMENTOID"].ToString());
                 tit.Tipo = dr["TIPO"].ToString();
+                tit.DtPagamento = utils.ComparaDataComNull(dr["dtPagamento"].ToString());
+                tit.ValorPago = utils.ComparaDecimalComZero(dr["valorpago"].ToString()); 
+                tit.Obs = dr["obs"].ToString();
 
                 int id = 0;
 
                 if (tit.Pessoaid != null)
                 {
                     id = Convert.ToInt32(tit.Pessoaid);
-                    List<Pessoas> pessoas = pesDA.PesquisarDA();
+                    List<Pessoas> pessoas = pesDA.PesquisarDA(id);
                     Pessoas pes = new Pessoas();
 
                     foreach (Pessoas ltPes in pessoas)
@@ -92,12 +95,6 @@ namespace DataAccess
             return titulos;
         }
         #endregion
-
-
-
-
-
-
 
         public bool InserirDA(Titulos tit)
         {
