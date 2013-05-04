@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
      <div id="content">
-        <div class="container half left">
+        <div class="container half2 left">
             <div class="conthead">
                 <h2>
                     Cadastro de Títulos Contas a Pagar</h2>
@@ -51,7 +51,7 @@
                             Fornecedor:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtFornecedor" runat="server" CssClass="inputboxRight" Width="100px"
+                            <asp:TextBox ID="txtFornecedor" runat="server" CssClass="inputboxRight" Width="70px"
                                 AutoPostBack="True" OnTextChanged="txtFornecedor_TextChanged" 
                                 ToolTip="Informe o cliente"></asp:TextBox>
                             <asp:Button ID="btnPesFornecedor" runat="server" CssClass="btn" Text="..." 
@@ -101,7 +101,35 @@
                                 ControlToValidate="txtDataVencimento" CssClass="validacao" 
                                 ErrorMessage="* Informe a data de vencimento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
-                    </tr>                                       
+                    </tr>    
+                    <tr>
+                        <td style="width: 140px">
+                            Data Pagamento:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtDtPagamento" runat="server" CssClass="inputbox" 
+                                Width="100px"></asp:TextBox>
+                            <asp:CalendarExtender ID="txtDtPagamento_CalendarExtender" runat="server" 
+                                TargetControlID="txtDtPagamento">
+                            </asp:CalendarExtender>
+                        </td>
+                        <td style="width: 140px">
+                            Valor Pago:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtVlrPago" runat="server" CssClass="inputboxRight" 
+                                Width="100px"></asp:TextBox>
+                        </td>
+                    </tr> 
+                     <tr>
+                        <td style="width: 140px">
+                            Obs:
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox" Height="42px" 
+                                MaxLength="200" TextMode="MultiLine" Width="421px"></asp:TextBox>
+                        </td>
+                    </tr>                                  
                 </table>
                 <table>
                     <tr>
@@ -115,7 +143,7 @@
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" />
                             
                         </td>
-                    </tr>
+                    </tr>                   
                 </table>
             </div>
             <asp:HiddenField ID="hfId" runat="server" />

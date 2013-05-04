@@ -142,7 +142,7 @@ namespace FIBIESA
             titulos.Id = utils.ComparaIntComZero(hfId.Value);
             titulos.Numero = utils.ComparaIntComZero(txtTitulo.Text);
             titulos.Parcela = utils.ComparaIntComZero(txtParcela.Text);
-            titulos.Pessoaid = utils.ComparaIntComZero(hfIdPessoa.Value);
+            titulos.Pessoaid = utils.ComparaIntComNull(hfIdPessoa.Value);
             titulos.DataEmissao = Convert.ToDateTime(txtDataEmissao.Text);
             titulos.DataVencimento = Convert.ToDateTime(txtDataVencimento.Text);
             titulos.Valor = utils.ComparaDecimalComZero(txtValor.Text);

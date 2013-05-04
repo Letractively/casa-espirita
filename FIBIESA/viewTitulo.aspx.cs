@@ -47,7 +47,7 @@ namespace Admin
             TitulosBL titBL = new TitulosBL();
             List<Titulos> titulos;
 
-            titulos = titBL.PesquisarBuscaBL(valor);
+            titulos = titBL.PesquisarBuscaBL("P",valor);
 
             foreach (Titulos ltTit in titulos)
             {
