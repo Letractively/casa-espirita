@@ -48,6 +48,8 @@ namespace DataAccess
 
                     foreach (Pessoas ltPes in pessoas)
                     {
+                        pes.Id = ltPes.Id;
+                        pes.Codigo = ltPes.Codigo;
                         pes.Nome = ltPes.Nome;
                         pes.CpfCnpj = ltPes.CpfCnpj;
                     }
@@ -64,6 +66,7 @@ namespace DataAccess
 
                     foreach (Portadores ltPor in portadores)
                     {
+                        por.Id = ltPor.Id;
                         por.Codigo = ltPor.Codigo;
                         por.Descricao = ltPor.Descricao;
                     }

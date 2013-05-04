@@ -25,7 +25,7 @@
 	border-color: inherit;
 	border-width: medium;
 	background: url('images/bg_btns.png') repeat-x 50% top;
-	color:  #fff; text-shadow: 1px 1px 1px #68C5D1; font-size: 13px; padding: 9px 15px; boirder-radius: 7px; -moz-border-radius: 7px; font-weight: 700; height: 40px;
+	color:  #fff; text-shadow: 1px 1px 1px #68C5D1; font-size: 13px; padding: 9px 15px; boirder-radius: 7px; -moz-border-radius: 7px; font-weight: 700; height: 37px;
 }
 		.btn:hover {background: url(images/bg_btns.png) 0 -30px; cursor: pointer; color: #fff; text-shadow: none}
 		

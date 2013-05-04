@@ -7,24 +7,50 @@ using DataAccess;
 
 namespace BusinessLayer
 {
+
     public class TitulosBL : BaseBL
     {
+        private bool IsValid(Titulos tit)
+        {
+            bool valido;
+            valido = tit.Tipo != "" && tit.Obs.Length <= 200;
+            valido = valido && tit.Numero > 0 && tit.Parcela > 0 && tit.TipoDocumentoId > 0;
+            valido = valido && tit.Valor != null;
+            return valido;
+        }
+
         public bool InserirBL(Titulos tit)
         {
-            TitulosDA titDA = new TitulosDA();
-            return titDA.InserirDA(tit);
+            if (IsValid(tit))
+            {
+                TitulosDA titDA = new TitulosDA();
+                return titDA.InserirDA(tit);
+            }
+            else
+                return false;
+
         }
 
         public bool EditarBL(Titulos tit)
         {
-            TitulosDA titDA = new TitulosDA();
-            return titDA.EditarDA(tit);
+            if (tit.Id > 0  && IsValid(tit))
+            {
+                TitulosDA titDA = new TitulosDA();
+                return titDA.EditarDA(tit);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Titulos tit)
         {
-            TitulosDA titDA = new TitulosDA();
-            return titDA.ExcluirDA(tit);
+            if (tit.Id > 0)
+            {
+                TitulosDA titDA = new TitulosDA();
+                return titDA.ExcluirDA(tit);
+            }
+            else
+                return false;
         }
 
         public List<Titulos> PesquisarBL()
@@ -33,25 +59,21 @@ namespace BusinessLayer
             return titDA.PesquisarDA();
         }
 
-        public List<Titulos> PesquisarBL(int tit)
+        public List<Titulos> PesquisarBL(int pes)
         {
             TitulosDA titDA = new TitulosDA();
-            return titDA.PesquisarDA(tit);
+            return titDA.PesquisarDA(pes);
         }
-
-        public List<Titulos> PesquisarBuscaBL(string valor)
+             
+        public List<Titulos> PesquisarBuscaBL(string tipo, string valor)
         {
-            TitulosDA titDA = new TitulosDA();
-            return titDA.PesquisarBuscaDA(valor);
-        }
+            /*criar as regras de negocio*/
+            TitulosDA titulosDA = new TitulosDA();
 
-        public override List<Base> Pesquisar(string codDes)
-        {
-            TitulosDA titDA = new TitulosDA();
-
-            return titDA.Pesquisar(codDes);
+            return titulosDA.PesquisarBuscaDA(tipo,valor);
         }
 
     }
+
 
 }
