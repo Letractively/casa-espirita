@@ -33,8 +33,9 @@
                                 <asp:GridView ID="dtgPortadores" runat="server" AutoGenerateColumns="False" BackColor="White"
                                     BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
                                     DataKeyNames="ID" OnRowDeleting="dtgPortadores_RowDeleting" OnSelectedIndexChanged="dtgPortadores_SelectedIndexChanged"
-                                    AllowSorting="True" GridLines="None" ShowHeaderWhenEmpty="True" OnPageIndexChanging="dtgPortadores_PageIndexChanging"
-                                    OnRowDataBound="dtgPortadores_RowDataBound" OnSorting="dtgPortadores_Sorting">
+                                    AllowSorting="True" GridLines="None" OnPageIndexChanging="dtgPortadores_PageIndexChanging"
+                                    OnRowDataBound="dtgPortadores_RowDataBound" 
+                                    OnSorting="dtgPortadores_Sorting">
                                     <Columns>
                                         <asp:CommandField SelectText="Editar" ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

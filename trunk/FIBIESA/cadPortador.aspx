@@ -15,38 +15,48 @@
                     <tr>
                         <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
-                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
+                                ToolTip="Informe o código do portador" Width="100px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                ControlToValidate="txtCodigo" CssClass="validacao" 
+                                ErrorMessage="*Informe o código do portador" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">* Descrição:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="70" Width="335px"></asp:TextBox>
+                                MaxLength="70" Width="300px" ToolTip="Informe a descrição do portador" 
+                                ValidationGroup="salvar"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">* Banco:</td>
+                        <td style="width: 140px">&nbsp;Banco:</td>
                         <td style="width: 400px">
                              <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist" 
-                                 AutoPostBack="True" onselectedindexchanged="ddlBanco_SelectedIndexChanged">
+                                 AutoPostBack="True" onselectedindexchanged="ddlBanco_SelectedIndexChanged" 
+                                 ToolTip="Informe o banco">
                              </asp:DropDownList>                          
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                                ControlToValidate="ddlBanco" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 140px">* Agência:</td>
+                        <td style="width: 140px">&nbsp;Agência:</td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlAgencia" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlAgencia" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Informe a agênica" AutoPostBack="True" 
+                                onselectedindexchanged="ddlAgencia_SelectedIndexChanged">
                              </asp:DropDownList> 
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlAgencia" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">&nbsp;Conta:</td>
+                        <td style="width: 400px">
+                            <asp:DropDownList ID="ddlConta" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Informe a conta">
+                             </asp:DropDownList> 
                         </td>
                     </tr>
                 </table>
@@ -56,17 +66,20 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para a página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Salva as informações do portador" />
                             
                         </td>
                     </tr>
                 </table>
                
             </div>
-            <asp:HiddenField ID="hfId" runat="server" />
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
+            <asp:HiddenField ID="hfId" runat="server" />            
         </div>
         <div class="status">
         </div>

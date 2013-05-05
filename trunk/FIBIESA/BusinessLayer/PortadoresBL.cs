@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class PortadoresBL : BaseBL
     {
+        private bool IsValid(Portadores por)
+        {
+            bool valido;
+            valido = por.Descricao.Length <= 70;
+           
+            return valido;
+        }
+
         public bool InserirBL(Portadores por)
         {
-            /*criar as regras de negocio*/
-            PortadoresDA porDA = new PortadoresDA();
+            if (IsValid(por))
+            {
+                PortadoresDA porDA = new PortadoresDA();
 
-            return porDA.InserirDA(por);
+                return porDA.InserirDA(por);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Portadores por)
         {
-            /*criar as regras de negocio*/
-            PortadoresDA porDA = new PortadoresDA();
+            if (por.Id > 0 && IsValid(por))
+            {
+                PortadoresDA porDA = new PortadoresDA();
 
-            return porDA.EditarDA(por);
+                return porDA.EditarDA(por);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Portadores por)
         {
-            /*criar as regras de negocio*/
-            PortadoresDA porDA = new PortadoresDA();
+            if (por.Id > 0)
+            {
+                PortadoresDA porDA = new PortadoresDA();
 
-            return porDA.ExcluirDA(por);
+                return porDA.ExcluirDA(por);
+            }
+            else
+                return false;
         }
 
         public List<Portadores> PesquisarBL()

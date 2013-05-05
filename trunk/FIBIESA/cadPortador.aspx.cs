@@ -22,18 +22,21 @@ namespace Admin
         private void carregarDados(int id_por)
         {
             PortadoresBL porBL = new PortadoresBL();
-
             List<Portadores> por = porBL.PesquisarBL(id_por);
+            string id_age; 
 
             foreach (Portadores ltPor in por)
             {
                 hfId.Value = ltPor.Id.ToString();
-                lblCodigo.Text = ltPor.Codigo.ToString();
+                txtCodigo.Text = ltPor.Codigo.ToString();
                 txtDescricao.Text = ltPor.Descricao;
                 ddlBanco.SelectedValue = ltPor.BancoId.ToString();
                 CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
-                ddlAgencia.SelectedValue = ltPor.AgenciaId.ToString();                           
-            }
+                ddlAgencia.SelectedValue = ltPor.AgenciaId.ToString();
+                id_age = ltPor.AgenciaId.ToString();
+                CarregarDDLConta(utils.ComparaIntComZero(id_age));
+                ddlConta.SelectedValue = ltPor.ContaId.ToString();
+             }
 
         }
         
@@ -61,7 +64,35 @@ namespace Admin
 
             ddlBanco.SelectedIndex = 0;
         }
-                
+
+        private void CarregarDDLConta(int age_id)
+        {
+            ContasBL conBL = new ContasBL();
+            List<Contas> contas = conBL.PesquisarBL(age_id);
+
+            ddlConta.Items.Clear();
+            ddlConta.Items.Add(new ListItem());
+            foreach (Contas ltCon in contas)
+                ddlConta.Items.Add(new ListItem(ltCon.Codigo.ToString() + " - " + ltCon.Descricao, ltCon.Id.ToString()));
+
+            ddlConta.SelectedIndex = 0;
+        }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtCodigo.Text = "";
+            txtDescricao.Text = "";
+            ddlBanco.SelectedIndex = 0;
+            ddlAgencia.SelectedIndex = 0;
+            ddlConta.SelectedIndex = 0;
+        }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,8 +113,7 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_por);
-                else
-                    lblCodigo.Text = "Código gerado automaticamente.";   
+                  
             }
 
         }
@@ -99,22 +129,39 @@ namespace Admin
             Portadores portadores = new Portadores();
 
             portadores.Id = utils.ComparaIntComZero(hfId.Value);
-            portadores.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
+            portadores.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             portadores.Descricao = txtDescricao.Text;
             portadores.AgenciaId = utils.ComparaIntComNull(ddlAgencia.SelectedValue);
             portadores.BancoId = utils.ComparaIntComNull(ddlBanco.SelectedValue);
+            portadores.ContaId = utils.ComparaIntComNull(ddlConta.SelectedValue);
 
             if (portadores.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    porBL.EditarBL(portadores);
+                {
+                    if (porBL.EditarBL(portadores))
+                    {
+                        ExibirMensagem("Portador atualizado com sucesso !");
+                        LimparCampos();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    porBL.InserirBL(portadores);
+                {
+                    if (porBL.InserirBL(portadores))
+                    {
+                        ExibirMensagem("Portador gravado com sucesso !");
+                        LimparCampos();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
@@ -127,6 +174,11 @@ namespace Admin
         protected void ddlBanco_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
+        }
+
+        protected void ddlAgencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDDLConta(utils.ComparaIntComZero(ddlAgencia.SelectedValue));
         }
 
                 

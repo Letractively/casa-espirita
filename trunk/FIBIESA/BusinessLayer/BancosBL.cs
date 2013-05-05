@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class BancosBL : BaseBL
     {
+        private bool IsValid(Bancos ban)
+        {
+            bool valido;
+            valido = ban.Descricao.Length <= 70;
+                                  
+            return valido;
+        }
+
         public bool InserirBL(Bancos ban)
         {
-            /*criar as regras de negocio*/
-            BancosDA bancosDA = new BancosDA();
+            if (IsValid(ban))
+            {
+                BancosDA bancosDA = new BancosDA();
 
-            return bancosDA.InserirDA(ban);
+                return bancosDA.InserirDA(ban);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Bancos ban)
         {
-            /*criar as regras de negocio*/
-            BancosDA bancosDA = new BancosDA();
+            if (ban.Id > 0 && IsValid(ban))
+            {
+                BancosDA bancosDA = new BancosDA();
 
-            return bancosDA.EditarDA(ban);
+                return bancosDA.EditarDA(ban);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Bancos ban)
         {
-            /*criar as regras de negocio*/
-            BancosDA bancosDA = new BancosDA();
+            if (ban.Id > 0)
+            {
+                BancosDA bancosDA = new BancosDA();
 
-            return bancosDA.ExcluirDA(ban);
+                return bancosDA.ExcluirDA(ban);
+            }
+            else
+                return false;
         }
 
         public List<Bancos> PesquisarBL()

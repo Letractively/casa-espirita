@@ -29,6 +29,7 @@ namespace DataAccess
                 por.Descricao = dr["DESCRICAO"].ToString();
                 por.AgenciaId = utils.ComparaIntComNull(dr["AGENCIAID"].ToString());
                 por.BancoId = utils.ComparaIntComNull(dr["BANCOID"].ToString());
+                por.ContaId = utils.ComparaIntComNull(dr["CONTAID"].ToString());
                 
                 int Id = 0;
                 
@@ -82,31 +83,47 @@ namespace DataAccess
         #endregion
         public bool InserirDA(Portadores por)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[4];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", por.Descricao);
             paramsToSP[2] = new SqlParameter("@agenciaid", por.AgenciaId);
             paramsToSP[3] = new SqlParameter("@bancoid", por.BancoId);
+            paramsToSP[4] = new SqlParameter("@contaid", por.ContaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Portadores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Portadores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;                    
+            }
         }
 
         public bool EditarDA(Portadores por)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@id", por.Id);
             paramsToSP[1] = new SqlParameter("@codigo", por.Codigo);
             paramsToSP[2] = new SqlParameter("@descricao", por.Descricao);
             paramsToSP[3] = new SqlParameter("@agenciaid", por.AgenciaId);
             paramsToSP[4] = new SqlParameter("@bancoid", por.BancoId);
+            paramsToSP[5] = new SqlParameter("@contaid", por.ContaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_Portadores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_Portadores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Portadores por)
@@ -115,9 +132,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", por.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Portadores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Portadores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Portadores> PesquisarDA()
