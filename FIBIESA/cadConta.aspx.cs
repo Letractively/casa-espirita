@@ -38,7 +38,7 @@ namespace Admin
             foreach (Contas ltCon in contas)
             {
                 hfId.Value = ltCon.Id.ToString();
-                lblCodigo.Text = ltCon.Codigo.ToString();
+                txtCodigo.Text = ltCon.Codigo.ToString();
                 txtDescricao.Text = ltCon.Descricao;
                 txtTitular.Text = ltCon.Titular;
                 txtDigito.Text = ltCon.Digito;
@@ -68,9 +68,7 @@ namespace Admin
                 CarregarDDLAgencia();
 
                 if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_con);
-                else
-                    lblCodigo.Text = "Código gerado automaticamente."; 
+                    CarregarDados(id_con);                
             }
         }
                
@@ -85,7 +83,7 @@ namespace Admin
             Contas contas = new Contas();
 
             contas.Id = utils.ComparaIntComZero(hfId.Value);
-            contas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
+            contas.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
             contas.Descricao = txtDescricao.Text;
             contas.Titular = txtTitular.Text;
             contas.AgenciaId = utils.ComparaIntComZero(ddlAgencia.SelectedValue);

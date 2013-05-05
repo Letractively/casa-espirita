@@ -15,14 +15,18 @@
                     <tr>
                         <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
-                            <asp:Label ID="lblCodigo" runat="server"></asp:Label>
+                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
+                                ToolTip="Informe o código do banco" Width="100px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ControlToValidate="txtCodigo" CssClass="validacao" 
+                                ErrorMessage="*Preenchimento Obrigatório"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">* Descrição:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" Width="335px" 
-                                MaxLength="70"></asp:TextBox>
+                                MaxLength="70" ToolTip="Informe a descrição do banco"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -36,10 +40,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para a página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Salva as informações do banco" />
                         </td>
                     </tr>
                 </table>

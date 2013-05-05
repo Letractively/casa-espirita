@@ -55,5 +55,12 @@ namespace DataObjects
             get { return _agencia; }
             set { _agencia = value; }
         }
+
+        private Int32? _contaId;
+        public Int32? ContaId
+        {
+            get { return _contaId; }
+            set { _contaId = value; }
+        }
     }
 }

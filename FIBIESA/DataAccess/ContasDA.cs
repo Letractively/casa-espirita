@@ -153,6 +153,17 @@ namespace DataAccess
                       
             return Contas;
         }
+
+        public List<Contas> PesquisarAgeDA(int id_age)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM CONTAS WHERE AGENCIAID = {0}", id_age));
+
+            List<Contas> Contas = CarregarObjContas(dr);
+
+            return Contas;
+        }
                 
         public List<Contas> PesquisarBuscaDA(string valor)
         {
