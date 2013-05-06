@@ -935,14 +935,16 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
           <Top>1.59211cm</Top>
-          <Left>3.27237cm</Left>
+          <Left>0.8136cm</Left>
           <Height>0.52456cm</Height>
-          <Width>6.81271cm</Width>
+          <Width>11.65273cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
