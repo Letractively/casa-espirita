@@ -72,6 +72,7 @@ namespace FIBIESA
 
             DoacoesBL doacoesBL = new DoacoesBL();
 
+
             Session["ldsRel"] = doacoesBL.PesquisarDataset(txtCodPessoa.Text, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
             if (Session["ldsRel"] != null)
             {
