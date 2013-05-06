@@ -225,6 +225,7 @@ namespace DataAccess
                                                                                             ",numero " +
                                                                                             ",PessoaId " +
                                                                                             ",pessoa " +
+                                                                                            ",cpfCnpj " +
                                                                                             ",usuarioId " +
                                                                                             ",usuario " +
                                                                                             ",data " +
