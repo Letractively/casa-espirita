@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadReserva.aspx.cs" Inherits="Admin.cadReserva" %>
+<%@ MasterType VirtualPath="~/home.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
@@ -8,7 +9,7 @@
         <div class="container half left">
             <div class="conthead">
                 <h2>
-                    Reserva</h2>
+                    [Reserva</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -17,10 +18,10 @@
                             Pessoa:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_pessoa" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtPessoa" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
+                            <asp:Button ID="btnPesPessoa" runat="server" Text="..." CssClass="btn" 
+                                onclick="btnPesPessoa_Click"  />
+                            <asp:Label ID="lblDesPessoa" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -28,10 +29,10 @@
                             Exemplar:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="_exemplar" runat="server">
-                                <asp:ListItem>Ativo</asp:ListItem>
-                                <asp:ListItem>Desativado</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtExemplar" runat="server" CssClass="inputbox" Width="75px"></asp:TextBox>
+                            <asp:Button ID="btnExemplar" runat="server" Text="..." CssClass="btn" 
+                                onclick="btnExemplar_Click" />
+                            <asp:Label ID="lblDesExemplar" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -39,15 +40,15 @@
                             Data Início:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_dataInicio" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtdataInicio" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Data Final:
+                            Data Prevista Devolução:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="_dataFim" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtdataPrevisao" runat="server" CssClass="inputbox"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -56,11 +57,18 @@
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <input type="submit" value="Enviar" class="btn" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                onclick="btnVoltar_Click" />
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
+                                onclick="btnSalvar_Click" /> 
                         </td>
                     </tr>
                 </table>
             </div>
+            <asp:HiddenField ID="hfId" runat="server" />
+            <asp:HiddenField ID="hfIdPessoa" runat="server" />
+            <asp:HiddenField ID="hfIdExemplar" runat="server" />
         </div>
         <div class="status">
         </div>

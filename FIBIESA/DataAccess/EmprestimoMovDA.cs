@@ -56,6 +56,7 @@ namespace DataAccess
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
         }
 
+
         public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             DataSet lDs;
