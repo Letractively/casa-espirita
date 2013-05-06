@@ -48,7 +48,7 @@ namespace Admin
             {
                 DataRow linha = tabela.NewRow();
 
-                linha["ID"] = visao.Id;
+                linha["ID"] = visao.EmprestimoId;
                 linha["TITULO"] = visao.Titulo;
                 linha["NOME"] = visao.Nome;
 
@@ -71,7 +71,8 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                Pesquisar(null);
         }
 
         protected void Busca_Click(object sender, EventArgs e)

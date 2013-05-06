@@ -46,6 +46,9 @@ namespace Admin
                 hfId.Value = laco.Id.ToString();
                 hfIdPessoa.Value = laco.PessoaId.ToString();
                 hfIdExemplar.Value = laco.ExemplarId.ToString();
+                txtExemplar.Text = laco.ExemplarId.ToString();
+                txtPessoa.Text = laco.PessoaId.ToString();
+
                 EmprestimoMov oi = empBL.CarregaEmpNaoDevolvido(laco.Id);
                 if (oi.Id > 0)
                 {
@@ -101,6 +104,7 @@ namespace Admin
             ScriptManager.RegisterStartupScript(this, this.GetType(),
                 Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" 
                 + txtPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
+
         }
 
         protected void btnExemplar_Click(object sender, EventArgs e)

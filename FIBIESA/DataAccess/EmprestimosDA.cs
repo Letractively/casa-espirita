@@ -41,6 +41,7 @@ namespace DataAccess
                 ViewEmprestimos emprestim = new ViewEmprestimos();
                 
                 emprestim.Id = int.Parse(dr["ID"].ToString());
+                emprestim.EmprestimoId = int.Parse(dr["EMPRESTIMOID"].ToString());
                 emprestim.ExemplarId = int.Parse(dr["EXEMPLARID"].ToString());
                 emprestim.PessoaId = int.Parse(dr["PESSOAID"].ToString());
                 emprestim.Id = int.Parse(dr["ID"].ToString());
@@ -87,8 +88,8 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
-            paramsToSP[1] = new SqlParameter("@codigo", instancia.ExemplarId);
-            paramsToSP[2] = new SqlParameter("@descricao", instancia.PessoaId);
+            paramsToSP[1] = new SqlParameter("@exemplarid", instancia.ExemplarId);
+            paramsToSP[2] = new SqlParameter("@pessoaid", instancia.PessoaId);
 
             return (SqlHelper.ExecuteNonQuery(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -173,7 +174,7 @@ namespace DataAccess
         /// <returns>O Objeto EmprestimoMov da movimentacao nao devolvida, ou se nao existir, um objeto vazio com id == -1.</returns>
         public EmprestimoMov CarregaEmpNaoDevolvido(int id_emprestimo)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT ID, EMPRESTIMOID DATAEMPRESTIMO, DATAPREVISTAEMPRESTIMO FROM EMPRESTIMOMOV ");
+            StringBuilder consulta = new StringBuilder(@"SELECT ID, EMPRESTIMOID, DATAEMPRESTIMO, DATAPREVISTAEMPRESTIMO FROM EMPRESTIMOMOV ");
             consulta.Append(@" WHERE EMPRESTIMOID = {0}");
             consulta.Append(@" AND DATADEVOLUCAO IS NULL ");
 
@@ -201,7 +202,7 @@ namespace DataAccess
             if (valor != "" && valor != null)
                 consulta.Append(string.Format(" WHERE titulo LIKE '%{1}%' OR nome LIKE '%{1}%' OR nomeFantasia LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
-            consulta.Append(" ORDER BY CODIGO ");
+            consulta.Append(" ORDER BY DATAEMPRESTIMO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());
