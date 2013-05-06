@@ -110,8 +110,8 @@
           <DataField>Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Numero">
-          <DataField>Numero</DataField>
+        <Field Name="numero">
+          <DataField>numero</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="PessoaId">
@@ -120,6 +120,10 @@
         </Field>
         <Field Name="pessoa">
           <DataField>pessoa</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cpfCnpj">
+          <DataField>cpfCnpj</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="UsuarioId">
@@ -187,34 +191,6 @@
   </DataSets>
   <Body>
     <ReportItems>
-      <Textbox Name="txtPessoaId">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>="Cliente: " + First(Fields!pessoa.Value, "DataSet_Venda")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>0.63493cm</Top>
-        <Left>2.56646cm</Left>
-        <Height>0.6cm</Height>
-        <Width>10.18646cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
@@ -503,54 +479,31 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet_VendaItens</DataSetName>
-        <Top>2.94119cm</Top>
+        <Top>0.71869cm</Top>
         <Left>1.03188cm</Left>
         <Height>1.41168cm</Height>
-        <Width>19.46136cm</Width>
-        <ZIndex>1</ZIndex>
+        <Width>19.46133cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="txtPessoaId2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>="Venda N°: " + First(Fields!Numero.Value, "DataSet_Instituicao")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>1.55208cm</Top>
-        <Left>2.56646cm</Left>
-        <Height>0.6cm</Height>
-        <Width>10.18646cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
     <Height>4.20833in</Height>
     <Style />
   </Body>
+  <ReportParameters>
+    <ReportParameter Name="valorExtenso">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Width>8.42188in</Width>
   <Page>
     <PageHeader>
-      <Height>4.6968cm</Height>
+      <Height>9.30056cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -579,7 +532,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Recibo de Venda </Value>
+                  <Value>Recibo de Venda  </Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -615,6 +568,10 @@
                   <Value>=iIf(First(Fields!Razao.Value, "DataSet_Instituicao") = "","Instituição",First(Fields!Razao.Value, "DataSet_Instituicao"))</Value>
                   <Style />
                 </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
+                  <Style />
+                </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
@@ -642,6 +599,10 @@
               <TextRuns>
                 <TextRun>
                   <Value>="Telefone: " + "(" + IIf(First(Fields!DDD.Value, "DataSet_Instituicao") = "","xx",First(Fields!DDD.Value, "DataSet_Instituicao")) + ")" + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -692,6 +653,132 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
+        <Textbox Name="txtTitulo2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Recibo </Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DimGray</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>4.8133cm</Top>
+          <Left>0.4961cm</Left>
+          <Height>0.6cm</Height>
+          <Width>1.66688cm</Width>
+          <ZIndex>5</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox20">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Venda Numero: " + Sum(Fields!numero.Value, "DataSet_Venda").ToString()</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox20</rd:DefaultName>
+          <Top>4.83341cm</Top>
+          <Left>2.79612cm</Left>
+          <Height>0.57989cm</Height>
+          <Width>5.02708cm</Width>
+          <ZIndex>6</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox21">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=(Sum(Fields!valor.Value, "DataSet_VendaItens") - Sum(Fields!desconto.Value, "DataSet_VendaItens"))</Value>
+                  <Style>
+                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox21</rd:DefaultName>
+          <Top>4.8133cm</Top>
+          <Left>9.96633cm</Left>
+          <Height>0.6cm</Height>
+          <Width>7.09083cm</Width>
+          <ZIndex>7</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+            <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox22">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Recebemos de " + First(Fields!pessoa.Value, "DataSet_Venda") + " a quantia de " + Parameters!valorExtenso.Value + " referente a venda dos itens abaixo."</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox22</rd:DefaultName>
+          <Top>5.75945cm</Top>
+          <Left>1.03188cm</Left>
+          <Height>3.06062cm</Height>
+          <Width>18.93216cm</Width>
+          <ZIndex>8</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -720,9 +807,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>0.4012cm</Top>
-          <Left>13.67049cm</Left>
+          <Left>13.98799cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.72107cm</Width>
+          <Width>7.14022cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -749,9 +836,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>1.24787cm</Top>
-          <Left>13.67049cm</Left>
+          <Left>13.98799cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.72107cm</Width>
+          <Width>7.14022cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -779,10 +866,84 @@
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
           <Top>2.09453cm</Top>
-          <Left>13.67049cm</Left>
+          <Left>13.98799cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.72107cm</Width>
+          <Width>7.14022cm</Width>
           <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Line Name="Line1">
+          <Top>0.86891cm</Top>
+          <Left>0.8136cm</Left>
+          <Height>0cm</Height>
+          <Width>11.65273cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
+        <Textbox Name="Textbox23">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!pessoa.Value, "DataSet_Venda")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox23</rd:DefaultName>
+          <Top>1.06266cm</Top>
+          <Left>0.8136cm</Left>
+          <Height>0.38833cm</Height>
+          <Width>11.65273cm</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="CPF/CNPJ :" + First(Fields!cpfCnpj.Value, "DataSet_Venda")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>1.59211cm</Top>
+          <Left>3.27237cm</Left>
+          <Height>0.52456cm</Height>
+          <Width>6.81271cm</Width>
+          <ZIndex>5</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
