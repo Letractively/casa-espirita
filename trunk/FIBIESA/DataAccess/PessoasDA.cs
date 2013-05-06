@@ -62,18 +62,46 @@ namespace DataAccess
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
                 DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
-
+                               
                 if (dsCid.Tables[0].Rows.Count != 0)
                 {
                     cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
                     cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
                     cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
                     cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+
+                    EstadosDA estDA = new EstadosDA();
+                    DataSet dsEst = estDA.PesquisaDA(cid.EstadoId);
+                    Estados est = new Estados();
+
+                    if (dsEst.Tables[0].Rows.Count > 0)
+                    {
+                        est.Id = (Int32)dsEst.Tables[0].Rows[0]["id"];
+                        est.Uf = (string)dsEst.Tables[0].Rows[0]["uf"];
+                        est.Descricao = (string)dsEst.Tables[0].Rows[0]["descricao"];
+                    }
+
+                    cid.Estados = est;
+
+
                 }
 
                 pes.Cidade = cid;
-                
 
+                BairrosDA baiDA = new BairrosDA();                
+                Bairros bai = new Bairros();
+                DataSet dsBai;
+                                
+                dsBai = baiDA.PesquisaDA(pes.BairroId);
+                if (dsBai.Tables[0].Rows.Count > 0)
+                {
+                    bai.Id = (Int32)dsBai.Tables[0].Rows[0]["id"];
+                    bai.Codigo = (Int32)dsBai.Tables[0].Rows[0]["codigo"];
+                    bai.Descricao = (string)dsBai.Tables[0].Rows[0]["descricao"];
+                }
+
+                pes.Bairro = bai;
+                
                 if (pes.CidadeProfId != null)
                 {
                     dsCid.Clear();
@@ -247,6 +275,14 @@ namespace DataAccess
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
                        
             return pessoas;
+        }
+
+        public DataSet PesquisaDA(int id_pes)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                              CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE ID = {0}", id_pes));
+
+            return ds;
         }
 
         public List<Pessoas> PesquisarPorGeneroDA(int id_cat)

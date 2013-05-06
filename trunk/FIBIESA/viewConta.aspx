@@ -45,10 +45,13 @@
                                             <ItemStyle CssClass="grd_delete" />
                                         </asp:CommandField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
+                                        <asp:BoundField DataField="DESBANCO" HeaderText="Banco" 
+                                            SortExpression="DESBANCO" />
+                                        <asp:BoundField DataField="DESCAGENCIA" HeaderText="Agência" 
+                                            SortExpression="DESCAGENCIA" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Cód. Conta" 
+                                            SortExpression="CODIGO" />
                                         <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
-                                        <asp:BoundField DataField="CODAGENCIA" HeaderText="Cód. Agência" SortExpression="CODAGENCIA" />
-                                        <asp:BoundField DataField="DESCAGENCIA" HeaderText="Descrição" SortExpression="DESCAGENCIA" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

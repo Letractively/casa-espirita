@@ -102,6 +102,7 @@
                             <li><a href="viewManVenda.aspx" title="">Manutenção Venda</a></li>
                             <li><a href="viewContasApagar.aspx" title="">Contas a Pagar</a></li> 
                             <li><a href="viewContasReceber.aspx" title="">Contas a Receber</a></li> 
+                            <li><a href="emissaoBloqBan.aspx">Emissão de Bloqueto Bancário</a></li>
                             <li><a href="viewJuroMulta.aspx" title="">Juros / Multas</a></li>                            
                             <li><a href="viewTitulo.aspx" title="">Título</a></li>
                             <li><a href="viewPortador.aspx" title="">Portadores</a></li>

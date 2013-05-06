@@ -20,6 +20,7 @@ namespace DataAccess
             List<Portadores> portadores = new List<Portadores>();
             AgenciasDA ageDA = new AgenciasDA();
             BancosDA banDA = new BancosDA();
+            ContasDA conDA = new ContasDA();
 
             while (dr.Read())
             {
@@ -61,8 +62,24 @@ namespace DataAccess
                     }
 
                     por.Banco = ban;
+                }
 
-                }                
+                if (por.ContaId != null)
+                {
+                    Id = Convert.ToInt32(por.ContaId);
+                    List<Contas> contas = conDA.PesquisarDA(Id);
+                    Contas con = new Contas();
+
+                    foreach (Contas ltCon in contas)
+                    {
+                        con.Id = ltCon.Id;
+                        con.Codigo = ltCon.Codigo;
+                        con.Descricao = ltCon.Descricao;
+                        con.Digito = ltCon.Digito;
+                    }
+
+                    por.Contas = con;
+                }  
 
                 portadores.Add(por);
             }

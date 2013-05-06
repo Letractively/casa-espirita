@@ -44,6 +44,7 @@ namespace DataAccess
                         age.Codigo = ltAge.Codigo;
                         age.Descricao = ltAge.Descricao;
                         age.Id = ltAge.Id;
+                        age.BancoId = ltAge.BancoId;
                     }
 
                     con.Agencia = age;

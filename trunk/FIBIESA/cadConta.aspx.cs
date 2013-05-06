@@ -18,11 +18,12 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
-        private void CarregarDDLAgencia()
+        private void CarregarDDLAgencia(int id_ban)
         {
             AgenciasBL ageBL = new AgenciasBL();
-            List<Agencias> agencias = ageBL.PesquisarBL();
+            List<Agencias> agencias = ageBL.PesquisarBanBL(id_ban);
 
+            ddlAgencia.Items.Clear();
             ddlAgencia.Items.Add(new ListItem());
             foreach (Agencias ltAge in agencias)
                 ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
@@ -42,9 +43,26 @@ namespace Admin
                 txtDescricao.Text = ltCon.Descricao;
                 txtTitular.Text = ltCon.Titular;
                 txtDigito.Text = ltCon.Digito;
-                ddlAgencia.SelectedValue = ltCon.AgenciaId.ToString();              
+                if (ltCon.Agencia != null)
+                {
+                    ddlBanco.SelectedValue = ltCon.Agencia.BancoId.ToString();
+                    CarregarDDLAgencia(utils.ComparaIntComZero(ltCon.Agencia.BancoId.ToString()));
+                    ddlAgencia.SelectedValue = ltCon.AgenciaId.ToString();
+                }
             }
 
+        }
+
+        private void CarregarDDLBanco()
+        {
+            BancosBL banBL = new BancosBL();
+            List<Bancos> bancos = banBL.PesquisarBL();
+
+            ddlBanco.Items.Add(new ListItem());
+            foreach (Bancos ltBan in bancos)
+                ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
+
+             ddlBanco.SelectedIndex = 0;
         }
        
         #endregion
@@ -65,7 +83,7 @@ namespace Admin
                             id_con = Convert.ToInt32(Request.QueryString["id_con"].ToString());
                 }
 
-                CarregarDDLAgencia();
+                CarregarDDLBanco();
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_con);                
@@ -108,6 +126,11 @@ namespace Admin
             Response.Redirect("viewConta.aspx");
 
 
+        }
+
+        protected void ddlBanco_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
         }
 
             

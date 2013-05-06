@@ -15,6 +15,8 @@ namespace FIBIESA
     {
         Utils utils = new Utils();
         string v_operacao = "";
+        PortadoresBL portBL = new PortadoresBL();
+        List<Portadores> portadores;
 
         #region funcoes
 
@@ -42,6 +44,8 @@ namespace FIBIESA
                     lblDesFornecedor.Text = ltTit.Pessoas.Nome != "" ? ltTit.Pessoas.Nome : ltTit.Pessoas.NomeFantasia;
                 }
                 ddlTipoDoc.SelectedValue = ltTit.TipoDocumentoId.ToString();
+                ddlPortador.SelectedValue = ltTit.Portadorid.ToString();
+                SelecionarDadosPortador(utils.ComparaIntComZero(ltTit.Portadorid.ToString()));
             }
 
         }
@@ -57,6 +61,18 @@ namespace FIBIESA
                 ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
 
             ddlTipoDoc.SelectedIndex = 0;
+        }
+
+        private void CarregarDdlPortador()
+        {
+            PortadoresBL porDBL = new PortadoresBL();
+            List<Portadores> port = porDBL.PesquisarBL();
+                        
+            ddlPortador.Items.Add(new ListItem());
+            foreach (Portadores ltPort in port)
+                ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
+
+            ddlPortador.SelectedIndex = 0;
         }
 
         private void LimparCampos()
@@ -110,6 +126,24 @@ namespace FIBIESA
             grdPesquisa.DataBind();
         }
 
+        private void SelecionarDadosPortador(int id_port)
+        {
+            portadores = portBL.PesquisarBL(id_port);
+
+            foreach (Portadores ltPort in portadores)
+            {
+                if (ltPort.Banco != null)
+                    lblBanco.Text = ltPort.Banco.Codigo.ToString() + " - " + ltPort.Banco.Descricao;
+
+                if (ltPort.Agencia != null)
+                    lblAgencia.Text = ltPort.Agencia.Codigo.ToString() + " - " + ltPort.Agencia.Descricao;
+
+                if (ltPort.Contas != null)
+                    lblConta.Text = ltPort.Contas.Codigo.ToString() + "  " + ltPort.Contas.Digito + " - " + ltPort.Contas.Descricao;
+
+            }
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -119,6 +153,7 @@ namespace FIBIESA
             if (!IsPostBack)
             {
                 CarregarDdlTipoDoc();
+                CarregarDdlPortador();
 
                 if (Request.QueryString["operacao"] != null && Request.QueryString["id_tit"] != null)
                 {
@@ -154,6 +189,7 @@ namespace FIBIESA
             titulos.DtPagamento = utils.ComparaDataComNull(txtDtPagamento.Text);
             titulos.ValorPago = utils.ComparaDecimalComZero(txtVlrPago.Text);
             titulos.Obs = txtObs.Text;
+            titulos.Portadorid = utils.ComparaIntComNull(ddlPortador.SelectedValue);
             titulos.Tipo = "R";
 
             if (titulos.Id > 0)
@@ -217,7 +253,8 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Show(); 
         }
 
-        protected void btnSelect_Click(object sender, EventArgs e)
+       
+ protected void btnSelect_Click(object sender, EventArgs e)
         {
 
             ImageButton btndetails = sender as ImageButton;
@@ -248,6 +285,10 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+        protected void ddlPortador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelecionarDadosPortador(utils.ComparaIntComZero(ddlPortador.SelectedValue));
         }
     }
 }

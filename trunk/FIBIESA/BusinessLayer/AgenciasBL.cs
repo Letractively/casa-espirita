@@ -84,7 +84,7 @@ namespace BusinessLayer
             return ageDA.PesquisarDA(age);
         }
 
-        public List<Agencias> PesquisarBanDA(int id_ban)
+        public List<Agencias> PesquisarBanBL(int id_ban)
         {
             AgenciasDA ageDA = new AgenciasDA();
 

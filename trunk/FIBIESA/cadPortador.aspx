@@ -38,7 +38,7 @@
                         <td style="width: 400px">
                              <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist" 
                                  AutoPostBack="True" onselectedindexchanged="ddlBanco_SelectedIndexChanged" 
-                                 ToolTip="Informe o banco">
+                                 ToolTip="Selecione o banco">
                              </asp:DropDownList>                          
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <td style="width: 140px">&nbsp;Agência:</td>
                         <td style="width: 400px">
                             <asp:DropDownList ID="ddlAgencia" runat="server" CssClass="dropdownlist" 
-                                ToolTip="Informe a agênica" AutoPostBack="True" 
+                                ToolTip="Selecione a agênica" AutoPostBack="True" 
                                 onselectedindexchanged="ddlAgencia_SelectedIndexChanged">
                              </asp:DropDownList> 
                         </td>
@@ -55,7 +55,7 @@
                         <td style="width: 140px">&nbsp;Conta:</td>
                         <td style="width: 400px">
                             <asp:DropDownList ID="ddlConta" runat="server" CssClass="dropdownlist" 
-                                ToolTip="Informe a conta">
+                                ToolTip="Selecione a conta">
                              </asp:DropDownList> 
                         </td>
                     </tr>

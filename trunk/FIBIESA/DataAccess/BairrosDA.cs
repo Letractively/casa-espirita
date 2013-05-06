@@ -174,6 +174,15 @@ namespace DataAccess
             return bairros;
         }
 
+        public DataSet PesquisaDA(int id_bai)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                              CommandType.Text, string.Format(@"SELECT * FROM BAIRROS WHERE ID = {0}", id_bai));
+
+            return ds;
+
+        }
+
         public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
