@@ -290,7 +290,7 @@ namespace FIBIESA
                         if (id > 0)
                         {                          
                             if(chkImprimirRec.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,850);", true);
                                                         
                             ExibirMensagem("Venda gravada com sucesso !");
                             LimparCamposGeral();
