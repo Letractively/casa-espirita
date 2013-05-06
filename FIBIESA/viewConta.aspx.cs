@@ -33,18 +33,20 @@ namespace Admin
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("CODAGENCIA", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("DESCAGENCIA", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));            
+            DataColumn coluna4 = new DataColumn("DESCAGENCIA", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("DESBANCO", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
             tabela.Columns.Add(coluna5);
-
+            
             ContasBL conBL = new ContasBL();
             List<Contas> contas;
+            BancosBL banBL = new BancosBL();
+            List<Bancos> bancos;
                         
             contas = conBL.PesquisarBuscaBL(valor);
             
@@ -56,10 +58,15 @@ namespace Admin
                 linha["CODIGO"] = ltCon.Codigo;
                 linha["DESCRICAO"] = ltCon.Descricao;
                 if (ltCon.Agencia != null)
-                {
-                    linha["CODAGENCIA"] = ltCon.Agencia.Codigo.ToString();
-                    linha["DESCAGENCIA"] = ltCon.Agencia.Descricao.ToString();
+                {                  
+                    linha["DESCAGENCIA"] = ltCon.Agencia.Codigo.ToString() + " - " +ltCon.Agencia.Descricao.ToString();
+
+                    bancos = banBL.PesquisarBL(utils.ComparaIntComZero(ltCon.Agencia.BancoId.ToString()));
+                    foreach (Bancos ltBan in bancos)
+	                    linha["DESBANCO"] = ltBan.Codigo.ToString() +" - "+ ltBan.Descricao;
+	                
                 }
+                                                              
 
                 tabela.Rows.Add(linha);
             }

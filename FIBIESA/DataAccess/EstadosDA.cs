@@ -110,6 +110,15 @@ namespace DataAccess
             return estados;
         }
 
+        public DataSet PesquisaDA(int id_est)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                              CommandType.Text, string.Format(@"SELECT * FROM ESTADOS WHERE ID = {0}", id_est));
+
+            return ds;
+
+        }
+
         public List<Estados> PesquisarDA(string campo, string valor)
         {
             string consulta;

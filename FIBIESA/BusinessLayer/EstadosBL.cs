@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
+
 
 namespace BusinessLayer
 {
@@ -55,6 +57,13 @@ namespace BusinessLayer
             EstadosDA estadosDA = new EstadosDA();
 
             return estadosDA.PesquisarDA(campo, valor);
+        }
+
+        public DataSet PesquisaBL(int id_est)
+        {
+            EstadosDA estDA = new EstadosDA();
+
+            return estDA.PesquisaDA(id_est);
         }
 
         public List<Estados> PesquisarBuscaBL(string valor)

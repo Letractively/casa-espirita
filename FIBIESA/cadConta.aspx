@@ -12,10 +12,19 @@
             <div class="contentbox">
                 <table>
                     <tr>
+                        <td style="width: 140px">Banco:</td>
+                        <td style="width: 250px" colspan="3">
+                             <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist" 
+                                 AutoPostBack="True" onselectedindexchanged="ddlBanco_SelectedIndexChanged" 
+                                 ToolTip="Selecione o banco">
+                             </asp:DropDownList>                          
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="width: 179px">* Agência:</td>
                         <td style="width: 350px">      
                             <asp:DropDownList ID="ddlAgencia" runat="server" CssClass="dropdownlist" 
-                                ToolTip="Informe a agência">
+                                ToolTip="Selecione a agência">
                              </asp:DropDownList>   
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlAgencia" ErrorMessage="*Informe a agência" 
@@ -37,7 +46,7 @@
                                 Width="100px" ToolTip="Informe o código da conta" ></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                 ControlToValidate="txtCodigo" ErrorMessage="*Informe o código da conta" 
-                                CssClass="validacao">*</asp:RequiredFieldValidator>
+                                CssClass="validacao" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>                    
                     <tr>

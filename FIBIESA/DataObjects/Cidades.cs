@@ -35,7 +35,12 @@ namespace DataObjects
             set { _estadoId = value; }
         }
 
-
+        private Estados _estados;
+        public Estados Estados
+        {
+            get { return _estados; }
+            set { _estados = value; }
+        }
     
     }
 }

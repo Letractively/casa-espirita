@@ -55,6 +55,13 @@ namespace BusinessLayer
 
             return bairrosDA.PesquisarCidDA(id_cid);
         }
+
+        public DataSet PesquisaBL(int id_bai)
+        {
+            BairrosDA bairrosDA = new BairrosDA();
+
+            return bairrosDA.PesquisaDA(id_bai);
+        }
         
         public List<Bairros> PesquisarBuscaBL(string valor)
         {

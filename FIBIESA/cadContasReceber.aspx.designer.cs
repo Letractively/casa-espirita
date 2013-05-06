@@ -211,6 +211,42 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtObs;
         
         /// <summary>
+        /// ddlPortador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPortador;
+        
+        /// <summary>
+        /// lblBanco control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBanco;
+        
+        /// <summary>
+        /// lblAgencia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAgencia;
+        
+        /// <summary>
+        /// lblConta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConta;
+        
+        /// <summary>
         /// btnVoltar control.
         /// </summary>
         /// <remarks>

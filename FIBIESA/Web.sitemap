@@ -94,6 +94,6 @@
         <siteMapNode url="viewContasReceber.aspx" title="Contas a Receber"  description="">
           <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber"  description="" />
         </siteMapNode>
-        
+      <siteMapNode url="emissaoBloqBan.aspx" title="Emissão Bloqueto Bancário"  description=""/>
     </siteMapNode>
 </siteMap>

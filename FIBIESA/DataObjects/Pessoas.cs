@@ -258,6 +258,13 @@ namespace DataObjects
             get { return _sexo; }
             set { _sexo = value; }
         }
-               
+
+        private Bairros _bairro;
+        public Bairros Bairro
+        {
+            get { return _bairro; }
+            set { _bairro = value; }
+        }
+                               
     }
 }

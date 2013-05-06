@@ -23,7 +23,7 @@ namespace DataAccess
             PessoasDA pesDA = new PessoasDA();
             PortadoresDA porDA = new PortadoresDA();
             TiposDocumentosDA tipDA = new TiposDocumentosDA();
-
+            
             while (dr.Read())
             {
                 Titulos tit = new Titulos();
@@ -48,13 +48,14 @@ namespace DataAccess
                     id = Convert.ToInt32(tit.Pessoaid);
                     List<Pessoas> pessoas = pesDA.PesquisarDA(id);
                     Pessoas pes = new Pessoas();
-
+                    
                     foreach (Pessoas ltPes in pessoas)
                     {
                         pes.Id = ltPes.Id;
                         pes.Codigo = ltPes.Codigo;
                         pes.Nome = ltPes.Nome;
                         pes.CpfCnpj = ltPes.CpfCnpj;
+                        pes.Endereco = ltPes.Endereco;
                     }
 
                     tit.Pessoas = pes;

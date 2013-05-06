@@ -1,6 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true" CodeBehind="cadContasReceber.aspx.cs" Inherits="FIBIESA.cadContasReceber" %>
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
- <%@ MasterType VirtualPath="~/home.Master" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
+    CodeBehind="cadContasReceber.aspx.cs" Inherits="FIBIESA.cadContasReceber" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -8,7 +10,7 @@
         <div class="container half2 left">
             <div class="conthead">
                 <h2>
-                    Cadastro de Títulos Contas a Pagar</h2>
+                    Cadastro de Títulos Contas a Receber</h2>
             </div>
             <div class="contentbox">
                 <table>
@@ -17,12 +19,11 @@
                             * Tipo de Documento:
                         </td>
                         <td style="width: 400px" colspan="3">
-                          <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
-                                ToolTip="Informe o tipo de documento">                               
+                            <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o tipo de documento">
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                                ControlToValidate="ddlTipoDoc" CssClass="validacao" 
-                                ErrorMessage="*Informe o tipo de documento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlTipoDoc"
+                                CssClass="validacao" ErrorMessage="*Informe o tipo de documento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -30,22 +31,20 @@
                             * Título:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputboxRight" 
-                                Width="100px" ToolTip="Informe o número do título"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                                ControlToValidate="txtTitulo" CssClass="validacao" 
-                                ErrorMessage="* Informe o número do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                        </td>                        
+                            <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputboxRight" Width="100px"
+                                ToolTip="Informe o número do título"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtTitulo"
+                                CssClass="validacao" ErrorMessage="* Informe o número do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                        </td>
                         <td style="width: 140px">
                             * Parcela:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtParcela" runat="server" CssClass="inputboxRight" 
-                                Width="50px" ToolTip="Informe a parcela"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
-                                ControlToValidate="txtParcela" CssClass="validacao" 
-                                ErrorMessage="* Informe o número da parcela" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                        </td>                   
+                            <asp:TextBox ID="txtParcela" runat="server" CssClass="inputboxRight" Width="50px"
+                                ToolTip="Informe a parcela"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtParcela"
+                                CssClass="validacao" ErrorMessage="* Informe o número da parcela" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">
@@ -53,26 +52,23 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtFornecedor" runat="server" CssClass="inputboxRight" Width="70px"
-                                AutoPostBack="True" OnTextChanged="txtFornecedor_TextChanged" 
-                                ToolTip="Informe o fornecedor"></asp:TextBox>
-                            <asp:Button ID="btnPesFornecedor" runat="server" CssClass="btn" Text="..." 
-                                CausesValidation="False" onclick="btnPesFornecedor_Click" />
+                                AutoPostBack="True" OnTextChanged="txtFornecedor_TextChanged" ToolTip="Informe o fornecedor"></asp:TextBox>
+                            <asp:Button ID="btnPesFornecedor" runat="server" CssClass="btn" Text="..." CausesValidation="False"
+                                OnClick="btnPesFornecedor_Click" />
                             <asp:Label ID="lblDesFornecedor" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtFornecedor"
-                                CssClass="validacao" ErrorMessage="*Informe o cliente" 
-                                ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                CssClass="validacao" ErrorMessage="*Informe o cliente" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
-                    </tr>                                        
+                    </tr>
                     <tr>
                         <td style="width: 140px">
                             * Valor:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" 
-                                Width="100px" ToolTip="Informe o valor do título"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
-                                ControlToValidate="txtValor" CssClass="validacao" 
-                                ErrorMessage="* Informe o valor do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" Width="100px"
+                                ToolTip="Informe o valor do título"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtValor"
+                                CssClass="validacao" ErrorMessage="* Informe o valor do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -80,78 +76,107 @@
                             * Data Emissão:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtDataEmissao" runat="server" CssClass="inputbox" 
-                                Width="100px" ToolTip="Informe a data de emissão"></asp:TextBox>
-                            <asp:CalendarExtender ID="txtDataEmissao_CalendarExtender" runat="server" 
-                                TargetControlID="txtDataEmissao">
+                            <asp:TextBox ID="txtDataEmissao" runat="server" CssClass="inputbox" Width="100px"
+                                ToolTip="Informe a data de emissão"></asp:TextBox>
+                            <asp:CalendarExtender ID="txtDataEmissao_CalendarExtender" runat="server" TargetControlID="txtDataEmissao">
                             </asp:CalendarExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
-                                ControlToValidate="txtDataEmissao" CssClass="validacao" 
-                                ErrorMessage="* Informe a data de emissão" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                        </td>                    
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtDataEmissao"
+                                CssClass="validacao" ErrorMessage="* Informe a data de emissão" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                        </td>
                         <td style="width: 140px">
                             * Data Vencimento:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtDataVencimento" runat="server" CssClass="inputbox" 
-                                Width="100px" ToolTip="Informe a data de vencimento"></asp:TextBox>
-                            <asp:CalendarExtender ID="txtDataVencimento_CalendarExtender" runat="server" 
-                                TargetControlID="txtDataVencimento">
+                            <asp:TextBox ID="txtDataVencimento" runat="server" CssClass="inputbox" Width="100px"
+                                ToolTip="Informe a data de vencimento"></asp:TextBox>
+                            <asp:CalendarExtender ID="txtDataVencimento_CalendarExtender" runat="server" TargetControlID="txtDataVencimento">
                             </asp:CalendarExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
-                                ControlToValidate="txtDataVencimento" CssClass="validacao" 
-                                ErrorMessage="* Informe a data de vencimento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtDataVencimento"
+                                CssClass="validacao" ErrorMessage="* Informe a data de vencimento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
-                    </tr>    
+                    </tr>
                     <tr>
                         <td style="width: 140px">
                             Data Pagamento:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtDtPagamento" runat="server" CssClass="inputbox" 
-                                Width="100px" ToolTip="Informe a data de pagamento"></asp:TextBox>
-                            <asp:CalendarExtender ID="txtDtPagamento_CalendarExtender" runat="server" 
-                                TargetControlID="txtDtPagamento">
+                            <asp:TextBox ID="txtDtPagamento" runat="server" CssClass="inputbox" Width="100px"
+                                ToolTip="Informe a data de pagamento"></asp:TextBox>
+                            <asp:CalendarExtender ID="txtDtPagamento_CalendarExtender" runat="server" TargetControlID="txtDtPagamento">
                             </asp:CalendarExtender>
                         </td>
                         <td style="width: 140px">
                             Valor Pago:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtVlrPago" runat="server" CssClass="inputboxRight" 
-                                Width="100px" ToolTip="Informe o valor pago"></asp:TextBox>
+                            <asp:TextBox ID="txtVlrPago" runat="server" CssClass="inputboxRight" Width="100px"
+                                ToolTip="Informe o valor pago"></asp:TextBox>
                         </td>
-                    </tr> 
-                     <tr>
+                    </tr>
+                    <tr>
                         <td style="width: 140px">
                             Obs:
                         </td>
                         <td colspan="3">
-                            <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox" Height="42px" 
-                                MaxLength="200" TextMode="MultiLine" Width="421px" 
-                                ToolTip="Informe a observação"></asp:TextBox>
+                            <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox" Height="42px" MaxLength="200"
+                                TextMode="MultiLine" Width="421px" ToolTip="Informe a observação"></asp:TextBox>
                         </td>
-                    </tr>                                  
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <strong>Dados Bancários</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Portador:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:DropDownList ID="ddlPortador" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o portador" AutoPostBack="True" 
+                                onselectedindexchanged="ddlPortador_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </td>
+                        <td style="width: 140px">
+                            Banco:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:Label ID="lblBanco" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">
+                            Agência:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:Label ID="lblAgencia" runat="server"></asp:Label>
+                        </td>
+                        <td style="width: 140px">
+                            Conta:
+                        </td>
+                        <td style="width: 400px">
+                            <asp:Label ID="lblConta" runat="server"></asp:Label>
+                        </td>
+                    </tr>                    
                 </table>
                 <table>
                     <tr>
                         <td style="width: 140px">
                         </td>
                         <td style="width: 400px">
-                            <asp:Button ID="btnVoltar" runat="server" Text ="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" OnClick="btnVoltar_Click"
+                                ToolTip="Volta para página de consulta" />
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="btnSalvar" runat="server" Text ="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
-                                ToolTip="Salva o título contas a receber" />
-                            
+                            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" OnClick="btnSalvar_Click"
+                                ValidationGroup="salvar" ToolTip="Salva o título contas a receber" />
                         </td>
-                    </tr>                   
+                    </tr>
                 </table>
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdPessoa" runat="server" />
-            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+                EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>
         <div class="status">
@@ -204,5 +229,5 @@
         <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdPessoa"
             PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
             OkControlID="btnCancel" Enabled="false" />
-    </div>   
+    </div>
 </asp:Content>

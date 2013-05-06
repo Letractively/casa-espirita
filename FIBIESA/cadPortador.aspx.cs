@@ -43,7 +43,7 @@ namespace Admin
         private void CarregarDDLAgencia(int id_ban)
         {
             AgenciasBL ageBL = new AgenciasBL();
-            List<Agencias> agencias = ageBL.PesquisarBanDA(id_ban);
+            List<Agencias> agencias = ageBL.PesquisarBanBL(id_ban);
 
             ddlAgencia.Items.Clear();
             ddlAgencia.Items.Add(new ListItem());

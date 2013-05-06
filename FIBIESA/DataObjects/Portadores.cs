@@ -62,5 +62,12 @@ namespace DataObjects
             get { return _contaId; }
             set { _contaId = value; }
         }
+
+        private Contas _contas;
+        public Contas Contas
+        {
+            get { return _contas; }
+            set { _contas = value; }
+        }
     }
 }
