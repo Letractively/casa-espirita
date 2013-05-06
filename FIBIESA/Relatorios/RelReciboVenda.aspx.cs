@@ -45,11 +45,16 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicao = new ReportDataSource("DataSet_Instituicao", instBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceVenda = new ReportDataSource("DataSet_Venda", lDtVenda);
-                ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", vendaItensBL.PesquisarBLDataSet(vendaid).Tables[0]);
+                DataSet lds = vendaItensBL.PesquisarBLDataSet(vendaid);
+                ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", lds.Tables[0]);
+                decimal valorTotal = Convert.ToDecimal(lds.Tables[0].Compute("Sum(valor)","").ToString());
+                decimal descontoTotal = Convert.ToDecimal(lds.Tables[0].Compute("Sum(desconto)","").ToString());
+                NumeroPorExtenso numeroPorExtenso = new NumeroPorExtenso(valorTotal - descontoTotal);
+                string valorExtenso = numeroPorExtenso.ToString();
+                ReportParameter[] param = new ReportParameter[1];
+                param[0] = new ReportParameter("valorExtenso", valorExtenso);
 
-
-
-                
+                ReportViewer1.LocalReport.SetParameters(param);
                 ReportViewer1.LocalReport.DataSources.Add(rptDatasourceInstituicao);
                 ReportViewer1.LocalReport.DataSources.Add(rptDatasourceInstituicaoLogo);
                 ReportViewer1.LocalReport.DataSources.Add(rptDatasourceVenda);
