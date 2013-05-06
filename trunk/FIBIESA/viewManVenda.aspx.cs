@@ -95,7 +95,7 @@ namespace Admin
             int ven_id = utils.ComparaIntComZero(dtgVendas.DataKeys[gvrow.RowIndex].Value.ToString());
             if(ven_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                    "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,815);", true);            
+                    "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,850);", true);            
         }
 
         protected void dtgVendas_SelectedIndexChanged(object sender, EventArgs e)
