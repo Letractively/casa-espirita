@@ -7,7 +7,7 @@ using DataAccess;
 
 namespace BusinessLayer
 {
-    public class ReservasBL
+    public class ReservasBL : BaseBL
     {
         public bool InserirBL(Reservas instancia)
         {
@@ -40,5 +40,36 @@ namespace BusinessLayer
 
             return varDA.PesquisarDA();
         }
+
+        public List<Reservas> PesquisarBL(int bai)
+        {
+            ReservasDA varDA = new ReservasDA();
+
+            return varDA.PesquisarDA(bai);
+        }
+
+        public List<Reservas> PesquisarCidBL(int id_cid)
+        {
+            BairrosDA varDA = new BairrosDA();
+            return null;
+            //return varDA.PesquisarCidDA(id_cid);
+        }
+
+        public List<Reservas> PesquisarBuscaBL(string valor)
+        {
+            /*criar as regras de negocio*/
+            ReservasDA varDA = new ReservasDA();
+            return null;
+
+           // return varDA.PesquisarBuscaDA(valor);
+        }
+
+        public override List<Base> Pesquisar(string codDes)
+        {
+            ReservasDA varDA = new ReservasDA();
+
+            return varDA.Pesquisar(codDes);
+        }
+
     }
 }

@@ -8,9 +8,9 @@ using System.Data;
 
 namespace BusinessLayer
 {
-    public class EmprestimosBL
+    public class EmprestimosBL : BaseBL
     {
-        public bool InserirBL(Emprestimos instancia)
+        public Int32 InserirBL(Emprestimos instancia)
         {
             /*criar as regras de negocio*/
             EmprestimosDA varDA = new EmprestimosDA();
@@ -42,12 +42,34 @@ namespace BusinessLayer
             return varDA.PesquisarDA();
         }
 
-        //public DataSet  PesquisarRelatorioBL()
-        //{
-        //    /*criar as regras de negocio*/
-        //    EmprestimosDA varDA = new EmprestimosDA();
+        public List<Emprestimos> PesquisarBL(int bai)
+        {
+            EmprestimosDA varDA = new EmprestimosDA();
 
-        //    return varDA.PesquisarDA();
-        //}
+            return varDA.PesquisarDA(bai);
+        }
+
+        public EmprestimoMov CarregaEmpNaoDevolvido(int id_emprestimo)
+        {
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.CarregaEmpNaoDevolvido(id_emprestimo);
+        }
+        
+        //public List<Emprestimos> PesquisarBuscaBL(string valor)
+        public List<ViewEmprestimos> PesquisarBuscaBL(string valor)
+        {
+            //criar as regras de negocio
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.PesquisarBuscaBL(valor);
+        }
+        
+        public override List<Base> Pesquisar(string codDes)
+        {
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.Pesquisar(codDes);
+        }
     }
 }

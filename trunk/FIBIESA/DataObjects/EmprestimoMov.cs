@@ -28,8 +28,8 @@ namespace DataObjects
             set { _dataEmprestimo = value; }
         }
 
-        private DateTime _dataDevolucao;
-        public DateTime DataDevolucao
+        private DateTime? _dataDevolucao;
+        public DateTime? DataDevolucao
         {
             get { return _dataDevolucao; }
             set { _dataDevolucao = value; }
