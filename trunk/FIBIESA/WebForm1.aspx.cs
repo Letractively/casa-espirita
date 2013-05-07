@@ -11,9 +11,23 @@ namespace FIBIESA
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private void ImprimirBoleto(BoletoBancario boleto)
+        {
+            this.Panel1.Controls.Add(boleto);
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                if (Session["boleto"] != null)
+                {
+                    BoletoBancario boletoBan = new BoletoBancario();
+                    boletoBan = (BoletoBancario)Session["boleto"];
+                    ImprimirBoleto(boletoBan);
+                }
+            }
+                
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)

@@ -59,6 +59,7 @@
     <Compile Include="DoacoesBL.cs" />
     <Compile Include="NotasEntradaBL.cs" />
     <Compile Include="NotasEntradaItensBL.cs" />
+    <Compile Include="numeroExtensoBL.cs" />
     <Compile Include="ObrasAutoresBL.cs" />
     <Compile Include="PortadoresBL.cs" />
     <Compile Include="TiposDocumentosBL.cs" />

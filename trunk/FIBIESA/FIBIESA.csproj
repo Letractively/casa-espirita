@@ -108,6 +108,7 @@
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="emissaoBloqBan.aspx" />
     <Content Include="erroPermissao.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\bg_breadcrumb.png" />
@@ -571,6 +572,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="emissaoBloqBan.aspx.cs">
+      <DependentUpon>emissaoBloqBan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="emissaoBloqBan.aspx.designer.cs">
+      <DependentUpon>emissaoBloqBan.aspx</DependentUpon>
     </Compile>
     <Compile Include="erroPermissao.aspx.cs">
       <DependentUpon>erroPermissao.aspx</DependentUpon>
