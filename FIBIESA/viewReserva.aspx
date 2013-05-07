@@ -22,7 +22,7 @@
                         <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />                 
                     </td>
                     <td>
-                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                        <asp:Button ID="btnInserir" runat="server" Text="Emprestar" CssClass="btn" 
                             onclick="btnInserir_Click" />
                      </td>
                     <!-- grid modelo começa aqui -->

@@ -194,6 +194,49 @@ namespace DataAccess
             return volta;
         }
 
+        /// <summary>
+        /// Verifica se a pessoa tem livros atrasados até a data de hoje
+        /// </summary>
+        /// <param name="pessoaId">O Id da pessoa a analisar</param>
+        /// <param name="Hoje">A data onde ainda não é considerado atraso.</param>
+        /// <returns></returns>
+        public bool LivrosAtrasados(int pessoaId, DateTime hoje)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT COUNT(*) AS QTD FROM VIEW_EMPRESTIMOS WHERE PESSOAID = " + pessoaId.ToString());
+            consulta.Append(@" AND DATAPREVISTAEMPRESTIMO >  '" + hoje.ToString("yyyy-MM-dd") + "'");
+            int i = 0;
+            string valor = SqlHelper.ExecuteScalar(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString()).ToString();
+
+            Int32.TryParse(valor, out i);
+            return (i > 0);
+        }
+
+        public int QuantosLivrosEmprestados(int pessoaId)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT COUNT(*) AS QTD FROM VIEW_EMPRESTIMOS WHERE PESSOAID = " + pessoaId.ToString());
+            int i = -1;
+            string valor = SqlHelper.ExecuteScalar(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString()).ToString();
+
+            Int32.TryParse(valor, out i);
+            return i;
+        }
+
+        public Int32 QtdRenovacoes(int emprestimoId)
+        {            
+            StringBuilder consulta = new StringBuilder(@"SELECT COUNT(*) -1 AS QTD FROM EMPRESTIMOMOV WHERE EMPRESTIMOID = " + emprestimoId.ToString());
+            int i = -1;
+            string valor = SqlHelper.ExecuteScalar(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString()).ToString();
+
+            if (Int32.TryParse(valor, out i))
+            {
+                if (i < 1)
+                    i = 0; //se retornou 0, e fez a subtracao, tem -1 em i
+            }
+            return i;
+        }
 
         public List<ViewEmprestimos> PesquisarBuscaBL(string valor)
         {
@@ -211,6 +254,8 @@ namespace DataAccess
 
             return listao;
         }
+
+
 
         //metodos do objeto viewEmprestimos
 
