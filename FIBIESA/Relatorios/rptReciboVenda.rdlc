@@ -899,7 +899,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=First(Fields!pessoa.Value, "DataSet_Venda")</Value>
+                  <Value>=First(Fields!usuario.Value, "DataSet_Venda")</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -914,38 +914,6 @@
           <Height>0.38833cm</Height>
           <Width>11.65273cm</Width>
           <ZIndex>4</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox8">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>="CPF/CNPJ :" + First(Fields!cpfCnpj.Value, "DataSet_Venda")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>1.59211cm</Top>
-          <Left>0.8136cm</Left>
-          <Height>0.52456cm</Height>
-          <Width>11.65273cm</Width>
-          <ZIndex>5</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
