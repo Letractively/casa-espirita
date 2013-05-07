@@ -277,9 +277,9 @@ namespace Admin
             {
                 if (empBL.QtdRenovacoes(emp.Id) > param)
                 {
-                    ExibirMensagem("Este exemplar não pode mais ser renovado!");
+                    ExibirMensagem("Este exemplar não pode mais ser renovado para esta pessoa!");
                     txtExemplar.Focus();
-                    throw new Exception(); //tem um jeito melhor de sair do metodo?
+                    return;  //throw new Exception(); //tem um jeito melhor de sair do metodo?
                 }
             }
 
