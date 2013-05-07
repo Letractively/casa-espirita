@@ -56,7 +56,6 @@ namespace DataAccess
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
         }
 
-
         public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             DataSet lDs;
@@ -115,7 +114,6 @@ namespace DataAccess
 
         }
 
-
         public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
         {
             DataSet lDs;
@@ -167,6 +165,38 @@ namespace DataAccess
                 return null;
             }
 
+        }
+
+        public Int32 IdMovEmprestado(int emprestimoId)
+        {
+            StringBuilder consulta = new StringBuilder(@"SELECT ID FROM EMPRESTIMOMOV WHERE DATADEVOLUCAO IS NULL AND EMPRESTIMOID = " + emprestimoId.ToString());
+            int i = -1;
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+            if (dr.Read())            
+                return int.Parse(dr["ID"].ToString());            
+            else
+                return -1;
+        }
+
+        public EmprestimoMov Carregar(int id)
+        {
+            EmprestimoMov volta = new EmprestimoMov();
+            volta.Id = -1;
+
+            StringBuilder consulta = new StringBuilder(@"SELECT * FROM EMPRESTIMOMOV WHERE ID = " + id.ToString());
+            int i = -1;
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+            if (dr.Read())
+            {
+                volta.Id = id;
+                volta.EmprestimoId = int.Parse(dr["EMPRESTIMOID"].ToString());
+                volta.DataDevolucao = DateTime.Parse(dr["DATADEVOLUCAO"].ToString());
+                volta.DataEmprestimo = DateTime.Parse(dr["DATAEMPRESTIMO"].ToString());
+                volta.DataPrevistaEmprestimo = DateTime.Parse(dr["DATAPREVISTAEMPRESTIMO"].ToString());
+            }
+            return volta;
         }
     }
 }

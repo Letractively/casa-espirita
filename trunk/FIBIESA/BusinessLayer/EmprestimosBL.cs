@@ -55,7 +55,30 @@ namespace BusinessLayer
 
             return varDA.CarregaEmpNaoDevolvido(id_emprestimo);
         }
-        
+
+        public bool LivrosAtrasados(int pessoaId, DateTime hoje)
+        { 
+            //criar as regras de negocio
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.LivrosAtrasados(pessoaId, hoje);
+        }
+
+        public int QuantosLivrosEmprestados(int pessoaId)
+        {
+            //criar as regras de negocio
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.QuantosLivrosEmprestados(pessoaId);
+        }
+
+        public Int32 QtdRenovacoes(int emprestimoId)
+        { 
+            //criar as regras de negocio
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.QtdRenovacoes(emprestimoId);        
+        }
         //public List<Emprestimos> PesquisarBuscaBL(string valor)
         public List<ViewEmprestimos> PesquisarBuscaBL(string valor)
         {

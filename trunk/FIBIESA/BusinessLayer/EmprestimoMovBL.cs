@@ -52,5 +52,20 @@ namespace BusinessLayer
             return varDA.PesquisarRelatorioDA(instancia, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status, ordenacao);
         }
 
+        public Int32 IdMovEmprestado(int emprestimoId)
+        { 
+            /*criar as regras de negocio*/
+            EmprestimoMovDA varDA = new EmprestimoMovDA();
+
+            return varDA.IdMovEmprestado(emprestimoId);        
+        }
+
+        public EmprestimoMov Carregar(int id)
+        {
+            /*criar as regras de negocio*/
+            EmprestimoMovDA varDA = new EmprestimoMovDA();
+
+            return varDA.Carregar(id);
+        }
     }
 }
