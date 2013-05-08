@@ -49,6 +49,13 @@ namespace BusinessLayer
             return varDA.PesquisarDA(bai);
         }
 
+        public List<Emprestimos> PesquisarBL(string campo, string valor)
+        {
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.PesquisarDA(campo, valor);
+        }
+
         public EmprestimoMov CarregaEmpNaoDevolvido(int id_emprestimo)
         {
             EmprestimosDA varDA = new EmprestimosDA();
@@ -79,6 +86,15 @@ namespace BusinessLayer
 
             return varDA.QtdRenovacoes(emprestimoId);        
         }
+
+        public DataTable BuscaHistorico(int pessoaId)
+        {
+                        //criar as regras de negocio
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.BuscaHistorico(pessoaId);
+        }
+
         //public List<Emprestimos> PesquisarBuscaBL(string valor)
         public List<ViewEmprestimos> PesquisarBuscaBL(string valor)
         {

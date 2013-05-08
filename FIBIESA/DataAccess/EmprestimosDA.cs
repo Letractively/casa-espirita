@@ -14,7 +14,7 @@ namespace DataAccess
     public class EmprestimosDA : BaseDA
     {
         Utils utils = new Utils();
-        #region funcoes
+        #region funcoes 
         private List<Emprestimos> CarregarObjEmprestimos(SqlDataReader dr)
         {
             List<Emprestimos> emprestimos = new List<Emprestimos>();
@@ -51,6 +51,8 @@ namespace DataAccess
                 emprestim.Nome = dr["NOME"].ToString();
                 emprestim.NomeFantasia = dr["NOMEFANTASIA"].ToString();
                 emprestim.Status = dr["STATUS"].ToString();
+                emprestim.Tombo = int.Parse(dr["TOMBO"].ToString());
+                emprestim.Codigo = int.Parse(dr["CODIGO"].ToString());
                                 
                 emprestimos.Add(emprestim);
             }
@@ -238,12 +240,74 @@ namespace DataAccess
             return i;
         }
 
+        /// <summary>
+        /// Retorna uma lista com todos os empréstimos ativos (não devolvidos) da pessoa.
+        /// </summary>
+        /// <param name="pessoaId"></param>
+        /// <returns></returns>
+        public DataTable BuscaHistorico(int pessoaId)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@" SELECT EX.TOMBO, OB.CODIGO, OB.TITULO,  MOV.DATAEMPRESTIMO, MOV.DATAPREVISTAEMPRESTIMO,");
+            consulta.Append(@" MOV.EMPRESTIMOID, EM.EXEMPLARID,  EM.PESSOAID,");
+            consulta.Append(@" CASE WHEN (DATAPREVISTAEMPRESTIMO <= CAST (GETDATE() AS DATE))");
+            consulta.Append(@" THEN 'Atrasado' ELSE 'Emprestado' END AS SITUACAO");
+            consulta.Append(@" FROM EMPRESTIMOMOV MOV");
+            consulta.Append(@" INNER JOIN EMPRESTIMOS EM ON EM.ID = MOV.EMPRESTIMOID");
+            consulta.Append(@" INNER JOIN EXEMPLARES EX ON EX.ID = EM.EXEMPLARID");
+            consulta.Append(@" INNER JOIN OBRAS OB ON OB.ID = EX.OBRAID");
+            consulta.Append(@" WHERE MOV.DATADEVOLUCAO IS NULL AND PESSOAID = " + pessoaId.ToString());
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("TOMBO", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("DATAEMPRESTIMO", Type.GetType("System.DateTime"));
+            DataColumn coluna5 = new DataColumn("DATAPREVISTAEMPRESTIMO", Type.GetType("System.DateTime"));
+            DataColumn coluna6 = new DataColumn("EMPRESTIMOID", Type.GetType("System.Int32"));
+            DataColumn coluna7 = new DataColumn("EXEMPLARID", Type.GetType("System.Int32"));
+            DataColumn coluna8 = new DataColumn("PESSOAID", Type.GetType("System.Int32"));
+            DataColumn coluna9 = new DataColumn("SITUACAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+            dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
+            dt.Columns.Add(coluna6);
+            dt.Columns.Add(coluna7);
+            dt.Columns.Add(coluna8);
+            dt.Columns.Add(coluna9);
+
+            while (dr.Read())
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["TOMBO"] = int.Parse(dr["TOMBO"].ToString());
+                linha["CODIGO"] = int.Parse(dr["CODIGO"].ToString());
+                linha["TITULO"] = dr["TITULO"].ToString();
+                linha["DATAEMPRESTIMO"] = Convert.ToDateTime(dr["DATAEMPRESTIMO"].ToString());
+                linha["DATAPREVISTAEMPRESTIMO"] = Convert.ToDateTime(dr["DATAPREVISTAEMPRESTIMO"].ToString());
+                linha["EMPRESTIMOID"] = int.Parse(dr["EMPRESTIMOID"].ToString());
+                linha["EXEMPLARID"] = int.Parse(dr["EXEMPLARID"].ToString());
+                linha["PESSOAID"] = int.Parse(dr["PESSOAID"].ToString());
+                linha["SITUACAO"] = dr["SITUACAO"].ToString();
+
+                dt.Rows.Add(linha);
+            }
+
+            return dt;
+        }
+
         public List<ViewEmprestimos> PesquisarBuscaBL(string valor)
         {
             StringBuilder consulta = new StringBuilder(@"SELECT * FROM view_emprestimos ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE titulo LIKE '%{1}%' OR nome LIKE '%{1}%' OR nomeFantasia LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" WHERE tombo LIKE '%{1}%' OR titulo LIKE '%{1}%' OR nome LIKE '%{1}%' OR nomeFantasia LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
             consulta.Append(" ORDER BY DATAEMPRESTIMO ");
 
@@ -255,8 +319,7 @@ namespace DataAccess
             return listao;
         }
 
-
-
+       
         //metodos do objeto viewEmprestimos
 
         public ViewEmprestimos CarregarViewEmprestimo(int id)

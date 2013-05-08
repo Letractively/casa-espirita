@@ -168,6 +168,38 @@ namespace DataAccess
             return exemplares;
         }
 
+         /// <summary>
+        /// Pesquisa Exemplares disponiveis para emprestimo (não emprestados)
+        /// </summary>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        public List<Exemplares> PesquisarDisponiveis(string valor)
+        {
+            //StringBuilder consulta = new StringBuilder(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+
+            StringBuilder consulta = new StringBuilder(@"SELECT EX.*, OB.TITULO, OB.CODIGO FROM EXEMPLARES EX ");
+
+            consulta.Append(" INNER JOIN OBRAS OB ON OB.ID = EX.OBRAID");
+            consulta.Append(" WHERE EX.STATUS = 'A'");
+            consulta.Append(" AND EX.ID NOT IN (");
+            consulta.Append(" SELECT EXE.ID FROM EMPRESTIMOMOV MOV");
+            consulta.Append(" INNER JOIN EMPRESTIMOS  EMP ON EMP.ID = MOV.EMPRESTIMOID");
+            consulta.Append(" INNER JOIN EXEMPLARES EXE ON EXE.ID = EMP.EXEMPLARID");
+            consulta.Append(" WHERE DATADEVOLUCAO IS NULL)");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (OB.CODIGO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY OB.CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Exemplares> exemplares = CarregarObjExemplares(dr);
+
+            return exemplares;
+        }
+
         public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(

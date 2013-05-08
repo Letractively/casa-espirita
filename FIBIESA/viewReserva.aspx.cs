@@ -32,12 +32,14 @@ namespace Admin
             DataTable tabela = new DataTable("tabela");
 
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("titulo", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("nome", Type.GetType("System.String"));
+            DataColumn coluna2 = new DataColumn("tombo", Type.GetType("System.Int32"));
+            DataColumn coluna3 = new DataColumn("titulo", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("nome", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
-            tabela.Columns.Add(coluna3);            
+            tabela.Columns.Add(coluna3);
+            tabela.Columns.Add(coluna4);            
             
             EmprestimosBL emprestimBL = new EmprestimosBL();
             List<ViewEmprestimos> emprestimos;
@@ -47,10 +49,11 @@ namespace Admin
             foreach (ViewEmprestimos visao in emprestimos)
             {
                 DataRow linha = tabela.NewRow();
-
+                
                 linha["ID"] = visao.EmprestimoId;
                 linha["TITULO"] = visao.Titulo;
                 linha["NOME"] = visao.Nome;
+                linha["TOMBO"] = visao.Tombo;
 
                 tabela.Rows.Add(linha);
             }
@@ -140,6 +143,11 @@ namespace Admin
                 dtgReservas.DataSource = m_DataView;
                 dtgReservas.DataBind();
             }
+        }
+
+        protected void btnBusca_Click(object sender, EventArgs e)
+        {
+            Pesquisar(txtBusca.Text);
         }
     }
 }
