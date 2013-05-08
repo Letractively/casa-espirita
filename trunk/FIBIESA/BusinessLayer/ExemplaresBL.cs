@@ -70,5 +70,12 @@ namespace BusinessLayer
 
             return varDA.Pesquisar(codDes);
         }
+
+        public List<Exemplares> PesquisarDisponiveis(string valor)
+        {
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.PesquisarDisponiveis(valor);
+        }
     }
 }

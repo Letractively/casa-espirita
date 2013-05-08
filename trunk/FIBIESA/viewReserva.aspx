@@ -19,7 +19,8 @@
                             ToolTip="Pesquisar por"></asp:TextBox>
                    </td>               
                    <td>
-                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" />                 
+                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                            onclick="btnBusca_Click" />                 
                     </td>
                     <td>
                         <asp:Button ID="btnInserir" runat="server" Text="Emprestar" CssClass="btn" 
@@ -47,6 +48,7 @@
                                             <ItemStyle CssClass="grd_edit" />
                                        </asp:CommandField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                       <asp:BoundField DataField="TOMBO" HeaderText="Tombo"  SortExpression="TOMBO" />
                                        <asp:BoundField DataField="titulo" HeaderText="Título" SortExpression="CODIGO" />
                                        <asp:BoundField DataField="nome" HeaderText="Nome" SortExpression="DESCRICAO" />
                                    </Columns>

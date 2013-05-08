@@ -120,7 +120,7 @@ namespace Admin
 
             ExemplaresBL exBL = new ExemplaresBL(); 
             Exemplares ex = new Exemplares(); 
-            List<Exemplares> listao = exBL.PesquisarBuscaBL(conteudo);
+            List<Exemplares> listao = exBL.PesquisarDisponiveis(conteudo);
 
             foreach (Exemplares laco in listao)
             {
@@ -135,6 +135,22 @@ namespace Admin
 
             grdPesquisaEx.DataSource = dt;
             grdPesquisaEx.DataBind();
+        }
+
+        private void CarregaHistorico(int pessoaId)
+        {
+            EmprestimosBL emp = new EmprestimosBL();
+            DataTable tabela = emp.BuscaHistorico(pessoaId);
+            if (tabela.Rows.Count > 0)
+            {
+                dtgHistorico.DataSource = tabela;
+                
+            }
+            else
+                dtgHistorico.DataSource = null;
+            dtgHistorico.DataBind();
+           // pnlHistorico.Height = new Unit(pnlHistorico.Height.Value + 10);
+            dtgHistorico.Visible = (tabela.Rows.Count > 0);
         }
         #endregion
 
@@ -154,11 +170,22 @@ namespace Admin
                         if (Request.QueryString["id_emp"] != null)
                         {
                             id_emprestimo = Convert.ToInt32(Request.QueryString["id_emp"].ToString());
+                            txtdataInicio.ReadOnly = true;
+                            txtdataPrevisao.ReadOnly = true;
+                            pnlHistorico.Visible = false;
+                            txtdataInicio_CalendarExtender.Enabled = false;
+                            txtdataPrevisao_CalendarExtender.Enabled = false;
                         }
                     }
                     else
                     {
                         //inserindo
+                        txtdataInicio.ReadOnly = false;
+                        txtdataPrevisao.ReadOnly = false;
+                        pnlHistorico.Visible = true;
+                        txtdataInicio_CalendarExtender.Enabled = true;
+                        txtdataPrevisao_CalendarExtender.Enabled = true;
+
                         btnRenovar.Visible = false;
                         btnSalvar.Text = "Emprestar";
                         txtdataInicio.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -169,7 +196,7 @@ namespace Admin
                             DateTime lol = DateTime.Now.AddDays(param);
                             txtdataPrevisao.Text = lol.ToString("dd/MM/yyyy");
                         }
-                        
+                        dtgHistorico.Visible = false;
 
                     }
                 }
@@ -180,16 +207,24 @@ namespace Admin
 
         protected void btnPesPessoa_Click(object sender, EventArgs e)
         {
-            CarregarPesquisaPessoa(null);
-            ModalPopupExtenderPessoas.Enabled = true;
-            ModalPopupExtenderPessoas.Show(); 
+            v_operacao = Request.QueryString["operacao"];
+            if (v_operacao != "edit")
+            {
+                CarregarPesquisaPessoa(null);
+                ModalPopupExtenderPessoas.Enabled = true;
+                ModalPopupExtenderPessoas.Show();
+            }
         }
 
         protected void btnExemplar_Click(object sender, EventArgs e)
         {
-            CarregarPesquisaExemplar(null);
-            ModalPopupExtenderExemplares.Enabled = true;
-            ModalPopupExtenderExemplares.Show();
+            v_operacao = Request.QueryString["operacao"];
+            if (v_operacao != "edit")
+            {
+                CarregarPesquisaExemplar(null);
+                ModalPopupExtenderExemplares.Enabled = true;
+                ModalPopupExtenderExemplares.Show();
+            }
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -233,7 +268,8 @@ namespace Admin
                     {
                         if (empBL.QuantosLivrosEmprestados(emp.PessoaId) > param)
                         {
-                            ExibirMensagem("Sem devolver nenhum livro, esta pessoa não pode pegar mais nenhum livro emprestado.");
+                            
+                            ExibirMensagem(lblDesPessoa.Text + " já atingiu o limite máximo de empréstimos simultâneos.");                            
                             txtPessoa.Focus();
                             return; //                            throw new Exception(); //tem um jeito melhor de sair do metodo?
                         }
@@ -293,8 +329,12 @@ namespace Admin
                 emovBL.EditarBL(mov);
                 mov = new EmprestimoMov();
                 mov.EmprestimoId = emp.Id;
-                mov.DataEmprestimo = Convert.ToDateTime(txtdataInicio.Text);
-                mov.DataPrevistaEmprestimo = Convert.ToDateTime(txtdataPrevisao.Text);
+                mov.DataEmprestimo = DateTime.Now;  
+                param = this.LerParametro(4, "B");
+                DateTime lol = DateTime.Now;
+                if (param > 0)
+                    lol =  DateTime.Now.AddDays(param);
+                mov.DataPrevistaEmprestimo = lol; 
                 mov.DataDevolucao = null;
                 emovBL.InserirBL(mov);
             }
@@ -333,6 +373,9 @@ namespace Admin
 
             ModalPopupExtenderPessoas.Enabled = false;
             ModalPopupExtenderPessoas.Hide();
+
+            //carrega emprestimos ativos da pessoa selecionada
+            CarregaHistorico(int.Parse(grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString()));
         }
         
         protected void txtPessoa_TextChanged(object sender, EventArgs e)
@@ -428,6 +471,12 @@ namespace Admin
                     lol = data.AddDays(param);
                 txtdataPrevisao.Text = lol.ToString("dd/MM/yyyy");
             }
+        }
+
+        protected void dtgHistorico_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
 

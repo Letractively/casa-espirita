@@ -79,9 +79,19 @@ namespace DataObjects
         }
 
 
+        private Int32 _codigo;
+        public Int32 Codigo
+        {
+            get { return _codigo; }
+            set { _codigo = value; }
+        }
 
-
-
+        private Int32 _tombo;
+        public Int32 Tombo
+        {
+            get { return _tombo; }
+            set { _tombo = value; }
+        }
 
 
 
