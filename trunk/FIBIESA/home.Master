@@ -160,7 +160,8 @@
                         <ul>
                             <li><a href="cadParametro.aspx" title="">Parâmetros</a></li>
                             <li><a href="viewFormulario.aspx" title="">Formulários</a></li>
-                            <li><a href="viewPermissao.aspx" title="">Permissões</a></li>                             
+                            <li><a href="viewPermissao.aspx" title="">Permissões</a></li>   
+                            <li><a href="viewDoacaoLog.aspx" title="">Logs Cadastro de Doações</a></li>                          
                         </ul>
                     </li>
 

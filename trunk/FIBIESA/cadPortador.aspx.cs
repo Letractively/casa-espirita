@@ -88,9 +88,9 @@ namespace Admin
         {
             txtCodigo.Text = "";
             txtDescricao.Text = "";
-            ddlBanco.SelectedIndex = 0;
-            ddlAgencia.SelectedIndex = 0;
-            ddlConta.SelectedIndex = 0;
+            ddlAgencia.SelectedIndex = -1;
+            ddlConta.SelectedIndex = -1;
+            ddlBanco.SelectedIndex = 0;            
         }
 
         #endregion
@@ -113,7 +113,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_por);
-                  
+
+                txtCodigo.Focus();
             }
 
         }
@@ -139,11 +140,8 @@ namespace Admin
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
-                    if (porBL.EditarBL(portadores))
-                    {
+                    if (porBL.EditarBL(portadores))                    
                         ExibirMensagem("Portador atualizado com sucesso !");
-                        LimparCampos();
-                    }
                     else
                         ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
                 }
@@ -164,10 +162,7 @@ namespace Admin
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }
-
-            Response.Redirect("viewPortador.aspx");
-            
+            }                      
 
         }
 

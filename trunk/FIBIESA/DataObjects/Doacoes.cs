@@ -55,6 +55,14 @@ namespace DataObjects
             get { return _pessoa; }
             set { _pessoa = value; }
         }
+        
+        private string _acao;
+        public string Acao
+        {
+            get { return _acao; }
+            set { _acao = value; }
+        }
+
     
     }
 }
