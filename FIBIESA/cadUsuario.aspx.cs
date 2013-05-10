@@ -77,6 +77,30 @@ namespace Admin
 
             return dt;
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtPessoa.Text = "";
+            hfId.Value = "";
+            hfIdPessoa.Value = "";
+            lblDesPessoa.Text = "";
+            txtNome.Text = "";
+            txtEmail.Text = "";
+            txtSenha.Text = "";
+            txtConfirmarSenha.Text = "";
+            txtDtInicio.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtDtFim.Text = DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+            txtLogin.Text = "";
+            ddlCategoria.SelectedIndex = 0;
+            ddlStatus.SelectedIndex = 0;
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -98,6 +122,13 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_usu);
+                else
+                {
+                    txtDtInicio.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    txtDtFim.Text = DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+                }
+
+                txtPessoa.Focus();
             }
         }
 
@@ -154,22 +185,26 @@ namespace Admin
             if (usuarios.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    usuBL.EditarBL(usuarios);
+                    if(usuBL.EditarBL(usuarios))
+                        ExibirMensagem("Usuário atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o usuário. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    usuBL.InserirBL(usuarios);
+                {
+                    if (usuBL.InserirBL(usuarios))
+                    {
+                        ExibirMensagem("Usuário gravado com sucesso !");
+                        LimparCampos();
+                    }
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewUsuario.aspx");
         }
-
-                     
-               
     }
 }

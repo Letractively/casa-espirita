@@ -44,6 +44,7 @@
     <Compile Include="AutoresBL.cs" />
     <Compile Include="BairrosBL.cs" />
     <Compile Include="BancosBL.cs" />
+    <Compile Include="BancosInstrucoesBL.cs" />
     <Compile Include="BaseBL.cs" />
     <Compile Include="CategoriasBL.cs" />
     <Compile Include="CidadesBL.cs" />

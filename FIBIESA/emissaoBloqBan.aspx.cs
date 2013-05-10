@@ -169,7 +169,7 @@ namespace FIBIESA
                     }
 
                     Instrucao_Banrisul instrucao = new Instrucao_Banrisul(999, 1);
-                    Instrucao_Banrisul item1 = new Instrucao_Banrisul(9, 5);
+                    Instrucao_Banrisul item1 = new Instrucao_Banrisul(1, 5);
                     Instrucao_Banrisul item2 = new Instrucao_Banrisul(81, 10);
 
                     boleto.Instrucoes.Add(instrucao);

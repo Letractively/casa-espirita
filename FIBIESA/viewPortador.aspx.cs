@@ -35,8 +35,8 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("CODAGENCIA", Type.GetType("System.Int32"));
-            DataColumn coluna5 = new DataColumn("CODBANCO", Type.GetType("System.Int32"));
+            DataColumn coluna4 = new DataColumn("CODAGENCIA", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("CODBANCO", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("DESBANCO", Type.GetType("System.String"));
             DataColumn coluna7 = new DataColumn("DESAGENCIA", Type.GetType("System.String"));
 
@@ -60,14 +60,32 @@ namespace Admin
                 linha["ID"] = ltPor.Id;
                 linha["CODIGO"] = ltPor.Codigo;
                 linha["DESCRICAO"] = ltPor.Descricao;
-                linha["CODBANCO"] = ltPor.Banco.Codigo;
-                linha["DESBANCO"] = ltPor.Banco.Descricao;
-                linha["CODAGENCIA"] = ltPor.Agencia.Codigo;
-                linha["DESAGENCIA"] = ltPor.Agencia.Descricao;
 
+                if (ltPor.Banco != null)
+                {
+                    linha["CODBANCO"] = ltPor.Banco.Codigo.ToString();
+                    linha["DESBANCO"] = ltPor.Banco.Descricao;
+                }
+                else
+                {
+                    linha["CODBANCO"] = "";
+                    linha["DESBANCO"] = ""; 
+                }
+
+                if (ltPor.Agencia != null)
+                {
+                    linha["CODAGENCIA"] = ltPor.Agencia.Codigo.ToString();
+                    linha["DESAGENCIA"] = ltPor.Agencia.Descricao;
+                }
+                else
+                {
+                    linha["CODAGENCIA"] = "";
+                    linha["DESAGENCIA"] = "";
+ 
+                }
                 tabela.Rows.Add(linha);                
             }
-
+            
             dtbPesquisa = tabela;
             dtgPortadores.DataSource = tabela;
             dtgPortadores.DataBind();

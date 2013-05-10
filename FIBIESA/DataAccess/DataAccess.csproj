@@ -45,6 +45,7 @@
     <Compile Include="AutoresDA.cs" />
     <Compile Include="BairrosDA.cs" />
     <Compile Include="BancosDA.cs" />
+    <Compile Include="BancosInstrucoesDA.cs" />
     <Compile Include="BaseDA.cs" />
     <Compile Include="CategoriasDA.cs" />
     <Compile Include="CidadesDA.cs" />
