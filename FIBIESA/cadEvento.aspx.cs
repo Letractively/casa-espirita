@@ -72,8 +72,9 @@ namespace Admin
                     }
                 }
                 else
-                    lblCodigo.Text = "Código gerado automaticamente.";             
-                    
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
         }
 

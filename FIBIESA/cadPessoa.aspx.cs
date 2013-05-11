@@ -102,6 +102,9 @@ namespace Admin
                 txtDtCadastro.Text = pes.DtCadastro.ToString("dd/MM/yyyy");
                 ddlSexo.SelectedValue = pes.Sexo;
                 txtEmail.Text = pes.Email;
+                rbTipoAssoc.SelectedValue = pes.TipoAssociado.ToString();
+                txtRefNome.Text = pes.RefNome.ToString();
+                txtRefTelefone.Text = pes.RefTelefone.ToString();
 
                 if (pes.Cidade != null )
                 {
@@ -271,7 +274,8 @@ namespace Admin
             txtDataNascimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");         
+            txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
+            txtRefTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");  
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
             txtCepProf.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
@@ -410,6 +414,9 @@ namespace Admin
             pessoas.DtCadastro = DateTime.Now;
             pessoas.Sexo = ddlSexo.SelectedValue;
             pessoas.Email = txtEmail.Text;
+            pessoas.TipoAssociado = rbTipoAssoc.SelectedValue;
+            pessoas.RefNome = txtRefNome.Text;
+            pessoas.RefTelefone = txtRefTelefone.Text;
 
             if (lblDesNome.Text == "* Nome")
                 pessoas.Tipo = "F";

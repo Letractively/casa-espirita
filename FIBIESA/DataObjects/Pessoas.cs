@@ -210,8 +210,8 @@ namespace DataObjects
             set { _refNome = value; }
         }
 
-        private Int32? _refTelefone;
-        public Int32? RefTelefone
+        private string _refTelefone;
+        public string RefTelefone
         {
             get { return _refTelefone; }
             set { _refTelefone = value; }
@@ -264,6 +264,14 @@ namespace DataObjects
         {
             get { return _bairro; }
             set { _bairro = value; }
+        }
+
+        private string _tipoAssociado;
+
+        public string TipoAssociado
+        {
+            get { return _tipoAssociado; }
+            set { _tipoAssociado = value; }
         }
                                
     }

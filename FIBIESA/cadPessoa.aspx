@@ -39,13 +39,19 @@
                                                 <td style="width: 200px">
                                                     <asp:Label ID="lblDesNome" runat="server"></asp:Label>
                                                 </td>                                                   
-                                                <td style="width: 100px" colspan="3">
+                                                <td style="width: 100px">
                                                     <asp:TextBox ID="txtNome" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="280px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator1" runat="server" ErrorMessage="Infome o Nome/Razão social"
                                                         ControlToValidate="txtNome" ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
-                                                </td>                                                                                              
+                                                </td>                                                                   
+                                                <td colspan="2">
+                                                    <asp:RadioButtonList ID = "rbTipoAssoc" runat="server" RepeatColumns="2">
+                                                        <asp:ListItem Selected="True" Value="A">Associado</asp:ListItem>
+                                                        <asp:ListItem Value="E">Efetivo</asp:ListItem>
+                                                    </asp:RadioButtonList>
+                                                </td>                                                                           
                                             </tr>                                            
                                             <tr>
                                                 <td style="width: 200px">
@@ -222,9 +228,35 @@
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
-                                <asp:TabPanel ID="tpTelefone" runat="server" HeaderText="Telefones">
+                                <asp:TabPanel ID="tpTelefone" runat="server" HeaderText="Referência/Telefones">
                                     <ContentTemplate>
                                         <table>
+                                            <tr>
+                                                <td>
+                                                    <strong>Referências:</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Referência Nome:
+                                                </td>
+                                                <td colspan = "4">
+                                                    <asp:TextBox ID="txtRefNome" runat="server" MaxLength="70" Width="335px" CssClass="inputbox"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Referência Telefone:
+                                                </td>
+                                                <td colspan ="4">
+                                                    <asp:TextBox ID="txtRefTelefone" runat="server" MaxLength="13" CssClass="inputbox"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Telefones: </strong>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td style="width: 70px">
                                                     Tipo:
