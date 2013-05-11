@@ -44,10 +44,10 @@
         <img src="images/logo_emp.png" alt="AdminCP" class="logo" />             
         <asp:Label ID="lblNomeEmpresa" runat="server" CssClass="titulo" ></asp:Label>
         
-        <div id="searchbox">
+       <%-- <div id="searchbox">
             <input type="text" class="searchinput" />
             <input type="image" src="images/search_btn.png" class="searchbtn" />
-        </div>
+        </div>--%>
     </div>
     <div id="left">
         <div id="openCloseIdentifier">

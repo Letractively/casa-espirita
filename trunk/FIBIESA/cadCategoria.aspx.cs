@@ -29,6 +29,18 @@ namespace Admin
                 txtDescricao.Text = ltCat.Descricao;	 
 	        }            
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            hfId.Value = "";
+        }
        
         #endregion
 
@@ -50,7 +62,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_cat);
                 else                    
-                    lblCodigo.Text = "Código gerado automaticamente."; 
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
 
         }
@@ -73,19 +87,27 @@ namespace Admin
             if (categorias.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    catBL.EditarBL(categorias);
+                    if (catBL.EditarBL(categorias))
+                       ExibirMensagem("Categoria atualizada com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
             else
             {
-                if(this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    catBL.InserirBL(categorias);
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                {
+                    if(catBL.InserirBL(categorias))
+                    {
+                        ExibirMensagem("Categoria gravada com sucesso !");
+                        LimparCampos();
+                    }
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewCategoria.aspx");
+                        
         }
     }
 }

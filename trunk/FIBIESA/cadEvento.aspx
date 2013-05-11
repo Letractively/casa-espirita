@@ -23,7 +23,7 @@
                         <td style="width: 140px">* Descrição:</td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="70" Width="335px"></asp:TextBox>
+                                MaxLength="70" Width="335px" ToolTip="Informe a descrição do evento"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
@@ -32,7 +32,8 @@
                     <tr>
                         <td style="width: 140px">* Dt. Início:</td>
                         <td>
-                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Informe a data de início" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
@@ -40,7 +41,8 @@
                         </td>
                         <td style="width: 100px">* Dt. Fim:</td>
                         <td>
-                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Informe a data de fim" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
@@ -68,10 +70,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />                            
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />                            
                         </td>
                     </tr>
                 </table>

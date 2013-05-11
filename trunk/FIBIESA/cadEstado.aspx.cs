@@ -30,6 +30,19 @@ namespace Admin
             }
 
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            txtUf.Text = "";
+        }
+        
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -49,6 +62,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_est);
+
+                txtUf.Focus();
             }
 
         }
@@ -64,7 +79,10 @@ namespace Admin
             if (estados.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    estBL.EditarBL(estados);
+                    if (estBL.EditarBL(estados))
+                       ExibirMensagem("Estado atualizado com sucesso !");
+                    else
+                       ExibirMensagem("Não foi possível atualizar o estado. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -72,12 +90,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    estBL.InserirBL(estados);
+                {
+                    if (estBL.InserirBL(estados))
+                    {
+                        ExibirMensagem("Estado gravado com sucesso !");
+                        LimparCampos();
+                    }
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-                        
-            Response.Redirect("viewEstado.aspx");
+            
         }
 
         protected void bntVoltar_Click(object sender, EventArgs e)

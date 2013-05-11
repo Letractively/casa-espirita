@@ -187,7 +187,25 @@ namespace FIBIESA
 
             ddl.SelectedIndex = 0;
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtCodigo.Text = "";
+            txtComplemento.Text = "";
+            txtCnpj.Text = "";
+            txtCep.Text = "";
+            txtEndereco.Text = "";
+            txtNomeFantasia.Text = "";
+            txtRazao.Text = "";
+            txtNumero.Text = "";            
+        }
         #endregion
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_ins = 0;
@@ -209,6 +227,8 @@ namespace FIBIESA
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_ins);
+
+                txtCodigo.Focus();
             }
 
         }
@@ -239,8 +259,15 @@ namespace FIBIESA
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
                     idIns = instituicoes.Id;
-                    insBL.EditarBL(instituicoes);
-                    VerificarImagem();
+
+                    if (insBL.EditarBL(instituicoes))
+                    {
+                        VerificarImagem();
+                        ExibirMensagem("Instituição atualizada com sucesso !");
+                    }
+                    else
+                        ExibirMensagem("Não foi possível atualizar a instituição. Revise as informações.");
+                    
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -250,15 +277,17 @@ namespace FIBIESA
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
                 {
-                    insBL.InserirBL(instituicoes);
-                    VerificarImagem();
+                    if (insBL.InserirBL(instituicoes))
+                    {
+                        VerificarImagem();
+                        ExibirMensagem("Instituição gravada com sucesso !");
+                        LimparCampos();
+                    }                                     
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
             }
 
-            Response.Redirect("~/viewInstituicao.aspx");
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

@@ -55,6 +55,13 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            lblCodigo.Text = "";
+            ddlEstado.SelectedIndex = -1;
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,7 +84,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_cid);
                 else
-                    lblCodigo.Text = "Código gerado automaticamente.";   
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
         }
 
@@ -99,19 +108,25 @@ namespace Admin
             if (cidades.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    cidBL.EditarBL(cidades);
+                    if(cidBL.EditarBL(cidades))
+                         ExibirMensagem("Cidade atualizada com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar a cidade. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
             else
             {
                 if(this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    cidBL.InserirBL(cidades);
+                    if(cidBL.InserirBL(cidades))
+                    {
+                        ExibirMensagem("Cidade gravada com sucesso !");
+                        LimparCampos();
+                    }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewCidade.aspx");
+                      
 
         }
               

@@ -12,7 +12,9 @@ namespace BusinessLayer
         private bool IsValid(Usuarios usu)
         {
             bool valido;
-            valido = usu.Senha != null;            
+            valido = usu.Nome.Length <= 70 && usu.Email.Length <= 100 && usu.Status.Length <= 1 && usu.Senha.Length <= 100;
+            valido = valido && usu.PessoaId > 0 && usu.CategoriaId > 0;
+            valido = valido && usu.DtFim != null && usu.DtInicio != null && usu.Senha != null && usu.Login != null && usu.Status != null;                        
             return valido;
         }
 
@@ -29,18 +31,26 @@ namespace BusinessLayer
 
         public bool EditarBL(Usuarios usu)
         {
-            /*criar as regras de negocio*/
-            UsuariosDA pessoasDA = new UsuariosDA();
+            if (usu.Id > 0 && IsValid(usu))
+            {
+                UsuariosDA pessoasDA = new UsuariosDA();
 
-            return pessoasDA.EditarDA(usu);
+                return pessoasDA.EditarDA(usu);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Usuarios usu)
         {
-            /*criar as regras de negocio*/
-            UsuariosDA pessoasDA = new UsuariosDA();
+            if (usu.Id > 0)
+            {
+                UsuariosDA pessoasDA = new UsuariosDA();
 
-            return pessoasDA.ExcluirDA(usu);
+                return pessoasDA.ExcluirDA(usu);
+            }
+            else
+                return false;
         }
 
         public List<Usuarios> PesquisarBL()

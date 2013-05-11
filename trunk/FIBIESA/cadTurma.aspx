@@ -28,7 +28,7 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="300px"></asp:TextBox>
+                                MaxLength="40" Width="300px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="Informe da descrição" 
                                 ValidationGroup="salvar" CssClass="validacao" Enabled="False">*</asp:RequiredFieldValidator>
@@ -39,7 +39,8 @@
                             * Evento:
                         </td>
                         <td style="width: 400px" colspan="3">   
-                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o evento">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlEvento" ErrorMessage="Informe o evento" 
@@ -51,14 +52,16 @@
                             Instrutor:
                         </td>
                         <td style="width: 400px" colspan="3">                            
-                            <asp:DropDownList ID="ddlInstrutor" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlInstrutor" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o instrutor">
                             </asp:DropDownList>                         
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">* Dt. Início:</td>
                         <td>
-                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Selecione a data de início" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
@@ -69,7 +72,8 @@
                         </td>
                         <td style="width: 140px">* Dt. Fim:</td>
                         <td>
-                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
+                            <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Selecione a data de fim" ></asp:TextBox>
                             <asp:CalendarExtender
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
@@ -83,21 +87,24 @@
                         <td style="width: 140px">Hora Início:</td>
                         <td>
                             <asp:TextBox ID="txtHoraInicio" runat="server" CssClass="inputbox" 
-                                Width="80px" ></asp:TextBox>                          
+                                Width="80px" ToolTip="Selecione a hora de início" ></asp:TextBox>                          
                         </td>
                         <td style="width: 140px">Hora Fim:</td>
                         <td>
-                            <asp:TextBox ID="txtHoraFim" runat="server" CssClass="inputbox" Width="80px" ></asp:TextBox>                          
+                            <asp:TextBox ID="txtHoraFim" runat="server" CssClass="inputbox" Width="80px" 
+                                ToolTip="Selecione a hora de fim" ></asp:TextBox>                          
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 140px">Sala:</td>
                         <td>
-                            <asp:TextBox ID="txtSala" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>                          
+                            <asp:TextBox ID="txtSala" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Informe a sala" ></asp:TextBox>                          
                         </td>
                         <td style="width: 140px">* Nro. Máximo:</td>
                         <td style="width: 400px" colspan="3"> 
-                            <asp:TextBox ID="txtNroMax" runat="server" CssClass="inputbox" Width="80px"></asp:TextBox>
+                            <asp:TextBox ID="txtNroMax" runat="server" CssClass="inputbox" Width="80px" 
+                                ToolTip="Informe o número máximo"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtNroMax" CssClass="validacao" 
                                 ErrorMessage="Informe o número máximo de alunos" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -107,7 +114,7 @@
                         <td style="width: 140px">Dias da Semana:</td>
                         <td colspan="3">
                             <asp:TextBox ID="txtDiaSemana" runat="server" CssClass="inputbox" 
-                                Width="300px" ></asp:TextBox>                          
+                                Width="300px" ToolTip="Informe os dias da semana" ></asp:TextBox>                          
                         </td>
                     </tr>
                 </table>
@@ -117,13 +124,15 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />                             
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />                             
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />  
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />  
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnParticipantes" runat="server" Text="Participantes" 
-                                CssClass="btn" onclick="btnParticipantes_Click" /> 
+                                CssClass="btn" onclick="btnParticipantes_Click" 
+                                ToolTip="Abre a página para incluir os participantes" /> 
                         </td>
                     </tr>
                 </table>                                                

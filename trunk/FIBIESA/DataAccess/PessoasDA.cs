@@ -51,12 +51,13 @@ namespace DataAccess
                 pes.CategoriaId = Convert.ToInt32(dr["CATEGORIAID"].ToString());
                 pes.EnvEmail = bool.Parse(dr["ENVEMAIL"].ToString());
                 pes.RefNome = dr["REFNOME"].ToString();
-                pes.RefTelefone = utils.ComparaShortComNull(dr["REFTELEFONE"].ToString());
+                pes.RefTelefone = dr["REFTELEFONE"].ToString();
                 pes.RefDDD = utils.ComparaShortComNull(dr["REFDDD"].ToString());
                 pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
                 pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
                 pes.BairroProf = utils.ComparaIntComZero(dr["BAIRROPROFID"].ToString());
                 pes.Sexo = dr["SEXO"].ToString();
+                pes.TipoAssociado = dr["TIPOASSOCIADO"].ToString();
 
                 
                 CidadesDA cidDA = new CidadesDA();
@@ -138,7 +139,7 @@ namespace DataAccess
 
         public int InserirDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[33];
+            SqlParameter[] paramsToSP = new SqlParameter[34];
                         
             paramsToSP[0] = new SqlParameter("@nome", pes.Nome);
             paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
@@ -173,6 +174,7 @@ namespace DataAccess
             paramsToSP[30] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[31] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[32] = new SqlParameter("@sexo", pes.Sexo);
+            paramsToSP[33] = new SqlParameter("@tipoassociado", pes.TipoAssociado);
 
             try
             {
@@ -192,7 +194,7 @@ namespace DataAccess
 
         public bool EditarDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[34];
+            SqlParameter[] paramsToSP = new SqlParameter[35];
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
             paramsToSP[1] = new SqlParameter("@codigo", pes.Codigo);
@@ -228,6 +230,7 @@ namespace DataAccess
             paramsToSP[31] = new SqlParameter("@status", pes.Status);
             paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
+            paramsToSP[34] = new SqlParameter("@tipoassociado", pes.TipoAssociado);
 
             try
             {

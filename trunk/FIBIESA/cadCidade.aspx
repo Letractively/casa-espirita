@@ -27,7 +27,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="70" Width="335px"></asp:TextBox>
+                                MaxLength="70" Width="335px" ToolTip="Informe a descrição da cidade"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
@@ -36,10 +36,11 @@
                     <tr>
                         <td style="width: 140px">
                             *
-                            Estado:
+                            UF:
                         </td>
                         <td style="width: 400px">   
-                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione a UF da cidade">
                             </asp:DropDownList>                       
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlEstado" ErrorMessage="*Preenchimento Obrigatório" 
@@ -53,10 +54,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />
                         </td>
                     </tr>
                 </table>               

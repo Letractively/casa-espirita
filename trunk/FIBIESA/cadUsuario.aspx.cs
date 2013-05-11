@@ -177,7 +177,7 @@ namespace Admin
             usuarios.Email = txtEmail.Text;
             usuarios.Login = txtLogin.Text;
             usuarios.Senha = txtSenha.Text;
-            usuarios.Status = ddlStatus.SelectedItem.Text;
+            usuarios.Status = ddlStatus.SelectedValue;
             usuarios.DtInicio = Convert.ToDateTime(txtDtInicio.Text);
             usuarios.DtFim = Convert.ToDateTime(txtDtFim.Text);
             usuarios.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);

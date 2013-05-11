@@ -15,7 +15,7 @@
                <table>
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcInstituicao" runat="server" ActiveTabIndex="1">
+                            <asp:TabContainer ID="tcInstituicao" runat="server" ActiveTabIndex="0">
                                 <asp:TabPanel ID="tpGeral" runat="server" HeaderText="Geral" >
                                     <ContentTemplate>
                                         <table>
@@ -24,7 +24,8 @@
                                                     * Código:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" 
+                                                        ToolTip="Informe o código da instituição"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCodigo"
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
@@ -35,7 +36,7 @@
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtRazao" runat="server" CssClass="inputbox" MaxLength="70" 
-                                                        Width="335px"></asp:TextBox>
+                                                        Width="335px" ToolTip="Informe a razão social"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtRazao"
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
@@ -46,7 +47,7 @@
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtNomeFantasia" runat="server" CssClass="inputbox" MaxLength="70" 
-                                                        Width="335px"></asp:TextBox>
+                                                        Width="335px" ToolTip="Informe o nome fantasia"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtNomeFantasia"
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
@@ -56,7 +57,8 @@
                                                     * CNPJ:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCnpj" runat="server" CssClass="inputbox" MaxLength="14"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCnpj" runat="server" CssClass="inputbox" MaxLength="14" 
+                                                        ToolTip="Informe o CNPJ"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCnpj"
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
@@ -67,7 +69,7 @@
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
-                                                        Width="335px"></asp:TextBox>
+                                                        Width="335px" ToolTip="Informe o e-mail"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail"
                                                         ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                                 </td>
@@ -78,7 +80,7 @@
                                                 </td>
                                                 <td style="width: 100px">
                                                     <asp:TextBox ID="txttelefone" runat="server" CssClass="inputbox" MaxLength="20" 
-                                                        Width="100px"></asp:TextBox>   
+                                                        Width="100px" ToolTip="Informe o telefone"></asp:TextBox>   
                                                 </td> 
                                             </tr>                                            
                                         </table>
@@ -92,7 +94,7 @@
                                                    CEP:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" 
+                                                    <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" ToolTip="Informe o CEP" 
                                                         Width="110px"></asp:TextBox>                                                  
                                                 </td>
                                             </tr>
@@ -101,7 +103,7 @@
                                                     UF:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" 
+                                                    <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" ToolTip="Selecione a UF"
                                                         onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -110,7 +112,7 @@
                                                     Cidade:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist" 
+                                                    <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist"  ToolTip="Selecione a cidade"
                                                         onselectedindexchanged="ddlCidades_SelectedIndexChanged" 
                                                         AutoPostBack="True"></asp:DropDownList>
                                                 </td>
@@ -120,7 +122,7 @@
                                                     Bairro:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ></asp:DropDownList>                                                    
+                                                    <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ToolTip="Informe o bairro"></asp:DropDownList>                                                    
                                                 </td>
                                             </tr>
                                             <tr>
@@ -128,7 +130,7 @@
                                                     Endereço:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtEndereco" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox>                                       
+                                                    <asp:TextBox ID="txtEndereco" runat="server" CssClass="inputbox" MaxLength="70" Width="335px" ToolTip="Informe o endereço"></asp:TextBox>                                       
                                                 </td>
                                             </tr>
                                             <tr>
@@ -136,7 +138,7 @@
                                                     Número:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox" MaxLength="20"></asp:TextBox>                                                 
+                                                    <asp:TextBox ID="txtNumero" runat="server" CssClass="inputbox" MaxLength="20" ToolTip="Informe o número"></asp:TextBox>                                                 
                                                 </td>
                                             </tr>
                                             <tr>
@@ -144,7 +146,7 @@
                                                     Complemento:
                                                 </td>
                                                 <td style="width: 500px">
-                                                    <asp:TextBox ID="txtComplemento" runat="server" CssClass="inputbox" MaxLength="40"></asp:TextBox>
+                                                    <asp:TextBox ID="txtComplemento" runat="server" CssClass="inputbox" MaxLength="40" ToolTip="Informe o complemento"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -181,10 +183,11 @@
                             
                         </td>
                         <td style="width: 400px">
-                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" OnClick="btnVoltar_Click" />
+                            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
+                                OnClick="btnVoltar_Click" ToolTip="Volta para página de consulta" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" OnClick="btnSalvar_Click"
-                                ValidationGroup="salvar" />
+                                ValidationGroup="salvar" ToolTip="Valida e salva as informações" />
                         </td>
                     </tr>
                 </table>
