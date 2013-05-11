@@ -21,7 +21,7 @@
         <div id="divRelatorio" runat="server">
             <rsweb:ReportViewer ID="rptDoacoes" runat="server" Height="570px" 
                 Width="800px" ShowRefreshButton="False" ShowPromptAreaButton="False" 
-                ShowDocumentMapButton="False" ShowFindControls="False" 
+                ShowDocumentMapButton="False" ShowFindControls="False" ShowPrintButton="true"
                 Font-Names="Arial" Font-Size="8pt" >
                 <LocalReport reportpath="Relatorios\rptDoacoes.rdlc">
                 </LocalReport>
