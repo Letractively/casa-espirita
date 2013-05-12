@@ -22,6 +22,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// updPrincipal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPrincipal;
+        
+        /// <summary>
         /// txtCliente control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Button btnPesCliente;
         
         /// <summary>
+        /// lblDesCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDesCliente;
+        
+        /// <summary>
         /// txtItem control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPesItem;
+        
+        /// <summary>
+        /// lblDesItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDesItem;
         
         /// <summary>
         /// txtDataIni control.
@@ -119,6 +146,24 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRelatorio;
+        
+        /// <summary>
+        /// hfIdCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdCliente;
+        
+        /// <summary>
+        /// hfIdItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdItem;
         
         /// <summary>
         /// Master property.
