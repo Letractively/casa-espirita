@@ -118,5 +118,12 @@ namespace DataObjects
             get { return _cidades; }
             set { _cidades = value; }
         }
+
+        private Int32 _ranking;
+        public Int32 Ranking
+        {
+            get { return _ranking; }
+            set { _ranking = value; }
+        }
     }
 }

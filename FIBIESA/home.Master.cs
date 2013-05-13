@@ -59,30 +59,30 @@ namespace FIBIESA
         //habilita o menu ou nao
         private bool IsAllMenuItemsVisible = true;
 
-        protected void rptControl_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
+        //protected void rptControl_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
 
-            if (!IsAllMenuItemsVisible)
-            {
-                foreach (RepeaterItem item in rptControl.Items)
-                {
-                    if (item.ItemType == ListItemType.Item || item.ItemType ==
-                                                                                      ListItemType.AlternatingItem)
-                    {
-                        SiteMapNode thisMapNode = (SiteMapNode)e.Item.DataItem;
-                        if (thisMapNode != null)
-                        {
-                            if (thisMapNode["visibility"] != null &&
-                               thisMapNode["visibility"].ToLower().Equals(bool.FalseString.ToLower()))
-                            {
-                                rptControl.Controls.Remove(e.Item);
-                            }
-                        }
-                    }
+        //    if (!IsAllMenuItemsVisible)
+        //    {
+        //        foreach (RepeaterItem item in rptControl.Items)
+        //        {
+        //            if (item.ItemType == ListItemType.Item || item.ItemType ==
+        //                                                                              ListItemType.AlternatingItem)
+        //            {
+        //                SiteMapNode thisMapNode = (SiteMapNode)e.Item.DataItem;
+        //                if (thisMapNode != null)
+        //                {
+        //                    if (thisMapNode["visibility"] != null &&
+        //                       thisMapNode["visibility"].ToLower().Equals(bool.FalseString.ToLower()))
+        //                    {
+        //                        rptControl.Controls.Remove(e.Item);
+        //                    }
+        //                }
+        //            }
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["FromPage"] = "About";
@@ -118,7 +118,7 @@ namespace FIBIESA
             }
 
 
-            rptControl.DataBind();
+            //rptControl.DataBind();
 
 
             if (!IsPostBack)

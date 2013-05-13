@@ -102,6 +102,13 @@ namespace Admin
             repPermissao.DataBind();
  
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -137,13 +144,21 @@ namespace Admin
                 if (permissao.CategoriaId > 0 && permissao.FormularioId > 0)
                 {
                     if (permissao.Id > 0)
-                        perBL.EditarBL(permissao);
+                    {
+                        if (perBL.EditarBL(permissao))
+                            ExibirMensagem("Permissões atualizadas com sucesso !");
+                        else
+                            ExibirMensagem("Não foi possível gravar as permissões. Revise as informações.");
+                    }
                     else
-                        perBL.InserirBL(permissao);
+                    {
+                        if (perBL.InserirBL(permissao))
+                            ExibirMensagem("Permissões gravadas com sucesso !");
+                        else
+                            ExibirMensagem("Não foi possível gravar as permissões. Revise as informações.");
+                    }
                 }
-            }
-            
-            Response.Redirect("~/viewPermissao.aspx");
+            }      
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

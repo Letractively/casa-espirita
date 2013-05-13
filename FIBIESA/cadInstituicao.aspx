@@ -75,6 +75,14 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td style="width: 140px">
+                                                    Ranking:
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:TextBox ID="txtRanking" runat="server" CssClass="inputbox" MaxLength="40" ToolTip="Informe o ranking"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="width: 80px">
                                                     Telefone:
                                                 </td>
@@ -88,7 +96,7 @@
                                 </asp:TabPanel>
                                 <asp:TabPanel ID="tpEndereco" runat="server" HeaderText="Endereço">
                                     <ContentTemplate>
-                                        <table>
+                                        <table>                                             
                                             <tr>
                                                 <td style="width: 140px">
                                                    CEP:

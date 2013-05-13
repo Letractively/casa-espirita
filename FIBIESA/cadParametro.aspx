@@ -1,137 +1,124 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
     CodeBehind="cadParametro.aspx.cs" Inherits="Admin.cadParametro" %>
-     <%@ MasterType VirtualPath="~/home.Master" %>
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
+<%@ MasterType VirtualPath="~/home.Master" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">  
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="content">
         <div class="container">
             <div class="conthead">
-                <h2>Parâmetros do Sistema</h2>
+                <h2>
+                    Parâmetros do Sistema</h2>
             </div>
             <div class="contentbox">
-                <table Width="100%">
+                <table>
                     <tr>
-                        <td>                            
-                            <asp:TabContainer ID="tcParametros" runat="server" ActiveTabIndex="0" >
-                                <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
+                        <td>
+                            <asp:TabContainer ID="tcParametros" runat="server" ActiveTabIndex="0">
+                                <asp:TabPanel ID="tpBiblioteca" runat="server" HeaderText="Módulo Biblioteca">
                                     <ContentTemplate>
                                         <table>
-                                            
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblQtdMaxEmp" runat="server">
+                                                Quantidade máxima de exemplares emprestado: 
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtQtdMaxEmp" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblQtdMaxRen" runat="server">
+                                                Quantidade máxima de renovações:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtQtdMaxRen" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblTempoMinRetirada" runat="server">
+                                                Tempo mínimo para retirada inicial de livros (dias): 
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtTempoMinRetirada" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblQtdMinRetirada" runat="server">
+                                                Quantidade mínima para retirada inicial de livros:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtQtdMinRetirada" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </ContentTemplate>
+                                </asp:TabPanel>
+                                <asp:TabPanel ID="tpFinanceiro" runat="server" HeaderText="Módulo Financeiro">
+                                    <ContentTemplate>
+                                        <table>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblValorMulta" runat="server">
+                                                Valor da multa por atraso nos empréstimos de livros:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtValorMulta" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblPerLucro" runat="server">
+                                                Percentual de lucro na venda: 
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtPerLucro" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblDesconto" runat="server">
+                                                Valor máximo de desconto:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtDesconto" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
                                 <asp:TabPanel runat="server" HeaderText="Módulo Eventos" ID="tpEvento">
-                                <ContentTemplate>
-                                    <table>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                            <asp:Label ID="lblCategoria" runat="server">
+                                    <ContentTemplate>
+                                        <table>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblCategoria" runat="server">
                                             Categoria definida como instrutor : 
-                                            </asp:Label>
-                                        </td>
-                                        <td style="width: 140px">
-                                            <asp:DropDownList ID="ddlCategoria" CssClass="dropdownlist" runat="server">
-                                            </asp:DropDownList>
-                                        </td>
-                                        </tr>
-                                    </table>
-                                </ContentTemplate>
-                                </asp:TabPanel>
-                                <asp:TabPanel ID="tpBiblioteca" runat="server" HeaderText="Módulo Biblioteca">
-                                <ContentTemplate>
-                                    <table>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblQtdMaxEmp" runat="server" >
-                                                Quantidade máxima de exemplares emprestado: 
-                                                </asp:Label>                                                
-                                             </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtQtdMaxEmp" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblQtdMaxRen" runat="server" >
-                                                Quantidade máxima de renovações:
-                                                </asp:Label>
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtQtdMaxRen" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:label ID="lblTempoMinRetirada" runat="server">
-                                                Tempo mínimo para retirada inicial de livros (dias): 
-                                                </asp:label>                                                 
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtTempoMinRetirada" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblQtdMinRetirada" runat="server">
-                                                Quantidade mínima para retirada inicial de livros:
-                                                </asp:Label>                                             
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtQtdMinRetirada" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ContentTemplate>
-                                </asp:TabPanel>
-                                <asp:TabPanel ID="tpEstoque" runat="server" HeaderText="Módulo Estoque">
-                                <ContentTemplate>
-                                    <table>
-                                    </table>
-                                </ContentTemplate>
-                                </asp:TabPanel>
-                                <asp:TabPanel ID="tpFinanceiro" runat="server" HeaderText="Módulo Financeiro">
-                                <ContentTemplate>
-                                    <table>
-                                        <tr>                                            
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblValorMulta" runat="server">
-                                                Valor da multa por atraso nos empréstimos de livros:
-                                                </asp:Label>                                             
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtValorMulta" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblPerLucro" runat="server">
-                                                Percentual de lucro na venda: 
-                                                </asp:Label>
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtPerLucro" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 400px"> 
-                                                <asp:Label ID="lblDesconto" runat="server">
-                                                Valor máximo de desconto:
-                                                </asp:Label>                                             
-                                            </td>
-                                            <td style="width: 140px">
-                                                <asp:TextBox ID="txtDesconto" CssClass="inputbox" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>                                        
-                                    </table>
-                                </ContentTemplate>
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:DropDownList ID="ddlCategoria" CssClass="dropdownlist" runat="server">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </ContentTemplate>
                                 </asp:TabPanel>
                             </asp:TabContainer>
-                          
                         </td>
-                    </tr>               
+                    </tr>
                 </table>
                 <table>
                     <tr>
@@ -139,18 +126,19 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
-                                onclick="btnVoltar_Click" />
+                                OnClick="btnVoltar_Click" ToolTip="Volta para página principal" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" CssClass="btn" Text="Salvar" 
-                                onclick="btnSalvar_Click" />
+                                OnClick="btnSalvar_Click" ToolTip="Valida e salva as informações" />
                         </td>
                     </tr>
-                </table>                
+                </table>
             </div>
-            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
-                </asp:ScriptManager>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+                EnableScriptLocalization="true">
+            </asp:ScriptManager>
         </div>
         <div class="status">
         </div>
-    </div>    
+    </div>
 </asp:Content>

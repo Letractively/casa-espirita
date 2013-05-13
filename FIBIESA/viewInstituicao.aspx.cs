@@ -36,12 +36,11 @@ namespace FIBIESA
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("RAZAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("EMAIL", Type.GetType("System.String"));
-            DataColumn coluna5 = new DataColumn("CNPJ", Type.GetType("System.String"));
-            DataColumn coluna6 = new DataColumn("CIDADEID", Type.GetType("System.Int32"));
-            DataColumn coluna7 = new DataColumn("CEP", Type.GetType("System.String"));
-            DataColumn coluna8 = new DataColumn("ENDERECO", Type.GetType("System.String"));
-            DataColumn coluna9 = new DataColumn("NUMERO", Type.GetType("System.String"));
-            DataColumn coluna10 = new DataColumn("COMPLEMENTO", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("CNPJ", Type.GetType("System.String"));           
+            DataColumn coluna6 = new DataColumn("CEP", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("ENDERECO", Type.GetType("System.String"));
+            DataColumn coluna8 = new DataColumn("NUMERO", Type.GetType("System.String"));
+            DataColumn coluna9 = new DataColumn("COMPLEMENTO", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -52,8 +51,7 @@ namespace FIBIESA
             tabela.Columns.Add(coluna7);
             tabela.Columns.Add(coluna8);
             tabela.Columns.Add(coluna9);
-            tabela.Columns.Add(coluna10);
-
+            
             InstituicoesBL insBL = new InstituicoesBL();
             List<Instituicoes> instituicoes;
 
@@ -68,7 +66,6 @@ namespace FIBIESA
                 linha["RAZAO"] = ins.Razao;
                 linha["EMAIL"] = ins.Email;
                 linha["CNPJ"] = ins.Cnpj;
-                linha["CIDADEID"] = ins.CidadeId;
                 linha["CEP"] = ins.Cep;
                 linha["ENDERECO"] = ins.Endereco;
                 linha["NUMERO"] = ins.Numero;
