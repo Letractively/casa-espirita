@@ -43,7 +43,10 @@ namespace FIBIESA
             Eventos eventos = new Eventos();
             List<Eventos> lEventos;
 
-            lEventos = eventosBL.PesquisarBL();
+            if (this.txtCurso.Text != string.Empty)
+                lEventos = eventosBL.PesquisarBL("CODIGO", this.txtCurso.Text);
+            else
+                lEventos = eventosBL.PesquisarBL();
 
             foreach (Eventos eventoItem in lEventos)
             {
@@ -58,7 +61,10 @@ namespace FIBIESA
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Evento não encontrado.');", true);
+            }
 
             Session["objBLPesquisa"] = eventosBL;
             Session["objPesquisa"] = eventos;
@@ -76,7 +82,10 @@ namespace FIBIESA
             Turmas turmas = new Turmas();
             List<Turmas> lTurmas;
 
-            lTurmas = turmasBL.PesquisarBL();
+            if (this.txtTurma.Text != string.Empty)
+                lTurmas = turmasBL.PesquisarBL("CODIGO", this.txtTurma.Text);
+            else
+                lTurmas = turmasBL.PesquisarBL();
 
             foreach (Turmas turmasItem in lTurmas)
             {
@@ -91,7 +100,10 @@ namespace FIBIESA
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Turma não encontrado.');", true);
+            }
 
             Session["objBLPesquisa"] = turmasBL;
             Session["objPesquisa"] = turmas;
@@ -106,9 +118,47 @@ namespace FIBIESA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (this.txtCurso.Text != string.Empty)
+            {
+                carregaCurso();
+            }
+            if (this.txtTurma.Text != string.Empty)
+            {
+                carregaTurma();
+            }
         }
 
+        public void carregaCurso()
+        {
+            pesquisaEvento("CODIGO");
+            if (Session["tabelaPesquisa"] != null)
+            {
+                dtGeral = (DataTable)Session["tabelaPesquisa"];
+                this.lblDesCurso.Text = dtGeral.Rows[0].ItemArray[2].ToString();
+                this.hfIdCurso.Value = dtGeral.Rows[0].ItemArray[0].ToString();
+            }
+            else
+            {
+                this.lblDesCurso.Text = string.Empty;
+                this.hfIdCurso.Value = string.Empty;
+            }
+        }
+
+        public void carregaTurma()
+        {
+            pesquisaTurma("CODIGO");
+            if (Session["tabelaPesquisa"] != null)
+            {
+                dtGeral = (DataTable)Session["tabelaPesquisa"];
+                this.lblDesTurma.Text = dtGeral.Rows[0].ItemArray[2].ToString();
+                this.hfIdTurma.Value = dtGeral.Rows[0].ItemArray[0].ToString();
+            }
+            else
+            {
+                this.lblDesTurma.Text = string.Empty;
+                this.hfIdTurma.Value = string.Empty;
+            }
+        }
 
         protected void btnPesCurso_Click(object sender, EventArgs e)
         {
@@ -124,18 +174,18 @@ namespace FIBIESA
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             TurmasBL turmasBL = new TurmasBL();
 
-            Session["ldsRel"] = turmasBL.PesquisarDataset(txtCurso.Text, txtTurma.Text, txtDataIni.Text, txtDataIniF.Text, txtDataFimI.Text, txtDataFim.Text,ckbTurmasAbertos.Checked).Tables[0];
-            if (Session["ldsRel"] != null)
+            Session["ldsRel"] = turmasBL.PesquisarDataset(hfIdCurso.Value, hfIdTurma.Value, txtDataIni.Text, txtDataIniF.Text, txtDataFimI.Text, txtDataFim.Text, ckbTurmasAbertos.Checked).Tables[0];
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelTurmas.aspx?Eventos=" + txtCurso.Text + "','',600,915);", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
         }
     }
