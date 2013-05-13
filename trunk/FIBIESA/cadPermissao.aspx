@@ -24,7 +24,8 @@
                            <strong>Módulo:</strong>     
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlModulo" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlModulo" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o Módulo">
                                 <asp:ListItem Value="F">Financeiro</asp:ListItem>
                                 <asp:ListItem Value="B">Biblioteca</asp:ListItem>
                                 <asp:ListItem Value="E">Estoque</asp:ListItem>
@@ -34,7 +35,8 @@
                             </asp:DropDownList>
                             &nbsp;&nbsp;
                             <asp:Button ID="btnBuscar" runat="server" CssClass="btn" Text="Buscar" 
-                                onclick="btnBuscar_Click" />
+                                onclick="btnBuscar_Click" 
+                                ToolTip="Pesquisar páginas do módulo selecionado" />
                         </td>
                     </tr>
                     <tr>
@@ -77,10 +79,10 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" Text="Voltar" CssClass="btn" runat="server" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para página principal" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" Text="Salvar" CssClass="btn" runat="server" 
-                                onclick="btnSalvar_Click" />                           
+                                onclick="btnSalvar_Click" ToolTip="Valida e salva as informações" />                           
                         </td>
                     </tr>
                 </table>

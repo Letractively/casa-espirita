@@ -37,6 +37,7 @@ namespace FIBIESA
                 txtNumero.Text = ltIns.Numero.ToString();
                 txtComplemento.Text = ltIns.Complemento;               
                 txttelefone.Text = ltIns.telefone;
+                txtRanking.Text = ltIns.Ranking.ToString();
 
                 if (ltIns.Cidades != null)
                 {
@@ -202,7 +203,13 @@ namespace FIBIESA
             txtEndereco.Text = "";
             txtNomeFantasia.Text = "";
             txtRazao.Text = "";
-            txtNumero.Text = "";            
+            txtNumero.Text = "";
+            txtEmail.Text = "";
+            ddlUF.SelectedIndex = -1;
+            ddlCidades.SelectedIndex = -1;
+            ddlBairro.SelectedIndex = -1;
+            txttelefone.Text = "";
+            txtRanking.Text = "";
         }
         #endregion
         
@@ -251,6 +258,7 @@ namespace FIBIESA
             instituicoes.Numero = txtNumero.Text;
             instituicoes.Complemento = txtComplemento.Text;            
             instituicoes.telefone = txttelefone.Text;
+            instituicoes.Ranking = utils.ComparaIntComZero(txtRanking.Text);
 
             int idIns = 0;
 

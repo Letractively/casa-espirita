@@ -19,7 +19,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtUf" runat="server" CssClass="inputbox" MaxLength="2" 
-                                Width="47px" Columns="2"></asp:TextBox>
+                                Width="47px" Columns="2" ToolTip="Informe a UF"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtUf" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -32,7 +32,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" MaxLength="70" 
-                                Width="335px"></asp:TextBox>
+                                Width="335px" ToolTip="Informe a descrição da UF"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -45,9 +45,10 @@
                         </td>
                         <td style ="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="bntVoltar_Click" />&nbsp;&nbsp;&nbsp;
+                                onclick="bntVoltar_Click" ToolTip="Volta para página de consulta" />&nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="bntSalvar_Click" ValidationGroup="salvar" />                            
+                                onclick="bntSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />                            
                         </td>                      
                     </tr>
                 </table>                

@@ -18,10 +18,12 @@
                             <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" ToolTip="Pesquisar por"></asp:TextBox>
                         </td>
                         <td>
-                            <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" OnClick="btnBusca_Click" />
+                            <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                                OnClick="btnBusca_Click" ToolTip="Pesquisar Categorias" />
                         </td>
                         <td>
-                            <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" OnClick="btnInserir_Click" />
+                            <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
+                                OnClick="btnInserir_Click" ToolTip="Inserir uma nova categoria" />
                         </td>
                     </tr>
                 </table>

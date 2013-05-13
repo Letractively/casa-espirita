@@ -124,24 +124,24 @@ namespace FIBIESA
 
             List<ItensEstoque> itens;
 
-            if (txtItem.Text != string.Empty)
-            {
-                itens = itemBl.PesquisarBL(lCampoPesquisa, txtItem.Text);
-            }
-            else
-            {
-                itens = itemBl.PesquisarBL();
-            }
-            foreach (ItensEstoque pes in itens)
-            {
-                DataRow linha = dt.NewRow();
+            //if (txtItem.Text != string.Empty)
+            //{
+            //    itens = itemBl.PesquisarBL(lCampoPesquisa, txtItem.Text);
+            //}
+            //else
+            //{
+            //    itens = itemBl.PesquisarBL();
+            //}
+            //foreach (ItensEstoque pes in itens)
+            //{
+            //    DataRow linha = dt.NewRow();
 
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Obra.Codigo;
-                linha["DESCRICAO"] = pes.Obra.Titulo;
+            //    linha["ID"] = pes.Id;
+            //    linha["CODIGO"] = pes.Obra.Codigo;
+            //    linha["DESCRICAO"] = pes.Obra.Titulo;
 
-                dt.Rows.Add(linha);
-            }
+            //    dt.Rows.Add(linha);
+            //}
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
@@ -171,27 +171,27 @@ namespace FIBIESA
         {
             VendaItensBL vendaItemBL = new VendaItensBL();
 
-            if (rbMaisVendidos.Checked)
-            {
-                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, "desc").Tables[0];
-            }
-            else if (rbMenosVendidos.Checked)
-            {
-                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, "asc").Tables[0];
-            }
-            else
-            {
-                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, string.Empty).Tables[0];
-            }
+            //if (rbMaisVendidos.Checked)
+            //{
+            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, "desc").Tables[0];
+            //}
+            //else if (rbMenosVendidos.Checked)
+            //{
+            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, "asc").Tables[0];
+            //}
+            //else
+            //{
+            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(hfIdCliente.Value, hfIdItem.Value, txtDataIni.Text, txtDataFim.Text, string.Empty).Tables[0];
+            //}
 
-            if (Session["ldsRel"] != null)
-            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,1125);", true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
-            }
+            //if (Session["ldsRel"] != null)
+            //{                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,1125);", true);
+            //}
+            //else
+            //{
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+            //}
 
 
             //emp. txtDataRetiradaIni.Text

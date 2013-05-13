@@ -19,7 +19,7 @@
                                 ToolTip="Informe o código do banco" Width="100px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>

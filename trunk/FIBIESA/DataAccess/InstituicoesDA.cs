@@ -37,6 +37,7 @@ namespace DataAccess
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
                 ins.DDD = dr["DDD"].ToString();
                 ins.telefone = dr["telefone"].ToString();
+                ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
@@ -74,7 +75,7 @@ namespace DataAccess
 
         public bool InserirDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[13];
+            SqlParameter[] paramsToSP = new SqlParameter[14];
 
             paramsToSP[0] = new SqlParameter("@codigo", ins.Codigo);
             paramsToSP[1] = new SqlParameter("@razao", ins.Razao);
@@ -89,15 +90,23 @@ namespace DataAccess
             paramsToSP[10] = new SqlParameter("@complemento", ins.Complemento);
             paramsToSP[11] = new SqlParameter("@DDD", ins.DDD);
             paramsToSP[12] = new SqlParameter("@telefone", ins.telefone);
+            paramsToSP[13] = new SqlParameter("@ranking", ins.Ranking);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[14];
+            SqlParameter[] paramsToSP = new SqlParameter[15];
 
             paramsToSP[0] = new SqlParameter("@id", ins.Id);
             paramsToSP[1] = new SqlParameter("@codigo", ins.Codigo);
@@ -113,10 +122,18 @@ namespace DataAccess
             paramsToSP[11] = new SqlParameter("@complemento", ins.Complemento);
             paramsToSP[12] = new SqlParameter("@DDD", ins.DDD);
             paramsToSP[13] = new SqlParameter("@telefone", ins.telefone);
+            paramsToSP[14] = new SqlParameter("@ranking", ins.Ranking);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Instituicoes ins)
@@ -138,9 +155,8 @@ namespace DataAccess
             List<Instituicoes> instituicoes = CarregarObjInstituicoes(dr);
 
             return instituicoes;
-
         }
-
+               
         public List<Instituicoes> PesquisarDA(string campo, string valor)
         {
             string consulta;

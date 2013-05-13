@@ -94,6 +94,10 @@
         <siteMapNode url="viewContasReceber.aspx" title="Contas a Receber"  description="">
           <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber"  description="" />
         </siteMapNode>
-      <siteMapNode url="emissaoBloqBan.aspx" title="Emissão Bloqueto Bancário"  description=""/>
+        <siteMapNode url="emissaoBloqBan.aspx" title="Emissão Bloqueto Bancário"  description=""/>
+        <siteMapNode url="cadParametro.aspx" title="Cadastro de Parâmetros"  description=""/>
+        <siteMapNode url="viewObra.aspx" title="Obras"  description="">
+          <siteMapNode url="cadObra.aspx" title="Cadastro de Obras"  description="" />
+        </siteMapNode>
     </siteMapNode>
 </siteMap>
