@@ -22,7 +22,7 @@
                                     Codigo:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="110px" ></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="110px" AutoPostBack="true"></asp:TextBox>
                                     <asp:Button ID="btnPesCodigo" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesCodigo_Click"  />
                                     &nbsp;
@@ -34,7 +34,7 @@
                                     Associado:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" MaxLength="10" Width="110px"></asp:TextBox>
+                                    <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" MaxLength="10" Width="110px" AutoPostBack="true"></asp:TextBox>
                                     <asp:Button ID="btnPesAssociado" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesAssociado_Click"  />
                                         &nbsp;

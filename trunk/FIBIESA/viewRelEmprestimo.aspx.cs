@@ -43,7 +43,14 @@ namespace FIBIESA
                 {
                     dtGeral = (DataTable)Session["tabelaPesquisa"];
                     this.lblDesCodigo.Text = dtGeral.Rows[0].ItemArray[2].ToString();
+                    this.hfIdCodigo.Value = dtGeral.Rows[0].ItemArray[0].ToString();
                 }
+                else
+                {
+                    this.lblDesCodigo.Text = string.Empty;
+                    this.hfIdCodigo.Value = string.Empty;
+                }
+
 
             }
             if (this.txtAssociado.Text != string.Empty)
@@ -53,7 +60,12 @@ namespace FIBIESA
                 {
                     dtGeral = (DataTable)Session["tabelaPesquisa"];
                     this.lblDesAssociado.Text = dtGeral.Rows[0].ItemArray[2].ToString();
-
+                    this.hfIdAssociado.Value = dtGeral.Rows[0].ItemArray[0].ToString();
+                }
+                else
+                {
+                    this.lblDesAssociado.Text = string.Empty;
+                    this.hfIdAssociado.Value = string.Empty;
                 }
 
             }
@@ -89,8 +101,14 @@ namespace FIBIESA
             Obras obras = new Obras();
             List<Obras> lObras;
 
-            lObras = obrasBl.PesquisarBL();
-
+            if (this.txtCodigo.Text != string.Empty)
+            {
+                lObras = obrasBl.PesquisarBL("CODIGO",this.txtCodigo.Text);
+            }
+            else
+            {
+                lObras = obrasBl.PesquisarBL();
+            }
             foreach (Obras obraItem in lObras)
             {
                 DataRow linha = dt.NewRow();
@@ -104,7 +122,10 @@ namespace FIBIESA
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Obra não encontrada.');", true);
+            }
 
             Session["objBLPesquisa"] = obrasBl;
             Session["objPesquisa"] = obras;
@@ -144,7 +165,10 @@ namespace FIBIESA
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Cliente não encontrado.');", true);
+            }
 
             Session["objBLPesquisa"] = pesBL;
             Session["objPesquisa"] = pe;
@@ -159,39 +183,35 @@ namespace FIBIESA
             EmprestimosBL empBL = new EmprestimosBL();
             Emprestimos emp = new Emprestimos();
 
-            if (txtAssociado.Text != string.Empty)
+            if (hfIdAssociado.Value != string.Empty)
             {
-                emp.PessoaId = int.Parse(txtAssociado.Text);
-            }
-            if (txtCodigo.Text != string.Empty)
-            {
-                emp.ExemplarId = int.Parse(txtCodigo.Text);
+                emp.PessoaId = int.Parse(hfIdAssociado.Value);
             }
 
             string PaginaRelatorio = "";
 
             if (rbLivrosMais.Checked)
             {
-                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "desc").Tables[0];
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp,hfIdCodigo.Value, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "desc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Mais&";
             }
             else if (rbLivrosMenos.Checked)
             {
-                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "asc").Tables[0];
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, hfIdCodigo.Value, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "asc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Menos&";
             }
             else
             {
-                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString()).Tables[0];
+                Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(emp, hfIdCodigo.Value, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString()).Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimos.aspx?";
             }
-            if (Session["ldsRel"] != null)
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('" + PaginaRelatorio + "PessoaId=" + emp.PessoaId + "&ExemplarId=" + emp.ExemplarId + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,1125);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('" + PaginaRelatorio + "PessoaId=" + hfIdAssociado.Value + "&obraId=" + hfIdCodigo.Value + "&DataRetiradaIni=" + txtDataRetiradaIni.Text + "&DataRetiradaFim=" + txtDataRetiradaFin.Text + "&DevolucaoFim=" + txtDevolucaoFim.Text + "&DevolucaoIni=" + txtDevolucaoIni.Text + "&Status=" + ddlStatus.SelectedValue.ToString() + "','',600,1125);", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
 
