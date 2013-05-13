@@ -36,7 +36,7 @@ namespace DataAccess
                 obra.Titulo = dr["TITULO"].ToString();
 
                 venItEi.Obras = obra;
-               
+
                 vendaItens.Add(venItEi);
             }
 
@@ -55,7 +55,7 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@itemestoqueid", venItEi.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@desconto", venItEi.Desconto);
             paramsToSP[5] = new SqlParameter("@situacao", venItEi.Situacao);
-                        
+
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
 
             DataTable tabela = ds.Tables[0];
@@ -165,7 +165,60 @@ namespace DataAccess
                                                                                             ",titulo " +
                                                                                        " FROM VIEW_vendasItens " +
                                                                                        " WHERE vendaId = {0} ", id_venda));
-            
+
+
+            return ds;
+        }
+
+        public DataSet PesquisarDARelDataSet(string pessoaId, string itemId, string dtIni, string dtFim, string ord)
+        {
+            string query;
+
+            query = "SELECT  v.vendaId " +
+                    "    ,v.quantidade " +
+                    "    ,v.total " +
+                    "    ,v.itemEstoqueId " +
+                    "    ,v.titulo " +
+                    "    ,v.PessoaId " +
+                    "    ,v.Nome " +
+                    "    ,v.data " +
+                    "    ,(SELECT COUNT(VendaItens.id) FROM dbo.VendaItens " +
+                    "        INNER JOIN vendas ON " +
+                    "            vendas.id = VendaItens.vendaId " +
+                    "        WHERE 1 = 1 AND VendaItens.itemEstoqueId = V.itemEstoqueId ";
+            if ((dtIni != string.Empty) && (dtFim != string.Empty))
+            {
+                query += "  and vendas.DATA between CONVERT(datetime,'" + dtIni + "',103) and  CONVERT(datetime,'" + dtFim + "',103)	 ";
+            }
+            if (pessoaId != string.Empty)
+            {
+                query += " AND vendas.PessoaId = " + pessoaId;
+            }
+            query += ") qtde FROM dbo.VIEW_vendasItens v " +
+                    " WHERE 1 = 1 ";
+            if (pessoaId != string.Empty)
+            {
+                query += " AND PessoaId = " + pessoaId;
+            }
+
+            if (itemId != string.Empty)
+            {
+                query += " AND itemEstoqueId = " + itemId;
+            }
+
+            if ((dtIni != string.Empty) && (dtFim != string.Empty))
+            {
+                query += " AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)";
+            }
+
+            if (ord != string.Empty)
+            {
+                query += " ORDER BY qtde " + ord;
+            }
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, query);
+
 
             return ds;
         }
