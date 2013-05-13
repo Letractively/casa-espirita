@@ -11,7 +11,7 @@ using FG;
 
 namespace DataAccess
 {
-    public class ItensEstoqueDA
+    public class ItensEstoqueDA : BaseDA
     {
         Utils utils = new Utils();
         #region funcoes
@@ -204,6 +204,30 @@ namespace DataAccess
                     consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.TITULO LIKE '%{0}%' AND IE.STATUS = {1}", valor, status));
                     break;
                 default:
+                    break;
+            }
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString());
+
+            return CarregarObjItemEstoque(dr);
+        }
+
+        public List<ItensEstoque> PesquisarDA(string campo, string valor)
+        {
+            StringBuilder consulta = new StringBuilder("SELECT * FROM ITENSESTOQUE IE, OBRAS O ");
+
+            switch (campo.ToUpper())
+            {
+                case "CODIGO":
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.CODIGO = {0} ", utils.ComparaIntComZero(valor)));
+                    break;
+                case "TITULO":
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND O.TITULO LIKE '%{0}%' ", valor));
+                    break;
+                default:
+                    consulta.Append(string.Format("WHERE IE.OBRAID = O.ID AND ((O.TITULO LIKE '%{0}%') OR (O.CODIGO = {1})) ", valor, utils.ComparaIntComZero(valor)));
                     break;
             }
 

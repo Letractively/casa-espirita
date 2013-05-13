@@ -56,7 +56,7 @@ namespace DataAccess
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
         }
 
-        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
+        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             DataSet lDs;
             try
@@ -78,10 +78,10 @@ namespace DataAccess
                     sqlQuery += " AND pessoaid = " + instancia.PessoaId;
                 }
 
-                if (instancia.ExemplarId != 0)
+                if (obraId != string.Empty)
                 {
 
-                    sqlQuery += " AND exemplarid = " + instancia.ExemplarId;
+                    sqlQuery += " AND obraid = " + obraId;
                 }
 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
@@ -114,7 +114,7 @@ namespace DataAccess
 
         }
 
-        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
+        public DataSet PesquisarRelatorioDA(Emprestimos instancia,string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
         {
             DataSet lDs;
             try
@@ -131,10 +131,10 @@ namespace DataAccess
                     sqlQuery += " AND pessoaid = " + instancia.PessoaId;
                 }
 
-                if (instancia.ExemplarId != 0)
+                if (obraId != string.Empty)
                 {
 
-                    sqlQuery += " AND exemplarid = " + instancia.ExemplarId;
+                    sqlQuery += " AND obraid = " + obraId;
                 }
 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))

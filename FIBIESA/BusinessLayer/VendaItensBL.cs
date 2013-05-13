@@ -17,7 +17,7 @@ namespace BusinessLayer
             valido = valido && venIt.ItemEstoqueId > 0 && venIt.Quantidade > 0 && venIt.Valor > 0;
             return valido;
         }
-        
+
         public Int32 InserirBL(VendaItens venIt)
         {
             if (IsValid(venIt))
@@ -82,6 +82,13 @@ namespace BusinessLayer
             VendaItensDA venItDA = new VendaItensDA();
 
             return venItDA.PesquisarDADataSet(venda);
+        }
+
+        public DataSet PesquisarBLRelDataSet(string pessoaId, string itemId, string dtIni, string dtFim, string ord)
+        {
+            VendaItensDA venItDA = new VendaItensDA();
+
+            return venItDA.PesquisarDARelDataSet(pessoaId, itemId, dtIni, dtFim, ord);
         }
     }
 }
