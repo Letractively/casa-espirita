@@ -397,7 +397,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="pessoaid">
+    <ReportParameter Name="nome">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="titulo">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
@@ -642,7 +647,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Usuário: " + IIf(Parameters!pessoaid.Value = 0, "-",Parameters!pessoaid.Value)</Value>
+                  <Value>="Usuário: " + IIf(Parameters!nome.Value = "", "Todos",Parameters!nome.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -654,6 +659,35 @@
           <Height>0.6cm</Height>
           <Width>7.42155cm</Width>
           <ZIndex>8</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="txtExemplarId">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Exemplar: " + IIf(Parameters!titulo.Value = "", "Todos",Parameters!titulo.Value)</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>3.27913cm</Top>
+          <Left>13.93031cm</Left>
+          <Height>0.59958cm</Height>
+          <Width>6.87917cm</Width>
+          <ZIndex>9</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
