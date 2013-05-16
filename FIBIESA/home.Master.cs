@@ -51,8 +51,22 @@ namespace FIBIESA
             }
 
         }
+        //public void JQueryValor(string CssClass, Int16 Maximo, Int16 CasasDecimais)
+        //{
+        //    Page.ClientScript.RegisterClientScriptInclude("jQueryPriceFormat", Page.ResolveClientUrl("~/javascript/jquery.price_format.1.4.js"));
 
+        //    string script = " $(document).ready(function () { " +
+        //                   " $('." + CssClass + "').priceFormat({" +
+        //                   "     limit: " + Maximo.ToString() + "," +
+        //                   "     centsLimit: " + CasasDecimais.ToString() + "," +
+        //                   "     prefix: ''," +
+        //                   "     centsSeparator: ','," +
+        //                   "     thousandsSeparator: '.'" +
+        //                   " });" +
+        //                "});";
 
+        //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "JQueryMask" + CssClass, script, true);
+        //}
 
         #endregion
 

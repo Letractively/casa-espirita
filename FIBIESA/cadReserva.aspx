@@ -84,12 +84,14 @@
                                     CellPadding="3" GridLines="None" OnRowDataBound="dtgHistorico_RowDataBound">
                                     <Columns>
                                         <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" HtmlEncode="False" >
+                                        <ItemStyle HorizontalAlign="Right" />
+                                        </asp:BoundField>
                                         <asp:BoundField DataField="TITULO" HeaderText="Título" />
                                         <asp:BoundField DataField="DATAEMPRESTIMO" HeaderText="Data Empréstimo" 
-                                            DataFormatString="{0:d}" />
+                                            DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="False" />
                                         <asp:BoundField DataField="DATAPREVISTAEMPRESTIMO" HeaderText="Data Devolução" 
-                                            DataFormatString="{0:d}" />
+                                            DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="False" />
                                         <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
                                         <asp:BoundField DataField="EMPRESTIMOID" HeaderText="EMPRESTIMOID" Visible="False" />
                                         <asp:BoundField DataField="EXEMPLARID" HeaderText="EXEMPLARID" Visible="False" />

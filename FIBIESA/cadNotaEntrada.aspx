@@ -78,7 +78,7 @@
                             Valor:
                         </td>
                         <td style="width: 200px">
-                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" Width="100px" 
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxValor" Width="100px" 
                                 MaxLength="10" AutoPostBack="True" ontextchanged="txtValor_TextChanged" 
                                 ToolTip="Informe o valor do item"></asp:TextBox>
                         </td>                    
@@ -86,7 +86,7 @@
                             Valor Venda:
                         </td>
                         <td style="width: 300px">
-                            <asp:TextBox ID="txtValorVenda" runat="server" CssClass="inputboxRight" 
+                            <asp:TextBox ID="txtValorVenda" runat="server" CssClass="inputboxValor" 
                                 Width="100px" MaxLength="10" ToolTip="Informe o valor de venda"></asp:TextBox>                            
                         </td> 
                         <td>

@@ -265,7 +265,7 @@ namespace DataAccess
             DataColumn coluna1 = new DataColumn("TOMBO", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("DATAEMPRESTIMO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("DATAEMPRESTIMO", Type.GetType("System.DateTime"));
             DataColumn coluna5 = new DataColumn("DATAPREVISTAEMPRESTIMO", Type.GetType("System.DateTime"));
             DataColumn coluna6 = new DataColumn("EMPRESTIMOID", Type.GetType("System.Int32"));
             DataColumn coluna7 = new DataColumn("EXEMPLARID", Type.GetType("System.Int32"));
