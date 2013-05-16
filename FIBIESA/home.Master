@@ -109,6 +109,7 @@
                             <li><a href="viewConta.aspx" title="">Contas</a></li>  
                             <li><a href="viewAgencia.aspx" title="">Agências</a></li>                          
                             <li><a href="viewBanco.aspx" title="">Bancos</a></li> 
+                            <li><a href="viewBancosInstrucoes.aspx">Instruções Bancárias</a></li>
                             <li><a href="viewTipoDocumento.aspx" title="">Tipos de Documentos</a></li>                           
                             
                         </ul>

@@ -99,5 +99,8 @@
         <siteMapNode url="viewObra.aspx" title="Obras"  description="">
           <siteMapNode url="cadObra.aspx" title="Cadastro de Obras"  description="" />
         </siteMapNode>
+        <siteMapNode url="viewBancosInstrucoes.aspx" title="Instruções Bancárias"  description="">
+          <siteMapNode url="cadBancosInstrucoes.aspx" title="Cadastro de Instruções Bancárias"  description="" />
+        </siteMapNode>
     </siteMapNode>
 </siteMap>

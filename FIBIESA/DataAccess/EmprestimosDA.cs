@@ -51,8 +51,8 @@ namespace DataAccess
                 emprestim.Nome = dr["NOME"].ToString();
                 emprestim.NomeFantasia = dr["NOMEFANTASIA"].ToString();
                 emprestim.Status = dr["STATUS"].ToString();
-                emprestim.Tombo = int.Parse(dr["TOMBO"].ToString());
-                emprestim.Codigo = int.Parse(dr["CODIGO"].ToString());
+                emprestim.Tombo = 123;//utils.ComparaIntComZero(dr["TOMBO"].ToString());
+                emprestim.Codigo = 1;//utils.ComparaIntComZero(dr["CODIGO"].ToString());
                                 
                 emprestimos.Add(emprestim);
             }
@@ -265,7 +265,7 @@ namespace DataAccess
             DataColumn coluna1 = new DataColumn("TOMBO", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("DATAEMPRESTIMO", Type.GetType("System.DateTime"));
+            DataColumn coluna4 = new DataColumn("DATAEMPRESTIMO", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("DATAPREVISTAEMPRESTIMO", Type.GetType("System.DateTime"));
             DataColumn coluna6 = new DataColumn("EMPRESTIMOID", Type.GetType("System.Int32"));
             DataColumn coluna7 = new DataColumn("EXEMPLARID", Type.GetType("System.Int32"));
