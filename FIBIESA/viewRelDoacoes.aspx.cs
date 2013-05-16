@@ -29,14 +29,35 @@ namespace FIBIESA
 
         }
         #endregion
+        public DataTable dtGeral;
         protected void Page_Load(object sender, EventArgs e)
         {
             //txtValorFim.Attribute.Add("onKeyDown");
             txtValorFim.Attributes.Add("onKeyDown", "return(FormataMoeda(this,10,event,2))");
             txtValorIni.Attributes.Add("onKeyDown", "return(FormataMoeda(this,10,event,2))");
+            if (this.txtCodPessoa.Text != string.Empty)
+            {
+                carregaPessoa();
+            }            
         }
 
-        protected void btnPesNome_Click(object sender, EventArgs e)
+        public void carregaPessoa()
+        {
+            pesquisaPessoa("CODIGO");
+            if (Session["tabelaPesquisa"] != null)
+            {
+                dtGeral = (DataTable)Session["tabelaPesquisa"];
+                this.lblDesPessoa.Text = dtGeral.Rows[0].ItemArray[2].ToString();
+                this.hfIdPessoa.Value = dtGeral.Rows[0].ItemArray[0].ToString();
+            }
+            else
+            {
+                this.lblDesPessoa.Text = string.Empty;
+                this.hfIdPessoa.Value = string.Empty;
+            }
+        }
+
+        public void pesquisaPessoa(string lCampoPesquisa)
         {
             Session["tabelaPesquisa"] = null;
 
@@ -44,7 +65,15 @@ namespace FIBIESA
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
+            List<Pessoas> pessoas;
+            if(this.txtCodPessoa.Text != string.Empty)
+            {
+               pessoas = pesBL.PesquisarBL(lCampoPesquisa,this.txtCodPessoa.Text);
+            }
+            else
+            {
+                pessoas = pesBL.PesquisarBL();
+            }
 
             foreach (Pessoas pes in pessoas)
             {
@@ -59,11 +88,21 @@ namespace FIBIESA
 
             if (dt.Rows.Count > 0)
                 Session["tabelaPesquisa"] = dt;
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Doador não encontrado.');", true);
+            }
 
             Session["objBLPesquisa"] = pesBL;
             Session["objPesquisa"] = pe;
 
+            
+
+        }
+
+        protected void btnPesNome_Click(object sender, EventArgs e)
+        {
+            pesquisaPessoa("");
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCodPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
         }
 
@@ -73,8 +112,8 @@ namespace FIBIESA
             DoacoesBL doacoesBL = new DoacoesBL();
 
 
-            Session["ldsRel"] = doacoesBL.PesquisarDataset(txtCodPessoa.Text, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
-            if (Session["ldsRel"] != null)
+            Session["ldsRel"] = doacoesBL.PesquisarDataset(hfIdPessoa.Value, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {
                 string periodo = "Todos";
                 if((txtDataIni.Text != string.Empty) && (txtDataFim.Text != string.Empty))
@@ -85,7 +124,7 @@ namespace FIBIESA
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
         }

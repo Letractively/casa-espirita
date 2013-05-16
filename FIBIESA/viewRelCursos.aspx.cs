@@ -77,13 +77,13 @@ namespace FIBIESA
            
 
             Session["ldsRel"] = eventosBL.PesquisarDataset(txtcurso.Text, txtDataIni.Text, txtDataIniF.Text, txtDataFim.Text, txtDataFimF.Text).Tables[0];
-            if (Session["ldsRel"] != null)
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelCursos.aspx?Eventos=" + txtcurso.Text + "','',600,815);", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "Alert('Sua pesquisa não retornou dados.');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
         }

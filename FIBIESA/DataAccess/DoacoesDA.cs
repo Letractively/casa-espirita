@@ -170,7 +170,7 @@ namespace DataAccess
             if ((valorIni != string.Empty) && (valorFim != string.Empty))
             {
 
-                sqlQuery += " AND valor BETWEEN CONVERT(DATETIME,'" + valorIni + "',103) AND CONVERT(DATETIME,'" + valorFim + "',103)";
+                sqlQuery += " AND valor BETWEEN CONVERT(decimal(9,2),'" + (valorIni.Replace(".","")).Replace(",",".") + "') AND CONVERT(decimal(9,2),'" + (valorFim.Replace(".","")).Replace(",",".") + "')";
             }
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
