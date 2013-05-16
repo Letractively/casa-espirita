@@ -89,7 +89,7 @@
                                             <tr>
                                                 <td style="width: 400px">
                                                     <asp:Label ID="lblDesconto" runat="server">
-                                                Valor máximo de desconto:
+                                                Percentual máximo de desconto:
                                                     </asp:Label>
                                                 </td>
                                                 <td style="width: 140px">

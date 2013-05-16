@@ -9,7 +9,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
     </asp:ScriptManager>
     <div id="content">
-        <div class="container half2 left">
+        <div class="container left">
             <div class="conthead">
                 <h2>
                     Emprestar</h2>
@@ -77,7 +77,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:Panel ID="pnlHistorico" runat="server" Width="550px" Height="126px" ScrollBars="Auto"
+                            <asp:Panel ID="pnlHistorico" runat="server" Width="650px" Height="126px" ScrollBars="Auto"
                                 BorderColor="#CCCCCC" GroupingText="Histórico de empréstimos">
                                 <asp:GridView ID="dtgHistorico" runat="server" AutoGenerateColumns="False" DataKeyNames="PESSOAID"
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
@@ -86,8 +86,10 @@
                                         <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
                                         <asp:BoundField DataField="CODIGO" HeaderText="Código" />
                                         <asp:BoundField DataField="TITULO" HeaderText="Título" />
-                                        <asp:BoundField DataField="DATAEMPRESTIMO" HeaderText="Data Empréstimo" />
-                                        <asp:BoundField DataField="DATAPREVISTAEMPRESTIMO" HeaderText="Data Prevista de Devolução" />
+                                        <asp:BoundField DataField="DATAEMPRESTIMO" HeaderText="Data Empréstimo" 
+                                            DataFormatString="{0:d}" />
+                                        <asp:BoundField DataField="DATAPREVISTAEMPRESTIMO" HeaderText="Data Devolução" 
+                                            DataFormatString="{0:d}" />
                                         <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
                                         <asp:BoundField DataField="EMPRESTIMOID" HeaderText="EMPRESTIMOID" Visible="False" />
                                         <asp:BoundField DataField="EXEMPLARID" HeaderText="EXEMPLARID" Visible="False" />

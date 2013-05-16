@@ -218,6 +218,7 @@
     <Content Include="viewAutor.aspx" />
     <Content Include="viewBairro.aspx" />
     <Content Include="viewBanco.aspx" />
+    <Content Include="viewBancosInstrucoes.aspx" />
     <Content Include="viewCategoria.aspx" />
     <Content Include="viewChamada.aspx" />
     <Content Include="viewCidade.aspx" />
@@ -711,6 +712,13 @@
     </Compile>
     <Compile Include="viewBanco.aspx.designer.cs">
       <DependentUpon>viewBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewBancosInstrucoes.aspx.cs">
+      <DependentUpon>viewBancosInstrucoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewBancosInstrucoes.aspx.designer.cs">
+      <DependentUpon>viewBancosInstrucoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewCategoria.aspx.cs">
       <DependentUpon>viewCategoria.aspx</DependentUpon>
