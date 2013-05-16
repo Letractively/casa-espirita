@@ -18,6 +18,7 @@ namespace Admin
         string v_operacao = ""; 
 
         #region funcoes
+             
 
         public void ExibirMensagem(string mensagem)
         {
@@ -30,13 +31,11 @@ namespace Admin
             txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtSerie.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtValor.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtValorVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");     
             txtTotItens.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtTotal.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-           
+            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");          
+                       
         }
 
         private void CriarDtItens()
@@ -185,7 +184,7 @@ namespace Admin
         {
             CarregarAtributos();
             CriarDtItens();
-    
+            
             int id_notE = 0;
             
             if (!IsPostBack)
@@ -204,7 +203,7 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_notE);
 
-                txtNumero.Focus();
+                txtNumero.Focus();               
             }
             
         }
@@ -406,6 +405,7 @@ namespace Admin
             
             ModalPopupExtenderPesItem.Enabled = false;
             ModalPopupExtenderPesItem.Hide();
+            txtQtde.Focus();
 
         }
 

@@ -136,10 +136,12 @@ body {background: #e0e0e0; margin: 0; padding: 0}
 		.inputboxes  {padding: 5px; overflow: auto; margin-bottom: 5px}
 		.inputboxes label {width: 75px; display: block; float: left; padding-top: 8px}
 			.inputbox, .inputboxes select, select {float: left; padding: 9px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px}
-				.inputbox,.inputboxRight {background: #fff url(../images/bg_input_normal.png) repeat-x top}
+				.inputbox,.inputboxRight,.inputboxValor {background: #fff url(../images/bg_input_normal.png) repeat-x top}
 			
 			.inputboxRight {float: left; padding: 9px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px; text-align:right}
-				
+			
+			.inputboxValor {float: left; padding: 9px; border: 1px solid #ccc; -moz-box-shadow: 1px 1px 2px #ccc; -moz-border-radius: 5px; min-width: 50px; text-align:right}
+					
 				
 				
 				.errorbox, .errorbox:focus {background: #fff url(../images/bg_input_error.png) repeat-x top; border: 1px solid #DE5F54!important; -moz-box-shadow: 1px 1px 2px #F6D3D0!important; -webkit-box-shadow: 1px 1px 2px #F6D3D0!important; box-shadow: 1px 1px 2px #F6D3D0!important; color: #DE5F54} 

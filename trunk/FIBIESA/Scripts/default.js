@@ -199,3 +199,13 @@ $(document).ready(function () {
     });
 });
 
+//formata campos de valores
+  $(document).ready(function () {
+      $('.inputboxValor').priceFormat({
+            limit: 9, 
+            centsLimit:2,
+            prefix: '', 
+            centsSeparator: ',',
+            thousandsSeparator: '.'
+         });
+    });
