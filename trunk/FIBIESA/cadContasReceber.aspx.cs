@@ -144,6 +144,16 @@ namespace FIBIESA
             }
         }
 
+        private void CarregarAtributos()
+        {
+            txtFornecedor.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtParcela.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtTitulo.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtDataEmissao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataVencimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtPagamento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -165,6 +175,8 @@ namespace FIBIESA
                         CarregarDados(id_tit);
                     }
                 }
+
+                CarregarAtributos();
             }
 
         }
@@ -252,9 +264,8 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show(); 
         }
-
-       
- protected void btnSelect_Click(object sender, EventArgs e)
+               
+        protected void btnSelect_Click(object sender, EventArgs e)
         {
 
             ImageButton btndetails = sender as ImageButton;
@@ -290,5 +301,7 @@ namespace FIBIESA
         {
             SelecionarDadosPortador(utils.ComparaIntComZero(ddlPortador.SelectedValue));
         }
+
+        
     }
 }

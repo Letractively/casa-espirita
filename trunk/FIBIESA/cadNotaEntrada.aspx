@@ -102,7 +102,8 @@
                                 <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" GridLines="None" 
                                     ShowHeaderWhenEmpty="True" onrowdeleting="dtgItens_RowDeleting" 
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
-                                    CellPadding="3" onrowdatabound="dtgItens_RowDataBound">
+                                    CellPadding="3" onrowdatabound="dtgItens_RowDataBound" 
+                                    DataKeyNames="IDORDEM,ID">
                                     <Columns>
                                         <asp:CommandField ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -166,6 +167,7 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
             <asp:HiddenField ID="hfOrdem" runat="server" />
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
            

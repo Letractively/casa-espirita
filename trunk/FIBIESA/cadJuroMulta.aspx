@@ -27,28 +27,28 @@
                             <tr>
                                 <td style="width: 140px">% Juro Dia:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputbox" Width="110px" 
+                                    <asp:TextBox ID="txtJuroDia" runat="server" CssClass="inputboxRight" Width="110px" 
                                         MaxLength="12" ></asp:TextBox>
                                 </td>   
                              </tr>
                             <tr>                       
                                 <td style="width: 140px">% Juro Mês:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtJuroMes" runat="server" CssClass="inputbox" Width="110px" 
+                                    <asp:TextBox ID="txtJuroMes" runat="server" CssClass="inputboxRight" Width="110px" 
                                         MaxLength="12"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: 140px">Valor Multa Dia:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtMultaDia" runat="server" CssClass="inputbox" Width="110px" 
+                                    <asp:TextBox ID="txtMultaDia" runat="server" CssClass="inputboxValor" Width="110px" 
                                         MaxLength="12"></asp:TextBox>
                                 </td> 
                             </tr>
                             <tr>                          
                                 <td style="width: 140px">Valor Multa Mês:</td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtMultaMes" runat="server" CssClass="inputbox" Width="110px" 
+                                    <asp:TextBox ID="txtMultaMes" runat="server" CssClass="inputboxValor" Width="110px" 
                                         MaxLength="12"></asp:TextBox>
                                 </td>
                             </tr>

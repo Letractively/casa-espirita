@@ -110,6 +110,16 @@ namespace FIBIESA
             grdPesquisa.DataBind();
         }
 
+        private void CarregarAtributos()
+        {
+            txtFornecedor.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtParcela.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtTitulo.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtDataEmissao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataVencimento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtPagamento.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -129,7 +139,9 @@ namespace FIBIESA
                         id_tit = Convert.ToInt32(Request.QueryString["id_tit"].ToString());
                         CarregarDados(id_tit);
                     }
-                }                
+                }
+
+                CarregarAtributos();
             }
         }
 
@@ -248,5 +260,7 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show();          
         }
+               
+                
     }
 }
