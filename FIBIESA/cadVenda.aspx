@@ -49,7 +49,7 @@
                             * Valor Unitário:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxRight" Width="110px"
+                            <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxValor" Width="110px"
                                 ToolTip="Informe o valor unitário do item."></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtValorUni"
                                 CssClass="validacao" ErrorMessage="*Informe o valor unitário" ValidationGroup="inserir">*</asp:RequiredFieldValidator>
@@ -58,7 +58,7 @@
                             Desconto:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputboxRight" Width="110px"
+                            <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputboxValor" Width="110px"
                                 ToolTip="Informe o valor de desconto."></asp:TextBox>
                         </td>
                     </tr>

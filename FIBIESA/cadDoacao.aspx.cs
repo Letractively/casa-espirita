@@ -75,7 +75,7 @@ namespace Admin
             {
                 CarregarAtributos();
                 txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                //CarregarPesquisaItem(null);
+                txtCliente.Focus();
             }
         }
         private DataTable CriarDtPesquisa()
@@ -128,6 +128,7 @@ namespace Admin
                 {
                     ExibirMensagem("Doação gravada com sucesso!");
                     LimparCampos();
+                    txtCliente.Focus();
 
                     //if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
                       //  ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);

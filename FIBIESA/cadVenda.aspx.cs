@@ -162,18 +162,25 @@ namespace FIBIESA
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
 
+        private void CarregarAtributos()
+        {
+            txtQuantidade.Attributes.Add("onkeypress", "return(Reais(this,event))");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             CriarDtItens();
 
             if (!IsPostBack)
-            {                
+            {
+                CarregarAtributos();
                 Session["dtItens"] = null;
                 hfOrdem.Value = "1";
                 txtQuantidade.Text = "1";
                 lblValor.Text = "0,00";
-            }                
+                txtCliente.Focus();
+            }           
+     
         }
 
        
@@ -294,6 +301,7 @@ namespace FIBIESA
                                                         
                             ExibirMensagem("Venda gravada com sucesso !");
                             LimparCamposGeral();
+                            txtCliente.Focus();
                         }
                         else
                             ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");                       

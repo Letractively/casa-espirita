@@ -82,7 +82,7 @@
                             * Valor:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxRight" Width="110px"
+                            <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxValor" Width="110px"
                                 OnTextChanged="txtValor_TextChanged" ToolTip="Informe o valor da doação"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtValor"
                                 CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar">*</asp:RequiredFieldValidator>

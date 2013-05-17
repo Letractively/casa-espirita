@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="2">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>

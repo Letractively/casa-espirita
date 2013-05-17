@@ -15,10 +15,11 @@ namespace Admin
     {
         Utils utils = new Utils();
         DataTable dtItens = new DataTable();
-        string v_operacao = ""; 
+        DataTable dtExcluidos = new DataTable();
+        string v_operacao = "";
 
         #region funcoes
-             
+
 
         public void ExibirMensagem(string mensagem)
         {
@@ -31,11 +32,11 @@ namespace Admin
             txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtSerie.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");     
+            txtNumero.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtTotItens.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtTotal.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");          
-                       
+            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+
         }
 
         private void CriarDtItens()
@@ -76,7 +77,7 @@ namespace Admin
             lblDesItem.Text = "";
             txtQtde.Text = "";
             txtValor.Text = "";
-            txtValorVenda.Text = "";           
+            txtValorVenda.Text = "";
         }
 
         private void CarregarDados(int id_pes)
@@ -85,10 +86,11 @@ namespace Admin
 
             NotasEntradaBL notEBL = new NotasEntradaBL();
             List<NotasEntrada> notasEntrada = notEBL.PesquisarBL(id_pes);
-                       
+
 
             foreach (NotasEntrada ltNotEn in notasEntrada)
             {
+                hfId.Value = ltNotEn.Id.ToString();
                 txtNumero.Text = ltNotEn.Numero.ToString();
                 txtSerie.Text = ltNotEn.Serie.ToString();
                 txtData.Text = ltNotEn.Data.ToString("dd/MM/yyyy");
@@ -111,11 +113,11 @@ namespace Admin
                 linha["VALOR"] = ltNotEnt.Valor;
                 linha["VALORTOTAL"] = ltNotEnt.Quantidade * ltNotEnt.Valor;
                 //linha["VALORVENDA"] = ltNotEnt.v ;
-    
+
                 dtItens.Rows.Add(linha);
             }
 
-            Session["tbItens"] = dtItens;
+            Session["dtItens"] = dtItens;
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
             txtTotItens.Text = dtItens.Compute("sum(QUANTIDADE)", "").ToString();
@@ -177,16 +179,53 @@ namespace Admin
             grdPesquisaItem.DataSource = dt;
             grdPesquisaItem.DataBind();
         }
-              
+
+        private void CriaDtExcluidos()
+        {
+            if (dtExcluidos.Columns.Count == 0)
+            {
+                DataColumn coluna1 = new DataColumn("IDCODIGO", Type.GetType("System.String"));
+                DataColumn coluna2 = new DataColumn("TIPO", Type.GetType("System.String"));
+
+                dtExcluidos.Columns.Add(coluna1);
+                dtExcluidos.Columns.Add(coluna2);
+            }
+        }
+
+        private void ExcluirItens()
+        {
+            NotasEntradaItensBL neItBL = new NotasEntradaItensBL();
+            NotasEntradaItens neItens = new NotasEntradaItens();
+
+            if (Session["tbexcluidos"] != null)
+            {
+                dtExcluidos = (DataTable)Session["tbexcluidos"];
+                foreach (DataRow row in dtExcluidos.Rows)
+                {
+                    switch (row["TIPO"].ToString().ToUpper())
+                    {
+                        case "I":
+                            {
+                                neItens.Id = utils.ComparaIntComZero(row["IDCODIGO"].ToString());
+                                neItBL.ExcluirBL(neItens);
+                                break;
+                            }
+                    }
+                }
+            }
+
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             CarregarAtributos();
             CriarDtItens();
-            
+            CriaDtExcluidos();
+
             int id_notE = 0;
-            
+
             if (!IsPostBack)
             {
                 Session["dtItens"] = null;
@@ -203,16 +242,16 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_notE);
 
-                txtNumero.Focus();               
+                txtNumero.Focus();
             }
-            
+
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);
             ModalPopupExtenderPesItem.Enabled = true;
-            ModalPopupExtenderPesItem.Show();      
+            ModalPopupExtenderPesItem.Show();
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -224,61 +263,108 @@ namespace Admin
             MovimentosEstoqueBL movEstBL = new MovimentosEstoqueBL();
             MovimentosEstoque movEstoque = new MovimentosEstoque();
 
+            notaEntrada.Id = utils.ComparaIntComZero(hfId.Value);
             notaEntrada.Numero = utils.ComparaIntComZero(txtNumero.Text);
             notaEntrada.Serie = utils.ComparaShortComZero(txtSerie.Text);
             notaEntrada.Data = Convert.ToDateTime(txtData.Text);
             int usu_id = 0;
 
+            if (Session["usuario"] != null)
+            {
+                List<Usuarios> usuarios;
+                usuarios = (List<Usuarios>)Session["usuario"];
+
+                foreach (Usuarios usu in usuarios)
+                {
+                    usu_id = usu.Id;
+                }
+            }
+
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
 
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-            {
-                if (dtItens.Rows.Count > 0)
-                {
-                    int id = ntEBL.InserirBL(notaEntrada);
 
-                    if (id > 0)
+            if (notaEntrada.Id == 0)
+            {
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                {
+                    if (dtItens.Rows.Count > 0)
                     {
+                        int id = ntEBL.InserirBL(notaEntrada);
+
+                        if (id > 0)
+                        {
+                            foreach (DataRow linha in dtItens.Rows)
+                            {
+                                notaEntradaItens.NotaEntradaId = id;
+                                notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
+                                notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
+                                notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
+
+                                Int32 notaE_item = ntEiBL.InserirBL(notaEntradaItens);
+                               
+                                if (notaE_item > 0)
+                                {
+                                    movEstoque.UsuarioId = usu_id;
+                                    movEstoque.ItemEstoqueId = notaEntradaItens.ItemEstoqueId;
+                                    movEstoque.Quantidade = notaEntradaItens.Quantidade;
+                                    movEstoque.Data = DateTime.Now;
+                                    movEstoque.Tipo = "E";
+                                    movEstoque.NotaEntradaId = notaE_item;
+
+                                    if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
+                                    {                                        
+                                        movEstBL.InserirBL(movEstoque);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
+            else
+            {
+                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                {
+                    if (dtItens.Rows.Count > 0)
+                    {
+                        ntEBL.EditarBL(notaEntrada);
+                        ExcluirItens(); 
                         foreach (DataRow linha in dtItens.Rows)
                         {
-                            notaEntradaItens.NotaEntradaId = id;
+                            notaEntradaItens.NotaEntradaId = notaEntrada.Id;
                             notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
                             notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
                             notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
 
-                            Int32 notaE_item = ntEiBL.InserirBL(notaEntradaItens);
+                            ntEiBL.EditarBL(notaEntradaItens);                                                   
 
-                            if (Session["usuario"] != null)
-                            {
-                                List<Usuarios> usuarios;
-                                usuarios = (List<Usuarios>)Session["usuario"];
-
-                                foreach (Usuarios usu in usuarios)
-                                {
-                                    usu_id = usu.Id;
-                                }                                                                
-                            }
-
-                            if (notaE_item > 0)
+                            if (notaEntradaItens.Id > 0)
                             {
                                 movEstoque.UsuarioId = usu_id;
                                 movEstoque.ItemEstoqueId = notaEntradaItens.ItemEstoqueId;
                                 movEstoque.Quantidade = notaEntradaItens.Quantidade;
                                 movEstoque.Data = DateTime.Now;
                                 movEstoque.Tipo = "E";
-                                movEstoque.NotaEntradaId = notaE_item;
+                                movEstoque.NotaEntradaId = notaEntradaItens.Id;
 
                                 if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
+                                {                                   
                                     movEstBL.InserirBL(movEstoque);
+                                }
                             }
                         }
                     }
+
                 }
+                else
+                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
 
             Response.Redirect("viewNotaEntrada.aspx");
 
@@ -286,7 +372,7 @@ namespace Admin
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-         
+
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
 
@@ -294,15 +380,15 @@ namespace Admin
 
             object key = new object();
             key = utils.ComparaIntComZero(hfOrdem.Value);
-            
-            linha["IDORDEM"] = key.ToString();          
+
+            linha["IDORDEM"] = key.ToString();
             linha["ITEMESTOQUEID"] = hfIdItem.Value;
             linha["IDITEM"] = txtItem.Text;
             linha["DESCITEM"] = lblDesItem.Text;
             linha["QUANTIDADE"] = txtQtde.Text;
             linha["VALOR"] = txtValor.Text;
-            linha["VALORTOTAL"] = utils.ComparaDecimalComZero(txtValor.Text) * utils.ComparaIntComZero(txtQtde.Text);
-            linha["VALORVENDA"] = txtValorVenda.Text; 
+            linha["VALORTOTAL"] = utils.ComparaDecimalComZero(String.Format("{0:C2}", txtValor.Text)) * utils.ComparaIntComZero(String.Format("{0:C2}", txtQtde.Text));
+            linha["VALORVENDA"] = txtValorVenda.Text;
 
             dtItens.Rows.Add(linha);
 
@@ -310,19 +396,19 @@ namespace Admin
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
             LimparCamposItem();
-                       
+
             txtTotItens.Text = dtItens.Compute("sum(QUANTIDADE)", "").ToString();
-            txtTotal.Text = dtItens.Compute("sum(VALORTOTAL)","").ToString();
+            txtTotal.Text = dtItens.Compute("sum(VALORTOTAL)", "").ToString();
             hfOrdem.Value = (utils.ComparaIntComZero(hfOrdem.Value) + 1).ToString(); //proxima ordem 
-          
+
         }
-                
+
         protected void txtItem_TextChanged(object sender, EventArgs e)
         {
             hfIdItem.Value = "";
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text,1);
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text, 1);
 
             foreach (ItensEstoque ltItEstoque in ltItEst)
             {
@@ -333,7 +419,7 @@ namespace Admin
 
             txtQtde.Focus();
 
-            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)               
+            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)
             {
                 ExibirMensagem("Item não cadastrado !");
                 txtItem.Text = "";
@@ -345,14 +431,14 @@ namespace Admin
         protected void txtValor_TextChanged(object sender, EventArgs e)
         {
             ParametrosBL parBL = new ParametrosBL();
-            DataSet dsPar = parBL.PesquisarBL(2,"F");
+            DataSet dsPar = parBL.PesquisarBL(2, "F");
             decimal percentual = 0;
 
             if (dsPar.Tables[0].Rows.Count != 0)
-                percentual  = utils.ComparaDecimalComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
+                percentual = utils.ComparaDecimalComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
 
-            txtValorVenda.Text = (utils.ComparaDecimalComZero(txtValor.Text) +
-                                 ((utils.ComparaDecimalComZero(txtValor.Text) * percentual)/100)).ToString();
+            txtValorVenda.Text = String.Format("{0:C2}",(utils.ComparaDecimalComZero(String.Format("{0:C2}", txtValor.Text)) +
+                                 ((utils.ComparaDecimalComZero(String.Format("{0:C2}", txtValor.Text)) * percentual) / 100)));
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -363,7 +449,9 @@ namespace Admin
         protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             object key = new object();
+            object key2 = new object();
             key = dtgItens.DataKeys[e.RowIndex][0];
+            key2 = dtgItens.DataKeys[e.RowIndex][1];
 
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
@@ -374,6 +462,19 @@ namespace Admin
             Session["dtItens"] = dtItens;
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
+
+
+            if (utils.ComparaIntComZero(key2.ToString()) > 0)
+            {
+                if (Session["tbexcluidos"] != null)
+                    dtExcluidos = (DataTable)Session["tbexcluidos"];
+
+                DataRow row = dtExcluidos.NewRow();
+                row["IDCODIGO"] = key2.ToString();
+                row["TIPO"] = "I";
+                dtExcluidos.Rows.Add(row);
+                Session["tbexcluidos"] = dtExcluidos;
+            }
         }
 
         protected void dtgItens_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -402,7 +503,7 @@ namespace Admin
             hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
             txtItem.Text = gvrow.Cells[2].Text;
             lblDesItem.Text = gvrow.Cells[3].Text;
-            
+
             ModalPopupExtenderPesItem.Enabled = false;
             ModalPopupExtenderPesItem.Hide();
             txtQtde.Focus();
@@ -417,6 +518,6 @@ namespace Admin
             txtPesItem.Text = "";
         }
 
-       
+
     }
 }

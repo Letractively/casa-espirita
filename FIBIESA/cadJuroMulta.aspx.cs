@@ -63,6 +63,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_jm);
+
+                txtMesAno.Focus();
             }
         }
 
