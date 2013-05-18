@@ -518,6 +518,19 @@ namespace Admin
             txtPesItem.Text = "";
         }
 
+        protected void txtNumero_TextChanged(object sender, EventArgs e)
+        {
+            NotasEntradaBL insBL = new NotasEntradaBL();
+
+            if (insBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtNumero.Text)))
+            {
+                ExibirMensagem("O número " + txtNumero.Text + " já existe. Informe um novo número.");
+                txtNumero.Text = "";
+                txtNumero.Focus();
+            }
+            else
+                txtSerie.Focus();              
+        }
 
     }
 }

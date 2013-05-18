@@ -176,6 +176,24 @@ namespace Admin
             CarregarDDLConta(utils.ComparaIntComZero(ddlAgencia.SelectedValue));
         }
 
+        protected void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+            InstituicoesBL insBL = new InstituicoesBL();
+
+            if (insBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtCodigo.Text)))
+            {
+                lblInformacao.Text = "O código " + txtCodigo.Text + " já existe. Informe um novo código.";
+                txtCodigo.Text = "";
+                txtCodigo.Focus();
+            }
+            else
+            {
+                lblInformacao.Text = "";
+                txtDescricao.Focus();
+            }  
+
+        }
+
                 
     }
 }

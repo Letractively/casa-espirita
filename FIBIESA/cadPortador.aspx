@@ -16,10 +16,12 @@
                         <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
-                                ToolTip="Informe o código do portador" Width="100px"></asp:TextBox>
+                                ToolTip="Informe o código do portador" Width="100px" AutoPostBack="True" 
+                                ontextchanged="txtCodigo_TextChanged"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
                                 ErrorMessage="*Informe o código do portador" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="lblInformacao" runat="server" CssClass="validacao"></asp:Label>
                         </td>
                     </tr>
                     <tr>

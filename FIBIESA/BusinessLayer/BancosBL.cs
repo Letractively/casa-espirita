@@ -82,5 +82,12 @@ namespace BusinessLayer
 
             return banDA.Pesquisar(codDes);
         }
+
+        public bool CodigoJaUtilizadoBL(Int32 codigo)
+        {
+            BancosDA insDA = new BancosDA();
+
+            return insDA.CodigoJaUtilizadoDA(codigo);
+        }
     }
 }

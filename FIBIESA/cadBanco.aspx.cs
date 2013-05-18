@@ -35,7 +35,12 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-        
+
+        private void LimparCampos()
+        {
+            txtCodigo.Text = "";
+            txtDescricao.Text = "";            
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -56,7 +61,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_ban);
-                  
+
+                txtCodigo.Focus();                  
             }
         }
 
@@ -77,20 +83,49 @@ namespace Admin
             if (bancos.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    banBL.EditarBL(bancos);
+                {
+                    if (banBL.EditarBL(bancos))
+                        ExibirMensagem("Banco atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o banco. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    banBL.InserirBL(bancos);
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))                    
+                    if (banBL.InserirBL(bancos))
+                    {
+                        ExibirMensagem("Banco gravado com sucesso !");
+                        LimparCampos();
+                        txtCodigo.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o banco. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
                      
             
+        }
+
+        protected void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+            BancosBL insBL = new BancosBL();
+
+            if (insBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtCodigo.Text)))
+            {
+                lblInformacao.Text = "O código " + txtCodigo.Text + " já existe. Informe um novo código.";
+                txtCodigo.Text = "";
+                txtCodigo.Focus();
+            }
+            else
+            {
+                lblInformacao.Text = "";
+                txtDescricao.Focus();
+            }  
         }
     }
 }

@@ -88,6 +88,6 @@ namespace BusinessLayer
 
             return usuariosDA.PesquisarDA(login, senha, data);
         }
-       
+                
     }
 }
