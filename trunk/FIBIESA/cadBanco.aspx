@@ -16,10 +16,12 @@
                         <td style="width: 140px">* Código:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
-                                ToolTip="Informe o código do banco" Width="100px"></asp:TextBox>
+                                ToolTip="Informe o código do banco" Width="100px" AutoPostBack="True" 
+                                ontextchanged="txtCodigo_TextChanged"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Informe o código" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="lblInformacao" runat="server" CssClass="validacao"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -28,8 +30,8 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" Width="335px" 
                                 MaxLength="70" ToolTip="Informe a descrição do banco"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -44,11 +46,13 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" 
-                                ToolTip="Salva as informações do banco" />
+                                ToolTip="Salva as informações do banco" />                            
                         </td>
                     </tr>
                 </table>
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">

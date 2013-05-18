@@ -179,7 +179,24 @@ namespace DataAccess
                 ba.Add(bas);
             }
             return ba;
-        }    
+        }
 
+        public bool CodigoJaUtilizadoDA(string codigo)
+        {
+            DataSet dsInst = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT 1 COD " +
+                                                                                        "  FROM ESTADOS " +
+                                                                                        " WHERE UPPER(UF) = '{0}' ", codigo.ToUpper()));
+            int cod = 0;
+
+            if (dsInst.Tables[0].Rows.Count != 0)
+                cod = (int)dsInst.Tables[0].Rows[0]["COD"];
+
+            if (cod == 1)
+                return true;
+            else
+                return false;
+
+        }
     }
 }

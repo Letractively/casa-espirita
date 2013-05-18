@@ -80,6 +80,12 @@ namespace BusinessLayer
 
             return estDA.Pesquisar(codDes);
         }
-            
+
+        public bool CodigoJaUtilizadoBL(string codigo)
+        {
+            EstadosDA estDA = new EstadosDA();
+
+            return estDA.CodigoJaUtilizadoDA(codigo);
+        }
     }
 }

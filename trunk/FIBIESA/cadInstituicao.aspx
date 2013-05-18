@@ -24,10 +24,14 @@
                                                     * Código:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" 
-                                                        ToolTip="Informe o código da instituição"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
+                                                        ToolTip="Informe o código da instituição" 
+                                                        ontextchanged="txtCodigo_TextChanged" AutoPostBack="True" Width="100px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCodigo"
-                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ErrorMessage="*Informe o código - Aba geral" ForeColor="#CC0000" 
+                                                        ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                    <asp:Label ID="lblInformacao" runat="server" CssClass="validacao" 
+                                                        Font-Size="Smaller"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -38,7 +42,8 @@
                                                     <asp:TextBox ID="txtRazao" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="335px" ToolTip="Informe a razão social"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtRazao"
-                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ErrorMessage="*Informe a razão social - Aba geral" ForeColor="#CC0000" 
+                                                        ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -49,7 +54,8 @@
                                                     <asp:TextBox ID="txtNomeFantasia" runat="server" CssClass="inputbox" MaxLength="70" 
                                                         Width="335px" ToolTip="Informe o nome fantasia"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtNomeFantasia"
-                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ErrorMessage="*Informe o nome fantasia" ForeColor="#CC0000" 
+                                                        ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -60,7 +66,8 @@
                                                     <asp:TextBox ID="txtCnpj" runat="server" CssClass="inputbox" MaxLength="14" 
                                                         ToolTip="Informe o CNPJ"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCnpj"
-                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ErrorMessage="*Informe o CNPJ - Aba geral" ForeColor="#CC0000" 
+                                                        ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -71,7 +78,8 @@
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                                         Width="335px" ToolTip="Informe o e-mail"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail"
-                                                        ErrorMessage="*Preenchimento Obrigatório" ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                                        ErrorMessage="*Informe o e-mail - Aba geral" ForeColor="#CC0000" 
+                                                        ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -88,7 +96,7 @@
                                                 </td>
                                                 <td style="width: 100px">
                                                     <asp:TextBox ID="txttelefone" runat="server" CssClass="inputbox" MaxLength="20" 
-                                                        Width="100px" ToolTip="Informe o telefone"></asp:TextBox>   
+                                                        Width="100px" ToolTip="Informe o telefone"></asp:TextBox>  
                                                 </td> 
                                             </tr>                                            
                                         </table>
@@ -199,6 +207,8 @@
                         </td>
                     </tr>
                 </table>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                    CssClass="validacao" ValidationGroup="salvar" />
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:HiddenField ID="hfIdInstLogo" runat="server" />

@@ -10,28 +10,50 @@ namespace BusinessLayer
 {
     public class InstituicoesBL
     {
+        private bool IsValid(Instituicoes ins)
+        {
+            bool valido;
+            valido = ins.Razao.Length <= 70 && ins.Email.Length <= 100 && ins.Endereco.Length <= 40 
+                     && ins.Cep.Length <= 10 && ins.NomeFantasia.Length <= 70 && ins.Complemento.Length <= 40 
+                     && ins.telefone.Length <= 20 && ins.Cnpj.Length <= 14;
+
+            return valido;
+        }
+
         public bool InserirBL(Instituicoes ins)
         {
-            /*criar as regras de negocio*/
-            InstituicoesDA instituicaoDA = new InstituicoesDA();
+            if (IsValid(ins))
+            {
+                InstituicoesDA instituicaoDA = new InstituicoesDA();
 
-            return instituicaoDA.InserirDA(ins);
+                return instituicaoDA.InserirDA(ins);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Instituicoes ins)
         {
-            /*criar as regras de negocio*/
-            InstituicoesDA instituicaoDA = new InstituicoesDA();
+            if (IsValid(ins) && ins.Id > 0)
+            {
+                InstituicoesDA instituicaoDA = new InstituicoesDA();
 
-            return instituicaoDA.EditarDA(ins);
+                return instituicaoDA.EditarDA(ins);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Instituicoes ins)
         {
-            /*criar as regras de negocio*/
-            InstituicoesDA instituicaoDA = new InstituicoesDA();
+            if (ins.Id > 0)
+            {
+                InstituicoesDA instituicaoDA = new InstituicoesDA();
 
-            return instituicaoDA.ExcluirDA(ins);
+                return instituicaoDA.ExcluirDA(ins);
+            }
+            else
+                return false;
         }
 
         public List<Instituicoes> PesquisarBL()
@@ -72,5 +94,11 @@ namespace BusinessLayer
             return instituicoesDA.PesquisarBuscaDA(valor);
         }
 
+        public bool CodigoJaUtilizadoBL(Int32 codigo)
+        {
+            InstituicoesDA insDA = new InstituicoesDA();
+
+            return insDA.CodigoJaUtilizadoDA(codigo);
+        }
     }
 }

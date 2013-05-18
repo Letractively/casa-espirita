@@ -82,5 +82,12 @@ namespace BusinessLayer
 
             return porDA.Pesquisar(codDes);
         }
+
+        public bool CodigoJaUtilizadoBL(Int32 codigo)
+        {
+            PortadoresDA porDA = new PortadoresDA();
+
+            return porDA.CodigoJaUtilizadoDA(codigo);
+        }
     }
 }

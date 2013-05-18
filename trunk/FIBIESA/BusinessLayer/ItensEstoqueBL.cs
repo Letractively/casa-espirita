@@ -91,11 +91,11 @@ namespace BusinessLayer
 
         }
 
-        public DataSet PesquisarItensEstoqueBL(int id_movEst)
-        {
-            ItensEstoqueDA itEstDA = new ItensEstoqueDA();
+        //public DataSet PesquisarItensEstoqueBL(int id_movEst)
+        //{
+        //    ItensEstoqueDA itEstDA = new ItensEstoqueDA();
 
-            return itEstDA.PesquisarItensEstoqueDA(id_movEst);
-        }
+        //    return itEstDA.PesquisarItensEstoqueDA(id_movEst);
+        //}
     }
 }

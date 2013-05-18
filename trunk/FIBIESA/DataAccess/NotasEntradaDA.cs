@@ -147,6 +147,23 @@ namespace DataAccess
                 
             return NotasEntrada;
         }
-              
+
+        public bool CodigoJaUtilizadoDA(Int32 codigo)
+        {
+            DataSet dsInst = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT 1 COD " +
+                                                                                        "  FROM NOTAENTRADA " +
+                                                                                        " WHERE NUMERO = {0} ", codigo));
+            int cod = 0;
+
+            if (dsInst.Tables[0].Rows.Count != 0)
+                cod = (int)dsInst.Tables[0].Rows[0]["COD"];
+
+            if (cod == 1)
+                return true;
+            else
+                return false;
+
+        }
     }
 }

@@ -73,7 +73,7 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             Estados estados = new Estados();
             estados.Id = utils.ComparaIntComZero(hfId.Value);
-            estados.Uf = txtUf.Text;
+            estados.Uf = txtUf.Text.ToUpper();
             estados.Descricao = txtDescricao.Text;
 
             if (estados.Id > 0)
@@ -106,6 +106,23 @@ namespace Admin
         protected void bntVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewEstado.aspx");
+        }
+
+        protected void txtUf_TextChanged(object sender, EventArgs e)
+        {
+            EstadosBL estBL = new EstadosBL();
+
+            if (estBL.CodigoJaUtilizadoBL(txtUf.Text))
+            {
+                lblInformacao.Text = "A UF " + txtUf.Text.ToUpper() + " já existe. Informe uma nova UF.";
+                txtUf.Text = "";
+                txtUf.Focus();
+            }
+            else
+            {
+                lblInformacao.Text = "";
+                txtDescricao.Focus();
+            } 
         }
     }
 }

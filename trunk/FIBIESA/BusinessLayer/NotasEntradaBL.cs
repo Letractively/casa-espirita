@@ -81,6 +81,12 @@ namespace BusinessLayer
 
             return notasEntradaDA.PesquisarBuscaDA(valor);
         }
-                
+
+        public bool CodigoJaUtilizadoBL(Int32 codigo)
+        {
+            NotasEntradaDA nteDA = new NotasEntradaDA();
+
+            return nteDA.CodigoJaUtilizadoDA(codigo);
+        }
     }
 }

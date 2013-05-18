@@ -18,7 +18,8 @@
                         </td>
                         <td style="width: 250px">
                             <asp:TextBox ID="txtNumero" runat="server" CssClass="inputboxRight" Width="100px" 
-                                MaxLength="10" ToolTip="Informe o número da nota"></asp:TextBox>
+                                MaxLength="10" ToolTip="Informe o número da nota" AutoPostBack="True" 
+                                ontextchanged="txtNumero_TextChanged"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="txtNumero" ErrorMessage="Informe o número da nota" 
                                 ValidationGroup="salvar" CssClass="validacao" EnableViewState="False">*</asp:RequiredFieldValidator>

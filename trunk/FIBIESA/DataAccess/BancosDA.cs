@@ -32,26 +32,14 @@ namespace DataAccess
 
             return bancos;
         }
-
-        private Int32 RetornaMaxCodigo()
-        {
-            Int32 codigo = 1;
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                          CommandType.Text, string.Format(@" SELECT ISNULL(MAX(CODIGO),0) + 1 as COD FROM BANCOS "));
-
-            if (ds.Tables[0].Rows.Count != 0)
-                codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
-
-            return codigo;
-        }
-
+                
         #endregion
 
         public bool InserirDA(Bancos ban)
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
+            paramsToSP[0] = new SqlParameter("@codigo", ban.Codigo);
             paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao);
 
             try
@@ -161,6 +149,24 @@ namespace DataAccess
                 ba.Add(bas);
             }
             return ba;
+        }
+
+        public bool CodigoJaUtilizadoDA(Int32 codigo)
+        {
+            DataSet dsInst = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT 1 COD " +
+                                                                                        "  FROM BANCOS " +
+                                                                                        " WHERE CODIGO = {0} ", codigo));
+            int cod = 0;
+
+            if (dsInst.Tables[0].Rows.Count != 0)
+                cod = (int)dsInst.Tables[0].Rows[0]["COD"];
+
+            if (cod == 1)
+                return true;
+            else
+                return false;
+
         }
     }
 }
