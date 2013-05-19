@@ -175,6 +175,8 @@ namespace Admin
                             pnlHistorico.Visible = false;
                             txtdataInicio_CalendarExtender.Enabled = false;
                             txtdataPrevisao_CalendarExtender.Enabled = false;
+                            txtPessoa.ReadOnly = true;
+                            txtExemplar.ReadOnly = true;
                         }
                     }
                     else
@@ -185,6 +187,8 @@ namespace Admin
                         pnlHistorico.Visible = true;
                         txtdataInicio_CalendarExtender.Enabled = true;
                         txtdataPrevisao_CalendarExtender.Enabled = true;
+                        txtPessoa.ReadOnly = false;
+                        txtExemplar.ReadOnly = false;
 
                         btnRenovar.Visible = false;
                         btnSalvar.Text = "Emprestar";
