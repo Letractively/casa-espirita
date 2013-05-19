@@ -149,32 +149,22 @@ namespace DataAccess
         public DataSet PesquisarDataset(string codPessoa, string valorIni, string valorFim, string dataIni, string dataFim)
         {
 
-
-            string sqlQuery = "SELECT Nome " +
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT Nome " +
                                 "  ,data " +
                                 "  ,valor " +
-                                " FROM VIEW_DOACOES WHERE 1 = 1 ";
+                                " FROM VIEW_DOACOES WHERE 1 = 1 ");
             if (codPessoa != string.Empty)
-            {
-
-                sqlQuery += " AND (PESSOAID =" + codPessoa + ")";
-            }
-
-
+                sqlQuery.Append(@" AND (PESSOAID =" + codPessoa + ")");
+            
             if ((dataIni != string.Empty) && (dataFim != string.Empty))
-            {
-
-                sqlQuery += " AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)";
-            }
-
+                sqlQuery.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)");
+            
             if ((valorIni != string.Empty) && (valorFim != string.Empty))
-            {
-
-                sqlQuery += " AND valor BETWEEN CONVERT(decimal(9,2),'" + (valorIni.Replace(".","")).Replace(",",".") + "') AND CONVERT(decimal(9,2),'" + (valorFim.Replace(".","")).Replace(",",".") + "')";
-            }
-
+                sqlQuery.Append(@" AND valor BETWEEN CONVERT(decimal(9,2),'" + (valorIni.Replace(".","")).Replace(",",".") + "') AND CONVERT(decimal(9,2),'" + (valorFim.Replace(".","")).Replace(",",".") + "')");
+            
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, sqlQuery);
+                                                       CommandType.Text, sqlQuery.ToString());
             
             return ds;
 

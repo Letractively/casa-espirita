@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true" CodeBehind="viewRelDoacoes.aspx.cs" Inherits="FIBIESA.viewRelDoacoes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
+    CodeBehind="viewRelDoacoes.aspx.cs" Inherits="FIBIESA.viewRelDoacoes" %>
+
 <%@ MasterType VirtualPath="~/home.Master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -8,24 +10,25 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </asp:ScriptManager>
-    <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
-        <ContentTemplate>        
+    <%--<asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">--%>
+        <%--<ContentTemplate>--%>
             <div id="content">
-                <div class="container">
+                <div class="container half left">
                     <div class="conthead">
-                        <h2>Relatório de Doações</h2>
+                        <h2>
+                            Relatório de Doações</h2>
                     </div>
                     <div class="contentbox">
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Nome:
+                                    Cliente:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodPessoa" runat="server" CssClass="inputbox" Width="110px" AutoPostBack="true"></asp:TextBox>
-                                    <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..." 
-                                        onclick="btnPesNome_Click"  />
-                                        &nbsp;
+                                    <asp:TextBox ID="txtCodPessoa" runat="server" CssClass="inputboxRight" Width="100px" 
+                                        AutoPostBack="true"></asp:TextBox>
+                                    <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..." OnClick="btnPesNome_Click" />
+                                    &nbsp;
                                     <asp:Label ID="lblDesPessoa" runat="server"></asp:Label>
                                 </td>
                             </tr>
@@ -37,15 +40,14 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtValorIni" runat="server" CssClass="inputbox"></asp:TextBox>
+                                                <asp:TextBox ID="txtValorIni" runat="server" CssClass="inputboxValor" Width="100px"></asp:TextBox>
                                             </td>
                                             <td>
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
-                                            <td>    
-                                                <asp:TextBox ID="txtValorFim" runat="server" CssClass="inputbox"   ></asp:TextBox>
-                                       
-                                             </td>
+                                            <td>
+                                                <asp:TextBox ID="txtValorFim" runat="server" CssClass="inputboxValor" Width="100px"></asp:TextBox>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -58,7 +60,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataIni_CalendarExtender" runat="server" TargetControlID="txtDataIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -66,30 +68,35 @@
                                             <td>
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
-                                            <td>    
-                                                <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                            <td>
+                                                <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataFim_CalendarExtender" runat="server" TargetControlID="txtDataFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
                                             </td>
                                         </tr>
                                     </table>
-                                </td>                                    
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="2" valign="middle" style="text-align:center;">
-                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
-                                        onclick="btnRelatorio_Click" />
-                                </td>                                    
+                                <td>
+                                </td>
+                                <td>
+                                    <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
+                                        ToolTip="Volta para página principal" onclick="btnVoltar_Click"
+                                         />
+                                    &nbsp;&nbsp;&nbsp;
+                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" OnClick="btnRelatorio_Click" />
+                                </td>
                             </tr>
                         </table>
                     </div>
+                </div>                
+                <div class="status">
                 </div>
                 <asp:HiddenField ID="hfIdPessoa" runat="server" />
                 <asp:HiddenField ID="hfIdItem" runat="server" />
-                <div class="status">
-                </div>
             </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+       <%-- </ContentTemplate>--%>
+  <%--  </asp:UpdatePanel>--%>
 </asp:Content>

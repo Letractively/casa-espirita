@@ -10,7 +10,7 @@
     <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div id="content">
-                <div class="container">
+                <div class="container half left">
                     <div class="conthead">
                         <h2>
                             Relatório de Empréstimos</h2>
@@ -19,10 +19,12 @@
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Codigo:
+                                    Obra:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="110px" AutoPostBack="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="100px" 
+                                        AutoPostBack="True" ontextchanged="txtCodigo_TextChanged" 
+                                        ToolTip="Informe a obra"></asp:TextBox>
                                     <asp:Button ID="btnPesCodigo" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesCodigo_Click"  />
                                     &nbsp;
@@ -34,7 +36,9 @@
                                     Associado:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" MaxLength="10" Width="110px" AutoPostBack="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" 
+                                        MaxLength="10" Width="100px" AutoPostBack="true" 
+                                        ontextchanged="txtAssociado_TextChanged" ToolTip="Informe o associado "></asp:TextBox>
                                     <asp:Button ID="btnPesAssociado" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesAssociado_Click"  />
                                         &nbsp;
@@ -49,7 +53,8 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDataRetiradaIni" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDataRetiradaIni" runat="server" CssClass="inputbox" 
+                                                    Width="100px" ToolTip="Informe a data de retirada"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataRetiradaIni_CalendarExtender" runat="server" TargetControlID="txtDataRetiradaIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -58,7 +63,8 @@
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
                                             <td>    
-                                                <asp:TextBox ID="txtDataRetiradaFin" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDataRetiradaFin" runat="server" CssClass="inputbox" 
+                                                    Width="100px" ToolTip="Informe a data de retirada"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataRetiradaFin_CalendarExtender" runat="server" TargetControlID="txtDataRetiradaFin"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -75,7 +81,8 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDevolucaoIni" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDevolucaoIni" runat="server" CssClass="inputbox" 
+                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDevolucaoIni_CalendarExtender" runat="server" TargetControlID="txtDevolucaoIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -84,7 +91,8 @@
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
                                             <td>     
-                                                <asp:TextBox ID="txtDevolucaoFim" runat="server" CssClass="inputbox"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDevolucaoFim" runat="server" CssClass="inputbox" 
+                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDevolucaoFim_CalendarExtender" runat="server" TargetControlID="txtDevolucaoFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -98,7 +106,8 @@
                                     Status:
                                 </td>
                                 <td style="width: 530px">
-                                    <asp:DropDownList ID="ddlStatus" runat="server" AppendDataBoundItems="True">
+                                    <asp:DropDownList ID="ddlStatus" runat="server" AppendDataBoundItems="True" 
+                                        CssClass="dropdownlist" ToolTip="Selecione o status do empréstimo">
                                         <asp:ListItem Text="Selecione" Value="" Selected="True"></asp:ListItem>                                            
                                         <asp:ListItem Text="D - Devolvido" Value="D" ></asp:ListItem>                                            
                                         <asp:ListItem Text="E - Emprestado" Value="E" ></asp:ListItem>                                            
@@ -109,27 +118,37 @@
                             <tr>
                                 <td style="width: 530px" colspan="2" style="text-align:center;">
                                     <center>
-                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Menos Retirados">                                                                                    
+                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" 
+                                            CssClass="input" Text="  Livros Menos Retirados" 
+                                            ToolTip="Lista os livros menos retirados">                                                                                    
                                         </asp:RadioButton>
                                         &nbsp;
-                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" CssClass="input" Text="  Livros Mais Retirados">
+                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" 
+                                            CssClass="input" Text="  Livros Mais Retirados" 
+                                            ToolTip="Lista os livros mais retirados">
                                         </asp:RadioButton>
                                     </center>
                                 </td>                                                                      
                             </tr>
                             <tr>
-                                <td colspan="2" valign="middle" style="text-align:center;">
+                                <td>
+                                    
+                                </td>
+                                <td>
+                                    <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
+                                        onclick="btnVoltar_Click" ToolTip="Volta para página principal" />
+                                    &nbsp;&nbsp;&nbsp;
                                     <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
-                                        onclick="btnRelatorio_Click" />
+                                        onclick="btnRelatorio_Click" ToolTip="Imprime o relatório" />
                                 </td>                                    
                             </tr>
                         </table>
                     </div>
+                </div>                
+                <div class="status">
                 </div>
                 <asp:HiddenField ID="hfIdAssociado" runat="server" />
                 <asp:HiddenField ID="hfIdCodigo" runat="server" />
-                <div class="status">
-                </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
