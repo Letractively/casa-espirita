@@ -61,7 +61,8 @@ namespace DataAccess
             DataSet lDs;
             try
             {
-                string sqlQuery = "SELECT " +
+                StringBuilder sqlQuery = new StringBuilder();
+                sqlQuery.Append(@"SELECT " +
                                   "    descricao " +
                                   "    ,Associado " +
                                   "    ,renovacoes " +
@@ -71,40 +72,25 @@ namespace DataAccess
                                   "    ,exemplarid " +
                                   "    ,status " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
-                                  " WHERE 1 = 1 ";
+                                  " WHERE 1 = 1 ");
                 if (instancia.PessoaId != 0)
-                {
-
-                    sqlQuery += " AND pessoaid = " + instancia.PessoaId;
-                }
-
+                    sqlQuery.Append(@" AND pessoaid = " + instancia.PessoaId);
+                
                 if (obraId != string.Empty)
-                {
-
-                    sqlQuery += " AND obraid = " + obraId;
-                }
-
+                    sqlQuery.Append(@" AND obraid = " + obraId);
+                
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
-                {
-
-                    sqlQuery += " AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)";
-                }
-
+                    sqlQuery.Append(@" AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)");
+                
                 if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
-                {
-
-                    sqlQuery += " AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)";
-                }
-
+                    sqlQuery.Append(@" AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)");
+                
                 if (Status != string.Empty)
-                {
-
-                    sqlQuery += " AND Status = " + Status;
-                }
-
+                    sqlQuery.Append(@" AND Status = '" + Status +"'");
+                
                 lDs = SqlHelper.ExecuteDataset(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, sqlQuery);
+                    CommandType.Text, sqlQuery.ToString());
                 return lDs;
             }
             catch (Exception ex)
@@ -119,45 +105,33 @@ namespace DataAccess
             DataSet lDs;
             try
             {
-                string sqlQuery = "SELECT " +
+                StringBuilder sqlQuery = new StringBuilder();
+                sqlQuery.Append( @"SELECT " +
                                   "    descricao " +
                                   "    ,exemplarid " +
                                   "    ,COUNT(exemplarid) quantidade " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
-                                  " WHERE 1 = 1 ";
-                if (instancia.PessoaId != 0)
-                {
-
-                    sqlQuery += " AND pessoaid = " + instancia.PessoaId;
-                }
-
+                                  " WHERE 1 = 1 ");
+                if (instancia.PessoaId != 0)                                    
+                    sqlQuery.Append( @" AND pessoaid = " + instancia.PessoaId);
+                
                 if (obraId != string.Empty)
-                {
-
-                    sqlQuery += " AND obraid = " + obraId;
-                }
+                    sqlQuery.Append(@" AND obraid = " + obraId);
+                
 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
-                {
-
-                    sqlQuery += " AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)";
-                }
-
+                    sqlQuery.Append(@" AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)");
+                
                 if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
-                {
-
-                    sqlQuery += " AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)";
-                }
-
+                    sqlQuery.Append(@" AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)");
+                
                 if (Status != string.Empty)
-                {
-
-                    sqlQuery += " AND Status = " + Status;
-                }
-                sqlQuery += " GROUP BY exemplarid, descricao order by quantidade " + retirados;
-                lDs = SqlHelper.ExecuteDataset(
-                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                    CommandType.Text, sqlQuery);
+                    sqlQuery.Append(@" AND Status = '" + Status+ "'");
+                
+                sqlQuery.Append(@" GROUP BY exemplarid, descricao order by quantidade " + retirados);
+                
+                lDs = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                    CommandType.Text,sqlQuery.ToString());
                 return lDs;
             }
             catch (Exception ex)

@@ -189,6 +189,7 @@
     <Content Include="Relatorios\RelEmprestimos.aspx" />
     <Content Include="Relatorios\RelEmprestimosMaisMenos.aspx" />
     <Content Include="Relatorios\RelReciboVenda.aspx" />
+    <Content Include="Relatorios\RelVendas.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\functions.js" />
@@ -686,6 +687,13 @@
     <Compile Include="Relatorios\RelReciboVenda.aspx.designer.cs">
       <DependentUpon>RelReciboVenda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelVendas.aspx.cs">
+      <DependentUpon>RelVendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelVendas.aspx.designer.cs">
+      <DependentUpon>RelVendas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="viewAgencia.aspx.cs">
       <DependentUpon>viewAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1012,6 +1020,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptDoacoes.rdlc" />
     <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc" />
     <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />

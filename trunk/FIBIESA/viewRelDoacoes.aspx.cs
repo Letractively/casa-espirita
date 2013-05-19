@@ -13,6 +13,8 @@ namespace FIBIESA
 {
     public partial class viewRelDoacoes : System.Web.UI.Page
     {
+        public DataTable dtGeral;
+
         #region funcoes
         private DataTable CriarTabelaPesquisa()
         {
@@ -28,16 +30,21 @@ namespace FIBIESA
             return dt;
 
         }
+        private void CarregarAtributos()
+        {
+            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtCodPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
+        }
         #endregion
-        public DataTable dtGeral;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            //txtValorFim.Attribute.Add("onKeyDown");
-            txtValorFim.Attributes.Add("onKeyDown", "return(FormataMoeda(this,10,event,2))");
-            txtValorIni.Attributes.Add("onKeyDown", "return(FormataMoeda(this,10,event,2))");
+            CarregarAtributos();
             if (this.txtCodPessoa.Text != string.Empty)
-            {
+            {                
                 carregaPessoa();
+                txtCodPessoa.Focus();
             }            
         }
 
@@ -127,6 +134,11 @@ namespace FIBIESA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }
 }

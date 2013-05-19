@@ -75,7 +75,7 @@ namespace FIBIESA
         protected void btnPesAssociado_Click(object sender, EventArgs e)
         {
 
-            pesquisaAssociado("");
+            pesquisaAssociado("CODIGO");
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtAssociado.ClientID + "&id=" + hfIdAssociado.ClientID + "&lbl=" + lblDesAssociado.ClientID + "','',600,500);", true);
         }
 
@@ -218,7 +218,29 @@ namespace FIBIESA
             //emp. txtDataRetiradaIni.Text
 
 
+        }
 
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
+
+        protected void txtAssociado_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAssociado.Text == "")
+            {
+                lblDesAssociado.Text = "";
+                hfIdAssociado.Value = "";
+            }
+        }
+
+        protected void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text == "")
+            {
+                lblDesCodigo.Text = "";
+                hfIdCodigo.Value = "";                     
+            }
         }
 
     }
