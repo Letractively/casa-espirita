@@ -256,5 +256,26 @@ namespace DataAccess
                  
         //    return ds;
         //}
+
+        public DataSet PesquisarItensEstoqueDataSetDA(ItensEstoque itensEstoque, byte? controlaestoque, byte? status)
+        {
+            string query = "SELECT * " +
+                    " FROM VIEW_ITENSESTOQUE  " +
+                    "  where 1 = 1 ";
+            if (itensEstoque.Id != 0)
+                query += "   AND ID = " + itensEstoque.Id;
+
+            if (status != null)
+                query += "   AND STATUS = " + status;
+
+            if (controlaestoque != null)
+                query += "   AND CONTROLAESTOQUE = " + controlaestoque;
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, query);
+
+
+            return ds;
+        }
     }
 }
