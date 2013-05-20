@@ -78,6 +78,7 @@
     <Content Include="cadCategoria.aspx" />
     <Content Include="cadChamada.aspx" />
     <Content Include="cadCidade.aspx" />
+    <Content Include="cadCirculacaoLivros.aspx" />
     <Content Include="cadConta.aspx" />
     <Content Include="cadContasApagar.aspx" />
     <Content Include="cadContasReceber.aspx" />
@@ -366,6 +367,13 @@
     </Compile>
     <Compile Include="cadCidade.aspx.designer.cs">
       <DependentUpon>cadCidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadCirculacaoLivros.aspx.cs">
+      <DependentUpon>cadCirculacaoLivros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadCirculacaoLivros.aspx.designer.cs">
+      <DependentUpon>cadCirculacaoLivros.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadConta.aspx.cs">
       <DependentUpon>cadConta.aspx</DependentUpon>

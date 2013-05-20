@@ -28,21 +28,16 @@ namespace DataAccess
                 tipo.Obraid = int.Parse(dr["OBRAID"].ToString());
                 tipo.Tombo = int.Parse(dr["TOMBO"].ToString());
                 tipo.Status = dr["STATUS"].ToString();
-
-                ObrasDA obDA = new ObrasDA();
-                DataSet dsOb = obDA.PesquisarDA(tipo.Obraid);
+                tipo.CodigoBarras = "11111";//dr["CODIGOBARRAS"].ToString();
+                              
                 Obras obras = new Obras();
+
+                obras.Id = int.Parse(dr["IDOBRA"].ToString());
+                obras.Codigo = int.Parse(dr["CODIGO"].ToString());
+                obras.Titulo = dr["TITULO"].ToString();
                 
-                if (dsOb.Tables[0].Rows.Count != 0)
-                {
-                    obras.Id = (Int32)dsOb.Tables[0].Rows[0]["id"];
-                    obras.Codigo = (Int32)dsOb.Tables[0].Rows[0]["codigo"];
-                    obras.Titulo = (string)dsOb.Tables[0].Rows[0]["titulo"];
-
-                    tipo.Obras = obras;
-                }
-
-              
+                tipo.Obras = obras;
+                              
                 tipoObra.Add(tipo);
             }
 
@@ -177,7 +172,7 @@ namespace DataAccess
         {
             //StringBuilder consulta = new StringBuilder(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
-            StringBuilder consulta = new StringBuilder(@"SELECT EX.*, OB.TITULO, OB.CODIGO FROM EXEMPLARES EX ");
+            StringBuilder consulta = new StringBuilder(@"SELECT EX.*, OB.ID IDOBRA, OB.TITULO, OB.CODIGO FROM EXEMPLARES EX ");
 
             consulta.Append(" INNER JOIN OBRAS OB ON OB.ID = EX.OBRAID");
             consulta.Append(" WHERE EX.STATUS = 'A'");
@@ -198,6 +193,38 @@ namespace DataAccess
             List<Exemplares> exemplares = CarregarObjExemplares(dr);
 
             return exemplares;
+        }
+
+        public DataSet PesquisarExemplaresEmprestimo(string valor)
+        {
+            StringBuilder consulta = new StringBuilder();
+
+            consulta.Append(@"SELECT EX.* "+
+                             ", OB.TITULO " +
+                             ", OB.CODIGO "+ 
+                             ", TOB.QTDDIAS "+
+                             ",(SELECT MOV.DATAPREVISTAEMPRESTIMO "+
+                             "    FROM EMPRESTIMOMOV MOV "+
+                             "        ,EMPRESTIMOS  EMP "+
+                             "   WHERE MOV.DATADEVOLUCAO IS NULL "+ 
+                             "     AND MOV.EMPRESTIMOID = EMP.ID "+
+                             "     AND EMP.EXEMPLARID = EX.ID ) DATAPREVISTAEMPRESTIMO " +
+                             "   FROM EXEMPLARES EX  "+
+                             "   INNER JOIN OBRAS OB ON OB.ID = EX.OBRAID "+
+                             "   INNER JOIN TIPOSOBRAS TOB ON TOB.ID = OB.TIPOSOBRAID " + 
+                             "   WHERE EX.STATUS = 'A' ");
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (OB.CODIGO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY OB.CODIGO ");
+
+            DataSet ds = SqlHelper.ExecuteDataset(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString());
+
+            return ds;
+ 
         }
 
         public override List<Base> Pesquisar(string descricao)
