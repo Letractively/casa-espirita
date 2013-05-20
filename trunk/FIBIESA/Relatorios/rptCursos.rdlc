@@ -596,7 +596,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Telefone: " + "(" + First(Fields!DDD.Value, "DataSet_instituicao").ToString() + ")" + First(Fields!telefone.Value, "DataSet_instituicao").ToString()</Value>
+                  <Value>="Telefone: " + First(Fields!telefone.Value, "DataSet_instituicao").ToString()</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
