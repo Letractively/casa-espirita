@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RelItensEstoque.aspx.cs" Inherits="FIBIESA.Relatorios.RelItensEstoque" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RelContasPagarReceber.aspx.cs" Inherits="FIBIESA.Relatorios.RelContasPagarReceber" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>FIBIESE - Relatório de Itens em Estoque</title>
+    <title>FIBIESE - Relatório de Contas a Pagar/Receber</title>
     <style type="text/css" media="all">
         html, body
         {
@@ -15,14 +15,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <div id="divRelatorio" runat="server">
-            <rsweb:ReportViewer ID="rptItensEstoque" runat="server" Height="590px" 
+            <rsweb:ReportViewer ID="rptContas" runat="server" Height="590px" 
                 Width="800px" ShowRefreshButton="False" ShowPromptAreaButton="true" 
                 ShowDocumentMapButton="False" ShowFindControls="False" ShowPrintButton="true"
                 Font-Names="Arial" Font-Size="8pt" >
-                <LocalReport reportpath="Relatorios\rptItensEstoque.rdlc">
+                <LocalReport reportpath="Relatorios\rptContasPagarReceber.rdlc">
                 </LocalReport>
             </rsweb:ReportViewer>
         </div>

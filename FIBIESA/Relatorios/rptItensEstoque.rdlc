@@ -585,7 +585,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>9.58in</Width>
+  <Width>7.87167in</Width>
   <Page>
     <PageHeader>
       <Height>4.47146cm</Height>
@@ -679,7 +679,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Telefone: " + "(" + IIf(First(Fields!DDD.Value, "DataSet_Instituicao") = "","xx",First(Fields!DDD.Value, "DataSet_Instituicao")) + ")" + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
+                  <Value>="Telefone: " + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -788,7 +788,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox16</rd:DefaultName>
           <Top>0.46778cm</Top>
-          <Left>17.29528cm</Left>
+          <Left>12.53278cm</Left>
           <Height>0.6cm</Height>
           <Width>7.03792cm</Width>
           <Style>
@@ -810,6 +810,8 @@
     </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
+    <InteractiveHeight>29.7cm</InteractiveHeight>
+    <InteractiveWidth>21cm</InteractiveWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

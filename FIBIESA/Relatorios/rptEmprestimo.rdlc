@@ -840,7 +840,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Telefone: " + "(" + IIf(First(Fields!DDD.Value, "DataSet_Instituicao") = "","xx",First(Fields!DDD.Value, "DataSet_Instituicao")) + ")" + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
+                  <Value>="Telefone: " + IIf(First(Fields!telefone.Value, "DataSet_Instituicao") = "","0000-0000",First(Fields!telefone.Value, "DataSet_Instituicao"))</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
