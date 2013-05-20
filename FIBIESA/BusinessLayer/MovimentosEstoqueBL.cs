@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -63,6 +64,14 @@ namespace BusinessLayer
             MovimentosEstoqueDA movimentosestoqueDA = new MovimentosEstoqueDA();
 
             return movimentosestoqueDA.PesquisarTotalMovimentosDA(id_ItEst, data);
+        }
+
+        public DataSet PesquisarDataSetBL(MovimentosEstoque movEstoque, string dtIni, string dtFim)
+        {
+            /*criar as regras de negocio*/
+            MovimentosEstoqueDA movimentosestoqueDA = new MovimentosEstoqueDA();
+
+            return movimentosestoqueDA.PesquisarDataSetDA(movEstoque, dtIni, dtFim);
         }
     }
 }
