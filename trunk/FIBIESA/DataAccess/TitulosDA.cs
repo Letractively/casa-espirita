@@ -246,23 +246,41 @@ namespace DataAccess
             return titulos;
         }
 
+        public DataSet PesquisarBuscaDataSetDA(Titulos titulos, string tipoTitulo, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
+        {
+            string consulta = "SELECT * FROM VIEW_TITULOS " +
+                              " WHERE 1 = 1  "  ;
 
+            if (tipoTitulo != string.Empty)
+                consulta += " AND APLICACAO = '" + tipoTitulo +"' " ;
 
+            if (blAtrasados)
+                consulta += " AND (CONVERT(DATETIME,dtVencimento,103) < CONVERT(DATETIME,GETDATE(),103) AND dtPagamento IS NULL) ";
 
+            if ((DataEmissaoIni != string.Empty) && (DataEmissaoFim != string.Empty))
+            {
 
+                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataEmissaoIni + "',103) AND CONVERT(DATETIME,'" + DataEmissaoFim + "',103)";
+            }
 
+            if ((DataVencimentoIni != string.Empty) && (DataVencimentoFim != string.Empty))
+            {
 
+                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataVencimentoIni + "',103) AND CONVERT(DATETIME,'" + DataVencimentoFim + "',103)";
+            }
 
+            if ((DataPagamentoIni != string.Empty) && (DataPagamentoFim != string.Empty))
+            {
 
+                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataPagamentoIni + "',103) AND CONVERT(DATETIME,'" + DataPagamentoFim + "',103)";
+            }
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta);
+
+            
+            return ds;
+        }
         
-
-        
-
-        
-
-
-
-
 
     }
 }
