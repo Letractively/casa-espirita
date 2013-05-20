@@ -175,7 +175,7 @@ namespace DataAccess
         public List<Titulos> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                            CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY CODIGO "));
+                                                            CommandType.Text, string.Format(@"SELECT * FROM TITULOS ORDER BY NUMERO "));
             List<Titulos> titulos = CarregarObjTitulos(dr);
             return titulos;
         }

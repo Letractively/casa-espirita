@@ -184,6 +184,7 @@
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
+    <Content Include="Relatorios\RelContasPagarReceber.aspx" />
     <Content Include="Relatorios\RelCursos.aspx" />
     <Content Include="Relatorios\RelDoacoes.aspx" />
     <Content Include="Relatorios\RelEmprestimoAcumulado.aspx" />
@@ -652,6 +653,13 @@
     </Compile>
     <Compile Include="recuperacaoLogin.aspx.designer.cs">
       <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelContasPagarReceber.aspx.cs">
+      <DependentUpon>RelContasPagarReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelContasPagarReceber.aspx.designer.cs">
+      <DependentUpon>RelContasPagarReceber.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelCursos.aspx.cs">
       <DependentUpon>RelCursos.aspx</DependentUpon>

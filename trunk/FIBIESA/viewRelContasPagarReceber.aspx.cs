@@ -33,10 +33,21 @@ namespace FIBIESA
             if (!IsPostBack)
             {
                 carregaTipoDocumentos();
+                CarregarAtributos();
             }
         }
 
         #region pesquisas
+
+        private void CarregarAtributos()
+        {
+            txtDataEmissaoIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataEmissaoFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataPagamentoFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataPagamentoIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataVencimentoFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataVencimentoIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))"); 
+        }
 
         public void pesquisaTitulo(string lCampoPesquisa)
         {
@@ -323,6 +334,11 @@ namespace FIBIESA
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }
 }
