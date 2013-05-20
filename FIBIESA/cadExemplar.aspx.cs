@@ -23,7 +23,7 @@ namespace Admin
         {
             ExemplaresBL exeBL = new ExemplaresBL();
             DataSet dsPar = exeBL.PesquisarBL(id_exe);
-
+            
             if (dsPar.Tables[0].Rows.Count != 0)
             {
                 hfId.Value = (string)dsPar.Tables[0].Rows[0]["id"].ToString(); 

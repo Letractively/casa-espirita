@@ -59,6 +59,13 @@ namespace DataAccess
                 pes.Sexo = dr["SEXO"].ToString();
                 pes.TipoAssociado = dr["TIPOASSOCIADO"].ToString();
 
+                Categorias catg = new Categorias();
+
+                catg.Id = utils.ComparaIntComZero(dr["IDCATG"].ToString());
+                catg.Codigo = utils.ComparaIntComZero(dr["CODCATG"].ToString());
+                catg.Descricao = dr["DESCATG"].ToString();
+
+                pes.Categorias = catg;
                 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
@@ -265,7 +272,10 @@ namespace DataAccess
         public List<Pessoas> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, @"SELECT * FROM PESSOAS ");
+                                                                CommandType.Text, @"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
+                                                                                   " FROM PESSOAS P " +
+                                                                                   "     ,CATEGORIAS C " +
+                                                                                   " WHERE P.CATEGORIAID = C.ID ");
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
                        
             return pessoas; 
@@ -274,7 +284,13 @@ namespace DataAccess
         public List<Pessoas> PesquisarDA(int id_pes)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE ID = {0}",id_pes));
+                                                                CommandType.Text, string.Format(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
+                                                                                                 " FROM PESSOAS P " +
+                                                                                                 "     ,CATEGORIAS C " +
+                                                                                                 " WHERE P.CATEGORIAID = C.ID " +
+                                                                                                 " AND P.ID = {0}", id_pes));
+
+
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
                        
             return pessoas;
@@ -291,7 +307,11 @@ namespace DataAccess
         public List<Pessoas> PesquisarPorGeneroDA(int id_cat)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM PESSOAS WHERE CATEGORIAID = {0}", id_cat));
+                                                                CommandType.Text, string.Format(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
+                                                                                                 " FROM PESSOAS P " +
+                                                                                                 "     ,CATEGORIAS C " +
+                                                                                                 " WHERE P.CATEGORIAID = C.ID " +
+                                                                                                 " AND P.CATEGORIAID = {0}", id_cat));
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
 
             return pessoas;
@@ -299,26 +319,28 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarDA(string campo, string valor)
         {
-            string consulta;
+            StringBuilder consulta = new StringBuilder();
+
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
+            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
 
             switch (campo.ToUpper())
             {
                 case "CODIGO":
-                    consulta = string.Format("SELECT * FROM PESSOAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
+                    consulta.Append(string.Format(" AND P.CODIGO = {0}", utils.ComparaIntComZero(valor)));
                     break;
                 case "NOME":
-                    consulta = string.Format("SELECT * FROM PESSOAS WHERE NOME  LIKE '%{0}%'", valor);
+                    consulta.Append(string.Format(" AND P.NOME  LIKE '%{0}%'", valor));
                     break;
                 case "NOMECODIGO":
-                    consulta = string.Format("SELECT * FROM PESSOAS WHERE NOME  LIKE '%{0}%' OR CODIGO = {1}", valor, utils.ComparaIntComZero(valor));
+                    consulta.Append(string.Format(" AND P.NOME  LIKE '%{0}%' OR CODIGO = {1}", valor, utils.ComparaIntComZero(valor)));
                     break;
-                default:
-                    consulta = "";
+                default:                    
                     break;
             }
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, consulta.ToString());
 
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
 
@@ -327,12 +349,14 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM PESSOAS ");
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
+            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  NOME  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
-            consulta.Append(" ORDER BY CODIGO ");
+            consulta.Append(" ORDER BY P.CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());

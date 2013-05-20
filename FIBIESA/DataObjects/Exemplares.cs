@@ -28,7 +28,7 @@ namespace DataObjects
             set { _tombo = value; }
         }
 
-        private string _status; //1
+        private string _status; 
         public string Status
         {
             get { return _status; }
@@ -40,6 +40,13 @@ namespace DataObjects
         {
             get { return _obras; }
             set { _obras = value; }
+        }
+
+        private string _codigoBarras;
+        public string CodigoBarras
+        {
+            get { return _codigoBarras; }
+            set { _codigoBarras = value; }
         }
 
     }

@@ -267,11 +267,17 @@ namespace DataObjects
         }
 
         private string _tipoAssociado;
-
         public string TipoAssociado
         {
             get { return _tipoAssociado; }
             set { _tipoAssociado = value; }
+        }
+
+        private Categorias _categorias;
+        public Categorias Categorias
+        {
+            get { return _categorias; }
+            set { _categorias = value; }
         }
                                
     }

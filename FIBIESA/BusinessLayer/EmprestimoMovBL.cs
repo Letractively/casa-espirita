@@ -67,5 +67,12 @@ namespace BusinessLayer
 
             return varDA.Carregar(id);
         }
+
+        public List<EmprestimoMov> PesquisarMovAtivosDA(int id_pessoa)
+        {
+            EmprestimoMovDA empMovDA = new EmprestimoMovDA();
+
+            return empMovDA.PesquisarMovAtivosDA(id_pessoa);
+        }
     }
 }

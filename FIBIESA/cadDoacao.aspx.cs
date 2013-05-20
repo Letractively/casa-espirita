@@ -66,18 +66,7 @@ namespace Admin
             grdPesquisa.DataSource = dt;
             grdPesquisa.DataBind();
         }
-        #endregion
 
-        protected void Page_Load(object sender, EventArgs e)
-        {          
-
-            if (!IsPostBack)
-            {
-                CarregarAtributos();
-                txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                txtCliente.Focus();
-            }
-        }
         private DataTable CriarDtPesquisa()
         {
             DataTable dt = new DataTable();
@@ -91,7 +80,19 @@ namespace Admin
 
             return dt;
         }
+        #endregion
 
+        protected void Page_Load(object sender, EventArgs e)
+        {          
+
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+                txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                txtCliente.Focus();
+            }
+        }
+        
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);

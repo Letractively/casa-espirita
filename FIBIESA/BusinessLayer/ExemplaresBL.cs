@@ -77,5 +77,12 @@ namespace BusinessLayer
 
             return varDA.PesquisarDisponiveis(valor);
         }
+
+        public DataSet PesquisarExemplaresEmprestimo(string valor)
+        {
+            ExemplaresDA exeDA = new ExemplaresDA();
+
+            return exeDA.PesquisarExemplaresEmprestimo(valor);
+        }
     }
 }

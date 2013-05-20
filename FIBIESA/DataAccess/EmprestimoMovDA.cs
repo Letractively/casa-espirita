@@ -15,6 +15,41 @@ namespace DataAccess
 
         Utils utils = new Utils();
 
+        #region funcoes
+        private List<EmprestimoMov> CarregarObjEmpMov(SqlDataReader dr)
+        {
+            List<EmprestimoMov> emprestimoMov = new List<EmprestimoMov>();
+            
+            while (dr.Read())
+            {
+                EmprestimoMov empMov = new EmprestimoMov();
+                empMov.Id = int.Parse(dr["ID"].ToString());
+                empMov.EmprestimoId = int.Parse(dr["EMPRESTIMOID"].ToString());
+                empMov.DataEmprestimo = Convert.ToDateTime(dr["DATAEMPRESTIMO"].ToString());
+                empMov.DataDevolucao = utils.ComparaDataComNull(dr["DATADEVOLUCAO"].ToString());
+                empMov.DataPrevistaEmprestimo = Convert.ToDateTime(dr["DATAPREVISTAEMPRESTIMO"].ToString());
+                empMov.Situacao = dr["SITUACAO"].ToString();
+
+                Exemplares exemplar = new Exemplares();
+                exemplar.Id = int.Parse(dr["IDEXE"].ToString());
+                exemplar.Tombo =  int.Parse(dr["TOMBO"].ToString());
+
+                empMov.Exemplares = exemplar;
+
+                Obras obras = new Obras();
+                obras.Id = int.Parse(dr["IDOBRA"].ToString());
+                obras.Codigo = int.Parse(dr["CODIGO"].ToString());
+                obras.Titulo = dr["TITULO"].ToString();
+
+                empMov.Obras = obras;
+                
+                emprestimoMov.Add(empMov);
+            }
+
+            return emprestimoMov;
+        }
+        #endregion
+
         public bool InserirDA(EmprestimoMov instancia)
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
@@ -171,6 +206,28 @@ namespace DataAccess
                 volta.DataPrevistaEmprestimo = DateTime.Parse(dr["DATAPREVISTAEMPRESTIMO"].ToString());
             }
             return volta;
+        }
+
+        public List<EmprestimoMov> PesquisarMovAtivosDA(int id_pessoa)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT EM.*, O.ID IDOBRA, O.CODIGO, O.TITULO, " +
+                                                                                       " EX.ID IDEXE, EX.TOMBO, " +
+                                                                                       " CASE WHEN (DATAPREVISTAEMPRESTIMO <= CAST (GETDATE() AS DATE)) " +
+                                                                                       " THEN 'Atrasado' ELSE 'Emprestado' END AS SITUACAO " +
+                                                                                       " FROM EMPRESTIMOMOV EM " +
+                                                                                       "     ,EMPRESTIMOS E " +
+                                                                                       "     ,EXEMPLARES EX " +
+                                                                                       "     ,OBRAS O " +
+                                                                                       " WHERE EM.EMPRESTIMOID = E.ID " +
+                                                                                       "   AND E.EXEMPLARID = EX.ID " +
+                                                                                       "   AND EX.OBRAID = O.ID " +
+                                                                                       "   AND EM.DATADEVOLUCAO IS NULL " +
+                                                                                       "   AND E.PESSOAID = {0}", id_pessoa));
+
+            List<EmprestimoMov> empMov = CarregarObjEmpMov(dr);
+
+            return empMov;
         }
     }
 }

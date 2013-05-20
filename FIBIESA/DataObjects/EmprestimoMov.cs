@@ -41,5 +41,26 @@ namespace DataObjects
             get { return _dataPrevistaEmprestimo; }
             set { _dataPrevistaEmprestimo = value; }
         }
+
+        private Obras _obras;
+        public Obras Obras
+        {
+            get { return _obras; }
+            set { _obras = value; }
+        }
+
+        private Exemplares _exemplares;
+        public Exemplares Exemplares
+        {
+            get { return _exemplares; }
+            set { _exemplares = value; }
+        }
+
+        private string _situacao;
+        public string Situacao
+        {
+            get { return _situacao; }
+            set { _situacao = value; }
+        }
     }
 }
