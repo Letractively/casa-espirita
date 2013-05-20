@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -73,5 +74,19 @@ namespace BusinessLayer
             return titulosDA.PesquisarBuscaDA(tipo,valor);
         }
 
+        public List<Titulos> PesquisarBuscaBL(string valor)
+        {
+            TitulosDA titulosDA = new TitulosDA();
+
+            return titulosDA.PesquisarBuscaDA(valor);
+        }
+
+        public DataSet PesquisarBuscaDataSetBL(Titulos titulos, string tipoTitulo, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
+        {
+            TitulosDA titulosDA = new TitulosDA();
+
+            return titulosDA.PesquisarBuscaDataSetDA(titulos, tipoTitulo, blAtrasados, DataEmissaoIni, DataEmissaoFim, DataVencimentoIni, DataVencimentoFim, DataPagamentoIni, DataPagamentoFim);
+        }
+        
     }
 }
