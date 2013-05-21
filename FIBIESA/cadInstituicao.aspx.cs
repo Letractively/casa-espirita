@@ -46,7 +46,9 @@ namespace FIBIESA
                     CarregarDdlBairro(ddlBairro, ltIns.CidadeId != null ? Convert.ToInt32(ltIns.CidadeId.ToString()) : 0);
                     ddlCidades.SelectedValue = ltIns.CidadeId.ToString();
                     ddlBairro.SelectedValue = ltIns.BairroId.ToString();
-                }               
+                }
+
+                hfIdInstLogo.Value = ltIns.InstituicaoLogo.Id.ToString();
             }
 
         }
@@ -115,9 +117,6 @@ namespace FIBIESA
                     insLBL.EditarBL(instituicoesLogo);
                 else
                     insLBL.InserirBL(instituicoesLogo);
-            }
-            else
-            { 
             }
         }
         private void VerificarImagem()
@@ -227,7 +226,10 @@ namespace FIBIESA
 
                     if (v_operacao == "edit")
                         if (Request.QueryString["id_ins"] != null)
+                        {
                             id_ins = Convert.ToInt32(Request.QueryString["id_ins"].ToString());
+                            imgLogo.ImageUrl = "instituicoesLogo.ashx?logoId=" + id_ins.ToString();
+                        }
                 }
 
                 CarregarDdlUF(ddlUF);

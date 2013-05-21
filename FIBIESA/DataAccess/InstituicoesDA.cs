@@ -37,7 +37,7 @@ namespace DataAccess
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
                 ins.DDD = dr["DDD"].ToString();
                 ins.telefone = dr["telefone"].ToString();
-                ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
+                //ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();

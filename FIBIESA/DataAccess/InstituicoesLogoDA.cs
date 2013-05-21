@@ -23,6 +23,7 @@ namespace DataAccess
                 insL.Id = int.Parse(dr["ID"].ToString());
                 insL.InstituicoesId = int.Parse(dr["INSTITUICOESID"].ToString());
                 insL.Extensao = dr["EXTENSAO"].ToString();
+                insL.Imagem = (byte[])dr["IMAGEM"];
                 //.Imagem = dr["IMAGEM"].ToString();
                 
                 instituicoesLogo.Add(insL);

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Security.Cryptography;
 namespace FG
 {
     public class Utils
@@ -295,6 +296,26 @@ namespace FG
         {
             e.Row.Cells[int_coluna].Attributes.Add("onclick", "javascript:return " +
                 "confirm('\\n" + prm_mensagem + "')");
+        }
+        /// <summary>
+        /// Gerar hash de strings (encriptacao via unica - one way crypt)
+        /// </summary>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        public string OneWayCrypt(string valor)
+        {
+            UnicodeEncoding UE = new UnicodeEncoding();
+            byte[] hashValue;
+            byte[] message = UE.GetBytes(valor);
+
+            SHA512Managed hashString = new SHA512Managed();
+            StringBuilder hex = new StringBuilder();
+            hashValue = hashString.ComputeHash(message);
+            foreach (byte x in hashValue)
+            {
+                hex.Append(String.Format("{0:x2}", x));
+            }
+            return hex.ToString();
         }
     }
        
