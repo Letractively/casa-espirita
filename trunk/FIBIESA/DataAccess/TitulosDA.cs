@@ -246,13 +246,25 @@ namespace DataAccess
             return titulos;
         }
 
-        public DataSet PesquisarBuscaDataSetDA(Titulos titulos, string tipoTitulo, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
+        public DataSet PesquisarBuscaDataSetDA(string codTitulos, string codAssociados, string codPotadores, string tipoTitulo, string tipoDocumento, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
         {
             string consulta = "SELECT * FROM VIEW_TITULOS " +
-                              " WHERE 1 = 1  "  ;
+                              " WHERE 1 = 1  ";
 
             if (tipoTitulo != string.Empty)
-                consulta += " AND APLICACAO = '" + tipoTitulo +"' " ;
+                consulta += " AND APLICACAO = '" + tipoTitulo + "' ";
+
+            if (codAssociados != string.Empty)
+                consulta += " AND CODIGOPESSOA IN (" + codAssociados + ")";
+
+            if (codPotadores != string.Empty)
+                consulta += " AND CODIGOPORTADOR IN (" + codPotadores + ")";
+
+            if (codTitulos != string.Empty)
+                consulta += " AND numero IN (" + codTitulos + ")";
+
+            if (tipoDocumento != string.Empty)
+                consulta += " AND tipoDocumentoId = " + tipoDocumento;
 
             if (blAtrasados)
                 consulta += " AND (CONVERT(DATETIME,dtVencimento,103) < CONVERT(DATETIME,GETDATE(),103) AND dtPagamento IS NULL) ";
@@ -277,7 +289,7 @@ namespace DataAccess
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta);
 
-            
+
             return ds;
         }
         
