@@ -10,7 +10,7 @@
 namespace FIBIESA.Relatorios {
     
     
-    public partial class RelContasPagarReceber {
+    public partial class RelContasPagar {
         
         /// <summary>
         /// form1 control.
@@ -40,13 +40,13 @@ namespace FIBIESA.Relatorios {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRelatorio;
         
         /// <summary>
-        /// rptContas control.
+        /// rptContasPagar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer rptContas;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer rptContasPagar;
         
         /// <summary>
         /// divMensagem control.

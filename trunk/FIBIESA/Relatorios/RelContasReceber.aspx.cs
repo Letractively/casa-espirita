@@ -11,7 +11,7 @@ using System.Data;
 
 namespace FIBIESA.Relatorios
 {
-    public partial class RelContasPagarReceber : System.Web.UI.Page
+    public partial class RelContasReceber : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
