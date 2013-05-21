@@ -97,14 +97,7 @@ namespace DataObjects
             get { return _volume; }
             set { _volume = value; }
         }
-        
-        private int? _origemId;
-        public int? OrigemId
-        {
-            get { return _origemId; }
-            set { _origemId = value; }
-        }
-
+         
         private int? _tiposObraId;
         public int? TiposObraId
         {

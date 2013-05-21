@@ -52,19 +52,7 @@ namespace Admin
                 ddlEditora.Items.Add(new ListItem(ltEd.Codigo + " - " + ltEd.Descricao, ltEd.Id.ToString()));
 
             ddlEditora.SelectedIndex = 0;
-        }
-
-        private void CarregarDdlOrigem()
-        {
-            OrigensBL oriBL = new OrigensBL();
-            List<Origens> origens = oriBL.PesquisarBL();
-
-            ddlOrigem.Items.Add(new ListItem());
-            foreach (Origens ltOri in origens)
-                ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
-
-            ddlOrigem.SelectedIndex = 0;
-        }
+        }        
 
         private void CarregarDados(int id_bai)
         {
@@ -84,8 +72,7 @@ namespace Admin
                 txtDataReimpressao.Text = dsOb.Tables[0].Rows[0]["datareimpressao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datareimpressao"]).ToString("dd/MM/yyyy") : "";
                 txtDataPublicacao.Text = dsOb.Tables[0].Rows[0]["datapublicacao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datapublicacao"]).ToString("dd/MM/yyyy") : "";
                 txtAssuntosAborda.Text = (string)dsOb.Tables[0].Rows[0]["assuntosaborda"].ToString();
-                ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();
-                ddlOrigem.SelectedValue = (string)dsOb.Tables[0].Rows[0]["origemid"].ToString();
+                ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();               
                 ddlTipoObra.SelectedValue = (string)dsOb.Tables[0].Rows[0]["tiposobraid"].ToString();
                 
             }           
@@ -122,8 +109,7 @@ namespace Admin
                 }
 
                 CarregarDdlEditora();
-                CarregarDdlTiposObra();
-                CarregarDdlOrigem();
+                CarregarDdlTiposObra();                
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
@@ -157,9 +143,7 @@ namespace Admin
             obras.DataReimpressao = utils.ComparaDataComNull(txtDataReimpressao.Text);
             obras.TiposObraId = utils.ComparaIntComNull(ddlTipoObra.SelectedValue);
             obras.LocalPublicacao = txtLocalPublic.Text;
-            obras.OrigemId = utils.ComparaIntComNull(ddlOrigem.SelectedValue);
-
-
+            
             if (obras.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
@@ -178,8 +162,7 @@ namespace Admin
 
             Response.Redirect("viewObra.aspx");
         }
-
-      
+            
         
     }
 }

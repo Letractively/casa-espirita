@@ -49,5 +49,18 @@ namespace DataObjects
             set { _codigoBarras = value; }
         }
 
+        private int? _origemId;
+        public int? OrigemId
+        {
+            get { return _origemId; }
+            set { _origemId = value; }
+        }
+
+        private string _codBarras;
+        public string CodBarras
+        {
+            get { return _codBarras; }
+            set { _codBarras = value; }
+        }
     }
 }

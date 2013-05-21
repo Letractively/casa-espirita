@@ -49,6 +49,15 @@
                             </asp:DropDownList>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="width: 120px">
+                            Origem:
+                        </td>
+                        <td style="width: 120px">
+                            <asp:DropDownList ID="ddlOrigem" runat="server" CssClass="dropdownlist">
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
                 </table>
                 <table>
                     <tr>

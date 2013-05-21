@@ -29,6 +29,7 @@ namespace DataAccess
                 tipo.Tombo = int.Parse(dr["TOMBO"].ToString());
                 tipo.Status = dr["STATUS"].ToString();
                 tipo.CodigoBarras = "11111";//dr["CODIGOBARRAS"].ToString();
+                tipo.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
                               
                 Obras obras = new Obras();
 
@@ -47,11 +48,14 @@ namespace DataAccess
 
         public bool InserirDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[3];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[1] = new SqlParameter("@status", instancia.Status);
             paramsToSP[2] = new SqlParameter("@tombo", instancia.Tombo);
+            paramsToSP[3] = new SqlParameter("@origemId", instancia.OrigemId);
+            paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
+            paramsToSP[5] = new SqlParameter("@codBarras", instancia.CodBarras);
 
             try
             {
@@ -68,12 +72,14 @@ namespace DataAccess
 
         public bool EditarDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[4];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[2] = new SqlParameter("@status", instancia.Status);
             paramsToSP[3] = new SqlParameter("@tombo", instancia.Tombo);
+            paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
+            paramsToSP[5] = new SqlParameter("@codBarras", instancia.CodBarras);
 
             try
             {
@@ -118,7 +124,7 @@ namespace DataAccess
         {
             DataSet ds = SqlHelper.ExecuteDataset(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT E.*, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
+                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
 
             return ds;
         }
@@ -148,7 +154,7 @@ namespace DataAccess
 
         public List<Exemplares> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+            StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             if (valor != "" && valor != null)
                 consulta.Append(string.Format(" AND (O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
