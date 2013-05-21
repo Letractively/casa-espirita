@@ -171,44 +171,61 @@ namespace DataAccess
             return ds;
         }
 
-        public DataSet PesquisarDARelDataSet(string pessoaId, string itemId, string dtIni, string dtFim, string ord)
+        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim)
         {
             StringBuilder query = new StringBuilder();
 
             query.Append(@"SELECT  v.vendaId " +
                     "    ,v.quantidade " +
                     "    ,v.total " +
-                    "    ,v.itemEstoqueId " +
+                    "    ,v.obraCodigo " +
                     "    ,v.titulo " +
                     "    ,v.PessoaId " +
                     "    ,v.Nome " +
                     "    ,v.data " +
-                    "    ,(SELECT COUNT(VendaItens.id) FROM dbo.VendaItens " +
-                    "        INNER JOIN vendas ON " +
-                    "            vendas.id = VendaItens.vendaId " +
-                    "        WHERE 1 = 1 AND VendaItens.itemEstoqueId = V.itemEstoqueId ");
-
-            if ((dtIni != string.Empty) && (dtFim != string.Empty))
-                query.Append(@"  and vendas.DATA between CONVERT(datetime,'" + dtIni + "',103) and  CONVERT(datetime,'" + dtFim + "',103)	 ");
-            
-            if (pessoaId != string.Empty)
-                query.Append(@" AND vendas.PessoaId = " + pessoaId);
-            
-            query.Append(@") qtde FROM dbo.VIEW_vendasItens v " +
+                    " FROM dbo.VIEW_vendasItens v " +
                     " WHERE 1 = 1 ");
 
-            if (pessoaId != string.Empty)
-                query.Append(@" AND PessoaId = " + pessoaId);
-            
-            if (itemId != string.Empty)
-                query.Append(@" AND itemEstoqueId = " + itemId);
-            
+            if (pessoasCod != string.Empty)
+                query.Append(@" AND pessoaCodigo IN (" + pessoasCod + ")");
+
+            if (itensCod != string.Empty)
+                query.Append(@" AND obraCodigo IN (" + itensCod + ")");
+
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
                 query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
-            
+
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, query.ToString());
+
+
+            return ds;
+        }
+
+        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, string ord)
+        {
+            StringBuilder query = new StringBuilder();
+
+            query.Append(@"SELECT  v.obraCodigo " +
+                    "    ,v.titulo " +
+                    "    ,SUM(v.quantidade) as qtde " +
+                    " FROM dbo.VIEW_vendasItens v " +
+                    " WHERE 1 = 1 ");
+
+            if (pessoasCod != string.Empty)
+                query.Append(@" AND pessoaCodigo IN (" + pessoasCod + ")");
+
+            if (itensCod != string.Empty)
+                query.Append(@" AND obraCodigo IN (" + itensCod + ")");
+
+            if ((dtIni != string.Empty) && (dtFim != string.Empty))
+                query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
+
+            query.Append(@" GROUP BY v.obraCodigo,v.titulo ");
             if (ord != string.Empty)
                 query.Append(@" ORDER BY qtde " + ord);
-            
+
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, query.ToString());
 
