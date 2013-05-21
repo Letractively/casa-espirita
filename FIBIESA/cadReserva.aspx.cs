@@ -240,6 +240,16 @@ namespace Admin
             
             emp.ExemplarId = utils.ComparaIntComZero(hfIdExemplar.Value);
             emp.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
+            
+            //a pessoa esta devendo?
+            PessoasBL people = new PessoasBL();
+            int fiado = people.EstaDevendo(emp.PessoaId);
+            if (fiado > 0)
+            {
+                ExibirMensagem("Esta pessoa possui títulos em abeto com a Instituição e não pode emprestar este exemplar!");
+                txtExemplar.Focus();
+                return;  //throw new Exception(); //tem um jeito melhor de sair do metodo?
+            }
 
 
             if (emp.Id > 0)
@@ -309,7 +319,17 @@ namespace Admin
             Emprestimos emp = new Emprestimos();
 
             emp.Id = utils.ComparaIntComZero(hfId.Value);
+            emp.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
 
+            //a pessoa esta devendo?
+            PessoasBL people = new PessoasBL();
+            int fiado = people.EstaDevendo(emp.PessoaId);
+            if (fiado > 0)
+            {
+                ExibirMensagem("Esta pessoa possui títulos em abeto com a Instituição e não pode renovar este exemplar!");
+                txtExemplar.Focus();
+                return;  //throw new Exception(); //tem um jeito melhor de sair do metodo?
+            }
 
             //Quantidade máxima de renovações:
             int param = this.LerParametro(2, "B");
