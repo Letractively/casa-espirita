@@ -63,20 +63,27 @@ namespace FIBIESA.Relatorios
 
                     PessoasBL peBL = new PessoasBL();
                     Pessoas pe = new Pessoas();
-                    List<Pessoas> lPessoas = peBL.PesquisarBuscaBL(PessoaId);
+                    List<Base> lPessoas = peBL.PesquisarPessoas(PessoaId);
 
-                    string nome = "";
-                    if (lPessoas.Count != 0 && PessoaId != string.Empty)
+                    string nome = string.Empty;
+                    foreach (Base pes in lPessoas)
                     {
-                        nome = lPessoas[0].Nome;
+                        if (nome == string.Empty)
+                            nome += pes.PesDescricao;
+                        else
+                            nome += ", " + pes.PesDescricao;
                     }
+
                     ObrasBL obrasBl = new ObrasBL();
                     Obras obras = new Obras();
-                    List<Obras> lObras = obrasBl.PesquisarBuscaBL(obraId);
-                    string titulo = "";
-                    if (lPessoas.Count != 0 && obraId != string.Empty)
+                    List<Base> lObras = obrasBl.PesquisarObras(obraId);
+                    string titulo = string.Empty;
+                    foreach (Base pes in lObras)
                     {
-                        titulo = lObras[0].Titulo;
+                        if (titulo == string.Empty)
+                            titulo += pes.PesDescricao;
+                        else
+                            titulo += ", " + pes.PesDescricao;
                     }
 
                     ReportParameter[] param = new ReportParameter[10];

@@ -100,8 +100,8 @@
     </DataSet>
     <DataSet Name="DataSet_Emprestimo">
       <Fields>
-        <Field Name="exemplarid">
-          <DataField>exemplarid</DataField>
+        <Field Name="obrasCodigo">
+          <DataField>obrasCodigo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="descricao">
@@ -241,14 +241,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="exemplarid">
+                    <Textbox Name="obrasCodigo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!exemplarid.Value</Value>
+                              <Value>=Fields!obrasCodigo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -257,7 +257,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>exemplarid</rd:DefaultName>
+                      <rd:DefaultName>obrasCodigo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -368,7 +368,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>4.45833in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -411,7 +411,7 @@
   <Width>11.67708in</Width>
   <Page>
     <PageHeader>
-      <Height>6.04617cm</Height>
+      <Height>7.66013cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -567,7 +567,7 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>4.0551cm</Top>
+          <Top>5.0076cm</Top>
           <Left>4.6699cm</Left>
           <Height>0.73613cm</Height>
           <Width>11.43cm</Width>
@@ -596,7 +596,7 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>4.96762cm</Top>
+          <Top>5.92012cm</Top>
           <Left>4.6699cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
@@ -625,7 +625,7 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>4.96762cm</Top>
+          <Top>5.92012cm</Top>
           <Left>16.57615cm</Left>
           <Height>0.60886cm</Height>
           <Width>11.43cm</Width>
@@ -657,7 +657,7 @@
           <Top>3.27871cm</Top>
           <Left>4.6699cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.42155cm</Width>
+          <Width>23.33625cm</Width>
           <ZIndex>8</ZIndex>
           <Style>
             <Border>
@@ -683,10 +683,10 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>3.27913cm</Top>
-          <Left>13.93031cm</Left>
+          <Top>4.23163cm</Top>
+          <Left>4.6699cm</Left>
           <Height>0.59958cm</Height>
-          <Width>6.87917cm</Width>
+          <Width>23.33625cm</Width>
           <ZIndex>9</ZIndex>
           <Style>
             <Border>
