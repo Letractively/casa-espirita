@@ -10,7 +10,7 @@
 namespace FIBIESA {
     
     
-    public partial class viewRelEmprestimo {
+    public partial class viewRelContasPagar {
         
         /// <summary>
         /// ScriptManager1 control.
@@ -22,40 +22,40 @@ namespace FIBIESA {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// upnlPesquisa control.
+        /// updPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upnlPesquisa;
+        protected global::System.Web.UI.UpdatePanel updPrincipal;
         
         /// <summary>
-        /// txtCodigo control.
+        /// txtTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
+        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
         
         /// <summary>
-        /// btnPesCodigo control.
+        /// btnPesTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesCodigo;
+        protected global::System.Web.UI.WebControls.Button btnPesTitulo;
         
         /// <summary>
-        /// RegularExpressionValidator1 control.
+        /// RegularExpressionValidator7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator7;
         
         /// <summary>
         /// txtAssociado control.
@@ -76,6 +76,51 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Button btnPesAssociado;
         
         /// <summary>
+        /// RegularExpressionValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator8;
+        
+        /// <summary>
+        /// ddlTipoDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        
+        /// <summary>
+        /// ckbAtrasados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckbAtrasados;
+        
+        /// <summary>
+        /// txtDataEmissaoIni control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataEmissaoIni;
+        
+        /// <summary>
+        /// txtDataEmissaoIni_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender txtDataEmissaoIni_CalendarExtender;
+        
+        /// <summary>
         /// RegularExpressionValidator2 control.
         /// </summary>
         /// <remarks>
@@ -85,22 +130,49 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
-        /// txtDataRetiradaIni control.
+        /// txtDataEmissaoFim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataRetiradaIni;
+        protected global::System.Web.UI.WebControls.TextBox txtDataEmissaoFim;
         
         /// <summary>
-        /// txtDataRetiradaIni_CalendarExtender control.
+        /// txtDataEmissaoFim_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDataRetiradaIni_CalendarExtender;
+        protected global::AjaxControlToolkit.CalendarExtender txtDataEmissaoFim_CalendarExtender;
+        
+        /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
+        /// txtDataVencimentoIni control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDataVencimentoIni;
+        
+        /// <summary>
+        /// txtDataVencimentoIni_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender txtDataVencimentoIni_CalendarExtender;
         
         /// <summary>
         /// RegularExpressionValidator3 control.
@@ -112,22 +184,22 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
-        /// txtDataRetiradaFin control.
+        /// txtDataVencimentoFim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataRetiradaFin;
+        protected global::System.Web.UI.WebControls.TextBox txtDataVencimentoFim;
         
         /// <summary>
-        /// txtDataRetiradaFin_CalendarExtender control.
+        /// txtDataVencimentoFim_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDataRetiradaFin_CalendarExtender;
+        protected global::AjaxControlToolkit.CalendarExtender txtDataVencimentoFim_CalendarExtender;
         
         /// <summary>
         /// RegularExpressionValidator4 control.
@@ -139,22 +211,22 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator4;
         
         /// <summary>
-        /// txtDevolucaoIni control.
+        /// txtDataPagamentoIni control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDevolucaoIni;
+        protected global::System.Web.UI.WebControls.TextBox txtDataPagamentoIni;
         
         /// <summary>
-        /// txtDevolucaoIni_CalendarExtender control.
+        /// txtDataPagamentoIni_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDevolucaoIni_CalendarExtender;
+        protected global::AjaxControlToolkit.CalendarExtender txtDataPagamentoIni_CalendarExtender;
         
         /// <summary>
         /// RegularExpressionValidator5 control.
@@ -166,22 +238,22 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator5;
         
         /// <summary>
-        /// txtDevolucaoFim control.
+        /// txtDataPagamentoFim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDevolucaoFim;
+        protected global::System.Web.UI.WebControls.TextBox txtDataPagamentoFim;
         
         /// <summary>
-        /// txtDevolucaoFim_CalendarExtender control.
+        /// txtDataPagamentoFim_CalendarExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDevolucaoFim_CalendarExtender;
+        protected global::AjaxControlToolkit.CalendarExtender txtDataPagamentoFim_CalendarExtender;
         
         /// <summary>
         /// RegularExpressionValidator6 control.
@@ -191,33 +263,6 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
-        
-        /// <summary>
-        /// ddlStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
-        
-        /// <summary>
-        /// rbLivrosMenos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbLivrosMenos;
-        
-        /// <summary>
-        /// rbLivrosMais control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbLivrosMais;
         
         /// <summary>
         /// btnVoltar control.
@@ -247,13 +292,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Panel pnlAssociado;
         
         /// <summary>
-        /// txtPesquisa control.
+        /// txtPesquisaAssociado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisaAssociado;
         
         /// <summary>
         /// grdPesquisaAssociado control.
@@ -265,13 +310,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.GridView grdPesquisaAssociado;
         
         /// <summary>
-        /// btnCancel control.
+        /// btnCancelAssociado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnCancelAssociado;
         
         /// <summary>
         /// ModalPopupExtenderPesquisaAssociado control.
@@ -283,49 +328,58 @@ namespace FIBIESA {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtenderPesquisaAssociado;
         
         /// <summary>
-        /// pnlObra control.
+        /// pnlTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlObra;
+        protected global::System.Web.UI.WebControls.Panel pnlTitulo;
         
         /// <summary>
-        /// txtPesquisaObra control.
+        /// txtPesquisaTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPesquisaObra;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisaTitulo;
         
         /// <summary>
-        /// grdPesquisaObra control.
+        /// grdPesquisaTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaObra;
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaTitulo;
         
         /// <summary>
-        /// btnCancelObra control.
+        /// btnCancelTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelObra;
+        protected global::System.Web.UI.WebControls.Button btnCancelTitulo;
         
         /// <summary>
-        /// ModalPopupExtenderPesquisaObra control.
+        /// ModalPopupExtenderPesquisaTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtenderPesquisaObra;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtenderPesquisaTitulo;
+        
+        /// <summary>
+        /// hfIdTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTitulo;
         
         /// <summary>
         /// hfIdAssociado control.
@@ -337,13 +391,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.HiddenField hfIdAssociado;
         
         /// <summary>
-        /// hfIdCodigo control.
+        /// hfIdPortador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdCodigo;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdPortador;
         
         /// <summary>
         /// Master property.
