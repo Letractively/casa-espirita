@@ -74,7 +74,6 @@
     <Content Include="cadAutor.aspx" />
     <Content Include="cadBairro.aspx" />
     <Content Include="cadBanco.aspx" />
-    <Content Include="cadBancosInstrucoes.aspx" />
     <Content Include="cadCategoria.aspx" />
     <Content Include="cadChamada.aspx" />
     <Content Include="cadCidade.aspx" />
@@ -340,13 +339,6 @@
     </Compile>
     <Compile Include="cadBanco.aspx.designer.cs">
       <DependentUpon>cadBanco.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="cadBancosInstrucoes.aspx.cs">
-      <DependentUpon>cadBancosInstrucoes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cadBancosInstrucoes.aspx.designer.cs">
-      <DependentUpon>cadBancosInstrucoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadCategoria.aspx.cs">
       <DependentUpon>cadCategoria.aspx</DependentUpon>
@@ -616,6 +608,9 @@
     </Compile>
     <Compile Include="home.Master.designer.cs">
       <DependentUpon>home.Master</DependentUpon>
+    </Compile>
+    <Compile Include="instituicoesLogo.ashx.cs">
+      <DependentUpon>instituicoesLogo.ashx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -1040,6 +1035,9 @@
     <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc" />
     <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="instituicoesLogo.ashx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

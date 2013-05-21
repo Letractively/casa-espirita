@@ -56,7 +56,8 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@desconto", venItEi.Desconto);
             paramsToSP[5] = new SqlParameter("@situacao", venItEi.Situacao);
 
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
+                CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
 
             DataTable tabela = ds.Tables[0];
 

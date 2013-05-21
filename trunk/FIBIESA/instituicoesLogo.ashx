@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="instituicoesLogo.ashx.cs" Class="FIBIESA.instituicoesLogo1" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="instituicoesLogo.ashx.cs" Class="FIBIESA.instituicoesLogo" %>
