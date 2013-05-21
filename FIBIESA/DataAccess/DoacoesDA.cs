@@ -155,7 +155,7 @@ namespace DataAccess
                                 "  ,valor " +
                                 " FROM VIEW_DOACOES WHERE 1 = 1 ");
             if (codPessoa != string.Empty)
-                sqlQuery.Append(@" AND (PESSOAID =" + codPessoa + ")");
+                sqlQuery.Append(@" AND pessoaCodigo IN (" + codPessoa + ")");
             
             if ((dataIni != string.Empty) && (dataFim != string.Empty))
                 sqlQuery.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)");

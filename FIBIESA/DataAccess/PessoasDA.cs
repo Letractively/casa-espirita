@@ -32,7 +32,7 @@ namespace DataAccess
                 pes.NomeMae = dr["NOMEMAE"].ToString();
                 pes.NomePai = dr["NOMEPAI"].ToString();
                 pes.DtNascimento = utils.ComparaDataComNull(dr["DTNASCIMENTO"].ToString());
-                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();                
+                pes.EstadoCivil = dr["ESTADOCIVIL"].ToString();
                 pes.Endereco = dr["ENDERECO"].ToString();
                 pes.Numero = dr["NUMERO"].ToString();
                 pes.BairroId = Convert.ToInt32(dr["BAIRROID"].ToString());
@@ -66,11 +66,11 @@ namespace DataAccess
                 catg.Descricao = dr["DESCATG"].ToString();
 
                 pes.Categorias = catg;
-                
+
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
                 DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
-                               
+
                 if (dsCid.Tables[0].Rows.Count != 0)
                 {
                     cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
@@ -96,10 +96,10 @@ namespace DataAccess
 
                 pes.Cidade = cid;
 
-                BairrosDA baiDA = new BairrosDA();                
+                BairrosDA baiDA = new BairrosDA();
                 Bairros bai = new Bairros();
                 DataSet dsBai;
-                                
+
                 dsBai = baiDA.PesquisaDA(pes.BairroId);
                 if (dsBai.Tables[0].Rows.Count > 0)
                 {
@@ -109,7 +109,7 @@ namespace DataAccess
                 }
 
                 pes.Bairro = bai;
-                
+
                 if (pes.CidadeProfId != null)
                 {
                     dsCid.Clear();
@@ -128,7 +128,7 @@ namespace DataAccess
 
                 pessoas.Add(pes);
             }
-            return pessoas; 
+            return pessoas;
         }
 
         private Int32 RetornaMaxCodigo()
@@ -147,7 +147,7 @@ namespace DataAccess
         public int InserirDA(Pessoas pes)
         {
             SqlParameter[] paramsToSP = new SqlParameter[34];
-                        
+
             paramsToSP[0] = new SqlParameter("@nome", pes.Nome);
             paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
             paramsToSP[2] = new SqlParameter("@cpfcnpj", pes.CpfCnpj);
@@ -155,7 +155,7 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@nomemae", pes.NomeMae);
             paramsToSP[5] = new SqlParameter("@nomepai", pes.NomePai);
             paramsToSP[6] = new SqlParameter("@dtnascimento", pes.DtNascimento);
-            paramsToSP[7] = new SqlParameter("@estadocivil", pes.EstadoCivil);          
+            paramsToSP[7] = new SqlParameter("@estadocivil", pes.EstadoCivil);
             paramsToSP[8] = new SqlParameter("@endereco", pes.Endereco);
             paramsToSP[9] = new SqlParameter("@numero", pes.Numero);
             paramsToSP[10] = new SqlParameter("@bairroid", pes.BairroId);
@@ -163,7 +163,7 @@ namespace DataAccess
             paramsToSP[12] = new SqlParameter("@cidadeid", pes.CidadeId);
             paramsToSP[13] = new SqlParameter("@complemento", pes.Complemento);
             paramsToSP[14] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[15] = new SqlParameter("@numeroprof", pes.NumeroProf);            
+            paramsToSP[15] = new SqlParameter("@numeroprof", pes.NumeroProf);
             paramsToSP[16] = new SqlParameter("@cepprof", pes.CepProf);
             paramsToSP[17] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
             paramsToSP[18] = new SqlParameter("@complementoprof", pes.ComplementoProf);
@@ -172,12 +172,12 @@ namespace DataAccess
             paramsToSP[21] = new SqlParameter("@status", pes.Status);
             paramsToSP[22] = new SqlParameter("@tipo", pes.Tipo);
             paramsToSP[23] = new SqlParameter("@obs", pes.Obs);
-            paramsToSP[24] = new SqlParameter("@categoriaid", pes.CategoriaId);            
+            paramsToSP[24] = new SqlParameter("@categoriaid", pes.CategoriaId);
             paramsToSP[25] = new SqlParameter("@envemail", pes.EnvEmail);
             paramsToSP[26] = new SqlParameter("@dtcadastro", pes.DtCadastro);
             paramsToSP[27] = new SqlParameter("@refnome", pes.RefNome);
             paramsToSP[28] = new SqlParameter("@reftelefone", pes.RefTelefone);
-            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);       
+            paramsToSP[29] = new SqlParameter("@refddd", pes.RefDDD);
             paramsToSP[30] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[31] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[32] = new SqlParameter("@sexo", pes.Sexo);
@@ -212,7 +212,7 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@nomemae", pes.NomeMae);
             paramsToSP[7] = new SqlParameter("@nomepai", pes.NomePai);
             paramsToSP[8] = new SqlParameter("@dtnascimento", pes.DtNascimento);
-            paramsToSP[9] = new SqlParameter("@estadocivil", pes.EstadoCivil);            
+            paramsToSP[9] = new SqlParameter("@estadocivil", pes.EstadoCivil);
             paramsToSP[10] = new SqlParameter("@endereco", pes.Endereco);
             paramsToSP[11] = new SqlParameter("@numero", pes.Numero);
             paramsToSP[12] = new SqlParameter("@bairroid", pes.BairroId);
@@ -220,7 +220,7 @@ namespace DataAccess
             paramsToSP[14] = new SqlParameter("@cidadeid", pes.CidadeId);
             paramsToSP[15] = new SqlParameter("@complemento", pes.Complemento);
             paramsToSP[16] = new SqlParameter("@enderecoprof", pes.EnderecoProf);
-            paramsToSP[17] = new SqlParameter("@numeroprof", pes.NumeroProf);           
+            paramsToSP[17] = new SqlParameter("@numeroprof", pes.NumeroProf);
             paramsToSP[18] = new SqlParameter("@cepprof", pes.CepProf);
             paramsToSP[19] = new SqlParameter("@cidadeprof", pes.CidadeProfId);
             paramsToSP[20] = new SqlParameter("@complementoprof", pes.ComplementoProf);
@@ -277,8 +277,8 @@ namespace DataAccess
                                                                                    "     ,CATEGORIAS C " +
                                                                                    " WHERE P.CATEGORIAID = C.ID ");
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
-                       
-            return pessoas; 
+
+            return pessoas;
         }
 
         public List<Pessoas> PesquisarDA(int id_pes)
@@ -292,7 +292,7 @@ namespace DataAccess
 
 
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
-                       
+
             return pessoas;
         }
 
@@ -335,7 +335,7 @@ namespace DataAccess
                 case "NOMECODIGO":
                     consulta.Append(string.Format(" AND P.NOME  LIKE '%{0}%' OR CODIGO = {1}", valor, utils.ComparaIntComZero(valor)));
                     break;
-                default:                    
+                default:
                     break;
             }
 
@@ -371,7 +371,7 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM PESSOAS WHERE CODIGO = '{0}' OR NOME LIKE '%{1}%'", utils.ComparaIntComZero(descricao), descricao));
-            
+
             List<Base> ba = new List<Base>();
 
             while (dr.Read())
@@ -384,6 +384,30 @@ namespace DataAccess
                 ba.Add(bas);
             }
             return ba;
-        }    
+        }
+        
+        public List<Base> PesquisarPessoas(string valor)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(string.Format(@"SELECT *  FROM PESSOAS WHERE CODIGO IN ({0}) ", valor));
+
+            consulta.Append(" ORDER BY CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["CODIGO"].ToString();
+                bas.PesDescricao = dr["NOME"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }
     }
 }
