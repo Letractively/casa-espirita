@@ -36,20 +36,13 @@
                     <tr>
                         <td>
                             * Tipo de Obra:</td>
-                        <td>
+                        <td colspan="3">
                             <asp:DropDownList ID="ddlTipoObra" runat="server" CssClass="dropdownlist">
                             </asp:DropDownList>                       
                             <asp:RequiredFieldValidator ID="valTipoObra" runat="server" 
                                 ControlToValidate="ddlTipoObra" ErrorMessage="Informe o Tipo de Obra" 
                                 ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>                        
-                        </td>
-                        <td style="width: 120px">
-                            Origem:
-                        </td>
-                        <td style="width: 120px">
-                            <asp:DropDownList ID="ddlOrigem" runat="server" CssClass="dropdownlist">
-                            </asp:DropDownList>
-                        </td>
+                        </td>                        
                     </tr>
                     <tr>
                         <td style="width: 140px">

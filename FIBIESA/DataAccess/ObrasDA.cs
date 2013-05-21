@@ -34,8 +34,7 @@ namespace DataAccess
                 obrinha.AssuntosAborda = dr["ASSUNTOSABORDA"].ToString();               
                 obrinha.DataReimpressao = utils.ComparaDataComNull(dr["DATAREIMPRESSAO"].ToString());
                 //obrinha.ImagemCapa = utils.ComparaIntComNull(dr["IMAGEMCAPA"].ToString());
-                obrinha.Volume = utils.ComparaIntComNull(dr["VOLUME"].ToString());
-                obrinha.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
+                obrinha.Volume = utils.ComparaIntComNull(dr["VOLUME"].ToString());                
                 obrinha.TiposObraId = utils.ComparaIntComNull(dr["TIPOSOBRAID"].ToString());
 
                 TiposObrasDA tObDA = new TiposObrasDA();
@@ -73,7 +72,7 @@ namespace DataAccess
 
         public bool InserirDA(Obras instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[14];
+            SqlParameter[] paramsToSP = new SqlParameter[13];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@titulo", instancia.Titulo);
@@ -86,9 +85,8 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
             paramsToSP[9] = new SqlParameter("@tipo", 0);
             paramsToSP[10] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
-            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);
-            paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);            
-            paramsToSP[13] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
+            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);                   
+            paramsToSP[12] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
 
             try
             {
@@ -105,7 +103,7 @@ namespace DataAccess
 
         public bool EditarDA(Obras instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[14];
+            SqlParameter[] paramsToSP = new SqlParameter[13];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
@@ -118,9 +116,8 @@ namespace DataAccess
             paramsToSP[8] = new SqlParameter("@isbn", instancia.Isbn);
             paramsToSP[9] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
             paramsToSP[10] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
-            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);
-            paramsToSP[12] = new SqlParameter("@origemId", instancia.OrigemId);
-            paramsToSP[13] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
+            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);            
+            paramsToSP[12] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
 
             try
             {

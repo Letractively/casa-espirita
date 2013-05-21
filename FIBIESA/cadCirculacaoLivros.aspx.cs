@@ -209,9 +209,25 @@ namespace FIBIESA
             lblSituacaoItem.Text = "";
             lblCodBarras.Text = "";
             lblPrevDevolucao.Text = "";
+            lblClienteItens.Text = "";
+            txtExemplar.Text = "";
+            lblDesExemplar.Text = "";
+            chkReciboEmprestimo.Checked = false;
             Session["dtItensEmp"] = null;
             dtgItens.DataSource = null;
             dtgItens.DataBind();
+        }
+
+        private void LimparCamposRenovacao()
+        {
+            hfIdPessoa.Value = "";
+            txtCliente.Text = "";
+            lblDesCliente.Text = "";
+            lblCategoria.Text = "";
+            LblSituacao.Text = "";
+            chkReciboRenovacao.Checked = false;            
+            dtgExemplar.DataSource = null;
+            dtgExemplar.DataBind();
         }
 
         private void IncluirExemplarEmprestimo(DataSet dsExe)
@@ -305,6 +321,42 @@ namespace FIBIESA
 
         protected void btnRenovar_Click(object sender, EventArgs e)
         {
+            EmprestimosBL empBL = new EmprestimosBL();
+            Emprestimos emp = new Emprestimos();
+
+            //emp.Id = utils.ComparaIntComZero(hfId.Value);
+
+            //Quantidade máxima de renovações:
+            int param = this.LerParametro(2, "B");
+            if (param >= 0)
+            {
+                if (empBL.QtdRenovacoes(emp.Id) > param)
+                {
+                    ExibirMensagem("Este exemplar não pode mais ser renovado para esta pessoa!");
+                    txtExemplar.Focus();
+                    return;  //throw new Exception(); //tem um jeito melhor de sair do metodo?
+                }
+            }
+
+            //chegou aqui? vamos renovar!
+            //renovar consiste em editar o atual e setar a data de devolucao, e inserir um novo
+            EmprestimoMovBL emovBL = new EmprestimoMovBL();
+            EmprestimoMov mov = empBL.CarregaEmpNaoDevolvido(emp.Id);
+            if (mov.Id > 0)
+            {
+                mov.DataDevolucao = DateTime.Now;
+                emovBL.EditarBL(mov);
+                mov = new EmprestimoMov();
+                mov.EmprestimoId = emp.Id;
+                mov.DataEmprestimo = DateTime.Now;
+                param = this.LerParametro(4, "B");
+                DateTime lol = DateTime.Now;
+                if (param > 0)
+                    lol = DateTime.Now.AddDays(param);
+                mov.DataPrevistaEmprestimo = lol;
+                mov.DataDevolucao = null;
+                emovBL.InserirBL(mov);
+            }
 
         }
 
@@ -333,8 +385,7 @@ namespace FIBIESA
         {
             if (this.Master.VerificaPermissaoUsuario("INSERIR"))
             {
-
-
+                
                 ////Quantidade máxima de exemplares emprestado:
                 //int param = this.LerParametro(1, "B");
                 //if (param >= 0)
@@ -361,14 +412,29 @@ namespace FIBIESA
                     emp.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
                     emp.ExemplarId = utils.ComparaIntComZero((linha["ID"].ToString()));
 
-                    int emp_id = empBL.InserirBL(emp);
-                    if (emp_id > 0)
+                    emp.Id = empBL.InserirBL(emp);
+                   
+                    if (emp.Id > 0)
                     {
                         EmprestimoMov mov = new EmprestimoMov();
-                        mov.EmprestimoId = emp_id;
+                        mov.EmprestimoId = emp.Id;
                         mov.DataEmprestimo = DateTime.Now;
-                        mov.DataPrevistaEmprestimo = Convert.ToDateTime((linha["DEVOLUCAO"].ToString()));                        
-                        emovBL.InserirBL(mov);
+                        mov.DataPrevistaEmprestimo = Convert.ToDateTime((linha["DEVOLUCAO"].ToString()));
+                        if (!emovBL.InserirBL(mov))
+                        {
+                            if (empBL.ExcluirBL(emp))
+                            {
+                                ExibirMensagem("Não foi possível concluir o empréstimo. Contate o administrador do sistema.");
+                                return;
+                            }
+
+                        }
+                    }
+                    if (emp.Id > 0)
+                    {
+                        LimparCamposEmprestimo();
+                        LimparCamposRenovacao();
+                        ExibirMensagem("Empréstimo realizado com sucesso!");                        
                     }
                 }
             }

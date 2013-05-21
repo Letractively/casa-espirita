@@ -32,6 +32,7 @@ namespace Admin
                 hfIdObra.Value = (string)dsPar.Tables[0].Rows[0]["obraid"].ToString();
                 txtObra.Text = (string)dsPar.Tables[0].Rows[0]["codigo"].ToString();
                 lblDesObra.Text = (string)dsPar.Tables[0].Rows[0]["titulo"];
+                ddlOrigem.SelectedValue = (string)dsPar.Tables[0].Rows[0]["origemid"].ToString();
             }
         }
 
@@ -53,16 +54,28 @@ namespace Admin
 
             return dt;
         }
+
+        private void CarregarDdlOrigem()
+        {
+            OrigensBL oriBL = new OrigensBL();
+            List<Origens> origens = oriBL.PesquisarBL();
+
+            ddlOrigem.Items.Add(new ListItem());
+            foreach (Origens ltOri in origens)
+                ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
+
+            ddlOrigem.SelectedIndex = 0;
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_exe = 0;
-
-            CarregarAtributos();
+            int id_exe = 0;            
 
             if (!IsPostBack)
             {
+                CarregarAtributos();
+                CarregarDdlOrigem();
 
                 if (Request.QueryString["operacao"] != null)
                 {
@@ -92,6 +105,7 @@ namespace Admin
             exemplares.Obraid = utils.ComparaIntComZero(hfIdObra.Value);
             exemplares.Tombo = utils.ComparaIntComZero(txtTombo.Text);
             exemplares.Status = ddlStatus.SelectedValue;
+            exemplares.OrigemId = utils.ComparaIntComNull(ddlOrigem.SelectedValue);
 
             if (exemplares.Id > 0)
             {

@@ -79,7 +79,6 @@ namespace Admin
             if (!IsPostBack)
                 Pesquisar(null);
         }
-
         
         protected void btnInserir_Click(object sender, EventArgs e)
         {
