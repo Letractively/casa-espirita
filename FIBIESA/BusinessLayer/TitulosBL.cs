@@ -81,11 +81,11 @@ namespace BusinessLayer
             return titulosDA.PesquisarBuscaDA(valor);
         }
 
-        public DataSet PesquisarBuscaDataSetBL(Titulos titulos, string tipoTitulo, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
+        public DataSet PesquisarBuscaDataSetBL(string codTitulos, string codAssociados, string codPotadores, string tipoTitulo, string tipoDocumento, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
         {
             TitulosDA titulosDA = new TitulosDA();
 
-            return titulosDA.PesquisarBuscaDataSetDA(titulos, tipoTitulo, blAtrasados, DataEmissaoIni, DataEmissaoFim, DataVencimentoIni, DataVencimentoFim, DataPagamentoIni, DataPagamentoFim);
+            return titulosDA.PesquisarBuscaDataSetDA(codTitulos, codAssociados, codPotadores, tipoTitulo, tipoDocumento, blAtrasados, DataEmissaoIni, DataEmissaoFim, DataVencimentoIni, DataVencimentoFim, DataPagamentoIni, DataPagamentoFim);
         }
         
     }

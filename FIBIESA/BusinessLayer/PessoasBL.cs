@@ -85,5 +85,17 @@ namespace BusinessLayer
 
             return pesDA.Pesquisar(codDes);
         }
+
+        /// <summary>
+        /// pesquisa realizada com mais de um id 
+        /// </summary>
+        /// <param name="valor">Id das pessoas separado por virgula</param>
+        /// <returns>Retorna um List<Base></returns>
+        public List<Base> PesquisarPessoas(string codDes)
+        {
+            PessoasDA pesDA = new PessoasDA();
+
+            return pesDA.PesquisarPessoas(codDes);
+        }
     }
 }
