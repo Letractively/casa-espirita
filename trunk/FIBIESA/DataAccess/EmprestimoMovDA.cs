@@ -91,7 +91,7 @@ namespace DataAccess
                 CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
         }
 
-        public DataSet PesquisarRelatorioDA(Emprestimos instancia, string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
+        public DataSet PesquisarRelatorioDA(string pessoasCod, string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             DataSet lDs;
             try
@@ -103,16 +103,16 @@ namespace DataAccess
                                   "    ,renovacoes " +
                                   "    ,dataRetirada " +
                                   "    ,dataDevolucao " +
-                                  "    ,pessoaid " +
-                                  "    ,exemplarid " +
+                                  "    ,pessoaCodigo " +
+                                  "    ,obrasCodigo " +
                                   "    ,status " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
                                   " WHERE 1 = 1 ");
-                if (instancia.PessoaId != 0)
-                    sqlQuery.Append(@" AND pessoaid = " + instancia.PessoaId);
+                if (pessoasCod != string.Empty)
+                    sqlQuery.Append(@" AND pessoaCodigo IN (" + pessoasCod + ")");
                 
-                if (obraId != string.Empty)
-                    sqlQuery.Append(@" AND obraid = " + obraId);
+                if (obrasCod != string.Empty)
+                    sqlQuery.Append(@" AND obrasCodigo IN (" + obrasCod + ")");
                 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
                     sqlQuery.Append(@" AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)");
@@ -135,7 +135,7 @@ namespace DataAccess
 
         }
 
-        public DataSet PesquisarRelatorioDA(Emprestimos instancia,string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
+        public DataSet PesquisarRelatorioDA(string pessoasCod,string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
         {
             DataSet lDs;
             try
@@ -143,15 +143,15 @@ namespace DataAccess
                 StringBuilder sqlQuery = new StringBuilder();
                 sqlQuery.Append( @"SELECT " +
                                   "    descricao " +
-                                  "    ,exemplarid " +
-                                  "    ,COUNT(exemplarid) quantidade " +
+                                  "    ,obrasCodigo " +
+                                  "    ,COUNT(obrasCodigo) quantidade " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
                                   " WHERE 1 = 1 ");
-                if (instancia.PessoaId != 0)                                    
-                    sqlQuery.Append( @" AND pessoaid = " + instancia.PessoaId);
+                if (pessoasCod != string.Empty)
+                    sqlQuery.Append(@" AND pessoaCodigo in (" + pessoasCod + ")");
                 
-                if (obraId != string.Empty)
-                    sqlQuery.Append(@" AND obraid = " + obraId);
+                if (obrasCod != string.Empty)
+                    sqlQuery.Append(@" AND obrasCodigo in (" + obrasCod + ")");
                 
 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
@@ -162,8 +162,8 @@ namespace DataAccess
                 
                 if (Status != string.Empty)
                     sqlQuery.Append(@" AND Status = '" + Status+ "'");
-                
-                sqlQuery.Append(@" GROUP BY exemplarid, descricao order by quantidade " + retirados);
+
+                sqlQuery.Append(@" GROUP BY obrasCodigo, descricao order by quantidade " + retirados);
                 
                 lDs = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                     CommandType.Text,sqlQuery.ToString());
