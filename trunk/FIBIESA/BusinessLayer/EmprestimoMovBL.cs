@@ -36,20 +36,20 @@ namespace BusinessLayer
             return varDA.ExcluirDA(instancia);
         }
 
-        public DataSet PesquisarRelatorioBL(Emprestimos instancia, string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
+        public DataSet PesquisarRelatorioBL(string pessoasCod, string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)
         {
             /*criar as regras de negocio*/
             EmprestimoMovDA varDA = new EmprestimoMovDA();
 
-            return varDA.PesquisarRelatorioDA(instancia, obraId, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status);
+            return varDA.PesquisarRelatorioDA(pessoasCod, obrasCod, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status);
         }
 
-        public DataSet PesquisarRelatorioBL(Emprestimos instancia,string obraId, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string ordenacao)
+        public DataSet PesquisarRelatorioBL(string pessoasCod,string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string ordenacao)
         {
             /*criar as regras de negocio*/
             EmprestimoMovDA varDA = new EmprestimoMovDA();
 
-            return varDA.PesquisarRelatorioDA(instancia,obraId, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status, ordenacao);
+            return varDA.PesquisarRelatorioDA(pessoasCod, obrasCod, dataRetiradaIni, dataRetiradaFim, dataDevolucaoIni, dataDevolucaoFim, Status, ordenacao);
         }
 
         public Int32 IdMovEmprestado(int emprestimoId)

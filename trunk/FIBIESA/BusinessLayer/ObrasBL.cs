@@ -70,5 +70,17 @@ namespace BusinessLayer
 
             return obraDA.Pesquisar(codDes);
         }
+
+        /// <summary>
+        /// pesquisa realizada com mais de um id 
+        /// </summary>
+        /// <param name="valor">Id das obras separado por virgula</param>
+        /// <returns>Retorna um List<Base></returns>
+        public List<Base> PesquisarObras(string cods)
+        {
+            ObrasDA obraDA = new ObrasDA();
+
+            return obraDA.PesquisarObras(cods);
+        }
     }
 }
