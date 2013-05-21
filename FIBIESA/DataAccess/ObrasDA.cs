@@ -226,5 +226,26 @@ namespace DataAccess
             return ba;
         }
 
+        public List<Base> PesquisarObras(string codigos)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.Text, string.Format(@"SELECT * FROM OBRAS WHERE CODIGO IN ({0})", codigos));
+
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesCodigo = dr["CODIGO"].ToString();
+                bas.PesDescricao = dr["TITULO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }
+
     }
 }
