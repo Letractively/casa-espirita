@@ -7,16 +7,16 @@ using System.Web.UI.WebControls;
 using System.Data;
 using DataObjects;
 using BusinessLayer;
-
+using FG;
 
 namespace FIBIESA
 {
     public partial class viewRelDoacoes : System.Web.UI.Page
     {
-        public DataTable dtGeral;
 
+        Utils utils = new Utils();
         #region funcoes
-        private DataTable CriarTabelaPesquisa()
+        public void CarregarPesquisaCliente(string conteudo)
         {
             DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -27,60 +27,9 @@ namespace FIBIESA
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
 
-            return dt;
-
-        }
-        private void CarregarAtributos()
-        {
-            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtCodPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
-        }
-        #endregion
-        
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            CarregarAtributos();
-            if (this.txtCodPessoa.Text != string.Empty)
-            {                
-                carregaPessoa();
-                txtCodPessoa.Focus();
-            }            
-        }
-
-        public void carregaPessoa()
-        {
-            pesquisaPessoa("CODIGO");
-            if (Session["tabelaPesquisa"] != null)
-            {
-                dtGeral = (DataTable)Session["tabelaPesquisa"];
-                this.lblDesPessoa.Text = dtGeral.Rows[0].ItemArray[2].ToString();
-                this.hfIdPessoa.Value = dtGeral.Rows[0].ItemArray[0].ToString();
-            }
-            else
-            {
-                this.lblDesPessoa.Text = string.Empty;
-                this.hfIdPessoa.Value = string.Empty;
-            }
-        }
-
-        public void pesquisaPessoa(string lCampoPesquisa)
-        {
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas;
-            if(this.txtCodPessoa.Text != string.Empty)
-            {
-               pessoas = pesBL.PesquisarBL(lCampoPesquisa,this.txtCodPessoa.Text);
-            }
-            else
-            {
-                pessoas = pesBL.PesquisarBL();
-            }
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
 
             foreach (Pessoas pes in pessoas)
             {
@@ -93,25 +42,29 @@ namespace FIBIESA
                 dt.Rows.Add(linha);
             }
 
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Doador não encontrado.');", true);
-            }
 
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-            
-
+            grdPesquisaCliente.DataSource = dt;
+            grdPesquisaCliente.DataBind();
         }
 
-        protected void btnPesNome_Click(object sender, EventArgs e)
+        private void CarregarAtributos()
         {
-            pesquisaPessoa("");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtCodPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
+            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            //txtCodPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtValorIni.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtValorFim.Attributes.Add("onkeypress", "return(Reais(this,event))");
         }
+        #endregion
+        public DataTable dtGeral;
+
+        
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            CarregarAtributos();          
+        }
+                        
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
@@ -119,7 +72,7 @@ namespace FIBIESA
             DoacoesBL doacoesBL = new DoacoesBL();
 
 
-            Session["ldsRel"] = doacoesBL.PesquisarDataset(hfIdPessoa.Value, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            Session["ldsRel"] = doacoesBL.PesquisarDataset(txtCliente.Text, txtValorIni.Text, txtValorFim.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {
                 string periodo = "Todos";
@@ -139,6 +92,56 @@ namespace FIBIESA
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/default.aspx");
+        }
+
+        protected void btnPesCliente_Click(object sender, EventArgs e)
+        {
+
+            CarregarPesquisaCliente(null);
+            ModalPopupExtenderPesquisaCliente.Enabled = true;
+            ModalPopupExtenderPesquisaCliente.Show();
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            if (Session["IntClientes"] != null || Session["IntClientes"] != null)
+                txtCliente.Text = Session["IntClientes"].ToString() + ",";
+
+            txtCliente.Text = txtCliente.Text + gvrow.Cells[2].Text;
+            Session["IntClientes"] = txtCliente.Text;
+            ModalPopupExtenderPesquisaCliente.Hide();
+            ModalPopupExtenderPesquisaCliente.Enabled = false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaCliente.Enabled = false;
+        }
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaCliente(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaCliente.Enabled = true;
+            ModalPopupExtenderPesquisaCliente.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void txtCliente_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCliente.Text == "")
+                Session["IntClientes"] = null;
+            Session["IntClientes"] = txtCliente.Text;
+
+        }
+
+        protected void grdPesquisaCliente_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

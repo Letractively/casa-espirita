@@ -10,8 +10,8 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </asp:ScriptManager>
-    <%--<asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">--%>
-        <%--<ContentTemplate>--%>
+    <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
+        <ContentTemplate>
             <div id="content">
                 <div class="container half left">
                     <div class="conthead">
@@ -25,11 +25,11 @@
                                     Cliente:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodPessoa" runat="server" CssClass="inputboxRight" Width="100px" 
+                                    <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" Width="100px" 
                                         AutoPostBack="true"></asp:TextBox>
-                                    <asp:Button ID="btnPesNome" runat="server" CssClass="btn" Text="..." OnClick="btnPesNome_Click" />
-                                    &nbsp;
-                                    <asp:Label ID="lblDesPessoa" runat="server"></asp:Label>
+                                    <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -40,7 +40,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtValorIni" runat="server" CssClass="inputboxValor" Width="100px"></asp:TextBox>
+                                                <asp:TextBox ID="txtValorIni" runat="server" CssClass="inputboxValor" Width="100px"></asp:TextBox>                                                 
                                             </td>
                                             <td>
                                                 &nbsp;a&nbsp;&nbsp;
@@ -64,6 +64,9 @@
                                                     ID="txtDataIni_CalendarExtender" runat="server" TargetControlID="txtDataIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
+ControlToValidate="txtDataIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="grupo" ForeColor="Red"></asp:RegularExpressionValidator>
                                             </td>
                                             <td>
                                                 &nbsp;a&nbsp;&nbsp;
@@ -73,6 +76,9 @@
                                                     ID="txtDataFim_CalendarExtender" runat="server" TargetControlID="txtDataFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
+ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="grupo" ForeColor="Red"></asp:RegularExpressionValidator>
                                             </td>
                                         </tr>
                                     </table>
@@ -86,7 +92,7 @@
                                         ToolTip="Volta para página principal" onclick="btnVoltar_Click"
                                          />
                                     &nbsp;&nbsp;&nbsp;
-                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" OnClick="btnRelatorio_Click" />
+                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" OnClick="btnRelatorio_Click" ValidationGroup="grupo" />
                                 </td>
                             </tr>
                         </table>
@@ -94,9 +100,57 @@
                 </div>                
                 <div class="status">
                 </div>
-                <asp:HiddenField ID="hfIdPessoa" runat="server" />
+                    <asp:Panel runat="server" ID="pnlCliente" Width="400px" CssClass="modalPopup" Style="display: none">
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
+                                        AutoPostBack="True"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <asp:GridView ID="grdPesquisaCliente" runat="server" CellPadding="3" AutoGenerateColumns="False"
+                                        DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
+                                        BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaCliente_RowDataBound"
+                                        Width="300px">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_tick.png"
+                                                        OnClick="btnSelect_Click" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                            <asp:BoundField DataField="CODIGO" HeaderText="Código" />
+                                            <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                        </Columns>
+                                        <FooterStyle BackColor="White" ForeColor="#000066" />
+                                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                        <RowStyle ForeColor="#000066" />
+                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                        <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                        <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                    </asp:GridView>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
+                                        CssClass="btn" />
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaCliente" runat="server" TargetControlID="hfIdCliente"
+                        PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
+                        OkControlID="btnCancel" Enabled="false" />
+                <asp:HiddenField ID="hfIdCliente" runat="server" />
                 <asp:HiddenField ID="hfIdItem" runat="server" />
             </div>
-       <%-- </ContentTemplate>--%>
-  <%--  </asp:UpdatePanel>--%>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>
