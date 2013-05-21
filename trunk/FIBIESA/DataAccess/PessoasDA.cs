@@ -409,5 +409,29 @@ namespace DataAccess
             }
             return ba;
         }
+
+
+        /// <summary>
+        /// Conta quantos titulos em aberto a pessoa tem. Retorna -1 em caso de erro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int EstaDevendo(int id)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(" SELECT COUNT(*) AS QTD FROM TITULOS ");
+            consulta.Append(" WHERE (DTPAGAMENTO > DTVENCIMENTO OR VALORPAGO < VALOR  OR VALORPAGO IS NULL OR DTPAGAMENTO IS NULL)");
+            consulta.Append(" AND PESSOAID = " + id.ToString());
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+            int qtd = -1;
+            while (dr.Read())
+            {
+                qtd = utils.ComparaIntComZero(dr["QTD"].ToString());
+            }
+
+            return qtd;
+        }
     }
 }

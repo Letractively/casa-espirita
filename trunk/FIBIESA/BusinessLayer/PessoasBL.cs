@@ -86,6 +86,12 @@ namespace BusinessLayer
             return pesDA.Pesquisar(codDes);
         }
 
+        public int EstaDevendo(int id)
+        {
+            PessoasDA instancia = new PessoasDA();
+            return instancia.EstaDevendo(id);
+        }
+
         /// <summary>
         /// pesquisa realizada com mais de um id 
         /// </summary>
