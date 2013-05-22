@@ -166,6 +166,24 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtDesconto;
         
         /// <summary>
+        /// lblTipoDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTipoDoc;
+        
+        /// <summary>
+        /// ddlTipoDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDoc;
+        
+        /// <summary>
         /// tpEvento control.
         /// </summary>
         /// <remarks>
