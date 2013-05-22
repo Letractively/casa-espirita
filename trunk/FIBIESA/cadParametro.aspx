@@ -96,6 +96,18 @@
                                                     <asp:TextBox ID="txtDesconto" CssClass="inputboxRight" runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lblTipoDoc" runat="server">
+                                                        Tipo de documento associado a multa por atraso na bilbioteca:
+                                                    </asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
+                                                        ToolTip="Selecione o tipo de documento">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>

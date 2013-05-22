@@ -13,12 +13,39 @@ namespace Admin
     public partial class cadParametro : System.Web.UI.Page
     {
         #region funcoes
+        private string LerParametro(string modulo, int codigo)
+        {
+            ParametrosBL parBL = new ParametrosBL();
+            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
+            string valor;
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+                valor = dsPar.Tables[0].Rows[0]["VALOR"].ToString();
+            else
+                valor = string.Empty;
+
+            return valor;
+        }
+
         private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
 
+
+        private void CarregaDdlTipoDoc()
+        {
+            TiposDocumentosBL tipDBL = new TiposDocumentosBL();
+            List<TiposDocumentos> tipoDoc = tipDBL.PesquisarBL("CR");
+
+            ddlTipoDoc.Items.Clear();
+            ddlTipoDoc.Items.Add(new ListItem());
+            foreach (TiposDocumentos ltTip in tipoDoc)
+                ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
+
+            ddlTipoDoc.SelectedIndex = 0;
+        }
         private void CarregarDdlCategoria()
         {
             CategoriasBL catBL = new CategoriasBL();
@@ -93,6 +120,7 @@ namespace Admin
             txtValorMulta.Text = CarregarParametro(1, "F");
             txtPerLucro.Text = CarregarParametro(2, "F");
             txtDesconto.Text = CarregarParametro(3, "F");
+            ddlTipoDoc.SelectedValue = CarregarParametro(4, "F");
             #endregion
         }
         private void CarregarAtributos()
@@ -113,6 +141,7 @@ namespace Admin
             if (!IsPostBack)
             {
                 CarregarDdlCategoria();
+                CarregaDdlTipoDoc();
                 CarregarDados();
                
             }
@@ -143,6 +172,7 @@ namespace Admin
                 SalvarParametro(1, "F", lblValorMulta.Text, txtValorMulta.Text);
                 SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
                 SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
+                SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
                 #endregion
             }
             else
