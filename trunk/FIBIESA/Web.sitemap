@@ -18,11 +18,14 @@
       <siteMapNode url="viewTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos" />
       <siteMapNode url="viewRelVendas.aspx" title="Relatório de Vendas" description="Relatório de Vendas" />
       <siteMapNode url="viewRelDoacoes.aspx" title="Relatório de Doações" description="Relatório de Doações" />
-      <siteMapNode url="viewRelContasPagarReceber.aspx" title="Relatório de Contas a Pagar/Receber" description="Relatório de Contas a Pagar/Receber" />
+      <siteMapNode url="viewRelContasPagar.aspx" title="Relatório de Contas a Pagar" description="Relatório de Contas a Pagar" />
+      <siteMapNode url="viewRelContasReceber.aspx" title="Relatório de Contas a Receber" description="Relatório de Contas a Receber" />
+      
     </siteMapNode>
 
     <siteMapNode title="Biblioteca" description="Biblioteca">
       <siteMapNode url="viewReserva.aspx" title="Emprestimos" description="Empréstimos" />
+      <siteMapNode url="cadCirculacaoLivros.aspx" title="Circulação de Livros" description="Circulação de Livros" />
       <siteMapNode url="viewExemplar.aspx" title="Exemplares" description="Exemplares" />
       <siteMapNode url="viewObra.aspx" title="Obras" description="Obras" />
       <siteMapNode url="viewEditora.aspx" title="Editoras" description="Editoras" />
@@ -30,7 +33,7 @@
       <siteMapNode url="viewOrigem.aspx" title="Origens de Exemplares" description="Origens de Exemplares" />
       <siteMapNode url="viewTipoAutor.aspx" title="Categorias de Autores" description="Categorias de Autores" />
       <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras" description="Categorias de Obras" />
-      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos" />
+      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos" />      
     </siteMapNode>
 
     <siteMapNode title="Estoque" description="Estoque">
@@ -38,12 +41,17 @@
       <siteMapNode url="cadMovimentoEstoque.aspx" title="Movimentos do Estoque" description="Movimentos do Estoque" />
       <siteMapNode url="cadAcertoEstoque.aspx" title="Acerto do Estoque" description="Acerto do Estoque" />
       <siteMapNode url="cadItemEstoque.aspx" title="Implantação do Estoque" description="Implantação do Estoque" />
+      <siteMapNode url="viewRelItensEstoque.aspx" title="Relatório do Estoque" description="Relatório do Estoque" />
+      <siteMapNode url="viewRelMovimentacaoEstoque.aspx" title="Relatório Mov. Estoque" description="Relatório Mov. Estoque" />
     </siteMapNode>
 
     <siteMapNode title="Evento" description="Evento">
       <siteMapNode url="viewEvento.aspx" title="Eventos" description="Eventos" />
       <siteMapNode url="viewTurma.aspx" title="Turmas" description="Turmas" />
       <siteMapNode url="cadChamada.aspx" title="Registro de Frequências" description="Registro de Frequências" />
+      <siteMapNode url="viewRelCursos.aspx" title="Relatório de Eventos" description="Relatório de Eventos" />
+      <siteMapNode url="viewRelTurmas.aspx" title="Relatório de Turmas" description="Relatório de Turmas" />
+      <siteMapNode url="viewRelFrequencia.aspx" title="Relatório de Frequência" description="Relatório de Frequência" />
     </siteMapNode>
 
     <siteMapNode title="Geral" description="Geral">

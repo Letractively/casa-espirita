@@ -27,8 +27,7 @@ namespace DataAccess
                 tipo.Id = int.Parse(dr["ID"].ToString());
                 tipo.Obraid = int.Parse(dr["OBRAID"].ToString());
                 tipo.Tombo = int.Parse(dr["TOMBO"].ToString());
-                tipo.Status = dr["STATUS"].ToString();
-                tipo.CodigoBarras = "11111";//dr["CODIGOBARRAS"].ToString();
+                tipo.Status = dr["STATUS"].ToString();                
                 tipo.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
                               
                 Obras obras = new Obras();
@@ -48,15 +47,14 @@ namespace DataAccess
 
         public bool InserirDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
             paramsToSP[0] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[1] = new SqlParameter("@status", instancia.Status);
             paramsToSP[2] = new SqlParameter("@tombo", instancia.Tombo);
             paramsToSP[3] = new SqlParameter("@origemId", instancia.OrigemId);
             paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
-            paramsToSP[5] = new SqlParameter("@codBarras", instancia.CodBarras);
-
+           
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -72,15 +70,14 @@ namespace DataAccess
 
         public bool EditarDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[2] = new SqlParameter("@status", instancia.Status);
             paramsToSP[3] = new SqlParameter("@tombo", instancia.Tombo);
             paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
-            paramsToSP[5] = new SqlParameter("@codBarras", instancia.CodBarras);
-
+           
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),

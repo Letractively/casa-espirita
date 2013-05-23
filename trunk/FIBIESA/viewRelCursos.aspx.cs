@@ -26,6 +26,15 @@ namespace FIBIESA
             return dt;
 
         }
+
+        private void CarregarAtributos()
+        {
+            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataIniF.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFimF.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
+
         #endregion
         public void pesquisaEvento(string lCampoPesquisa)
         {
@@ -61,7 +70,7 @@ namespace FIBIESA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CarregarAtributos();
         }
 
         protected void btnPesCurso_Click(object sender, EventArgs e)
@@ -86,6 +95,16 @@ namespace FIBIESA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
+        }
+
+        protected void txtcurso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }
 }

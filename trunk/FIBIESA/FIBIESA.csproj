@@ -183,13 +183,17 @@
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
-    <Content Include="Relatorios\RelContasPagarReceber.aspx" />
+    <Content Include="Relatorios\RelContasPagar.aspx" />
+    <Content Include="Relatorios\RelContasReceber.aspx" />
     <Content Include="Relatorios\RelCursos.aspx" />
     <Content Include="Relatorios\RelDoacoes.aspx" />
     <Content Include="Relatorios\RelEmprestimoAcumulado.aspx" />
     <Content Include="Relatorios\RelEmprestimos.aspx" />
     <Content Include="Relatorios\RelEmprestimosMaisMenos.aspx" />
+    <Content Include="Relatorios\RelItensEstoque.aspx" />
+    <Content Include="Relatorios\RelMovimentacaoEstoque.aspx" />
     <Content Include="Relatorios\RelReciboVenda.aspx" />
+    <Content Include="Relatorios\RelTurmas.aspx" />
     <Content Include="Relatorios\RelVendas.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -242,11 +246,13 @@
     <Content Include="viewPermissao.aspx" />
     <Content Include="viewPessoa.aspx" />
     <Content Include="viewPortador.aspx" />
-    <Content Include="viewRelContasPagarReceber.aspx" />
+    <Content Include="viewRelContasPagar.aspx" />
+    <Content Include="viewRelContasReceber.aspx" />
     <Content Include="viewRelCursos.aspx" />
     <Content Include="viewRelDoacoes.aspx" />
     <Content Include="viewRelEmprestimo.aspx" />
     <Content Include="viewRelFrequencia.aspx" />
+    <Content Include="viewRelItensEstoque.aspx" />
     <Content Include="viewRelMovimentacaoEstoque.aspx" />
     <Content Include="viewRelTurmas.aspx" />
     <Content Include="viewRelVendas.aspx" />
@@ -649,12 +655,19 @@
     <Compile Include="recuperacaoLogin.aspx.designer.cs">
       <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Relatorios\RelContasPagarReceber.aspx.cs">
-      <DependentUpon>RelContasPagarReceber.aspx</DependentUpon>
+    <Compile Include="Relatorios\RelContasPagar.aspx.cs">
+      <DependentUpon>RelContasPagar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Relatorios\RelContasPagarReceber.aspx.designer.cs">
-      <DependentUpon>RelContasPagarReceber.aspx</DependentUpon>
+    <Compile Include="Relatorios\RelContasPagar.aspx.designer.cs">
+      <DependentUpon>RelContasPagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelContasReceber.aspx.cs">
+      <DependentUpon>RelContasReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelContasReceber.aspx.designer.cs">
+      <DependentUpon>RelContasReceber.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelCursos.aspx.cs">
       <DependentUpon>RelCursos.aspx</DependentUpon>
@@ -691,12 +704,33 @@
     <Compile Include="Relatorios\RelEmprestimosMaisMenos.aspx.designer.cs">
       <DependentUpon>RelEmprestimosMaisMenos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelItensEstoque.aspx.cs">
+      <DependentUpon>RelItensEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelItensEstoque.aspx.designer.cs">
+      <DependentUpon>RelItensEstoque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelMovimentacaoEstoque.aspx.cs">
+      <DependentUpon>RelMovimentacaoEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelMovimentacaoEstoque.aspx.designer.cs">
+      <DependentUpon>RelMovimentacaoEstoque.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\RelReciboVenda.aspx.cs">
       <DependentUpon>RelReciboVenda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\RelReciboVenda.aspx.designer.cs">
       <DependentUpon>RelReciboVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelTurmas.aspx.cs">
+      <DependentUpon>RelTurmas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelTurmas.aspx.designer.cs">
+      <DependentUpon>RelTurmas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelVendas.aspx.cs">
       <DependentUpon>RelVendas.aspx</DependentUpon>
@@ -880,12 +914,19 @@
     <Compile Include="viewPortador.aspx.designer.cs">
       <DependentUpon>viewPortador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="viewRelContasPagarReceber.aspx.cs">
-      <DependentUpon>viewRelContasPagarReceber.aspx</DependentUpon>
+    <Compile Include="viewRelContasPagar.aspx.cs">
+      <DependentUpon>viewRelContasPagar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="viewRelContasPagarReceber.aspx.designer.cs">
-      <DependentUpon>viewRelContasPagarReceber.aspx</DependentUpon>
+    <Compile Include="viewRelContasPagar.aspx.designer.cs">
+      <DependentUpon>viewRelContasPagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelContasReceber.aspx.cs">
+      <DependentUpon>viewRelContasReceber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelContasReceber.aspx.designer.cs">
+      <DependentUpon>viewRelContasReceber.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewRelCursos.aspx.cs">
       <DependentUpon>viewRelCursos.aspx</DependentUpon>
@@ -914,6 +955,13 @@
     </Compile>
     <Compile Include="viewRelFrequencia.aspx.designer.cs">
       <DependentUpon>viewRelFrequencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelItensEstoque.aspx.cs">
+      <DependentUpon>viewRelItensEstoque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelItensEstoque.aspx.designer.cs">
+      <DependentUpon>viewRelItensEstoque.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewRelMovimentacaoEstoque.aspx.cs">
       <DependentUpon>viewRelMovimentacaoEstoque.aspx</DependentUpon>
@@ -1030,11 +1078,16 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptContasPagar.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />
     <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
     <EmbeddedResource Include="Relatorios\rptDoacoes.rdlc" />
     <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc" />
     <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="instituicoesLogo.ashx" />

@@ -50,10 +50,7 @@ namespace FIBIESA
         private void CarregarAtributos()
         {
             txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            //txtCodPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtValorIni.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtValorFim.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");           
         }
         #endregion
         public DataTable dtGeral;

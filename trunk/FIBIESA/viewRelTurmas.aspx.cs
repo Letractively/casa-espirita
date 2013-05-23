@@ -27,6 +27,14 @@ namespace FIBIESA
             return dt;
 
         }
+
+        private void CarregarAtributos()
+        {
+            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataIniF.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFimI.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
         #endregion
 
         #region "Pesquisas"
@@ -118,6 +126,8 @@ namespace FIBIESA
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            CarregarAtributos();
+
             if (this.txtCurso.Text != string.Empty)
             {
                 carregaCurso();
@@ -188,5 +198,11 @@ namespace FIBIESA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
         }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
+               
     }
 }
