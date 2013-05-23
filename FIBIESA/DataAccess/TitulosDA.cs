@@ -270,21 +270,19 @@ namespace DataAccess
                 consulta += " AND (CONVERT(DATETIME,dtVencimento,103) < CONVERT(DATETIME,GETDATE(),103) AND dtPagamento IS NULL) ";
 
             if ((DataEmissaoIni != string.Empty) && (DataEmissaoFim != string.Empty))
-            {
-
-                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataEmissaoIni + "',103) AND CONVERT(DATETIME,'" + DataEmissaoFim + "',103)";
+            {                
+                consulta += " AND DTEMISSAO BETWEEN CONVERT(DATETIME,'" + DataEmissaoIni + "',103) AND CONVERT(DATETIME,'" + DataEmissaoFim + "',103)";
             }
 
             if ((DataVencimentoIni != string.Empty) && (DataVencimentoFim != string.Empty))
             {
 
-                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataVencimentoIni + "',103) AND CONVERT(DATETIME,'" + DataVencimentoFim + "',103)";
+                consulta += " AND DTVENCIMENTO BETWEEN CONVERT(DATETIME,'" + DataVencimentoIni + "',103) AND CONVERT(DATETIME,'" + DataVencimentoFim + "',103)";
             }
 
             if ((DataPagamentoIni != string.Empty) && (DataPagamentoFim != string.Empty))
-            {
-
-                consulta += " AND data BETWEEN CONVERT(DATETIME,'" + DataPagamentoIni + "',103) AND CONVERT(DATETIME,'" + DataPagamentoFim + "',103)";
+            {               
+                consulta += " AND DTPAGAMENTO BETWEEN CONVERT(DATETIME,'" + DataPagamentoIni + "',103) AND CONVERT(DATETIME,'" + DataPagamentoFim + "',103)";
             }
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta);
