@@ -7,13 +7,15 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLayer;
 using DataObjects;
+using FG;
 
 namespace FIBIESA
 {
     public partial class viewRelItensEstoque : System.Web.UI.Page
     {
+        Utils utils = new Utils();
         #region funcoes
-        private DataTable CriarTabelaPesquisa()
+        public void CarregarPesquisaItem(string conteudo)
         {
             DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -24,8 +26,25 @@ namespace FIBIESA
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
 
-            return dt;
+            ItensEstoqueBL itemBl = new ItensEstoqueBL();
+            ItensEstoque item = new ItensEstoque();
 
+            List<ItensEstoque> lItens =  itemBl.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque pes in lItens)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Obra.Codigo;
+                linha["DESCRICAO"] = pes.Obra.Titulo;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
         }
         #endregion
 
@@ -37,81 +56,35 @@ namespace FIBIESA
             }
         }
 
-        #region pesquisas
-        public void pesquisaItem(string lCampoPesquisa)
-        {
-
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
-            ItensEstoqueBL itemBl = new ItensEstoqueBL();
-            ItensEstoque item = new ItensEstoque();
-
-            List<ItensEstoque> itens;
-
-            if (txtItem.Text != string.Empty && lCampoPesquisa != string.Empty)
-            {
-                itens = itemBl.PesquisarBL(lCampoPesquisa, txtItem.Text);
-            }
-            else
-            {
-                itens = itemBl.PesquisarBL();
-            }
-            foreach (ItensEstoque pes in itens)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Obra.Codigo;
-                linha["DESCRICAO"] = pes.Obra.Titulo;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Item não encontrado.');", true);
-            }
-
-            Session["objBLPesquisa"] = itemBl;
-            Session["objPesquisa"] = item;
-        }
-
-        #endregion pesquisas
-
-
-        #region carrega Informações
-
-        public void carregaItem()
-        {
-            pesquisaItem("CODIGO");
-            if (Session["tabelaPesquisa"] != null)
-            {
-                dtGeral = (DataTable)Session["tabelaPesquisa"];
-                this.lblDesItem.Text = dtGeral.Rows[0].ItemArray[2].ToString();
-                this.hfIdItem.Value = dtGeral.Rows[0].ItemArray[0].ToString();
-            }
-            else
-            {
-                this.lblDesItem.Text = "Todos";
-                this.hfIdItem.Value = "0";
-            }
-        }
-
-        #endregion carrega Informações
-
-        protected void txtItem_TextChanged(object sender, EventArgs e)
-        {
-            carregaItem();
-        }
+        #region Click
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            pesquisaItem("");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
+
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            if (Session["IntItem"] != null && Session["IntItem"] != string.Empty)
+                txtItem.Text = Session["IntItem"].ToString() + ",";
+
+            txtItem.Text = txtItem.Text + gvrow.Cells[2].Text;
+            Session["IntItem"] = txtItem.Text;
+            ModalPopupExtenderPesquisaItem.Hide();
+            ModalPopupExtenderPesquisaItem.Enabled = false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaItem.Enabled = false;
         }
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
@@ -119,8 +92,7 @@ namespace FIBIESA
             ItensEstoqueBL itensEstoqueBL = new ItensEstoqueBL();
             ItensEstoque itensEstoque = new ItensEstoque();
 
-            itensEstoque.Id = Convert.ToInt32(hfIdItem.Value);
-
+            
             byte? controlaestoque = null;
             if (rbControlaEstoque.Checked)
                 controlaestoque = 1;
@@ -128,14 +100,14 @@ namespace FIBIESA
                 controlaestoque = 0;
 
             byte? blStatus = null;
-            string status = "Todos";                
+            string status = "Todos";
             if (ddlStatus.SelectedValue != string.Empty)
             {
                 blStatus = Convert.ToByte(ddlStatus.SelectedValue);
                 status = ddlStatus.SelectedItem.Text;
             }
-            
-            Session["ldsRel"] = itensEstoqueBL.PesquisarItensEstoqueDataSetBL(itensEstoque,controlaestoque,blStatus).Tables[0];
+
+            Session["ldsRel"] = itensEstoqueBL.PesquisarItensEstoqueDataSetBL(txtItem.Text, controlaestoque, blStatus).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelItensEstoque.aspx?status=" + status + "','',590,805);", true);
@@ -146,5 +118,31 @@ namespace FIBIESA
             }
         }
 
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
+
+        #endregion
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void txtItem_TextChanged(object sender, EventArgs e)
+        {
+            if (txtItem.Text == "")
+                Session["IntItem"] = null;
+            Session["IntItem"] = txtItem.Text;
+        }        
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
     }
 }

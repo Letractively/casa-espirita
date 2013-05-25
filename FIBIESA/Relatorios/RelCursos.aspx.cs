@@ -3,6 +3,7 @@ using System.Data;
 using BusinessLayer;
 using DataObjects;
 using Microsoft.Reporting.WebForms;
+using System.Collections.Generic;
 
 namespace FIBIESA.Relatorios
 {
@@ -25,7 +26,7 @@ namespace FIBIESA.Relatorios
             if (lDtPesquisa.Rows.Count > 0)
             {
 
-                string Eventos = Request.QueryString["Eventos"].ToString();
+                string eventos = Request.QueryString["Eventos"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();
 
@@ -36,8 +37,24 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceCursos = new ReportDataSource("DataSet_Cursos", lDtPesquisa);
 
+                string nome = string.Empty;
+                if (eventos != string.Empty)
+                {
+                    EventosBL eveBL = new EventosBL();
+                    Eventos eve = new Eventos();
+                    List<Base> lEventos = eveBL.PesquisarEventos(eventos);
+
+                 
+                    foreach (Base pes in lEventos)
+                    {
+                        if (nome == string.Empty)
+                            nome += pes.PesDescricao;
+                        else
+                            nome += ", " + pes.PesDescricao;
+                    }
+                }
                 ReportParameter[] param = new ReportParameter[2];
-                param[0] = new ReportParameter("Eventos", Eventos);
+                param[0] = new ReportParameter("Eventos", eventos);
                 param[1] = new ReportParameter("totalEventos", lDtPesquisa.Rows.Count.ToString());
 
                 rptEventos.LocalReport.SetParameters(param);

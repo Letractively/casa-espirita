@@ -30,7 +30,7 @@ namespace FIBIESA.Relatorios
             if (lDtPesquisa.Rows.Count > 0)
             {
 
-                string Eventos = Request.QueryString["Eventos"].ToString();
+                string eventos = Request.QueryString["Eventos"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();
 
@@ -41,8 +41,26 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceEventos = new ReportDataSource("DataSet_Eventos", lDtPesquisa);
 
+                string nome = string.Empty;
+                if (eventos != string.Empty)
+                {
+                    EventosBL eveBL = new EventosBL();
+                    Eventos eve = new Eventos();
+
+                    List<Base> lEventos = eveBL.PesquisarEventos(eventos);
+
+
+                    foreach (Base pes in lEventos)
+                    {
+                        if (nome == string.Empty)
+                            nome += pes.PesDescricao;
+                        else
+                            nome += ", " + pes.PesDescricao;
+                    }
+                }
+
                 ReportParameter[] param = new ReportParameter[1];
-                param[0] = new ReportParameter("evento", Eventos);
+                param[0] = new ReportParameter("evento", nome);
                 
                 rptEventos.LocalReport.SetParameters(param);
                 rptEventos.LocalReport.DataSources.Add(rptDatasourceInstituicao);

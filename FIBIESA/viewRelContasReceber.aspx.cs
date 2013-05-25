@@ -189,7 +189,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntAssociado"] != null || Session["IntAssociado"] != null)
+            if (Session["IntAssociado"] != string.Empty && Session["IntAssociado"] != null)
                 txtAssociado.Text = Session["IntAssociado"].ToString() + ",";
 
             txtAssociado.Text = txtAssociado.Text + gvrow.Cells[2].Text;
@@ -204,7 +204,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntTitulo"] != null || Session["IntTitulo"] != null)
+            if (Session["IntTitulo"] != string.Empty && Session["IntTitulo"] != null)
                 txtTitulo.Text = Session["IntTitulo"].ToString() + ",";
 
             txtTitulo.Text = txtTitulo.Text + gvrow.Cells[2].Text;

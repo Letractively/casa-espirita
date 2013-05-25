@@ -241,48 +241,48 @@ namespace DataAccess
 
         }
 
-        public DataSet PesquisarDataSetDA(MovimentosEstoque movestoque, string dtIni, string dtFim)
+        public DataSet PesquisarDataSetDA(MovimentosEstoque movestoque, string coditens, string codUsuarios, string dtIni, string dtFim)
         {
-            string consulta = "";
+            StringBuilder sqlQuery = new StringBuilder();
 
 
-            consulta = " SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
+            sqlQuery.Append(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
                         "   FROM MOVIMENTOSESTOQUE M  " +
                         "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
                         "        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  " +
                         "        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  " +
                         "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
                         "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +                        
-                        "  WHERE 1 = 1 ";
+                        "  WHERE 1 = 1 ");
 
-            if(movestoque.UsuarioId != 0)
+            if(codUsuarios != string.Empty)
             {
-                consulta += " AND m.usuarioid = " + movestoque.UsuarioId;
+                sqlQuery.Append(@" AND m.usuarioid IN (" + codUsuarios + ")");
             }
 
-            if (movestoque.ItemEstoqueId != 0)
+            if (coditens != string.Empty)
             {
-                consulta += " AND m.ITEMESTOQUEID = " + movestoque.ItemEstoqueId;
+                sqlQuery.Append(@" AND IE.CODIGO IN (" + coditens + ")");
             }
 
             if (movestoque.Quantidade != 0)
             {
-                consulta += " AND m.quantidade = " + movestoque.Quantidade;
+                sqlQuery.Append(@" AND m.quantidade = " + movestoque.Quantidade);
             }
 
-            if (movestoque.Tipo != string.Empty)
+            if (movestoque.Tipo != null)
             {
-                consulta += " AND m.tipo = " + movestoque.Tipo;
+                sqlQuery.Append(@" AND m.tipo = " + movestoque.Tipo);
             }
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
             {
 
-                consulta += " AND M.data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)";
+                sqlQuery.Append(@" AND M.data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
             }
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, sqlQuery.ToString());
 
             return ds;
         }

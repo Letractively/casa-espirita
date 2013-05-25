@@ -89,22 +89,22 @@ namespace FIBIESA
             if (rbMaisVendidos.Checked)
             {
                 Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, "desc").Tables[0];
-                paginaRel = "/Relatorios/RelVendasAcumulados.aspx?acumulado=Mais&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text;
+                paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Mais&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
             }
             else if (rbMenosVendidos.Checked)
             {
                 Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, "asc").Tables[0];
-                paginaRel = "/Relatorios/RelVendasAcumulados.aspx?acumulado=Menos&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text;
+                paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Menos&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
             }
             else
             {
                 Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
-                paginaRel = "/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text;
+                paginaRel = "WinOpen('/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,1125);";
             }
 
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('" + paginaRel + "','',600,1125);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),  paginaRel.ToString() , true);
             }
             else
             {
@@ -146,7 +146,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntClientes"] != null || Session["IntClientes"] != string.Empty)
+            if (Session["IntClientes"] != null && Session["IntClientes"] != string.Empty)
                 txtCliente.Text = Session["IntClientes"].ToString() + ",";
 
             txtCliente.Text = txtCliente.Text + gvrow.Cells[2].Text;
@@ -161,7 +161,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntItem"] != string.Empty || Session["IntItem"] != null)
+            if (Session["IntItem"] != string.Empty && Session["IntItem"] != null)
                 txtItem.Text = Session["IntItem"].ToString() + ",";
 
             txtItem.Text = txtItem.Text + gvrow.Cells[2].Text;
@@ -218,6 +218,7 @@ namespace FIBIESA
 
         #endregion TextChanged
 
+        #region RowDataBound
         protected void grdPesquisaCliente_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -229,5 +230,7 @@ namespace FIBIESA
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
+
+        #endregion
     }
 }

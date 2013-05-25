@@ -98,11 +98,11 @@ namespace BusinessLayer
         //    return itEstDA.PesquisarItensEstoqueDA(id_movEst);
         //}
 
-        public DataSet PesquisarItensEstoqueDataSetBL(ItensEstoque itensEstoque, byte? controleEstoque, byte? Status)
+        public DataSet PesquisarItensEstoqueDataSetBL(string codItens, byte? controleEstoque, byte? Status)
         {
             ItensEstoqueDA itEstDA = new ItensEstoqueDA();
 
-            return itEstDA.PesquisarItensEstoqueDataSetDA(itensEstoque, controleEstoque, Status);
+            return itEstDA.PesquisarItensEstoqueDataSetDA(codItens, controleEstoque, Status);
         }
     }
 }

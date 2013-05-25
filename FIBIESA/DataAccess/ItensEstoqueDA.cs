@@ -257,22 +257,23 @@ namespace DataAccess
         //    return ds;
         //}
 
-        public DataSet PesquisarItensEstoqueDataSetDA(ItensEstoque itensEstoque, byte? controlaestoque, byte? status)
+        public DataSet PesquisarItensEstoqueDataSetDA(string codItens, byte? controlaestoque, byte? status)
         {
-            string query = "SELECT * " +
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT * " +
                     " FROM VIEW_ITENSESTOQUE  " +
-                    "  where 1 = 1 ";
-            if (itensEstoque.Id != 0)
-                query += "   AND ID = " + itensEstoque.Id;
+                    "  where 1 = 1 ");
+            if (codItens != string.Empty)
+                sqlQuery.Append(@"   AND codigo IN (" + codItens + ")");
 
             if (status != null)
-                query += "   AND STATUS = " + status;
+                sqlQuery.Append(@"   AND STATUS = " + status);
 
             if (controlaestoque != null)
-                query += "   AND CONTROLAESTOQUE = " + controlaestoque;
+                sqlQuery.Append(@"   AND CONTROLAESTOQUE = " + controlaestoque);
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, query);
+                                                       CommandType.Text, sqlQuery.ToString());
 
 
             return ds;

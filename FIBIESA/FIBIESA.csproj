@@ -195,6 +195,7 @@
     <Content Include="Relatorios\RelReciboVenda.aspx" />
     <Content Include="Relatorios\RelTurmas.aspx" />
     <Content Include="Relatorios\RelVendas.aspx" />
+    <Content Include="Relatorios\RelVendasAcumulados.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\functions.js" />
@@ -739,6 +740,13 @@
     <Compile Include="Relatorios\RelVendas.aspx.designer.cs">
       <DependentUpon>RelVendas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelVendasAcumulados.aspx.cs">
+      <DependentUpon>RelVendasAcumulados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelVendasAcumulados.aspx.designer.cs">
+      <DependentUpon>RelVendasAcumulados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="viewAgencia.aspx.cs">
       <DependentUpon>viewAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1088,6 +1096,8 @@
     <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
     <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptVendas.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptVendasAcumulado.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="instituicoesLogo.ashx" />

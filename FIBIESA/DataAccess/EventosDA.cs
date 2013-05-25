@@ -194,6 +194,24 @@ namespace DataAccess
             return ba;
         }
 
+        public List<Base> PesquisarEventos(string codigos)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM EVENTOS WHERE CODIGO IN ({0})", codigos));
+
+            List<Base> ba = new List<Base>();
+
+            while (dr.Read())
+            {
+                Base bas = new Base();
+                bas.PesId1 = int.Parse(dr["ID"].ToString());
+                bas.PesDescricao = dr["DESCRICAO"].ToString();
+
+                ba.Add(bas);
+            }
+            return ba;
+        }
 
         public DataSet PesquisarDataSet(string codDes, string dataIni, string dataIniF, string dataFim, string dataFimF)
         {
@@ -205,7 +223,7 @@ namespace DataAccess
                                 " FROM EVENTOS WHERE 1 = 1 ");
             
             if (codDes != string.Empty)
-                sqlQuery.Append(@" AND (codigo = " + codDes + " OR descricao = '" + codDes +"')");
+                sqlQuery.Append(@" AND codigo IN (" + codDes + ")");
             
 
             if ((dataIni != string.Empty) && (dataIniF != string.Empty))

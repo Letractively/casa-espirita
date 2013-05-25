@@ -7,13 +7,15 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLayer;
 using DataObjects;
+using FG;
 
 namespace FIBIESA
 {
     public partial class viewRelMovimentacaoEstoque : System.Web.UI.Page
     {
+        Utils utils = new Utils();
         #region funcoes
-        private DataTable CriarTabelaPesquisa()
+        public void CarregarPesquisaItem(string conteudo)
         {
             DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -24,76 +26,12 @@ namespace FIBIESA
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
 
-            return dt;
-
-        }
-        #endregion
-
-        #region pesquisas
-        public void pesquisaUsuario(string lCampoPesquisa)
-        {
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas;
-            if (this.txtUsuario.Text != string.Empty && lCampoPesquisa != string.Empty)
-            {
-                pessoas = pesBL.PesquisarBL(lCampoPesquisa, this.txtUsuario.Text);
-            }
-            else
-            {
-                pessoas = pesBL.PesquisarBL();
-            }
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Usuário não encontrado.');", true);
-            }
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-
-
-        }
-
-        public void pesquisaItem(string lCampoPesquisa)
-        {
-
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
             ItensEstoqueBL itemBl = new ItensEstoqueBL();
             ItensEstoque item = new ItensEstoque();
 
-            List<ItensEstoque> itens;
+            List<ItensEstoque> lItens = itemBl.PesquisarBuscaBL(conteudo);
 
-            if (txtItem.Text != string.Empty && lCampoPesquisa != string.Empty)
-            {
-                itens = itemBl.PesquisarBL(lCampoPesquisa, txtItem.Text);
-            }
-            else
-            {
-                itens = itemBl.PesquisarBL();
-            }
-            foreach (ItensEstoque pes in itens)
+            foreach (ItensEstoque pes in lItens)
             {
                 DataRow linha = dt.NewRow();
 
@@ -104,98 +42,120 @@ namespace FIBIESA
                 dt.Rows.Add(linha);
             }
 
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-            else
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
+        }
+
+        public void CarregarPesquisaUsuario(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            UsuariosBL usuBL = new UsuariosBL();
+            Usuarios usu = new Usuarios();
+            List<Usuarios> lUsuarios = usuBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Usuarios pes in lUsuarios)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ALERTA", "alert('Item não encontrado.');", true);
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Id;
+                linha["DESCRICAO"] = pes.Nome;
+
+                dt.Rows.Add(linha);
             }
 
-            Session["objBLPesquisa"] = itemBl;
-            Session["objPesquisa"] = item;
+
+            grdPesquisaUsuario.DataSource = dt;
+            grdPesquisaUsuario.DataBind();
         }
 
-
-        #endregion pesquisas
-
-
-        #region carrega Informações
-        public void carregaUsuario()
+        private void CarregarAtributos()
         {
-            pesquisaUsuario("CODIGO");
-            if (Session["tabelaPesquisa"] != null)
-            {
-                dtGeral = (DataTable)Session["tabelaPesquisa"];
-                this.lblDesUsuario.Text = dtGeral.Rows[0].ItemArray[2].ToString();
-                this.hfIdUsuario.Value = dtGeral.Rows[0].ItemArray[0].ToString();
-            }
-            else
-            {
-                this.lblDesUsuario.Text = "Todos";
-                this.hfIdUsuario.Value = "0";
-            }
+            txtDataIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDataFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtQuantidade.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
+        #endregion
 
-        public void carregaItem()
-        {
-            pesquisaItem("CODIGO");
-            if (Session["tabelaPesquisa"] != null)
-            {
-                dtGeral = (DataTable)Session["tabelaPesquisa"];
-                this.lblDesItem.Text = dtGeral.Rows[0].ItemArray[2].ToString();
-                this.hfIdItem.Value = dtGeral.Rows[0].ItemArray[0].ToString();
-            }
-            else
-            {
-                this.lblDesItem.Text = "Todos";
-                this.hfIdItem.Value = "0";
-            }
-        }
-
-        #endregion carrega Informações
-
-        public DataTable dtGeral;
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        #region eventos textBox
-
-        protected void txtItem_TextChanged(object sender, EventArgs e)
-        {
-            carregaItem();
-        }
-
-        protected void txtUsuario_TextChanged(object sender, EventArgs e)
-        {
-            carregaUsuario();
-        }
-        #endregion eventos textBox
-
-        #region botões de pesquisa
-        protected void btnPesUsuario_Click(object sender, EventArgs e)
-        {
-            pesquisaUsuario(string.Empty);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtUsuario.ClientID + "&id=" + hfIdUsuario.ClientID + "&lbl=" + lblDesUsuario.ClientID + "','',600,500);", true);
-        }
+        #region Click
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            pesquisaItem(string.Empty);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
+
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+
         }
 
-        #endregion botões de pesquisa
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            if (Session["IntItem"] != null && Session["IntItem"] != string.Empty)
+                txtItem.Text = Session["IntItem"].ToString() + ",";
+
+            txtItem.Text = txtItem.Text + gvrow.Cells[2].Text;
+            Session["IntItem"] = txtItem.Text;
+            ModalPopupExtenderPesquisaItem.Hide();
+            ModalPopupExtenderPesquisaItem.Enabled = false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaItem.Enabled = false;
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
+
+        protected void btnPesUsuario_Click(object sender, EventArgs e)
+        {
+
+            CarregarPesquisaUsuario(null);
+            ModalPopupExtenderPesquisaUsuario.Enabled = true;
+            ModalPopupExtenderPesquisaUsuario.Show();
+
+        }
+
+        protected void btnSelectUsuario_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            if (Session["IntUsuario"] != null && Session["IntUsuario"] != string.Empty)
+                txtUsuario.Text = Session["IntUsuario"].ToString() + ",";
+
+            txtUsuario.Text = txtUsuario.Text + gvrow.Cells[2].Text;
+            Session["IntUsuario"] = txtUsuario.Text;
+            ModalPopupExtenderPesquisaUsuario.Hide();
+            ModalPopupExtenderPesquisaUsuario.Enabled = false;
+        }
+
+        protected void btnCancelUsuario_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaUsuario.Enabled = false;
+        }
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
             MovimentosEstoqueBL movimentosEstoqueBL = new MovimentosEstoqueBL();
             MovimentosEstoque movimentosEstoque = new MovimentosEstoque();
 
-            movimentosEstoque.ItemEstoqueId = Convert.ToInt32(hfIdItem.Value);
-            movimentosEstoque.UsuarioId = Convert.ToInt32(hfIdUsuario.Value);
 
             if (txtQuantidade.Text != string.Empty)
                 movimentosEstoque.Quantidade = Convert.ToInt32(txtQuantidade.Text);
@@ -205,7 +165,7 @@ namespace FIBIESA
             else if (rbEntrada.Checked)
                 movimentosEstoque.Tipo = "E";
 
-            Session["ldsRel"] = movimentosEstoqueBL.PesquisarDataSetBL(movimentosEstoque, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            Session["ldsRel"] = movimentosEstoqueBL.PesquisarDataSetBL(movimentosEstoque, txtItem.Text, txtUsuario.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {
                 string periodo = "Todos";
@@ -220,6 +180,62 @@ namespace FIBIESA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
 
+        }
+
+        #endregion
+
+
+        public DataTable dtGeral;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+                CarregarAtributos();
+        }
+
+
+        #region eventos textBox
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void txtPesquisaUsuario_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaUsuario(txtPesquisaUsuario.Text);
+            ModalPopupExtenderPesquisaUsuario.Enabled = true;
+            ModalPopupExtenderPesquisaUsuario.Show();
+            txtPesquisaUsuario.Text = "";
+        }
+
+        protected void txtItem_TextChanged(object sender, EventArgs e)
+        {
+            if (txtItem.Text == "")
+                Session["IntItem"] = null;
+            Session["IntItem"] = txtItem.Text;
+        }
+
+        protected void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text == "")
+                Session["IntUsuario"] = null;
+            Session["IntUsuario"] = txtUsuario.Text;
+        }
+        #endregion eventos textBox
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void grdPesquisaUsuario_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
 
     }

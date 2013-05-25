@@ -19,7 +19,7 @@
         </asp:ScriptManager>
         <div id="divRelatorio" runat="server">
             <rsweb:ReportViewer ID="rpvEmprestimos" runat="server" Height="770px" 
-                Width="1110px" ShowRefreshButton="False" ShowPromptAreaButton="False" 
+                Width="1100px" ShowRefreshButton="False" ShowPromptAreaButton="False" 
                 ShowDocumentMapButton="False" ShowFindControls="False" ShowPrintButton="true"
                 Font-Names="Arial" Font-Size="8pt" >
                 <LocalReport ReportPath="Relatorios\rptEmprestimoAcumulado.rdlc">
