@@ -60,32 +60,39 @@ namespace FIBIESA.Relatorios
                     ReportDataSource rptDatasourceInstituicao = new ReportDataSource("DataSet_Instituicao", instBL.PesquisarDsBL().Tables[0]);
                     ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                     ReportDataSource rptDatasourceEmprestimos = new ReportDataSource("DataSet_Emprestimo", lDtPesquisa);
-
+                    string nome = string.Empty;
+                    if (PessoaId != string.Empty)
+                    {
                     PessoasBL peBL = new PessoasBL();
                     Pessoas pe = new Pessoas();
-                    List<Base> lPessoas = peBL.PesquisarPessoas(PessoaId);
+                    
+                        List<Base> lPessoas = peBL.PesquisarPessoas(PessoaId);
 
-                    string nome = string.Empty;
-                    foreach (Base pes in lPessoas)
-                    {
-                        if (nome == string.Empty)
-                            nome += pes.PesDescricao;
-                        else
-                            nome += ", " + pes.PesDescricao;
+                        
+                        foreach (Base pes in lPessoas)
+                        {
+                            if (nome == string.Empty)
+                                nome += pes.PesDescricao;
+                            else
+                                nome += ", " + pes.PesDescricao;
+                        }
                     }
 
-                    ObrasBL obrasBl = new ObrasBL();
-                    Obras obras = new Obras();
-                    List<Base> lObras = obrasBl.PesquisarObras(obraId);
                     string titulo = string.Empty;
-                    foreach (Base pes in lObras)
+                    if (obraId != string.Empty)
                     {
-                        if (titulo == string.Empty)
-                            titulo += pes.PesDescricao;
-                        else
-                            titulo += ", " + pes.PesDescricao;
+                        ObrasBL obrasBl = new ObrasBL();
+                        Obras obras = new Obras();
+                        List<Base> lObras = obrasBl.PesquisarObras(obraId);
+                     
+                        foreach (Base pes in lObras)
+                        {
+                            if (titulo == string.Empty)
+                                titulo += pes.PesDescricao;
+                            else
+                                titulo += ", " + pes.PesDescricao;
+                        }
                     }
-
                     ReportParameter[] param = new ReportParameter[10];
                     param[0] = new ReportParameter("nome", nome);
                     param[1] = new ReportParameter("titulo", titulo);

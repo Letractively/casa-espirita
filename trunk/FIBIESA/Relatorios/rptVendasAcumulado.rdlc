@@ -413,7 +413,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>8.60937in</Width>
+  <Width>7.54687in</Width>
   <Page>
     <PageHeader>
       <Height>5.08cm</Height>
@@ -425,8 +425,8 @@
           <Value>=First(Fields!Imagem.Value, "DataSet_InstituicaoLogo")</Value>
           <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
-          <Top>0.72337cm</Top>
-          <Left>0.95912cm</Left>
+          <Top>0.40587cm</Top>
+          <Left>0.32412cm</Left>
           <Height>3.34222cm</Height>
           <Width>3.41313cm</Width>
           <Visibility>
@@ -456,8 +456,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>0.72337cm</Top>
-          <Left>5.48349cm</Left>
+          <Top>0.40587cm</Top>
+          <Left>4.84849cm</Left>
           <Height>0.6cm</Height>
           <Width>7.69938cm</Width>
           <ZIndex>1</ZIndex>
@@ -485,8 +485,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>1.80816cm</Top>
-          <Left>5.07338cm</Left>
+          <Top>1.49066cm</Top>
+          <Left>4.43838cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>2</ZIndex>
@@ -514,8 +514,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>2.58454cm</Top>
-          <Left>5.07338cm</Left>
+          <Top>2.26704cm</Top>
+          <Left>4.43838cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>3</ZIndex>
@@ -543,8 +543,8 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>3.35976cm</Top>
-          <Left>5.09984cm</Left>
+          <Top>3.04226cm</Top>
+          <Left>4.46484cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>4</ZIndex>
@@ -573,8 +573,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.8292cm</Top>
-          <Left>16.00067cm</Left>
+          <Top>0.5117cm</Top>
+          <Left>13.46067cm</Left>
           <Height>0.49417cm</Height>
           <Width>5.42396cm</Width>
           <ZIndex>5</ZIndex>
@@ -603,8 +603,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>4.11903cm</Top>
-          <Left>5.09984cm</Left>
+          <Top>3.80153cm</Top>
+          <Left>4.46484cm</Left>
           <Height>0.6cm</Height>
           <Width>11.43cm</Width>
           <ZIndex>6</ZIndex>

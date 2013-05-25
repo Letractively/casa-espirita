@@ -70,6 +70,13 @@ namespace BusinessLayer
             return eveDA.Pesquisar(codDes);
         }
 
+        public List<Base> PesquisarEventos(string codDes)
+        {
+            EventosDA eveDA = new EventosDA();
+
+            return eveDA.PesquisarEventos(codDes);
+        }
+
         public DataSet PesquisarDataset(string codDes, string dataIni, string dataIniF, string dataFim, string dataFimF)
         {
             EventosDA eveDA = new EventosDA();

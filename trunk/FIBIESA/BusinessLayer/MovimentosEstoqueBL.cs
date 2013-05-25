@@ -66,12 +66,12 @@ namespace BusinessLayer
             return movimentosestoqueDA.PesquisarTotalMovimentosDA(id_ItEst, data);
         }
 
-        public DataSet PesquisarDataSetBL(MovimentosEstoque movEstoque, string dtIni, string dtFim)
+        public DataSet PesquisarDataSetBL(MovimentosEstoque movestoque, string coditens, string codUsuarios, string dtIni, string dtFim)
         {
             /*criar as regras de negocio*/
             MovimentosEstoqueDA movimentosestoqueDA = new MovimentosEstoqueDA();
 
-            return movimentosestoqueDA.PesquisarDataSetDA(movEstoque, dtIni, dtFim);
+            return movimentosestoqueDA.PesquisarDataSetDA(movestoque, coditens, codUsuarios, dtIni, dtFim);
         }
     }
 }

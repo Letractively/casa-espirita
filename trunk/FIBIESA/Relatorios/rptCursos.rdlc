@@ -472,7 +472,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>8.38542in</Width>
+  <Width>8.20834in</Width>
   <Page>
     <PageHeader>
       <Height>4.33917cm</Height>
@@ -625,7 +625,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Eventos: " + IIf(IsNothing(Parameters!Eventos.Value.ToString()),"Todos",Parameters!Eventos.Value)</Value>
+                  <Value>="Eventos: " + IIf(Parameters!Eventos.Value.ToString() = "","Todos",Parameters!Eventos.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -635,7 +635,7 @@
           <Top>3.42167cm</Top>
           <Left>4.3307cm</Left>
           <Height>0.6cm</Height>
-          <Width>11.43cm</Width>
+          <Width>16.00729cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>

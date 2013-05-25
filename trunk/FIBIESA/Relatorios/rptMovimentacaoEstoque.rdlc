@@ -754,7 +754,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>9.6875in</Width>
+  <Width>7.94662in</Width>
   <Page>
     <PageHeader>
       <Height>5.90021cm</Height>
@@ -915,7 +915,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>1.20813cm</Top>
-          <Left>15.60711cm</Left>
+          <Left>14.65461cm</Left>
           <Height>0.49417cm</Height>
           <Width>5.42396cm</Width>
           <ZIndex>5</ZIndex>
@@ -957,7 +957,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.99694cm</Top>
-          <Left>15.46966cm</Left>
+          <Left>12.61216cm</Left>
           <Height>0.68792cm</Height>
           <Width>7.19667cm</Width>
           <Style>

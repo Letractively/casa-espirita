@@ -806,7 +806,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Evento: " + Parameters!evento.Value</Value>
+                  <Value>="Evento: " + IIf(Parameters!evento.Value = "", "Todos", Parameters!evento.Value)</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -816,7 +816,7 @@
           <Top>3.50528cm</Top>
           <Left>4.55084cm</Left>
           <Height>0.6cm</Height>
-          <Width>11.43cm</Width>
+          <Width>17.91779cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>

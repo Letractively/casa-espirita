@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLayer;
 using DataObjects;
+using FG;
 namespace FIBIESA
 {
     public partial class viewRelCursos : System.Web.UI.Page
     {
+        Utils utils = new Utils();
         #region funcoes
-        private DataTable CriarTabelaPesquisa()
+        public void CarregarPesquisaEvento(string conteudo)
         {
             DataTable dt = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -23,8 +25,24 @@ namespace FIBIESA
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
 
-            return dt;
+            EventosBL eveBL = new EventosBL();
+            Eventos eve = new Eventos();
+            List<Eventos> lEventos = eveBL.PesquisarBuscaBL(conteudo);
 
+            foreach (Eventos pes in lEventos)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["DESCRICAO"] = pes.Descricao;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisaEvento.DataSource = dt;
+            grdPesquisaEvento.DataBind();
         }
 
         private void CarregarAtributos()
@@ -36,48 +54,42 @@ namespace FIBIESA
         }
 
         #endregion
-        public void pesquisaEvento(string lCampoPesquisa)
-        {
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = CriarTabelaPesquisa();
-
-            EventosBL eventosBL = new EventosBL();
-            Eventos eventos = new Eventos();
-            List<Eventos> lEventos;
-
-            lEventos = eventosBL.PesquisarBL();
-
-            foreach (Eventos eventoItem in lEventos)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = eventoItem.Id;
-                linha["CODIGO"] = eventoItem.Codigo;
-                linha["DESCRICAO"] = eventoItem.Descricao;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = eventosBL;
-            Session["objPesquisa"] = eventos;
-
-        }
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
             CarregarAtributos();
         }
 
-        protected void btnPesCurso_Click(object sender, EventArgs e)
-        {
-            pesquisaEvento("");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtcurso.ClientID + "&id=" + hfIdCodigo.ClientID + "&lbl=" + lblDesCodigo.ClientID + "','',600,500);", true);
+        protected void btnPesEvento_Click(object sender, EventArgs e)
+        {         
+
+            CarregarPesquisaEvento(null);
+            ModalPopupExtenderPesquisaEvento.Enabled = true;
+            ModalPopupExtenderPesquisaEvento.Show();
+        
         }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            if (Session["IntEvento"] != null && Session["IntEvento"] != string.Empty)
+                txtEvento.Text = Session["IntEvento"].ToString() + ",";
+
+            txtEvento.Text = txtEvento.Text + gvrow.Cells[2].Text;
+            Session["IntEvento"] = txtEvento.Text;
+            ModalPopupExtenderPesquisaEvento.Hide();
+            ModalPopupExtenderPesquisaEvento.Enabled = false;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaEvento.Enabled = false;
+        }
+
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
@@ -85,10 +97,10 @@ namespace FIBIESA
             
            
 
-            Session["ldsRel"] = eventosBL.PesquisarDataset(txtcurso.Text, txtDataIni.Text, txtDataIniF.Text, txtDataFim.Text, txtDataFimF.Text).Tables[0];
+            Session["ldsRel"] = eventosBL.PesquisarDataset(txtEvento.Text, txtDataIni.Text, txtDataIniF.Text, txtDataFim.Text, txtDataFimF.Text).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelCursos.aspx?Eventos=" + txtcurso.Text + "','',600,815);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelCursos.aspx?Eventos=" + txtEvento.Text + "','',600,825);", true);
             }
             else
             {
@@ -97,14 +109,32 @@ namespace FIBIESA
 
         }
 
-        protected void txtcurso_TextChanged(object sender, EventArgs e)
-        {
+        #region TextChanged
 
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaEvento(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaEvento.Enabled = true;
+            ModalPopupExtenderPesquisaEvento.Show();
+            txtPesquisa.Text = "";
         }
 
+        protected void txtEvento_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEvento.Text == "")
+                Session["IntEvento"] = null;
+            Session["IntEvento"] = txtEvento.Text;
+        }
+        #endregion
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/default.aspx");
+        }
+
+        protected void grdPesquisaEvento_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
     }
 }

@@ -408,10 +408,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>11.67708in</Width>
+  <Width>11.04166in</Width>
   <Page>
     <PageHeader>
-      <Height>7.66013cm</Height>
+      <Height>6.97221cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -628,7 +628,7 @@
           <Top>5.92012cm</Top>
           <Left>16.57615cm</Left>
           <Height>0.60886cm</Height>
-          <Width>11.43cm</Width>
+          <Width>11.08604cm</Width>
           <ZIndex>7</ZIndex>
           <Style>
             <Border>
@@ -657,7 +657,7 @@
           <Top>3.27871cm</Top>
           <Left>4.6699cm</Left>
           <Height>0.6cm</Height>
-          <Width>23.33625cm</Width>
+          <Width>22.99229cm</Width>
           <ZIndex>8</ZIndex>
           <Style>
             <Border>
@@ -686,7 +686,7 @@
           <Top>4.23163cm</Top>
           <Left>4.6699cm</Left>
           <Height>0.59958cm</Height>
-          <Width>23.33625cm</Width>
+          <Width>22.99229cm</Width>
           <ZIndex>9</ZIndex>
           <Style>
             <Border>

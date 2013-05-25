@@ -105,7 +105,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntClientes"] != null || Session["IntClientes"] != null)
+            if (Session["IntClientes"] != string.Empty && Session["IntClientes"] != null)
                 txtCliente.Text = Session["IntClientes"].ToString() + ",";
 
             txtCliente.Text = txtCliente.Text + gvrow.Cells[2].Text;
