@@ -1086,6 +1086,7 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasPagar.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />
     <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
@@ -1094,7 +1095,6 @@
     <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
     <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
     <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
     <EmbeddedResource Include="Relatorios\rptVendas.rdlc" />
     <EmbeddedResource Include="Relatorios\rptVendasAcumulado.rdlc" />
