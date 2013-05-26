@@ -203,7 +203,8 @@ namespace DataAccess
             StringBuilder consulta = new StringBuilder();
 
             consulta.Append(@"SELECT EX.* "+
-                             ", OB.TITULO, OB.ORIGEMID " +
+                             ", OB.TITULO "+
+                             ", OB.ORIGEMID " +
                              ", OB.CODIGO "+ 
                              ", TOB.QTDDIAS "+
                              ",(SELECT MOV.DATAPREVISTAEMPRESTIMO "+
@@ -218,7 +219,7 @@ namespace DataAccess
                              "   WHERE EX.STATUS = 'A' ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (OB.CODIGO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND EX.TOMBO = {0} ", utils.ComparaIntComZero(valor)));
 
             consulta.Append(" ORDER BY OB.CODIGO ");
 
@@ -228,6 +229,41 @@ namespace DataAccess
 
             return ds;
  
+        }
+
+        public DataSet PesquisarExemplaresDevolucao(string valor)
+        {
+            StringBuilder consulta = new StringBuilder();
+
+            consulta.Append(@"SELECT OB.TITULO " +
+                             "      ,EX.TOMBO  " +
+                             "      ,EM.ID " +
+                             "      ,P.NOME " +
+                             "      ,MOV.DATAPREVISTAEMPRESTIMO " +
+                             "      ,MOV.ID MOVID " +
+                             "      ,CASE WHEN (MOV.DATAPREVISTAEMPRESTIMO < CAST (GETDATE() AS DATE)) " +
+                             "           THEN 'Atrasado' ELSE 'Emprestado' END AS SITUACAO " +
+                             "  FROM EXEMPLARES EX " +
+                             "      ,EMPRESTIMOS EM " +
+                             "      ,EMPRESTIMOMOV MOV " +
+                             "      ,OBRAS OB " +
+                             "      ,PESSOAS P " +
+                             " WHERE EX.ID = EM.EXEMPLARID " +
+                             "   AND EM.ID = MOV.EMPRESTIMOID  " +   
+                             "   AND EX.OBRAID = OB.ID  " + 
+                             "   AND EM.PESSOAID = P.ID " +
+                             "   AND MOV.DATADEVOLUCAO IS NULL ");                             
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND EX.TOMBO = {0} ", utils.ComparaIntComZero(valor)));
+                 
+
+            DataSet ds = SqlHelper.ExecuteDataset(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, consulta.ToString());
+
+            return ds;
+
         }
 
         public override List<Base> Pesquisar(string descricao)

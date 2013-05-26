@@ -19,7 +19,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
+                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
                                 <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                     <ContentTemplate>
                                         <table width="800PX">
@@ -59,17 +59,20 @@
                                             <tr>
                                                 <td colspan="2">
                                                     <asp:Panel ID="pnlExemplar" runat="server" GroupingText="Empréstimos Ativos"
-                                                    Width="100%" Height="180px" ScrollBars="Auto" BorderColor="#CCCCCC">
+                                                    Width="100%" Height="250px" ScrollBars="Auto" BorderColor="#CCCCCC">
                                                         <asp:GridView ID="dtgExemplar" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
-                                                            DataKeyNames="ID" AllowSorting="True" GridLines="None" OnRowDataBound="dtgExemplar_RowDataBound"
+                                                            DataKeyNames="ID,EMPRESTIMOID" AllowSorting="True" GridLines="None" OnRowDataBound="dtgExemplar_RowDataBound"
                                                             PageSize="5" Width="800px">
                                                             <Columns>
                                                                 <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                                                <asp:BoundField DataField="EMPRESTIMOID" HeaderText="EMPRESTIMOID" 
+                                                                    Visible="False" />
                                                                 <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
                                                                 <asp:BoundField DataField="TITULO" HeaderText="Título" />
                                                                 <asp:BoundField DataField="RENOVAR" HeaderText="Pode Renovar?" />
-                                                                <asp:BoundField DataField="DEVOLUCAO" HeaderText="Prazo Devolução" />
+                                                                <asp:BoundField DataField="QTDDIAS" HeaderText="Qtd. Dias" />
+                                                                <asp:BoundField DataField="DEVOLUCAO" HeaderText="Devolução" />
                                                                 <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
                                                                 <asp:TemplateField HeaderText="Renovar">
                                                                     <ItemTemplate>
@@ -92,8 +95,8 @@
                                             </tr>
                                             <tr>                                                
                                                 <td colspan="2" valign="middle" style="text-align:center;">
-                                                    <asp:Button ID="Button1" runat="server" CssClass="btn" Text="Voltar" onclick="btnVoltar_Click"
-                                                    ToolTip="Volta para página de consulta" />
+                                                    <asp:Button ID="btnAbreEmp" runat="server" CssClass="btn" Text="Empréstimo" 
+                                                    ToolTip="Abre a aba de empréstimo" onclick="btnAbreEmp_Click" />
                                                     &nbsp&nbsp&nbsp;
                                                 </td>
                                             </tr>
@@ -186,10 +189,10 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" valign="middle" style="text-align:center;">
-                                                    <asp:Button ID="btnVoltarEmp" runat="server" CssClass="btn" Text="Voltar" onclick="btnVoltar_Click"
-                                                    ToolTip="Volta para página de consulta" />
+                                                    <asp:Button ID="btnVoltarEmp" runat="server" CssClass="btn" Text="Voltar" 
+                                                    ToolTip="Volta para a aba cliente/renovar" onclick="btnVoltarEmp_Click" />
                                                     &nbsp&nbsp&nbsp;
-                                                    <asp:Button ID="btnFinOperacoes" runat="server" CssClass="btn" Text="Emprestar" 
+                                                    <asp:Button ID="btnFinOperacoes" runat="server" CssClass="btn" Text="Finalizar" 
                                                     ToolTip="Confirma o empréstimo do(s) exemplare(s)" 
                                                         onclick="btnFinOperacoes_Click"/>                                                                                                        
                                                 </td>
@@ -205,22 +208,15 @@
                                                     Exemplar:
                                                 </td>
                                                 <td style="width: 400px">
-                                                    <asp:TextBox ID="txtExemplarDev" runat="server" CssClass="inputboxRight" Width="110px" AutoPostBack="True"
+                                                    <asp:TextBox ID="txtExemplarDev" runat="server" CssClass="inputboxRight" 
+                                                        Width="110px" AutoPostBack="True" ontextchanged="txtExemplarDev_TextChanged"
                                                         ></asp:TextBox>
                                                     <asp:Button ID="btnExemplarDev" runat="server" Text="..." CssClass="btn" />
                                                     <asp:Label ID="lblExemplarDev" runat="server"></asp:Label>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtExemplarDev"
                                                         ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 140px">
-                                                    Código de barras:
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lblCodBarraDev" runat="server"></asp:Label>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td style="width: 140px">
                                                     Situação:
@@ -246,21 +242,21 @@
                                                 <td colspan="2">
                                                     <asp:Panel ID="pnlExemplarDev" runat="server" GroupingText="Devoluções" Width="100%" Height="180px" ScrollBars="Auto"
                                                         BorderColor="#CCCCCC">
-                                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White"
+                                                        <asp:GridView ID="dtgExemplarDev" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
-                                                            DataKeyNames="ID" AllowSorting="True" GridLines="None" 
-                                                            PageSize="5" Width="800px">
+                                                            DataKeyNames="MOVID,ID" AllowSorting="True" GridLines="None" 
+                                                            PageSize="5" Width="800px" onrowdeleting="dtgExemplarDev_RowDeleting">
                                                             <Columns>
                                                                 <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                                                     <HeaderStyle CssClass="grd_cmd_header" />
                                                                     <ItemStyle CssClass="grd_delete" />
                                                                 </asp:CommandField>
+                                                                <asp:BoundField DataField="MOVID" HeaderText="MOVID" Visible="False" />
                                                                 <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                                                 <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
                                                                 <asp:BoundField DataField="TITULO" HeaderText="Título" />
                                                                 <asp:BoundField DataField="DEVOLUCAO" HeaderText="Prazo Devolução" />
-                                                                <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
-                                                                <asp:BoundField DataField="ACAO" HeaderText="Ação" />
+                                                                <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />                                                                
                                                             </Columns>
                                                             <FooterStyle BackColor="White" ForeColor="#000066" />
                                                             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -277,11 +273,12 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" valign="middle" style="text-align:center;">                                                
-                                                    <asp:Button ID="btnVoltarDev" runat="server" CssClass="btn" Text="Voltar" onclick="btnVoltar_Click"
-                                                    ToolTip="Volta para página de consulta" />
+                                                    <asp:Button ID="btnVoltarDev" runat="server" CssClass="btn" Text="Voltar" onclick="btnVoltarDev_Click"
+                                                    ToolTip="Volta para a aba cliente/renovar" />
                                                     &nbsp&nbsp&nbsp;
-                                                    <asp:Button ID="btnFinOpeDev" runat="server" CssClass="btn" Text="Devolver" 
-                                                    ToolTip="Confirma a devolução do(s) exemplare(s)"/>
+                                                    <asp:Button ID="btnFinOpeDev" runat="server" CssClass="btn" Text="Finalizar" 
+                                                    ToolTip="Confirma a devolução do(s) exemplare(s)" 
+                                                        onclick="btnFinOpeDev_Click"/>
                                                 </td>
                                             </tr>
                                         </table>

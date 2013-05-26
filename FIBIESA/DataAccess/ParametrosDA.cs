@@ -99,5 +99,18 @@ namespace DataAccess
 
             return lds;          
         }
+
+        public string PesquisarValorDA(int codigo, string modulo)
+        {
+            DataSet lds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT * FROM PARAMETROS WHERE CODIGO = {0} AND MODULO = '{1}'", codigo, modulo));
+
+            string valor = null;
+
+            if (lds.Tables[0].Rows.Count != 0)
+                valor = lds.Tables[0].Rows[0]["VALOR"].ToString();
+
+            return valor;
+        }
     }
 }
