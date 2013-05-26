@@ -58,22 +58,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// rbControlaEstoque control.
+        /// ddlControlaEst control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbControlaEstoque;
-        
-        /// <summary>
-        /// rbNaoControlaEstoque control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbNaoControlaEstoque;
+        protected global::System.Web.UI.WebControls.DropDownList ddlControlaEst;
         
         /// <summary>
         /// ddlStatus control.

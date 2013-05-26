@@ -245,7 +245,6 @@ namespace DataAccess
         {
             StringBuilder sqlQuery = new StringBuilder();
 
-
             sqlQuery.Append(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
                         "   FROM MOVIMENTOSESTOQUE M  " +
                         "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
@@ -255,31 +254,20 @@ namespace DataAccess
                         "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +                        
                         "  WHERE 1 = 1 ");
 
-            if(codUsuarios != string.Empty)
-            {
-                sqlQuery.Append(@" AND m.usuarioid IN (" + codUsuarios + ")");
-            }
+            if(codUsuarios != string.Empty)            
+                sqlQuery.Append(@" AND m.usuarioid IN (" + codUsuarios + ")");            
 
-            if (coditens != string.Empty)
-            {
-                sqlQuery.Append(@" AND IE.CODIGO IN (" + coditens + ")");
-            }
+            if (coditens != string.Empty)            
+                sqlQuery.Append(@" AND O.CODIGO IN (" + coditens + ")");            
 
-            if (movestoque.Quantidade != 0)
-            {
-                sqlQuery.Append(@" AND m.quantidade = " + movestoque.Quantidade);
-            }
+            if (movestoque.Quantidade != 0)            
+                sqlQuery.Append(@" AND m.quantidade = " + movestoque.Quantidade);            
 
-            if (movestoque.Tipo != null)
-            {
-                sqlQuery.Append(@" AND m.tipo = " + movestoque.Tipo);
-            }
+            if (movestoque.Tipo != null)            
+                sqlQuery.Append(@" AND m.tipo = '" + movestoque.Tipo +"'");            
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
-            {
-
-                sqlQuery.Append(@" AND M.data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
-            }
+                sqlQuery.Append(@" AND M.data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");            
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, sqlQuery.ToString());

@@ -53,6 +53,7 @@ namespace FIBIESA
         {
             if (!IsPostBack)
             {
+                Session["IntItem"] = null;
             }
         }
 
@@ -94,10 +95,10 @@ namespace FIBIESA
 
             
             byte? controlaestoque = null;
-            if (rbControlaEstoque.Checked)
-                controlaestoque = 1;
-            else if (rbNaoControlaEstoque.Checked)
-                controlaestoque = 0;
+
+            if (utils.ComparaIntComZero(ddlControlaEst.SelectedValue) > 0)
+                controlaestoque = Convert.ToByte(ddlControlaEst.SelectedValue);
+            
 
             byte? blStatus = null;
             string status = "Todos";
