@@ -160,9 +160,9 @@ namespace FIBIESA
             if (txtQuantidade.Text != string.Empty)
                 movimentosEstoque.Quantidade = Convert.ToInt32(txtQuantidade.Text);
 
-            if (rbSaida.Checked)
+            if (utils.ComparaIntComZero(ddlTipoMov.SelectedValue) == 2 )
                 movimentosEstoque.Tipo = "S";
-            else if (rbEntrada.Checked)
+            else if (utils.ComparaIntComZero(ddlTipoMov.SelectedValue) == 1 )
                 movimentosEstoque.Tipo = "E";
 
             Session["ldsRel"] = movimentosEstoqueBL.PesquisarDataSetBL(movimentosEstoque, txtItem.Text, txtUsuario.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
@@ -189,7 +189,11 @@ namespace FIBIESA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
                 CarregarAtributos();
+                Session["IntItem"] = null;
+                Session["IntUsuario"] = null;
+            }
         }
 
 

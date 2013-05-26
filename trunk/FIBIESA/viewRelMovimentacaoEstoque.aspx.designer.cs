@@ -103,22 +103,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// rbEntrada control.
+        /// ddlTipoMov control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbEntrada;
-        
-        /// <summary>
-        /// rbSaida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbSaida;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoMov;
         
         /// <summary>
         /// txtDataIni control.

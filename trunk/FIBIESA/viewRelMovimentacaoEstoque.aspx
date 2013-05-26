@@ -18,11 +18,12 @@
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Item:
+                                    Item(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="110px" 
-                                        AutoPostBack="true" ontextchanged="txtItem_TextChanged" ToolTip="Digite o código do Item."></asp:TextBox>                                                                                   
+                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="260px" 
+                                        AutoPostBack="true" ontextchanged="txtItem_TextChanged" 
+                                        ToolTip="Informe o(s) item(s) - Lista de valores disponível"></asp:TextBox>                                                                                   
                                     <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesItem_Click"  />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
@@ -31,11 +32,12 @@
                             </tr>
                             <tr>
                                 <td style="width: 140px">
-                                    Usuário:
+                                    Usuário(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtUsuario" runat="server" CssClass="inputbox" Width="110px" 
-                                        AutoPostBack="true" ontextchanged="txtUsuario_TextChanged" ToolTip="Digite o código do Usuário"></asp:TextBox>
+                                    <asp:TextBox ID="txtUsuario" runat="server" CssClass="inputbox" Width="260px" 
+                                        AutoPostBack="true" ontextchanged="txtUsuario_TextChanged" 
+                                        ToolTip="Informe o(s) usuário(s) - Lista de valores disponível"></asp:TextBox>
                                     <asp:Button ID="btnPesUsuario" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesUsuario_Click"  />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
@@ -47,20 +49,23 @@
                                     Quantidade:
                                 </td>
                                 <td style="width: 530px" colspan="2" >                            
-                                    <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox"></asp:TextBox>                                                                
+                                    <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox" 
+                                        ToolTip="Informe a quantidade "></asp:TextBox>                                                                
                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtQuantidade" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 530px" colspan="2" style="text-align:center;">
-                                    <center>
-                                        <asp:RadioButton ID="rbEntrada" GroupName="Estoque" runat="server" CssClass="input" value="1" Text="   Entrada">                                                                                                                                
-                                        </asp:RadioButton>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <asp:RadioButton ID="rbSaida" GroupName="Estoque" runat="server" CssClass="input" value="0" Text="   Saída">
-                                        </asp:RadioButton>
-                                    </center>
+                                <td>
+                                    Tipo de Movimento:
+                                </td>
+                                <td style="width: 530px">                                   
+                                        <asp:DropDownList ID="ddlTipoMov" runat="server" AppendDataBoundItems="True" CssClass="dropdownlist"                                        
+                                        ToolTip="Selecione o tipo de movimento">
+                                        <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Entrada" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Saída" Value="2"></asp:ListItem>
+                                    </asp:DropDownList>                                 
                                 </td>                                                                      
                             </tr>
                             <tr>
@@ -71,7 +76,8 @@ ControlToValidate="txtQuantidade" ValidationExpression="^\d+$" Display="Dynamic"
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" Width="100px" 
+                                                    ToolTip="Informe a data de movimentação"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataIni_CalendarExtender" runat="server" TargetControlID="txtDataIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -83,7 +89,8 @@ ControlToValidate="txtDataIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
                                             <td>    
-                                                <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" Width="100px" 
+                                                    ToolTip="Informe a data de movimentação"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataFim_CalendarExtender" runat="server" TargetControlID="txtDataFim" 
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -97,12 +104,15 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                 </td>                                    
                             </tr>
                             <tr>
-                                <td colspan="2" valign="middle" style="text-align:center;">
+                                <td>
+                                </td>
+                                <td>
                                     <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
                                         OnClick="btnVoltar_Click" ToolTip="Volta para página principal" />
                                     &nbsp;&nbsp;&nbsp;
                                     <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
-                                        onclick="btnRelatorio_Click" validationgroup="grupo" />
+                                        onclick="btnRelatorio_Click" validationgroup="grupo" 
+                                        ToolTip="Imprime o relatório" />
                                 </td>                                    
                             </tr>                                        
                         </table>

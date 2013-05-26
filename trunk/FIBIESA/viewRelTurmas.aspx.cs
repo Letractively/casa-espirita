@@ -89,8 +89,12 @@ namespace FIBIESA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            CarregarAtributos();           
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+                Session["IntTurma"] = null;
+                Session["IntEvento"] = null;
+            }
         }
 
         protected void btnPesEvento_Click(object sender, EventArgs e)

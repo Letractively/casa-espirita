@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true" CodeBehind="viewRelItensEstoque.aspx.cs" Inherits="FIBIESA.viewRelItensEstoque" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/home.Master" AutoEventWireup="true"
+    CodeBehind="viewRelItensEstoque.aspx.cs" Inherits="FIBIESA.viewRelItensEstoque" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
@@ -7,62 +9,68 @@
         EnableScriptLocalization="true">
     </asp:ScriptManager>
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
-        <ContentTemplate>        
+        <ContentTemplate>
             <div id="content">
                 <div class="container">
                     <div class="conthead">
-                        <h2>Relatório de Itens em Estoque</h2>
+                        <h2>
+                            Relatório de Itens em Estoque</h2>
                     </div>
                     <div class="contentbox">
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Item:
+                                    Item(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="110px" 
-                                        AutoPostBack="true" ontextchanged="txtItem_TextChanged" ToolTip="Digite o código do Item."></asp:TextBox>                                                                                   
-                                    <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." 
-                                        onclick="btnPesItem_Click"  />
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
-        ControlToValidate="txtItem" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" Width="260px" AutoPostBack="true"
+                                        OnTextChanged="txtItem_TextChanged" 
+                                        ToolTip="Informe o(s) iten(s) - Lista de valores disponível"></asp:TextBox>
+                                    <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." OnClick="btnPesItem_Click" />
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*"
+                                        ToolTip="Não Válida" SetFocusOnError="true" ControlToValidate="txtItem" ValidationExpression="^\d+(,\d+)*$"
+                                        Display="Dynamic" ValidationGroup="grupo" ForeColor="Red" CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 530px" colspan="2" style="text-align:center;">
-                                    <center>
-                                        <asp:RadioButton ID="rbControlaEstoque" GroupName="Estoque" runat="server" CssClass="input" value="1" Text="   Controla Estoque">                                                                                                                                
-                                        </asp:RadioButton>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <asp:RadioButton ID="rbNaoControlaEstoque" GroupName="Estoque" runat="server" CssClass="input" value="0" Text="   Não Controla Estoque">
-                                        </asp:RadioButton>
-                                    </center>
-                                </td>                                                                      
+                                <td style="width: 140px">
+                                    Controla Estoque:
+                                </td>
+                                <td style="width: 530px">
+                                    <asp:DropDownList ID="ddlControlaEst" runat="server" AppendDataBoundItems="True"
+                                        CssClass="dropdownlist" 
+                                        ToolTip="Selecione se o(s) iten(s) controla estoque">
+                                        <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Controla Estoque" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Não Controla Estoque" Value="0"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="width: 140px">
                                     Status:
                                 </td>
                                 <td style="width: 530px">
-                                    <asp:DropDownList ID="ddlStatus" runat="server" AppendDataBoundItems="True">
+                                    <asp:DropDownList ID="ddlStatus" runat="server" AppendDataBoundItems="True" 
+                                        CssClass="dropdownlist" ToolTip="Selecione o status do(s) item(s)">
                                         <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="Ativos" Value="1" ></asp:ListItem>                                            
-                                        <asp:ListItem Text="Inativos" Value="0" ></asp:ListItem>                                            
+                                        <asp:ListItem Text="Ativos" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Inativos" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" valign="middle" style="text-align:center;">
-                                    <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
-                                        onclick="btnVoltar_Click" ToolTip="Volta para página principal"/>
-                                    &nbsp;&nbsp;&nbsp;                  
-                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
-                                        onclick="btnRelatorio_Click" validationgroup="grupo"/>
-                                </td>                                    
-                            </tr>                                        
+                                <td colspan="2" valign="middle" style="text-align: center;">
+                                    <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" OnClick="btnVoltar_Click"
+                                        ToolTip="Volta para página principal" />
+                                    &nbsp;&nbsp;&nbsp;
+                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" OnClick="btnRelatorio_Click"
+                                        ValidationGroup="grupo" ToolTip="Imprime o relatório" />
+                                </td>
+                            </tr>
                         </table>
                     </div>
-                </div>                
+                </div>
                 <asp:HiddenField ID="hfIdItem" runat="server" Value="0" />
                 <div class="status">
                 </div>
