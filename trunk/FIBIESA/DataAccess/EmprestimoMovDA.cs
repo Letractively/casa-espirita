@@ -29,6 +29,7 @@ namespace DataAccess
                 empMov.DataDevolucao = utils.ComparaDataComNull(dr["DATADEVOLUCAO"].ToString());
                 empMov.DataPrevistaEmprestimo = Convert.ToDateTime(dr["DATAPREVISTAEMPRESTIMO"].ToString());
                 empMov.Situacao = dr["SITUACAO"].ToString();
+                empMov.QtdeDias = Int16.Parse(dr["QTDDIAS"].ToString());
 
                 Exemplares exemplar = new Exemplares();
                 exemplar.Id = int.Parse(dr["IDEXE"].ToString());
@@ -214,20 +215,47 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT EM.*, O.ID IDOBRA, O.CODIGO, O.TITULO, " +
                                                                                        " EX.ID IDEXE, EX.TOMBO, " +
                                                                                        " CASE WHEN (DATAPREVISTAEMPRESTIMO <= CAST (GETDATE() AS DATE)) " +
-                                                                                       " THEN 'Atrasado' ELSE 'Emprestado' END AS SITUACAO " +
+                                                                                       " THEN 'Atrasado' ELSE 'Emprestado' END AS SITUACAO, " +
+                                                                                       " TIO.QTDDIAS " +
                                                                                        " FROM EMPRESTIMOMOV EM " +
                                                                                        "     ,EMPRESTIMOS E " +
                                                                                        "     ,EXEMPLARES EX " +
                                                                                        "     ,OBRAS O " +
+                                                                                       "     ,TIPOSOBRAS TIO " +
                                                                                        " WHERE EM.EMPRESTIMOID = E.ID " +
                                                                                        "   AND E.EXEMPLARID = EX.ID " +
                                                                                        "   AND EX.OBRAID = O.ID " +
+                                                                                       "   AND O.TIPOSOBRAID = TIO.ID " +
                                                                                        "   AND EM.DATADEVOLUCAO IS NULL " +
                                                                                        "   AND E.PESSOAID = {0}", id_pessoa));
 
             List<EmprestimoMov> empMov = CarregarObjEmpMov(dr);
 
             return empMov;
+        }
+
+        /// <summary>
+        /// Renova o emprestimo. Finaliza o movimento e inclui um novo registro.
+        /// </summary>
+        /// <param name="pessoaId"></param>
+        /// <returns></returns>
+        public bool RenovarEmprestimo(EmprestimoMov empMov, int qtdeDias)
+        {
+            if (EditarDA(empMov))
+            {
+                EmprestimoMov empMovimento = new EmprestimoMov();
+                empMovimento.DataEmprestimo = DateTime.Now;
+                empMovimento.EmprestimoId = empMov.EmprestimoId;
+                empMovimento.DataPrevistaEmprestimo = DateTime.Now.AddDays(qtdeDias);
+
+                if (InserirDA(empMovimento))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+ 
         }
     }
 }

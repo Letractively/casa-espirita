@@ -55,5 +55,12 @@ namespace BusinessLayer
 
             return parametrosDA.PesquisarDA(codigo, modulo);
         }
+
+        public string PesquisarValorBL(int codigo, string modulo)
+        {
+            ParametrosDA parametrosDA = new ParametrosDA();
+
+            return parametrosDA.PesquisarValorDA(codigo, modulo);
+        }
     }
 }

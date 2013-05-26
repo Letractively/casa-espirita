@@ -319,7 +319,6 @@ namespace DataAccess
             return listao;
         }
 
-       
         //metodos do objeto viewEmprestimos
 
         public ViewEmprestimos CarregarViewEmprestimo(int id)
@@ -346,5 +345,6 @@ namespace DataAccess
             return ve;
 
         }
+               
     }
 }

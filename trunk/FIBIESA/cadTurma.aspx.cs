@@ -35,12 +35,9 @@ namespace Admin
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
 
-            DataSet dsPar = parBL.PesquisarBL(1,"E");
+            string valor = parBL.PesquisarValorBL(1,"E");
 
-            if (dsPar.Tables[0].Rows.Count != 0)
-               parametros.Valor = (string)dsPar.Tables[0].Rows[0]["valor"];
-
-            if (utils.ComparaIntComZero(parametros.Valor) > 0)
+            if (utils.ComparaIntComZero(valor) > 0)
             {
                 PessoasBL pesBL = new PessoasBL();
                 List<Pessoas> pessoas = pesBL.PesquisarPorGeneroDA(utils.ComparaIntComZero(parametros.Valor));

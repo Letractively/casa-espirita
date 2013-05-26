@@ -52,8 +52,8 @@ namespace Admin
                 EmprestimoMov oi = empBL.CarregaEmpNaoDevolvido(laco.Id);
                 if (oi.Id > 0)
                 {
-                    txtdataInicio.Text = oi.DataEmprestimo.ToString("dd/MM/yyyy");
-                    txtdataPrevisao.Text = oi.DataPrevistaEmprestimo.ToString("dd/MM/yyyy");
+                    //txtdataInicio.Text = oi.DataEmprestimo.ToString("dd/MM/yyyy");
+                    //txtdataPrevisao.Text = oi.DataPrevistaEmprestimo.ToString("dd/MM/yyyy");
                 }
             }
         }
@@ -67,13 +67,9 @@ namespace Admin
         private int LerParametro(int codigo, string modulo)
         {
             ParametrosBL parBL = new ParametrosBL();
-            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
-            int valor = -1;
+            string valor = parBL.PesquisarValorBL(codigo, modulo);
 
-            if (dsPar.Tables[0].Rows.Count != 0)
-                valor = utils.ComparaIntComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
-
-            return valor;
+            return utils.ComparaIntComZero(valor);           
         }
 
         //paineis modal

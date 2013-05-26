@@ -112,13 +112,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.GridView dtgExemplar;
         
         /// <summary>
-        /// Button1 control.
+        /// btnAbreEmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnAbreEmp;
         
         /// <summary>
         /// tpEmprestimo control.
@@ -292,15 +292,6 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// lblCodBarraDev control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCodBarraDev;
-        
-        /// <summary>
         /// lblSitDev control.
         /// </summary>
         /// <remarks>
@@ -337,13 +328,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Panel pnlExemplarDev;
         
         /// <summary>
-        /// GridView1 control.
+        /// dtgExemplarDev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView dtgExemplarDev;
         
         /// <summary>
         /// btnVoltarDev control.

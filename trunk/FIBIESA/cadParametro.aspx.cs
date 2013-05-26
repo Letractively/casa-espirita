@@ -16,13 +16,9 @@ namespace Admin
         private string LerParametro(string modulo, int codigo)
         {
             ParametrosBL parBL = new ParametrosBL();
-            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
-            string valor;
-
-            if (dsPar.Tables[0].Rows.Count != 0)
-                valor = dsPar.Tables[0].Rows[0]["VALOR"].ToString();
-            else
-                valor = string.Empty;
+            
+            string valor = parBL.PesquisarValorBL(codigo, modulo);
+            
 
             return valor;
         }
@@ -94,14 +90,7 @@ namespace Admin
         {
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
-            string v_valor = "";
-            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
-
-            if (dsPar.Tables[0].Rows.Count != 0)
-                v_valor = (string)dsPar.Tables[0].Rows[0]["valor"];
-
-            return v_valor;         
- 
+            return parBL.PesquisarValorBL(codigo, modulo);           
         }
         private void CarregarDados()
         {

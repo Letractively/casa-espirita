@@ -14,15 +14,15 @@ namespace DataObjects
             set { _id = value; }
         }
 
-        private int _emprestimoId;
-        public int EmprestimoId
+        private int? _emprestimoId;
+        public int? EmprestimoId
         {
             get { return _emprestimoId; }
             set { _emprestimoId = value; }
         }
 
-        private DateTime _dataEmprestimo;
-        public DateTime DataEmprestimo
+        private DateTime? _dataEmprestimo;
+        public DateTime? DataEmprestimo
         {
             get { return _dataEmprestimo; }
             set { _dataEmprestimo = value; }
@@ -35,8 +35,8 @@ namespace DataObjects
             set { _dataDevolucao = value; }
         }
 
-        private DateTime _dataPrevistaEmprestimo;
-        public DateTime DataPrevistaEmprestimo
+        private DateTime? _dataPrevistaEmprestimo;
+        public DateTime? DataPrevistaEmprestimo
         {
             get { return _dataPrevistaEmprestimo; }
             set { _dataPrevistaEmprestimo = value; }
@@ -62,5 +62,13 @@ namespace DataObjects
             get { return _situacao; }
             set { _situacao = value; }
         }
+
+        private Int16 _qtdeDias;
+        public Int16 QtdeDias
+        {
+            get { return _qtdeDias; }
+            set { _qtdeDias = value; }
+        }
+               
     }
 }
