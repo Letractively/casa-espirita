@@ -22,112 +22,94 @@ namespace FIBIESA {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// txtEvento control.
+        /// upnlPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEvento;
+        protected global::System.Web.UI.UpdatePanel upnlPesquisa;
         
         /// <summary>
-        /// btnPesEvento control.
+        /// ddlEvento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesEvento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEvento;
         
         /// <summary>
-        /// txtTurma control.
+        /// RegularExpressionValidator3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTurma;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
-        /// btnPesTurma control.
+        /// ddlTurma control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesTurma;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTurma;
         
         /// <summary>
-        /// txtInstrutor control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInstrutor;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// btnPesInstrutor control.
+        /// lblInstrutor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesInstrutor;
+        protected global::System.Web.UI.WebControls.Label lblInstrutor;
         
         /// <summary>
-        /// txtParticipante control.
+        /// ddlParticipante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParticipante;
+        protected global::System.Web.UI.WebControls.DropDownList ddlParticipante;
         
         /// <summary>
-        /// btnPesParticipante control.
+        /// RegularExpressionValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesParticipante;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
-        /// txtDataIni control.
+        /// ddlMes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataIni;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMes;
         
         /// <summary>
-        /// txtDataIni_CalendarExtender control.
+        /// ddlAno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDataIni_CalendarExtender;
-        
-        /// <summary>
-        /// txtDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataFim;
-        
-        /// <summary>
-        /// txtDataFim_CalendarExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtDataFim_CalendarExtender;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAno;
         
         /// <summary>
         /// rbComPreenchimento control.
@@ -148,6 +130,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RadioButton rbSemPreenchimento;
         
         /// <summary>
+        /// btnVoltar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
+        
+        /// <summary>
         /// btnRelatorio control.
         /// </summary>
         /// <remarks>
@@ -155,6 +146,42 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRelatorio;
+        
+        /// <summary>
+        /// hfIdEvento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdEvento;
+        
+        /// <summary>
+        /// hfIdTurma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTurma;
+        
+        /// <summary>
+        /// hfIdInstrutor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdInstrutor;
+        
+        /// <summary>
+        /// hfIdParticipante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdParticipante;
         
         /// <summary>
         /// Master property.
