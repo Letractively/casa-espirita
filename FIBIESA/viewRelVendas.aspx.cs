@@ -79,6 +79,11 @@ namespace FIBIESA
         public DataTable dtGeral;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Session["IntClientes"] = null;
+                Session["IntItem"] = null;
+            }
         }
 
         #region Click
@@ -232,5 +237,7 @@ namespace FIBIESA
         }
 
         #endregion
+
+        
     }
 }

@@ -79,8 +79,14 @@ namespace FIBIESA
         public DataTable dtGeral;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarAtributos();
-            carregaTipoDocumentos();
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+                carregaTipoDocumentos();
+                Session["IntTitulo"] = null;
+                Session["IntAssociado"] = null;
+            }
+
         }
 
         #region pesquisas
@@ -224,10 +230,7 @@ namespace FIBIESA
         }
 
         #endregion
-
-
-
-
+        
         public void carregaTipoDocumentos()
         {
             this.ddlTipoDocumento.DataTextField = "DESCRICAO";

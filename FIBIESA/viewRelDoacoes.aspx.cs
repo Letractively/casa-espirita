@@ -59,7 +59,11 @@ namespace FIBIESA
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarAtributos();          
+            if (!IsPostBack)
+            {
+                Session["IntClientes"] = null;
+                CarregarAtributos();
+            }
         }
                         
 

@@ -22,6 +22,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// updPrincipal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPrincipal;
+        
+        /// <summary>
         /// txtCliente control.
         /// </summary>
         /// <remarks>
@@ -184,13 +193,13 @@ namespace FIBIESA {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtenderPesquisaCliente;
         
         /// <summary>
-        /// hfIdPessoa control.
+        /// hfIdCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdPessoa;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdCliente;
         
         /// <summary>
         /// hfIdItem control.
