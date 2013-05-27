@@ -49,7 +49,7 @@
                                     Quantidade:
                                 </td>
                                 <td style="width: 530px" colspan="2" >                            
-                                    <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputbox" 
+                                    <asp:TextBox ID="txtQuantidade" runat="server" CssClass="inputboxRight" 
                                         ToolTip="Informe a quantidade "></asp:TextBox>                                                                
                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtQuantidade" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>

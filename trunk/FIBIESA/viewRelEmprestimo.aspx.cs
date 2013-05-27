@@ -111,13 +111,14 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntClientes"] != null || Session["IntClientes"] != string.Empty)
+            if (Session["IntClientes"] != null && Session["IntClientes"] != string.Empty)
                 txtAssociado.Text = Session["IntClientes"].ToString() + ",";
 
             txtAssociado.Text = txtAssociado.Text + gvrow.Cells[2].Text;
             Session["IntClientes"] = txtAssociado.Text;
             ModalPopupExtenderPesquisaAssociado.Hide();
             ModalPopupExtenderPesquisaAssociado.Enabled = false;
+
         }
 
         protected void btnSelectObra_Click(object sender, EventArgs e)
@@ -126,7 +127,7 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntObra"] != string.Empty || Session["IntObra"] != null)
+            if (Session["IntObra"] != null && Session["IntObra"] != string.Empty)
                 txtCodigo.Text = Session["IntObra"].ToString() + ",";
 
             txtCodigo.Text = txtCodigo.Text + gvrow.Cells[2].Text;

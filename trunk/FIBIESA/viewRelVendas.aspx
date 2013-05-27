@@ -18,11 +18,11 @@
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Cliente:
+                                    Cliente(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCliente" runat="server" CssClass="inputbox" Width="110px" AutoPostBack="true"
-                                        ToolTip="Intervalo Selecionado. Use ','"></asp:TextBox>
+                                    <asp:TextBox ID="txtCliente" runat="server" CssClass="inputbox" Width="260px" AutoPostBack="true"
+                                        ToolTip="Informe o(s) cliente(s) - Lista de valores disponível"></asp:TextBox>
                                     <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
@@ -30,11 +30,12 @@ ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dyna
                             </tr>
                             <tr>
                                 <td style="width: 140px">
-                                    Item:
+                                    Item(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" MaxLength="10" Width="110px"
-                                        AutoPostBack="true" ToolTip="Informe o item"></asp:TextBox>
+                                    <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" MaxLength="10" Width="260px"
+                                        AutoPostBack="true" 
+                                        ToolTip="Informe o(s) item(s) - Lista de valores disponível"></asp:TextBox>
                                     <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." OnClick="btnPesItem_Click" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtItem" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>

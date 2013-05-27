@@ -22,7 +22,7 @@
                                     Obra:
                                 </td>
                                 <td style="width: 530px" colspan="2">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="100px" 
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="260px" 
                                         AutoPostBack="True" ontextchanged="txtCodigo_TextChanged"  
                                         ToolTip="Intervalo Selecionado. Use ','"></asp:TextBox>
                                     <asp:Button ID="btnPesCodigo" runat="server" CssClass="btn" Text="..." 
@@ -37,8 +37,9 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" 
-                                        MaxLength="10" Width="100px" AutoPostBack="true" 
-                                        ontextchanged="txtAssociado_TextChanged" ToolTip="Intervalo Selecionado. Use ','"></asp:TextBox>
+                                        MaxLength="10" Width="260px" AutoPostBack="true" 
+                                        ontextchanged="txtAssociado_TextChanged" 
+                                        ToolTip="Intervalo Selecionado. Use ','"></asp:TextBox>
                                     <asp:Button ID="btnPesAssociado" runat="server" CssClass="btn" Text="..." 
                                         onclick="btnPesAssociado_Click"  />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true"
