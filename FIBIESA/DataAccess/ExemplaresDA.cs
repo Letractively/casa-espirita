@@ -117,6 +117,20 @@ namespace DataAccess
             return CarregarObjExemplares(dr);
         }
 
+        public Exemplares LerDA(int id)
+        {
+            SqlDataReader ds = SqlHelper.ExecuteReader(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, "
+                    + " OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
+
+            List<Exemplares> oi = CarregarObjExemplares(ds);
+            if (oi.Count == 1)
+                return oi[0];
+            else
+                return null;
+        }
+        
         public DataSet PesquisarDA(int id)
         {
             DataSet ds = SqlHelper.ExecuteDataset(

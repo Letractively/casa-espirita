@@ -18,6 +18,7 @@ namespace BusinessLayer
             return varDA.InserirDA(instancia);
         }
 
+
         public bool EditarBL(Exemplares instancia)
         {
             /*criar as regras de negocio*/
@@ -42,11 +43,19 @@ namespace BusinessLayer
             return varDA.PesquisarDA();
         }
 
-        public DataSet PesquisarBL(int bai)
+        public DataSet PesquisarBL(int id)
         {
             ExemplaresDA varDA = new ExemplaresDA();
 
-            return varDA.PesquisarDA(bai);
+            return varDA.PesquisarDA(id);
+        }
+
+        public Exemplares LerBL(int id)
+        {
+            ExemplaresDA varDA = new ExemplaresDA();
+
+            return varDA.LerDA(id);
+
         }
 
         public List<Exemplares> PesquisarBL(string campo, string valor)
