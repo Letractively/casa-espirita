@@ -57,6 +57,17 @@ namespace FIBIESA
             ddlParticipante.SelectedIndex = 0;
         }
 
+        private void CarregarDdlAno()
+        {
+            ChamadasBL chaBL = new ChamadasBL();
+            DataSet dsChamada = chaBL.PesquisarAnosChamada();
+            ddlAno.DataValueField = "ano";
+            ddlAno.DataTextField = "ano";
+            ddlAno.DataSource = dsChamada;
+            ddlAno.DataBind();
+            ddlAno.SelectedIndex = 0;
+        }
+
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -64,6 +75,8 @@ namespace FIBIESA
             if (!IsPostBack)
             {
                 CarregarDdlEvento();
+                CarregarDdlAno();
+                ddlMes.SelectedValue = DateTime.Now.Month.ToString();
             }
 
         }

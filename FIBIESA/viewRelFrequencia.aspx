@@ -23,10 +23,10 @@
                                 <td style="width: 530px" colspan="3">
                                     <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
                                         ToolTip="Selecione o instrutor" AppendDataBoundItems="true" AutoPostBack="true"
-                                        onselectedindexchanged="ddlEvento_SelectedIndexChanged" >                                        
+                                        onselectedindexchanged="ddlEvento_SelectedIndexChanged">                                                                                                                            
                                     </asp:DropDownList>
-                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
-        ControlToValidate="ddlEvento" InitialValue="Selecione" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" InitialValue="Selecione" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
+        ControlToValidate="ddlEvento" validationgroup="grupo" ForeColor="Red"></asp:RequiredFieldValidator>                                   
                                 </td>
                             </tr>
                             <tr>
@@ -36,10 +36,10 @@
                                 <td style="width: 530px" colspan="3">
                                     <asp:DropDownList ID="ddlTurma" runat="server" CssClass="dropdownlist" 
                                         ToolTip="Selecione a turma" AppendDataBoundItems="false" AutoPostBack="true"
-                                        onselectedindexchanged="ddlTurma_SelectedIndexChanged">                                        
+                                        onselectedindexchanged="ddlTurma_SelectedIndexChanged">                                                                                
                                     </asp:DropDownList>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
-        ControlToValidate="ddlTurma"  InitialValue="0" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" InitialValue="Selecione" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
+        ControlToValidate="ddlTurma" validationgroup="grupo" ForeColor="Red"></asp:RequiredFieldValidator>                                   
                                 </td>
                             </tr>
                             <tr>
@@ -56,10 +56,8 @@
                                 </td>
                                 <td style="width: 530px" colspan="3">
                                     <asp:DropDownList ID="ddlParticipante" runat="server" CssClass="dropdownlist" 
-                                        ToolTip="Selecione o participante" AppendDataBoundItems="false">                                        
-                                    </asp:DropDownList>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
-        ControlToValidate="ddlParticipante"  InitialValue="Todos" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                        ToolTip="Selecione o participante" AppendDataBoundItems="false">                                                        
+                                    </asp:DropDownList>                                    
                                 </td>
                             </tr>
                             <tr>
@@ -69,7 +67,6 @@
                                 <td style="width: 100px">
                                     <asp:DropDownList ID="ddlMes" runat="server" AppendDataBoundItems="True" 
                                         CssClass="dropdownlist" ToolTip="Selecione o mês">
-                                        <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>                                            
                                         <asp:ListItem Text="Janeiro" Value="1" ></asp:ListItem>                                            
                                         <asp:ListItem Text="Fevereiro" Value="2" ></asp:ListItem>                                            
                                         <asp:ListItem Text="Março" Value="3" ></asp:ListItem>
@@ -83,14 +80,15 @@
                                         <asp:ListItem Text="Novembro" Value="11" ></asp:ListItem>
                                         <asp:ListItem Text="Dezembro" Value="12" ></asp:ListItem>                                            
                                     </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" InitialValue="Todos" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
+        ControlToValidate="ddlMes" validationgroup="grupo" ForeColor="Red"></asp:RequiredFieldValidator>                                   
                                 </td>                                    
                                 <td style="width: 140px">
                                     Ano:
                                 </td>
                                 <td style="width: 240px">
                                     <asp:DropDownList ID="ddlAno" runat="server" AppendDataBoundItems="True" 
-                                        CssClass="dropdownlist" ToolTip="Selecione o ano">
-                                        <asp:ListItem Text="Todos" Value="" Selected="True"></asp:ListItem>                                                                                                                        
+                                        CssClass="dropdownlist" ToolTip="Selecione o ano">                                        
                                     </asp:DropDownList>
                                 </td>
                             </tr>
