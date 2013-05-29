@@ -247,7 +247,6 @@ namespace Admin
                 return;  //throw new Exception(); //tem um jeito melhor de sair do metodo?
             }
 
-
             if (emp.Id > 0)
             { //editando == devolvendo
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
@@ -258,9 +257,42 @@ namespace Admin
                     EmprestimoMov mov = empBL.CarregaEmpNaoDevolvido(emp.Id);
                     if (mov.Id > 0)
                     {
-                        mov.DataDevolucao = DateTime.Now;
-                        //mov.DataEmprestimo = Convert.ToDateTime(txtdataInicio.Text);
-                        //mov.DataPrevistaEmprestimo = Convert.ToDateTime(txtdataPrevisao.Text);
+                        DateTime hoje = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                        mov.DataDevolucao = hoje;
+                        if (hoje > mov.DataPrevistaEmprestimo)
+                        { //entregou atrasado? I shall have your money...
+
+                           DateTime diaD = mov.DataPrevistaEmprestimo ?? hoje; //convertendo DateTime? para DateTime com opcao de setar valor padrao
+                            TimeSpan span = hoje - diaD;
+                            int multa = this.LerParametro(1, "F");
+                            double valor = multa * span.TotalDays;
+
+                            //cadastrar titulo da multa
+                            TitulosBL titBL = new TitulosBL();
+                            Titulos titulos = new Titulos();     
+                            
+                            titulos.Numero = titBL.NovoNumero(); 
+                            titulos.Parcela = 1; 
+                            titulos.Pessoaid = emp.PessoaId;
+                            titulos.DataEmissao = hoje;
+                            
+                            int prazo = this.LerParametro(6, "F");
+                            prazo = (prazo < 1 ? 7: prazo);
+                            titulos.DataVencimento = hoje.AddDays(prazo);
+                            titulos.Valor = Convert.ToDecimal(valor); 
+                            titulos.TipoDocumentoId = this.LerParametro(4, "F");  
+                            ExemplaresBL exb = new ExemplaresBL();
+                            Exemplares ex = exb.LerBL(emp.ExemplarId);
+                                                         
+                            titulos.Obs = "Titulo gerado automaticamente, devido ao atraso de " + Convert.ToInt16(span.TotalDays).ToString()
+                                + " dia(s) na devolução do exemplar " + emp.Id.ToString() + " - " + ex.Obras.Titulo;
+                            
+                            titulos.Portadorid = this.LerParametro(5, "F");
+                            titulos.Tipo = "R";
+                            
+                            
+                            titBL.InserirBL(titulos);
+                        }
                         emovBL.EditarBL(mov);
                     }
                 }
@@ -345,18 +377,29 @@ namespace Admin
             EmprestimoMov mov = empBL.CarregaEmpNaoDevolvido(emp.Id);
             if (mov.Id > 0)
             {
-                mov.DataDevolucao = DateTime.Now;
-                emovBL.EditarBL(mov);
-                mov = new EmprestimoMov();
-                mov.EmprestimoId = emp.Id;
-                mov.DataEmprestimo = DateTime.Now;  
-                param = this.LerParametro(4, "B");
-                DateTime lol = DateTime.Now;
-                if (param > 0)
-                    lol =  DateTime.Now.AddDays(param);
-                mov.DataPrevistaEmprestimo = lol; 
-                mov.DataDevolucao = null;
-                emovBL.InserirBL(mov);
+                DateTime hoje = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                DateTime previsao = mov.DataPrevistaEmprestimo ?? hoje; //convertendo DateTime? para DateTime
+                if (DateTime.Compare(previsao, hoje) > 0)
+                {
+                    mov.DataDevolucao = DateTime.Now;
+                    emovBL.EditarBL(mov);
+                    mov = new EmprestimoMov();
+                    mov.EmprestimoId = emp.Id;
+                    mov.DataEmprestimo = DateTime.Now;
+                    param = this.LerParametro(4, "B");
+                    DateTime lol = DateTime.Now;
+                    if (param > 0)
+                        lol = DateTime.Now.AddDays(param);
+                    mov.DataPrevistaEmprestimo = lol;
+                    mov.DataDevolucao = null;
+                    emovBL.InserirBL(mov);
+                }
+                else
+                {
+                    ExibirMensagem("Exemplar atrasado não pode ser renovado!");
+                    txtExemplar.Focus();
+                    return;
+                }
             }
             Response.Redirect("viewReserva.aspx");
         }
