@@ -78,6 +78,28 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 400px">
+                                                    <asp:Label ID="lblDiasVctoMulta" runat="server">
+                                                Prazo (em dias) para vencimento da multa:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtDiasVctoMulta" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblPortadorMulta" runat="server">
+                                                Portador que vai ser associado ao título gerado em multas:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:DropDownList ID="ddlPortadorMulta" runat="server" CssClass="dropdownlist" 
+                                                        ToolTip="Selecione o portador">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 400px">
                                                     <asp:Label ID="lblPerLucro" runat="server">
                                                 Percentual de lucro na venda: 
                                                     </asp:Label>
