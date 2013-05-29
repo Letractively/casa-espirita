@@ -87,6 +87,16 @@ namespace BusinessLayer
 
             return titulosDA.PesquisarBuscaDataSetDA(codTitulos, codAssociados, codPotadores, tipoTitulo, tipoDocumento, blAtrasados, DataEmissaoIni, DataEmissaoFim, DataVencimentoIni, DataVencimentoFim, DataPagamentoIni, DataPagamentoFim);
         }
-        
+
+        /// <summary>
+        /// Retorna um numero de titulo válido, ou -1 se der erro.
+        /// </summary>
+        /// <returns></returns>
+        public Int32 NovoNumero()
+        {
+            TitulosDA titulosDA = new TitulosDA();
+
+            return titulosDA.NovoNumero();
+        }
     }
 }
