@@ -132,7 +132,15 @@ namespace DataAccess
             List<Chamadas> Chamadas = CarregarObjChamada(dr);
         
             return Chamadas;
-        }      
+        }
+
+        public DataSet PesquisarAnosChamadaDA()
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.StoredProcedure, "stp_CHAMADA_ANOS_CONSULTA");
+
+            return ds;
+        }
        
     }
 }
