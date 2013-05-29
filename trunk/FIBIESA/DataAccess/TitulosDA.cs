@@ -290,7 +290,22 @@ namespace DataAccess
 
             return ds;
         }
-        
 
+        /// <summary>
+        /// Retorna um numero de titulo válido, ou -1 se der erro.
+        /// </summary>
+        /// <returns></returns>
+        public Int32 NovoNumero()        
+        {
+            string sql = @"SELECT COALESCE(MAX(NUMERO)+1, 1) AS VALOR FROM TITULOS";
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),            
+                    CommandType.Text, string.Format(sql));
+            int numero = -1;
+            if (dr.Read())
+                numero = utils.ComparaIntComZero(dr["VALOR"].ToString());
+
+            
+            return numero < 0 ? 1: numero;
+        }
     }
 }
