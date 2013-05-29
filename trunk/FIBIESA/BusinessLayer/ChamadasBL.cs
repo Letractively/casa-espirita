@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -55,7 +56,15 @@ namespace BusinessLayer
             ChamadasDA chaDA = new ChamadasDA();
 
             return chaDA.PesquisarDA(id_tur, id_eve);
-        } 
+        }
+
+        public DataSet PesquisarAnosChamada()
+        {
+
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.PesquisarAnosChamadaDA();
+        }         
                
     }
 }
