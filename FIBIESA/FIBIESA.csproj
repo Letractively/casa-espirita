@@ -183,6 +183,7 @@
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
+    <Content Include="Relatorios\RelReciboDoacao.aspx" />
     <Content Include="Relatorios\RelContasPagar.aspx" />
     <Content Include="Relatorios\RelContasReceber.aspx" />
     <Content Include="Relatorios\RelCursos.aspx" />
@@ -656,6 +657,13 @@
     <Compile Include="recuperacaoLogin.aspx.designer.cs">
       <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelReciboDoacao.aspx.cs">
+      <DependentUpon>RelReciboDoacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelReciboDoacao.aspx.designer.cs">
+      <DependentUpon>RelReciboDoacao.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\RelContasPagar.aspx.cs">
       <DependentUpon>RelContasPagar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1086,6 +1094,12 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptReciboDoacao.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptFrequencia.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasPagar.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />
