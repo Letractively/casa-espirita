@@ -410,6 +410,59 @@ namespace DataAccess
             return ba;
         }
 
+        public string VerificaSituacaoPessoa(int id_pes, bool financeiro, bool biblioteca)
+        {
+            StringBuilder v_erro = new StringBuilder();
+            StringBuilder v_query = new StringBuilder();
+
+            if (financeiro)
+            {
+                v_query.Append(@"SELECT COUNT(1) QTDE ");
+                v_query.Append(@"  FROM TITULOS T ");
+                v_query.Append(@" WHERE T.PESSOAID = " + id_pes.ToString());
+                v_query.Append(@"  AND ((CONVERT(DATETIME,T.DTVENCIMENTO,103) < CONVERT(DATETIME,GETDATE(),103) AND T.DTPAGAMENTO IS NULL)");
+                v_query.Append(@"   OR T.VALORPAGO < VALOR ) ");
+
+                DataSet dsTit = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                    CommandType.Text, v_query.ToString());
+                int v_qtd;
+
+                if (dsTit.Tables[0].Rows.Count != 0)
+                {
+                    v_qtd = (Int32)dsTit.Tables[0].Rows[0]["QTDE"];
+
+                    if (v_qtd > 0)
+                        v_erro.Append("Cliente com pendencia financeira.");
+                }
+            }
+
+            v_query.Clear();
+
+            if (biblioteca)
+            {
+                v_query.Append(@"SELECT COUNT(1) QTDE ");
+                v_query.Append(@"  FROM EMPRESTIMOS EMP ");
+                v_query.Append(@"     , EMPRESTIMOMOV EMPMOV ");
+                v_query.Append(@" WHERE EMP.ID = EMPMOV.EMPRESTIMOID ");
+                v_query.Append(@"   AND EMP.PESSOAID = " + id_pes.ToString());
+                v_query.Append(@"   AND (CONVERT(DATETIME,EMPMOV.DATAPREVISTAEMPRESTIMO,103) < CONVERT(DATETIME,GETDATE(),103)) ");
+                v_query.Append(@"   AND EMPMOV.DATADEVOLUCAO IS NULL ");
+
+                DataSet dsEmp = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                    CommandType.Text, v_query.ToString());
+                int v_qtd;
+
+                if (dsEmp.Tables[0].Rows.Count != 0)
+                {
+                    v_qtd = (Int32)dsEmp.Tables[0].Rows[0]["QTDE"];
+
+                    if (v_qtd > 0)
+                        v_erro.Append(" Cliente com pendencia na biblioteca.");
+                }
+            }
+            
+            return v_erro.ToString();
+        }
 
         /// <summary>
         /// Conta quantos titulos em aberto a pessoa tem. Retorna -1 em caso de erro.

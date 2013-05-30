@@ -60,7 +60,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" valign="middle" style="text-align: center;">
+                                <td></td>
+                                <td>
                                     <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" OnClick="btnVoltar_Click"
                                         ToolTip="Volta para página principal" />
                                     &nbsp;&nbsp;&nbsp;

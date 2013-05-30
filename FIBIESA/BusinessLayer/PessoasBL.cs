@@ -92,6 +92,13 @@ namespace BusinessLayer
             return instancia.EstaDevendo(id);
         }
 
+        public string VerificaSituacaoPessoa(int id_pes, bool financeiro, bool biblioteca)
+        {
+            PessoasDA pesDA = new PessoasDA();
+
+            return pesDA.VerificaSituacaoPessoa(id_pes, financeiro, biblioteca);
+        }
+
         /// <summary>
         /// pesquisa realizada com mais de um id 
         /// </summary>
