@@ -88,6 +88,69 @@ namespace FIBIESA
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
+                      
+            ItensEstoqueBL itemBl = new ItensEstoqueBL();
+            ItensEstoque item = new ItensEstoque();
+
+            List<ItensEstoque> lItens = itemBl.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque pes in lItens)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Obra;
+                linha["DESCRICAO"] = pes.Obra.Titulo;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
+        }
+
+        public void CarregarPesquisaItemEmp(string tombo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            ExemplaresBL exeBL = new ExemplaresBL();
+            Exemplares exemplares = new Exemplares();
+            List<Exemplares> ltExe = exeBL.PesquisarDisponiveis(tombo);
+
+            foreach (Exemplares exemp in ltExe)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = exemp.Id;
+                linha["CODIGO"] = exemp.Tombo;
+                linha["DESCRICAO"] = exemp.Obras.Titulo;
+
+                dt.Rows.Add(linha);
+                
+            }
+                                  
+            grdPesquisaEmp.DataSource = dt;
+            grdPesquisaEmp.DataBind();
+        }
+
+        public void CarregarPesquisaCliente(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
@@ -182,6 +245,7 @@ namespace FIBIESA
         private void PesquisarCliente(string cod_cliente)
         {
             hfIdPessoa.Value = "";
+            string situacao = null;
             PessoasBL pesBL = new PessoasBL();
             Pessoas pessoa = new Pessoas();
             List<Pessoas> pes = pesBL.PesquisarBL("CODIGO", cod_cliente);
@@ -193,7 +257,14 @@ namespace FIBIESA
                 lblDesCliente.Text = ltpessoa.Nome;
                 lblClienteItens.Text = ltpessoa.Nome;
                 lblCategoria.Text = ltpessoa.Categorias.Descricao;
-                LblSituacao.Text = "OK";
+                
+                situacao = pesBL.VerificaSituacaoPessoa(utils.ComparaIntComZero(hfIdPessoa.Value),true,true);
+                
+                if (situacao != null && situacao != string.Empty)
+                    LblSituacao.Text = situacao;                
+                else
+                    LblSituacao.Text = "OK";
+
                 PesquisarEmprestimosAtivo(utils.ComparaIntComZero(hfIdPessoa.Value));
             }
 
@@ -377,35 +448,31 @@ namespace FIBIESA
         }
 
         #endregion
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             CriarDtItensEmp();
             CriarDtItensDev();
             CriarDtPesquisa();
+            if (!IsPostBack)
+            {
+                dtItensEmp = null;
+                dtItensDev = null;
+            }
         }
-
+        
+        #region renovacao
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
-            CarregarPesquisaItem(null);
+            CarregarPesquisaCliente(null);
 
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show();
         }
-
-        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void txtCliente_TextChanged(object sender, EventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
-        }
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-
+            PesquisarCliente(txtCliente.Text);
+        }        
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
@@ -418,19 +485,13 @@ namespace FIBIESA
 
             ModalPopupExtenderPesquisa.Hide();
             ModalPopupExtenderPesquisa.Enabled = false;
+            PesquisarCliente(txtCliente.Text);
 
         }
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             ModalPopupExtenderPesquisa.Enabled = false;
         }
-
-        protected void txtCliente_TextChanged(object sender, EventArgs e)
-        {
-            PesquisarCliente(txtCliente.Text);
-        }
-
         protected void btnRenovar_Click(object sender, EventArgs e)
         {
             Button btndetails = sender as Button;
@@ -473,28 +534,70 @@ namespace FIBIESA
 
 
         }
-
-        protected void dtgExemplar_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
+        #endregion
 
+        #region emprestimo
         protected void txtExemplar_TextChanged(object sender, EventArgs e)
         {
-            PesquisarExemplar(txtExemplar.Text);
+            if (hfIdPessoa.Value != null && hfIdPessoa.Value != string.Empty)
+                PesquisarExemplar(txtExemplar.Text);
+            else
+            {
+                ExibirMensagem("Informe o cliente");
+                tcPrincipal.ActiveTabIndex = 0;
+            }
+        }        
+        protected void btnExemplar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItemEmp(null);
+            ModalPopupExtenderPesquisaEmp.Enabled = true;
+            ModalPopupExtenderPesquisaEmp.Show();
+        }        
+        protected void btnAbreEmp_Click(object sender, EventArgs e)
+        {
+            tcPrincipal.ActiveTabIndex = 1;
         }
-
-        protected void btnDevolver_Click(object sender, EventArgs e)
+        protected void btnVoltarEmp_Click(object sender, EventArgs e)
+        {
+            tcPrincipal.ActiveTabIndex = 0;
+        }
+        protected void btnSelectItemEmp_Click(object sender, EventArgs e)
         {
 
-        }
+            if (hfIdPessoa.Value != null && hfIdPessoa.Value != String.Empty)
+            {
+                ImageButton btndetails = sender as ImageButton;
+                GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-        protected void btnVoltar_Click(object sender, EventArgs e)
+                hfIdItem.Value = grdPesquisaEmp.DataKeys[gvrow.RowIndex].Value.ToString();
+                txtExemplar.Text = gvrow.Cells[2].Text;
+                lblDesExemplar.Text = gvrow.Cells[3].Text;
+
+                ModalPopupExtenderPesquisaEmp.Hide();
+                ModalPopupExtenderPesquisaEmp.Enabled = false;
+                PesquisarExemplar(txtExemplar.Text);
+            }
+            else
+            {
+                ExibirMensagem("Informe o cliente");
+                tcPrincipal.ActiveTabIndex = 0;
+            }
+
+        }
+        protected void btnCancelEmp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/default.aspx");
+            ModalPopupExtenderPesquisaEmp.Enabled = false;
         }
-
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
         protected void btnFinOperacoes_Click(object sender, EventArgs e)
         {
             if (this.Master.VerificaPermissaoUsuario("INSERIR"))
@@ -555,27 +658,79 @@ namespace FIBIESA
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
         }
-
-        protected void btnAbreEmp_Click(object sender, EventArgs e)
+        protected void dtgExemplar_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            tcPrincipal.ActiveTabIndex = 1;
-        }
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }               
+        #endregion
 
-        protected void btnVoltarEmp_Click(object sender, EventArgs e)
+        #region devolucao
+        protected void txtExemplarDev_TextChanged(object sender, EventArgs e)
         {
-            tcPrincipal.ActiveTabIndex = 0;
+            PesquisarExemplarDev(txtExemplarDev.Text);
+        }                
+        protected void btnExemplarDev_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
         }
+        protected void btnSelectItemDev_Click(object sender, EventArgs e)
+        {
 
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtExemplarDev.Text = gvrow.Cells[2].Text;
+            lblExemplarDev.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesquisaItem.Hide();
+            ModalPopupExtenderPesquisaItem.Enabled = false;
+
+        }
+        protected void btnCancelDev_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisaItem.Enabled = false;
+        }        
+        protected void btnDevolver_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnFinOpeDev_Click(object sender, EventArgs e)
+        {
+            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+            {
+
+                if (Session["dtItensDev"] != null)
+                    dtItensDev = (DataTable)Session["dtItensDev"];
+
+                EmprestimoMovBL emovBL = new EmprestimoMovBL();
+
+                foreach (DataRow linha in dtItensDev.Rows)
+                {
+
+                    EmprestimoMov mov = new EmprestimoMov();
+                    mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
+                    mov.DataDevolucao = DateTime.Now;
+
+                    if (emovBL.EditarBL(mov))
+                    {
+                        LimparCamposDevolucao();
+                        ExibirMensagem("Devolução realizada com sucesso!");
+                    }
+                    else
+                        ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
+                }
+            }
+            else
+                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        }
         protected void btnVoltarDev_Click(object sender, EventArgs e)
         {
             tcPrincipal.ActiveTabIndex = 0;
         }
-
-        protected void txtExemplarDev_TextChanged(object sender, EventArgs e)
-        {
-            PesquisarExemplarDev(txtExemplarDev.Text);
-        }
-
         protected void dtgExemplarDev_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             object key = new object();
@@ -592,35 +747,22 @@ namespace FIBIESA
             dtgExemplarDev.DataBind();
 
         }
-
-        protected void btnFinOpeDev_Click(object sender, EventArgs e)
+        protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-            {
-
-                if (Session["dtItensDev"] != null)
-                    dtItensDev = (DataTable)Session["dtItensDev"];
-                               
-                EmprestimoMovBL emovBL = new EmprestimoMovBL();
-
-                foreach (DataRow linha in dtItensDev.Rows)
-                {
-
-                    EmprestimoMov mov = new EmprestimoMov();
-                    mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
-                    mov.DataDevolucao = DateTime.Now;
-
-                    if (emovBL.EditarBL(mov))
-                    {
-                        LimparCamposDevolucao();
-                        ExibirMensagem("Devolução realizada com sucesso!");
-                    }
-                    else
-                        ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");                    
-                }
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            Response.Redirect("~/default.aspx");
         }
+        #endregion
+
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
+        }
+        
+        
+                
     }
 }

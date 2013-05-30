@@ -8,6 +8,8 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
     </asp:ScriptManager>
+    <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
+        <ContentTemplate> 
     <div id="content">
         <div class="container">
             <div class="conthead">
@@ -19,7 +21,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
+                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
                                 <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                     <ContentTemplate>
                                         <table width="800PX">
@@ -48,7 +50,7 @@
                                                     Situação:
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="LblSituacao" runat="server"></asp:Label>
+                                                    <asp:Label ID="LblSituacao" runat="server" ForeColor="Red"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>                                                
@@ -95,15 +97,21 @@
                                             </tr>
                                             <tr>                                                
                                                 <td colspan="2" valign="middle" style="text-align:center;">
+                                                    <asp:Button ID="btnVoltarRen" runat="server" CssClass="btn" Text="Voltar"
+                                                    ToolTip="Volta para página principal" onclick="btnVoltar_Click"/>
+                                                    &nbsp&nbsp&nbsp;
                                                     <asp:Button ID="btnAbreEmp" runat="server" CssClass="btn" Text="Empréstimo" 
                                                     ToolTip="Abre a aba de empréstimo" onclick="btnAbreEmp_Click" />
-                                                    &nbsp&nbsp&nbsp;
+                                                    
                                                 </td>
                                             </tr>
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
                                 <asp:TabPanel ID="tpEmprestimo" runat="server" HeaderText="Empréstimo">
+                                    <HeaderTemplate>
+                                        Empréstimo
+                                    </HeaderTemplate>
                                     <ContentTemplate>
                                         <table>
                                             <tr>
@@ -121,7 +129,8 @@
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtExemplar" runat="server" CssClass="inputboxRight" Width="110px" AutoPostBack="True"
                                                         OnTextChanged="txtExemplar_TextChanged"></asp:TextBox>
-                                                    <asp:Button ID="btnExemplar" runat="server" Text="..." CssClass="btn" />
+                                                    <asp:Button ID="btnExemplar" runat="server" Text="..." CssClass="btn" 
+                                                        onclick="btnExemplar_Click" />
                                                     <asp:Label ID="lblDesExemplar" runat="server"></asp:Label>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExemplar"
                                                         ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
@@ -211,7 +220,8 @@
                                                     <asp:TextBox ID="txtExemplarDev" runat="server" CssClass="inputboxRight" 
                                                         Width="110px" AutoPostBack="True" ontextchanged="txtExemplarDev_TextChanged"
                                                         ></asp:TextBox>
-                                                    <asp:Button ID="btnExemplarDev" runat="server" Text="..." CssClass="btn" />
+                                                    <asp:Button ID="btnExemplarDev" runat="server" Text="..." CssClass="btn" 
+                                                        onclick="btnExemplarDev_Click" />
                                                     <asp:Label ID="lblExemplarDev" runat="server"></asp:Label>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtExemplarDev"
                                                         ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
@@ -342,5 +352,103 @@
         <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdPessoa"
             PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
             OkControlID="btnCancel" Enabled="false" />
+        <asp:Panel runat="server" ID="pnlItem" Width="400px" CssClass="modalPopup" Style="display: none">
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
+                                    AutoPostBack="True"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <asp:GridView ID="grdPesquisaItem" runat="server" CellPadding="3" AutoGenerateColumns="False"
+                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
+                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaItem_RowDataBound"
+                                    Width="300px">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="btnSelectItemDev" runat="server" ImageUrl="~/images/icons/icon_tick.png"
+                                                    OnClick="btnSelectItemDev_Click" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
+                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                    </Columns>
+                                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                    <RowStyle ForeColor="#000066" />
+                                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="btnCancelDev" runat="server" Text="Cancelar" OnClick="btnCancelDev_Click"
+                                    CssClass="btn" />
+                            </td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+                <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaItem" runat="server" TargetControlID="hfIdItem"
+                    PopupControlID="pnlItem" BackgroundCssClass="modalBackground" DropShadow="true"
+                    OkControlID="btnCancel" Enabled="false" />
+         <asp:Panel runat="server" ID="pnlItemEmp" Width="400px" CssClass="modalPopup" Style="display: none">
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
+                                    AutoPostBack="True"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <asp:GridView ID="grdPesquisaEmp" runat="server" CellPadding="3" AutoGenerateColumns="False"
+                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
+                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaItem_RowDataBound"
+                                    Width="300px">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="btnSelectItemEmp" runat="server" ImageUrl="~/images/icons/icon_tick.png"
+                                                    OnClick="btnSelectItemEmp_Click" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
+                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                    </Columns>
+                                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                    <RowStyle ForeColor="#000066" />
+                                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Button ID="btnCancelEmp" runat="server" Text="Cancelar" OnClick="btnCancelEmp_Click"
+                                    CssClass="btn" />
+                            </td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+                <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaEmp" runat="server" TargetControlID="hfIdItem"
+                    PopupControlID="pnlItemEmp" BackgroundCssClass="modalBackground" DropShadow="true"
+                    OkControlID="btnCancelEmp" Enabled="false" />
     </div>
+            </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

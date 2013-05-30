@@ -446,9 +446,9 @@ namespace FIBIESA
             hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
             txtCliente.Text = gvrow.Cells[2].Text;
             lblDesCliente.Text = gvrow.Cells[3].Text;
-
+                        
+            ModalPopupExtenderPesquisa.Hide();
             ModalPopupExtenderPesquisa.Enabled = false;
-            ModalPopupExtenderPesquisa.Hide();           
 
         }
 
@@ -473,9 +473,9 @@ namespace FIBIESA
             txtItem.Text = gvrow.Cells[2].Text;
             lblDesItem.Text = gvrow.Cells[3].Text;
             txtValorUni.Text = gvrow.Cells[4].Text;
-
+            
+            ModalPopupExtenderPesItem.Hide();
             ModalPopupExtenderPesItem.Enabled = false;
-            ModalPopupExtenderPesItem.Hide();        
 
         }
 
