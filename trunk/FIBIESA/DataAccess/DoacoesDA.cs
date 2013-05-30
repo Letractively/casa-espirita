@@ -169,6 +169,66 @@ namespace DataAccess
             return ds;
 
         }
+
+        public DataSet PesquisarDataSet(int id_Doa)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT  id
+                                                                              ,PESSOAID
+                                                                              ,data
+                                                                              ,valor
+                                                                              ,usuarioId
+                                                                              ,Nome
+                                                                              ,nomeFantasia
+                                                                              ,cpfCnpj
+                                                                              ,RG
+                                                                              ,nomeMae
+                                                                              ,nomePai
+                                                                              ,dtNascimento
+                                                                              ,estadoCivil
+                                                                              ,Naturalidade
+                                                                              ,Endereco
+                                                                              ,Numero
+                                                                              ,bairroId
+                                                                              ,CEP
+                                                                              ,cidadeId
+                                                                              ,Complemento
+                                                                              ,enderecoProf
+                                                                              ,numeroProf
+                                                                              ,cepProf
+                                                                              ,cidadeProf
+                                                                              ,complementoProf
+                                                                              ,Empresa
+                                                                              ,Email
+                                                                              ,status
+                                                                              ,Tipo
+                                                                              ,Obs
+                                                                              ,categoriaId
+                                                                              ,envEmail
+                                                                              ,dtCadastro
+                                                                              ,refNome
+                                                                              ,refTelefone
+                                                                              ,refDDD
+                                                                              ,blReceberEmail
+                                                                              ,pessoaCodigo
+                                                                              ,bairroProfId
+                                                                              ,sexo
+                                                                              ,tipoAssociado
+                                                                              ,Login
+                                                                              ,senha
+                                                                              ,nomeUsuario
+                                                                              ,statusUsuario
+                                                                              ,dtInicio
+                                                                              ,dtFim
+                                                                              ,tipoUsuario
+                                                                              ,emailUsuario
+                                                                              ,nrTentLogin
+                                                                              ,dhTentLogin
+                                                                              ,usuarioCodigo
+                                                                              ,categoriaUsuario" +
+                                                                        " FROM dbo.VIEW_doacoes WHERE ID = {0}", id_Doa));
+            return ds;
+        }
         
     }
 }

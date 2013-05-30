@@ -64,5 +64,13 @@ namespace BusinessLayer
 
             return doacoesDA.PesquisarDataset(codPessoa,valorIni,valorFim,dataIni,dataFim);
         }
+
+        public DataSet PesquisarDataset(int id_doa)
+        {
+            /*criar as regras de negocio*/
+            DoacoesDA doacoesDA = new DoacoesDA();
+
+            return doacoesDA.PesquisarDataSet(id_doa);
+        }
     }
 }
