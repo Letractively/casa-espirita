@@ -112,15 +112,6 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.DropDownList ddlAno;
         
         /// <summary>
-        /// rbComPreenchimento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbComPreenchimento;
-        
-        /// <summary>
         /// rbSemPreenchimento control.
         /// </summary>
         /// <remarks>
@@ -128,6 +119,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbSemPreenchimento;
+        
+        /// <summary>
+        /// rbComPreenchimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbComPreenchimento;
         
         /// <summary>
         /// btnVoltar control.

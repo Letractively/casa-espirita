@@ -67,15 +67,15 @@
                                 <td style="width: 100px">
                                     <asp:DropDownList ID="ddlMes" runat="server" AppendDataBoundItems="True" 
                                         CssClass="dropdownlist" ToolTip="Selecione o mês">
-                                        <asp:ListItem Text="Janeiro" Value="1" ></asp:ListItem>                                            
-                                        <asp:ListItem Text="Fevereiro" Value="2" ></asp:ListItem>                                            
-                                        <asp:ListItem Text="Março" Value="3" ></asp:ListItem>
-                                        <asp:ListItem Text="Abril" Value="4" ></asp:ListItem>
-                                        <asp:ListItem Text="Maio" Value="5" ></asp:ListItem>
-                                        <asp:ListItem Text="Junho" Value="6" ></asp:ListItem>
-                                        <asp:ListItem Text="Julho" Value="7" ></asp:ListItem>
-                                        <asp:ListItem Text="Agosto" Value="8" ></asp:ListItem>
-                                        <asp:ListItem Text="Setembro" Value="9" ></asp:ListItem>
+                                        <asp:ListItem Text="Janeiro" Value="01" ></asp:ListItem>                                            
+                                        <asp:ListItem Text="Fevereiro" Value="02" ></asp:ListItem>                                            
+                                        <asp:ListItem Text="Março" Value="03" ></asp:ListItem>
+                                        <asp:ListItem Text="Abril" Value="04" ></asp:ListItem>
+                                        <asp:ListItem Text="Maio" Value="05" ></asp:ListItem>
+                                        <asp:ListItem Text="Junho" Value="06" ></asp:ListItem>
+                                        <asp:ListItem Text="Julho" Value="07" ></asp:ListItem>
+                                        <asp:ListItem Text="Agosto" Value="08" ></asp:ListItem>
+                                        <asp:ListItem Text="Setembro" Value="09" ></asp:ListItem>
                                         <asp:ListItem Text="Outubro" Value="10" ></asp:ListItem>
                                         <asp:ListItem Text="Novembro" Value="11" ></asp:ListItem>
                                         <asp:ListItem Text="Dezembro" Value="12" ></asp:ListItem>                                            
@@ -95,10 +95,10 @@
                             <tr>
                                 <td  colspan="4" style="text-align:center;">
                                     <center>
-                                        <asp:RadioButton ID="rbComPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" value="1" Text="Com Preenchimento">                                                                                    
+                                        <asp:RadioButton ID="rbSemPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" Text="Sem Preenchimento">
                                         </asp:RadioButton>
-                                        <asp:RadioButton ID="rbSemPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" value="0" Text="Sem Preenchimento">
-                                        </asp:RadioButton>
+                                        <asp:RadioButton ID="rbComPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" Text="Com Preenchimento">                                                                                    
+                                        </asp:RadioButton>                                        
                                     </center>
                                 </td>                                                                      
                             </tr>

@@ -79,9 +79,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 400px">
-                                                    <asp:Label ID="lblDiasVctoMulta" runat="server">
-                                                Prazo (em dias) para vencimento da multa:
-                                                    </asp:Label>
+                                                    <asp:Label ID="lblDiasVctoMulta" runat="server" Text="Prazo (em dias) para vencimento da multa:"/>                                              
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtDiasVctoMulta" CssClass="inputboxRight" runat="server"></asp:TextBox>
@@ -89,9 +87,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 400px">
-                                                    <asp:Label ID="lblPortadorMulta" runat="server">
-                                                Portador que vai ser associado ao título gerado em multas:
-                                                    </asp:Label>
+                                                    <asp:Label ID="lblPortadorMulta" runat="server" Text="Portador que vai ser associado ao título gerado em multas:"/>
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:DropDownList ID="ddlPortadorMulta" runat="server" CssClass="dropdownlist" 

@@ -64,7 +64,14 @@ namespace BusinessLayer
             ChamadasDA chaDA = new ChamadasDA();
 
             return chaDA.PesquisarAnosChamadaDA();
-        }         
+        }
+
+        public DataSet PesquisarDataSet(string mes, string ano, int turmaId, string alunosCod, int preenchido)
+        {
+            ChamadasDA chaDA = new ChamadasDA();
+
+            return chaDA.PesquisarDataSetDA(mes, ano, turmaId, alunosCod, preenchido);
+        }
                
     }
 }
