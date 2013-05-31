@@ -32,7 +32,7 @@ namespace DataAccess
                               
                 Obras obras = new Obras();
 
-                obras.Id = int.Parse(dr["IDOBRA"].ToString());
+                obras.Id = int.Parse(dr["OBRAid"].ToString());
                 obras.Codigo = int.Parse(dr["CODIGO"].ToString());
                 obras.Titulo = dr["TITULO"].ToString();
                 
@@ -142,7 +142,7 @@ namespace DataAccess
 
         public List<Exemplares> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT E.*, O.ORIGEMID FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+            StringBuilder consulta = new StringBuilder("SELECT E.*, O.ORIGEMID, O.codigo, o.titulo FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             switch (campo.ToUpper())
             {
@@ -151,6 +151,9 @@ namespace DataAccess
                     break;
                 case "TITULO":
                     consulta.Append(string.Format(" AND O.TITULO  LIKE '%{0}%'", valor));
+                    break;
+                case "ID":
+                    consulta.Append(string.Format(" AND E.ID  = {0}", valor));
                     break;
                 default:
                     break;

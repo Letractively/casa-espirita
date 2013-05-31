@@ -14,7 +14,7 @@ namespace DataAccess
     public class EmprestimosDA : BaseDA
     {
         Utils utils = new Utils();
-        #region funcoes 
+        #region funcoes
         private List<Emprestimos> CarregarObjEmprestimos(SqlDataReader dr)
         {
             List<Emprestimos> emprestimos = new List<Emprestimos>();
@@ -39,21 +39,22 @@ namespace DataAccess
             while (dr.Read())
             {
                 ViewEmprestimos emprestim = new ViewEmprestimos();
-                
+
                 emprestim.Id = int.Parse(dr["ID"].ToString());
                 emprestim.EmprestimoId = int.Parse(dr["EMPRESTIMOID"].ToString());
                 emprestim.ExemplarId = int.Parse(dr["EXEMPLARID"].ToString());
                 emprestim.PessoaId = int.Parse(dr["PESSOAID"].ToString());
                 emprestim.Id = int.Parse(dr["ID"].ToString());
                 emprestim.DtEmprestimo = Convert.ToDateTime(dr["DATAEMPRESTIMO"].ToString());
-                emprestim.DtPrevistaDevolucao = Convert.ToDateTime(dr["DATAPREVISTAEMPRESTIMO"].ToString());
+                if (dr["DATAPREVISTAEMPRESTIMO"].ToString() != string.Empty)
+                    emprestim.DtPrevistaDevolucao = Convert.ToDateTime(dr["DATAPREVISTAEMPRESTIMO"].ToString());
                 emprestim.Titulo = dr["TITULO"].ToString();
                 emprestim.Nome = dr["NOME"].ToString();
                 emprestim.NomeFantasia = dr["NOMEFANTASIA"].ToString();
                 emprestim.Status = dr["STATUS"].ToString();
                 emprestim.Tombo = 123;//utils.ComparaIntComZero(dr["TOMBO"].ToString());
                 emprestim.Codigo = 1;//utils.ComparaIntComZero(dr["CODIGO"].ToString());
-                                
+
                 emprestimos.Add(emprestim);
             }
 
@@ -72,7 +73,7 @@ namespace DataAccess
             {
                 DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                     CommandType.StoredProcedure, "stp_insert_emprestimos", paramsToSP);
-                
+
                 DataTable tabela = ds.Tables[0];
 
                 int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
@@ -154,7 +155,7 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                     CommandType.Text, string.Format(@"SELECT * FROM emprestimos WHERE  CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'", utils.ComparaIntComZero(descricao), descricao));
-            
+
             List<Base> ba = new List<Base>();
 
             while (dr.Read())
@@ -183,11 +184,11 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                 CommandType.Text,
-                string.Format(consulta.ToString(),id_emprestimo));
+                string.Format(consulta.ToString(), id_emprestimo));
             EmprestimoMov volta = new EmprestimoMov();
             volta.Id = -1;
             if (dr.Read())
-            {                
+            {
                 volta.Id = int.Parse(dr["ID"].ToString());
                 volta.EmprestimoId = int.Parse(dr["EMPRESTIMOID"].ToString());
                 volta.DataEmprestimo = Convert.ToDateTime(dr["DATAEMPRESTIMO"].ToString());
@@ -226,7 +227,7 @@ namespace DataAccess
         }
 
         public Int32 QtdRenovacoes(int emprestimoId)
-        {            
+        {
             StringBuilder consulta = new StringBuilder(@"SELECT COUNT(*) -1 AS QTD FROM EMPRESTIMOMOV WHERE EMPRESTIMOID = " + emprestimoId.ToString());
             int i = -1;
             string valor = SqlHelper.ExecuteScalar(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -328,7 +329,7 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                 CommandType.Text, string.Format(@"SELECT * FROM view_emprestimos  WHERE ID = {0}", id));
-            
+
             dr.Read();
 
             ve.Id = id;
@@ -345,6 +346,6 @@ namespace DataAccess
             return ve;
 
         }
-               
+
     }
 }

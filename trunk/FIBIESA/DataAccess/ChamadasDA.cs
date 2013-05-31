@@ -7,8 +7,8 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
-
-
+using System.Data;
+	
 namespace DataAccess
 {
     public class ChamadasDA
@@ -140,6 +140,27 @@ namespace DataAccess
                                                        CommandType.StoredProcedure, "stp_CHAMADA_ANOS_CONSULTA");
 
             return ds;
+        }
+
+        public DataSet PesquisarDataSetDA(string mes, string ano, int turmaId, string alunosCod, int preenchido)
+        {
+            SqlParameter[] paramsToSP = new SqlParameter[5];           
+            paramsToSP[0] = new SqlParameter("@MES", mes);//string
+            paramsToSP[1] = new SqlParameter("@ANO", ano);//string
+            paramsToSP[2] = new SqlParameter("@turmasid", turmaId);//int
+            paramsToSP[3] = new SqlParameter("@alunoscod", alunosCod);//string
+            paramsToSP[4] = new SqlParameter("@preenchido", preenchido);//bit
+
+            try
+            {
+                DataSet Lds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_CONSULTA_CHAMADA", paramsToSP);
+
+                return Lds;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
        
     }

@@ -184,6 +184,7 @@
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
+    <Content Include="Relatorios\RelFrequencia.aspx" />
     <Content Include="Relatorios\RelReciboDoacao.aspx" />
     <Content Include="Relatorios\RelContasPagar.aspx" />
     <Content Include="Relatorios\RelContasReceber.aspx" />
@@ -665,6 +666,13 @@
     <Compile Include="recuperacaoLogin.aspx.designer.cs">
       <DependentUpon>recuperacaoLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelFrequencia.aspx.cs">
+      <DependentUpon>RelFrequencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelFrequencia.aspx.designer.cs">
+      <DependentUpon>RelFrequencia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\RelReciboDoacao.aspx.cs">
       <DependentUpon>RelReciboDoacao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1132,7 +1140,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55354</DevelopmentServerPort>
+          <DevelopmentServerPort>54771</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

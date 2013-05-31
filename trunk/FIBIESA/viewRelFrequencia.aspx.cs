@@ -53,7 +53,7 @@ namespace FIBIESA
 
             foreach (TurmasParticipantes turmasParticipantes in lTurmasParticipantes)
                 ddlParticipante.Items.Add(new ListItem(turmasParticipantes.Pessoa.Codigo + " - " + turmasParticipantes.Pessoa.Nome, turmasParticipantes.Pessoa.Id.ToString()));
-            ddlParticipante.Items.Insert(0, "Todos");
+            ddlParticipante.Items.Insert(0, new ListItem("Todos",""));
             ddlParticipante.SelectedIndex = 0;
         }
 
@@ -77,6 +77,7 @@ namespace FIBIESA
                 CarregarDdlEvento();
                 CarregarDdlAno();
                 ddlMes.SelectedValue = DateTime.Now.Month.ToString();
+                rbSemPreenchimento.Checked = true;
             }
 
         }
@@ -109,7 +110,23 @@ namespace FIBIESA
 
         protected void btnRelatorio_Click(object sender, EventArgs e)
         {
+            ChamadasBL chamadasBL = new ChamadasBL();
 
+            int preenchido = 0;
+            if (rbSemPreenchimento.Checked)
+                preenchido = 0;
+            else if (rbComPreenchimento.Checked)
+                preenchido = 1;
+
+            Session["ldsRel"] = chamadasBL.PesquisarDataSet(ddlMes.SelectedValue, ddlAno.SelectedValue, Convert.ToInt16(ddlTurma.SelectedValue), ddlParticipante.SelectedValue, preenchido).Tables[0];
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
+            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelFrequencia.aspx','',600,925);", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
+            }
         }
     }
 }
