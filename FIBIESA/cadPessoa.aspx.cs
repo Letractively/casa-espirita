@@ -27,7 +27,7 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            ddlCategoria.Items.Add(new ListItem());
+            ddlCategoria.Items.Add(new ListItem("Selecione",""));
             foreach (Categorias ltCat in categorias)            
                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
             
@@ -38,7 +38,7 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Estados ltUF in estados)
                 ddl.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
@@ -50,7 +50,7 @@ namespace Admin
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
                 ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
@@ -62,7 +62,7 @@ namespace Admin
             List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Bairros ltBai in bairros)
                 ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
 
@@ -323,6 +323,11 @@ namespace Admin
             }
            
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -430,9 +435,14 @@ namespace Admin
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
                     idPes = pessoas.Id;
-                    pesBL.EditarBL(pessoas);
-                    ExcluirTelefones();
-                    GravarTelefones(idPes);
+                    if(pesBL.EditarBL(pessoas))
+                    {                                          
+                        ExcluirTelefones();
+                        GravarTelefones(idPes);
+                        ExibirMensagem("Pessoa atualizada com sucesso !");  
+                    }
+                    else
+                        ExibirMensagem("Não foi possível atualizar a pessoa. Revise as informações.");
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
@@ -445,6 +455,10 @@ namespace Admin
                     idPes = pesBL.InserirBL(pessoas);
                     ExcluirTelefones();
                     GravarTelefones(idPes);
+                    if(idPes > 0)
+                        ExibirMensagem("Pessoa gravada com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível gravar a pessoa. Revise as informações.");
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);

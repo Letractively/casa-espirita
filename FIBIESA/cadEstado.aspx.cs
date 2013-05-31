@@ -41,6 +41,7 @@ namespace Admin
         {
             txtDescricao.Text = "";
             txtUf.Text = "";
+            txtDescricao.Focus();
         }
         
         #endregion

@@ -21,7 +21,8 @@
                         </td>
                         <td style="width: 300px">                      
                             <asp:TextBox ID="txtPessoa" runat="server" CssClass="inputbox" Width="75px" 
-                                ToolTip="Informe a pessoa"></asp:TextBox>
+                                ToolTip="Informe a pessoa" AutoPostBack="True" 
+                                ontextchanged="txtPessoa_TextChanged"></asp:TextBox>
                             <asp:Button ID="btnPesPessoa" runat="server" Text="..." CssClass="btn" 
                                 onclick="btnPesPessoa_Click" />
                             <asp:Label ID="lblDesPessoa" runat="server"></asp:Label>
@@ -151,7 +152,7 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" 
-                                ToolTip="Valida e salva as informações" /> 
+                                ToolTip="Valida e salva as informações" />                             
                         </td>
                     </tr>
                 </table>                

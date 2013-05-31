@@ -13,7 +13,7 @@ namespace BusinessLayer
         {
             bool valido;
             valido = usu.Nome.Length <= 70 && usu.Email.Length <= 100 && usu.Status.Length <= 1 && usu.Senha.Length <= 100;
-            valido = valido && usu.PessoaId > 0 && usu.CategoriaId > 0;
+            valido = valido && usu.CategoriaId > 0;
             valido = valido && usu.DtFim != null && usu.DtInicio != null && usu.Senha != null && usu.Login != null && usu.Status != null;                        
             return valido;
         }

@@ -21,7 +21,7 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            ddlCategoria.Items.Add(new ListItem());
+            ddlCategoria.Items.Add(new ListItem("Selecione",""));
             foreach (Categorias ltCat in categorias)                        
                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao,ltCat.Id.ToString()));                
             
@@ -204,6 +204,31 @@ namespace Admin
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            }
+        }
+
+        protected void txtPessoa_TextChanged(object sender, EventArgs e)
+        {
+            hfIdPessoa.Value = "";
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pessoa = new Pessoas();
+            List<Pessoas> pes = pesBL.PesquisarBL("CODIGO", txtPessoa.Text);
+
+            foreach (Pessoas ltpessoa in pes)
+            {
+                hfIdPessoa.Value = ltpessoa.Id.ToString();
+                txtPessoa.Text = ltpessoa.Codigo.ToString();
+                lblDesPessoa.Text = ltpessoa.Nome;
+                ddlCategoria.Focus();
+            }
+
+            if (utils.ComparaIntComZero(hfIdPessoa.Value) <= 0)
+            {
+                ExibirMensagem("Pessoa não cadastrada !");
+                txtPessoa.Text = "";
+                lblDesPessoa.Text = "";
+                txtPessoa.Focus();
+                hfIdPessoa.Value = "";
             }
         }
     }

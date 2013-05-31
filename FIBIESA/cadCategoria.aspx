@@ -30,8 +30,8 @@
                                 MaxLength="70" Width="335px" ToolTip="Informe a descrição da categoria"></asp:TextBox>
                             <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -45,11 +45,13 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" 
-                                ToolTip="Valida e salva as informações" />                            
+                                ToolTip="Valida e salva as informações" />   
                         </td>
                     </tr>
                 </table>
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">            

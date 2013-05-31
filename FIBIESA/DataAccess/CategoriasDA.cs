@@ -52,7 +52,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@descricao", cat.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", cat.Descricao.ToUpper());
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_categorias", paramsToSP);
 
@@ -65,7 +65,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", cat.Id);
             paramsToSP[1] = new SqlParameter("@codigo", cat.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", cat.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", cat.Descricao.ToUpper());
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_categorias", paramsToSP);
 

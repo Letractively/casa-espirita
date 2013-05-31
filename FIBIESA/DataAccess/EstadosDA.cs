@@ -36,8 +36,8 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@uf",est.Uf);
-            paramsToSP[1] = new SqlParameter("@descricao", est.Descricao);
+            paramsToSP[0] = new SqlParameter("@uf",est.Uf.ToUpper());
+            paramsToSP[1] = new SqlParameter("@descricao", est.Descricao.ToUpper());
 
             try
             {
@@ -56,8 +56,8 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@id", est.Id);
-            paramsToSP[1] = new SqlParameter("@uf", est.Uf);
-            paramsToSP[2] = new SqlParameter("@descricao", est.Descricao);
+            paramsToSP[1] = new SqlParameter("@uf", est.Uf.ToUpper());
+            paramsToSP[2] = new SqlParameter("@descricao", est.Descricao.ToUpper());
 
             try
             {

@@ -53,17 +53,6 @@ namespace Admin
 
             ddlCategoria.SelectedIndex = 0;
         }
-        private void CarregarDdlPortadorMulta()
-        {
-            PortadoresBL porDBL = new PortadoresBL();
-            List<Portadores> port = porDBL.PesquisarBL();
-
-            ddlPortadorMulta.Items.Add(new ListItem());
-            foreach (Portadores ltPort in port)
-                ddlPortadorMulta.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
-
-            ddlPortadorMulta.SelectedIndex = 0;
-        }
         private void SalvarParametro(int codigo, string modulo, string descricao, string valor)
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -121,8 +110,6 @@ namespace Admin
             txtPerLucro.Text = CarregarParametro(2, "F");
             txtDesconto.Text = CarregarParametro(3, "F");
             ddlTipoDoc.SelectedValue = CarregarParametro(4, "F");
-            ddlPortadorMulta.SelectedValue = CarregarParametro(5, "F");
-            txtDiasVctoMulta.Text = CarregarParametro(6, "F");
             #endregion
         }
         private void CarregarAtributos()
@@ -144,10 +131,8 @@ namespace Admin
             {
                 CarregarDdlCategoria();
                 CarregaDdlTipoDoc();
-                CarregarDdlPortadorMulta();
-
-                //tem que ser a ultima
-                CarregarDados();                
+                CarregarDados();
+               
             }
         }
 
@@ -177,8 +162,6 @@ namespace Admin
                 SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
                 SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
                 SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
-                SalvarParametro(5, "F", lblPortadorMulta.Text, ddlPortadorMulta.SelectedValue);
-                SalvarParametro(6, "F", lblDiasVctoMulta.Text, txtDiasVctoMulta.Text);
                 #endregion
             }
             else
