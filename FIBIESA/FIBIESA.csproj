@@ -108,6 +108,8 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="Relatorios\RelCodigoBarras.aspx" />
+    <Content Include="viewRelCodigoBarras.aspx" />
     <Content Include="default.aspx" />
     <Content Include="emissaoBloqBan.aspx" />
     <Content Include="erroPermissao.aspx" />
@@ -180,7 +182,6 @@
     <Content Include="images\toolbox_row.png" />
     <Content Include="images\Índice.png" />
     <Content Include="login.aspx" />
-    <Content Include="ops.aspx" />
     <Content Include="Pesquisar.aspx" />
     <Content Include="PesquisarItens.aspx" />
     <Content Include="recuperacaoLogin.aspx" />
@@ -588,6 +589,20 @@
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelCodigoBarras.aspx.cs">
+      <DependentUpon>RelCodigoBarras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelCodigoBarras.aspx.designer.cs">
+      <DependentUpon>RelCodigoBarras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewRelCodigoBarras.aspx.cs">
+      <DependentUpon>viewRelCodigoBarras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewRelCodigoBarras.aspx.designer.cs">
+      <DependentUpon>viewRelCodigoBarras.aspx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -637,13 +652,6 @@
       <DependentUpon>index.Master</DependentUpon>
     </Compile>
     <Compile Include="moduloautenticador.cs" />
-    <Compile Include="ops.aspx.cs">
-      <DependentUpon>ops.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ops.aspx.designer.cs">
-      <DependentUpon>ops.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pesquisar.aspx.cs">
       <DependentUpon>Pesquisar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1110,6 +1118,9 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptCodigoBarras.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptReciboDoacao.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

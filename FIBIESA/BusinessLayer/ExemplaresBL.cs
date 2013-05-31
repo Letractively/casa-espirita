@@ -100,6 +100,13 @@ namespace BusinessLayer
 
             return exeDA.PesquisarExemplaresDevolucao(valor);
         }
+
+        public DataSet PesquisarBuscaExemplaresDA(string exemId)
+        {
+            ExemplaresDA exeDA = new ExemplaresDA();
+
+            return exeDA.PesquisarBuscaExemplaresDA(exemId);
+        }
                 
     }
     
