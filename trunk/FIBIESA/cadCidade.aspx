@@ -29,8 +29,8 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="70" Width="335px" ToolTip="Informe a descrição da cidade"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -43,8 +43,8 @@
                                 ToolTip="Selecione a UF da cidade">
                             </asp:DropDownList>                       
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlEstado" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="ddlEstado" ErrorMessage="*Selecione a UF" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -62,8 +62,10 @@
                         </td>
                     </tr>
                 </table>               
-            </div>
-             <asp:HiddenField ID="hfId" runat="server" />
+            </div>             
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
+            <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">
         </div>

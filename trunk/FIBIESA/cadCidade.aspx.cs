@@ -22,7 +22,7 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddlEstado.Items.Add(new ListItem());
+            ddlEstado.Items.Add(new ListItem("Selecione",""));
             foreach (Estados ltEst in estados)            
                ddlEstado.Items.Add(new ListItem(ltEst.Uf +" - "+ltEst.Descricao,ltEst.Id.ToString()));                
             
@@ -58,9 +58,10 @@ namespace Admin
 
         private void LimparCampos()
         {
-            txtDescricao.Text = "";
-            lblCodigo.Text = "";
+            txtDescricao.Text = "";            
             ddlEstado.SelectedIndex = -1;
+            lblCodigo.Text = "Código gerado automaticamente.";
+            txtDescricao.Focus();
         }
         #endregion
 

@@ -29,8 +29,8 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="40" Width="335px" ToolTip="Informe a descrição do bairro"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -43,7 +43,7 @@
                                 ToolTip="Selecione a UF"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlUf" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Selecione a UF" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td> 
                     </tr>
                     <tr>
@@ -52,10 +52,10 @@
                         </td>  
                         <td style="width: 400px">
                            <asp:DropDownList ID="ddlCidade" runat="server" CssClass="dropdownlist" 
-                                ValidationGroup="Selecione a cidade"></asp:DropDownList>
+                                ToolTip="Selecione a cidade"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="ddlCidade" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Selecione a cidade" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td> 
                     </tr>
                 </table>
@@ -69,11 +69,13 @@
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
                                 onclick="btnSalvar_Click" ValidationGroup="salvar" 
-                                ToolTip="Valida e salva as informações" />   
+                                ToolTip="Valida e salva as informações" />                               
                         </td>
                     </tr>                   
                 </table>                
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
         </div>
         <div class="status">

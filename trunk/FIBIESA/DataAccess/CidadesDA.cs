@@ -51,7 +51,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@descricao", cid.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", cid.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@estadoId", cid.EstadoId);
 
             try
@@ -73,7 +73,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", cid.Id);
             paramsToSP[1] = new SqlParameter("@codigo", cid.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", cid.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", cid.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@estadoId", cid.EstadoId);
 
             try

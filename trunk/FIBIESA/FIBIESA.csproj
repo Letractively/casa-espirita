@@ -108,7 +108,7 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
-    <Content Include="Default.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="emissaoBloqBan.aspx" />
     <Content Include="erroPermissao.aspx" />
     <Content Include="Global.asax" />
@@ -587,12 +587,12 @@
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="emissaoBloqBan.aspx.cs">
       <DependentUpon>emissaoBloqBan.aspx</DependentUpon>

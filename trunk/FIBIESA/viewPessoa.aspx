@@ -43,7 +43,7 @@
                                     BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
                                     CellPadding="3" DataKeyNames="ID" onrowdeleting="dtgPessoas_RowDeleting" 
                                     onselectedindexchanged="dtgPessoas_SelectedIndexChanged" GridLines="None" 
-                                    ShowHeaderWhenEmpty="True" AllowPaging="True" AllowSorting="True" 
+                                    AllowPaging="True" AllowSorting="True" 
                                     onpageindexchanging="dtgPessoas_PageIndexChanging" 
                                     onrowdatabound="dtgPessoas_RowDataBound" onsorting="dtgPessoas_Sorting">
                                     <Columns>

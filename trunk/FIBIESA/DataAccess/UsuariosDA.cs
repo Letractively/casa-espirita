@@ -79,7 +79,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@login", usu.Login);
             paramsToSP[1] = new SqlParameter("@senha", usu.Senha);
-            paramsToSP[2] = new SqlParameter("@nome", usu.Nome);
+            paramsToSP[2] = new SqlParameter("@nome", usu.Nome.ToUpper());
             paramsToSP[3] = new SqlParameter("@status", usu.Status);
             paramsToSP[4] = new SqlParameter("@dtinicio", usu.DtInicio);
             paramsToSP[5] = new SqlParameter("@dtfim", usu.DtFim);
@@ -109,7 +109,7 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@id", usu.Id);
             paramsToSP[1] = new SqlParameter("@login", usu.Login);
             paramsToSP[2] = new SqlParameter("@senha", usu.Senha);
-            paramsToSP[3] = new SqlParameter("@nome", usu.Nome);
+            paramsToSP[3] = new SqlParameter("@nome", usu.Nome.ToUpper());
             paramsToSP[4] = new SqlParameter("@status", usu.Status);
             paramsToSP[5] = new SqlParameter("@dtinicio", usu.DtInicio);
             paramsToSP[6] = new SqlParameter("@dtfim", usu.DtFim);

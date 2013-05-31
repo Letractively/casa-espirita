@@ -45,7 +45,7 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddlUf.Items.Add(new ListItem());
+            ddlUf.Items.Add(new ListItem("Selecione",""));
             foreach (Estados ltUF in estados)
                 ddlUf.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
@@ -58,7 +58,7 @@ namespace Admin
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
             ddlCidade.Items.Clear();
-            ddlCidade.Items.Add(new ListItem());
+            ddlCidade.Items.Add(new ListItem("Selecione",""));
             foreach (Cidades ltCid in cidades)
                 ddlCidade.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
@@ -75,7 +75,8 @@ namespace Admin
         {
             txtDescricao.Text = "";
             ddlUf.SelectedIndex = 0;
-            ddlCidade.SelectedIndex = 0;
+            ddlCidade.Items.Clear();
+            lblCodigo.Text = "Código gerado automaticamente.";            
         }
 
         #endregion
@@ -141,6 +142,7 @@ namespace Admin
                     {
                         ExibirMensagem("Bairro gravado com sucesso !");
                         LimparCampos();
+                        txtDescricao.Focus();
                     }
                     else
                         ExibirMensagem("Não foi possível gravar o bairro. Revise as informações.");

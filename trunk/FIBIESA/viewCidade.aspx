@@ -38,7 +38,7 @@
                                     onselectedindexchanged="dtgCidades_SelectedIndexChanged" GridLines="None" 
                                     onpageindexchanging="dtgCidades_PageIndexChanging" 
                                     onrowdatabound="dtgCidades_RowDataBound" onsorting="dtgCidades_Sorting" 
-                                    ShowHeaderWhenEmpty="True" AllowSorting="True">
+                                    AllowSorting="True">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header"/>

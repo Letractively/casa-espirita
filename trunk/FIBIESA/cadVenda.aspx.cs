@@ -404,6 +404,7 @@ namespace FIBIESA
                 txtCliente.Text = "";
                 lblDesCliente.Text = "";
                 txtCliente.Focus();
+                hfIdPessoa.Value = "";
             }
         }
 
