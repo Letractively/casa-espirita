@@ -52,7 +52,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@descricao", eve.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", eve.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@dtinicio", eve.DtInicio);
             paramsToSP[3] = new SqlParameter("@dtfim", eve.DtFim);
 
@@ -74,7 +74,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", eve.Id);
             paramsToSP[1] = new SqlParameter("@codigo", eve.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", eve.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", eve.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@dtinicio", eve.DtInicio);
             paramsToSP[4] = new SqlParameter("@dtfim", eve.DtFim);
 
