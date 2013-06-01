@@ -39,10 +39,15 @@ namespace Admin
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
 
+            TurmasBL turBL = new TurmasBL();
+            DataSet dsTur = turBL.PesquisarBL(turmaId);
+
+            if (dsTur.Tables[0].Rows.Count != 0)
+                lblTurma.Text = (string)dsTur.Tables[0].Rows[0]["descricao"].ToString();
+          
             TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
             List<TurmasParticipantes> tPar = tParBL.PesquisarBL(turmaId);
-
-
+            
             foreach (TurmasParticipantes ltTpar in tPar)
             {
                 DataRow linha = tabela.NewRow();
@@ -63,12 +68,12 @@ namespace Admin
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["turmaId"] != null)
+                if (Session["turmaId"] != null)
                 {
                     if (Request.QueryString["lblDesTurma"] != null)
                         lblTurma.Text = Request.QueryString["lblDesTurma"].ToString();
 
-                    hfIdTurma.Value = Request.QueryString["turmaId"].ToString();
+                    hfIdTurma.Value = Session["turmaId"].ToString();
                     Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
                 }
             }

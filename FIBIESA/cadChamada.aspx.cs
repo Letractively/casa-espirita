@@ -21,7 +21,7 @@ namespace Admin
             EventosBL eveBL = new EventosBL();
             List<Eventos> eventos = eveBL.PesquisarBL();
                        
-            ddlEvento.Items.Add(new ListItem("Selecione"));
+            ddlEvento.Items.Add(new ListItem("Selecione",""));
             foreach (Eventos ltEve in eventos)
                 ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
 
@@ -34,7 +34,7 @@ namespace Admin
             List<Turmas> turmas = turBL.PesquisarEveBL(id_tur);
 
             ddlTurmas.Items.Clear();
-            ddlTurmas.Items.Add(new ListItem("Selecione"));
+            ddlTurmas.Items.Add(new ListItem("Selecione",""));
             foreach (Turmas ltTur in turmas)
                 ddlTurmas.Items.Add(new ListItem(ltTur.Codigo + " - " + ltTur.Descricao, ltTur.Id.ToString()));
 
@@ -56,63 +56,69 @@ namespace Admin
 
         private void Pesquisar(int id_tur, int id_eve)
         {
-            DataTable tabela = new DataTable();
-            
-            DataColumn coluna1 = new DataColumn("TURMAPARTICIPANTEID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODPARTICIPANTE", Type.GetType("System.Int32"));
-            DataColumn coluna3 = new DataColumn("DESCPARTICIPANTE", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("PRESENCA", Type.GetType("System.Boolean"));
-            DataColumn coluna5 = new DataColumn("DATA", Type.GetType("System.String"));
-            DataColumn coluna6 = new DataColumn("ID", Type.GetType("System.Int32"));
-
-            tabela.Columns.Add(coluna1);
-            tabela.Columns.Add(coluna2);
-            tabela.Columns.Add(coluna3);
-            tabela.Columns.Add(coluna4);
-            tabela.Columns.Add(coluna5);
-            tabela.Columns.Add(coluna6);
-
-            TurmasBL turBL = new TurmasBL();
-            TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
-            ChamadasBL chaBL = new ChamadasBL();
-            List<Turmas> turmas = turBL.PesquisarBL(id_tur, id_eve);
-
-            foreach (Turmas ltTur in turmas)
+            if (Convert.ToDateTime(txtSelData.Text) > DateTime.Now)
+                ExibirMensagem("Não é permitido registrar frequências futuras !");
+            else
             {
-                List<TurmasParticipantes> tPar = tParBL.PesquisarBL(ltTur.Id);
+                DataTable tabela = new DataTable();
 
-                foreach (TurmasParticipantes ltTpar in tPar)
+                DataColumn coluna1 = new DataColumn("TURMAPARTICIPANTEID", Type.GetType("System.Int32"));
+                DataColumn coluna2 = new DataColumn("CODPARTICIPANTE", Type.GetType("System.Int32"));
+                DataColumn coluna3 = new DataColumn("DESCPARTICIPANTE", Type.GetType("System.String"));
+                DataColumn coluna4 = new DataColumn("PRESENCA", Type.GetType("System.Boolean"));
+                DataColumn coluna5 = new DataColumn("DATA", Type.GetType("System.String"));
+                DataColumn coluna6 = new DataColumn("ID", Type.GetType("System.Int32"));
+
+                tabela.Columns.Add(coluna1);
+                tabela.Columns.Add(coluna2);
+                tabela.Columns.Add(coluna3);
+                tabela.Columns.Add(coluna4);
+                tabela.Columns.Add(coluna5);
+                tabela.Columns.Add(coluna6);
+
+                TurmasBL turBL = new TurmasBL();
+                TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
+                ChamadasBL chaBL = new ChamadasBL();
+                List<Turmas> turmas = turBL.PesquisarBL(id_tur, id_eve);
+
+                foreach (Turmas ltTur in turmas)
                 {
-                    DataRow linha = tabela.NewRow();
+                    List<TurmasParticipantes> tPar = tParBL.PesquisarBL(ltTur.Id);
 
-                    linha["TURMAPARTICIPANTEID"] = ltTpar.Id;
-                    linha["CODPARTICIPANTE"] = ltTpar.Pessoa.Codigo;
-                    linha["DESCPARTICIPANTE"] = ltTpar.Pessoa.Nome;
-
-                    List<Chamadas> cha = chaBL.PesquisarBL(ltTpar.Id, Convert.ToDateTime(txtSelData.Text));
-
-                    if (cha.Count > 0)
+                    foreach (TurmasParticipantes ltTpar in tPar)
                     {
-                        foreach (Chamadas ltCha in cha)
+                        DataRow linha = tabela.NewRow();
+
+                        linha["TURMAPARTICIPANTEID"] = ltTpar.Id;
+                        linha["CODPARTICIPANTE"] = ltTpar.Pessoa.Codigo;
+                        linha["DESCPARTICIPANTE"] = ltTpar.Pessoa.Nome;
+
+                        List<Chamadas> cha = chaBL.PesquisarBL(ltTpar.Id, Convert.ToDateTime(txtSelData.Text));
+
+                        if (cha.Count > 0)
                         {
-                            linha["ID"] = ltCha.Id;
-                            linha["PRESENCA"] = ltCha.Presenca;
-                            linha["DATA"] = ltCha.Data.ToString("dd/MM/yyyy");
+                            foreach (Chamadas ltCha in cha)
+                            {
+                                linha["ID"] = ltCha.Id;
+                                linha["PRESENCA"] = ltCha.Presenca;
+                                linha["DATA"] = ltCha.Data.ToString("dd/MM/yyyy");
+                            }
                         }
-                    }
-                    else
-                    {
-                        linha["ID"] = 0;
-                        linha["PRESENCA"] = false;
-                        linha["DATA"] = txtSelData.Text; 
-                    }
+                        else
+                        {
+                            linha["ID"] = 0;
+                            linha["PRESENCA"] = false;
+                            linha["DATA"] = txtSelData.Text;
+                        }
 
-                    tabela.Rows.Add(linha);
-                }                
+                        tabela.Rows.Add(linha);
+                    }
+                }
+
+                repPermissao.DataSource = tabela;
+                repPermissao.DataBind();
             }
-
-            repPermissao.DataSource = tabela;
-            repPermissao.DataBind();
+            
         }
 
         public void ExibirMensagem(string mensagem)
@@ -185,6 +191,8 @@ namespace Admin
 
         protected void ddlEvento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            repPermissao.DataSource = null;
+            repPermissao.DataBind();
             CarregarDdlTurmas(utils.ComparaIntComZero(ddlEvento.SelectedValue));
         }       
         

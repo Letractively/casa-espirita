@@ -10,28 +10,50 @@ namespace BusinessLayer
 {
     public class TurmasBL : BaseBL
     {
-        public bool InserirBL(Turmas tur)
+        private bool IsValid(Turmas tur)
         {
-            /*criar as regras de negocio*/
-            TurmasDA turmasDA = new TurmasDA();
+            bool valido;
+            valido = tur.Descricao.Length <= 70 && tur.EventoId > 0;
+            valido = valido && tur.Nromax > 0 && tur.DataInicial != null && tur.DataFinal != null;
 
-            return turmasDA.InserirDA(tur);
+            return valido;
+        }
+
+        public Int32 InserirBL(Turmas tur)
+        {
+            if (IsValid(tur))
+            {
+                TurmasDA turmasDA = new TurmasDA();
+
+                return turmasDA.InserirDA(tur);
+            }
+            else
+                return 0;
+               
         }
 
         public bool EditarBL(Turmas tur)
         {
-            /*criar as regras de negocio*/
-            TurmasDA turmasDA = new TurmasDA();
+            if (tur.Id > 0 && IsValid(tur))
+            {
+                TurmasDA turmasDA = new TurmasDA();
 
-            return turmasDA.EditarDA(tur);
+                return turmasDA.EditarDA(tur);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Turmas tur)
         {
-            /*criar as regras de negocio*/
-            TurmasDA turmasDA = new TurmasDA();
+            if (tur.Id > 0)
+            {
+                TurmasDA turmasDA = new TurmasDA();
 
-            return turmasDA.ExcluirDA(tur);
+                return turmasDA.ExcluirDA(tur);
+            }
+            else
+                return false;
         }
 
         public List<Turmas> PesquisarBL()
@@ -42,7 +64,7 @@ namespace BusinessLayer
             return turmasDA.PesquisarDA();
         }
 
-        public List<Turmas> PesquisarBL(int tur)
+        public DataSet PesquisarBL(int tur)
         {
             TurmasDA turmasDA = new TurmasDA();
 

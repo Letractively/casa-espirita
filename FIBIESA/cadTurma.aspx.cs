@@ -23,7 +23,7 @@ namespace Admin
             EventosBL eveBL = new EventosBL();
             List<Eventos> eventos = eveBL.PesquisarBL();
 
-            ddlEvento.Items.Add(new ListItem());
+            ddlEvento.Items.Add(new ListItem("Selecione",""));
             foreach (Eventos ltEve in eventos)            
                 ddlEvento.Items.Add(new ListItem(ltEve.Codigo+" - "+ ltEve.Descricao, ltEve.Id.ToString()));
 
@@ -40,9 +40,9 @@ namespace Admin
             if (utils.ComparaIntComZero(valor) > 0)
             {
                 PessoasBL pesBL = new PessoasBL();
-                List<Pessoas> pessoas = pesBL.PesquisarPorGeneroDA(utils.ComparaIntComZero(parametros.Valor));
+                List<Pessoas> pessoas = pesBL.PesquisarPorGeneroDA(utils.ComparaIntComZero(valor));
 
-                ddlInstrutor.Items.Add(new ListItem());
+                ddlInstrutor.Items.Add(new ListItem("Selecione", ""));
                 foreach (Pessoas ltPes in pessoas)
                     ddlInstrutor.Items.Add(new ListItem(ltPes.Codigo + " - " + ltPes.Nome, ltPes.Id.ToString()));
 
@@ -53,24 +53,24 @@ namespace Admin
         private void CarregarDados(int id_tur)
         {
             TurmasBL turBL = new TurmasBL();
-            List<Turmas> turmas = turBL.PesquisarBL(id_tur);
-
-            foreach (Turmas ltTur in turmas)
+            DataSet dsTur = turBL.PesquisarBL(id_tur);
+                   
+            foreach(DataRow ltTur in dsTur.Tables[0].Rows)
             {
-                hfId.Value = ltTur.Id.ToString();
-                lblcodigo.Text = ltTur.Codigo.ToString();
-                txtDescricao.Text = ltTur.Descricao;
-                txtSala.Text = ltTur.Sala;
-                txtNroMax.Text = ltTur.Nromax.ToString();
-                txtDiaSemana.Text = ltTur.DiaSemana;
-                txtDtFim.Text = ltTur.DataFinal.ToString("dd/MM/yyyy");
-                txtDtInicio.Text = ltTur.DataInicial.ToString("dd/MM/yyyy");
-                txtHoraFim.Text = ltTur.HoraFim != null ? Convert.ToDateTime(ltTur.HoraFim).ToString("HH:mm") : "";
-                txtHoraInicio.Text = ltTur.HoraIni != null ? Convert.ToDateTime(ltTur.HoraIni).ToString("HH:mm") : "";   
-                ddlEvento.SelectedValue = ltTur.EventoId.ToString();               
-                ddlInstrutor.SelectedValue = ltTur.PessoaId.ToString();
+                hfId.Value = ltTur["id"].ToString();
+                lblcodigo.Text = ltTur["Codigo"].ToString();
+                txtDescricao.Text = ltTur["Descricao"].ToString();
+                txtSala.Text = ltTur["Sala"].ToString();
+                txtNroMax.Text = ltTur["Nromax"].ToString();
+                txtDiaSemana.Text = ltTur["DiaSemana"].ToString();
+                txtDtFim.Text = ltTur["DtFim"].ToString();
+                txtDtInicio.Text = ltTur["DtIni"].ToString();
+                txtHoraFim.Text = ltTur["HoraFim"].ToString(); 
+                txtHoraInicio.Text = ltTur["HoraIni"].ToString();   
+                ddlEvento.SelectedValue = ltTur["EventoId"].ToString();               
+                ddlInstrutor.SelectedValue = ltTur["PessoaId"].ToString();
 
-            }
+            }                
 
         }
         private void CarregarAtributos()
@@ -100,6 +100,7 @@ namespace Admin
             txtDiaSemana.Text = "";
             txtHoraFim.Text = "";
             txtHoraInicio.Text = "";
+            lblcodigo.Text = "Código gerado automaticamente.";
 
         }
         #endregion
@@ -127,6 +128,7 @@ namespace Admin
                     lblcodigo.Text = "Código gerado automaticamente.";
 
                 btnParticipantes.Visible = v_operacao.ToLower() == "edit";
+                txtDescricao.Focus();
             }
         }
 
@@ -152,7 +154,10 @@ namespace Admin
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                     if (turBL.EditarBL(turmas))
+                    {
                         ExibirMensagem("Turma atualizada com sucesso !");
+                        txtDescricao.Focus();
+                    }
                     else
                         ExibirMensagem("Não foi possível atualizar a turma. Revise as informações.");
                 else
@@ -161,14 +166,20 @@ namespace Admin
             }
             else
             {
+                Int32 id_turma = 0;
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if (turBL.InserirBL(turmas))
+                {
+                    id_turma = turBL.InserirBL(turmas);
+                    hfId.Value = id_turma.ToString();
+                    if (id_turma > 0)
                     {
-                        ExibirMensagem("Turma gravada com sucesso !");
-                        LimparCampos();
+                        ExibirMensagem("Turma gravada com sucesso !");                       
+                        btnParticipantes.Visible = true;
+                        txtDescricao.Focus();
                     }
                     else
                         ExibirMensagem("Não foi possível gravar a turma. Revise as informações.");
+                }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
@@ -182,10 +193,10 @@ namespace Admin
                
         protected void btnParticipantes_Click(object sender, EventArgs e)
         {
-            Response.Redirect("cadTurmaParticipantes.aspx?turmaId=" + hfId.Value + "&lblDesTurma=" + txtDescricao.Text);
-        }
+            Session["turmaId"] = hfId.Value;
+            Response.Redirect("cadTurmaParticipantes.aspx?");
 
-         
+        }        
       
     }
 }

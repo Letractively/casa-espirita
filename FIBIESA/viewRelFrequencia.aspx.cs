@@ -41,9 +41,9 @@ namespace FIBIESA
         private void CarregarDdlInstrutor()
         {
             TurmasBL turBL = new TurmasBL();
-            List<Turmas> lTurmas = turBL.PesquisarBL(Convert.ToInt16(ddlTurma.SelectedValue.ToString()));
+            DataSet dsTur = turBL.PesquisarBL(Convert.ToInt16(ddlTurma.SelectedValue.ToString()));
 
-            lblInstrutor.Text = lTurmas[0].Pessoa.Nome;
+            lblInstrutor.Text = dsTur.Tables[0].Rows[0]["NOME"].ToString();
         }
 
         private void CarregarDdlParticipante()

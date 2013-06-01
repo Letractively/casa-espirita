@@ -22,7 +22,7 @@
                                 </td>
                                 <td style="width: 530px" colspan="3">
                                     <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
-                                        ToolTip="Selecione o instrutor" AppendDataBoundItems="true" AutoPostBack="true"
+                                        ToolTip="Selecione o evento" AppendDataBoundItems="true" AutoPostBack="true"
                                         onselectedindexchanged="ddlEvento_SelectedIndexChanged">                                                                                                                            
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" InitialValue="Selecione" ErrorMessage="*" ToolTip="Obrigatório" SetFocusOnError="true"
@@ -93,17 +93,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td  colspan="4" style="text-align:center;">
-                                    <center>
+                                <td></td>
+                                <td  colspan="3">                                   
                                         <asp:RadioButton ID="rbSemPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" Text="Sem Preenchimento">
                                         </asp:RadioButton>
                                         <asp:RadioButton ID="rbComPreenchimento" GroupName="Preenchimento" runat="server" CssClass="input" Text="Com Preenchimento">                                                                                    
-                                        </asp:RadioButton>                                        
-                                    </center>
+                                        </asp:RadioButton>  
                                 </td>                                                                      
                             </tr>
                             <tr>
-                                <td colspan="4" valign="middle" style="text-align:center;">
+                                <td></td>
+                                <td colspan="3">
                                     <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
                                     onclick="btnVoltar_Click" ToolTip="Volta para página principal" />
                                             &nbsp;&nbsp;&nbsp;
