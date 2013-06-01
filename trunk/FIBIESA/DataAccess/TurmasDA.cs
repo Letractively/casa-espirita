@@ -88,12 +88,12 @@ namespace DataAccess
 
         }
         #endregion
-        public bool InserirDA(Turmas tur)
+        public Int32 InserirDA(Turmas tur)
         {
             SqlParameter[] paramsToSP = new SqlParameter[11];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@descricao", tur.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", tur.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@eventoid", tur.EventoId);
             paramsToSP[3] = new SqlParameter("@dtini", tur.DataInicial);
             paramsToSP[4] = new SqlParameter("@dtfim", tur.DataFinal);
@@ -101,20 +101,26 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@sala", tur.Sala);
             paramsToSP[7] = new SqlParameter("@horaini", tur.HoraIni);
             paramsToSP[8] = new SqlParameter("@horafim", tur.HoraFim);
-            paramsToSP[9] = new SqlParameter("@diasemana", tur.DiaSemana);
+            paramsToSP[9] = new SqlParameter("@diasemana", tur.DiaSemana.ToUpper());
             paramsToSP[10] = new SqlParameter("@pessoaid", tur.PessoaId);
 
 
             try
-            {
-                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_turmas", paramsToSP);
+            {                
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_turmas", paramsToSP);
 
-                return true;
+                DataTable tabela = ds.Tables[0];
+
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
             }
             catch (Exception e)
             {
-                return false;
+                return 0;
             }
+
+
 
         }
 
@@ -124,7 +130,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", tur.Id);
             paramsToSP[1] = new SqlParameter("@codigo", tur.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", tur.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", tur.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@eventoid", tur.EventoId);
             paramsToSP[4] = new SqlParameter("@dtini", tur.DataInicial);
             paramsToSP[5] = new SqlParameter("@dtfim", tur.DataFinal);
@@ -132,7 +138,7 @@ namespace DataAccess
             paramsToSP[7] = new SqlParameter("@sala", tur.Sala);
             paramsToSP[8] = new SqlParameter("@horaini", tur.HoraIni);
             paramsToSP[9] = new SqlParameter("@horafim", tur.HoraFim);
-            paramsToSP[10] = new SqlParameter("@diasemana", tur.DiaSemana);
+            paramsToSP[10] = new SqlParameter("@diasemana", tur.DiaSemana.ToUpper());
             paramsToSP[11] = new SqlParameter("@pessoaid", tur.PessoaId);
 
             try
@@ -176,14 +182,21 @@ namespace DataAccess
 
         }
 
-        public List<Turmas> PesquisarDA(int id_tur)
+        public DataSet PesquisarDA(int id_tur)
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TURMAS WHERE ID = {0}", id_tur));
-            List<Turmas> turmas = CarregarObjTurmas(dr);
+            StringBuilder v_query = new StringBuilder();
 
-            return turmas;
+            v_query.Append(@"SELECT T.*, P.NOME ");
+            v_query.Append(@" FROM TURMAS T ");
+            v_query.Append(@"     ,PESSOAS P ");        
+            v_query.Append(@"WHERE T.PESSOAID = P.ID ");
+            v_query.Append(@"  AND T.ID = {0} ");
+                                                                                           
+            
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(v_query.ToString(), id_tur));
+       
+            return ds;
         }
 
         public List<Turmas> PesquisarEveDA(int id_eve)

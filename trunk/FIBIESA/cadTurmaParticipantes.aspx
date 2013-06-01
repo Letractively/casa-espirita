@@ -23,7 +23,8 @@
                            * Participante:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtParticipante" runat="server" CssClass="inputbox"></asp:TextBox>
+                            <asp:TextBox ID="txtParticipante" runat="server" CssClass="inputbox" 
+                                ToolTip="Informe o participante"></asp:TextBox>
                             <asp:Button ID="btnPesParticipante" runat="server" CssClass="btn" Text="..." onclick="btnPesParticipante_Click" 
                                 />
                             &nbsp;
@@ -39,10 +40,12 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" 
+                                ToolTip="Volta para página de cadastro de turmas" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" 
-                                onclick="btnInserir_Click" ValidationGroup="salvar" />
+                                onclick="btnInserir_Click" ValidationGroup="salvar" 
+                                ToolTip="Inseri o participante selecionado" />
                         </td>
                     </tr>
                     <tr>
@@ -52,9 +55,9 @@
                                    CellPadding="3" AllowPaging="True" DataKeyNames="ID"                                    
                                     PageSize="7" AllowSorting="True" 
                                 onrowdeleting="dtgParticipantes_RowDeleting" GridLines="None" 
-                                onrowdatabound="dtgParticipantes_RowDataBound" ShowHeaderWhenEmpty="True" 
+                                onrowdatabound="dtgParticipantes_RowDataBound" 
                                 onpageindexchanging="dtgParticipantes_PageIndexChanging" 
-                                onsorting="dtgParticipantes_Sorting">
+                                onsorting="dtgParticipantes_Sorting" Width="400px">
                                    <Columns>
                                        <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />

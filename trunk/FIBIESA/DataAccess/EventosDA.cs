@@ -113,8 +113,12 @@ namespace DataAccess
         public List<Eventos> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM EVENTOS "));
-
+                                                                CommandType.Text, string.Format(@"SELECT * " + 
+                                                                                                 "  FROM EVENTOS " +
+                                                                                                 " WHERE CONVERT(DATETIME,GETDATE(),103) "  +
+                                                                                                 " BETWEEN  CONVERT(DATETIME,DTINICIO,103) AND  CONVERT(DATETIME,DTFIM,103) "
+                                                                                                ));
+   
             List<Eventos> eventos = CarregarObjEventos(dr);
                         
             return eventos;

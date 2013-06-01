@@ -22,36 +22,25 @@ namespace DataAccess
             {
                 TurmasParticipantes turP = new TurmasParticipantes();
                 PessoasDA pesDA = new PessoasDA();
-                TurmasDA turDA = new TurmasDA();
+                Turmas turmas = new Turmas();
+                Pessoas pessoas = new Pessoas();
 
                 turP.Id = int.Parse(dr["ID"].ToString());
                 turP.PessoaId = int.Parse(dr["PESSOAID"].ToString());
                 turP.TurmaId = int.Parse(dr["TURMASID"].ToString());
                 
-                List<Pessoas> pes = pesDA.PesquisarDA(turP.PessoaId);
-                Pessoas pessoas = new Pessoas();
+                //turmas
+                turmas.Id =int.Parse(dr["ID_TUR"].ToString());
+                turmas.Descricao = dr["DESCRICAO"].ToString();
+                turP.Turma = turmas;
+                
+                //pessoas
+                pessoas.Id = int.Parse(dr["ID_PES"].ToString());
+                pessoas.Codigo = int.Parse(dr["P_COD"].ToString());
+                pessoas.Nome = dr["NOME"].ToString();
 
-                foreach (Pessoas ltPes in pes)
-                {
-                    pessoas.Id = ltPes.Id;
-                    pessoas.Codigo = ltPes.Codigo;
-                    pessoas.Nome = ltPes.Nome;
-
-                    turP.Pessoa = pessoas;
-                }
-
-                List<Turmas> tur = turDA.PesquisarDA(turP.PessoaId);
-                Turmas turmas = new Turmas();
-
-                foreach (Turmas ltTur in tur)
-                {
-                    turmas.Id = ltTur.Id;
-                    turmas.Codigo = ltTur.Codigo;
-                    turmas.Descricao = ltTur.Descricao;
-
-                    turP.Turma = turmas;
-                }
-
+                turP.Pessoa = pessoas;
+                                
                 turmasParticipantes.Add(turP);
             }
             return turmasParticipantes;
@@ -96,8 +85,17 @@ namespace DataAccess
 
         public List<TurmasParticipantes> PesquisarDA()
         {
+            StringBuilder v_query = new StringBuilder();
+            v_query.Append(@"SELECT TP.*, T.ID ID_TUR, T.DESCRICAO ");
+            v_query.Append(@"       ,P.CODIGO P_COD,P.ID ID_PES, P.NOME ");
+            v_query.Append(@"  FROM TURMASPARTICIPANTES TP ");
+            v_query.Append(@"      ,TURMAS T ");
+            v_query.Append(@"      ,PESSOAS P ");
+            v_query.Append(@" WHERE T.ID = TP.TURMASID ");
+            v_query.Append(@"   AND TP.PESSOAID = P.ID ");
+         
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM TURMASPARTICIPANTES "));
+                                                                CommandType.Text, string.Format(v_query.ToString()));
 
             List<TurmasParticipantes> turmasParticipantes = CarregarObjTurmasParticipantes(dr);
 
@@ -107,9 +105,18 @@ namespace DataAccess
 
         public List<TurmasParticipantes> PesquisarDA(int id_turma)
         {
+            StringBuilder v_query = new StringBuilder();
+            v_query.Append(@"SELECT TP.*, T.ID ID_TUR, T.DESCRICAO ");
+            v_query.Append(@"       ,P.CODIGO P_COD,P.ID ID_PES, P.NOME ");
+            v_query.Append(@"  FROM TURMASPARTICIPANTES TP ");
+            v_query.Append(@"      ,TURMAS T ");
+            v_query.Append(@"      ,PESSOAS P ");
+            v_query.Append(@" WHERE T.ID = TP.TURMASID ");
+            v_query.Append(@"   AND TP.PESSOAID = P.ID ");
+            v_query.Append(@"   AND TP.TURMASID = {0}");                                                                                       
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM TURMASPARTICIPANTES WHERE TURMASID = {0}", id_turma));
+                                                       CommandType.Text, string.Format(v_query.ToString(), id_turma));
 
             List<TurmasParticipantes> turmasParticipantes = CarregarObjTurmasParticipantes(dr);
 

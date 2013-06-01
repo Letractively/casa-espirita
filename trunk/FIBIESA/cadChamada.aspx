@@ -20,31 +20,36 @@
                     <tr>                           
                         <td style="width: 280px">                                                         
                             <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
-                                AutoPostBack="True" onselectedindexchanged="ddlEvento_SelectedIndexChanged">
+                                AutoPostBack="True" 
+                                onselectedindexchanged="ddlEvento_SelectedIndexChanged" 
+                                ToolTip="Selecione o evento">
                             </asp:DropDownList>       
                         </td>                        
                         <td style="width: 280px"> 
-                            <asp:DropDownList ID="ddlTurmas" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlTurmas" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione a turma">
                             </asp:DropDownList>                                                                               
                         </td>
                         <td style="width: 130px"> 
-                        <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px"></asp:TextBox>
+                        <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px" 
+                                ToolTip="Selecione a data"></asp:TextBox>
                         <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData"
                             Enabled="True">
                         </asp:CalendarExtender>                           
                         </td>  
                         <td>                           
                             <asp:Button ID="btnPesquisar" runat="server"  Text="Pesquisar" CssClass="btn" 
-                              onclick="btnPesquisar_Click"/>  
+                              onclick="btnPesquisar_Click" ToolTip="Realiza a pesquisa " 
+                                ValidationGroup="salvar"/>  
                         </td>
                     </tr>    
                     <tr>                        
                          <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlEvento" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
+                                ControlToValidate="ddlEvento" ErrorMessage="*Selecione o evento" 
+                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator></td>
                           <td colspan="2"><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                ControlToValidate="ddlTurmas" ErrorMessage="*Preenchimento Obrigatório" 
-                                ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator></td>
+                                ControlToValidate="ddlTurmas" ErrorMessage="*Selecione a turma" 
+                                  ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator></td>
                           <td></td>
                     </tr>               
                     <tr>                        
@@ -80,10 +85,10 @@
                         <td style="width: 100px"> </td>
                         <td colspan="3">
                             <asp:Button ID="btnVoltar" runat="server"  Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />                           
+                                onclick="btnVoltar_Click" ToolTip="Volta para página principal" />                           
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnInserir" runat="server"  Text="Salvar" CssClass="btn" 
-                                onclick="btnInserir_Click" />  
+                                onclick="btnInserir_Click" ToolTip="Salva as informações" />  
                         </td>
                     </tr>
                 </table>                
