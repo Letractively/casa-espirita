@@ -37,7 +37,7 @@
                                     onselectedindexchanged="dtgTurma_SelectedIndexChanged" GridLines="None" 
                                     onpageindexchanging="dtgTurmas_PageIndexChanging" 
                                     onrowdatabound="dtgTurmas_RowDataBound" onsorting="dtgTurmas_Sorting" 
-                                    ShowHeaderWhenEmpty="True" AllowSorting="True">
+                                    AllowSorting="True">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True">                                            
                                             <ItemStyle CssClass="grd_edit" />

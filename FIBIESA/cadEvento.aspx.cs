@@ -94,7 +94,10 @@ namespace Admin
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
                 {
                     if (eveBL.EditarBL(eventos))
+                    {
                         ExibirMensagem("Evento atualizado com sucesso !");
+                        txtDescricao.Focus();
+                    }
                     else
                         ExibirMensagem("Não foi possível atualizar o evento. Revise as informações.");
                 }
