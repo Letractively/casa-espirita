@@ -157,7 +157,7 @@ namespace FIBIESA
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Estados ltUF in estados)
                 ddl.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
@@ -169,7 +169,7 @@ namespace FIBIESA
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
                 ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
@@ -181,7 +181,7 @@ namespace FIBIESA
             List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione",""));
             foreach (Bairros ltBai in bairros)
                 ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
 
@@ -192,7 +192,6 @@ namespace FIBIESA
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-
         private void LimparCampos()
         {
             txtCodigo.Text = "";
@@ -204,11 +203,15 @@ namespace FIBIESA
             txtRazao.Text = "";
             txtNumero.Text = "";
             txtEmail.Text = "";
-            ddlUF.SelectedIndex = -1;
+            ddlUF.SelectedIndex = 0;
+            ddlCidades.Items.Clear();
+            ddlBairro.Items.Clear();
             ddlCidades.SelectedIndex = -1;
             ddlBairro.SelectedIndex = -1;
             txttelefone.Text = "";
             txtRanking.Text = "";
+            tcInstituicao.ActiveTabIndex = 0;
+            txtCodigo.Focus();
         }
         #endregion
         

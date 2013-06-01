@@ -110,6 +110,7 @@ namespace Admin
                     {
                         ExibirMensagem("Evento gravado com sucesso !");
                         LimparCampos();
+                        txtDescricao.Focus();
                     }
                     else
                         ExibirMensagem("Não foi possível gravar o evento. Revise as informações.");

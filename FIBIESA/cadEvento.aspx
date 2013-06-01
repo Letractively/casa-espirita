@@ -25,8 +25,9 @@
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
                                 MaxLength="70" Width="335px" ToolTip="Informe a descrição do evento"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição do evento" 
+                                ValidationGroup="salvar" CssClass="validacao" 
+                                ToolTip="Informe a descrição do evento">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -55,18 +56,20 @@
                         <td>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtDtInicio" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Informe a data inicial" ValidationGroup="salvar" 
+                                ToolTip="Informe a data inicial">*</asp:RequiredFieldValidator>
                         </td>
                         <td colspan="2">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtDtFim" CssClass="validacao" 
-                                ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                ErrorMessage="*Informe a data final" ValidationGroup="salvar" 
+                                ToolTip="Informe a data final">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td style="width: 140px">
+                        <td style="width: 140px">                            
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
@@ -79,6 +82,8 @@
                     </tr>
                 </table>
             </div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
             <asp:HiddenField ID="hfId" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
                 EnableScriptLocalization="true">
