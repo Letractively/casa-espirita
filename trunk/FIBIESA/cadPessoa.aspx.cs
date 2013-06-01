@@ -328,6 +328,62 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
+        private void LimparCampos()
+        {
+            hfId.Value = "";
+            hfIdTelefone.Value = "";
+            hfOrdemFone.Value = "";
+            txtCep.Text = "";
+            txtCepProf.Text = "";
+            txtComplemento.Text = "";
+            txtComplementoProf.Text = "";
+            txtCpfCnpj.Text = "";
+            txtDataNascimento.Text = "";
+            txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtEmail.Text = "";
+            txtEmpresa.Text = "";
+            txtEndereco.Text = "";
+            txtEnderecoProf.Text = "";
+            txtNome.Text = "";
+            txtNomeMae.Text = "";
+            txtNomePai.Text = "";
+            txtNumero.Text = "";
+            txtNumeroProf.Text = "";
+            txtObservacao.Text = "";
+            txtRefNome.Text = "";
+            txtRefTelefone.Text = "";
+            txtRg.Text = "";
+            txtTelefone.Text = "";
+            dtExcluidos.Clear();
+            dtFone.Clear();
+            dtgTelefones.DataSource = dtFone;
+            dtgTelefones.DataBind();            
+            lblCodigo.Text = "Código gerado automaticamente.";
+            lblDesNome.Text = "";
+            ddlCategoria.SelectedIndex = 0;
+            ddlSexo.SelectedIndex = 0;
+            ddlEstadoCivil.SelectedIndex = 0;
+            ddlBairro.SelectedIndex = -1;
+            ddlCidades.SelectedIndex = -1;
+            ddlUF.SelectedIndex = 0;
+            ddlBairroProf.SelectedIndex = -1;
+            ddlCidadeProf.SelectedIndex = -1;
+            ddlUfProf.SelectedIndex = 0;
+
+
+            if (Request.QueryString["tipoPessoa"] != null)
+            {
+                if (Request.QueryString["tipoPessoa"].ToString() == "F")
+                {
+                    lblDesNome.Text = "* Nome";
+                }
+                else
+                {
+                    lblDesNome.Text = "* Nome Fantasia";
+                }
+
+            }
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -341,6 +397,10 @@ namespace Admin
                 if (Request.QueryString["operacao"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
+                    dtExcluidos.Clear();
+                    dtFone.Clear();
+                    Session["tbexcluidos"] = null;
+                    Session["tbfone"] = null;
 
                     if (v_operacao == "edit")
                     {
@@ -377,7 +437,7 @@ namespace Admin
                     CarregarDadosPessoas(id_pes);
                     CarregarDadosTelefones(id_pes);
                 }
-            }
+            }          
 
         }
                                     
@@ -456,16 +516,17 @@ namespace Admin
                     ExcluirTelefones();
                     GravarTelefones(idPes);
                     if(idPes > 0)
+                    {
                         ExibirMensagem("Pessoa gravada com sucesso !");
+                        LimparCampos();
+                    }
                     else
                         ExibirMensagem("Não foi possível gravar a pessoa. Revise as informações.");
                 }
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-                
             
-            Response.Redirect("viewPessoa.aspx");
         }
 
         protected void btnInserirTelefone_Click(object sender, EventArgs e)
