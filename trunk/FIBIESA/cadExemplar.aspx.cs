@@ -60,11 +60,26 @@ namespace Admin
             OrigensBL oriBL = new OrigensBL();
             List<Origens> origens = oriBL.PesquisarBL();
 
-            ddlOrigem.Items.Add(new ListItem());
+            ddlOrigem.Items.Add(new ListItem("Selecione",""));
             foreach (Origens ltOri in origens)
                 ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
 
             ddlOrigem.SelectedIndex = 0;
+        }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtObra.Text = "";
+            lblDesObra.Text = "";
+            txtTombo.Text = "";
+            ddlOrigem.SelectedIndex = 0;
+            hfIdObra.Value = "";
+            hfId.Value = "";
         }
         #endregion
 
@@ -88,6 +103,8 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_exe);
+
+                txtObra.Focus();
             }
         }
 
@@ -110,7 +127,10 @@ namespace Admin
             if (exemplares.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    exeBL.EditarBL(exemplares);
+                   if(exeBL.EditarBL(exemplares))
+                        ExibirMensagem("Exemplar atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o exemplar. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -118,12 +138,18 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    exeBL.InserirBL(exemplares);
+                    if(exeBL.InserirBL(exemplares))                     
+                    {
+                        ExibirMensagem("Exemplar gravado com sucesso !");
+                        LimparCampos();
+                        txtObra.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o exemplar. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewExemplar.aspx");
+                        
         }
 
         protected void btnPesObra_Click(object sender, EventArgs e)
@@ -168,6 +194,23 @@ namespace Admin
                 lblDesObra.Text = ltObr.Titulo;
             }
             
+        }
+
+        protected void txtTombo_TextChanged(object sender, EventArgs e)
+        {
+            ExemplaresBL exeBL = new ExemplaresBL();
+
+            if (exeBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtTombo.Text)))
+            {
+                lblInformacao.Text = "O tombo " + txtTombo.Text + " já existe. Informe um novo código.";
+                txtTombo.Text = "";
+                txtTombo.Focus();
+            }
+            else
+            {
+                lblInformacao.Text = "";
+                ddlOrigem.Focus();
+            }  
         }
 
        

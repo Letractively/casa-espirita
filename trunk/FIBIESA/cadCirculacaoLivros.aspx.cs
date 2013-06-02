@@ -34,6 +34,7 @@ namespace FIBIESA
 
         private DataTable CriarDtItensEmp()
         {
+            DataColumn[] keys = new DataColumn[1];
             if (dtItensEmp.Rows.Count <= 0)
             {
                 DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
@@ -45,6 +46,10 @@ namespace FIBIESA
                 dtItensEmp.Columns.Add(coluna2);
                 dtItensEmp.Columns.Add(coluna3);
                 dtItensEmp.Columns.Add(coluna4);
+
+                keys[0] = coluna2;
+
+                dtItensEmp.PrimaryKey = keys;
             }
 
             return dtItensEmp;
@@ -88,23 +93,20 @@ namespace FIBIESA
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
-                      
-            ItensEstoqueBL itemBl = new ItensEstoqueBL();
-            ItensEstoque item = new ItensEstoque();
 
-            List<ItensEstoque> lItens = itemBl.PesquisarBuscaBL(conteudo);
+            ExemplaresBL exeBL = new ExemplaresBL();
+            Exemplares exemplares = new Exemplares();
 
-            foreach (ItensEstoque pes in lItens)
-            {
+            DataSet dsExe =  exeBL.PesquisarExemplaresDevolucao(conteudo);                   
+            foreach(DataRow ltExe in dsExe.Tables[0].Rows)
+            {              
                 DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Obra;
-                linha["DESCRICAO"] = pes.Obra.Titulo;
+                linha["ID"] = ltExe["Id"];
+                linha["CODIGO"] = ltExe["tombo"];
+                linha["DESCRICAO"] = ltExe["titulo"];
 
                 dt.Rows.Add(linha);
-            }
-
+            }   
 
             grdPesquisaItem.DataSource = dt;
             grdPesquisaItem.DataBind();
@@ -279,37 +281,47 @@ namespace FIBIESA
 
         private void PesquisarExemplar(string cod_exemplar)
         {
-            hfIdItem.Value = "";
-            ExemplaresBL exeBL = new ExemplaresBL();
-            Exemplares exemplares = new Exemplares();
-            DataSet dsExe = exeBL.PesquisarExemplaresEmprestimo(cod_exemplar);
-
-            if (dsExe.Tables[0].Rows.Count != 0)
+            if (!ExemplarJaIncluido(dtItensEmp, cod_exemplar, "dtItensEmp"))
             {
-                hfIdItem.Value = (string)dsExe.Tables[0].Rows[0]["id"].ToString();
-                lblCodBarras.Text = "11222";
-                lblDesExemplar.Text = (string)dsExe.Tables[0].Rows[0]["titulo"].ToString();
 
-                if ((string)dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"].ToString() == ""
-                    || (string)dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"].ToString() == null)
+                hfIdItem.Value = "";
+                ExemplaresBL exeBL = new ExemplaresBL();
+                Exemplares exemplares = new Exemplares();
+                DataSet dsExe = exeBL.PesquisarExemplaresEmprestimo(cod_exemplar);
+
+                if (dsExe.Tables[0].Rows.Count != 0)
                 {
-                    lblSituacaoItem.Text = "Disponível";
-                    lblPrevDevolucao.Text = "";
-                    IncluirExemplarEmprestimo(dsExe);
+                    hfIdItem.Value = (string)dsExe.Tables[0].Rows[0]["id"].ToString();
+                    lblDesExemplar.Text = (string)dsExe.Tables[0].Rows[0]["titulo"].ToString();
+
+                    if ((string)dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"].ToString() == ""
+                        || (string)dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"].ToString() == null)
+                    {
+                        lblSituacaoItem.Text = "Disponível";
+                        lblPrevDevolucao.Text = "";
+                        IncluirExemplarEmprestimo(dsExe);
+                        txtExemplar.Text = "";
+                        lblDesExemplar.Text = "";
+                        lblSituacaoItem.Text = "";
+                        lblPrevDevolucao.Text = "";
+                    }
+                    else
+                    {
+                        lblSituacaoItem.Text = "Emprestado";
+                        lblPrevDevolucao.Text = ((DateTime)(dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"])).ToString("dd/MM/yyyy");
+                    }
                 }
-                else
+
+                if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)
                 {
-                    lblSituacaoItem.Text = "Emprestado";
-                    lblPrevDevolucao.Text = ((DateTime)(dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"])).ToString("dd/MM/yyyy");
+                    ExibirMensagem("Item não cadastrado !");
+                    LimparCamposEmprestimo();
+                    txtExemplar.Focus();
                 }
             }
-
-            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)
-            {
-                ExibirMensagem("Item não cadastrado !");
-                LimparCamposEmprestimo();
-                txtExemplar.Focus();
-            }
+            else
+                ExibirMensagem("Exemplar já incluído !");
+                        
         }
 
         private void PesquisarExemplarDev(string cod_exemplar)
@@ -351,8 +363,7 @@ namespace FIBIESA
         {
             hfIdItem.Value = "";
             lblDesExemplar.Text = "";
-            lblSituacaoItem.Text = "";
-            lblCodBarras.Text = "";
+            lblSituacaoItem.Text = "";            
             lblPrevDevolucao.Text = "";
             lblClienteItens.Text = "";
             txtExemplar.Text = "";
@@ -387,10 +398,10 @@ namespace FIBIESA
         }
 
         private void IncluirExemplarEmprestimo(DataSet dsExe)
-        {
+        {            
             if (Session["dtItensEmp"] != null)
                 dtItensEmp = (DataTable)Session["dtItensEmp"];
-
+                        
             if (dsExe.Tables[0].Rows.Count != 0)
             {
                 DataRow linha = dtItensEmp.NewRow();
@@ -434,7 +445,7 @@ namespace FIBIESA
             dtgExemplarDev.DataBind();
 
         }
-
+        
         private int LerParametro(int codigo, string modulo)
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -445,6 +456,21 @@ namespace FIBIESA
                 valor = utils.ComparaIntComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
 
             return valor;
+        }
+
+        private bool ExemplarJaIncluido(DataTable dtTable, string tombo, string sessao)
+        {
+            object key = new object();
+
+            key = tombo;
+
+            if (Session[sessao] != null)
+                dtTable = (DataTable)Session[sessao];
+
+            if (dtTable.Rows.Contains(key))
+                return true;
+            else
+                return false;
         }
 
         #endregion
@@ -458,6 +484,8 @@ namespace FIBIESA
             {
                 dtItensEmp = null;
                 dtItensDev = null;
+                Session["dtItensEmp"] = null;
+                Session["dtItensDev"] = null;
             }
         }
         
@@ -662,7 +690,24 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
-        }               
+        }
+        protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {            
+            object key = new object();
+            
+            key = dtgItens.DataKeys[e.RowIndex][0];
+            
+            if (Session["dtItensEmp"] != null)
+                dtItensEmp = (DataTable)Session["dtItensEmp"];
+
+            if (dtItensEmp.Rows.Contains(key))
+                dtItensEmp.Rows.Remove(dtItensEmp.Rows.Find(key));
+
+            Session["dtItensEmp"] = dtItensEmp;
+            dtgItens.DataSource = dtItensEmp;
+            dtgItens.DataBind();
+            
+        }
         #endregion
 
         #region devolucao
@@ -688,6 +733,7 @@ namespace FIBIESA
 
             ModalPopupExtenderPesquisaItem.Hide();
             ModalPopupExtenderPesquisaItem.Enabled = false;
+            PesquisarExemplarDev(txtExemplarDev.Text);
 
         }
         protected void btnCancelDev_Click(object sender, EventArgs e)
@@ -753,7 +799,6 @@ namespace FIBIESA
         }
         #endregion
 
-
         protected void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             CarregarPesquisaItem(txtPesquisa.Text);
@@ -761,8 +806,6 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Show();
             txtPesquisa.Text = "";
         }
-        
-        
-                
+                                
     }
 }

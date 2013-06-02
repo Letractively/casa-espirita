@@ -84,7 +84,7 @@ namespace BusinessLayer
 
             //verifica quantidade máxima de renovação
             int maxRenovacao = utils.ComparaIntComZero(parDa.PesquisarValorDA(2, "B"));
-            if (empDA.QtdRenovacoes(id_emp) > maxRenovacao)
+            if (empDA.QtdRenovacoes(id_emp) >= maxRenovacao)
             {
                 erro = "Este título não pode ser mais renovado!";
                 return erro;

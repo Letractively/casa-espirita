@@ -107,6 +107,13 @@ namespace BusinessLayer
 
             return exeDA.PesquisarBuscaExemplaresDA(exemId);
         }
+
+        public bool CodigoJaUtilizadoBL(Int32 codigo)
+        {
+            ExemplaresDA exeDA = new ExemplaresDA();
+
+            return exeDA.CodigoJaUtilizadoDA(codigo);
+        }
                 
     }
     

@@ -21,7 +21,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
+                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
                                 <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                     <ContentTemplate>
                                         <table width="800PX">
@@ -135,15 +135,7 @@
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExemplar"
                                                         ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 140px">
-                                                    Código de barras:
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lblCodBarras" runat="server"></asp:Label>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                             <tr>
                                                 <td style="width: 140px">
                                                     Situação:
@@ -171,8 +163,8 @@
                                                         BorderColor="#CCCCCC">
                                                         <asp:GridView ID="dtgItens" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
-                                                            DataKeyNames="ID" AllowSorting="True" GridLines="None" 
-                                                            PageSize="5" Width="800px">
+                                                            DataKeyNames="TOMBO" AllowSorting="True" GridLines="None" 
+                                                            PageSize="5" Width="800px" onrowdeleting="dtgItens_RowDeleting">
                                                             <Columns>
                                                                 <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                                                     <HeaderStyle CssClass="grd_cmd_header" />

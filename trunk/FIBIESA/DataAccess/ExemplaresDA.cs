@@ -47,14 +47,13 @@ namespace DataAccess
 
         public bool InserirDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[4];
 
             paramsToSP[0] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[1] = new SqlParameter("@status", instancia.Status);
             paramsToSP[2] = new SqlParameter("@tombo", instancia.Tombo);
             paramsToSP[3] = new SqlParameter("@origemId", instancia.OrigemId);
-            paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
-           
+                      
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -316,6 +315,24 @@ namespace DataAccess
                                                                 CommandType.Text, consulta.ToString());
 
             return ds;
+        }
+
+        public bool CodigoJaUtilizadoDA(Int32 codigo)
+        {
+            DataSet dsInst = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT 1 COD " +
+                                                                                        "  FROM EXEMPLARES " +
+                                                                                        " WHERE TOMBO = {0} ", codigo));
+            int cod = 0;
+
+            if (dsInst.Tables[0].Rows.Count != 0)
+                cod = (int)dsInst.Tables[0].Rows[0]["COD"];
+
+            if (cod == 1)
+                return true;
+            else
+                return false;
+
         }
 
     }
