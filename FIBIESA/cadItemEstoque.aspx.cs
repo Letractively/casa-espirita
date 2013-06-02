@@ -14,7 +14,7 @@ namespace Admin
     public partial class cadItemEstoque : System.Web.UI.Page
     {
         Utils utils = new Utils();
-  
+
         #region
         private DataTable CriarDtPesquisa()
         {
@@ -31,11 +31,10 @@ namespace Admin
         }
         private void CarregarAtributos()
         {
-            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");            
+            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtQtdMin.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtVlrMedio.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");         
-            btnExcluir.Attributes.Add("onclick", "return confirm('Deseja excluir as informações ?');"); 
+            txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");           
         }
         private void CarregarDados(int id_obra)
         {
@@ -56,64 +55,71 @@ namespace Admin
                     ddlStatus.SelectedValue = ltItEs.Status == true ? "A" : "I";
                 }
             }
-            else
-            {
-                hfIdItem.Value = "";
-                txtItem.Text = "";
-                ExibirMensagem("Item não cadastrado !");
-            }
 
         }
         private void LimparCampos()
         {
             hfId.Value = "";
             lblDesItem.Text = "";
-            txtData.Text = ""; 
+            txtData.Text = "";
             txtQtdMin.Text = "";
             txtVlrMedio.Text = "";
             txtVlrVenda.Text = "";
             chkControlaEstoque.Checked = false;
-            ddlStatus.SelectedValue = "I";
+            ddlStatus.SelectedValue = "A";
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
         public void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            ObrasBL obBL = new ObrasBL();
+            Obras obras = new Obras();
+            List<Obras> ltObra = obBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Obras litE in ltObra)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = litE.Id;
+                linha["CODIGO"] = litE.Codigo;
+                linha["TITULO"] = litE.Titulo;
+
+                dt.Rows.Add(linha);
+
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarAtributos();
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+                txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                txtItem.Focus();
+            }
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            ObrasBL obBL = new ObrasBL();
-            Obras obr = new Obras();
-            List<Obras> obras = obBL.PesquisarBL();
-
-            foreach (Obras ltobr in obras)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = ltobr.Id;
-                linha["CODIGO"] = ltobr.Codigo;
-                linha["DESCRICAO"] = ltobr.Titulo;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = obBL;
-            Session["objPesquisa"] = obr;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
-    
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
@@ -131,6 +137,16 @@ namespace Admin
             }
 
             CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
+
+            if (hfIdItem.Value == null || hfIdItem.Value == string.Empty)
+            {
+                hfIdItem.Value = "";
+                txtItem.Text = "";
+                ExibirMensagem("Item não cadastrado !");
+                txtItem.Focus();
+            }
+            else
+                txtQtdMin.Focus();
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -149,8 +165,8 @@ namespace Admin
             itEstoque.VlrCusto = utils.ComparaDecimalComZero(txtVlrMedio.Text);
             itEstoque.VlrVenda = utils.ComparaDecimalComZero(txtVlrVenda.Text);
             itEstoque.ControlaEstoque = chkControlaEstoque.Checked;
-            itEstoque.Status = ddlStatus.SelectedValue == "A"? true : false;
-            
+            itEstoque.Status = ddlStatus.SelectedValue == "A" ? true : false;
+
             if (itEstoque.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
@@ -167,34 +183,51 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(itEsBL.InserirBL(itEstoque))
+                    if (itEsBL.InserirBL(itEstoque))
                         ExibirMensagem("Atualização realizada com sucesso !");
                     else
                         ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-                       
+
+        }
+        
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+
+            LimparCampos();
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtItem.Text = gvrow.Cells[2].Text;
+            lblDesItem.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesItem.Enabled = false;
+            ModalPopupExtenderPesItem.Hide();            
+            CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
+            txtQtdMin.Focus();
+
         }
 
-        protected void btnExcluir_Click(object sender, EventArgs e)
-        {   
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-               ItensEstoqueBL itEsBL = new ItensEstoqueBL();
-               ItensEstoque itEstoque = new ItensEstoque();
-               itEstoque.Id = utils.ComparaIntComZero(hfId.Value);
-               if (itEstoque.Id > 0)
-               {
-                   if (itEsBL.ExcluirBL(itEstoque))
-                       ExibirMensagem("Informações excluídas com sucesso !");
-                   hfIdItem.Value = "";
-                   txtItem.Text = "";                   
-                   LimparCampos();
-               }
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
         }
     }
 }

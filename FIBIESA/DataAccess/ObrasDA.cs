@@ -75,14 +75,14 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[13];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@titulo", instancia.Titulo);
+            paramsToSP[1] = new SqlParameter("@titulo", instancia.Titulo.ToUpper());
             paramsToSP[2] = new SqlParameter("@nroEdicao", instancia.NroEdicao);
             paramsToSP[3] = new SqlParameter("@editoraId", instancia.EditoraId);
-            paramsToSP[4] = new SqlParameter("@localPublicacao", instancia.LocalPublicacao);
+            paramsToSP[4] = new SqlParameter("@localPublicacao", instancia.LocalPublicacao.ToUpper());
             paramsToSP[5] = new SqlParameter("@datapublicacao", instancia.DataPublicacao);
             paramsToSP[6] = new SqlParameter("@nroPaginas", instancia.NroPaginas);            
             paramsToSP[7] = new SqlParameter("@isbn", instancia.Isbn);                     
-            paramsToSP[8] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
+            paramsToSP[8] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda.ToUpper());
             paramsToSP[9] = new SqlParameter("@tipo", 0);
             paramsToSP[10] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);                   
@@ -107,15 +107,15 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
-            paramsToSP[2] = new SqlParameter("@titulo", instancia.Titulo);
+            paramsToSP[2] = new SqlParameter("@titulo", instancia.Titulo.ToUpper());
             paramsToSP[3] = new SqlParameter("@nroEdicao", instancia.NroEdicao);
             paramsToSP[4] = new SqlParameter("@editoraId", instancia.EditoraId);
-            paramsToSP[5] = new SqlParameter("@localPublicacao", instancia.LocalPublicacao);
+            paramsToSP[5] = new SqlParameter("@localPublicacao", instancia.LocalPublicacao.ToUpper());
             paramsToSP[6] = new SqlParameter("@datapublicacao", instancia.DataPublicacao);
             paramsToSP[7] = new SqlParameter("@nroPaginas", instancia.NroPaginas);
             paramsToSP[8] = new SqlParameter("@isbn", instancia.Isbn);
             paramsToSP[9] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
-            paramsToSP[10] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda);
+            paramsToSP[10] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda.ToUpper());
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);            
             paramsToSP[12] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
 

@@ -31,6 +31,19 @@ namespace Admin
             }
 
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            lblCodigo.Text = "Código gerado automaticamente.";
+            ddlTiposAutores.SelectedIndex = 0;
+        }
         #endregion
         
         private void CarregaTiposAutores()
@@ -39,6 +52,7 @@ namespace Admin
             List<TiposDeAutores> listao = tipos.PesquisarBL();
             
             ddlTiposAutores.Items.Clear();
+            ddlTiposAutores.Items.Add(new ListItem("Selecione",""));
             foreach (TiposDeAutores tp in listao)
             {   
                 ddlTiposAutores.Items.Add(new ListItem(tp.Codigo + " - " + tp.Descricao, tp.Id.ToString()));
@@ -66,7 +80,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
                 else
-                    lblCodigo.Text = "Código gerado automaticamente.";  
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
         }
 
@@ -88,7 +104,10 @@ namespace Admin
             if (aut.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    auBL.EditarBL(aut);
+                    if(auBL.EditarBL(aut))
+                        ExibirMensagem("Autor atualizado com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar o autor. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -96,12 +115,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    auBL.InserirBL(aut);
+                    if(auBL.InserirBL(aut))
+                    {
+                        ExibirMensagem("Autor gravado com sucesso !");
+                        LimparCampos();
+                        txtDescricao.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar o autor. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }
-
-            Response.Redirect("viewAutor.aspx");
+            }         
         }
     }
 }

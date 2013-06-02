@@ -26,21 +26,22 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="335px"></asp:TextBox>
+                                MaxLength="40" Width="335px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                ControlToValidate="txtDescricao" ErrorMessage="*Informe a descrição" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             * Tipo de Autor:</td>
                         <td>
-                            <asp:DropDownList ID="ddlTiposAutores" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlTiposAutores" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o tipo de autor">
                             </asp:DropDownList>                       
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                                ControlToValidate="ddlTiposAutores" ErrorMessage="*Preenchimento Obrigatório" 
-                                ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>                        
+                                ControlToValidate="ddlTiposAutores" ErrorMessage="*Selecione o tipo de autor" 
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>                        
                         </td>
                     </tr>
                 </table>
@@ -50,15 +51,18 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />                             
+                                onclick="btnVoltar_Click" ToolTip="Volta para a página de consulta" />                             
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />   
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />   
                         </td>
                     </tr>
                 </table>                
             </div>
-            <asp:HiddenField ID="hfId" runat="server" />
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+                CssClass="validacao" ValidationGroup="salvar" />
+            <asp:HiddenField ID="hfId" runat="server" />            
         </div>
         <div class="status">
         </div>

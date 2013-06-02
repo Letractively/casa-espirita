@@ -35,7 +35,7 @@ namespace Admin
             TiposObrasBL tpObBL = new TiposObrasBL();
             List<TiposObras> tiposObras = tpObBL.PesquisarBL();
 
-            ddlTipoObra.Items.Add(new ListItem());
+            ddlTipoObra.Items.Add(new ListItem("Selecione",""));
             foreach (TiposObras lttpOb in tiposObras)
                 ddlTipoObra.Items.Add(new ListItem(lttpOb.Codigo + " - " + lttpOb.Descricao, lttpOb.Id.ToString()));
 
@@ -47,7 +47,7 @@ namespace Admin
             EditorasBL edBL = new EditorasBL();
             List<Editoras> editoras = edBL.PesquisarBL();
 
-            ddlEditora.Items.Add(new ListItem());
+            ddlEditora.Items.Add(new ListItem("Selecione",""));
             foreach (Editoras ltEd in editoras)
                 ddlEditora.Items.Add(new ListItem(ltEd.Codigo + " - " + ltEd.Descricao, ltEd.Id.ToString()));
 
@@ -78,7 +78,6 @@ namespace Admin
             }           
         }
 
-
         private void CarregarAtributos()
         {   
             txtNroEdicao.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
@@ -86,6 +85,28 @@ namespace Admin
             txtVolume.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtDataPublicacao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");           
+        }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            lblCodigo.Text = "Código gerado automaticamente.";
+            txtTitulo.Text = "";
+            txtVolume.Text = "";
+            txtNroPags.Text = "";
+            txtNroEdicao.Text = "";
+            txtLocalPublic.Text = "";
+            txtISBN.Text = "";
+            txtDataReimpressao.Text = "";
+            txtDataPublicacao.Text = "";
+            txtAssuntosAborda.Text = "";
+            ddlEditora.SelectedIndex = 0;
+            ddlTipoObra.SelectedIndex = 0;
         }
 
         #endregion
@@ -115,6 +136,8 @@ namespace Admin
                     CarregarDados(id_bai);
                 else
                     lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtTitulo.Focus();
                 
                     
             }
@@ -147,7 +170,10 @@ namespace Admin
             if (obras.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    obraBL.EditarBL(obras);
+                    if(obraBL.EditarBL(obras))
+                        ExibirMensagem("Obra atualizada com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar a obra. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -155,14 +181,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    obraBL.InserirBL(obras);
+                    if(obraBL.InserirBL(obras))
+                    {
+                        ExibirMensagem("Obra gravada com sucesso !");
+                        LimparCampos();
+                        txtTitulo.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar a obra. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewObra.aspx");
         }
-            
-        
     }
 }

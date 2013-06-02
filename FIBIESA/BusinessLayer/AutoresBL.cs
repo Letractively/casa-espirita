@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class AutoresBL
     {
+        private bool IsValid(Autores aut)
+        {
+            bool valido;
+            valido = aut.Descricao.Length <= 70;
+
+            return valido;
+        }
+
         public bool InserirBL(Autores aut)
         {
-            /*criar as regras de negocio*/
-            AutoresDA autoresDA = new AutoresDA();
+            if (IsValid(aut))
+            {
+                AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.InserirDA(aut);
+                return autoresDA.InserirDA(aut);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Autores aut)
         {
-            /*criar as regras de negocio*/
-            AutoresDA autoresDA = new AutoresDA();
+            if (aut.Id > 0 && IsValid(aut))
+            {
+                AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.EditarDA(aut);
+                return autoresDA.EditarDA(aut);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Autores aut)
         {
-            /*criar as regras de negocio*/
-            AutoresDA autoresDA = new AutoresDA();
+            if (aut.Id > 0)
+            {
+                AutoresDA autoresDA = new AutoresDA();
 
-            return autoresDA.ExcluirDA(aut);
+                return autoresDA.ExcluirDA(aut);
+            }
+            else
+                return false;
         }
 
         public List<Autores> PesquisarBL()

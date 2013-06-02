@@ -42,7 +42,18 @@ namespace Admin
             }
 
         }
-       
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";            
+            lblCodigo.Text = "Código gerado automaticamente.";
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -64,7 +75,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
                 else
-                    lblCodigo.Text = "Código gerado automaticamente.";  
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
         }
 
@@ -85,7 +98,10 @@ namespace Admin
             if (editoras.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    edBL.EditarBL(editoras);
+                    if(edBL.EditarBL(editoras))
+                        ExibirMensagem("Editora atualizada com sucesso !");
+                    else
+                        ExibirMensagem("Não foi possível atualizar a editora. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -93,12 +109,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    edBL.InserirBL(editoras);
+                    if(edBL.InserirBL(editoras))
+                    {
+                        ExibirMensagem("Editora gravada com sucesso !");
+                        LimparCampos();
+                        txtDescricao.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar a editora. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewEditora.aspx");
         }
     }
 }

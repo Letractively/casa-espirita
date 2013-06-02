@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class TiposDeAutoresBL : BaseBL
     {
+        private bool IsValid(TiposDeAutores instancia)
+        {
+            bool valido;
+            valido = instancia.Descricao.Length <= 40;
+
+            return valido;
+        }
+
         public bool InserirBL(TiposDeAutores instancia)
         {
-            /*criar as regras de negocio*/
-            TiposDeAutoresDA varDA = new TiposDeAutoresDA();
+            if (IsValid(instancia))
+            {
+                TiposDeAutoresDA varDA = new TiposDeAutoresDA();
 
-            return varDA.InserirDA(instancia);
+                return varDA.InserirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(TiposDeAutores instancia)
         {
-            /*criar as regras de negocio*/
-            TiposDeAutoresDA varDA = new TiposDeAutoresDA();
+            if (instancia.Id > 0 && IsValid(instancia))
+            {
+                TiposDeAutoresDA varDA = new TiposDeAutoresDA();
 
-            return varDA.EditarDA(instancia);
+                return varDA.EditarDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(TiposDeAutores instancia)
         {
-            /*criar as regras de negocio*/
-            TiposDeAutoresDA varDA = new TiposDeAutoresDA();
+            if (instancia.Id > 0)
+            {
+                TiposDeAutoresDA varDA = new TiposDeAutoresDA();
 
-            return varDA.ExcluirDA(instancia);
+                return varDA.ExcluirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public List<TiposDeAutores> PesquisarBL()

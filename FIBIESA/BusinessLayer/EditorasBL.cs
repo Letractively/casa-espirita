@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class EditorasBL : BaseBL
     {
+        private bool IsValid(Editoras instancia)
+        {
+            bool valido;
+            valido = instancia.Descricao.Length <= 70;
+
+            return valido;
+        }
+
         public bool InserirBL(Editoras instancia)
         {
-            /*criar as regras de negocio*/
-            EditorasDA varDA = new EditorasDA();
+            if (IsValid(instancia))
+            {
+                EditorasDA varDA = new EditorasDA();
 
-            return varDA.InserirDA(instancia);
+                return varDA.InserirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Editoras instancia)
         {
-            /*criar as regras de negocio*/
-            EditorasDA varDA = new EditorasDA();
+            if (instancia.Id > 0 && IsValid(instancia))
+            {
+                EditorasDA varDA = new EditorasDA();
 
-            return varDA.EditarDA(instancia);
+                return varDA.EditarDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Editoras instancia)
         {
-            /*criar as regras de negocio*/
-            EditorasDA varDA = new EditorasDA();
+            if (instancia.Id > 0)
+            {
+                EditorasDA varDA = new EditorasDA();
 
-            return varDA.ExcluirDA(instancia);
+                return varDA.ExcluirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public List<Editoras> PesquisarBL()
