@@ -39,7 +39,18 @@ namespace Admin
                 lblCodigo.Text = orig.Codigo.ToString();
                 txtDescricao.Text = orig.Descricao;
             }
+        }
 
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            lblCodigo.Text = "Código gerado automaticamente."; 
         }
         
         #endregion
@@ -84,7 +95,13 @@ namespace Admin
             if (origens.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    origemBL.EditarBL(origens);
+                    if(origemBL.EditarBL(origens))
+                    {
+                        ExibirMensagem("Origem atualizada com sucesso !");
+                        txtDescricao.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível Origem a categoria. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -92,12 +109,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    origemBL.InserirBL(origens);
+                    if(origemBL.InserirBL(origens))
+                    {
+                        ExibirMensagem("Origem gravada com sucesso !");
+                        LimparCampos();
+                        txtDescricao.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar a Origem. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-
-            Response.Redirect("viewOrigem.aspx");
         }
     }
 }

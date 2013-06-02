@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class TiposObrasBL : BaseBL
     {
+        private bool IsValid(TiposObras instancia)
+        {
+            bool valido;
+            valido = instancia.Descricao.Length <= 40 && instancia.QtdDias > 0;
+
+            return valido;
+        }
+
         public bool InserirBL(TiposObras instancia)
         {
-            /*criar as regras de negocio*/
-            TiposObrasDA varDA = new TiposObrasDA();
+            if (IsValid(instancia))
+            {
+                TiposObrasDA varDA = new TiposObrasDA();
 
-            return varDA.InserirDA(instancia);
+                return varDA.InserirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(TiposObras instancia)
         {
-            /*criar as regras de negocio*/
-            TiposObrasDA varDA = new TiposObrasDA();
+            if (instancia.Id > 0 && IsValid(instancia))
+            {
+                TiposObrasDA varDA = new TiposObrasDA();
 
-            return varDA.EditarDA(instancia);
+                return varDA.EditarDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(TiposObras instancia)
         {
-            /*criar as regras de negocio*/
-            TiposObrasDA varDA = new TiposObrasDA();
+            if (instancia.Id > 0)
+            {
+                TiposObrasDA varDA = new TiposObrasDA();
 
-            return varDA.ExcluirDA(instancia);
+                return varDA.ExcluirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public List<TiposObras> PesquisarBL()

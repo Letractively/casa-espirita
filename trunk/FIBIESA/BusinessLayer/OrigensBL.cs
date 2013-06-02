@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class OrigensBL : BaseBL
     {
+        private bool IsValid(Origens instancia)
+        {
+            bool valido;
+            valido = instancia.Descricao.Length <= 40;
+
+            return valido;
+        }
+
         public bool InserirBL(Origens instancia)
         {
-            /*criar as regras de negocio*/
-            OrigensDA varDA = new OrigensDA();
+            if (IsValid(instancia))
+            {
+                OrigensDA varDA = new OrigensDA();
 
-            return varDA.InserirDA(instancia);
+                return varDA.InserirDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(Origens instancia)
         {
-            /*criar as regras de negocio*/
-            OrigensDA varDA = new OrigensDA();
+            if (instancia.Id > 0 && IsValid(instancia))
+            {
+                OrigensDA varDA = new OrigensDA();
 
-            return varDA.EditarDA(instancia);
+                return varDA.EditarDA(instancia);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(Origens instancia)
         {
-            /*criar as regras de negocio*/
-            OrigensDA varDA = new OrigensDA();
+            if (instancia.Id > 0)
+            {
+                OrigensDA varDA = new OrigensDA();
 
-            return varDA.ExcluirDA(instancia);
+                return varDA.ExcluirDA(instancia);
+            }
+            else
+                return false;                
         }
 
         public List<Origens> PesquisarBL()
