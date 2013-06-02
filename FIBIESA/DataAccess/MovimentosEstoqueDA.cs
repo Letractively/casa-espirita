@@ -30,7 +30,7 @@ namespace DataAccess
                 movEst.VlrCusto = utils.ComparaDecimalComZero(dr["VLRCUSTO"].ToString());
                 movEst.ItemEstoqueId = int.Parse(dr["ITEMESTOQUEID"].ToString());
                 movEst.Quantidade = utils.ComparaIntComZero(dr["QUANTIDADE"].ToString());
-                movEst.NotaEntradaId = utils.ComparaIntComNull(dr["NOTAENTRADAID"].ToString());
+                movEst.NotaEntradaId = utils.ComparaIntComNull(dr["NOTAENTRADAITENSID"].ToString());
                 movEst.Tipo = dr["TIPO"].ToString();
                 movEst.Data = Convert.ToDateTime(dr["DATA"].ToString());
                 movEst.NumeroVenda = utils.ComparaIntComNull(dr["NUMERO"].ToString());
@@ -76,7 +76,7 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@usuarioid", movEst.UsuarioId);
             paramsToSP[2] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
             paramsToSP[3] = new SqlParameter("@quantidade", movEst.Quantidade);
-            paramsToSP[4] = new SqlParameter("@notaentradaid", movEst.NotaEntradaId);
+            paramsToSP[4] = new SqlParameter("@notaentradaitensid", movEst.NotaEntradaId);
             paramsToSP[5] = new SqlParameter("@tipo", movEst.Tipo);
             paramsToSP[6] = new SqlParameter("@data", movEst.Data);
 
@@ -101,7 +101,7 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@usuarioid", movEst.UsuarioId);
             paramsToSP[3] = new SqlParameter("@itemestoqueid", movEst.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@quantidade", movEst.Quantidade);
-            paramsToSP[5] = new SqlParameter("@notaentradaid", movEst.NotaEntradaId);
+            paramsToSP[5] = new SqlParameter("@notaentradaitensid", movEst.NotaEntradaId);
             paramsToSP[6] = new SqlParameter("@tipo", movEst.Tipo);
             paramsToSP[7] = new SqlParameter("@data", movEst.Data);
 

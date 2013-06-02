@@ -20,7 +20,8 @@
                         </td>
                         <td style="width: 400px">
                            <asp:TextBox ID="txtItem" runat="server" CssClass="inputboxRight" Width="75px" 
-                                AutoPostBack="True" ontextchanged="txtItem_TextChanged"></asp:TextBox>
+                                AutoPostBack="True" ontextchanged="txtItem_TextChanged" 
+                                ToolTip="Informe o item"></asp:TextBox>
                            <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." onclick="btnPesItem_Click" 
                                  />
                             &nbsp;
@@ -30,13 +31,15 @@
                             Data:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>                        
+                            <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px" 
+                                ToolTip="Informe a data"></asp:TextBox>                        
                             <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" 
                                 TargetControlID="txtData">
                             </asp:CalendarExtender>
                         &nbsp;&nbsp;
                         <asp:Button ID="btnPesquisar" runat="server" CssClass="btn" Text="Pesquisar" 
-                                onclick="btnPesquisar_Click"></asp:Button>
+                                onclick="btnPesquisar_Click" 
+                                ToolTip="Realiza a pesquisa conforme o filtro"></asp:Button>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +85,7 @@
                         </td>
                         <td style="width: 180px">
                             <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
-                                onclick="btnVoltar_Click"></asp:Button>
+                                onclick="btnVoltar_Click" ToolTip="Volta para página principal"></asp:Button>
                         </td>
                         <td>
                             Quantidade Total:     

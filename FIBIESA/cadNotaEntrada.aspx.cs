@@ -300,23 +300,10 @@ namespace Admin
                                 notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
                                 notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
                                 notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
+                                notaEntradaItens.UsuarioId = usu_id;
 
-                                Int32 notaE_item = ntEiBL.InserirBL(notaEntradaItens);
+                                ntEiBL.InserirBL(notaEntradaItens);                              
                                
-                                if (notaE_item > 0)
-                                {
-                                    movEstoque.UsuarioId = usu_id;
-                                    movEstoque.ItemEstoqueId = notaEntradaItens.ItemEstoqueId;
-                                    movEstoque.Quantidade = notaEntradaItens.Quantidade;
-                                    movEstoque.Data = DateTime.Now;
-                                    movEstoque.Tipo = "E";
-                                    movEstoque.NotaEntradaId = notaE_item;
-
-                                    if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
-                                    {                                        
-                                        movEstBL.InserirBL(movEstoque);
-                                    }
-                                }
                             }
                         }
                     }

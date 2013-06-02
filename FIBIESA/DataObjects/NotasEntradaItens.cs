@@ -49,6 +49,13 @@ namespace DataObjects
             set { _obra = value; }
         }
 
+        private Int32 _usuarioId;
+        public Int32 UsuarioId
+        {
+            get { return _usuarioId; }
+            set { _usuarioId = value; }
+        }
+
         
     }
 }
