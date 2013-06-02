@@ -41,22 +41,28 @@ namespace DataAccess
 
         #endregion
 
-        public Int32 InserirDA(NotasEntradaItens ntEi)
+        public bool InserirDA(NotasEntradaItens ntEi)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[4];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
             paramsToSP[0] = new SqlParameter("@notaentradaid", ntEi.NotaEntradaId);
             paramsToSP[1] = new SqlParameter("@valor", ntEi.Valor);
             paramsToSP[2] = new SqlParameter("@quantidade", ntEi.Quantidade);
             paramsToSP[3] = new SqlParameter("@itemestoqueid", ntEi.ItemEstoqueId);
+            paramsToSP[4] = new SqlParameter("@usuarioId", ntEi.UsuarioId);
+            
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
 
-            DataTable tabela = ds.Tables[0];
+            DataTable tabela = ds.Tables[0];         
 
-            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+            string resultado = tabela.Rows[0][0].ToString();
 
-            return id;
+            if (resultado == "true")
+                return true;
+            else
+                return false;
+
         }
 
         public bool EditarDA(NotasEntradaItens ntEi)
