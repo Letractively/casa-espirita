@@ -58,14 +58,16 @@ namespace FIBIESA
 
             TitulosBL titBL = new TitulosBL();
             Titulos tit = new Titulos();
-            List<Titulos> lTitulos = titBL.PesquisarBuscaBL(conteudo);
+            List<Titulos> lTitulos = titBL.PesquisarBuscaBL("P",conteudo);
             foreach (Titulos pes in lTitulos)
             {
                 DataRow linha = dt.NewRow();
 
                 linha["ID"] = pes.Id;
                 linha["CODIGO"] = pes.Numero;
-                linha["DESCRICAO"] = pes.PesCodigo;
+                if (pes.TiposDocumentos != null)
+                    linha["DESCRICAO"] = pes.TiposDocumentos.Descricao;
+                
 
                 dt.Rows.Add(linha);
             }
@@ -146,7 +148,6 @@ namespace FIBIESA
 
         protected void btnPesTitulo_Click(object sender, EventArgs e)
         {
-
             CarregarPesquisaTitulo(null);
             ModalPopupExtenderPesquisaTitulo.Enabled = true;
             ModalPopupExtenderPesquisaTitulo.Show();
@@ -182,7 +183,6 @@ namespace FIBIESA
             ModalPopupExtenderPesquisaTitulo.Enabled = false;
         }
 
-
         protected void btnCancelAssociado_Click(object sender, EventArgs e)
         {
             ModalPopupExtenderPesquisaAssociado.Enabled = false;
@@ -192,7 +192,6 @@ namespace FIBIESA
         {
             ModalPopupExtenderPesquisaTitulo.Enabled = false;
         }
-
 
         #region eventos textBox
         protected void txtPesquisaAssociado_TextChanged(object sender, EventArgs e)

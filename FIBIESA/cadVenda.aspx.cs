@@ -275,21 +275,7 @@ namespace FIBIESA
                             vendaItens.Situacao = "A";
                             vendaItens.Desconto = utils.ComparaDecimalComZero(linha["DESCONTO"].ToString());
 
-                            Int32 ven_item =  venItBL.InserirBL(vendaItens);
-
-                            if (ven_item > 0)
-                            {
-                                
-                                movEstoque.UsuarioId = usu_id;
-                                movEstoque.ItemEstoqueId = vendaItens.ItemEstoqueId;
-                                movEstoque.Quantidade = vendaItens.Quantidade;
-                                movEstoque.Data = DateTime.Now;
-                                movEstoque.Tipo = "S";
-                                movEstoque.VendaItensId = ven_item;
-
-                                if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
-                                    movEstBL.InserirBL(movEstoque);                               
-                            }
+                            venItBL.InserirBL(vendaItens, usu_id);
                             
                         }
 

@@ -56,7 +56,7 @@ namespace FIBIESA
             List<TiposDocumentos> tipoDoc = tipDBL.PesquisarBL("CR");
 
             ddlTipoDoc.Items.Clear();
-            ddlTipoDoc.Items.Add(new ListItem());
+            ddlTipoDoc.Items.Add(new ListItem("Selecione",""));
             foreach (TiposDocumentos ltTip in tipoDoc)
                 ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
 
@@ -68,7 +68,7 @@ namespace FIBIESA
             PortadoresBL porDBL = new PortadoresBL();
             List<Portadores> port = porDBL.PesquisarBL();
                         
-            ddlPortador.Items.Add(new ListItem());
+            ddlPortador.Items.Add(new ListItem("Selecione",""));
             foreach (Portadores ltPort in port)
                 ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
 

@@ -10,7 +10,7 @@
             </div>
             <div class="contentbox">
                 <asp:TextBox ID="txtBusca" runat="server" CssClass="inputbox" 
-                    ValidationGroup="Pesquisar por"></asp:TextBox>
+                    ToolTip="Pesquisar por"></asp:TextBox>
                 &nbsp;&nbsp;
                 <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
                     onclick="btnBusca_Click" />
@@ -28,8 +28,7 @@
                                    onrowdeleting="dtgDoacao_RowDeleting" 
                                     AllowSorting="True" GridLines="None" 
                                     onpageindexchanging="dtgDoacao_PageIndexChanging" 
-                                    onrowdatabound="dtgDoacao_RowDataBound" onsorting="dtgDoacao_Sorting" 
-                                    ShowHeaderWhenEmpty="True">
+                                    onrowdatabound="dtgDoacao_RowDataBound" onsorting="dtgDoacao_Sorting">
                                    <Columns>
                                        <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                             <HeaderStyle CssClass="grd_cmd_header" />
@@ -38,7 +37,7 @@
                                        <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_printer.png"
-                                                    OnClick="btnSelect_Click" ToolTip="Imprime o recibo de venda" />
+                                                    OnClick="btnSelect_Click" ToolTip="Imprime o recibo de doação" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
@@ -67,4 +66,5 @@
         <div class="status">
         </div>
     </div>   
+   
 </asp:Content>

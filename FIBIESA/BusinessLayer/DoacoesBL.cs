@@ -5,33 +5,47 @@ using System.Text;
 using DataObjects;
 using DataAccess;
 using System.Data;
+using FG;
 
 namespace BusinessLayer
 {
     public class DoacoesBL
     {
-        public bool InserirBL(Doacoes doa)
+        Utils utils = new Utils();
+
+        private bool IsValid(Doacoes doa)
         {
-            /*criar as regras de negocio*/
-            DoacoesDA doacoesDA = new DoacoesDA();
+            bool valido;
+            valido = doa.PessoaId > 0 && doa.UsuarioId > 0;
+            valido = valido && doa.Valor > 0  && utils.ComparaDataComNull(doa.Data) != null;
 
-            return doacoesDA.InserirDA(doa);
+            return valido;
         }
-
-        public bool EditarBL(Doacoes doa)
+        
+        public Int32 InserirBL(Doacoes doa)
         {
-            /*criar as regras de negocio*/
-            DoacoesDA doacoesDA = new DoacoesDA();
+           if(IsValid(doa))
+           {
+                DoacoesDA doacoesDA = new DoacoesDA();
 
-            return doacoesDA.InserirDA(doa);
+                return doacoesDA.InserirDA(doa);
+           }
+           else
+               return 0;
+           
         }
+             
 
         public bool ExcluirBL(Doacoes doa)
         {
-            /*criar as regras de negocio*/
-            DoacoesDA doacoesDA = new DoacoesDA();
+            if(doa.Id > 0)
+            {
+                DoacoesDA doacoesDA = new DoacoesDA();
 
-            return doacoesDA.ExcluirDA(doa);
+                return doacoesDA.ExcluirDA(doa);
+            }
+            else
+                return false;
         }
         
         public List<Doacoes> PesquisarBL()

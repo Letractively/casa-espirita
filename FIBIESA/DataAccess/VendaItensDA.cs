@@ -45,9 +45,9 @@ namespace DataAccess
 
         #endregion
 
-        public Int32 InserirDA(VendaItens venItEi)
+        public bool InserirDA(VendaItens venItEi, int usuarioID)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[7];
 
             paramsToSP[0] = new SqlParameter("@vendaid", venItEi.VendaId);
             paramsToSP[1] = new SqlParameter("@valor", venItEi.Valor);
@@ -55,15 +55,19 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@itemestoqueid", venItEi.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@desconto", venItEi.Desconto);
             paramsToSP[5] = new SqlParameter("@situacao", venItEi.Situacao);
+            paramsToSP[6] = new SqlParameter("@usuarioId", usuarioID);
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
                 CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
 
             DataTable tabela = ds.Tables[0];
 
-            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+            string resultado = tabela.Rows[0][0].ToString();
 
-            return id;
+            if (resultado == "true")
+                return true;
+            else
+                return false;
         }
 
         public bool EditarDA(VendaItens venItEi)
@@ -94,11 +98,12 @@ namespace DataAccess
             return true;
         }
 
-        public bool CancelarVendaItemDA(int id_venIt)
+        public bool CancelarVendaItemDA(int id_ven, int id_venIt)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[1];
+            SqlParameter[] paramsToSP = new SqlParameter[2];
 
             paramsToSP[0] = new SqlParameter("@vendaItemId", id_venIt);
+            paramsToSP[1] = new SqlParameter("@vendaId", id_ven);
 
             try
             {

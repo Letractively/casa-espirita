@@ -15,7 +15,7 @@ namespace FIBIESA
     {
         Utils utils = new Utils();
         string v_operacao = "";
-
+        
         #region funcoes
 
         private void CarregarDados(Int32 venId)
@@ -80,12 +80,16 @@ namespace FIBIESA
             btnCancelar.Attributes.Add("onclick", "javascript:return " + "confirm('\\n" + "Deseja realmente cancelar essa venda ?" + "')");       
         }
 
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_vend = 0;
-
             if (!IsPostBack)
             {
                 CarregarAtributos();
@@ -115,8 +119,11 @@ namespace FIBIESA
             int venIt_id = utils.ComparaIntComZero(dtgItens.DataKeys[gvrow.RowIndex].Value.ToString());
             if (venIt_id > 0)
             {
-                venItBL.CancelarVendaItemBL(venIt_id);
-                CarregarDados(venIt_id);
+                if (venItBL.CancelarVendaItemBL(utils.ComparaIntComZero(hfIdVenda.Value), venIt_id))
+                {
+                    CarregarDados(utils.ComparaIntComZero(hfIdVenda.Value));
+                    ExibirMensagem("Item cancelado com sucesso !");
+                }
             }
 
         }
@@ -138,6 +145,7 @@ namespace FIBIESA
                 if (venBL.CancelarVendaBL(utils.ComparaIntComZero(hfIdVenda.Value)))
                 {
                     CarregarDados(utils.ComparaIntComZero(hfIdVenda.Value));
+                    ExibirMensagem("Venda cancelada com sucesso !");
                 }
             }
            
