@@ -25,7 +25,7 @@ namespace FIBIESA.Relatorios
             lDtPesquisa = (DataTable)Session["ldsRel"];
             if (lDtPesquisa.Rows.Count > 0)
             {
-
+                string mes = Request.QueryString["mes"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();
 
@@ -35,7 +35,11 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicao = new ReportDataSource("DataSet_Instituicao", instBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceFrequencia = new ReportDataSource("DataSet_Frequencia", lDtPesquisa);
-                                
+
+                ReportParameter[] param = new ReportParameter[1];
+                param[0] = new ReportParameter("mes", mes);
+
+                rptFrequencia.LocalReport.SetParameters(param);
                 rptFrequencia.LocalReport.DataSources.Add(rptDatasourceInstituicao);
                 rptFrequencia.LocalReport.DataSources.Add(rptDatasourceInstituicaoLogo);
                 rptFrequencia.LocalReport.DataSources.Add(rptDatasourceFrequencia);
