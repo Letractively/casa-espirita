@@ -2387,6 +2387,13 @@
     <Height>8.21875in</Height>
     <Style />
   </Body>
+  <ReportParameters>
+    <ReportParameter Name="mes">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Width>9.04893in</Width>
   <Page>
     <PageHeader>
@@ -2510,7 +2517,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Mês: " + First(Fields!mes.Value, "DataSet_Frequencia").ToString()</Value>
+                  <Value>="Mês: " + Parameters!mes.Value.ToString()</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
