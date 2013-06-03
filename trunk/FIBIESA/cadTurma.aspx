@@ -113,8 +113,16 @@
                     <tr>                        
                         <td style="width: 140px">Dias da Semana:</td>
                         <td colspan="3">
-                            <asp:TextBox ID="txtDiaSemana" runat="server" CssClass="inputbox" 
-                                Width="300px" ToolTip="Informe os dias da semana" ></asp:TextBox>                          
+                            <asp:CheckBoxList ID="ckbDiasSemana" runat="server" Width="317px" Height="16px" 
+                                RepeatDirection="Horizontal" TextAlign="Left">
+                                <asp:ListItem Text="Dom" Value="1" />
+                                <asp:ListItem Text="Seg" Value="2" />
+                                <asp:ListItem Text="Ter" Value="3" />
+                                <asp:ListItem Text="Qua" Value="4" />
+                                <asp:ListItem Text="Qui" Value="5" />
+                                <asp:ListItem Text="Sex" Value="6" />
+                                <asp:ListItem Text="Sáb" Value="7" />                                
+                            </asp:CheckBoxList>                                                    
                         </td>
                     </tr>
                 </table>
