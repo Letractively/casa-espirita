@@ -23,8 +23,7 @@
       
     </siteMapNode>
 
-    <siteMapNode title="Biblioteca" description="Biblioteca">
-      <siteMapNode url="viewReserva.aspx" title="Emprestimos" description="Empréstimos" />
+    <siteMapNode title="Biblioteca" description="Biblioteca">      
       <siteMapNode url="cadCirculacaoLivros.aspx" title="Circulação de Livros" description="Circulação de Livros" />
       <siteMapNode url="viewExemplar.aspx" title="Exemplares" description="Exemplares" />
       <siteMapNode url="viewObra.aspx" title="Obras" description="Obras" />
