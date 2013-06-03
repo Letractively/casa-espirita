@@ -5,12 +5,15 @@
 <%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">  
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
-    </asp:ScriptManager>
-    <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">
-        <ContentTemplate>
+    </asp:ScriptManager> 
+    <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">     
+        <ContentTemplate>        
+        <script type="text/javascript">
+            Sys.Application.add_load(formatarValor);
+        </script>
             <div id="content">
                 <!-- Atenção -->
                 <div class="status warning">

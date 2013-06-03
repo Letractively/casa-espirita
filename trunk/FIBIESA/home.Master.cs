@@ -152,9 +152,9 @@ namespace FIBIESA
                 }
 
                 CarregarInstituicao();
-            }
-        }
+            }       
 
+        }
         protected void imbSair_Click(object sender, ImageClickEventArgs e)
         {
             Logout();

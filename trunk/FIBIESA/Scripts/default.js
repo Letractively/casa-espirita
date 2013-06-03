@@ -199,13 +199,47 @@ $(document).ready(function () {
     });
 });
 
-//formata campos de valores
-  $(document).ready(function () {
-      $('.inputboxValor').priceFormat({
-            limit: 9, 
-            centsLimit:2,
-            prefix: '', 
-            centsSeparator: ',',
-            thousandsSeparator: '.'
-         });
+
+////formata campos de valores
+//  $(document).ready(function () {
+//      $('.inputboxValor').priceFormat({
+//            limit: 9, 
+//            centsLimit:2,
+//            prefix: '', 
+//            centsSeparator: ',',
+//            thousandsSeparator: '.'
+//         });
+//    });
+
+
+
+function formatarValor () {
+    $('.inputboxValor').priceFormat({
+        limit: 9,
+        centsLimit: 2,
+        prefix: '',
+        centsSeparator: ',',
+        thousandsSeparator: '.'
     });
+};
+
+$(document).ready(function () {
+    formatarValor()
+});
+
+
+
+   
+//    function pageLoad(){
+//           (function () {
+//      $('.inputboxValor').priceFormat({
+//            limit: 9, 
+//            centsLimit:2,
+//            prefix: '', 
+//            centsSeparator: ',',
+//            thousandsSeparator: '.'
+//         });
+//        });
+//       }
+
+

@@ -29,9 +29,9 @@ namespace Admin
                                     this.GetType(),
                                     "Alert",
                                     "window.alert(\"" + mensagem + "\");",
-                                    true);          
+                                    true);
         }
-                               
+
         public void LimparCampos()
         {
             txtCliente.Text = "";
@@ -87,7 +87,7 @@ namespace Admin
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
-        {          
+        {
 
             if (!IsPostBack)
             {
@@ -95,21 +95,15 @@ namespace Admin
                 txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtCliente.Focus();
             }
-
-            ScriptManager.RegisterStartupScript(
-                                    upnlPesquisa,
-                                    this.GetType(),
-                                    "numberFormat",
-                                    "",
-                                    true);   
+          
         }
-        
+
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);
-           
+
             ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();            
+            ModalPopupExtenderPesquisa.Show();
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -139,7 +133,7 @@ namespace Admin
                 Int32 id_doa = doaBL.InserirBL(doacoes);
 
                 if (id_doa > 0)
-                {                    
+                {
                     LimparCampos();
                     txtCliente.Focus();
 
@@ -154,15 +148,15 @@ namespace Admin
             else
                 Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
-            
+
         }
-               
+
         protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
-             
+
         protected void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             CarregarPesquisaItem(txtPesquisa.Text);
@@ -170,20 +164,20 @@ namespace Admin
             ModalPopupExtenderPesquisa.Show();
             txtPesquisa.Text = "";
         }
-                              
+
         protected void btnSelect_Click(object sender, EventArgs e)
         {
-            
+
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();            
-            txtCliente.Text = gvrow.Cells[2].Text;            
+            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtCliente.Text = gvrow.Cells[2].Text;
             lblDesCliente.Text = gvrow.Cells[3].Text;
-            
+
             ModalPopupExtenderPesquisa.Hide();
             ModalPopupExtenderPesquisa.Enabled = false;
-            txtValor.Focus();                       
+            txtValor.Focus();
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -215,7 +209,7 @@ namespace Admin
                 txtCliente.Focus();
             }
         }
-              
+
 
     }
 }
