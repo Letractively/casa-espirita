@@ -22,7 +22,7 @@ namespace FIBIESA
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos = banBL.PesquisarBL();
 
-            ddlBanco.Items.Add(new ListItem());
+            ddlBanco.Items.Add(new ListItem("Selecione",""));
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
@@ -88,6 +88,8 @@ namespace FIBIESA
                 ddlObrigDias.SelectedValue = "false";
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_banIns);
+
+                ddlBanco.Focus();
 
             }
 

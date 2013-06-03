@@ -9,28 +9,48 @@ namespace BusinessLayer
 {
     public class TiposDocumentosBL : BaseBL
     {
+        private bool IsValid(TiposDocumentos tdo)
+        {
+            bool valido;
+            valido = tdo.Descricao.Length <= 40 && (tdo.Aplicacao == "CP" || tdo.Aplicacao =="CR");
+
+            return valido;
+        }
+
         public bool InserirBL(TiposDocumentos tdo)
         {
-            /*criar as regras de negocio*/
-            TiposDocumentosDA tdoDA = new TiposDocumentosDA();
+            if (IsValid(tdo))
+            {
+                TiposDocumentosDA tdoDA = new TiposDocumentosDA();
 
-            return tdoDA.InserirDA(tdo);
+                return tdoDA.InserirDA(tdo);
+            }
+            else
+                return false;
         }
 
         public bool EditarBL(TiposDocumentos tdo)
         {
-            /*criar as regras de negocio*/
-            TiposDocumentosDA tdoDA = new TiposDocumentosDA();
+            if (tdo.Id > 0 && IsValid(tdo))
+            {
+                TiposDocumentosDA tdoDA = new TiposDocumentosDA();
 
-            return tdoDA.EditarDA(tdo);
+                return tdoDA.EditarDA(tdo);
+            }
+            else
+                return false;
         }
 
         public bool ExcluirBL(TiposDocumentos tdo)
         {
-            /*criar as regras de negocio*/
-            TiposDocumentosDA tdoDA = new TiposDocumentosDA();
+            if (tdo.Id > 0)
+            {
+                TiposDocumentosDA tdoDA = new TiposDocumentosDA();
 
-            return tdoDA.ExcluirDA(tdo);
+                return tdoDA.ExcluirDA(tdo);
+            }
+            else
+                return false;
         }
 
         public List<TiposDocumentos> PesquisarBL(string aplicacao)

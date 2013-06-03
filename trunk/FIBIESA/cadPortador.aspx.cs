@@ -46,7 +46,7 @@ namespace Admin
             List<Agencias> agencias = ageBL.PesquisarBanBL(id_ban);
 
             ddlAgencia.Items.Clear();
-            ddlAgencia.Items.Add(new ListItem());
+            ddlAgencia.Items.Add(new ListItem("Selecione",""));
             foreach (Agencias ltAge in agencias)
                 ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
 
@@ -58,7 +58,7 @@ namespace Admin
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos = banBL.PesquisarBL();
 
-            ddlBanco.Items.Add(new ListItem());
+            ddlBanco.Items.Add(new ListItem("Selecione", ""));
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
@@ -71,7 +71,7 @@ namespace Admin
             List<Contas> contas = conBL.PesquisarBL(age_id);
 
             ddlConta.Items.Clear();
-            ddlConta.Items.Add(new ListItem());
+            ddlConta.Items.Add(new ListItem("Selecione", ""));
             foreach (Contas ltCon in contas)
                 ddlConta.Items.Add(new ListItem(ltCon.Codigo.ToString() + " - " + ltCon.Descricao, ltCon.Id.ToString()));
 

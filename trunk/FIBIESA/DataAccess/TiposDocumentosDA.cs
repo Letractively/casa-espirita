@@ -52,7 +52,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
-            paramsToSP[1] = new SqlParameter("@descricao", tdo.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", tdo.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@aplicacao", tdo.Aplicacao);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_tiposDocumentos", paramsToSP);
@@ -66,7 +66,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", tdo.Id);
             paramsToSP[1] = new SqlParameter("@codigo", tdo.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", tdo.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", tdo.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@aplicacao", tdo.Aplicacao);
 
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_tiposDocumentos", paramsToSP);

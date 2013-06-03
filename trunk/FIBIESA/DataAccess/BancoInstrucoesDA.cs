@@ -58,7 +58,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
             paramsToSP[0] = new SqlParameter("@codigo", ban.Codigo);
-            paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@nrdias", ban.Nrdias);
             paramsToSP[3] = new SqlParameter("@bancoid", ban.Bancoid);
 
@@ -81,7 +81,7 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", ban.Id);
             paramsToSP[1] = new SqlParameter("@codigo", ban.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", ban.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", ban.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@nrdias", ban.Nrdias);
             paramsToSP[4] = new SqlParameter("@bancoid", ban.Bancoid);
 

@@ -23,7 +23,7 @@ namespace Admin
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos = banBL.PesquisarBL();
 
-            ddlBanco.Items.Add(new ListItem());
+            ddlBanco.Items.Add(new ListItem("Selecione",""));
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
@@ -34,7 +34,7 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Estados ltUF in estados)
                 ddl.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
@@ -46,7 +46,7 @@ namespace Admin
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
                 ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
@@ -58,7 +58,7 @@ namespace Admin
             List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem());
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Bairros ltBai in bairros)
                 ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
 
@@ -95,6 +95,7 @@ namespace Admin
         }
         private void CarregarAtributos()
         {           
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
@@ -111,6 +112,27 @@ namespace Admin
 
             return dt;
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            txtEndereco.Text = "";
+            txtRanking.Text = "";
+            txtComplemento.Text = "";
+            txtCodigo.Text = "";
+            txtCep.Text = "";
+            ddlBanco.SelectedIndex = 0;
+            ddlUF.SelectedIndex = 0;
+            ddlCidades.Items.Clear();
+            ddlBairro.Items.Clear();
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -164,21 +186,29 @@ namespace Admin
             if (agencias.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                   ageBL.EditarBL(agencias);
+                   if(ageBL.EditarBL(agencias))
+                       ExibirMensagem("Agência atualizada com sucesso !");
+                   else
+                       ExibirMensagem("Não foi possível atualizar a agência. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))                
-                    ageBL.InserirBL(agencias);
+                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    if (ageBL.InserirBL(agencias))
+                    {
+                        ExibirMensagem("Agência gravada com sucesso !");
+                        LimparCampos();
+                        txtCodigo.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível gravar a agência. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
             }
-
-            Response.Redirect("viewAgencia.aspx");
         }
                      
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
@@ -192,7 +222,12 @@ namespace Admin
             CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ddlCidades.SelectedValue));
         }
 
-               
+        protected void txtCep_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+                      
               
     }
 }

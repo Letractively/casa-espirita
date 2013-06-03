@@ -28,7 +28,19 @@ namespace Admin
                 txtDescricao.Text = ltTdo.Descricao;
                 ddlAplicacao.SelectedValue = ltTdo.Aplicacao;
             }
+        }
 
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
+        private void LimparCampos()
+        {
+            txtDescricao.Text = "";
+            lblCodigo.Text = "Código gerado automaticamente.";
+            ddlAplicacao.SelectedIndex = 0;
         }
         
         #endregion
@@ -53,7 +65,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_tdo);
                 else
-                    lblCodigo.Text = "Código gerado automaticamente."; 
+                    lblCodigo.Text = "Código gerado automaticamente.";
+
+                txtDescricao.Focus();
             }
         }
 
@@ -75,7 +89,13 @@ namespace Admin
             if (tiposDocumentos.Id > 0)
             {
                 if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    tdoBL.EditarBL(tiposDocumentos);
+                    if (tdoBL.EditarBL(tiposDocumentos))
+                    {
+                        ExibirMensagem("Tipo de documento atualizado com sucesso !");
+                        txtDescricao.Focus();
+                    }
+                    else
+                        ExibirMensagem("Não foi possível atualizar o tipo de documento. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
@@ -83,14 +103,17 @@ namespace Admin
             else
             {
                 if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    tdoBL.InserirBL(tiposDocumentos);
+                     if (tdoBL.InserirBL(tiposDocumentos))
+                    {
+                        ExibirMensagem("Tipo de documento gravado com sucesso !");
+                        LimparCampos();
+                        txtDescricao.Focus();
+                    }
+                    else
+                         ExibirMensagem("Não foi possível gravar o tipo de documento. Revise as informações.");
                 else
                     Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }
-
-            Response.Redirect("viewTipoDocumento.aspx");
-        }
-
-        
+            }          
+        }        
     }
 }
