@@ -48,7 +48,7 @@
                                     <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_delete.png"
-                                                  OnClick="btnSelect_Click"  />
+                                                  OnClick="btnSelect_Click" ToolTip="Cancela o item da venda" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     <asp:BoundField DataField="CODIGO" HeaderText="Código" />
@@ -80,10 +80,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" />                             
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" />                             
                              &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar Venda" CssClass="btn" 
-                                 ValidationGroup="salvar" onclick="btnCancelar_Click" />   
+                                 ValidationGroup="salvar" onclick="btnCancelar_Click" 
+                                ToolTip="Cancela a venda" />   
                         </td>
                     </tr>                   
                 </table>                

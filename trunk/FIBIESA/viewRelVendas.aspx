@@ -22,7 +22,8 @@
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtCliente" runat="server" CssClass="inputbox" Width="260px" AutoPostBack="true"
-                                        ToolTip="Informe o(s) cliente(s) - Lista de valores disponível"></asp:TextBox>
+                                        ToolTip="Informe o(s) cliente(s) - Lista de valores disponível" 
+                                        ontextchanged="txtCliente_TextChanged"></asp:TextBox>
                                     <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
@@ -35,7 +36,8 @@ ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dyna
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtItem" runat="server" CssClass="inputbox" MaxLength="10" Width="260px"
                                         AutoPostBack="true" 
-                                        ToolTip="Informe o(s) item(s) - Lista de valores disponível"></asp:TextBox>
+                                        ToolTip="Informe o(s) item(s) - Lista de valores disponível" 
+                                        ontextchanged="txtItem_TextChanged"></asp:TextBox>
                                     <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." OnClick="btnPesItem_Click" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtItem" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
@@ -75,13 +77,14 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                             </tr>
                             <tr>
                                 <td>
+                                    Tipo de Relatório:
                                 </td>
                                 <td>
-                                    <asp:RadioButton ID="rbMaisVendidos" GroupName="Vendidos" runat="server" CssClass="input"
-                                        value="1" Text="Mais Vendidos" ToolTip="Imprime os itens mais vendidos"></asp:RadioButton>
-                                    &nbsp;&nbsp;
-                                    <asp:RadioButton ID="rbMenosVendidos" GroupName="Vendidos" runat="server" CssClass="input"
-                                        value="0" Text="Menos Vendidos" ToolTip="Imprime os itens menos vendidos"></asp:RadioButton>
+                                    <asp:DropDownList runat="server"  ID="ddlTipoRel" CssClass="dropdownlist" ToolTip="Selecione o tipo de relatório">
+                                        <asp:ListItem>Selecione</asp:ListItem>
+                                        <asp:ListItem Value="1">Mais Vendidos</asp:ListItem>
+                                        <asp:ListItem Value="0">Menos Vendidos</asp:ListItem>
+                                    </asp:DropDownList>                                   
                                 </td>
                             </tr>
                             <tr>

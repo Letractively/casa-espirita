@@ -93,9 +93,15 @@ namespace Admin
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
             int ven_id = utils.ComparaIntComZero(dtgVendas.DataKeys[gvrow.RowIndex].Value.ToString());
-            if(ven_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                    "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,850);", true);            
+            string sit = gvrow.Cells[5].Text;
+            if (sit == "A")
+            {
+                if (ven_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                        "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + ven_id + "','',600,850);", true);
+            }
+            else
+                ExibirMensagem("Venda cancelada não é possível imprimir o recibo !");
         }
 
         protected void dtgVendas_SelectedIndexChanged(object sender, EventArgs e)

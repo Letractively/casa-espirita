@@ -99,24 +99,35 @@ namespace DataAccess
 
         public bool InserirDA(Titulos tit)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[12];
-            paramsToSP[0] = new SqlParameter("@numero", tit.Numero);
-            paramsToSP[1] = new SqlParameter("@parcela", tit.Parcela);
-            paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
-            paramsToSP[3] = new SqlParameter("@pessoaid", tit.Pessoaid);
-            paramsToSP[4] = new SqlParameter("@portadorid", tit.Portadorid);
-            paramsToSP[5] = new SqlParameter("@dtvencimento", tit.DataVencimento);
-            paramsToSP[6] = new SqlParameter("@dtemissao", tit.DataEmissao);
-            paramsToSP[7] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
-            paramsToSP[8] = new SqlParameter("@tipo", tit.Tipo);
-            paramsToSP[9] = new SqlParameter("@dtPagamento", tit.DtPagamento);
-            paramsToSP[10] = new SqlParameter("@valorPago", tit.ValorPago);
-            paramsToSP[11] = new SqlParameter("@obs", tit.Obs);
-            
+            int qtde_parc = 1;
+            DateTime dt_emi = tit.DataEmissao;
+            DateTime dt_vencimento = tit.DataVencimento;
             try
             {
-                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_titulos", paramsToSP);
-                
+                for (int i = 0; i < tit.Parcela; i++)
+                {
+
+                    SqlParameter[] paramsToSP = new SqlParameter[12];
+                    paramsToSP[0] = new SqlParameter("@numero", tit.Numero);
+                    paramsToSP[1] = new SqlParameter("@parcela", qtde_parc);
+                    paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
+                    paramsToSP[3] = new SqlParameter("@pessoaid", tit.Pessoaid);
+                    paramsToSP[4] = new SqlParameter("@portadorid", tit.Portadorid);
+                    paramsToSP[5] = new SqlParameter("@dtvencimento", dt_vencimento);
+                    paramsToSP[6] = new SqlParameter("@dtemissao", dt_emi);
+                    paramsToSP[7] = new SqlParameter("@tipodocumentoid", tit.TipoDocumentoId);
+                    paramsToSP[8] = new SqlParameter("@tipo", tit.Tipo);
+                    paramsToSP[9] = new SqlParameter("@dtPagamento", tit.DtPagamento);
+                    paramsToSP[10] = new SqlParameter("@valorPago", tit.ValorPago);
+                    paramsToSP[11] = new SqlParameter("@obs", tit.Obs.ToUpper());
+
+                    qtde_parc++;
+                    dt_emi = dt_emi.AddMonths(1);
+                    dt_vencimento = dt_vencimento.AddMonths(1);
+
+                    SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_titulos", paramsToSP);
+
+                }
                 return true;
             }
             catch (Exception e)
@@ -140,7 +151,7 @@ namespace DataAccess
             paramsToSP[9] = new SqlParameter("@tipo", tit.Tipo);
             paramsToSP[10] = new SqlParameter("@dtPagamento", tit.DtPagamento);
             paramsToSP[11] = new SqlParameter("@valorPago", tit.ValorPago);
-            paramsToSP[12] = new SqlParameter("@obs", tit.Obs);
+            paramsToSP[12] = new SqlParameter("@obs", tit.Obs.ToUpper());
           
             try
             {

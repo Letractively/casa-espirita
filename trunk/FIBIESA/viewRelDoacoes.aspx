@@ -26,7 +26,8 @@
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtCliente" runat="server" CssClass="inputbox" Width="260px" 
-                                        AutoPostBack="true" ToolTip="Informe o(s) cliente(s)"></asp:TextBox>
+                                        AutoPostBack="true" ToolTip="Informe o(s) cliente(s)" 
+                                        ontextchanged="txtCliente_TextChanged"></asp:TextBox>
                                     <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
 ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic" validationgroup="grupo" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>

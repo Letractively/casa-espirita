@@ -32,7 +32,7 @@ ControlToValidate="txtTitulo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                             </tr>
                             <tr>
                                 <td style="width: 140px">
-                                    Associado(s):
+                                    Fornecedor(es):
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" 

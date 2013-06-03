@@ -24,8 +24,12 @@ namespace Admin
 
         public void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    upnlPesquisa,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);          
         }
                                
         public void LimparCampos()
@@ -91,6 +95,13 @@ namespace Admin
                 txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtCliente.Focus();
             }
+
+            ScriptManager.RegisterStartupScript(
+                                    upnlPesquisa,
+                                    this.GetType(),
+                                    "numberFormat",
+                                    "",
+                                    true);   
         }
         
         protected void btnPesCliente_Click(object sender, EventArgs e)
@@ -125,14 +136,17 @@ namespace Admin
 
             if (this.Master.VerificaPermissaoUsuario("INSERIR"))
             {
-                if(doaBL.InserirBL(doacoes))
-                {
-                    ExibirMensagem("Doação gravada com sucesso!");
+                Int32 id_doa = doaBL.InserirBL(doacoes);
+
+                if (id_doa > 0)
+                {                    
                     LimparCampos();
                     txtCliente.Focus();
 
-                    //if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                      //  ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,815);", true);
+                    if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboDoacao.aspx?doacaoid=" + id_doa + "','',600,850);", true);
+                    else
+                        ExibirMensagem("Doação gravada com sucesso!");
                 }
                 else
                     ExibirMensagem("Não foi possível gravar a doação.");
@@ -148,7 +162,6 @@ namespace Admin
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
-
              
         protected void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
@@ -170,8 +183,7 @@ namespace Admin
             
             ModalPopupExtenderPesquisa.Hide();
             ModalPopupExtenderPesquisa.Enabled = false;
-
-                       
+            txtValor.Focus();                       
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -203,12 +215,7 @@ namespace Admin
                 txtCliente.Focus();
             }
         }
-
-        protected void txtValor_TextChanged(object sender, EventArgs e)
-        {
-            btnSalvar.Focus();
-        }       
-
+              
 
     }
 }

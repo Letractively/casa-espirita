@@ -61,7 +61,7 @@ namespace FIBIESA
         {
             if (!IsPostBack)
             {
-                Session["IntClientes"] = null;
+                Session["IntClientes"] = null;             
                 CarregarAtributos();
             }
         }
@@ -135,7 +135,8 @@ namespace FIBIESA
         {
             if (txtCliente.Text == "")
                 Session["IntClientes"] = null;
-            Session["IntClientes"] = txtCliente.Text;
+            else
+                Session["IntClientes"] = txtCliente.Text;
 
         }
 

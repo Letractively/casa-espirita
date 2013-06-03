@@ -52,7 +52,7 @@ namespace FIBIESA
             List<TiposDocumentos> tipoDoc = tipDBL.PesquisarBL("CP");
 
             ddlTipoDoc.Items.Clear();
-            ddlTipoDoc.Items.Add(new ListItem());
+            ddlTipoDoc.Items.Add(new ListItem("Selecione",""));
             foreach (TiposDocumentos ltTip in tipoDoc)
                 ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
 
@@ -67,7 +67,7 @@ namespace FIBIESA
             txtParcela.Text = "";
             txtFornecedor.Text = "";
             lblDesFornecedor.Text = "";
-            txtDataEmissao.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtDataEmissao.Text ="";
             txtDataVencimento.Text = "";
             hfId.Value = "";
             hfIdPessoa.Value = "";

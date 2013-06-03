@@ -18,15 +18,15 @@ namespace BusinessLayer
             return valido;
         }
 
-        public Int32 InserirBL(VendaItens venIt)
+        public bool InserirBL(VendaItens venIt, int usuarioID)
         {
             if (IsValid(venIt))
             {
                 VendaItensDA venItDA = new VendaItensDA();
 
-                return venItDA.InserirDA(venIt);
+                return venItDA.InserirDA(venIt, usuarioID);
             }
-            return 0;
+            return false;
         }
 
         public bool EditarBL(VendaItens venIt)
@@ -51,13 +51,13 @@ namespace BusinessLayer
             return false;
         }
 
-        public bool CancelarVendaItemBL(int id_venIt)
+        public bool CancelarVendaItemBL(int id_ven, int id_venIt)
         {
             if (id_venIt > 0)
             {
                 VendaItensDA venItDA = new VendaItensDA();
 
-                return venItDA.CancelarVendaItemDA(id_venIt);
+                return venItDA.CancelarVendaItemDA(id_ven, id_venIt);
             }
             return false;
         }

@@ -91,12 +91,12 @@ namespace FIBIESA
         {
             VendaItensBL vendaItemBL = new VendaItensBL();
             string paginaRel = "";
-            if (rbMaisVendidos.Checked)
+            if (ddlTipoRel.SelectedValue == "1")
             {
                 Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, "desc").Tables[0];
                 paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Mais&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
             }
-            else if (rbMenosVendidos.Checked)
+            else if (ddlTipoRel.SelectedValue == "0")
             {
                 Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, "asc").Tables[0];
                 paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Menos&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
@@ -210,7 +210,8 @@ namespace FIBIESA
         {
             if (txtCliente.Text == "")
                 Session["IntClientes"] = null;
-            Session["IntClientes"] = txtCliente.Text;
+            else
+                Session["IntClientes"] = txtCliente.Text;
 
         }
 
@@ -218,7 +219,8 @@ namespace FIBIESA
         {
             if (txtItem.Text == "")
                 Session["IntItem"] = null;
-            Session["IntItem"] = txtItem.Text;
+            else
+                Session["IntItem"] = txtItem.Text;
         }
 
         #endregion TextChanged
@@ -238,6 +240,6 @@ namespace FIBIESA
 
         #endregion
 
-        
+               
     }
 }

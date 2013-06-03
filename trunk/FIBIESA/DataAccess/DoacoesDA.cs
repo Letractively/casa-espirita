@@ -66,7 +66,7 @@ namespace DataAccess
         }
         #endregion
 
-        public bool InserirDA(Doacoes doa)
+        public Int32 InserirDA(Doacoes doa)
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
@@ -75,9 +75,22 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@valor", doa.Valor);
             paramsToSP[3] = new SqlParameter("@usuarioid", doa.UsuarioId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_doacoes", paramsToSP);
 
-            return true;
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                    CommandType.StoredProcedure, "stp_insert_doacoes", paramsToSP);
+
+                DataTable tabela = ds.Tables[0];
+
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public bool EditarDA(Doacoes doa)
@@ -185,8 +198,7 @@ namespace DataAccess
                                                                               ,nomeMae
                                                                               ,nomePai
                                                                               ,dtNascimento
-                                                                              ,estadoCivil
-                                                                              ,Naturalidade
+                                                                              ,estadoCivil                                                                             
                                                                               ,Endereco
                                                                               ,Numero
                                                                               ,bairroId

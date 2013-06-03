@@ -159,7 +159,7 @@ namespace DataAccess
         public bool CancelarVendaDA(int id_ven)
         {
             SqlParameter[] paramsToSP = new SqlParameter[1];
-
+            
             paramsToSP[0] = new SqlParameter("@vendaId", id_ven);
 
             try
