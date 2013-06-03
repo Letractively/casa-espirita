@@ -92,11 +92,11 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[9];
 
             paramsToSP[0] = new SqlParameter("@codigo", age.Codigo);
-            paramsToSP[1] = new SqlParameter("@descricao", age.Descricao);
+            paramsToSP[1] = new SqlParameter("@descricao", age.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@cep", age.Cep);
             paramsToSP[3] = new SqlParameter("@bairroid", age.BairroId);
-            paramsToSP[4] = new SqlParameter("@endereco", age.Endereco);
-            paramsToSP[5] = new SqlParameter("@complemento", age.Complemento);
+            paramsToSP[4] = new SqlParameter("@endereco", age.Endereco.ToUpper());
+            paramsToSP[5] = new SqlParameter("@complemento", age.Complemento.ToUpper());
             paramsToSP[6] = new SqlParameter("@cidadeid", age.CidadeId);
             paramsToSP[7] = new SqlParameter("@ranking", age.Ranking);
             paramsToSP[8] = new SqlParameter("@bancoid", age.BancoId);
@@ -119,11 +119,11 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", age.Id);
             paramsToSP[1] = new SqlParameter("@codigo", age.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", age.Descricao);
+            paramsToSP[2] = new SqlParameter("@descricao", age.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@cep", age.Cep);
             paramsToSP[4] = new SqlParameter("@bairroid", age.BairroId);
-            paramsToSP[5] = new SqlParameter("@endereco", age.Endereco);
-            paramsToSP[6] = new SqlParameter("@complemento", age.Complemento);
+            paramsToSP[5] = new SqlParameter("@endereco", age.Endereco.ToUpper());
+            paramsToSP[6] = new SqlParameter("@complemento", age.Complemento.ToUpper());
             paramsToSP[7] = new SqlParameter("@cidadeid", age.CidadeId);
             paramsToSP[8] = new SqlParameter("@ranking", age.Ranking);
             paramsToSP[9] = new SqlParameter("@bancoid", age.BancoId);

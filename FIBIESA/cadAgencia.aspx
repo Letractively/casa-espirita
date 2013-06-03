@@ -15,7 +15,8 @@
                     <tr>
                         <td style="width: 140px">* Banco:</td>
                         <td style="width: 400px" colspan="3">
-                            <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlBanco" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o banco">
                              </asp:DropDownList>                           
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlBanco" ErrorMessage="* Informe o banco" 
@@ -29,10 +30,10 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
-                                Width="100px"></asp:TextBox>
+                                Width="100px" ToolTip="Informe o código"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
-                                ErrorMessage="Informe o código da agência">*</asp:RequiredFieldValidator>
+                                ErrorMessage="Informe o código da agência" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -42,7 +43,7 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" MaxLength="70"
-                                Width="335px"></asp:TextBox>
+                                Width="335px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescricao"
                                 ErrorMessage="*Informe a descrição " ForeColor="#CC0000" 
                                 ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -53,7 +54,8 @@
                             CEP:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="20"></asp:TextBox>
+                            <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" 
+                                ToolTip="Informe o CEP" Width="110px"></asp:TextBox>
                         </td>
                     </tr>                   
                     <tr>
@@ -62,7 +64,8 @@
                         </td>
                         <td style="width: 500px">
                             <asp:DropDownList ID="ddlUF" runat="server" CssClass="dropdownlist" 
-                                onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
+                                onselectedindexchanged="ddlUF_SelectedIndexChanged" AutoPostBack="True" 
+                                ToolTip="Selecione a UF" ></asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +75,7 @@
                         <td style="width: 500px">
                             <asp:DropDownList ID="ddlCidades" runat="server" CssClass="dropdownlist" 
                                 onselectedindexchanged="ddlCidades_SelectedIndexChanged" 
-                                AutoPostBack="True"></asp:DropDownList>
+                                AutoPostBack="True" ToolTip="Selecione a cidade"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                                         runat="server" ControlToValidate="ddlCidades" 
                                 ErrorMessage="* Informe a cidade" ValidationGroup="salvar" 
@@ -84,7 +87,8 @@
                             * Bairro:
                         </td>
                         <td style="width: 500px">
-                            <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" ></asp:DropDownList>
+                            <asp:DropDownList ID="ddlBairro" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione o bairro" ></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
                                         runat="server" ControlToValidate="ddlBairro" 
                                 ErrorMessage="* Informe o bairro" ValidationGroup="salvar" 
@@ -96,7 +100,8 @@
                             Endereço:
                         </td>
                         <td style="width: 400px" colspan="3">
-                            <asp:TextBox ID="txtEndereco" runat="server" CssClass="inputbox" MaxLength="70" Width="335px"></asp:TextBox>
+                            <asp:TextBox ID="txtEndereco" runat="server" CssClass="inputbox" MaxLength="70" 
+                                Width="335px" ToolTip="Informe o endereço"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -105,13 +110,14 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtComplemento" runat="server" CssClass="inputbox" MaxLength="40"
-                                Width="147px"></asp:TextBox>
+                                Width="147px" ToolTip="Informe o complemento"></asp:TextBox>
                         </td>
                         <td style="width: 140px">
                             Ranking:
                         </td>
                         <td style="width: 400px">
-                            <asp:TextBox ID="txtRanking" runat="server" CssClass="inputboxRight" Width="55px"></asp:TextBox>
+                            <asp:TextBox ID="txtRanking" runat="server" CssClass="inputboxRight" 
+                                Width="55px" ValidationGroup="Informe o ranking"></asp:TextBox>
                         </td>
                     </tr>                              
                 </table>
@@ -121,10 +127,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" Text ="Voltar" CssClass="btn" 
-                                onclick="btnVoltar_Click" /> 
+                                onclick="btnVoltar_Click" ToolTip="Volta para página de consulta" /> 
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" Text ="Salvar" CssClass="btn" 
-                                onclick="btnSalvar_Click" ValidationGroup="salvar" />                            
+                                onclick="btnSalvar_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />                            
                         </td>
                     </tr>
                 </table>

@@ -74,6 +74,7 @@
     <Content Include="cadAutor.aspx" />
     <Content Include="cadBairro.aspx" />
     <Content Include="cadBanco.aspx" />
+    <Content Include="cadBancosInstrucoes.aspx" />
     <Content Include="cadCategoria.aspx" />
     <Content Include="cadChamada.aspx" />
     <Content Include="cadCidade.aspx" />
@@ -350,6 +351,13 @@
     </Compile>
     <Compile Include="cadBanco.aspx.designer.cs">
       <DependentUpon>cadBanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cadBancosInstrucoes.aspx.cs">
+      <DependentUpon>cadBancosInstrucoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadBancosInstrucoes.aspx.designer.cs">
+      <DependentUpon>cadBancosInstrucoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadCategoria.aspx.cs">
       <DependentUpon>cadCategoria.aspx</DependentUpon>

@@ -26,7 +26,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="335px"></asp:TextBox>
+                                MaxLength="40" Width="335px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
@@ -38,7 +38,9 @@
                             Aplicação:
                         </td>
                         <td style="width: 400px">
-                            <asp:DropDownList ID="ddlAplicacao" runat="server" CssClass="dropdownlist">
+                            <asp:DropDownList ID="ddlAplicacao" runat="server" CssClass="dropdownlist" 
+                                ToolTip="Selecione a aplicação">
+                                <asp:ListItem>Selecione</asp:ListItem>
                                 <asp:ListItem Value="CP">Contas a Pagar</asp:ListItem>
                                 <asp:ListItem Value="CR">Contas a Receber</asp:ListItem>
                             </asp:DropDownList>
@@ -54,10 +56,11 @@
                         </td>
                         <td style="width: 400px">
                             <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
-                                onclick="btnVoltar_Click" />
+                                onclick="btnVoltar_Click" ToolTip="Volta para a página de consulta" />
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" 
-                                onclick="btnInserir_Click" ValidationGroup="salvar" />                            
+                            <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Salvar" 
+                                onclick="btnInserir_Click" ValidationGroup="salvar" 
+                                ToolTip="Valida e salva as informações" />                            
                         </td>
                     </tr>
                 </table>
