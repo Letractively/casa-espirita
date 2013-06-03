@@ -62,7 +62,12 @@ namespace Admin
                 txtDescricao.Text = ltTur["Descricao"].ToString();
                 txtSala.Text = ltTur["Sala"].ToString();
                 txtNroMax.Text = ltTur["Nromax"].ToString();
-                txtDiaSemana.Text = ltTur["DiaSemana"].ToString();
+                string[] diasSemana = ltTur["DiaSemana"].ToString().Split(new Char[] { ',' });
+                foreach (string dia in diasSemana)
+                {
+                    if (dia != string.Empty)
+                        ckbDiasSemana.Items.FindByValue(dia).Selected = true;
+                }
                 txtDtFim.Text = ltTur["DtFim"].ToString();
                 txtDtInicio.Text = ltTur["DtIni"].ToString();
                 txtHoraFim.Text = ltTur["HoraFim"].ToString(); 
@@ -97,7 +102,10 @@ namespace Admin
             txtDtFim.Text = "";
             ddlEvento.SelectedIndex = 0;
             ddlInstrutor.SelectedIndex = 0;
-            txtDiaSemana.Text = "";
+            foreach (ListItem item in ckbDiasSemana.Items)
+            {
+                item.Selected = false;
+            }
             txtHoraFim.Text = "";
             txtHoraInicio.Text = "";
             lblcodigo.Text = "Código gerado automaticamente.";
@@ -140,7 +148,12 @@ namespace Admin
             turmas.Id = utils.ComparaIntComZero(hfId.Value);
             turmas.Codigo = utils.ComparaIntComZero(lblcodigo.Text);
             turmas.Descricao = txtDescricao.Text;
-            turmas.DiaSemana = txtDiaSemana.Text;
+            string diasSemana = "";
+            foreach (ListItem item in ckbDiasSemana.Items)
+            {
+                diasSemana += item.Selected ? item.Value + "," : "";
+            }
+            turmas.DiaSemana = diasSemana;
             turmas.Nromax = utils.ComparaIntComZero(txtNroMax.Text);
             turmas.EventoId = utils.ComparaIntComZero(ddlEvento.SelectedValue);
             turmas.HoraFim = utils.ComparaDataComNull(txtHoraFim.Text);
