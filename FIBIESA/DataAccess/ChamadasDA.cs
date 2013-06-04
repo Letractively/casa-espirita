@@ -142,14 +142,15 @@ namespace DataAccess
             return ds;
         }
 
-        public DataSet PesquisarDataSetDA(string mes, string ano, int turmaId, string alunosCod, int preenchido)
+        public DataSet PesquisarDataSetDA(string mes, string ano, int turmaId, string alunosCod, int preenchido, string diasSemanas)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];           
+            SqlParameter[] paramsToSP = new SqlParameter[6];           
             paramsToSP[0] = new SqlParameter("@MES", mes);//string
             paramsToSP[1] = new SqlParameter("@ANO", ano);//string
             paramsToSP[2] = new SqlParameter("@turmasid", turmaId);//int
             paramsToSP[3] = new SqlParameter("@alunoscod", alunosCod);//string
             paramsToSP[4] = new SqlParameter("@preenchido", preenchido);//bit
+            paramsToSP[5] = new SqlParameter("@diasSemana", diasSemanas);
 
             try
             {

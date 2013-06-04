@@ -26,20 +26,48 @@ namespace FIBIESA.Relatorios
                 lDtPesquisa = (DataTable)Session["ldsRel"];
                 if (lDtPesquisa.Rows.Count > 0)
                 {
-                    
-                    InstituicoesBL instBL = new InstituicoesBL();
-                    Instituicoes inst = new Instituicoes();
+                    DataTable dt = new DataTable();
+                    DataColumn coluna1 = new DataColumn("col1", Type.GetType("System.String"));
+                    DataColumn coluna2 = new DataColumn("col2", Type.GetType("System.String"));
+                    DataColumn coluna3 = new DataColumn("col3", Type.GetType("System.String"));
+                    DataColumn coluna4 = new DataColumn("col4", Type.GetType("System.String"));
+                    //DataColumn coluna5 = new DataColumn("col5", Type.GetType("System.String"));
 
-                    InstituicoesLogoBL instLogoBL = new InstituicoesLogoBL();
-                    InstituicoesLogo instLogo = new InstituicoesLogo();
-
-                    ReportDataSource rptDatasourceInstituicao = new ReportDataSource("DataSet_Instituicao", instBL.PesquisarDsBL().Tables[0]);
-                    ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
-                    ReportDataSource rptDatasourceEmprestimos = new ReportDataSource("DataSet_CodigoBarras", lDtPesquisa);
+                    dt.Columns.Add(coluna1);
+                    dt.Columns.Add(coluna2);
+                    dt.Columns.Add(coluna3);
+                    dt.Columns.Add(coluna4);
+                    //dt.Columns.Add(coluna5);
+                    int total = lDtPesquisa.Rows.Count -1;
+                    while ((lDtPesquisa.Rows.Count != 0) && (lDtPesquisa.Rows[total].RowState.ToString() != "Deleted"))
+                    {
+                        int countItem = 1;
+                        DataRow linha;
+                        linha = dt.NewRow();
+                        foreach (DataRow row in lDtPesquisa.Rows)
+                        {
+                            if (row.RowState.ToString() != "Deleted")
+                            {
+                                if (countItem < 4)
+                                {
+                                    linha["col" + countItem] = row["tombo"];
+                                    row.Delete();
+                                }
+                                else
+                                {
+                                    linha["col" + countItem] = row["tombo"];
+                                    row.Delete();
+                                    break;
+                                }
+                                countItem += 1;
+                            }
+                        }
+                        dt.Rows.Add(linha);
+                    }
+                    lDtPesquisa = null;
                     
-                    //rpvEmprestimos.ProcessingMode = ProcessingMode.Local;
-                    rpvCodigoBarras.LocalReport.DataSources.Add(rptDatasourceInstituicao);
-                    rpvCodigoBarras.LocalReport.DataSources.Add(rptDatasourceInstituicaoLogo);
+                    ReportDataSource rptDatasourceEmprestimos = new ReportDataSource("DataSet_CodigoBarras", dt);
+                    dt = null;                    
                     rpvCodigoBarras.LocalReport.DataSources.Add(rptDatasourceEmprestimos);
 
                     rpvCodigoBarras.LocalReport.Refresh();

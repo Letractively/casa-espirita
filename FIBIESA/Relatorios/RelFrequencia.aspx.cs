@@ -25,6 +25,24 @@ namespace FIBIESA.Relatorios
             lDtPesquisa = (DataTable)Session["ldsRel"];
             if (lDtPesquisa.Rows.Count > 0)
             {
+                int countfalta, countPresenca;
+                foreach (DataRow row in lDtPesquisa.Rows)
+                {
+                    countfalta = 0;
+                    countPresenca = 0;
+                    foreach (DataColumn column in lDtPesquisa.Columns)
+                    {
+
+                        if ((column.ColumnName.Contains("dia")) && (row[column].ToString() == "F"))
+                            countfalta += 1;
+                        if ((column.ColumnName.Contains("dia")) && (row[column].ToString() == "P"))
+                            countPresenca += 1;
+                        if (column.ColumnName.Contains("totalFalta"))
+                            row[column] = countfalta;
+                        if (column.ColumnName.Contains("totalPresenca"))
+                            row[column] = countPresenca;
+                    }
+                }
                 string mes = Request.QueryString["mes"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();

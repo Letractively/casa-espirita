@@ -136,129 +136,137 @@
           <DataField>ultimo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="d1">
-          <DataField>d1</DataField>
+        <Field Name="dia1">
+          <DataField>dia1</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d2">
-          <DataField>d2</DataField>
+        <Field Name="dia2">
+          <DataField>dia2</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d3">
-          <DataField>d3</DataField>
+        <Field Name="dia3">
+          <DataField>dia3</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d4">
-          <DataField>d4</DataField>
+        <Field Name="dia4">
+          <DataField>dia4</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d5">
-          <DataField>d5</DataField>
+        <Field Name="dia5">
+          <DataField>dia5</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d6">
-          <DataField>d6</DataField>
+        <Field Name="dia6">
+          <DataField>dia6</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d7">
-          <DataField>d7</DataField>
+        <Field Name="dia7">
+          <DataField>dia7</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d8">
-          <DataField>d8</DataField>
+        <Field Name="dia8">
+          <DataField>dia8</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d9">
-          <DataField>d9</DataField>
+        <Field Name="dia9">
+          <DataField>dia9</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d10">
-          <DataField>d10</DataField>
+        <Field Name="dia10">
+          <DataField>dia10</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d11">
-          <DataField>d11</DataField>
+        <Field Name="dia11">
+          <DataField>dia11</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d12">
-          <DataField>d12</DataField>
+        <Field Name="dia12">
+          <DataField>dia12</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d13">
-          <DataField>d13</DataField>
+        <Field Name="dia13">
+          <DataField>dia13</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d14">
-          <DataField>d14</DataField>
+        <Field Name="dia14">
+          <DataField>dia14</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d15">
-          <DataField>d15</DataField>
+        <Field Name="dia15">
+          <DataField>dia15</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d16">
-          <DataField>d16</DataField>
+        <Field Name="dia16">
+          <DataField>dia16</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d17">
-          <DataField>d17</DataField>
+        <Field Name="dia17">
+          <DataField>dia17</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d18">
-          <DataField>d18</DataField>
+        <Field Name="dia18">
+          <DataField>dia18</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d19">
-          <DataField>d19</DataField>
+        <Field Name="dia19">
+          <DataField>dia19</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d20">
-          <DataField>d20</DataField>
+        <Field Name="dia20">
+          <DataField>dia20</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d21">
-          <DataField>d21</DataField>
+        <Field Name="dia21">
+          <DataField>dia21</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d22">
-          <DataField>d22</DataField>
+        <Field Name="dia22">
+          <DataField>dia22</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d23">
-          <DataField>d23</DataField>
+        <Field Name="dia23">
+          <DataField>dia23</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d24">
-          <DataField>d24</DataField>
+        <Field Name="dia24">
+          <DataField>dia24</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d25">
-          <DataField>d25</DataField>
+        <Field Name="dia25">
+          <DataField>dia25</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d26">
-          <DataField>d26</DataField>
+        <Field Name="dia26">
+          <DataField>dia26</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d27">
-          <DataField>d27</DataField>
+        <Field Name="dia27">
+          <DataField>dia27</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d28">
-          <DataField>d28</DataField>
+        <Field Name="dia28">
+          <DataField>dia28</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d29">
-          <DataField>d29</DataField>
+        <Field Name="dia29">
+          <DataField>dia29</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d30">
-          <DataField>d30</DataField>
+        <Field Name="dia30">
+          <DataField>dia30</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="d31">
-          <DataField>d31</DataField>
+        <Field Name="dia31">
+          <DataField>dia31</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="totalFalta">
+          <DataField>totalFalta</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="totalPresenca">
+          <DataField>totalPresenca</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -367,6 +375,12 @@
             </TablixColumn>
             <TablixColumn>
               <Width>0.21654in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.65092in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.44259in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1345,6 +1359,66 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Presença</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Faltas</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -1382,21 +1456,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d1">
+                    <Textbox Name="dia1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d1.Value</Value>
+                              <Value>=Fields!dia1.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d1</rd:DefaultName>
+                      <rd:DefaultName>dia1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1412,21 +1486,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d2">
+                    <Textbox Name="dia2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d2.Value</Value>
+                              <Value>=Fields!dia2.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d2</rd:DefaultName>
+                      <rd:DefaultName>dia2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1442,21 +1516,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d3">
+                    <Textbox Name="dia3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d3.Value</Value>
+                              <Value>=Fields!dia3.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d3</rd:DefaultName>
+                      <rd:DefaultName>dia3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1472,21 +1546,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d4">
+                    <Textbox Name="dia4">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d4.Value</Value>
+                              <Value>=Fields!dia4.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d4</rd:DefaultName>
+                      <rd:DefaultName>dia4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1502,21 +1576,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d5">
+                    <Textbox Name="dia5">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d5.Value</Value>
+                              <Value>=Fields!dia5.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d5</rd:DefaultName>
+                      <rd:DefaultName>dia5</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1532,21 +1606,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d6">
+                    <Textbox Name="dia6">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d6.Value</Value>
+                              <Value>=Fields!dia6.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d6</rd:DefaultName>
+                      <rd:DefaultName>dia6</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1562,21 +1636,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d7">
+                    <Textbox Name="dia7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d7.Value</Value>
+                              <Value>=Fields!dia7.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d7</rd:DefaultName>
+                      <rd:DefaultName>dia7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1592,21 +1666,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d8">
+                    <Textbox Name="dia8">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d8.Value</Value>
+                              <Value>=Fields!dia8.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d8</rd:DefaultName>
+                      <rd:DefaultName>dia8</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1622,21 +1696,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d9">
+                    <Textbox Name="dia9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d9.Value</Value>
+                              <Value>=Fields!dia9.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d9</rd:DefaultName>
+                      <rd:DefaultName>dia9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1652,21 +1726,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d10">
+                    <Textbox Name="dia10">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d10.Value</Value>
+                              <Value>=Fields!dia10.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d10</rd:DefaultName>
+                      <rd:DefaultName>dia10</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1682,21 +1756,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d11">
+                    <Textbox Name="dia11">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d11.Value</Value>
+                              <Value>=Fields!dia11.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d11</rd:DefaultName>
+                      <rd:DefaultName>dia11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1712,21 +1786,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d12">
+                    <Textbox Name="dia12">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d12.Value</Value>
+                              <Value>=Fields!dia12.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d12</rd:DefaultName>
+                      <rd:DefaultName>dia12</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1742,21 +1816,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d13">
+                    <Textbox Name="dia13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d13.Value</Value>
+                              <Value>=Fields!dia13.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d13</rd:DefaultName>
+                      <rd:DefaultName>dia13</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1772,21 +1846,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d14">
+                    <Textbox Name="dia14">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d14.Value</Value>
+                              <Value>=Fields!dia14.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d14</rd:DefaultName>
+                      <rd:DefaultName>dia14</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1802,21 +1876,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d15">
+                    <Textbox Name="dia15">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d15.Value</Value>
+                              <Value>=Fields!dia15.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d15</rd:DefaultName>
+                      <rd:DefaultName>dia15</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1832,21 +1906,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d16">
+                    <Textbox Name="dia16">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d16.Value</Value>
+                              <Value>=Fields!dia16.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d16</rd:DefaultName>
+                      <rd:DefaultName>dia16</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1862,21 +1936,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d17">
+                    <Textbox Name="dia17">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d17.Value</Value>
+                              <Value>=Fields!dia17.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d17</rd:DefaultName>
+                      <rd:DefaultName>dia17</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1892,21 +1966,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d18">
+                    <Textbox Name="dia18">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d18.Value</Value>
+                              <Value>=Fields!dia18.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d18</rd:DefaultName>
+                      <rd:DefaultName>dia18</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1922,21 +1996,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d19">
+                    <Textbox Name="dia19">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d19.Value</Value>
+                              <Value>=Fields!dia19.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d19</rd:DefaultName>
+                      <rd:DefaultName>dia19</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1952,21 +2026,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d20">
+                    <Textbox Name="dia20">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d20.Value</Value>
+                              <Value>=Fields!dia20.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d20</rd:DefaultName>
+                      <rd:DefaultName>dia20</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1982,21 +2056,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d21">
+                    <Textbox Name="dia21">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d21.Value</Value>
+                              <Value>=Fields!dia21.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d21</rd:DefaultName>
+                      <rd:DefaultName>dia21</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2012,21 +2086,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d22">
+                    <Textbox Name="dia22">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d22.Value</Value>
+                              <Value>=Fields!dia22.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d22</rd:DefaultName>
+                      <rd:DefaultName>dia22</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2042,21 +2116,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d23">
+                    <Textbox Name="dia23">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d23.Value</Value>
+                              <Value>=Fields!dia23.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d23</rd:DefaultName>
+                      <rd:DefaultName>dia23</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2072,21 +2146,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d24">
+                    <Textbox Name="dia24">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d24.Value</Value>
+                              <Value>=Fields!dia24.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d24</rd:DefaultName>
+                      <rd:DefaultName>dia24</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2102,21 +2176,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d25">
+                    <Textbox Name="dia25">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d25.Value</Value>
+                              <Value>=Fields!dia25.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d25</rd:DefaultName>
+                      <rd:DefaultName>dia25</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2132,21 +2206,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d26">
+                    <Textbox Name="dia26">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d26.Value</Value>
+                              <Value>=Fields!dia26.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d26</rd:DefaultName>
+                      <rd:DefaultName>dia26</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2162,21 +2236,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d27">
+                    <Textbox Name="dia27">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d27.Value</Value>
+                              <Value>=Fields!dia27.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d27</rd:DefaultName>
+                      <rd:DefaultName>dia27</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2192,21 +2266,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d28">
+                    <Textbox Name="dia28">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d28.Value</Value>
+                              <Value>=Fields!dia28.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d28</rd:DefaultName>
+                      <rd:DefaultName>dia28</rd:DefaultName>
                       <Visibility>
                         <Hidden>=IIf(First(Fields!ultimo.Value, "DataSet_Frequencia")&lt;=28,true,false)</Hidden>
                       </Visibility>
@@ -2225,21 +2299,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d29">
+                    <Textbox Name="dia29">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d29.Value</Value>
+                              <Value>=Fields!dia29.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d29</rd:DefaultName>
+                      <rd:DefaultName>dia29</rd:DefaultName>
                       <Visibility>
                         <Hidden>=IIf(First(Fields!ultimo.Value, "DataSet_Frequencia")&lt;=29,true,false)</Hidden>
                       </Visibility>
@@ -2258,21 +2332,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d30">
+                    <Textbox Name="dia30">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d30.Value</Value>
+                              <Value>=Fields!dia30.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d30</rd:DefaultName>
+                      <rd:DefaultName>dia30</rd:DefaultName>
                       <Visibility>
                         <Hidden>=IIf(First(Fields!ultimo.Value, "DataSet_Frequencia")&lt;=30,true,false)</Hidden>
                       </Visibility>
@@ -2291,24 +2365,88 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="d31">
+                    <Textbox Name="dia31">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!d31.Value</Value>
+                              <Value>=Fields!dia31.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>d31</rd:DefaultName>
+                      <rd:DefaultName>dia31</rd:DefaultName>
                       <Visibility>
                         <Hidden>=IIf(First(Fields!ultimo.Value, "DataSet_Frequencia")&lt;=31,true,false)</Hidden>
                       </Visibility>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="totalPresenca">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!totalPresenca.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>totalPresenca</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="totalFalta">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!totalFalta.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>totalFalta</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2328,6 +2466,10 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember>
+              <FixedData>true</FixedData>
+            </TablixMember>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -2376,7 +2518,7 @@
         <Top>0.28258cm</Top>
         <Left>0.28257cm</Left>
         <Height>1.32293cm</Height>
-        <Width>22.27204cm</Width>
+        <Width>25.04954cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2394,7 +2536,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>9.04893in</Width>
+  <Width>10.9031in</Width>
   <Page>
     <PageHeader>
       <Height>5.89593cm</Height>
