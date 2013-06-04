@@ -76,7 +76,7 @@ namespace FIBIESA
             {
                 CarregarDdlEvento();
                 CarregarDdlAno();
-                ddlMes.SelectedValue = DateTime.Now.Month.ToString();
+                ddlMes.SelectedValue = DateTime.Now.Month.ToString("d2");
                 rbSemPreenchimento.Checked = true;
             }
 
@@ -117,11 +117,13 @@ namespace FIBIESA
                 preenchido = 0;
             else if (rbComPreenchimento.Checked)
                 preenchido = 1;
+            TurmasBL turBl = new TurmasBL();
+            List<Turmas> lTurmas = turBl.PesquisarBL("CODIGO",ddlTurma.SelectedValue.ToString());
 
-            Session["ldsRel"] = chamadasBL.PesquisarDataSet(ddlMes.SelectedValue, ddlAno.SelectedValue, Convert.ToInt16(ddlTurma.SelectedValue), ddlParticipante.SelectedValue, preenchido).Tables[0];
+            Session["ldsRel"] = chamadasBL.PesquisarDataSet(ddlMes.SelectedValue, ddlAno.SelectedValue, Convert.ToInt16(ddlTurma.SelectedValue), ddlParticipante.SelectedValue, preenchido, lTurmas[0].DiaSemana).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelFrequencia.aspx','',600,925);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelFrequencia.aspx?mes=" + ddlMes.SelectedItem.Text + "','',600,925);", true);
             }
             else
             {

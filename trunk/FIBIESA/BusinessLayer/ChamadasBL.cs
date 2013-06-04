@@ -12,9 +12,9 @@ namespace BusinessLayer
     {
         public bool InserirBL(Chamadas cha)
         {
-            
+
             ChamadasDA chaDA = new ChamadasDA();
-                        
+
             return chaDA.InserirDA(cha);
         }
 
@@ -66,12 +66,12 @@ namespace BusinessLayer
             return chaDA.PesquisarAnosChamadaDA();
         }
 
-        public DataSet PesquisarDataSet(string mes, string ano, int turmaId, string alunosCod, int preenchido)
+        public DataSet PesquisarDataSet(string mes, string ano, int turmaId, string alunosCod, int preenchido, string diasSemanas)
         {
             ChamadasDA chaDA = new ChamadasDA();
 
-            return chaDA.PesquisarDataSetDA(mes, ano, turmaId, alunosCod, preenchido);
+            return chaDA.PesquisarDataSetDA(mes, ano, turmaId, alunosCod, preenchido, diasSemanas);
         }
-               
+
     }
 }
