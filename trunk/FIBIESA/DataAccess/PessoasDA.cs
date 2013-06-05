@@ -420,8 +420,8 @@ namespace DataAccess
                 v_query.Append(@"SELECT COUNT(1) QTDE ");
                 v_query.Append(@"  FROM TITULOS T ");
                 v_query.Append(@" WHERE T.PESSOAID = " + id_pes.ToString());
-                v_query.Append(@"  AND ((CONVERT(DATETIME,T.DTVENCIMENTO,103) < CONVERT(DATETIME,GETDATE(),103) AND T.DTPAGAMENTO IS NULL)");
-                v_query.Append(@"   OR T.VALORPAGO < VALOR ) ");
+                v_query.Append(@"  AND CONVERT(DATE,T.DTVENCIMENTO,103) < CONVERT(DATE,GETDATE(),103)");
+                v_query.Append(@"  AND (T.DTPAGAMENTO IS NULL  OR T.VALORPAGO < VALOR ) ");
 
                 DataSet dsTit = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                     CommandType.Text, v_query.ToString());
