@@ -34,6 +34,9 @@ namespace DataAccess
                 movEst.Tipo = dr["TIPO"].ToString();
                 movEst.Data = Convert.ToDateTime(dr["DATA"].ToString());
                 movEst.NumeroVenda = utils.ComparaIntComNull(dr["NUMERO"].ToString());
+                movEst.Numnota = utils.ComparaIntComNull(dr["NUMNOTA"].ToString());
+                movEst.Serie = utils.ComparaShortComNull(dr["SERIE"].ToString());
+
 
                 Usuarios usuarios = new Usuarios();
                 usuarios.Login = dr["LOGIN"].ToString();
@@ -44,23 +47,7 @@ namespace DataAccess
                 obras.Titulo = dr["TITULO"].ToString();
 
                 movEst.Obras = obras;
-
-
-                if (movEst.NotaEntradaId != null)
-                {
-                    NotasEntradaDA notaentradaDA = new NotasEntradaDA();
-                    List<NotasEntrada> notaEnt = notaentradaDA.PesquisarDA(movEst.NotaEntradaId != null ? (int)movEst.NotaEntradaId : 0);
-                    NotasEntrada notaEntrada = new NotasEntrada();
-
-                    foreach (NotasEntrada ltNotE in notaEnt)
-                    {
-                        notaEntrada.Numero = ltNotE.Numero;
-                        notaEntrada.Serie = ltNotE.Serie;
-                    }
-
-                    movEst.NotaEntrada = notaEntrada;
-                }
-
+                
                 movEstoque.Add(movEst);
             }
 
@@ -143,15 +130,22 @@ namespace DataAccess
 
         public List<MovimentosEstoque> PesquisarDA(Int32 id_ItEst)
         {
+            StringBuilder v_consulta = new StringBuilder();
+
+            v_consulta.Append(@"  SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO ");
+            v_consulta.Append(@"        ,U.LOGIN, V.NUMERO, N.NUMERO NUMNOTA , N.SERIE ");
+            v_consulta.Append(@"   FROM MOVIMENTOSESTOQUE M  ");
+            v_consulta.Append(@"        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  ");
+            v_consulta.Append(@"        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  ");
+            v_consulta.Append(@"        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  ");
+            v_consulta.Append(@"        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  ");
+            v_consulta.Append(@"        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  ");
+            v_consulta.Append(@"        LEFT JOIN NOTAENTRADAITENS NI ON NI.ID = M.NOTAENTRADAITENSID ");
+            v_consulta.Append(@"        LEFT JOIN NOTAENTRADA N ON N.ID = NI.NOTAENTRADAID ");
+            v_consulta.Append(@"   WHERE M.ITEMESTOQUEID = {0} ");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
-                                                                                                 "   FROM MOVIMENTOSESTOQUE M  " +
-                                                                                                 "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
-                                                                                                 "        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  " +
-                                                                                                 "        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  " +
-                                                                                                 "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
-                                                                                                 "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +
-                                                                                                 " WHERE M.ITEMESTOQUEID = '{0}'", id_ItEst));
+                                                                CommandType.Text, string.Format(v_consulta.ToString(), id_ItEst));
 
 
             List<MovimentosEstoque> movEstoque = CarregarObjMovimentoEstoque(dr);
@@ -161,38 +155,26 @@ namespace DataAccess
 
         public List<MovimentosEstoque> PesquisarDA(int item_id, DateTime? data)
         {
-            string consulta = "";
+            StringBuilder v_consulta = new StringBuilder();
+
+            v_consulta.Append(@"  SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO ");
+            v_consulta.Append(@"        ,U.LOGIN, V.NUMERO, N.NUMERO NUMNOTA , N.SERIE ");
+            v_consulta.Append(@"   FROM MOVIMENTOSESTOQUE M  ");
+            v_consulta.Append(@"        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  "); 
+            v_consulta.Append(@"        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  "); 
+            v_consulta.Append(@"        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  ");
+            v_consulta.Append(@"        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  ");
+            v_consulta.Append(@"        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  ");
+            v_consulta.Append(@"        LEFT JOIN NOTAENTRADAITENS NI ON NI.ID = M.NOTAENTRADAITENSID ");
+            v_consulta.Append(@"        LEFT JOIN NOTAENTRADA N ON N.ID = NI.NOTAENTRADAID ");
+            v_consulta.Append(@"   WHERE IE.ID = {0} ");
 
             if (data != null)
-            {
-                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
-                                          "   FROM MOVIMENTOSESTOQUE M  " +
-                                          "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
-                                          "        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  " +
-                                          "        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  " +
-                                          "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
-                                          "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +
-                                          "  WHERE IE.ID = {0} " +
-                                          "    AND M.DATA BETWEEN CONVERT(DATETIME,'{1} 00:00:00.001',103) AND CONVERT(DATETIME,'{1} 23:59:59.999',103) "
-                                                                             , item_id, data != null ? Convert.ToDateTime(data).ToString("dd/MM/yyyy") : "");
-
-            }
-            else
-            {
-                consulta = string.Format(@" SELECT M.*,IE.VLRCUSTO, IE.VLRVENDA, O.CODIGO, O.TITULO, U.LOGIN, V.NUMERO   " +
-                                          "   FROM MOVIMENTOSESTOQUE M  " +
-                                          "        INNER JOIN ITENSESTOQUE IE ON IE.ID = M.ITEMESTOQUEID  " +
-                                          "        INNER JOIN USUARIOS U ON U.ID = M.USUARIOID  " +
-                                          "        INNER JOIN OBRAS O ON O.ID = IE.OBRAID  " +
-                                          "        LEFT JOIN VENDAITENS VI ON VI.ID = M.VENDAITENSID  " +
-                                          "        LEFT JOIN VENDAS V ON V.ID = VI.VENDAID  " +
-                                          "  WHERE IE.ID = {0} ", item_id);
-
-            }
-
-
+                v_consulta.Append(@"    AND M.DATA BETWEEN CONVERT(DATE,'{1}',103) AND CONVERT(DATE,'{1}',103) ");
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
+                                                                CommandType.Text, string.Format(v_consulta.ToString(), item_id
+                                                                ,data != null ? Convert.ToDateTime(data).ToString("dd/MM/yyyy") : ""));
 
 
             List<MovimentosEstoque> movEstoque = CarregarObjMovimentoEstoque(dr);

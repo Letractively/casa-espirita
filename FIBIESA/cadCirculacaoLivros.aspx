@@ -21,7 +21,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
+                            <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
                                 <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                     <ContentTemplate>
                                         <table width="800PX">
@@ -32,9 +32,75 @@
                                                 <td style="width: 800px">
                                                     <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" Width="110px"
                                                         AutoPostBack="True" OnTextChanged="txtCliente_TextChanged" ToolTip="Informe o cliente"></asp:TextBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click"
                                                         CausesValidation="False" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     <asp:Label ID="lblDesCliente" runat="server"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -43,6 +109,28 @@
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="lblCategoria" runat="server"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -51,11 +139,55 @@
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="LblSituacao" runat="server" ForeColor="Red"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                 </td>
                                             </tr>
                                             <tr>                                                
                                                 <td colspan="2">
                                                     <asp:CheckBox ID="chkReciboRenovacao" runat="server" Text="Imprimir Recibo"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -65,54 +197,196 @@
                                                         <asp:GridView ID="dtgExemplar" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
                                                             DataKeyNames="ID,EMPRESTIMOID" AllowSorting="True" GridLines="None" OnRowDataBound="dtgExemplar_RowDataBound"
-                                                            PageSize="5" Width="800px">
-                                                            <Columns>
-                                                                <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                                                <asp:BoundField DataField="EMPRESTIMOID" HeaderText="EMPRESTIMOID" 
+                                                            PageSize="5" Width="800px"><Columns>
+<asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+<asp:BoundField DataField="EMPRESTIMOID" HeaderText="EMPRESTIMOID" 
                                                                     Visible="False" />
-                                                                <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
-                                                                <asp:BoundField DataField="TITULO" HeaderText="Título" />
-                                                                <asp:BoundField DataField="RENOVAR" HeaderText="Pode Renovar?" />
-                                                                <asp:BoundField DataField="QTDDIAS" HeaderText="Qtd. Dias" />
-                                                                <asp:BoundField DataField="DEVOLUCAO" HeaderText="Devolução" />
-                                                                <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
-                                                                <asp:TemplateField HeaderText="Renovar">
-                                                                    <ItemTemplate>
+<asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
+<asp:BoundField DataField="TITULO" HeaderText="Título" />
+<asp:BoundField DataField="RENOVAR" HeaderText="Pode Renovar?" />
+<asp:BoundField DataField="QTDDIAS" HeaderText="Qtd. Dias" />
+<asp:BoundField DataField="DEVOLUCAO" HeaderText="Devolução" />
+<asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
+<asp:TemplateField HeaderText="Renovar"><ItemTemplate>
                                                                         <asp:Button ID="btnRenovar" runat="server" Text="Renovar" OnClick="btnRenovar_Click"/>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                            </Columns>
-                                                            <FooterStyle BackColor="White" ForeColor="#000066" />
-                                                            <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                                                            <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                                            <RowStyle ForeColor="#000066" />
-                                                            <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                                                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                                            <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                                                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                                            <SortedDescendingHeaderStyle BackColor="#00547E" />
-                                                        </asp:GridView>
+                                                                    
+</ItemTemplate>
+</asp:TemplateField>
+</Columns>
+
+<FooterStyle BackColor="White" ForeColor="#000066" />
+
+<HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+
+<PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+
+<RowStyle ForeColor="#000066" />
+
+<SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+
+<SortedAscendingCellStyle BackColor="#F1F1F1" />
+
+<SortedAscendingHeaderStyle BackColor="#007DBB" />
+
+<SortedDescendingCellStyle BackColor="#CAC9C9" />
+
+<SortedDescendingHeaderStyle BackColor="#00547E" />
+</asp:GridView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     </asp:Panel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                 </td>
                                             </tr>
                                             <tr>                                                
                                                 <td colspan="2" valign="middle" style="text-align:center;">
                                                     <asp:Button ID="btnVoltarRen" runat="server" CssClass="btn" Text="Voltar"
                                                     ToolTip="Volta para página principal" onclick="btnVoltar_Click"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     &nbsp&nbsp&nbsp;
                                                     <asp:Button ID="btnAbreEmp" runat="server" CssClass="btn" Text="Empréstimo" 
                                                     ToolTip="Abre a aba de empréstimo" onclick="btnAbreEmp_Click" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     
                                                 </td>
                                             </tr>
                                         </table>
-                                    </ContentTemplate>
-                                </asp:TabPanel>
+                                    
+</ContentTemplate>
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</asp:TabPanel>
                                 <asp:TabPanel ID="tpEmprestimo" runat="server" HeaderText="Empréstimo">
                                     <HeaderTemplate>
                                         Empréstimo
-                                    </HeaderTemplate>
-                                    <ContentTemplate>
+                                    
+</HeaderTemplate>
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ContentTemplate>
                                         <table>
                                             <tr>
                                                 <td style="width: 140px">
@@ -199,8 +473,31 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                    </ContentTemplate>
-                                </asp:TabPanel>
+                                    
+</ContentTemplate>
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</asp:TabPanel>
                                 <asp:TabPanel ID="tpDevolucao" runat="server" HeaderText="Devolução">
                                     <ContentTemplate>
                                         <table>                                            
@@ -284,8 +581,31 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                    </ContentTemplate>
-                                </asp:TabPanel>
+                                    
+</ContentTemplate>
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</asp:TabPanel>
                             </asp:TabContainer>
                         </td>
                     </tr>

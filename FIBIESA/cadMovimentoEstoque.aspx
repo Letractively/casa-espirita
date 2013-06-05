@@ -88,10 +88,11 @@
                                 onclick="btnVoltar_Click" ToolTip="Volta para página principal"></asp:Button>
                         </td>
                         <td>
-                            Quantidade Total:     
+                            <strong>Quantidade Total:</strong>      
                         </td>
                         <td>
-                            <asp:TextBox ID="txtQtdTotal" runat="server" CssClass="inputboxRight"></asp:TextBox>
+                            <asp:TextBox ID="txtQtdTotal" runat="server" CssClass="inputboxRight" 
+                                Font-Bold="True" ForeColor="Red" ReadOnly="True" Width="100px"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

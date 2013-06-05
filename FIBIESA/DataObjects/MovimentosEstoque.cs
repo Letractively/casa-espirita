@@ -111,6 +111,20 @@ namespace DataObjects
             get { return _numeroVenda; }
             set { _numeroVenda = value; }
         }
+
+        private Int32? _numnota;
+        public Int32? Numnota
+        {
+            get { return _numnota; }
+            set { _numnota = value; }
+        }
+
+        private Int16? _serie;
+        public Int16? Serie
+        {
+            get { return _serie; }
+            set { _serie = value; }
+        }
     
     }
 }

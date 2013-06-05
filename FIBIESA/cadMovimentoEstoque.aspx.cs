@@ -66,12 +66,9 @@ namespace Admin
                 linha["VLRCUSTO"] = ltMovEst.Valor;
                 linha["USUNOME"] = ltMovEst.Usuarios.Login;
                 linha["QTDE"] = ltMovEst.Quantidade;
-                if (ltMovEst.NotaEntrada != null)
-                {
-                    linha["NOTAENT"] = utils.ComparaIntComZero(ltMovEst.NotaEntrada.Numero.ToString());
-                    linha["NOTAENTSERIE"] = utils.ComparaShortComZero(ltMovEst.NotaEntrada.Serie.ToString());
-                }
-                                
+                linha["NOTAENT"] = utils.ComparaIntComZero(ltMovEst.Numnota.ToString());
+                linha["NOTAENTSERIE"] = utils.ComparaShortComZero(ltMovEst.Serie.ToString());
+                                              
                 linha["VENDANUM"] = ltMovEst.NumeroVenda != null ? utils.ComparaIntComNull(ltMovEst.NumeroVenda.ToString()): 0 ;
                                                
                 linha["TIPO"] = ltMovEst.Tipo;
@@ -86,7 +83,7 @@ namespace Admin
                 tabela.Rows.Add(linha);
 
             }
-
+                   
             dtgMovItem.DataSource = tabela;
             dtgMovItem.DataBind();
             dtbPesquisa = tabela;
@@ -122,18 +119,45 @@ namespace Admin
 
         private void LimparCampos()
         {
+            hfIdItem.Value = "";
             txtItem.Text = "";
             lblDesItem.Text = "";
             txtQtdTotal.Text = "";
+            txtData.Text = "";
             dtgMovItem.DataSource = null;
             dtgMovItem.DataBind();
+        }
+
+        private void PesquisarItem(string conteudo)
+        {
+            LimparCampos();
+            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", conteudo, 1);
+
+            foreach (ItensEstoque ltItEstoque in ltItEst)
+            {
+                hfIdItem.Value = ltItEstoque.Id.ToString();
+                txtItem.Text = ltItEstoque.Obra.Codigo.ToString();
+                lblDesItem.Text = ltItEstoque.Obra.Titulo;
+            }
+
+            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0 && conteudo != string.Empty)
+            {
+                ExibirMensagem("Item não cadastrado !");
+                LimparCampos();
+            }
         }
 
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarAtributos();
+            if (!IsPostBack)
+            {
+                CarregarAtributos();
+                txtItem.Focus();
+            }
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
@@ -181,23 +205,7 @@ namespace Admin
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
         {
-            hfIdItem.Value = "";
-            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
-            ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text,1);
-
-            foreach (ItensEstoque ltItEstoque in ltItEst)
-            {
-                hfIdItem.Value = ltItEstoque.Id.ToString();
-                txtItem.Text = ltItEstoque.Obra.Codigo.ToString();
-                lblDesItem.Text = ltItEstoque.Obra.Titulo;
-            }
-
-            if (utils.ComparaIntComZero(hfIdItem.Value) <= 0)
-            {
-                ExibirMensagem("Item não cadastrado !");
-                LimparCampos();
-            }
+            PesquisarItem(txtItem.Text);
         }
 
         protected void dtgMovItem_RowDataBound(object sender, GridViewRowEventArgs e)

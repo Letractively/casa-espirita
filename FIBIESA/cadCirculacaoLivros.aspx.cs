@@ -176,8 +176,12 @@ namespace FIBIESA
 
         public void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    updPrincipal,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
         }
 
         private void PesquisarEmprestimosAtivo(Int32 id_pessoa)
@@ -272,9 +276,14 @@ namespace FIBIESA
 
             if (utils.ComparaIntComZero(hfIdPessoa.Value) <= 0)
             {
-                ExibirMensagem("Cliente não cadastrado !");
+                if (cod_cliente != string.Empty)
+                    ExibirMensagem("Cliente não cadastrado !");
+                
                 txtCliente.Text = "";
                 lblDesCliente.Text = "";
+                lblCategoria.Text = "";
+                LblSituacao.Text = "";
+                lblClienteItens.Text = "";
                 txtCliente.Focus();
             }
         }
@@ -320,7 +329,11 @@ namespace FIBIESA
                 }
             }
             else
+            {
+                lblDesExemplar.Text = "";
+                txtExemplar.Text = "";
                 ExibirMensagem("Exemplar já incluído !");
+            }
                         
         }
 
@@ -577,6 +590,9 @@ namespace FIBIESA
             else
             {
                 ExibirMensagem("Informe o cliente");
+                txtExemplar.Text = "";
+                lblDesExemplar.Text = "";
+                lblClienteItens.Text = "";
                 tcPrincipal.ActiveTabIndex = 0;
             }
         }        
@@ -650,6 +666,7 @@ namespace FIBIESA
 
                 EmprestimosBL empBL = new EmprestimosBL();
                 EmprestimoMovBL emovBL = new EmprestimoMovBL();
+                bool v_erro = false;
 
                 foreach (DataRow linha in dtItensEmp.Rows)
                 {
@@ -665,7 +682,8 @@ namespace FIBIESA
                         mov.EmprestimoId = emp.Id;
                         mov.DataEmprestimo = DateTime.Now;
                         mov.DataPrevistaEmprestimo = Convert.ToDateTime((linha["DEVOLUCAO"].ToString()));
-                        if (!emovBL.InserirBL(mov))
+                        v_erro = emovBL.InserirBL(mov);
+                        if (!v_erro)
                         {
                             if (empBL.ExcluirBL(emp))
                             {
@@ -675,12 +693,14 @@ namespace FIBIESA
 
                         }
                     }
-                    if (emp.Id > 0)
-                    {
-                        LimparCamposEmprestimo();
-                        LimparCamposRenovacao();
-                        ExibirMensagem("Empréstimo realizado com sucesso!");
-                    }
+                }
+
+
+                if (v_erro)
+                {
+                    LimparCamposEmprestimo();
+                    LimparCamposRenovacao();
+                    ExibirMensagem("Empréstimo realizado com sucesso!");
                 }
             }
             else
