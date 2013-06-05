@@ -123,7 +123,7 @@ namespace FIBIESA
             Session["ldsRel"] = chamadasBL.PesquisarDataSet(ddlMes.SelectedValue, ddlAno.SelectedValue, Convert.ToInt16(ddlTurma.SelectedValue), ddlParticipante.SelectedValue, preenchido, lTurmas[0].DiaSemana).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelFrequencia.aspx?mes=" + ddlMes.SelectedItem.Text + "','',600,925);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelFrequencia.aspx?mes=" + ddlMes.SelectedItem.Text + "','',600,1005);", true);
             }
             else
             {
