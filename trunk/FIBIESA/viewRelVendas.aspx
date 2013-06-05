@@ -89,6 +89,14 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                             </tr>
                             <tr>
                                 <td>
+                                 
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="ckbCancelado" runat="server" Text="  Listar Vendas Canceladas" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                 </td>
                                 <td>
                                     <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" ToolTip="Volta para página principal"
