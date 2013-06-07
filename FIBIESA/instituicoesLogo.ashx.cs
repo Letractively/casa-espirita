@@ -20,7 +20,7 @@ namespace FIBIESA
                 InstituicoesBL ibl = new InstituicoesBL();
                 int id = Convert.ToInt16(context.Request.QueryString["logoId"]);
                 List<Instituicoes> lista = ibl.PesquisarBL(id);
-                byte[] img = lista[0].InstituicaoLogo.Imagem;
+                byte[] img = lista[0].InstituicaoLogo != null ? lista[0].InstituicaoLogo.Imagem : null;
 
                 if (img != null)
                 {
