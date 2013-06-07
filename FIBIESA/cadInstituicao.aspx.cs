@@ -48,7 +48,7 @@ namespace FIBIESA
                     ddlBairro.SelectedValue = ltIns.BairroId.ToString();
                 }
 
-                hfIdInstLogo.Value = ltIns.InstituicaoLogo.Id.ToString();
+                hfIdInstLogo.Value = ltIns.InstituicaoLogo != null ? ltIns.InstituicaoLogo.Id.ToString() : "0";
             }
 
         }
@@ -58,6 +58,7 @@ namespace FIBIESA
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
             txttelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
+            txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");         
         }
         private DataTable CriarDtPesquisa()
         {
@@ -221,8 +222,8 @@ namespace FIBIESA
             
             if (!IsPostBack)
             {
-                CarregarAtributos();
 
+                CarregarAtributos();
                 if (Request.QueryString["operacao"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];

@@ -88,6 +88,8 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                     <asp:TextBox ID="txtRanking" runat="server" CssClass="inputbox" MaxLength="40" ToolTip="Informe o ranking"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtRanking" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
