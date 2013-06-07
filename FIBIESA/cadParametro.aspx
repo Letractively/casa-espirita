@@ -29,6 +29,8 @@
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtQtdMaxEmp" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtQtdMaxEmp" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -39,6 +41,8 @@
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtQtdMaxRen" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtQtdMaxRen" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -49,6 +53,8 @@
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtTempoMinRetirada" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtTempoMinRetirada" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -59,6 +65,8 @@
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtQtdMinRetirada" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtQtdMinRetirada" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                         </table>
@@ -83,6 +91,8 @@
                                                 </td>
                                                 <td style="width: 140px">
                                                     <asp:TextBox ID="txtDiasVctoMulta" CssClass="inputboxRight" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtDiasVctoMulta" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -160,7 +170,7 @@
                                 OnClick="btnVoltar_Click" ToolTip="Volta para página principal" />
                             &nbsp;&nbsp;&nbsp;
                             <asp:Button ID="btnSalvar" runat="server" CssClass="btn" Text="Salvar" 
-                                OnClick="btnSalvar_Click" ToolTip="Valida e salva as informações" />
+                                OnClick="btnSalvar_Click" ToolTip="Valida e salva as informações" ValidationGroup="salvar" />
                         </td>
                     </tr>
                 </table>
