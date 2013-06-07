@@ -170,7 +170,7 @@ namespace DataAccess
             v_consulta.Append(@"   WHERE IE.ID = {0} ");
 
             if (data != null)
-                v_consulta.Append(@"    AND M.DATA BETWEEN CONVERT(DATE,'{1}',103) AND CONVERT(DATE,'{1}',103) ");
+                v_consulta.Append(@"    AND CONVERT(DATE,M.DATA,103) BETWEEN CONVERT(DATE,'{1}',103) AND CONVERT(DATE,'{1}',103) ");
             
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(v_consulta.ToString(), item_id

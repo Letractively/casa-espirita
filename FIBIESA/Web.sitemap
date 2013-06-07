@@ -33,7 +33,7 @@
       <siteMapNode url="viewTipoAutor.aspx" title="Categorias de Autores" description="Categorias de Autores" />
       <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras" description="Categorias de Obras" />
       <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos" />   
-      <siteMapNode url="viewRelCodigoBarras.aspx" title="Relatório de Emprésimos" description="Relatório Código de Barras" />     
+      <siteMapNode url="viewRelCodigoBarras.aspx" title="Relatório de Código de Barras" description="Relatório Código de Barras" />     
     </siteMapNode>
 
     <siteMapNode title="Estoque" description="Estoque">

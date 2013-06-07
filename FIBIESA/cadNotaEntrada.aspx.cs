@@ -301,6 +301,7 @@ namespace Admin
                                 notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
                                 notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
                                 notaEntradaItens.UsuarioId = usu_id;
+                                notaEntradaItens.ValorVenda = utils.ComparaDecimalComZero(linha["VALORVENDA"].ToString());
 
                                 ntEiBL.InserirBL(notaEntradaItens);                              
                                

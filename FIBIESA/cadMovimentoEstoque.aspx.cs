@@ -149,6 +149,39 @@ namespace Admin
             }
         }
 
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+                                 
+            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque litE in ltItEst)
+            {
+                DataRow linha = dt.NewRow();
+
+                if (litE.Obra != null)
+                {
+                    linha["ID"] = litE.Id;
+                    linha["CODIGO"] = litE.Obra.Codigo;
+                    linha["TITULO"] = litE.Obra.Titulo;
+                    
+                    dt.Rows.Add(linha);
+                }
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -161,36 +194,10 @@ namespace Admin
         }
 
         protected void btnPesItem_Click(object sender, EventArgs e)
-        {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
-            ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL(1);
-
-            foreach (ItensEstoque litE in ltItEst)
-            {
-                DataRow linha = dt.NewRow();
-
-                if (litE.Obra != null)
-                {
-                    linha["ID"] = litE.Id;
-                    linha["CODIGO"] = litE.Obra.Codigo;
-                    linha["DESCRICAO"] = litE.Obra.Titulo;
-
-                    dt.Rows.Add(linha);
-                }
-
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = itEstBL;
-            Session["objPesquisa"] = itEstoque;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
+        {            
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show(); 
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -254,6 +261,38 @@ namespace Admin
             }
         }
 
-                             
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+            LimparCampos();
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtItem.Text = gvrow.Cells[2].Text;
+            lblDesItem.Text = gvrow.Cells[3].Text;
+            
+            ModalPopupExtenderPesItem.Hide();
+            ModalPopupExtenderPesItem.Enabled = false;
+
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }           
     }
 }

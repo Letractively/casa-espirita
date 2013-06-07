@@ -56,6 +56,13 @@ namespace DataObjects
             set { _usuarioId = value; }
         }
 
+        private Decimal? _valorVenda;
+        public Decimal? ValorVenda
+        {
+            get { return _valorVenda; }
+            set { _valorVenda = value; }
+        }
+
         
     }
 }
