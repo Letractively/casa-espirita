@@ -84,18 +84,18 @@ namespace BusinessLayer
             return venItDA.PesquisarDADataSet(venda);
         }
 
-        public DataSet PesquisarBLRelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, string ord)
+        public DataSet PesquisarBLRelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados, string ord)
         {
             VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.PesquisarDARelDataSet(pessoasCod, itensCod, dtIni, dtFim, ord);
+            return venItDA.PesquisarDARelDataSet(pessoasCod, itensCod, dtIni, dtFim, cancelados, ord);
         }
 
-        public DataSet PesquisarBLRelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim)
+        public DataSet PesquisarBLRelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados)
         {
             VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.PesquisarDARelDataSet(pessoasCod, itensCod, dtIni, dtFim);
+            return venItDA.PesquisarDARelDataSet(pessoasCod, itensCod, dtIni, dtFim, cancelados);
         }
     }
 }

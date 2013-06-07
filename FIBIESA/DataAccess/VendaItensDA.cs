@@ -176,7 +176,7 @@ namespace DataAccess
             return ds;
         }
 
-        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim)
+        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados)
         {
             StringBuilder query = new StringBuilder();
 
@@ -188,6 +188,7 @@ namespace DataAccess
                     "    ,v.PessoaId " +
                     "    ,v.Nome " +
                     "    ,v.data " +
+                    "    ,situacao " +
                     " FROM dbo.VIEW_vendasItens v " +
                     " WHERE 1 = 1 ");
 
@@ -200,6 +201,8 @@ namespace DataAccess
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
                 query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
 
+            if (!cancelados)
+                query.Append(@" AND situacao = 'A' ");
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, query.ToString());
@@ -208,7 +211,7 @@ namespace DataAccess
             return ds;
         }
 
-        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, string ord)
+        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados , string ord)
         {
             StringBuilder query = new StringBuilder();
 
@@ -226,6 +229,9 @@ namespace DataAccess
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
                 query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
+
+            if (!cancelados)
+                query.Append(@" AND situacao = 'A' ");
 
             query.Append(@" GROUP BY v.obraCodigo,v.titulo ");
             if (ord != string.Empty)
