@@ -68,6 +68,12 @@
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCnpj"
                                                         ErrorMessage="*Informe o CNPJ - Aba geral" ForeColor="#CC0000" 
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+ControlToValidate="txtCnpj" ValidationExpression="^\d{2}.?\d{3}.?\d{3}/?\d{4}.?\d{2}$" Display="Dynamic" validationgroup="salvar" 
+                                                        ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                                    <asp:MaskedEditExtender runat="server" ID="mke" TargetControlID="txtCnpj" Mask="99,999,999/9999-99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" 
+    OnInvalidCssClass="MaskedEditError" InputDirection="LeftToRight" ClearMaskOnLostFocus="false" ErrorTooltipEnabled="True"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -78,7 +84,7 @@
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                                         Width="335px" ToolTip="Informe o e-mail"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail"
-                                                        ErrorMessage="*Informe o e-mail - Aba geral" ForeColor="#CC0000" 
+                                                        ErrorMessage="*Informe o e-mail - Aba geral" ForeColor="#CC0000" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
@@ -88,8 +94,10 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                     <asp:TextBox ID="txtRanking" runat="server" CssClass="inputbox" MaxLength="40" ToolTip="Informe o ranking"></asp:TextBox>
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
-ControlToValidate="txtRanking" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+ControlToValidate="txtRanking" ValidationExpression="^\d+$" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  
+                                                        CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -113,7 +121,11 @@ ControlToValidate="txtRanking" ValidationExpression="^\d+$" Display="Dynamic" va
                                                 </td>
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCep" runat="server" CssClass="inputbox" MaxLength="9" ToolTip="Informe o CEP" 
-                                                        Width="110px"></asp:TextBox>                                                  
+                                                        Width="110px"></asp:TextBox>                                                    
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+ControlToValidate="txtCep" ValidationExpression="^\d{5}-?\d{3}$" Display="Dynamic" validationgroup="salvar" 
+                                                        ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                              <tr>

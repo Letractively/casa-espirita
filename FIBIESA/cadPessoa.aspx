@@ -32,7 +32,7 @@
                                                 </td>
                                                 <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox" 
-                                                        ReadOnly="True" Width="110px"></asp:TextBox>
+                                                        ReadOnly="True" Width="110px"></asp:TextBox>                                                    
                                                 </td>                                               
                                             </tr>
                                             <tr>
@@ -61,7 +61,7 @@
                                                     <asp:TextBox ID="txtCpfCnpj" runat="server" CssClass="inputbox" MaxLength="14" ToolTip="Informe o CPF/CNPJ"></asp:TextBox>
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCpfCnpj" ErrorMessage="Informe o CPF/CNPJ"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                        ForeColor="#CC0000" ValidationGroup="salvar" >*</asp:RequiredFieldValidator>                                                    
                                                 </td>  
                                                 <td style="width: 150px">
                                                    * Categoria:
@@ -102,6 +102,9 @@
                                                         ID="txtDataNascimento_CalendarExtender" runat="server" TargetControlID="txtDataNascimento"
                                                         Enabled="True">
                                                     </asp:CalendarExtender>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
+ControlToValidate="txtDataNascimento" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="grupo" ForeColor="Red"></asp:RegularExpressionValidator>
                                                 </td>
                                                 <td style="width: 150px">
                                                     Estado Civil:
@@ -124,6 +127,8 @@
                                                 <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" ToolTip="Informe o e-mail"
                                                         Width="280px"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>                                                
                                             </tr>
                                             <tr>
@@ -160,6 +165,10 @@
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCep" ErrorMessage="Informe o CEP - Aba Endereço"
                                                         ForeColor="#CC0000" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+ControlToValidate="txtCep" ValidationExpression="^\d{5}-?\d{3}$" Display="Dynamic" validationgroup="salvar" 
+                                                        ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                              <tr>
@@ -336,6 +345,10 @@
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCepProf" runat="server" CssClass="inputbox" MaxLength="9" 
                                                         Width="110px" ToolTip="Informe o CEP profissional"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+ControlToValidate="txtCepProf" ValidationExpression="^\d{5}-?\d{3}$" Display="Dynamic" validationgroup="salvar" 
+                                                        ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                                                 </td>
                                             </tr>
                                             <tr>

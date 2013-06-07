@@ -38,7 +38,10 @@
                             <asp:CalendarExtender
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
-                            </asp:CalendarExtender>                           
+                            </asp:CalendarExtender>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="DD/MM/YYYY" SetFocusOnError="true" 
+ControlToValidate="txtDtInicio" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>                           
                         </td>
                         <td style="width: 100px">* Dt. Fim:</td>
                         <td>
@@ -48,6 +51,9 @@
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
                             </asp:CalendarExtender>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" SetFocusOnError="true" 
+ControlToValidate="txtDtFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                            ToolTip="DD/MM/YYYY" Display="Dynamic" validationgroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                             
                         </td>
                     </tr>
