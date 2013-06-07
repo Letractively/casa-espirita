@@ -296,6 +296,19 @@ namespace DataAccess
             return pessoas;
         }
 
+        public DataSet PesquisaDataSetDA(int pesssoaid)
+        {
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
+                                                                                                 " FROM PESSOAS P " +
+                                                                                                 "     ,CATEGORIAS C " +
+                                                                                                 " WHERE P.CATEGORIAID = C.ID " +
+                                                                                                 " AND P.ID = {0}", pesssoaid));
+
+
+            return ds;
+        }
+
         public DataSet PesquisaDA(int id_pes)
         {
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
