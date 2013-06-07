@@ -43,13 +43,14 @@ namespace DataAccess
 
         public bool InserirDA(NotasEntradaItens ntEi)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@notaentradaid", ntEi.NotaEntradaId);
             paramsToSP[1] = new SqlParameter("@valor", ntEi.Valor);
             paramsToSP[2] = new SqlParameter("@quantidade", ntEi.Quantidade);
             paramsToSP[3] = new SqlParameter("@itemestoqueid", ntEi.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@usuarioId", ntEi.UsuarioId);
+            paramsToSP[5] = new SqlParameter("@ValorVenda", ntEi.ValorVenda);
             
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
