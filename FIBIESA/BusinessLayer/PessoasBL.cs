@@ -57,12 +57,20 @@ namespace BusinessLayer
             return pessoasDA.PesquisarPorGeneroDA(id_cat);
         }
 
+        public DataSet PesquisaDataSetDA(int id_pes)
+        {
+            
+            PessoasDA pessoasDA = new PessoasDA();
+
+            return pessoasDA.PesquisaDataSetDA(id_pes);
+        }
+
         public List<Pessoas> PesquisarBL(int id_pes)
         {
             PessoasDA pessoasDA = new PessoasDA();
 
             return pessoasDA.PesquisarDA(id_pes);
-        }
+        }        
 
         public List<Pessoas> PesquisarBL(string campo, string valor)
         {
