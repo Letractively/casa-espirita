@@ -347,5 +347,17 @@ namespace DataAccess
 
         }
 
+        public DataSet PesquisarDataSetDA(int empId)
+        {
+            SqlParameter[] paramsToSP = new SqlParameter[1];
+
+            paramsToSP[0] = new SqlParameter("@id", empId);
+            
+            DataSet ds = SqlHelper.ExecuteDataset(
+                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                CommandType.StoredProcedure, "stp_CONSULTA_emprestimo", paramsToSP);
+            return ds;
+        }
+
     }
 }

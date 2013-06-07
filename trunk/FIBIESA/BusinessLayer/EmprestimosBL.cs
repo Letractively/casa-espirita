@@ -111,6 +111,13 @@ namespace BusinessLayer
             return varDA.Pesquisar(codDes);
         }
 
+        public DataSet PesquisarDataSet(int empId)
+        {
+            EmprestimosDA varDA = new EmprestimosDA();
+
+            return varDA.PesquisarDataSetDA(empId);
+        }
+
         
     }
 }

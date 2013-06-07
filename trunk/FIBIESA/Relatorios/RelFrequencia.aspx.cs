@@ -22,7 +22,9 @@ namespace FIBIESA.Relatorios
 
         private void geraRelatorio()
         {
+            
             lDtPesquisa = (DataTable)Session["ldsRel"];
+            string mes = Request.QueryString["mes"].ToString();
             if (lDtPesquisa.Rows.Count > 0)
             {
                 int countfalta, countPresenca;
@@ -43,7 +45,7 @@ namespace FIBIESA.Relatorios
                             row[column] = countPresenca;
                     }
                 }
-                string mes = Request.QueryString["mes"].ToString();
+                //string mes = Request.QueryString["mes"].ToString();
                 InstituicoesBL instBL = new InstituicoesBL();
                 Instituicoes inst = new Instituicoes();
 
