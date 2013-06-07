@@ -115,6 +115,8 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="Relatorios\RelCarteirinha.aspx" />
+    <Content Include="Relatorios\RelRecibos.aspx" />
     <Content Include="Relatorios\RelCodigoBarras.aspx" />
     <Content Include="viewRelCodigoBarras.aspx" />
     <Content Include="default.aspx" />
@@ -602,6 +604,20 @@
     </Compile>
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelCarteirinha.aspx.cs">
+      <DependentUpon>RelCarteirinha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelCarteirinha.aspx.designer.cs">
+      <DependentUpon>RelCarteirinha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelRecibos.aspx.cs">
+      <DependentUpon>RelRecibos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelRecibos.aspx.designer.cs">
+      <DependentUpon>RelRecibos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelCodigoBarras.aspx.cs">
       <DependentUpon>RelCodigoBarras.aspx</DependentUpon>
@@ -1132,6 +1148,9 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptCarteirinha.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptCodigoBarras.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1139,6 +1158,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptFrequencia.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptRecibos.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
@@ -1151,8 +1173,12 @@
     <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptVendas.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptVendasAcumulado.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptVendas.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptVendasAcumulado.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="instituicoesLogo.ashx" />

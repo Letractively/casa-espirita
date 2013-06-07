@@ -67,6 +67,8 @@
                         <td style="width: 300px; height: 62px;" colspan="5">
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                 Width="300px" ToolTip="Informe o e-mail"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="true"
+ControlToValidate="txtEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" validationgroup="salvar" ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
                         </td>
                     </tr> 
                     <tr>
@@ -125,6 +127,9 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtDtInicio" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
+ControlToValidate="txtDtInicio" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                         </td>                   
                         <td style="width: 80px">
                             *
@@ -133,12 +138,15 @@
                         <td style="width: 250px">
                             <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" 
                                 ToolTip="Informe da data de fim"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtDtFim" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                             <asp:CalendarExtender ID="txtDtFim_CalendarExtender" runat="server" 
                                 TargetControlID="txtDtFim">
                             </asp:CalendarExtender>                            
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
+ControlToValidate="txtDtFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
+                                            Display="Dynamic" validationgroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                         </td>
                     </tr>                      
                                       

@@ -9,6 +9,7 @@ using DataObjects;
 using FG;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Admin
 {
@@ -68,8 +69,8 @@ namespace Admin
                     if (dia != string.Empty)
                         ckbDiasSemana.Items.FindByValue(dia).Selected = true;
                 }
-                txtDtFim.Text = ltTur["DtFim"].ToString();
-                txtDtInicio.Text = ltTur["DtIni"].ToString();
+                txtDtFim.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
+                txtDtInicio.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
                 txtHoraFim.Text = ltTur["HoraFim"].ToString(); 
                 txtHoraInicio.Text = ltTur["HoraIni"].ToString();   
                 ddlEvento.SelectedValue = ltTur["EventoId"].ToString();               

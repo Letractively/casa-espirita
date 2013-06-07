@@ -15,7 +15,7 @@ namespace BusinessLayer
             bool valido;
             valido = ins.Razao.Length <= 70 && ins.Email.Length <= 100 && ins.Endereco.Length <= 40 
                      && ins.Cep.Length <= 10 && ins.NomeFantasia.Length <= 70 && ins.Complemento.Length <= 40 
-                     && ins.telefone.Length <= 20 && ins.Cnpj.Length <= 14;
+                     && ins.telefone.Length <= 20 && ins.Cnpj.Length <= 20;
 
             return valido;
         }
