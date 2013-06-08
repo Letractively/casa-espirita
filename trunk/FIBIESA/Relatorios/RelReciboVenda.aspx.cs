@@ -8,11 +8,14 @@ using Microsoft.Reporting.WebForms;
 using System.Data;
 using DataObjects;
 using BusinessLayer;
+using FG;
 
 namespace FIBIESA.Relatorios
 {
     public partial class RelReciboVenda : System.Web.UI.Page
     {
+        Utils utils = new Utils();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -46,14 +49,14 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceVenda = new ReportDataSource("DataSet_Venda", lDtVenda);
                 DataSet lds = vendaItensBL.PesquisarBLDataSet(vendaid);
-                ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", lds.Tables[0]);
-                decimal valorTotal = Convert.ToDecimal(lds.Tables[0].Compute("Sum(valor)","").ToString());
-                decimal descontoTotal = Convert.ToDecimal(lds.Tables[0].Compute("Sum(desconto)","").ToString());
-                NumeroPorExtenso numeroPorExtenso = new NumeroPorExtenso(valorTotal - descontoTotal);
-                string valorExtenso = numeroPorExtenso.ToString();
                 ReportParameter[] param = new ReportParameter[1];
-                param[0] = new ReportParameter("valorExtenso", valorExtenso);
+                ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", lds.Tables[0]);
 
+                decimal valorTotal = utils.ComparaDecimalComZero((lds.Tables[0].Compute("Sum(valor)", "").ToString()));
+                decimal descontoTotal = utils.ComparaDecimalComZero(lds.Tables[0].Compute("Sum(desconto)", "").ToString());
+                NumeroPorExtenso numeroPorExtenso = new NumeroPorExtenso(valorTotal - descontoTotal);
+                string valorExtenso = numeroPorExtenso.ToString();                    
+                param[0] = new ReportParameter("valorExtenso", valorExtenso);
                 ReportViewer1.LocalReport.SetParameters(param);
                 ReportViewer1.LocalReport.DataSources.Add(rptDatasourceInstituicao);
                 ReportViewer1.LocalReport.DataSources.Add(rptDatasourceInstituicaoLogo);
@@ -62,6 +65,8 @@ namespace FIBIESA.Relatorios
 
                 ReportViewer1.LocalReport.Refresh();
                 //Session["ldsRel"] = null;
+                
+               
             }
             else
             {

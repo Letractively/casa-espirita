@@ -69,11 +69,15 @@
                                                         ErrorMessage="*Informe o CNPJ - Aba geral" ForeColor="#CC0000" 
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
-                                                        ErrorMessage="*" ToolTip="Não Válida" SetFocusOnError="True"
+                                                        ErrorMessage="*CNPJ com formato errado" ToolTip="Não Válida" SetFocusOnError="True"
 ControlToValidate="txtCnpj" ValidationExpression="^\d{2}.?\d{3}.?\d{3}/?\d{4}.?\d{2}$" Display="Dynamic" validationgroup="salvar" 
-                                                        ForeColor="Red"  CssClass="labelValignMiddle"></asp:RegularExpressionValidator>
-                                                    <asp:MaskedEditExtender runat="server" ID="mke" TargetControlID="txtCnpj" Mask="99,999,999/9999-99" MessageValidatorTip="true" OnFocusCssClass="MaskedEditFocus" 
-    OnInvalidCssClass="MaskedEditError" InputDirection="LeftToRight" ClearMaskOnLostFocus="false" ErrorTooltipEnabled="True"/>
+                                                        ForeColor="Red"  CssClass="labelValignMiddle">*</asp:RegularExpressionValidator>
+                                                    <asp:MaskedEditExtender runat="server" ID="mke" TargetControlID="txtCnpj" 
+                                                        Mask="99,999,999/9999-99" ClearMaskOnLostFocus="False" 
+                                                        ErrorTooltipEnabled="True" CultureAMPMPlaceholder="" 
+                                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" 
+                                                        CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
+                                                        CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -84,8 +88,12 @@ ControlToValidate="txtCnpj" ValidationExpression="^\d{2}.?\d{3}.?\d{3}/?\d{4}.?\
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" 
                                                         Width="335px" ToolTip="Informe o e-mail"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail"
-                                                        ErrorMessage="*Informe o e-mail - Aba geral" ForeColor="#CC0000" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+                                                        ErrorMessage="*Informe o e-mail - Aba geral" ForeColor="#CC0000" 
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*E-mail com formato errado"
+                                                        ToolTip="Não Válido" SetFocusOnError="True" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+                                                        Display="Dynamic" ValidationGroup="salvar" CssClass="validacao">*</asp:RegularExpressionValidator>
+
                                                 </td>
                                             </tr>
                                             <tr>

@@ -156,12 +156,12 @@ namespace FIBIESA
 
             string PaginaRelatorio = "";
 
-            if (rbLivrosMais.Checked)
+            if (ddlTipo.SelectedValue == "A")
             {
                 Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(txtAssociado.Text, txtCodigo.Text, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "desc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Mais&";
             }
-            else if (rbLivrosMenos.Checked)
+            else if (ddlTipo.SelectedValue == "B")
             {
                 Session["ldsRel"] = empMovBL.PesquisarRelatorioBL(txtAssociado.Text, txtCodigo.Text, txtDataRetiradaIni.Text, txtDataRetiradaFin.Text, txtDevolucaoIni.Text, txtDevolucaoFim.Text, ddlStatus.SelectedValue.ToString(), "asc").Tables[0];
                 PaginaRelatorio = "/Relatorios/RelEmprestimoAcumulado.aspx?Acumulado=Menos&";
@@ -179,10 +179,6 @@ namespace FIBIESA
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
-
-
-            //emp. txtDataRetiradaIni.Text
-
 
         }
 
