@@ -109,14 +109,30 @@ namespace DataAccess
         }
 
         public bool ExcluirDA(Doacoes doa)
-        {
+        {                       
+
             SqlParameter[] paramsToSP = new SqlParameter[1];
 
             paramsToSP[0] = new SqlParameter("@id", doa.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_doacoes", paramsToSP);
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.StoredProcedure, "stp_delete_doacoes", paramsToSP);
 
-            return true;
+                DataTable tabela = ds.Tables[0];
+
+                string resultado = tabela.Rows[0][0].ToString();
+
+                if (resultado == "true")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Doacoes> PesquisarDA()
@@ -125,7 +141,7 @@ namespace DataAccess
                                                                 CommandType.Text, string.Format(@"SELECT * FROM DOACOES "));
 
             List<Doacoes> Doacoes = CarregarObjDoacoes(dr);
-           
+
             return Doacoes;
 
         }
@@ -146,7 +162,7 @@ namespace DataAccess
 
             return doacoes;
         }
-        
+
         public List<Doacoes> PesquisarDA(int id_doa)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
@@ -154,7 +170,7 @@ namespace DataAccess
                                                                                        " FROM DOACOES WHERE ID = {0}", id_doa));
 
             List<Doacoes> Doacoes = CarregarObjDoacoes(dr);
-                        
+
             return Doacoes;
         }
 
@@ -169,16 +185,16 @@ namespace DataAccess
                                 " FROM VIEW_DOACOES WHERE 1 = 1 ");
             if (codPessoa != string.Empty)
                 sqlQuery.Append(@" AND pessoaCodigo IN (" + codPessoa + ")");
-            
+
             if ((dataIni != string.Empty) && (dataFim != string.Empty))
                 sqlQuery.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)");
-            
+
             if ((valorIni != string.Empty) && (valorFim != string.Empty))
-                sqlQuery.Append(@" AND valor BETWEEN CONVERT(decimal(9,2),'" + (valorIni.Replace(".","")).Replace(",",".") + "') AND CONVERT(decimal(9,2),'" + (valorFim.Replace(".","")).Replace(",",".") + "')");
-            
+                sqlQuery.Append(@" AND valor BETWEEN CONVERT(decimal(9,2),'" + (valorIni.Replace(".", "")).Replace(",", ".") + "') AND CONVERT(decimal(9,2),'" + (valorFim.Replace(".", "")).Replace(",", ".") + "')");
+
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, sqlQuery.ToString());
-            
+
             return ds;
 
         }
@@ -241,6 +257,6 @@ namespace DataAccess
                                                                         " FROM dbo.VIEW_doacoes WHERE ID = {0}", id_Doa));
             return ds;
         }
-        
+
     }
 }
