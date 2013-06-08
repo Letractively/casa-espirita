@@ -82,7 +82,8 @@ namespace Admin
             FormulariosBL forBL = new FormulariosBL();
             Formularios formulario = new Formularios();
 
-            formulario.Id = utils.ComparaIntComZero(hfId.Value);            
+            formulario.Id = utils.ComparaIntComZero(hfId.Value);
+            formulario.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             formulario.Descricao = txtDescricao.Text;
             formulario.Nome = txtNome.Text;
             formulario.Tipo = ddlTipo.SelectedValue;

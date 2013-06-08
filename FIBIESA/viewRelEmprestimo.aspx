@@ -19,7 +19,7 @@
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Obra:
+                                    Obra(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="260px" 
@@ -33,7 +33,7 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                             </tr>
                             <tr>
                                 <td style="width: 140px">
-                                    Associado:
+                                    Associado(s):
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtAssociado" runat="server" CssClass="inputbox" 
@@ -129,18 +129,16 @@ ControlToValidate="txtDevolucaoFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 530px" colspan="2" style="text-align:center;">
-                                    <center>
-                                        <asp:RadioButton ID="rbLivrosMenos" GroupName="Livros" runat="server" 
-                                            CssClass="input" Text="  Livros Menos Retirados" 
-                                            ToolTip="Lista os livros menos retirados">                                                                                    
-                                        </asp:RadioButton>
-                                        &nbsp;
-                                        <asp:RadioButton ID="rbLivrosMais" GroupName="Livros" runat="server" 
-                                            CssClass="input" Text="  Livros Mais Retirados" 
-                                            ToolTip="Lista os livros mais retirados">
-                                        </asp:RadioButton>
-                                    </center>
+                                <td>
+                                Tipo de Relatório:
+                                </td>
+                                <td>
+                                   <asp:DropDownList ID="ddlTipo" runat="server" AppendDataBoundItems="True" 
+                                        CssClass="dropdownlist" ToolTip="Selecion o tipo do relatório">
+                                        <asp:ListItem Text="Selecione" Value="" Selected="True"></asp:ListItem> 
+                                        <asp:ListItem Text="Mais Retirados" Value="A"></asp:ListItem>                                            
+                                        <asp:ListItem Text="Menos retirados" Value="B"></asp:ListItem>                                            
+                                    </asp:DropDownList>                                   
                                 </td>                                                                      
                             </tr>
                             <tr>

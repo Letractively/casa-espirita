@@ -19,12 +19,15 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
-
-
+        
         public void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                     updPrincipal,
+                                     this.GetType(),
+                                     "Alert",
+                                     "window.alert(\"" + mensagem + "\");",
+                                     true);
         }
 
         private void CarregarAtributos()
@@ -216,6 +219,18 @@ namespace Admin
 
         }
 
+        private void LimparCampos()
+        {
+            txtNumero.Text = "";
+            txtSerie.Text = "";
+            txtData.Text = "";
+            txtTotal.Text = "";
+            txtTotItens.Text = "";
+            LimparCamposItem();
+            Session["dtItens"] = null;
+            dtgItens.DataSource = null;
+            dtgItens.DataBind();            
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -269,92 +284,90 @@ namespace Admin
             notaEntrada.Data = Convert.ToDateTime(txtData.Text);
             int usu_id = 0;
 
-            if (Session["usuario"] != null)
-            {
-                List<Usuarios> usuarios;
-                usuarios = (List<Usuarios>)Session["usuario"];
-
-                foreach (Usuarios usu in usuarios)
-                {
-                    usu_id = usu.Id;
-                }
-            }
-
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
 
-
-            if (notaEntrada.Id == 0)
+            if (dtItens.Rows.Count > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                {
-                    if (dtItens.Rows.Count > 0)
-                    {
-                        int id = ntEBL.InserirBL(notaEntrada);
 
-                        if (id > 0)
+                if (Session["usuario"] != null)
+                {
+                    List<Usuarios> usuarios;
+                    usuarios = (List<Usuarios>)Session["usuario"];
+
+                    foreach (Usuarios usu in usuarios)
+                    {
+                        usu_id = usu.Id;
+                    }
+                }
+
+
+                if (notaEntrada.Id == 0)
+                {
+                    if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                    {
+                        if (dtItens.Rows.Count > 0)
                         {
+                            int id = ntEBL.InserirBL(notaEntrada);
+
+                            if (id > 0)
+                            {
+                                foreach (DataRow linha in dtItens.Rows)
+                                {
+                                    notaEntradaItens.NotaEntradaId = id;
+                                    notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
+                                    notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
+                                    notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
+                                    notaEntradaItens.UsuarioId = usu_id;
+                                    notaEntradaItens.ValorVenda = utils.ComparaDecimalComZero(linha["VALORVENDA"].ToString());
+
+                                    ntEiBL.InserirBL(notaEntradaItens);
+                                }
+                            }
+
+                            LimparCampos();
+                            ExibirMensagem("Nota de Entrada gravada com sucesso !");
+                        }
+
+                    }
+                    else
+                        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                }
+                else
+                {
+                    if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                    {
+                        ExcluirItens();
+                        if (dtItens.Rows.Count > 0)
+                        {
+                            ntEBL.EditarBL(notaEntrada);
+
                             foreach (DataRow linha in dtItens.Rows)
                             {
-                                notaEntradaItens.NotaEntradaId = id;
+                                notaEntradaItens.NotaEntradaId = notaEntrada.Id;
+                                notaEntradaItens.Id = utils.ComparaIntComZero(linha["ID"].ToString());
                                 notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
                                 notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
                                 notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
                                 notaEntradaItens.UsuarioId = usu_id;
                                 notaEntradaItens.ValorVenda = utils.ComparaDecimalComZero(linha["VALORVENDA"].ToString());
 
-                                ntEiBL.InserirBL(notaEntradaItens);                              
-                               
+                                if (notaEntradaItens.Id > 0)
+                                    ntEiBL.EditarBL(notaEntradaItens);
+                                else
+                                    ntEiBL.InserirBL(notaEntradaItens);
+
                             }
                         }
-                    }
 
+                        ExibirMensagem("Nota de Entrada atualizada com sucesso !");
+                    }
+                    else
+                        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
                 }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
             else
-            {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (dtItens.Rows.Count > 0)
-                    {
-                        ntEBL.EditarBL(notaEntrada);
-                        ExcluirItens(); 
-                        foreach (DataRow linha in dtItens.Rows)
-                        {
-                            notaEntradaItens.NotaEntradaId = notaEntrada.Id;
-                            notaEntradaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
-                            notaEntradaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
-                            notaEntradaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
-
-                            ntEiBL.EditarBL(notaEntradaItens);                                                   
-
-                            if (notaEntradaItens.Id > 0)
-                            {
-                                movEstoque.UsuarioId = usu_id;
-                                movEstoque.ItemEstoqueId = notaEntradaItens.ItemEstoqueId;
-                                movEstoque.Quantidade = notaEntradaItens.Quantidade;
-                                movEstoque.Data = DateTime.Now;
-                                movEstoque.Tipo = "E";
-                                movEstoque.NotaEntradaId = notaEntradaItens.Id;
-
-                                if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
-                                {                                   
-                                    movEstBL.InserirBL(movEstoque);
-                                }
-                            }
-                        }
-                    }
-
-                }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
-
-
-            Response.Redirect("viewNotaEntrada.aspx");
+                ExibirMensagem("Não é possível salvar uma nota sem o(s) item(es) !");
 
         }
 
@@ -469,6 +482,9 @@ namespace Admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+          
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarJsExclusao("Deseja excluir este item da nota de entrada?", 0, e);
         }
 
         protected void btnCanelItem_Click(object sender, EventArgs e)
