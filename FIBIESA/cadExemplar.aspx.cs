@@ -39,22 +39,7 @@ namespace Admin
         private void CarregarAtributos()
         {
            txtTombo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }
-
-        private DataTable CriarDtPesquisa()
-        {
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            return dt;
-        }
-
+        }        
         private void CarregarDdlOrigem()
         {
             OrigensBL oriBL = new OrigensBL();
@@ -68,10 +53,13 @@ namespace Admin
         }
         private void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                   updPrincipal,
+                                   this.GetType(),
+                                   "Alert",
+                                   "window.alert(\"" + mensagem + "\");",
+                                   true);
         }
-
         private void LimparCampos()
         {
             txtObra.Text = "";
@@ -80,6 +68,36 @@ namespace Admin
             ddlOrigem.SelectedIndex = 0;
             hfIdObra.Value = "";
             hfId.Value = "";
+        }
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            ObrasBL obBL = new ObrasBL();
+            Obras obras = new Obras();
+            List<Obras> ltObra = obBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Obras litE in ltObra)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = litE.Id;
+                linha["CODIGO"] = litE.Codigo;
+                linha["TITULO"] = litE.Titulo;
+
+                dt.Rows.Add(linha);
+
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
         }
         #endregion
 
@@ -154,31 +172,9 @@ namespace Admin
 
         protected void btnPesObra_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            ObrasBL obBL = new ObrasBL();
-            Obras obr = new Obras();
-            List<Obras> obras = obBL.PesquisarBL();
-
-            foreach (Obras ltobr in obras)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = ltobr.Id;
-                linha["CODIGO"] = ltobr.Codigo;
-                linha["DESCRICAO"] = ltobr.Titulo;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = obBL;
-            Session["objPesquisa"] = obr;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtObra.ClientID + "&id=" + hfIdObra.ClientID + "&lbl=" + lblDesObra.ClientID + "','',600,500);", true);
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
         }
 
         protected void txtObra_TextChanged(object sender, EventArgs e)
@@ -213,6 +209,41 @@ namespace Admin
             }  
         }
 
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+
+            LimparCampos();
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdObra.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtObra.Text = gvrow.Cells[2].Text;
+            lblDesObra.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesItem.Enabled = false;
+            ModalPopupExtenderPesItem.Hide();           
+            txtTombo.Focus();
+
+        }
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }
        
     }
 }

@@ -116,7 +116,6 @@
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
     <Content Include="Relatorios\RelCarteirinha.aspx" />
-    <Content Include="Relatorios\RelRecibos.aspx" />
     <Content Include="Relatorios\RelCodigoBarras.aspx" />
     <Content Include="viewRelCodigoBarras.aspx" />
     <Content Include="default.aspx" />
@@ -611,13 +610,6 @@
     </Compile>
     <Compile Include="Relatorios\RelCarteirinha.aspx.designer.cs">
       <DependentUpon>RelCarteirinha.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Relatorios\RelRecibos.aspx.cs">
-      <DependentUpon>RelRecibos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Relatorios\RelRecibos.aspx.designer.cs">
-      <DependentUpon>RelRecibos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelCodigoBarras.aspx.cs">
       <DependentUpon>RelCodigoBarras.aspx</DependentUpon>
@@ -1158,9 +1150,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptFrequencia.rdlc">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\rptRecibos.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />

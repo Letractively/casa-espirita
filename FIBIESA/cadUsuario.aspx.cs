@@ -64,24 +64,15 @@ namespace Admin
             txtDtFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtPessoa.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
-        private DataTable CriarDtPesquisa()
+
+        public void ExibirMensagem(string mensagem)
         {
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            return dt;
-        }
-
-        private void ExibirMensagem(string mensagem)
-        {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    upnlPesquisa,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
         }
 
         private void LimparCampos()
@@ -99,6 +90,37 @@ namespace Admin
             txtLogin.Text = "";
             ddlCategoria.SelectedIndex = 0;
             ddlStatus.SelectedIndex = 0;
+        }
+
+        public void CarregarPesquisaPessoa(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("NOME", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pe = new Pessoas();
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Pessoas pes in pessoas)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["NOME"] = pes.Nome;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();
         }
 
         #endregion
@@ -139,31 +161,9 @@ namespace Admin
 
         protected void btnPesPessoa_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtPessoa.ClientID + "&id=" + hfIdPessoa.ClientID + "&lbl=" + lblDesPessoa.ClientID + "','',600,500);", true);
+            CarregarPesquisaPessoa(null);
+            ModalPopupExtenderPessoa.Enabled = true;
+            ModalPopupExtenderPessoa.Show(); 
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -219,6 +219,7 @@ namespace Admin
                 hfIdPessoa.Value = ltpessoa.Id.ToString();
                 txtPessoa.Text = ltpessoa.Codigo.ToString();
                 lblDesPessoa.Text = ltpessoa.Nome;
+                txtNome.Text = ltpessoa.Nome;
                 ddlCategoria.Focus();
             }
 
@@ -231,5 +232,40 @@ namespace Admin
                 hfIdPessoa.Value = "";
             }
         }
+
+        protected void btnCanel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPessoa.Enabled = false;
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtPessoa.Text = gvrow.Cells[2].Text;
+            lblDesPessoa.Text = gvrow.Cells[3].Text;
+            txtNome.Text = lblDesPessoa.Text;
+           
+            ModalPopupExtenderPessoa.Hide();
+            ModalPopupExtenderPessoa.Enabled = false;
+
+        }
+
+        protected void txtPesPessoa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaPessoa(txtPesPessoa.Text);
+            ModalPopupExtenderPessoa.Enabled = true;
+            ModalPopupExtenderPessoa.Show();
+            txtPesPessoa.Text = "";
+        }           
     }
 }

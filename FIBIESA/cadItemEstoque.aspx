@@ -6,8 +6,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+                        EnableScriptLocalization="true">
+                    </asp:ScriptManager>
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>
+        <script type="text/javascript">
+            Sys.Application.add_load(formatarValor);
+        </script>
             <div id="content">
                 <div class="container half left">
                     <div class="conthead">
@@ -102,9 +108,7 @@
                     </div>
                     <asp:HiddenField ID="hfIdItem" runat="server" />
                     <asp:HiddenField ID="hfId" runat="server" />
-                    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
-                        EnableScriptLocalization="true">
-                    </asp:ScriptManager>
+                   
                 </div>
                 <div class="status">
                 </div>

@@ -91,35 +91,31 @@ namespace FIBIESA
         {
             VendaItensBL vendaItemBL = new VendaItensBL();
             string paginaRel = "";
-            //if (ddlTipoRel.SelectedValue == "1")
-            //{
-            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked, "desc").Tables[0];
-            //    paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Mais&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
-            //}
-            //else if (ddlTipoRel.SelectedValue == "0")
-            //{
-            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked, "asc").Tables[0];
-            //    paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Menos&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
-            //}
-            //else
-            //{
-            //    Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked).Tables[0];
-            //    paginaRel = "WinOpen('/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,1125);";
-            //}
+            if (ddlTipoRel.SelectedValue == "1")
+            {
+                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked, "desc").Tables[0];
+                paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Mais&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
+            }
+            else if (ddlTipoRel.SelectedValue == "0")
+            {
+                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked, "asc").Tables[0];
+                paginaRel = "WinOpen('/Relatorios/RelVendasAcumulados.aspx?acumulado=Menos&DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,760);";
+            }
+            else
+            {
+                Session["ldsRel"] = vendaItemBL.PesquisarBLRelDataSet(txtCliente.Text, txtItem.Text, txtDataIni.Text, txtDataFim.Text, ckbCancelado.Checked).Tables[0];
+                paginaRel = "WinOpen('/Relatorios/RelVendas.aspx?DtIni=" + txtDataIni.Text + "&DtFim=" + txtDataFim.Text + "','',600,1125);";
+            }
 
-            //if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
-            //{                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),  paginaRel.ToString() , true);
-            //}
-            //else
-            //{
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
-            //}
-
-
-            //emp. txtDataRetiradaIni.Text
-
-
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
+            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),  paginaRel.ToString() , true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
+            }
+            
 
         }
 

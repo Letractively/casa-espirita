@@ -71,8 +71,12 @@ namespace Admin
         }
         public void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    updPrincipal,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
         }
         public void CarregarPesquisaItem(string conteudo)
         {
