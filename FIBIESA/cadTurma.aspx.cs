@@ -64,11 +64,11 @@ namespace Admin
                 txtSala.Text = ltTur["Sala"].ToString();
                 txtNroMax.Text = ltTur["Nromax"].ToString();
                 string[] diasSemana = ltTur["DiaSemana"].ToString().Split(new Char[] { ',' });
-                foreach (string dia in diasSemana)
-                {
-                    if (dia != string.Empty)
-                        ckbDiasSemana.Items.FindByValue(dia).Selected = true;
-                }
+                //foreach (string dia in diasSemana)
+                //{
+                //    if (dia != string.Empty)
+                //        ckbDiasSemana.Items.FindByValue(dia).Selected = true;
+                //}
                 txtDtFim.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
                 txtDtInicio.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
                 txtHoraFim.Text = ltTur["HoraFim"].ToString(); 

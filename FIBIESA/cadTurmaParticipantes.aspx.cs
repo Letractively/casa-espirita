@@ -63,6 +63,47 @@ namespace Admin
             dtgParticipantes.DataBind();
 
         }
+
+        public void CarregarPesquisaPessoa(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pe = new Pessoas();
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+
+            foreach (Pessoas pes in pessoas)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = pes.Id;
+                linha["CODIGO"] = pes.Codigo;
+                linha["DESCRICAO"] = pes.Nome;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisa.DataSource = dt;
+            grdPesquisa.DataBind();
+        }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ScriptManager.RegisterStartupScript(
+                                    updPrincipal,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,40 +123,9 @@ namespace Admin
 
         protected void btnPesParticipante_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
-
-            PessoasBL pesBL = new PessoasBL();
-            Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBL();
-
-            foreach (Pessoas pes in pessoas)
-            {
-                DataRow linha = dt.NewRow();
-
-                linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Codigo;
-                linha["DESCRICAO"] = pes.Nome;
-
-                dt.Rows.Add(linha);
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = pesBL;
-            Session["objPesquisa"] = pe;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtParticipante.ClientID + "&id=" + hfIdParticipante.ClientID + "&lbl=" + lblDesParticipante.ClientID + "','',600,500);", true);
+            CarregarPesquisaPessoa(null);           
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -212,6 +222,65 @@ namespace Admin
             dtgParticipantes.DataSource = dtbPesquisa;
             dtgParticipantes.PageIndex = e.NewPageIndex;
             dtgParticipantes.DataBind();
+        }
+
+        protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesquisa.Enabled = false;
+        }
+
+        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaPessoa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
+        }
+
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdParticipante.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtParticipante.Text = gvrow.Cells[2].Text;
+            lblDesParticipante.Text = gvrow.Cells[3].Text;
+
+            ModalPopupExtenderPesquisa.Hide();
+            ModalPopupExtenderPesquisa.Enabled = false;
+
+        }
+
+        protected void txtParticipante_TextChanged(object sender, EventArgs e)
+        {
+            hfIdParticipante.Value = "";
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pessoa = new Pessoas();
+            List<Pessoas> pes = pesBL.PesquisarBL("CODIGO", txtParticipante.Text);
+
+            foreach (Pessoas ltpessoa in pes)
+            {
+                hfIdParticipante.Value = ltpessoa.Id.ToString();
+                txtParticipante.Text = ltpessoa.Codigo.ToString();
+                lblDesParticipante.Text = ltpessoa.Nome;
+                btnInserir.Focus();
+            }
+
+            if (utils.ComparaIntComZero(hfIdParticipante.Value) <= 0)
+            {
+                ExibirMensagem("Cliente não cadastrado !");
+                txtParticipante.Text = "";
+                lblDesParticipante.Text = "";
+                txtParticipante.Focus();
+                hfIdParticipante.Value = "";
+            }
         }
 
        
