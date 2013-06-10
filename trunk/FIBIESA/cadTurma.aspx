@@ -125,13 +125,13 @@ ControlToValidate="txtDtFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[
                         <td colspan="3">
                             <asp:CheckBoxList ID="ckbDiasSemana" runat="server" Width="317px" Height="16px" 
                                 RepeatDirection="Horizontal" TextAlign="Left">
-                                <asp:ListItem Text="Dom" Value="1" />
-                                <asp:ListItem Text="Seg" Value="2" />
-                                <asp:ListItem Text="Ter" Value="3" />
-                                <asp:ListItem Text="Qua" Value="4" />
-                                <asp:ListItem Text="Qui" Value="5" />
-                                <asp:ListItem Text="Sex" Value="6" />
-                                <asp:ListItem Text="Sáb" Value="7" />                                
+                                <asp:ListItem Text="Domingo" Value="1" />
+                                <asp:ListItem Text="Segunda" Value="2" />
+                                <asp:ListItem Text="Terça" Value="3" />
+                                <asp:ListItem Text="Quarta" Value="4" />
+                                <asp:ListItem Text="Quinta" Value="5" />
+                                <asp:ListItem Text="Sexta" Value="6" />
+                                <asp:ListItem Text="Sábado" Value="7" />                                
                             </asp:CheckBoxList>                                                    
                         </td>
                     </tr>

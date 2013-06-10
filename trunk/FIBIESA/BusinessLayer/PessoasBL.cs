@@ -87,6 +87,14 @@ namespace BusinessLayer
             return pessoasDA.PesquisarBuscaDA(valor);
         }
 
+        public List<Pessoas> PesquisarParticTurmaBL(string valor, int tur_id)
+        {
+            /*criar as regras de negocio*/
+            PessoasDA pessoasDA = new PessoasDA();
+
+            return pessoasDA.PesquisarParticTurmaDA(valor, tur_id); 
+        }
+
         public override List<Base> Pesquisar(string codDes)
         {
             PessoasDA pesDA = new PessoasDA();
