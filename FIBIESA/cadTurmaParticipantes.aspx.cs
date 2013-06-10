@@ -77,7 +77,7 @@ namespace Admin
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+            List<Pessoas> pessoas = pesBL.PesquisarParticTurmaBL(conteudo,utils.ComparaIntComZero(hfIdTurma.Value));
 
             foreach (Pessoas pes in pessoas)
             {

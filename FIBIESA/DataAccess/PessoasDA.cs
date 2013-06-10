@@ -379,6 +379,28 @@ namespace DataAccess
             return pessoas;
         }
 
+        public List<Pessoas> PesquisarParticTurmaDA(string valor, int tur_id)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
+            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
+
+            if(tur_id > 0)
+                consulta.Append(string.Format(@"  AND NOT EXISTS(SELECT 1 FROM TURMASPARTICIPANTES T WHERE T.PESSOAID = P.ID AND T.TURMASID = {0})",tur_id));
+
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY P.CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Pessoas> pessoas = CarregarObjPessoa(dr);
+
+            return pessoas;
+        }
+        
         public override List<Base> Pesquisar(string descricao)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
