@@ -77,14 +77,11 @@
             <p>
                 <span>Você está logado como
                     <asp:Label ID="lblCategoria" runat="server" /></span></p>
-            <ul>
-                <li><a href="#" title="E-mail">
-                    <img src="images/icons/icon_mail.png" alt="Mail" /></a></li>
-                <li><a href="#" title="Configuração">
-                    <img src="images/icons/icon_cog.png" alt="Configure" /></a></li>
+            <ul>     
                 <li><a>
                     <asp:ImageButton ID="imbSair" runat="server" ImageUrl="images/icons/icon_unlock.png"
                         AlternateText="Sair" OnClick="imbSair_Click" ToolTip="Sair" /></a></li>
+                 
             </ul>
         </div>
     </div>

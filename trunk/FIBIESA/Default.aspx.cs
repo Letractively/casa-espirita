@@ -24,5 +24,20 @@ namespace Admin
         {
             Response.Redirect("~/cadChamada.aspx");
         }
+
+        protected void imgAtaEmprestimos_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/cadCirculacaoLivros.aspx");
+        }
+
+        protected void imgAtaEstoque_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/cadAcertoEstoque.aspx");
+        }
+
+        protected void imgPessoas_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/viewPessoa.aspx");
+        }
     }
 }

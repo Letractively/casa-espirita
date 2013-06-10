@@ -115,8 +115,12 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="images\logoff.png" />
+    <Content Include="images\users1.png" />
+    <Content Include="images\LOGOUM.png" />
     <Content Include="Relatorios\RelCarteirinha.aspx" />
     <Content Include="Relatorios\RelCodigoBarras.aspx" />
+    <Content Include="Relatorios\RelRecibos.aspx" />
     <Content Include="viewRelCodigoBarras.aspx" />
     <Content Include="default.aspx" />
     <Content Include="emissaoBloqBan.aspx" />
@@ -617,6 +621,13 @@
     </Compile>
     <Compile Include="Relatorios\RelCodigoBarras.aspx.designer.cs">
       <DependentUpon>RelCodigoBarras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelRecibos.aspx.cs">
+      <DependentUpon>RelRecibos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelRecibos.aspx.designer.cs">
+      <DependentUpon>RelRecibos.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewRelCodigoBarras.aspx.cs">
       <DependentUpon>viewRelCodigoBarras.aspx</DependentUpon>
@@ -1152,6 +1163,7 @@
     <EmbeddedResource Include="Relatorios\rptFrequencia.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptRecibos.rdlc" />
     <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasPagar.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />

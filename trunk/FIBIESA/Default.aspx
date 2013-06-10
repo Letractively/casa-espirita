@@ -13,6 +13,11 @@
                        <table>
                             <tr>
                                 <td>
+                                    <asp:ImageButton ID="imgPessoas" runat="server" AlternateText="Vendas" 
+                                        ImageUrl="~/images/users1.png" 
+                                        ToolTip="Abre Página de Cadastro de Pessoas" onclick="imgPessoas_Click" />
+                                </td>
+                                <td>
                                     <asp:ImageButton ID="imgAtaVendas" runat="server" AlternateText="Vendas" 
                                         ImageUrl="~/images/money2.png" onclick="imgAtaVendas_Click" 
                                         ToolTip="Abre Página de Vendas de Livros" />
@@ -20,7 +25,8 @@
                                 <td>
                                     <asp:ImageButton ID="imgAtaEmprestimos" runat="server" 
                                         AlternateText="Empréstimos" ImageUrl="~/images/fancybox/books.png" 
-                                        ToolTip="Abre Página de Empréstimos de Livros" />
+                                        ToolTip="Abre Página de Empréstimos de Livros" 
+                                        onclick="imgAtaEmprestimos_Click" />
                                 </td>                           
                                 <td>
                                     <asp:ImageButton ID="imgAtaFrequencia" runat="server" 
@@ -30,7 +36,13 @@
                                 </td>
                                 <td>
                                     <asp:ImageButton ID="imgAtaEstoque" runat="server" AlternateText="Estoque" 
-                                        ImageUrl="~/images/box.png" ToolTip="Abre Página de Controle de Estoque" />
+                                        ImageUrl="~/images/box.png" ToolTip="Abre Página de Controle de Estoque" 
+                                        onclick="imgAtaEstoque_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan ="5">
+                                    <img src="images/LOGOUM.png" />                                    
                                 </td>
                             </tr>
                        </table>                      

@@ -53,6 +53,12 @@
                                         <asp:CommandField ShowDeleteButton="True">
                                             <ItemStyle CssClass="grd_delete" />
                                         </asp:CommandField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_printer.png"
+                                                    OnClick="btnSelect_Click" ToolTip="Imprime a carterinha" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                         <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
                                         <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />

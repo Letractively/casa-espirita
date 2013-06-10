@@ -79,6 +79,12 @@ namespace Admin
             dtgPessoas.DataSource = tabela;
             dtgPessoas.DataBind();
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -100,7 +106,10 @@ namespace Admin
                 Pessoas pessoas = new Pessoas();
 
                 pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
-                pesBL.ExcluirBL(pessoas);
+                if (pesBL.ExcluirBL(pessoas))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro !");
                 Pesquisar(null);
             }
             else
@@ -170,6 +179,17 @@ namespace Admin
             Pesquisar(txtBusca.Text); 
         }
 
+        protected void btnSelect_Click(object sender, EventArgs e)
+        {
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            int pes_id = utils.ComparaIntComZero(dtgPessoas.DataKeys[gvrow.RowIndex].Value.ToString());
+
+            if (pes_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                         //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                        "WinOpen('/Relatorios/RelCarteirinha.aspx?pessoaid=" + pes_id + "','',600,850);", true);            
+                           
+        }
        
     }
 }
