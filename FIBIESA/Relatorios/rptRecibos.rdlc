@@ -128,6 +128,10 @@
           <DataField>exemplar</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="titulo">
+          <DataField>titulo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="tombo">
           <DataField>tombo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -161,7 +165,7 @@
   </DataSets>
   <Body>
     <ReportItems>
-      <Textbox Name="Textbox24">
+      <Textbox Name="Textbox29">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -176,8 +180,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>0.29329cm</Top>
-        <Left>1.42875cm</Left>
+        <Top>0.49935cm</Top>
+        <Left>1.41553cm</Left>
         <Height>0.6cm</Height>
         <Width>17.50219cm</Width>
         <Style>
@@ -205,11 +209,41 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>1.10454cm</Top>
-        <Left>1.41553cm</Left>
-        <Height>0.6cm</Height>
+        <Top>2.13361cm</Top>
+        <Left>1.42214cm</Left>
+        <Height>0.63486cm</Height>
         <Width>17.51541cm</Width>
         <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox24">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Título: " + First(Fields!titulo.Value, "DataSet_Recibo")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox24</rd:DefaultName>
+        <Top>1.27574cm</Top>
+        <Left>1.42214cm</Left>
+        <Height>0.68148cm</Height>
+        <Width>17.50219cm</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -235,11 +269,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>1.88093cm</Top>
-        <Left>1.41553cm</Left>
+        <Top>2.94486cm</Top>
+        <Left>1.42214cm</Left>
         <Height>0.67028cm</Height>
         <Width>17.51541cm</Width>
-        <ZIndex>2</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -265,11 +299,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>2.7276cm</Top>
-        <Left>1.41553cm</Left>
+        <Top>3.79153cm</Top>
+        <Left>1.42214cm</Left>
         <Height>0.6525cm</Height>
         <Width>17.51541cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -295,11 +329,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>3.55649cm</Top>
-        <Left>1.45707cm</Left>
+        <Top>4.62042cm</Top>
+        <Left>1.40892cm</Left>
         <Height>0.70107cm</Height>
-        <Width>17.47387cm</Width>
-        <ZIndex>4</ZIndex>
+        <Width>17.52863cm</Width>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -314,10 +348,22 @@
     <Height>5.04167in</Height>
     <Style />
   </Body>
+  <ReportParameters>
+    <ReportParameter Name="nomeUsuario">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idUsuario">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Width>8.01042in</Width>
   <Page>
     <PageHeader>
-      <Height>7.24959cm</Height>
+      <Height>8.14917cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -437,7 +483,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Atendente: " + First(Fields!atendente.Value, "DataSet_Recibo")</Value>
+                  <Value>="Atendente: " + Parameters!nomeUsuario.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -449,9 +495,6 @@
           <Height>0.74049cm</Height>
           <Width>10.18646cm</Width>
           <ZIndex>4</ZIndex>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -469,7 +512,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Cód Usuário: " + First(Fields!codusuario.Value, "DataSet_Recibo")</Value>
+                  <Value>="Cód Usuário: " + First(Fields!codusuario.Value, "DataSet_Recibo").ToString()</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -481,9 +524,6 @@
           <Height>0.74049cm</Height>
           <Width>10.18646cm</Width>
           <ZIndex>5</ZIndex>
-          <Visibility>
-            <Hidden>true</Hidden>
-          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -508,9 +548,9 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>5.41021cm</Top>
+          <Top>6.39393cm</Top>
           <Left>5.08cm</Left>
-          <Height>0.72796cm</Height>
+          <Height>0.69674cm</Height>
           <Width>10.18646cm</Width>
           <ZIndex>6</ZIndex>
           <Style>
@@ -537,11 +577,40 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <Top>6.31455cm</Top>
+          <Top>7.26706cm</Top>
           <Left>5.08cm</Left>
-          <Height>0.75865cm</Height>
+          <Height>0.65281cm</Height>
           <Width>10.18646cm</Width>
           <ZIndex>7</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="txtData5">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Usuário: " + First(Fields!nomeusuario.Value, "DataSet_Recibo")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <Top>5.47705cm</Top>
+          <Left>5.08cm</Left>
+          <Height>0.74049cm</Height>
+          <Width>10.18646cm</Width>
+          <ZIndex>8</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
