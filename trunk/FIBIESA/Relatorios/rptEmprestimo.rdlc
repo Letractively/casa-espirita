@@ -128,6 +128,10 @@
           <DataField>status</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="tombo">
+          <DataField>tombo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>BusinessLayer</DataSourceName>
@@ -175,7 +179,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Código</Value>
+                              <Value>Tombo</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -401,14 +405,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="obrasCodigo">
+                    <Textbox Name="tombo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!obrasCodigo.Value</Value>
+                              <Value>=Fields!tombo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -417,7 +421,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>obrasCodigo</rd:DefaultName>
+                      <rd:DefaultName>tombo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

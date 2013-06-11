@@ -100,8 +100,8 @@
     </DataSet>
     <DataSet Name="DataSet_Emprestimo">
       <Fields>
-        <Field Name="obrasCodigo">
-          <DataField>obrasCodigo</DataField>
+        <Field Name="tombo">
+          <DataField>tombo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="descricao">
@@ -147,7 +147,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Código</Value>
+                              <Value>Tombo</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -241,14 +241,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="obrasCodigo">
+                    <Textbox Name="tombo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!obrasCodigo.Value</Value>
+                              <Value>=Fields!tombo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -257,7 +257,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>obrasCodigo</rd:DefaultName>
+                      <rd:DefaultName>tombo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

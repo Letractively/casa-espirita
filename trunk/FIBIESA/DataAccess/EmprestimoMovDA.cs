@@ -107,6 +107,7 @@ namespace DataAccess
                                   "    ,pessoaCodigo " +
                                   "    ,obrasCodigo " +
                                   "    ,status " +
+                                  "    ,tombo " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
                                   " WHERE 1 = 1 ");
                 if (pessoasCod != string.Empty)
@@ -144,8 +145,8 @@ namespace DataAccess
                 StringBuilder sqlQuery = new StringBuilder();
                 sqlQuery.Append( @"SELECT " +
                                   "    descricao " +
-                                  "    ,obrasCodigo " +
-                                  "    ,COUNT(obrasCodigo) quantidade " +
+                                  "    ,tombo " +
+                                  "    ,COUNT(tombo) quantidade " +
                                   "FROM dbo.VIEW_REL_EMPRESTIMO " +
                                   " WHERE 1 = 1 ");
                 if (pessoasCod != string.Empty)
@@ -164,7 +165,7 @@ namespace DataAccess
                 if (Status != string.Empty)
                     sqlQuery.Append(@" AND Status = '" + Status+ "'");
 
-                sqlQuery.Append(@" GROUP BY obrasCodigo, descricao order by quantidade " + retirados);
+                sqlQuery.Append(@" GROUP BY tombo, descricao order by quantidade " + retirados);
                 
                 lDs = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                     CommandType.Text,sqlQuery.ToString());

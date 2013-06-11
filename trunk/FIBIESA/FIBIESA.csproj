@@ -1169,8 +1169,12 @@
     <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />
     <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
     <EmbeddedResource Include="Relatorios\rptDoacoes.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptEmprestimo.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
     <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
