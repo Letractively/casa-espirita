@@ -116,8 +116,8 @@
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
     <Content Include="images\logoff.png" />
+    <Content Include="images\logoFibiese.png" />
     <Content Include="images\users1.png" />
-    <Content Include="images\LOGOUM.png" />
     <Content Include="Relatorios\RelCarteirinha.aspx" />
     <Content Include="Relatorios\RelCodigoBarras.aspx" />
     <Content Include="Relatorios\RelRecibos.aspx" />

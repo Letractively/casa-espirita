@@ -39,13 +39,17 @@
                                         ImageUrl="~/images/box.png" ToolTip="Abre Página de Controle de Estoque" 
                                         onclick="imgAtaEstoque_Click" />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan ="5">
-                                    <img src="images/LOGOUM.png" />                                    
+                            </tr>                           
+                       </table>  
+                       <table width="100%">
+                        <tr>                                
+                                <td>
+                                <center>
+                                    <img src="images/logoFibiese.png" />    
+                                </center>                                                                                  
                                 </td>
                             </tr>
-                       </table>                      
+                       </table>                    
                     </div>
                 </div>
                 
