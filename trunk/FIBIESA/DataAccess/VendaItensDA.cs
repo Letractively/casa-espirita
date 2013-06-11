@@ -189,6 +189,7 @@ namespace DataAccess
                     "    ,v.Nome " +
                     "    ,v.data " +
                     "    ,situacao " +
+                    "    ,numero " +
                     " FROM dbo.VIEW_vendasItens v " +
                     " WHERE 1 = 1 ");
 
