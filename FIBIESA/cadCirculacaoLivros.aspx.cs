@@ -564,7 +564,7 @@ namespace FIBIESA
                 {
                     if (chkReciboRenovacao.Checked)
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                                             "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + empMov.Id + "','',600,850);", true);
+                                             "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + empMov.EmprestimoId + "','',600,850);", true);
                     else
                         ExibirMensagem("Renovação realizada com sucesso !");
 
@@ -786,16 +786,18 @@ namespace FIBIESA
 
                     EmprestimoMov mov = new EmprestimoMov();
                     mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
+                    mov.EmprestimoId = utils.ComparaIntComZero(linha["ID"].ToString());
                     mov.DataDevolucao = DateTime.Now;
 
                     if (emovBL.EditarBL(mov))
-                    {
-                        LimparCamposDevolucao();
+                    {                        
                         if(chkReciboDevolucao.Checked)                            
                             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                                                     "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.Id + "','',600,850);", true);
+                                                     "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.EmprestimoId + "','',600,850);", true);                        
                         else
                             ExibirMensagem("Devolução realizada com sucesso!");
+
+                        LimparCamposDevolucao();
                     }
                     else
                         ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
