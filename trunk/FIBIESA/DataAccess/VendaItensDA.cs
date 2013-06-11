@@ -203,7 +203,7 @@ namespace DataAccess
                 query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
 
             if (!cancelados)
-                query.Append(@" AND situacao = 'A' ");
+                query.Append(@" AND situacao = 'A' and vendasituacao = 'A' ");
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                        CommandType.Text, query.ToString());
@@ -232,7 +232,7 @@ namespace DataAccess
                 query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
 
             if (!cancelados)
-                query.Append(@" AND situacao = 'A' ");
+                query.Append(@" AND situacao = 'A' and vendasituacao = 'A' ");
 
             query.Append(@" GROUP BY v.obraCodigo,v.titulo ");
             if (ord != string.Empty)
