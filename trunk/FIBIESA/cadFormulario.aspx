@@ -30,7 +30,7 @@
                     <tr>
                         <td style="width: 140px">* Tipo:</td>
                         <td><asp:DropDownList ID="ddlTipo" runat="server" CssClass="dropdownlist" >
-                            <asp:ListItem></asp:ListItem>
+                            <asp:ListItem>Selecione</asp:ListItem>
                             <asp:ListItem Value="V">Consulta</asp:ListItem>
                             <asp:ListItem Value="C">Edição</asp:ListItem>
                             </asp:DropDownList>
@@ -52,7 +52,8 @@
                     <tr>
                         <td style="width: 140px">* Modulo:</td>
                         <td><asp:DropDownList ID="ddlModulo" runat="server" CssClass="dropdownlist" >
-                            <asp:ListItem Selected="True" Value="F">Financeiro</asp:ListItem>
+                            <asp:ListItem Selected="True">Selecione</asp:ListItem>
+                            <asp:ListItem Value="F">Financeiro</asp:ListItem>
                             <asp:ListItem Value="B">Biblioteca</asp:ListItem>
                             <asp:ListItem Value="C">Configuração</asp:ListItem>
                             <asp:ListItem Value="E">Estoque</asp:ListItem>

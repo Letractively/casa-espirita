@@ -317,6 +317,13 @@ namespace FG
             }
             return hex.ToString();
         }
+        public string LimpaFormatacaoCNPJ(string pCNPJ)
+        {
+            pCNPJ = pCNPJ.Replace(".", "");
+            pCNPJ = pCNPJ.Replace("-", "");
+            pCNPJ = pCNPJ.Replace("/", "");
+            return pCNPJ;
+        }
     }
        
 }

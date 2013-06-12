@@ -28,8 +28,17 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
+        private void CarregarDdlPortador()
+        {
+            PortadoresBL porDBL = new PortadoresBL();
+            List<Portadores> port = porDBL.PesquisarBL();
 
+            ddlPortadorMulta.Items.Add(new ListItem("Selecione", ""));
+            foreach (Portadores ltPort in port)
+                ddlPortadorMulta.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
 
+            ddlPortadorMulta.SelectedIndex = 0;
+        }
         private void CarregaDdlTipoDoc()
         {
             TiposDocumentosBL tipDBL = new TiposDocumentosBL();
@@ -110,17 +119,20 @@ namespace Admin
             txtPerLucro.Text = CarregarParametro(2, "F");
             txtDesconto.Text = CarregarParametro(3, "F");
             ddlTipoDoc.SelectedValue = CarregarParametro(4, "F");
+            ddlPortadorMulta.SelectedValue = CarregarParametro(5,"F");
             #endregion
         }
         private void CarregarAtributos()
-        {           
-            txtQtdMaxEmp.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtQtdMaxRen.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtQtdMinRetirada.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtTempoMinRetirada.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        {
+            txtQtdMaxEmp.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtQtdMaxRen.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtQtdMinRetirada.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtTempoMinRetirada.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtValorMulta.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtPerLucro.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtDesconto.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtDiasVctoMulta.Attributes.Add("onkeypress", "return(Reais(this,event))");
+
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -130,6 +142,7 @@ namespace Admin
             if (!IsPostBack)
             {
                 CarregarDdlCategoria();
+                CarregarDdlPortador();
                 CarregaDdlTipoDoc();
                 CarregarDados();
                
@@ -162,6 +175,7 @@ namespace Admin
                 SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
                 SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
                 SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
+                SalvarParametro(5, "F", lblTipoDoc.Text, ddlPortadorMulta.SelectedValue);
                 #endregion
             }
             else

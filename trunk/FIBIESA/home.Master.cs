@@ -43,7 +43,7 @@ namespace FIBIESA
         private void CarregarInstituicao()
         {
             InstituicoesBL insBL = new InstituicoesBL();
-            List<Instituicoes> instituicoes = insBL.PesquisarBL();
+            List<Instituicoes> instituicoes = insBL.PesquisarBL(true);
 
             foreach (Instituicoes inst in instituicoes)
             {
