@@ -118,7 +118,7 @@ namespace FIBIESA
             else if (rbComPreenchimento.Checked)
                 preenchido = 1;
             TurmasBL turBl = new TurmasBL();
-            List<Turmas> lTurmas = turBl.PesquisarBL("CODIGO",ddlTurma.SelectedValue.ToString());
+            List<Turmas> lTurmas = turBl.PesquisarBL("ID",ddlTurma.SelectedValue.ToString());
 
             Session["ldsRel"] = chamadasBL.PesquisarDataSet(ddlMes.SelectedValue, ddlAno.SelectedValue, Convert.ToInt16(ddlTurma.SelectedValue), ddlParticipante.SelectedValue, preenchido, lTurmas[0].DiaSemana).Tables[0];
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)

@@ -216,7 +216,7 @@ namespace FIBIESA
             linha["QUANTIDADE"] = txtQuantidade.Text;            
             linha["VALOR"] = utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
             linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValorUni.Text); 
-            linha["DESCONTO"] = utils.ComparaIntComZero(txtDesconto.Text);
+            linha["DESCONTO"] = utils.ComparaDecimalComZero(txtDesconto.Text);
             linha["CODIGO"] = txtItem.Text;
             linha["DESCRICAO"] = lblDesItem.Text;
 
@@ -275,7 +275,7 @@ namespace FIBIESA
                             vendaItens.VendaId = id;
                             vendaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
                             vendaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
-                            vendaItens.Valor = utils.ComparaDecimalComZero(linha["VALOR"].ToString());
+                            vendaItens.Valor = utils.ComparaDecimalComZero(linha["VALORUNI"].ToString());
                             vendaItens.Situacao = "A";
                             vendaItens.Desconto = utils.ComparaDecimalComZero(linha["DESCONTO"].ToString());
 
