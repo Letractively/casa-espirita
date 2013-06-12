@@ -5,11 +5,14 @@ using System.Text;
 using DataObjects;
 using DataAccess;
 using System.Data;
+using FG;
 
 namespace BusinessLayer
 {
     public class InstituicoesBL
     {
+        Utils utils = new Utils();
+
         private bool IsValid(Instituicoes ins)
         {
             bool valido;
@@ -25,7 +28,9 @@ namespace BusinessLayer
             if (IsValid(ins))
             {
                 InstituicoesDA instituicaoDA = new InstituicoesDA();
-
+                
+                ins.Cnpj = utils.LimpaFormatacaoCNPJ(ins.Cnpj);
+                
                 return instituicaoDA.InserirDA(ins);
             }
             else
@@ -37,7 +42,9 @@ namespace BusinessLayer
             if (IsValid(ins) && ins.Id > 0)
             {
                 InstituicoesDA instituicaoDA = new InstituicoesDA();
-
+                
+                ins.Cnpj = utils.LimpaFormatacaoCNPJ(ins.Cnpj);
+                
                 return instituicaoDA.EditarDA(ins);
             }
             else
@@ -56,12 +63,12 @@ namespace BusinessLayer
                 return false;
         }
 
-        public List<Instituicoes> PesquisarBL()
+        public List<Instituicoes> PesquisarBL(bool instPrincipal)
         {
             /*criar as regras de negocio*/
             InstituicoesDA instituicoesDA = new InstituicoesDA();
 
-            return instituicoesDA.PesquisarDA();
+            return instituicoesDA.PesquisarDA(instPrincipal);
         }
 
         public DataSet PesquisarDsBL()

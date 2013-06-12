@@ -37,7 +37,7 @@ namespace DataAccess
                 ins.Complemento = dr["COMPLEMENTO"].ToString();
                 ins.DDD = dr["DDD"].ToString();
                 ins.telefone = dr["telefone"].ToString();
-                //ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
+                ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
@@ -147,10 +147,17 @@ namespace DataAccess
             return true;
         }
 
-        public List<Instituicoes> PesquisarDA()
+        public List<Instituicoes> PesquisarDA(bool instPrincipal)
         {
+            StringBuilder v_consulta = new StringBuilder();
+
+            v_consulta.Append(@"SELECT * FROM INSTITUICOES ");
+
+            if (instPrincipal)
+                v_consulta.Append(@" WHERE RANKING = (SELECT MIN(RANKING) FROM INSTITUICOES)");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM INSTITUICOES "));
+                                                                CommandType.Text, v_consulta.ToString());
 
             List<Instituicoes> instituicoes = CarregarObjInstituicoes(dr);
 
