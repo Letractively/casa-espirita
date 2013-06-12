@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="BoletoNet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>eaaf8cb0-8915-4c22-b168-06e8a30496c9</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Boleto">
+      <Fields>
+        <Field Name="Categoria">
+          <DataField>Categoria</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="imageBanco">
+          <DataField>imageBanco</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="Carteira">
+          <DataField>Carteira</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DataVencimento">
+          <DataField>DataVencimento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ValorBoleto">
+          <DataField>ValorBoleto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ValorCobrado">
+          <DataField>ValorCobrado</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Instrucoes">
+          <DataField>Instrucoes</DataField>
+          <rd:TypeName>System.Collections.Generic.List`1[[BoletoNet.IInstrucao, Boleto.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]</rd:TypeName>
+        </Field>
+        <Field Name="LocalPagamento">
+          <DataField>LocalPagamento</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="QuantidadeMoeda">
+          <DataField>QuantidadeMoeda</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ValorMoeda">
+          <DataField>ValorMoeda</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Aceite">
+          <DataField>Aceite</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Especie">
+          <DataField>Especie</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EspecieDocumento">
+          <DataField>EspecieDocumento</DataField>
+          <rd:TypeName>BoletoNet.IEspecieDocumento</rd:TypeName>
+        </Field>
+        <Field Name="DataDocumento">
+          <DataField>DataDocumento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DataProcessamento">
+          <DataField>DataProcessamento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="NumeroParcela">
+          <DataField>NumeroParcela</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NumeroDocumento">
+          <DataField>NumeroDocumento</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DigitoNossoNumero">
+          <DataField>DigitoNossoNumero</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NossoNumero">
+          <DataField>NossoNumero</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Moeda">
+          <DataField>Moeda</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cedente">
+          <DataField>Cedente</DataField>
+          <rd:TypeName>BoletoNet.Cedente</rd:TypeName>
+        </Field>
+        <Field Name="CodigoBarra">
+          <DataField>CodigoBarra</DataField>
+          <rd:TypeName>BoletoNet.CodigoBarra</rd:TypeName>
+        </Field>
+        <Field Name="Banco">
+          <DataField>Banco</DataField>
+          <rd:TypeName>BoletoNet.IBanco</rd:TypeName>
+        </Field>
+        <Field Name="ContaBancaria">
+          <DataField>ContaBancaria</DataField>
+          <rd:TypeName>BoletoNet.ContaBancaria</rd:TypeName>
+        </Field>
+        <Field Name="ValorDesconto">
+          <DataField>ValorDesconto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Sacado">
+          <DataField>Sacado</DataField>
+          <rd:TypeName>BoletoNet.Sacado</rd:TypeName>
+        </Field>
+        <Field Name="UsoBanco">
+          <DataField>UsoBanco</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PercJurosMora">
+          <DataField>PercJurosMora</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="JurosMora">
+          <DataField>JurosMora</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IOF">
+          <DataField>IOF</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Abatimento">
+          <DataField>Abatimento</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PercMulta">
+          <DataField>PercMulta</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ValorMulta">
+          <DataField>ValorMulta</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OutrosAcrescimos">
+          <DataField>OutrosAcrescimos</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OutrosDescontos">
+          <DataField>OutrosDescontos</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="DataJurosMora">
+          <DataField>DataJurosMora</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DataMulta">
+          <DataField>DataMulta</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DataDesconto">
+          <DataField>DataDesconto</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DataOutrosAcrescimos">
+          <DataField>DataOutrosAcrescimos</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DataOutrosDescontos">
+          <DataField>DataOutrosDescontos</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="TipoModalidade">
+          <DataField>TipoModalidade</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>BoletoNet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>BoletoNet</rd:DataSetName>
+        <rd:TableName>Boletos</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>FindAll</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.List`1[BoletoNet.Boleto] FindAll(System.Predicate`1[BoletoNet.Boleto])</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>BoletoNet.Boletos, Boleto.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>9.09375in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>4.53125in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Rectangle Name="Rectangle1">
+                      <ReportItems>
+                        <Image Name="Image1">
+                          <Source>Database</Source>
+                          <Value>=Fields!imageBanco.Value</Value>
+                          <MIMEType>image/jpeg</MIMEType>
+                          <Sizing>FitProportional</Sizing>
+                          <Top>0.44979cm</Top>
+                          <Left>0.42333cm</Left>
+                          <Height>1.5cm</Height>
+                          <Width>1.5cm</Width>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Image>
+                        <Textbox Name="NumeroDocumento">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="numero do Boleto " + Fields!NumeroDocumento.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>NumeroDocumento</rd:DefaultName>
+                          <Top>0.47625cm</Top>
+                          <Left>8.67833cm</Left>
+                          <Height>0.66146cm</Height>
+                          <Width>10.50396cm</Width>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Image Name="Image2">
+                          <Source>Embedded</Source>
+                          <Value>logoFibiese</Value>
+                          <Sizing>FitProportional</Sizing>
+                          <Top>1.48167cm</Top>
+                          <Left>7.67291cm</Left>
+                          <Height>3.54542cm</Height>
+                          <Width>3.78354cm</Width>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Image>
+                      </ReportItems>
+                      <KeepTogether>true</KeepTogether>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Rectangle>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet_Boleto</DataSetName>
+        <Top>0.38841cm</Top>
+        <Left>0.57362cm</Left>
+        <Height>11.50938cm</Height>
+        <Width>23.09812cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>6.19792in</Height>
+    <Style />
+  </Body>
+  <Width>9.48958in</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logoFibiese">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportID>b3b6bec9-2fc3-4669-b4cd-5e8fef83276b</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>
