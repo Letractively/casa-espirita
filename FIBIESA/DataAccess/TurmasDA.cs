@@ -232,6 +232,9 @@ namespace DataAccess
                 case "CODIGO":
                     consulta = string.Format("SELECT * FROM TURMAS WHERE CODIGO = {0}", utils.ComparaIntComZero(valor));
                     break;
+                case "ID":
+                    consulta = string.Format("SELECT * FROM TURMAS WHERE ID = {0}", utils.ComparaIntComZero(valor));
+                    break;
                 case "DESCRICAO":
                     consulta = string.Format("SELECT * FROM TURMAS WHERE DESCRICAO  LIKE '%{0}%'", valor);
                     break;
