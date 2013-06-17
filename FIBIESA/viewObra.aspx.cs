@@ -71,6 +71,11 @@ namespace Admin
             dtgObras.DataSource = tabela;
             dtgObras.DataBind();
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+              "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -104,7 +109,8 @@ namespace Admin
                 ObrasBL obraBL = new ObrasBL();
                 Obras obras = new Obras();
                 obras.Id = utils.ComparaIntComZero(dtgObras.DataKeys[e.RowIndex][0].ToString());
-                obraBL.ExcluirBL(obras);
+                if (obraBL.ExcluirBL(obras))
+                    ExibirMensagem("Obra excluída com sucesso !");
                 Pesquisar(null);
             }
             else

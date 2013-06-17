@@ -18,7 +18,7 @@ namespace BusinessLayer
             return valido;
         }
 
-        public bool InserirBL(Obras instancia)
+        public Int32 InserirBL(Obras instancia)
         {
             if (IsValid(instancia))
             {
@@ -27,7 +27,7 @@ namespace BusinessLayer
                 return varDA.InserirDA(instancia);
             }
             else
-                return false;
+                return 0;
         }
 
         public bool EditarBL(Obras instancia)

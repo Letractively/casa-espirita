@@ -15,8 +15,7 @@ namespace Admin
     public partial class cadExemplar : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        string v_operacao = "";
-
+        string v_operacao = "";       
         #region funcoes
        
         private void CarregarDados(int id_exe)

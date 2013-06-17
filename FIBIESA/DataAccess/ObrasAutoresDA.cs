@@ -25,6 +25,10 @@ namespace DataAccess
                 obAt.Id = utils.ComparaIntComZero(dr["ID"].ToString());
                 obAt.ObraId = utils.ComparaIntComZero(dr["OBRAID"].ToString());
                 obAt.AutoresId = utils.ComparaIntComZero(dr["AUTORESID"].ToString());
+                obAt.TipoAutor = dr["TIPO"].ToString();
+                obAt.Autor = dr["DESCRICAO"].ToString();
+                obAt.CodAutor = utils.ComparaIntComZero(dr["CODIGO"].ToString());
+
 
                 ObrasAutores.Add(obAt);
             }
@@ -40,9 +44,18 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@obraid", obAt.ObraId);
             paramsToSP[1] = new SqlParameter("@autoresid", obAt.AutoresId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_obrasAutores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_insert_obrasAutores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
 
         public bool EditarDA(ObrasAutores obAt)
@@ -71,8 +84,17 @@ namespace DataAccess
 
         public List<ObrasAutores> PesquisarDA()
         {
+            StringBuilder v_consulta = new StringBuilder();
+
+            v_consulta.Append(@"SELECT OA.*, A.CODIGO, A.DESCRICAO, TA.DESCRICAO TIPO  ");
+            v_consulta.Append(@"  FROM OBRASAUTORES OA ");
+            v_consulta.Append(@"      ,AUTORES A ");
+            v_consulta.Append(@"      ,TIPOSDEAUTORES TA ");
+            v_consulta.Append(@"  WHERE OA.AUTORESID = A.ID ");
+            v_consulta.Append(@"    AND A.TIPOID = TA.ID ");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM OBRASAUTORES "));
+                                                                CommandType.Text, v_consulta.ToString());
 
             List<ObrasAutores> ObrasAutores = CarregarObjObrasAutores(dr);
 
@@ -80,11 +102,22 @@ namespace DataAccess
 
         }
 
-        public List<ObrasAutores> PesquisarDA(int id_obAt)
+        public List<ObrasAutores> PesquisarDA(int id_obra)
         {
+            StringBuilder v_consulta = new StringBuilder();
+
+            v_consulta.Append(@"SELECT OA.*, A.CODIGO, A.DESCRICAO, TA.DESCRICAO TIPO  ");
+            v_consulta.Append(@"  FROM OBRASAUTORES OA ");           
+            v_consulta.Append(@"      ,AUTORES A ");
+            v_consulta.Append(@"      ,TIPOSDEAUTORES TA ");
+            v_consulta.Append(@"  WHERE OA.AUTORESID = A.ID ");
+            v_consulta.Append(@"    AND A.TIPOID = TA.ID " );
+            v_consulta.Append(string.Format(@" AND OA.OBRAID = {0}", id_obra));
+            
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM OBRASAUTORES WHERE ID = {0}", id_obAt));
+                                                       CommandType.Text, v_consulta.ToString());
+                                                                                     
 
             List<ObrasAutores> ObrasAutores = CarregarObjObrasAutores(dr);
 
