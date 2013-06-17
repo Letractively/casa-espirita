@@ -70,7 +70,7 @@ namespace DataAccess
 
         #endregion
 
-        public bool InserirDA(Obras instancia)
+        public Int32 InserirDA(Obras instancia)
         {
             SqlParameter[] paramsToSP = new SqlParameter[13];
 
@@ -90,15 +90,19 @@ namespace DataAccess
 
             try
             {
-                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                            CommandType.StoredProcedure, "stp_insert_Obras", paramsToSP);
 
-                return true;
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Obras", paramsToSP);
+
+                DataTable tabela = ds.Tables[0];
+
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
             }
             catch (Exception e)
             {
-                return false;
-            }
+                return 0;
+            }           
         }
 
         public bool EditarDA(Obras instancia)

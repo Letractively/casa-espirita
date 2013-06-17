@@ -27,5 +27,26 @@ namespace DataObjects
             get { return _autoresId; }
             set { _autoresId = value; }
         }
+
+        private string _tipoAutor;
+        public string TipoAutor
+        {
+            get { return _tipoAutor; }
+            set { _tipoAutor = value; }
+        }
+
+        private string _autor;
+        public string Autor
+        {
+            get { return _autor; }
+            set { _autor = value; }
+        }
+
+        private Int32 _codAutor;
+        public Int32 CodAutor
+        {
+            get { return _codAutor; }
+            set { _codAutor = value; }
+        }
     }
 }

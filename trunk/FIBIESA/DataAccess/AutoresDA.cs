@@ -27,7 +27,7 @@ namespace DataAccess
                 aut.Codigo = int.Parse(dr["CODIGO"].ToString());
                 aut.Descricao = dr["DESCRICAO"].ToString();
                 aut.TipoId = int.Parse(dr["TIPOID"].ToString());
-
+                
                 TiposDeAutoresDA tAutDA = new TiposDeAutoresDA();
                 List<TiposDeAutores> tAut = tAutDA.PesquisarDA(aut.TipoId);
                 TiposDeAutores tiposDeAutores = new TiposDeAutores();
