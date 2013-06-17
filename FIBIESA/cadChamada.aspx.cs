@@ -56,6 +56,7 @@ namespace Admin
 
         private void Pesquisar(int id_tur, int id_eve)
         {
+            DateTime dataSelecionada = Convert.ToDateTime(txtSelData.Text);            
             if (Convert.ToDateTime(txtSelData.Text) > DateTime.Now)
                 ExibirMensagem("Não é permitido registrar frequências futuras !");
             else
@@ -80,6 +81,14 @@ namespace Admin
                 TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
                 ChamadasBL chaBL = new ChamadasBL();
                 List<Turmas> turmas = turBL.PesquisarBL(id_tur, id_eve);
+                
+                if (turmas.Count != 0)
+                {
+                    if (turmas[0].DiaSemana.IndexOf(char.Parse(Convert.ToString((int)dataSelecionada.DayOfWeek + 1))) == -1)
+                    {
+                        ExibirMensagem("Dia da semana selecionado não cadastrado para essa turma.");
+                    }
+                }
 
                 foreach (Turmas ltTur in turmas)
                 {
