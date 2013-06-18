@@ -87,6 +87,12 @@ namespace FIBIESA
             txtDataVencimento.Text = "";
             hfId.Value = "";
             hfIdPessoa.Value = "";
+            txtDataEmissao.Text = "";
+            ddlPortador.SelectedIndex = 0;
+            SelecionarDadosPortador(utils.ComparaIntComZero(ddlPortador.SelectedValue));
+            lblBanco.Text = string.Empty;
+            lblAgencia.Text = string.Empty;
+            lblConta.Text = string.Empty;
         }
 
         private void ExibirMensagem(string mensagem)
