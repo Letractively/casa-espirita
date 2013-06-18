@@ -38,7 +38,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtQtdDias" runat="server" CssClass="inputboxRight" 
-                                ToolTip="Informe a quantidade de dias"></asp:TextBox>
+                                ToolTip="Informe a quantidade de dias" MaxLength="4"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtQtdDias" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>

@@ -28,6 +28,13 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadAutores"] = value; }
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+        
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
@@ -99,7 +106,12 @@ namespace Admin
                 AutoresBL autBL = new AutoresBL();
                 Autores au = new Autores();
                 au.Id = utils.ComparaIntComZero(dtgAutores.DataKeys[e.RowIndex][0].ToString());
-                autBL.ExcluirBL(au);
+                
+                if (autBL.ExcluirBL(au))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+                
                 Pesquisar(null);
             }
             else

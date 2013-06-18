@@ -62,6 +62,12 @@ namespace Admin
             dtgOrigens.DataSource = tabela;
             dtgOrigens.DataBind();
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -95,7 +101,12 @@ namespace Admin
                 OrigensBL origemBL = new OrigensBL();
                 Origens origens = new Origens();
                 origens.Id = utils.ComparaIntComZero(dtgOrigens.DataKeys[e.RowIndex][0].ToString());
-                origemBL.ExcluirBL(origens);
+                
+                if (origemBL.ExcluirBL(origens))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+                
                 Pesquisar(null);
             }
             else

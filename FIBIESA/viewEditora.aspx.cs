@@ -64,6 +64,11 @@ namespace Admin
             dtgEditoras.DataSource = tabela;           
             dtgEditoras.DataBind();
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -96,7 +101,10 @@ namespace Admin
                 EditorasBL edBL = new EditorasBL();
                 Editoras editoras = new Editoras();
                 editoras.Id = utils.ComparaIntComZero(dtgEditoras.DataKeys[e.RowIndex][0].ToString());
-                edBL.ExcluirBL(editoras);
+                if (edBL.ExcluirBL(editoras))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
                 Pesquisar(null);
             }
             else
