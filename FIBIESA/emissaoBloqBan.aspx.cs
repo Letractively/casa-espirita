@@ -100,7 +100,11 @@ namespace FIBIESA
 
             ddlPortador.SelectedIndex = 0;
         }
-
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -145,47 +149,59 @@ namespace FIBIESA
                     cedente.Codigo = Convert.ToInt32("13000");
 
 
-
-                    String cedente_nossoNumeroBoleto = "22222222";
-
-                    Boleto boleto = new Boleto(ltTit.DataVencimento, ltTit.Valor, "341", cedente_nossoNumeroBoleto, cedente);
-
-                    boleto.NumeroDocumento = numeroDocumento;
-
-
-                    //DADOS DO SACADO CLIENTE
-                    Sacado sacado = new Sacado(ltTit.Pessoas.CpfCnpj, ltTit.Pessoas.Nome != "" ? ltTit.Pessoas.Nome : ltTit.Pessoas.NomeFantasia);
-                    boleto.Sacado = sacado;
-
-                    pes = pesBL.PesquisarBL(utils.ComparaIntComZero(ltTit.Pessoaid.ToString()));
-
-                    foreach (Pessoas ltPes in pes)
+                    try
                     {
-                        boleto.Sacado.Endereco.End = ltPes.Endereco;
-                        boleto.Sacado.Endereco.Bairro = ltPes.Bairro.Descricao;
-                        boleto.Sacado.Endereco.Cidade = ltPes.Cidade.Descricao;
-                        boleto.Sacado.Endereco.CEP = ltPes.Cep;
-                        boleto.Sacado.Endereco.UF = ltPes.Cidade.Estados.Uf;
+
+                        String cedente_nossoNumeroBoleto = "22222222";
+
+                        Boleto boleto = new Boleto(ltTit.DataVencimento, ltTit.Valor, "341", cedente_nossoNumeroBoleto, cedente);
+
+                        boleto.NumeroDocumento = numeroDocumento;
+
+
+                        //DADOS DO SACADO CLIENTE
+                        Sacado sacado = new Sacado(ltTit.Pessoas.CpfCnpj, ltTit.Pessoas.Nome != "" ? ltTit.Pessoas.Nome : ltTit.Pessoas.NomeFantasia);
+                        boleto.Sacado = sacado;
+
+                        pes = pesBL.PesquisarBL(utils.ComparaIntComZero(ltTit.Pessoaid.ToString()));
+
+                        foreach (Pessoas ltPes in pes)
+                        {
+                            boleto.Sacado.Endereco.End = ltPes.Endereco;
+                            boleto.Sacado.Endereco.Bairro = ltPes.Bairro.Descricao;
+                            boleto.Sacado.Endereco.Cidade = ltPes.Cidade.Descricao;
+                            boleto.Sacado.Endereco.CEP = ltPes.Cep;
+                            boleto.Sacado.Endereco.UF = ltPes.Cidade.Estados.Uf;
+                        }
+
+                        Instrucao_Banrisul instrucao = new Instrucao_Banrisul(999, 1);
+                        Instrucao_Banrisul item1 = new Instrucao_Banrisul(1, 5);
+                        Instrucao_Banrisul item2 = new Instrucao_Banrisul(81, 10);
+
+                        boleto.Instrucoes.Add(instrucao);
+                        boleto.Instrucoes.Add(item1);
+                        boleto.Instrucoes.Add(item2);
+
+                        BoletoBancario boleto_bancario = new BoletoBancario();
+                        boleto_bancario.CodigoBanco = 041;
+                        boleto_bancario.Boleto = boleto;
+                        boleto_bancario.MostrarCodigoCarteira = true;
+                        boleto_bancario.Boleto.Valida();
+
+                        boleto_bancario.MostrarComprovanteEntrega = true;
+
+                        Session["boleto"] = boleto_bancario;
+                        Response.Redirect("~/WebForm1.aspx");
                     }
-
-                    Instrucao_Banrisul instrucao = new Instrucao_Banrisul(999, 1);
-                    Instrucao_Banrisul item1 = new Instrucao_Banrisul(1, 5);
-                    Instrucao_Banrisul item2 = new Instrucao_Banrisul(81, 10);
-
-                    boleto.Instrucoes.Add(instrucao);
-                    boleto.Instrucoes.Add(item1);
-                    boleto.Instrucoes.Add(item2);
-
-                    BoletoBancario boleto_bancario = new BoletoBancario();
-                    boleto_bancario.CodigoBanco = 041;
-                    boleto_bancario.Boleto = boleto;
-                    boleto_bancario.MostrarCodigoCarteira = true;
-                    boleto_bancario.Boleto.Valida();
-
-                    boleto_bancario.MostrarComprovanteEntrega = true;
-
-                    Session["boleto"] = boleto_bancario;
-                    Response.Redirect("~/WebForm1.aspx");
+                    catch(Exception ex)
+                    {
+                        if (ex.Source.Equals("Boleto.Net"))
+                        {
+                            this.ExibirMensagem(ex.Message);
+                        }
+                        else
+                            throw;
+                    }
                 }
             }
         }
