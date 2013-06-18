@@ -46,7 +46,7 @@ namespace Admin
         }
         private void CarregarAtributos()
         {
-            txtQtdDias.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtQtdDias.Attributes.Add("onkeypress", "return(Reais(this,event))");
         }
 
         private void ExibirMensagem(string mensagem)

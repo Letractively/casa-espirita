@@ -12,6 +12,9 @@
     </asp:ScriptManager>
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>
+        <script type="text/javascript">
+            Sys.Application.add_load(formatarValor);
+        </script>
             <div id="content">
                 <div class="container half left">
                     <div class="conthead">

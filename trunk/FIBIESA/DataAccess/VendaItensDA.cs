@@ -57,17 +57,24 @@ namespace DataAccess
             paramsToSP[5] = new SqlParameter("@situacao", venItEi.Situacao);
             paramsToSP[6] = new SqlParameter("@usuarioId", usuarioID);
 
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
-                CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_insert_VendaItens", paramsToSP);
 
-            DataTable tabela = ds.Tables[0];
+                DataTable tabela = ds.Tables[0];
 
-            string resultado = tabela.Rows[0][0].ToString();
+                string resultado = tabela.Rows[0][0].ToString();
 
-            if (resultado == "true")
-                return true;
-            else
+                if (resultado == "true")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
                 return false;
+            }
         }
 
         public bool EditarDA(VendaItens venItEi)
@@ -82,9 +89,16 @@ namespace DataAccess
             paramsToSP[5] = new SqlParameter("@desconto", venItEi.Desconto);
             paramsToSP[6] = new SqlParameter("@situacao", venItEi.Situacao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_VendaItens", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_VendaItens", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(VendaItens venItEi)
@@ -93,9 +107,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", venItEi.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_vendaItens", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_vendaItens", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool CancelarVendaItemDA(int id_ven, int id_venIt)
@@ -200,7 +221,7 @@ namespace DataAccess
                 query.Append(@" AND obraCodigo IN (" + itensCod + ")");
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
-                query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
+                query.Append(@" AND CONVERT(DATE,DATA,103) BETWEEN CONVERT(DATE,'" + dtIni + "',103) AND CONVERT(DATE,'" + dtFim + "',103)");
 
             if (!cancelados)
                 query.Append(@" AND situacao = 'A' and vendasituacao = 'A' ");
@@ -229,7 +250,7 @@ namespace DataAccess
                 query.Append(@" AND obraCodigo IN (" + itensCod + ")");
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
-                query.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");
+                query.Append(@" AND CONVERT(DATE,DATA,103) BETWEEN CONVERT(DATE,'" + dtIni + "',103) AND CONVERT(DATE,'" + dtFim + "',103)");
 
             if (!cancelados)
                 query.Append(@" AND situacao = 'A' and vendasituacao = 'A' ");

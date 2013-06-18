@@ -61,6 +61,11 @@ namespace Admin
             dtgTiposAutores.DataSource = tabela;
             dtgTiposAutores.DataBind();
         }
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -94,7 +99,11 @@ namespace Admin
                 TiposDeAutoresBL tiposaBL = new TiposDeAutoresBL();
                 TiposDeAutores tiposAu = new TiposDeAutores();
                 tiposAu.Id = utils.ComparaIntComZero(dtgTiposAutores.DataKeys[e.RowIndex][0].ToString());
-                tiposaBL.ExcluirBL(tiposAu);
+               
+                if (tiposaBL.ExcluirBL(tiposAu))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
                 Pesquisar(null);
             }
             else
