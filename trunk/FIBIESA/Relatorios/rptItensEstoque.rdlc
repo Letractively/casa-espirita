@@ -128,6 +128,10 @@
           <DataField>Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="codigoobra">
+          <DataField>codigoobra</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="Status">
           <DataField>Status</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
@@ -380,14 +384,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Id">
+                    <Textbox Name="codigoobra">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Id.Value</Value>
+                              <Value>=Fields!codigoobra.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -396,7 +400,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Id</rd:DefaultName>
+                      <rd:DefaultName>codigoobra</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
