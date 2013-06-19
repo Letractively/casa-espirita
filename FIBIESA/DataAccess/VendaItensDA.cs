@@ -185,7 +185,7 @@ namespace DataAccess
                                                        CommandType.Text, string.Format(@"SELECT id " +
                                                                                             ",vendaId " +
                                                                                             ",quantidade " +
-                                                                                            ",valor " +
+                                                                                            ",total " +
                                                                                             ",desconto " +
                                                                                             ",situacao " +
                                                                                             ",itemEstoqueId " +

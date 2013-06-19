@@ -128,6 +128,10 @@
           <DataField>Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="Codigo">
+          <DataField>Codigo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="VendaItensId">
           <DataField>VendaItensId</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -477,14 +481,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Id">
+                    <Textbox Name="Codigo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Id.Value</Value>
+                              <Value>=Fields!Codigo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -493,7 +497,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Id</rd:DefaultName>
+                      <rd:DefaultName>Codigo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

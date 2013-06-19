@@ -162,8 +162,8 @@
           <DataField>quantidade</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="valor">
-          <DataField>valor</DataField>
+        <Field Name="total">
+          <DataField>total</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="desconto">
@@ -428,21 +428,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="valor">
+                    <Textbox Name="total">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!valor.Value</Value>
+                              <Value>=Fields!total.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>valor</rd:DefaultName>
+                      <rd:DefaultName>total</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -640,7 +640,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=(Sum(Fields!valor.Value, "DataSet_VendaItens") - Sum(Fields!desconto.Value, "DataSet_VendaItens"))</Value>
+                <Value>=Sum(Fields!total.Value, "DataSet_VendaItens").ToString()</Value>
                 <Style>
                   <Format>'R$' #,0.00;('R$' #,0.00)</Format>
                 </Style>
@@ -732,7 +732,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Telefone: " + "(" + First(Fields!DDD.Value, "DataSet_Instituicao") + ")" + First(Fields!telefone.Value, "DataSet_Instituicao")</Value>
+                <Value>="Telefone: " + First(Fields!telefone.Value, "DataSet_Instituicao")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -791,7 +791,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Total s/desconto R$" + Sum(Fields!valor.Value, "DataSet_VendaItens").ToString()</Value>
+                <Value>="Total s/desconto R$" + (Sum(Fields!total.Value, "DataSet_VendaItens") + Sum(Fields!desconto.Value, "DataSet_VendaItens")).ToString()</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1143,7 +1143,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!valor.Value</Value>
+                              <Value>=Fields!total.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1349,7 +1349,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=(Sum(Fields!valor.Value, "DataSet_VendaItens") - Sum(Fields!desconto.Value, "DataSet_VendaItens"))</Value>
+                <Value>=Sum(Fields!total.Value, "DataSet_VendaItens").ToString()</Value>
                 <Style>
                   <Format>'R$' #,0.00;('R$' #,0.00)</Format>
                 </Style>
@@ -1441,7 +1441,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Telefone: " + "(" + First(Fields!DDD.Value, "DataSet_Instituicao") + ")" + First(Fields!telefone.Value, "DataSet_Instituicao")</Value>
+                <Value>="Telefone: " + First(Fields!telefone.Value, "DataSet_Instituicao")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1500,7 +1500,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Total s/desconto R$" + Sum(Fields!valor.Value, "DataSet_VendaItens").ToString()</Value>
+                <Value>="Total s/desconto R$" + (Sum(Fields!total.Value, "DataSet_VendaItens") + Sum(Fields!desconto.Value, "DataSet_VendaItens")).ToString()</Value>
                 <Style />
               </TextRun>
             </TextRuns>

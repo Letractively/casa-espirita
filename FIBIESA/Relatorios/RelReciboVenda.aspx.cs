@@ -52,9 +52,9 @@ namespace FIBIESA.Relatorios
                 ReportParameter[] param = new ReportParameter[1];
                 ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", lds.Tables[0]);
 
-                decimal valorTotal = utils.ComparaDecimalComZero((lds.Tables[0].Compute("Sum(valor)", "").ToString()));
+                decimal valorTotal = utils.ComparaDecimalComZero((lds.Tables[0].Compute("Sum(total)", "").ToString()));
                 decimal descontoTotal = utils.ComparaDecimalComZero(lds.Tables[0].Compute("Sum(desconto)", "").ToString());
-                NumeroPorExtenso numeroPorExtenso = new NumeroPorExtenso(valorTotal - descontoTotal);
+                NumeroPorExtenso numeroPorExtenso = new NumeroPorExtenso(valorTotal);
                 string valorExtenso = numeroPorExtenso.ToString();                    
                 param[0] = new ReportParameter("valorExtenso", valorExtenso);
                 ReportViewer1.LocalReport.SetParameters(param);

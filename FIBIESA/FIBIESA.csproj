@@ -1151,6 +1151,9 @@
     <Content Include="home.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptBoleto.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptCarteirinha.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1164,7 +1167,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptRecibos.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptReciboVenda.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptContasPagar.rdlc" />
     <EmbeddedResource Include="Relatorios\rptContasReceber.rdlc" />
     <EmbeddedResource Include="Relatorios\rptCursos.rdlc" />
@@ -1175,8 +1180,12 @@
     <EmbeddedResource Include="Relatorios\rptEmprestimoAcumulado.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc" />
-    <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc" />
+    <EmbeddedResource Include="Relatorios\rptItensEstoque.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rptMovimentacaoEstoque.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\rptTurmas.rdlc" />
     <EmbeddedResource Include="Relatorios\rptVendas.rdlc">
       <SubType>Designer</SubType>
