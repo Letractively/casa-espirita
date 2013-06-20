@@ -38,7 +38,7 @@
                                                             * Título:
                                                         </td>
                                                         <td style="width: 120px" colspan="3">
-                                                            <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputbox" MaxLength="40" Width="335px"
+                                                            <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputbox" MaxLength="100" Width="335px"
                                                                 ToolTip="Informe o título"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                                                     runat="server" CssClass="validacao" ErrorMessage="Informe o Título da Obra" ValidationGroup="salvar"
                                                                     ControlToValidate="txtTitulo">*</asp:RequiredFieldValidator>
@@ -61,7 +61,7 @@
                                                         </td>
                                                         <td style="width: 180px">
                                                             <asp:TextBox ID="txtNroEdicao" runat="server" CssClass="inputboxRight" Width="70px"
-                                                                ToolTip="Informe o número da edição"></asp:TextBox>
+                                                                ToolTip="Informe o número da edição" MaxLength="4"></asp:TextBox>
                                                         </td>
                                                         <td>
                                                             Editora:
@@ -76,14 +76,15 @@
                                                             ISBN:
                                                         </td>
                                                         <td style="width: 150px">
-                                                            <asp:TextBox ID="txtISBN" runat="server" CssClass="inputbox" ToolTip="Informe o ISBN"></asp:TextBox>
+                                                            <asp:TextBox ID="txtISBN" runat="server" CssClass="inputbox" ToolTip="Informe o ISBN"
+                                                                MaxLength="20"></asp:TextBox>
                                                         </td>
                                                         <td style="width: 140px">
                                                             Número de Páginas:
                                                         </td>
                                                         <td style="width: 120px">
                                                             <asp:TextBox ID="txtNroPags" runat="server" CssClass="inputboxRight" Width="70px"
-                                                                ToolTip="Informe o número de páginas"></asp:TextBox>
+                                                                ToolTip="Informe o número de páginas" MaxLength="4"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -99,9 +100,14 @@
                                                         </td>
                                                         <td style="width: 120px">
                                                             <asp:TextBox ID="txtDataPublicacao" runat="server" CssClass="inputbox" Width="110px"
-                                                                ToolTip="Informe a data de publicação"></asp:TextBox><asp:CalendarExtender ID="txtData_CalendarExtender"
-                                                                    runat="server" TargetControlID="txtDataPublicacao">
-                                                                </asp:CalendarExtender>
+                                                                ToolTip="Informe a data de publicação" MaxLength="10"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*"
+                                                                ToolTip="Não Válido" SetFocusOnError="True" ControlToValidate="txtDataPublicacao"
+                                                                ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                                                Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
+                                                            <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtDataPublicacao"
+                                                                Enabled="True">
+                                                            </asp:CalendarExtender>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -110,16 +116,21 @@
                                                         </td>
                                                         <td style="width: 180px">
                                                             <asp:TextBox ID="txtDataReimpressao" runat="server" CssClass="inputbox" Width="110px"
-                                                                ToolTip="Informe a data de reimpressão"></asp:TextBox><asp:CalendarExtender ID="CalendarExtender1"
-                                                                    runat="server" TargetControlID="txtDataReimpressao">
-                                                                </asp:CalendarExtender>
+                                                                ToolTip="Informe a data de reimpressão" MaxLength="10"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*"
+                                                                ToolTip="Não Válido" SetFocusOnError="True" ControlToValidate="txtDataReimpressao"
+                                                                ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                                                Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
+                                                            <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtDataReimpressao"
+                                                                Enabled="True">
+                                                            </asp:CalendarExtender>
                                                         </td>
                                                         <td style="width: 120px">
                                                             Volume:
                                                         </td>
                                                         <td style="width: 120px">
                                                             <asp:TextBox ID="txtVolume" runat="server" CssClass="inputboxRight" Width="110px"
-                                                                ToolTip="Informe o volume"></asp:TextBox>
+                                                                ToolTip="Informe o volume" MaxLength="4"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -127,8 +138,9 @@
                                                             Assuntos abordados:
                                                         </td>
                                                         <td style="width: 120px" colspan="3">
-                                                            <asp:TextBox ID="txtAssuntosAborda" runat="server" CssClass="inputbox" MaxLength="1000"
-                                                                Width="485px" Height="79px" TextMode="MultiLine" ToolTip="Informe os assuntos abordados na obra"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAssuntosAborda" runat="server" CssClass="inputbox" MaxLength="4000"
+                                                                Width="485px" Height="79px" TextMode="MultiLine" 
+                                                                ToolTip="Informe os assuntos abordados na obra"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -143,7 +155,8 @@
                                                         </td>
                                                         <td style="width: 400px">
                                                             <asp:TextBox ID="txtAutor" runat="server" CssClass="inputboxRight" ToolTip="Informe o código do autor - Lista de valores disponível"
-                                                                Width="75px"></asp:TextBox><asp:Button ID="btnAutor" runat="server" CssClass="btn"
+                                                                Width="75px" MaxLength="10" AutoPostBack="True" 
+                                                                ontextchanged="txtAutor_TextChanged"></asp:TextBox><asp:Button ID="btnAutor" runat="server" CssClass="btn"
                                                                     Text="..." OnClick="btnAutor_Click" /><asp:Label ID="lblDesAutor" runat="server"></asp:Label>
                                                         </td>
                                                         <tr>
@@ -205,7 +218,7 @@
                                         ValidationGroup="salvar" ToolTip="Valida e salva as informações" />
                                 </td>
                             </tr>
-                        </table>                       
+                        </table>
                         <asp:HiddenField ID="hfId" runat="server" />
                         <asp:HiddenField ID="hfIdAutor" runat="server" />
                         <asp:HiddenField ID="hfOrdem" runat="server" />

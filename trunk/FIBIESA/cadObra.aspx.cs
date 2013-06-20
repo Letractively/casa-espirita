@@ -79,9 +79,9 @@ namespace Admin
         }
         private void CarregarAtributos()
         {   
-            txtNroEdicao.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtNroPags.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtVolume.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+            txtNroEdicao.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtNroPags.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtVolume.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtDataPublicacao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");           
         }
@@ -108,6 +108,12 @@ namespace Admin
             txtAssuntosAborda.Text = "";
             ddlEditora.SelectedIndex = 0;
             ddlTipoObra.SelectedIndex = 0;
+            LimparCamposAutor();            
+            dtAutores = null;       
+            Session["dtAutores"] = dtAutores;
+            dtgAutores.DataSource = dtAutores;
+            dtgAutores.DataBind();
+            tcPrincipal.ActiveTabIndex = 0;
         }
         private void LimparCamposAutor()
         {
@@ -325,7 +331,7 @@ namespace Admin
             obras.Titulo = txtTitulo.Text;
             obras.NroEdicao = utils.ComparaIntComNull(txtNroEdicao.Text);
             obras.EditoraId = utils.ComparaIntComNull(ddlEditora.SelectedValue);
-            obras.NroPaginas = utils.ComparaIntComNull(txtNroPags.Text);
+            obras.NroPaginas = Convert.ToInt16(txtNroPags.Text);
             obras.Volume = utils.ComparaIntComNull(txtVolume.Text);
             obras.Isbn = txtISBN.Text;
             obras.AssuntosAborda = txtAssuntosAborda.Text;
@@ -527,6 +533,33 @@ namespace Admin
         protected void btnCanel_Click(object sender, EventArgs e)
         {
             ModalPopupExtenderPesAutor.Enabled = false;
+        }
+
+        protected void txtAutor_TextChanged(object sender, EventArgs e)
+        {
+            AutoresBL autBl = new AutoresBL();
+            List<Autores> autores = autBl.PesquisarBL("CODIGO",txtAutor.Text);
+                        
+            foreach (Autores ltAut in autores)
+            {
+                hfIdAutor.Value = ltAut.Id.ToString();
+                txtAutor.Text = ltAut.Codigo.ToString();
+                lblDesAutor.Text = ltAut.Descricao;
+                if (ltAut.TiposDeAutores != null)
+                    txtDesTipo.Text = ltAut.TiposDeAutores.Descricao;
+            }
+            
+            if (hfIdAutor.Value == null || hfIdAutor.Value == string.Empty)
+            {
+                hfIdAutor.Value = "";                
+                lblDesAutor.Text = "";
+                txtAutor.Text = "";
+                ExibirMensagem("Autor não cadastrado !");
+                txtDesTipo.Text = "";
+                txtAutor.Focus();
+            }
+            else
+                txtAutor.Focus();
         }
 
        
