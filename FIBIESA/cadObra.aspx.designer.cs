@@ -148,6 +148,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtDataPublicacao;
         
         /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
         /// txtData_CalendarExtender control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDataReimpressao;
+        
+        /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
         /// CalendarExtender1 control.
