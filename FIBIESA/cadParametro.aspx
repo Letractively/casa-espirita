@@ -121,6 +121,18 @@ ControlToValidate="txtDiasVctoMulta" ValidationExpression="^\d+$" Display="Dynam
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>
+                                                    <asp:Label ID="lblTipoDoc" runat="server">
+                                                        Tipo de documento associado a multa por atraso na bilbioteca:
+                                                    </asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
+                                                        ToolTip="Selecione o tipo de documento">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="width: 400px">
                                                     <asp:Label ID="lblPerLucro" runat="server">
                                                 Percentual de lucro na venda: 
@@ -141,19 +153,7 @@ ControlToValidate="txtDiasVctoMulta" ValidationExpression="^\d+$" Display="Dynam
                                                     <asp:TextBox ID="txtDesconto" CssClass="inputboxRight" runat="server" 
                                                         MaxLength="5"></asp:TextBox>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:Label ID="lblTipoDoc" runat="server">
-                                                        Tipo de documento associado a multa por atraso na bilbioteca:
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlTipoDoc" runat="server" CssClass="dropdownlist" 
-                                                        ToolTip="Selecione o tipo de documento">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>

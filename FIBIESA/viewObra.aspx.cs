@@ -109,8 +109,12 @@ namespace Admin
                 ObrasBL obraBL = new ObrasBL();
                 Obras obras = new Obras();
                 obras.Id = utils.ComparaIntComZero(dtgObras.DataKeys[e.RowIndex][0].ToString());
+               
                 if (obraBL.ExcluirBL(obras))
-                    ExibirMensagem("Obra excluída com sucesso !");
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+                
                 Pesquisar(null);
             }
             else

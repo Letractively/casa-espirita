@@ -24,8 +24,9 @@
                                     * Obra:
                                 </td>
                                 <td style="width: 300px">
-                                    <asp:TextBox ID="txtObra" runat="server" CssClass="inputbox" Width="75px" OnTextChanged="txtObra_TextChanged"
-                                        AutoPostBack="True" ToolTip="Informe a obra - Lista de valores disponível"></asp:TextBox>
+                                    <asp:TextBox ID="txtObra" runat="server" CssClass="inputboxRight" Width="75px" OnTextChanged="txtObra_TextChanged"
+                                        AutoPostBack="True" ToolTip="Informe a obra - Lista de valores disponível" 
+                                        MaxLength="10"></asp:TextBox>
                                     <asp:Button ID="btnPesObra" runat="server" Text="..." CssClass="btn" OnClick="btnPesObra_Click" />
                                     <asp:Label ID="lblDesObra" runat="server"></asp:Label>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtObra"
@@ -37,8 +38,9 @@
                                     * Tombo:
                                 </td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtTombo" runat="server" CssClass="inputbox" AutoPostBack="True"
-                                        OnTextChanged="txtTombo_TextChanged" ToolTip="Informe o tombo"></asp:TextBox>
+                                    <asp:TextBox ID="txtTombo" runat="server" CssClass="inputboxRight" AutoPostBack="True"
+                                        OnTextChanged="txtTombo_TextChanged" ToolTip="Informe o tombo" 
+                                        MaxLength="10" Width="120px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="valTombo" runat="server" ControlToValidate="txtTombo"
                                         ErrorMessage="*" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                                     <asp:Label ID="lblInformacao" runat="server" CssClass="validacao"></asp:Label>

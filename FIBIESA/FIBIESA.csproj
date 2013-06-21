@@ -106,7 +106,6 @@
     <Content Include="cadPermissao.aspx" />
     <Content Include="cadPessoa.aspx" />
     <Content Include="cadPortador.aspx" />
-    <Content Include="cadReserva.aspx" />
     <Content Include="cadTipoAutor.aspx" />
     <Content Include="cadTipoDocumento.aspx" />
     <Content Include="cadTipoObra.aspx" />
@@ -545,13 +544,6 @@
     </Compile>
     <Compile Include="cadPortador.aspx.designer.cs">
       <DependentUpon>cadPortador.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="cadReserva.aspx.cs">
-      <DependentUpon>cadReserva.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cadReserva.aspx.designer.cs">
-      <DependentUpon>cadReserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="cadTipoAutor.aspx.cs">
       <DependentUpon>cadTipoAutor.aspx</DependentUpon>

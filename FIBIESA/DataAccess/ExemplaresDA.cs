@@ -202,9 +202,9 @@ namespace DataAccess
             consulta.Append(" WHERE DATADEVOLUCAO IS NULL)");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (OB.CODIGO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (EX.TOMBO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
 
-            consulta.Append(" ORDER BY OB.CODIGO ");
+            consulta.Append(" ORDER BY EX.TOMBO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());
@@ -255,6 +255,7 @@ namespace DataAccess
                              "      ,EX.TOMBO  " +
                              "      ,EM.ID " +
                              "      ,P.NOME " +
+                             "      ,P.ID PES_ID " +
                              "      ,MOV.DATAPREVISTAEMPRESTIMO " +
                              "      ,MOV.ID MOVID " +
                              "      ,CASE WHEN (MOV.DATAPREVISTAEMPRESTIMO < CAST (GETDATE() AS DATE)) " +

@@ -69,6 +69,21 @@ namespace DataObjects
             get { return _qtdeDias; }
             set { _qtdeDias = value; }
         }
+
+        private Int32 _pessoaId;
+        public Int32 PessoaId
+        {
+            get { return _pessoaId; }
+            set { _pessoaId = value; }
+        }
+
+        private string _titulo;
+        public string Titulo
+        {
+            get { return _titulo; }
+            set { _titulo = value; }
+        }
+
                
     }
 }

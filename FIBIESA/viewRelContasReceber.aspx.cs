@@ -298,10 +298,7 @@ namespace FIBIESA
         }
 
         #endregion
-
-
-
-
+        
         public void carregaTipoDocumentos()
         {
             this.ddlTipoDocumento.DataTextField = "DESCRICAO";
@@ -329,7 +326,7 @@ namespace FIBIESA
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
             {
                 string periodo = "";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelContasReceber.aspx?periodo=" + periodo + "','',590,805);", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelContasReceber.aspx?periodo=" + periodo + "','',590,980);", true);
             }
             else
             {

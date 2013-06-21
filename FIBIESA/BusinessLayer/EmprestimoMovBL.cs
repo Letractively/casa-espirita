@@ -13,6 +13,18 @@ namespace BusinessLayer
     public class EmprestimoMovBL
     {
         Utils utils = new Utils();
+
+        #region
+        
+        private string LerParametro(int codigo, string modulo)
+        {
+            ParametrosBL parBL = new ParametrosBL();
+            string valor = parBL.PesquisarValorBL(codigo, modulo);
+
+            return valor;
+        }
+
+        #endregion
         public bool InserirBL(EmprestimoMov instancia)
         {
             /*criar as regras de negocio*/
@@ -21,12 +33,55 @@ namespace BusinessLayer
             return varDA.InserirDA(instancia);
         }
 
-        public bool EditarBL(EmprestimoMov instancia)
-        {
-            /*criar as regras de negocio*/
+        public string EditarBL(EmprestimoMov instancia)
+        {            
             EmprestimoMovDA varDA = new EmprestimoMovDA();
 
-            return varDA.EditarDA(instancia);
+            if (varDA.EditarDA(instancia))
+            {
+                DateTime hoje = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                DateTime diaD = instancia.DataPrevistaEmprestimo ?? hoje;
+                TimeSpan data = hoje - diaD;
+                int diasAtraso = data.Days;
+
+                if (utils.ComparaIntComZero(diasAtraso.ToString()) > 0)
+                {
+                    //cadastrar titulo da multa
+                    decimal multa = utils.ComparaDecimalComZero(this.LerParametro(1, "F"));
+                    Int32 tipoDocumento = utils.ComparaIntComZero(this.LerParametro(4, "F"));
+                    Int32 portadorId = utils.ComparaIntComZero(this.LerParametro(5, "F"));
+
+                    multa = multa * diasAtraso;
+                    int prazo = utils.ComparaIntComZero(this.LerParametro(6, "F"));
+                    prazo = (prazo < 1 ? 7 : prazo);                   
+                    
+                    TitulosBL titBL = new TitulosBL();
+                    Titulos titulos = new Titulos();
+
+                    titulos.Numero = titBL.RetornaNovoNumero();
+                    titulos.Parcela = 1;
+                    titulos.Pessoaid = instancia.PessoaId;
+                    titulos.DataEmissao = hoje;                   
+                    titulos.DataVencimento = hoje.AddDays(prazo);
+                    titulos.Valor = multa;
+                    titulos.TipoDocumentoId = tipoDocumento;
+                    titulos.Portadorid = portadorId;
+                    titulos.Tipo = "R";
+
+                                                   
+                    titulos.Obs = "Titulo gerado automaticamente, devido ao atraso de " + utils.ComparaIntComZero(diasAtraso.ToString())
+                        + " dia(s) na devolução do exemplar " + instancia.Titulo;
+
+                    if (titBL.InserirBL(titulos))
+                        return "Exemplar devolvido com atraso. Foi gerado o título " + titulos.Numero + " no valor de R$" + titulos.Valor;
+                                        
+                }
+
+                return "Devolução realizada com sucesso!";
+            }
+            else
+                return "false";
+
         }
 
         public bool ExcluirBL(EmprestimoMov instancia)
