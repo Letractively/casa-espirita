@@ -753,7 +753,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Relatórios de Emprestimos </Value>
+                  <Value>Relatórios de Empréstimos </Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
