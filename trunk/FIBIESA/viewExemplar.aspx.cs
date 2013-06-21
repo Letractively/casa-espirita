@@ -72,6 +72,13 @@ namespace Admin
             dtgExemplar.DataSource = tabela;
             dtgExemplar.DataBind();
         }
+
+        private void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+              "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -99,7 +106,11 @@ namespace Admin
                 ExemplaresBL exemBL = new ExemplaresBL();
                 Exemplares exemplares = new Exemplares();
                 exemplares.Id = utils.ComparaIntComZero(dtgExemplar.DataKeys[e.RowIndex][0].ToString());
-                exemBL.ExcluirBL(exemplares);
+               
+                if (exemBL.ExcluirBL(exemplares))
+                    ExibirMensagem("Registro excluído com sucesso !");
+                else
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
                 Pesquisar(null);
             }
             else

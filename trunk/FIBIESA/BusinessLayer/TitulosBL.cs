@@ -92,11 +92,11 @@ namespace BusinessLayer
         /// Retorna um numero de titulo válido, ou -1 se der erro.
         /// </summary>
         /// <returns></returns>
-        public Int32 NovoNumero()
+        public Int32 RetornaNovoNumero()
         {
             TitulosDA titulosDA = new TitulosDA();
 
-            return titulosDA.NovoNumero();
+            return titulosDA.RetornaNovoNumero();
         }
     }
 }

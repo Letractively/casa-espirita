@@ -173,7 +173,7 @@
                                                         <td colspan="2">
                                                             <asp:GridView ID="dtgAutores" runat="server" AutoGenerateColumns="False" BackColor="White"
                                                                 BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
-                                                                DataKeyNames="AUTORESID,ID" OnRowDeleting="dtgAutores_RowDeleting" AllowSorting="True"
+                                                                DataKeyNames="AUTORESID,OBRAID,ID" OnRowDeleting="dtgAutores_RowDeleting" AllowSorting="True"
                                                                 GridLines="None" OnPageIndexChanging="dtgAutores_PageIndexChanging" OnRowDataBound="dtgAutores_RowDataBound"
                                                                 OnSorting="dtgAutores_Sorting" Width="400px">
                                                                 <Columns>
@@ -181,11 +181,12 @@
                                                                         <HeaderStyle CssClass="grd_cmd_header" />
                                                                         <ItemStyle CssClass="grd_delete" />
                                                                     </asp:CommandField>
-                                                                    <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                                                    <asp:BoundField DataField="ID" HeaderText="ID" visible="false" />                                                                
                                                                     <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
                                                                     <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" SortExpression="DESCRICAO" />
                                                                     <asp:BoundField DataField="TIPO" HeaderText="Tipo" SortExpression="TIPO" />
                                                                     <asp:BoundField DataField="AUTORESID" HeaderText="AUTORESID" Visible="False" />
+                                                                    <asp:BoundField DataField="OBRAID" HeaderText="OBRAID" Visible="False" />
                                                                 </Columns>
                                                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                                                 <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

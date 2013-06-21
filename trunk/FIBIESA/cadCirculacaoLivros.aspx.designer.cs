@@ -373,6 +373,15 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.HiddenField hfIdPessoa;
         
         /// <summary>
+        /// hfIdPessoaDev control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdPessoaDev;
+        
+        /// <summary>
         /// hfIdItem control.
         /// </summary>
         /// <remarks>
@@ -391,13 +400,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Panel pnlCliente;
         
         /// <summary>
-        /// txtPesquisa control.
+        /// txtPesquisaCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisaCliente;
         
         /// <summary>
         /// grdPesquisa control.
@@ -436,13 +445,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Panel pnlItem;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtPesquisaItemDev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisaItemDev;
         
         /// <summary>
         /// grdPesquisaItem control.
@@ -481,13 +490,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.Panel pnlItemEmp;
         
         /// <summary>
-        /// TextBox2 control.
+        /// txtPesquisaEmp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtPesquisaEmp;
         
         /// <summary>
         /// grdPesquisaEmp control.

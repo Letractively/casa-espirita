@@ -97,16 +97,16 @@ namespace FIBIESA
             ExemplaresBL exeBL = new ExemplaresBL();
             Exemplares exemplares = new Exemplares();
 
-            DataSet dsExe =  exeBL.PesquisarExemplaresDevolucao(conteudo);                   
-            foreach(DataRow ltExe in dsExe.Tables[0].Rows)
-            {              
+            DataSet dsExe = exeBL.PesquisarExemplaresDevolucao(conteudo);
+            foreach (DataRow ltExe in dsExe.Tables[0].Rows)
+            {
                 DataRow linha = dt.NewRow();
                 linha["ID"] = ltExe["Id"];
                 linha["CODIGO"] = ltExe["tombo"];
                 linha["DESCRICAO"] = ltExe["titulo"];
 
                 dt.Rows.Add(linha);
-            }   
+            }
 
             grdPesquisaItem.DataSource = dt;
             grdPesquisaItem.DataBind();
@@ -136,9 +136,9 @@ namespace FIBIESA
                 linha["DESCRICAO"] = exemp.Obras.Titulo;
 
                 dt.Rows.Add(linha);
-                
+
             }
-                                  
+
             grdPesquisaEmp.DataSource = dt;
             grdPesquisaEmp.DataBind();
         }
@@ -263,11 +263,11 @@ namespace FIBIESA
                 lblDesCliente.Text = ltpessoa.Nome;
                 lblClienteItens.Text = ltpessoa.Nome;
                 lblCategoria.Text = ltpessoa.Categorias.Descricao;
-                
-                situacao = pesBL.VerificaSituacaoPessoa(utils.ComparaIntComZero(hfIdPessoa.Value),true,true);
-                
+
+                situacao = pesBL.VerificaSituacaoPessoa(utils.ComparaIntComZero(hfIdPessoa.Value), true, true);
+
                 if (situacao != null && situacao != string.Empty)
-                    LblSituacao.Text = situacao;                
+                    LblSituacao.Text = situacao;
                 else
                     LblSituacao.Text = "OK";
 
@@ -278,7 +278,7 @@ namespace FIBIESA
             {
                 if (cod_cliente != string.Empty)
                     ExibirMensagem("Cliente não cadastrado !");
-                
+
                 txtCliente.Text = "";
                 lblDesCliente.Text = "";
                 lblCategoria.Text = "";
@@ -334,7 +334,7 @@ namespace FIBIESA
                 txtExemplar.Text = "";
                 ExibirMensagem("Exemplar já incluído !");
             }
-                        
+
         }
 
         private void PesquisarExemplarDev(string cod_exemplar)
@@ -347,6 +347,7 @@ namespace FIBIESA
             {
                 lblExemplarDev.Text = (string)dsExe.Tables[0].Rows[0]["TITULO"].ToString();
                 lblClienteDev.Text = (string)dsExe.Tables[0].Rows[0]["NOME"].ToString();
+                hfIdPessoaDev.Value = (string)dsExe.Tables[0].Rows[0]["PES_ID"].ToString();
                 lblSitDev.Text = "";
 
                 IncluirExemplarDevolucao(dsExe);
@@ -376,7 +377,7 @@ namespace FIBIESA
         {
             hfIdItem.Value = "";
             lblDesExemplar.Text = "";
-            lblSituacaoItem.Text = "";            
+            lblSituacaoItem.Text = "";
             lblPrevDevolucao.Text = "";
             lblClienteItens.Text = "";
             txtExemplar.Text = "";
@@ -405,16 +406,17 @@ namespace FIBIESA
             lblExemplarDev.Text = "";
             lblSitDev.Text = "";
             lblClienteDev.Text = "";
+            hfIdPessoaDev.Value = "";
             chkReciboDevolucao.Checked = false;
             dtgExemplarDev.DataSource = null;
             dtgExemplarDev.DataBind();
         }
 
         private void IncluirExemplarEmprestimo(DataSet dsExe)
-        {            
+        {
             if (Session["dtItensEmp"] != null)
                 dtItensEmp = (DataTable)Session["dtItensEmp"];
-                        
+
             if (dsExe.Tables[0].Rows.Count != 0)
             {
                 DataRow linha = dtItensEmp.NewRow();
@@ -458,7 +460,7 @@ namespace FIBIESA
             dtgExemplarDev.DataBind();
 
         }
-        
+
         private int LerParametro(int codigo, string modulo)
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -487,7 +489,7 @@ namespace FIBIESA
         }
 
         #endregion
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             CriarDtItensEmp();
@@ -501,7 +503,7 @@ namespace FIBIESA
                 Session["dtItensDev"] = null;
             }
         }
-        
+
         #region renovacao
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
@@ -513,7 +515,7 @@ namespace FIBIESA
         protected void txtCliente_TextChanged(object sender, EventArgs e)
         {
             PesquisarCliente(txtCliente.Text);
-        }        
+        }
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
@@ -556,7 +558,6 @@ namespace FIBIESA
                 empMov.EmprestimoId = utils.ComparaIntComZero(emp_id);
                 empMov.DataDevolucao = DateTime.Now;
                 empMov.DataEmprestimo = null;
-                empMov.DataPrevistaEmprestimo = null;
 
                 erro = empMovBL.RenovarEmprestimoBL(empMov, utils.ComparaIntComZero(qtdeDias));
 
@@ -583,6 +584,13 @@ namespace FIBIESA
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
+        protected void txtPesquisaCliente_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaCliente(txtPesquisaCliente.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisaCliente.Text = "";
+        }
         #endregion
 
         #region emprestimo
@@ -598,13 +606,22 @@ namespace FIBIESA
                 lblClienteItens.Text = "";
                 tcPrincipal.ActiveTabIndex = 0;
             }
-        }        
+        }
         protected void btnExemplar_Click(object sender, EventArgs e)
         {
-            CarregarPesquisaItemEmp(null);
-            ModalPopupExtenderPesquisaEmp.Enabled = true;
-            ModalPopupExtenderPesquisaEmp.Show();
-        }        
+            if (hfIdPessoa.Value != null && hfIdPessoa.Value != String.Empty)
+            {
+                CarregarPesquisaItemEmp(null);
+                ModalPopupExtenderPesquisaEmp.Enabled = true;
+                ModalPopupExtenderPesquisaEmp.Show();
+            }
+            else
+            {
+                ExibirMensagem("Informe o cliente");
+                tcPrincipal.ActiveTabIndex = 0;
+            }
+
+        }
         protected void btnAbreEmp_Click(object sender, EventArgs e)
         {
             tcPrincipal.ActiveTabIndex = 1;
@@ -615,26 +632,16 @@ namespace FIBIESA
         }
         protected void btnSelectItemEmp_Click(object sender, EventArgs e)
         {
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (hfIdPessoa.Value != null && hfIdPessoa.Value != String.Empty)
-            {
-                ImageButton btndetails = sender as ImageButton;
-                GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            hfIdItem.Value = grdPesquisaEmp.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtExemplar.Text = gvrow.Cells[2].Text;
+            lblDesExemplar.Text = gvrow.Cells[3].Text;
 
-                hfIdItem.Value = grdPesquisaEmp.DataKeys[gvrow.RowIndex].Value.ToString();
-                txtExemplar.Text = gvrow.Cells[2].Text;
-                lblDesExemplar.Text = gvrow.Cells[3].Text;
-
-                ModalPopupExtenderPesquisaEmp.Hide();
-                ModalPopupExtenderPesquisaEmp.Enabled = false;
-                PesquisarExemplar(txtExemplar.Text);
-            }
-            else
-            {
-                ExibirMensagem("Informe o cliente");
-                tcPrincipal.ActiveTabIndex = 0;
-            }
-
+            ModalPopupExtenderPesquisaEmp.Hide();
+            ModalPopupExtenderPesquisaEmp.Enabled = false;
+            PesquisarExemplar(txtExemplar.Text);
         }
         protected void btnCancelEmp_Click(object sender, EventArgs e)
         {
@@ -696,7 +703,7 @@ namespace FIBIESA
 
                         }
                         else
-                            if(chkReciboEmprestimo.Checked)
+                            if (chkReciboEmprestimo.Checked)
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
                                              "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + emp.Id + "','',600,850);", true);
                     }
@@ -719,11 +726,11 @@ namespace FIBIESA
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
         protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {            
+        {
             object key = new object();
-            
+
             key = dtgItens.DataKeys[e.RowIndex][0];
-            
+
             if (Session["dtItensEmp"] != null)
                 dtItensEmp = (DataTable)Session["dtItensEmp"];
 
@@ -733,7 +740,14 @@ namespace FIBIESA
             Session["dtItensEmp"] = dtItensEmp;
             dtgItens.DataSource = dtItensEmp;
             dtgItens.DataBind();
-            
+
+        }
+        protected void txtPesquisaEmp_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItemEmp(txtPesquisaEmp.Text);
+            ModalPopupExtenderPesquisaEmp.Enabled = true;
+            ModalPopupExtenderPesquisaEmp.Show();
+            txtPesquisaEmp.Text = "";
         }
         #endregion
 
@@ -741,7 +755,7 @@ namespace FIBIESA
         protected void txtExemplarDev_TextChanged(object sender, EventArgs e)
         {
             PesquisarExemplarDev(txtExemplarDev.Text);
-        }                
+        }
         protected void btnExemplarDev_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);
@@ -766,7 +780,7 @@ namespace FIBIESA
         protected void btnCancelDev_Click(object sender, EventArgs e)
         {
             ModalPopupExtenderPesquisaItem.Enabled = false;
-        }        
+        }
         protected void btnDevolver_Click(object sender, EventArgs e)
         {
 
@@ -787,17 +801,23 @@ namespace FIBIESA
                     EmprestimoMov mov = new EmprestimoMov();
                     mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
                     mov.EmprestimoId = utils.ComparaIntComZero(linha["ID"].ToString());
+                    mov.DataPrevistaEmprestimo = utils.ComparaDataComNull(linha["DEVOLUCAO"].ToString());
+                    mov.PessoaId = utils.ComparaIntComZero(hfIdPessoaDev.Value);
+                    mov.Titulo = linha["TITULO"].ToString();
                     mov.DataDevolucao = DateTime.Now;
 
-                    if (emovBL.EditarBL(mov))
-                    {                        
-                        if(chkReciboDevolucao.Checked)                            
+                    string retorno = emovBL.EditarBL(mov);
+                    if (retorno != "false")
+                    {
+                        if (chkReciboDevolucao.Checked)
                             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                                                     "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.EmprestimoId + "','',600,850);", true);                        
+                                                     "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.EmprestimoId + "','',600,850);", true);
                         else
                             ExibirMensagem("Devolução realizada com sucesso!");
 
                         LimparCamposDevolucao();
+                        LimparCamposRenovacao();
+                        LimparCamposEmprestimo();
                     }
                     else
                         ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
@@ -830,15 +850,14 @@ namespace FIBIESA
         {
             Response.Redirect("~/default.aspx");
         }
+        protected void txtPesquisaItemDev_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisaItemDev.Text);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+            txtPesquisaItemDev.Text = "";
+        }
         #endregion
 
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-                                
     }
 }

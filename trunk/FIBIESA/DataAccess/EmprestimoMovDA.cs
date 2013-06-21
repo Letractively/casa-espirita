@@ -59,11 +59,18 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@dataemprestimo", instancia.DataEmprestimo);
             paramsToSP[2] = new SqlParameter("@datadevolucao", instancia.DataDevolucao);
             paramsToSP[3] = new SqlParameter("@dataprevistaemprestimo", instancia.DataPrevistaEmprestimo);
-            
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_emprestimoMov", paramsToSP) > 0);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                           CommandType.StoredProcedure, "stp_insert_emprestimoMov", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(EmprestimoMov instancia)
@@ -76,9 +83,19 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@dataprevistaemprestimo", instancia.DataPrevistaEmprestimo);
             paramsToSP[4] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_emprestimoMov", paramsToSP) > 0);
+            try
+            {
+               
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                           CommandType.StoredProcedure, "stp_update_emprestimoMov", paramsToSP);
+
+                return true;
+
+            }            
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(EmprestimoMov instancia)
@@ -86,10 +103,18 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[1];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
+            
+            try
+            {
+                SqlHelper.ExecuteNonQuery( ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                            CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP) > 0);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public DataSet PesquisarRelatorioDA(string pessoasCod, string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status)

@@ -188,6 +188,13 @@ namespace Admin
                 hfIdObra.Value = ltObr.Id.ToString();
                 lblDesObra.Text = ltObr.Titulo;
             }
+
+            if (hfIdObra.Value == null || hfIdObra.Value == string.Empty)
+            {
+                ExibirMensagem("Obra não cadastrada !");
+                txtObra.Text = "";
+                txtObra.Focus();
+            }
             
         }
 

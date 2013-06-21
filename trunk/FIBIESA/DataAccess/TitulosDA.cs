@@ -16,8 +16,7 @@ namespace DataAccess
         Utils utils = new Utils();
 
         #region funcoes
-
-       private List<Titulos> CarregarObjTitulos(SqlDataReader dr)
+        private List<Titulos> CarregarObjTitulos(SqlDataReader dr)
         {
             List<Titulos> titulos = new List<Titulos>();
             PessoasDA pesDA = new PessoasDA();
@@ -94,6 +93,22 @@ namespace DataAccess
                 titulos.Add(tit);    
             }
             return titulos;
+        }
+        /// <summary>
+        /// Retorna um numero de titulo válido, ou -1 se der erro.
+        /// </summary>
+        /// <returns></returns>
+        public Int32 RetornaNovoNumero()
+        {
+            string sql = @"SELECT COALESCE(MAX(NUMERO)+1, 1) AS VALOR FROM TITULOS";
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.Text, string.Format(sql));
+            int numero = -1;
+            if (dr.Read())
+                numero = utils.ComparaIntComZero(dr["VALOR"].ToString());
+
+
+            return numero < 0 ? 1 : numero;
         }
         #endregion
 
@@ -259,64 +274,42 @@ namespace DataAccess
 
         public DataSet PesquisarBuscaDataSetDA(string codTitulos, string codAssociados, string codPotadores, string tipoTitulo, string tipoDocumento, Boolean blAtrasados, string DataEmissaoIni, string DataEmissaoFim, string DataVencimentoIni, string DataVencimentoFim, string DataPagamentoIni, string DataPagamentoFim)
         {
-            string consulta = "SELECT * FROM VIEW_TITULOS " +
-                              " WHERE 1 = 1  ";
+            StringBuilder consulta = new StringBuilder();
+
+            consulta.Append(@"SELECT * FROM VIEW_TITULOS WHERE 1 = 1  ");
 
             if (tipoTitulo != string.Empty)
-                consulta += " AND APLICACAO = '" + tipoTitulo + "' ";
+                consulta.Append(@" AND APLICACAO = '" + tipoTitulo + "' ");
 
             if (codAssociados != string.Empty)
-                consulta += " AND CODIGOPESSOA IN (" + codAssociados + ")";
+                consulta.Append(@" AND CODIGOPESSOA IN (" + codAssociados + ")");
 
             if (codPotadores != string.Empty)
-                consulta += " AND CODIGOPORTADOR IN (" + codPotadores + ")";
+                consulta.Append(@" AND CODIGOPORTADOR IN (" + codPotadores + ")");
 
             if (codTitulos != string.Empty)
-                consulta += " AND numero IN (" + codTitulos + ")";
+                consulta.Append(@" AND numero IN (" + codTitulos + ")");
 
             if (tipoDocumento != string.Empty)
-                consulta += " AND tipoDocumentoId = " + tipoDocumento;
+                consulta.Append(@" AND tipoDocumentoId = " + tipoDocumento);
 
             if (blAtrasados)
-                consulta += " AND (CONVERT(DATETIME,dtVencimento,103) < CONVERT(DATETIME,GETDATE(),103) AND dtPagamento IS NULL) ";
+                consulta.Append(@" AND CONVERT(DATE,dtVencimento,103) < CONVERT(DATE,GETDATE(),103) AND dtPagamento IS NULL ");
 
             if ((DataEmissaoIni != string.Empty) && (DataEmissaoFim != string.Empty))
-            {                
-                consulta += " AND DTEMISSAO BETWEEN CONVERT(DATETIME,'" + DataEmissaoIni + "',103) AND CONVERT(DATETIME,'" + DataEmissaoFim + "',103)";
-            }
-
+                consulta.Append(@" AND CONVERT(DATE,DTEMISSAO,103) BETWEEN CONVERT(DATE,'" + DataEmissaoIni + "',103) AND CONVERT(DATE,'" + DataEmissaoFim + "',103)");
+            
             if ((DataVencimentoIni != string.Empty) && (DataVencimentoFim != string.Empty))
-            {
-
-                consulta += " AND DTVENCIMENTO BETWEEN CONVERT(DATETIME,'" + DataVencimentoIni + "',103) AND CONVERT(DATETIME,'" + DataVencimentoFim + "',103)";
-            }
-
+                consulta.Append(@" AND CONVERT(DATE,DTVENCIMENTO,103)  BETWEEN CONVERT(DATE,'" + DataVencimentoIni + "',103) AND CONVERT(DATE,'" + DataVencimentoFim + "',103)");
+            
             if ((DataPagamentoIni != string.Empty) && (DataPagamentoFim != string.Empty))
-            {               
-                consulta += " AND DTPAGAMENTO BETWEEN CONVERT(DATETIME,'" + DataPagamentoIni + "',103) AND CONVERT(DATETIME,'" + DataPagamentoFim + "',103)";
-            }
+                consulta.Append(@" AND CONVERT(DATE,DTPAGAMENTO,103) BETWEEN CONVERT(DATE,'" + DataPagamentoIni + "',103) AND CONVERT(DATE,'" + DataPagamentoFim + "',103)");
+            
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta);
-
+                                                                CommandType.Text, consulta.ToString());
 
             return ds;
         }
-
-        /// <summary>
-        /// Retorna um numero de titulo válido, ou -1 se der erro.
-        /// </summary>
-        /// <returns></returns>
-        public Int32 NovoNumero()        
-        {
-            string sql = @"SELECT COALESCE(MAX(NUMERO)+1, 1) AS VALOR FROM TITULOS";
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),            
-                    CommandType.Text, string.Format(sql));
-            int numero = -1;
-            if (dr.Read())
-                numero = utils.ComparaIntComZero(dr["VALOR"].ToString());
-
-            
-            return numero < 0 ? 1: numero;
-        }
+                
     }
 }

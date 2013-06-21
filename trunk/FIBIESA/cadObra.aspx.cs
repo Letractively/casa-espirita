@@ -132,17 +132,18 @@ namespace Admin
                 DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
                 DataColumn coluna4 = new DataColumn("TIPO", Type.GetType("System.String"));
                 DataColumn coluna5 = new DataColumn("AUTORESID", Type.GetType("System.Int32"));
-                             
+                DataColumn coluna6 = new DataColumn("OBRAID", Type.GetType("System.Int32"));                            
 
                 dtAutores.Columns.Add(coluna1);
                 dtAutores.Columns.Add(coluna2);
                 dtAutores.Columns.Add(coluna3);
                 dtAutores.Columns.Add(coluna4);
                 dtAutores.Columns.Add(coluna5);
+                dtAutores.Columns.Add(coluna6);
 
                 keys[0] = coluna5;
-                keys[1] = coluna1;
-               
+                keys[1] = coluna6;
+                               
                 dtAutores.PrimaryKey = keys;
             }
         }
@@ -245,6 +246,7 @@ namespace Admin
                 linha["AUTORESID"] = ltObAut.AutoresId;                      
                 linha["DESCRICAO"] = ltObAut.Autor;
                 linha["TIPO"] = ltObAut.TipoAutor;
+                linha["OBRAID"] = ltObAut.ObraId;
 
                 dtAutores.Rows.Add(linha);
             }
@@ -445,13 +447,13 @@ namespace Admin
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
+            if (Session["dtAutores"] != null)
+                dtAutores = (DataTable)Session["dtAutores"];
+
             if (utils.ComparaIntComZero(hfIdAutor.Value) > 0)
             {
                 if (!AutorJaIncluido(dtAutores,hfId.Value, hfIdAutor.Value, "dtAutores"))
                 {
-                    if (Session["dtAutores"] != null)
-                        dtAutores = (DataTable)Session["dtAutores"];
-
                     DataRow linha = dtAutores.NewRow();
 
                     linha["ID"] = 0;
@@ -459,6 +461,7 @@ namespace Admin
                     linha["DESCRICAO"] = lblDesAutor.Text;
                     linha["TIPO"] = txtDesTipo.Text;
                     linha["AUTORESID"] = hfIdAutor.Value;
+                    linha["OBRAID"] = utils.ComparaIntComZero(hfId.Value);
 
                     dtAutores.Rows.Add(linha);
 
@@ -471,7 +474,6 @@ namespace Admin
                 else
                     ExibirMensagem("Autor já incluído !");
             }
-
             
         }
 
@@ -481,25 +483,28 @@ namespace Admin
              
             keys[0] = dtgAutores.DataKeys[e.RowIndex][0];
             keys[1] = dtgAutores.DataKeys[e.RowIndex][1];
-           
 
+         
             if (Session["dtAutores"] != null)
                 dtAutores = (DataTable)Session["dtAutores"];
 
+            DataRow linha = dtAutores.Rows.Find(keys);
+            string id = linha["id"].ToString();
+
             if (dtAutores.Rows.Contains(keys))
-                dtAutores.Rows.Remove(dtAutores.Rows.Find(keys));
+                dtAutores.Rows.Remove(dtAutores.Rows.Find(keys));            
 
             Session["dtAutores"] = dtAutores;
             dtgAutores.DataSource = dtAutores;
             dtgAutores.DataBind();
 
-            if (utils.ComparaIntComZero(keys[1].ToString()) > 0)
+            if (utils.ComparaIntComZero(id) > 0)
             {
                 if (Session["tbexcluidos"] != null)
                     dtExcluidos = (DataTable)Session["tbexcluidos"];
 
                 DataRow row = dtExcluidos.NewRow();
-                row["IDCODIGO"] = keys[1].ToString();
+                row["IDCODIGO"] = id;
                 row["TIPO"] = "A";
                 dtExcluidos.Rows.Add(row);
                 Session["tbexcluidos"] = dtExcluidos;
