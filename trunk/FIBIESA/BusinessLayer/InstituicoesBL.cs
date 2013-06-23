@@ -16,10 +16,11 @@ namespace BusinessLayer
         private bool IsValid(Instituicoes ins)
         {
             bool valido;
-            valido = ins.Razao.Length <= 70 && ins.Email.Length <= 100 && ins.Endereco.Length <= 40 
+            valido = ins.Razao.Length <= 70 && ins.Email.Length <= 100 && ins.Endereco.Length <= 70 
                      && ins.Cep.Length <= 10 && ins.NomeFantasia.Length <= 70 && ins.Complemento.Length <= 40 
                      && ins.telefone.Length <= 20 && ins.Cnpj.Length <= 20;
 
+            valido = valido && utils.ValidaCNPJ(ins.Cnpj);
             return valido;
         }
 

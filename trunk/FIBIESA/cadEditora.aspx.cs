@@ -51,7 +51,7 @@ namespace Admin
 
         private void LimparCampos()
         {
-            txtDescricao.Text = "";            
+            txtDescricao.Text = "";
             lblCodigo.Text = "Código gerado automaticamente.";
         }
         #endregion
@@ -97,28 +97,24 @@ namespace Admin
 
             if (editoras.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(edBL.EditarBL(editoras))
-                        ExibirMensagem("Editora atualizada com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar a editora. Revise as informações.");
+
+                if (edBL.EditarBL(editoras))
+                    ExibirMensagem("Editora atualizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a editora. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(edBL.InserirBL(editoras))
-                    {
-                        ExibirMensagem("Editora gravada com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a editora. Revise as informações.");
+                if (edBL.InserirBL(editoras))
+                {
+                    ExibirMensagem("Editora gravada com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a editora. Revise as informações.");
+
             }
         }
     }

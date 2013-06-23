@@ -16,7 +16,7 @@ namespace Admin
     {
         Utils utils = new Utils();
 
-        #region funcoes 
+        #region funcoes
         public DataTable dtbPesquisa
         {
             get
@@ -28,7 +28,7 @@ namespace Admin
             }
             set { Session["_dtbPesquisa_cadForm"] = value; }
         }
- 
+
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
@@ -43,9 +43,9 @@ namespace Admin
 
             FormulariosBL forBL = new FormulariosBL();
             List<Formularios> formularios;
-            
+
             formularios = forBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Formularios formu in formularios)
             {
 
@@ -80,7 +80,7 @@ namespace Admin
 
             return newSortDirection;
         }
-        
+
         public void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
@@ -102,22 +102,19 @@ namespace Admin
 
         protected void dtgFormularios_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                FormulariosBL formBL = new FormulariosBL();
-                Formularios formularios = new Formularios();
-                formularios.Id = utils.ComparaIntComZero(dtgFormularios.DataKeys[e.RowIndex][0].ToString());
 
-                if (formBL.ExcluirBL(formularios))
-                    ExibirMensagem("Formulário excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o formulário.");
+            FormulariosBL formBL = new FormulariosBL();
+            Formularios formularios = new Formularios();
+            formularios.Id = utils.ComparaIntComZero(dtgFormularios.DataKeys[e.RowIndex][0].ToString());
 
-                Pesquisar(null);
-            }
+            if (formBL.ExcluirBL(formularios))
+                ExibirMensagem("Formulário excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-           
+                ExibirMensagem("Não foi possível excluir o formulário.");
+
+            Pesquisar(null);
+
+
         }
 
         protected void dtgFormularios_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,7 +125,7 @@ namespace Admin
         }
 
         protected void dtgFormularios_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {            
+        {
             dtgFormularios.DataSource = dtbPesquisa;
             dtgFormularios.PageIndex = e.NewPageIndex;
             dtgFormularios.DataBind();
@@ -169,18 +166,18 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);            
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgFormularios_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarJsExclusao("Deseja excluir este formulário?", 1, e);
         }
 
-                
+
     }
 }

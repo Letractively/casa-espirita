@@ -34,13 +34,13 @@ namespace FIBIESA
                 txtDtPagamento.Text = ltTit.DtPagamento != null ? Convert.ToDateTime(ltTit.DtPagamento).ToString("dd/MM/yyyy") : "";
                 txtVlrPago.Text = ltTit.ValorPago.ToString();
                 txtObs.Text = ltTit.Obs.ToString();
-                
+
                 if (ltTit.Pessoas != null)
                 {
                     hfIdPessoa.Value = ltTit.Pessoas.Id.ToString();
                     txtFornecedor.Text = ltTit.Pessoas.Codigo.ToString();
                     lblDesFornecedor.Text = ltTit.Pessoas.Nome != "" ? ltTit.Pessoas.Nome : ltTit.Pessoas.NomeFantasia;
-                }              
+                }
                 ddlTipoDoc.SelectedValue = ltTit.TipoDocumentoId.ToString();
             }
 
@@ -52,7 +52,7 @@ namespace FIBIESA
             List<TiposDocumentos> tipoDoc = tipDBL.PesquisarBL("CP");
 
             ddlTipoDoc.Items.Clear();
-            ddlTipoDoc.Items.Add(new ListItem("Selecione",""));
+            ddlTipoDoc.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposDocumentos ltTip in tipoDoc)
                 ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
 
@@ -67,7 +67,7 @@ namespace FIBIESA
             txtParcela.Text = "";
             txtFornecedor.Text = "";
             lblDesFornecedor.Text = "";
-            txtDataEmissao.Text ="";
+            txtDataEmissao.Text = "";
             txtDataVencimento.Text = "";
             hfId.Value = "";
             hfIdPessoa.Value = "";
@@ -169,31 +169,23 @@ namespace FIBIESA
 
             if (titulos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (titBL.EditarBL(titulos))
-                        ExibirMensagem("Título atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar o título. Revise as informações.");
-                }
+
+                if (titBL.EditarBL(titulos))
+                    ExibirMensagem("Título atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o título. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (titBL.InserirBL(titulos))
                 {
-                    if (titBL.InserirBL(titulos))
-                    {
-                        ExibirMensagem("Título gravado com sucesso !");
-                        LimparCampos();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o título. Revise as informações.");
+                    ExibirMensagem("Título gravado com sucesso !");
+                    LimparCampos();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o título. Revise as informações.");
+
             }
         }
 
@@ -237,7 +229,7 @@ namespace FIBIESA
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            ModalPopupExtenderPesquisa.Enabled = false;         
+            ModalPopupExtenderPesquisa.Enabled = false;
         }
 
         protected void txtPesquisa_TextChanged(object sender, EventArgs e)
@@ -258,9 +250,9 @@ namespace FIBIESA
         {
             CarregarPesquisa(null);
             ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();          
+            ModalPopupExtenderPesquisa.Show();
         }
-               
-                
+
+
     }
 }

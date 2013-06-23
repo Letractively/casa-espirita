@@ -33,7 +33,7 @@ namespace Admin
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));            
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("DESCAGENCIA", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("DESBANCO", Type.GetType("System.String"));
 
@@ -42,14 +42,14 @@ namespace Admin
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
             tabela.Columns.Add(coluna5);
-            
+
             ContasBL conBL = new ContasBL();
             List<Contas> contas;
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos;
-                        
+
             contas = conBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Contas ltCon in contas)
             {
                 DataRow linha = tabela.NewRow();
@@ -58,15 +58,15 @@ namespace Admin
                 linha["CODIGO"] = ltCon.Codigo;
                 linha["DESCRICAO"] = ltCon.Descricao;
                 if (ltCon.Agencia != null)
-                {                  
-                    linha["DESCAGENCIA"] = ltCon.Agencia.Codigo.ToString() + " - " +ltCon.Agencia.Descricao.ToString();
+                {
+                    linha["DESCAGENCIA"] = ltCon.Agencia.Codigo.ToString() + " - " + ltCon.Agencia.Descricao.ToString();
 
                     bancos = banBL.PesquisarBL(utils.ComparaIntComZero(ltCon.Agencia.BancoId.ToString()));
                     foreach (Bancos ltBan in bancos)
-	                    linha["DESBANCO"] = ltBan.Codigo.ToString() +" - "+ ltBan.Descricao;
-	                
+                        linha["DESBANCO"] = ltBan.Codigo.ToString() + " - " + ltBan.Descricao;
+
                 }
-                                                              
+
 
                 tabela.Rows.Add(linha);
             }
@@ -74,7 +74,13 @@ namespace Admin
             dtbPesquisa = tabela;
             dtgContas.DataSource = tabela;
             dtgContas.DataBind();
-        }   
+        }
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -96,21 +102,22 @@ namespace Admin
 
         protected void dtgContas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                ContasBL conBL = new ContasBL();
-                Contas contas = new Contas();
-                contas.Id = utils.ComparaIntComZero(dtgContas.DataKeys[e.RowIndex][0].ToString());
-                conBL.ExcluirBL(contas);
-                Pesquisar(null);
-            }
+            ContasBL conBL = new ContasBL();
+            Contas contas = new Contas();
+            contas.Id = utils.ComparaIntComZero(dtgContas.DataKeys[e.RowIndex][0].ToString());
+            
+            if (conBL.ExcluirBL(contas))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text); 
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgContas_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -155,7 +162,7 @@ namespace Admin
 
         protected void dtgContas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

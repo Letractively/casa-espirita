@@ -43,7 +43,7 @@
                         <td style="width: 179px">* Código:</td>
                         <td style="width: 250px" colspan="3">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
-                                Width="100px" ToolTip="Informe o código da conta" ></asp:TextBox>
+                                Width="100px" ToolTip="Informe o código da conta" MaxLength="8" ></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                 ControlToValidate="txtCodigo" ErrorMessage="*Informe o código da conta" 
                                 CssClass="validacao" ValidationGroup="salvar">*</asp:RequiredFieldValidator>

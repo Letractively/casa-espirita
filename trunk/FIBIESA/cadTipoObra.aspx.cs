@@ -31,7 +31,7 @@ namespace Admin
 
         private void CarregarDados(int id_bai)
         {
-            
+
             TiposObrasBL tipoBL = new TiposObrasBL();
             List<TiposObras> tipos = tipoBL.PesquisarBL(id_bai);
 
@@ -59,7 +59,7 @@ namespace Admin
         {
             txtDescricao.Text = "";
             txtQtdDias.Text = "";
-            lblCodigo.Text = "Código gerado automaticamente."; 
+            lblCodigo.Text = "Código gerado automaticamente.";
         }
         #endregion
 
@@ -107,33 +107,31 @@ namespace Admin
 
             if (tipos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if (tipoBL.EditarBL(tipos))
-                    {
-                        ExibirMensagem("Categoria atualizada com sucesso !");
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
+                if (tipoBL.EditarBL(tipos))
+                {
+                    ExibirMensagem("Categoria atualizada com sucesso !");
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(tipoBL.InserirBL(tipos))
-                    {
-                        ExibirMensagem("Categoria gravada com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a categoria. Revise as informações.");
+
+                if (tipoBL.InserirBL(tipos))
+                {
+                    ExibirMensagem("Categoria gravada com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a categoria. Revise as informações.");
+
             }
-                        
+
         }
     }
 }

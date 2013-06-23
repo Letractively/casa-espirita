@@ -46,7 +46,7 @@ namespace Admin
             List<Bancos> bancos;
 
             bancos = banBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Bancos ban in bancos)
             {
 
@@ -64,6 +64,13 @@ namespace Admin
             dtgBancos.DataSource = tabela;
             dtgBancos.DataBind();
         }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -71,20 +78,18 @@ namespace Admin
                 Pesquisar(null);
         }
 
-     
+
         protected void dtgBancos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                BancosBL banBL = new BancosBL();
-                Bancos bancos = new Bancos();
-                bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
-                banBL.ExcluirBL(bancos);
-                Pesquisar(null);
-            }
+            BancosBL banBL = new BancosBL();
+            Bancos bancos = new Bancos();
+            bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
+           
+            if (banBL.ExcluirBL(bancos))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
         }
 
         protected void dtgBancos_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,7 +116,7 @@ namespace Admin
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
             }

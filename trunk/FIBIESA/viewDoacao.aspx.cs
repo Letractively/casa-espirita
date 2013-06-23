@@ -48,7 +48,7 @@ namespace FIBIESA
             List<Doacoes> doacoes;
 
             doacoes = doaBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Doacoes ltDoa in doacoes)
             {
                 DataRow linha = tabela.NewRow();
@@ -59,12 +59,12 @@ namespace FIBIESA
                 linha["NOME"] = ltDoa.Pessoa.Nome;
                 linha["VALOR"] = ltDoa.Valor;
 
-                tabela.Rows.Add(linha);               
+                tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
             dtgDoacao.DataSource = tabela;
-            dtgDoacao.DataBind(); 
+            dtgDoacao.DataBind();
         }
 
         public void ExibirMensagem(string mensagem)
@@ -85,24 +85,19 @@ namespace FIBIESA
         {
             Response.Redirect("cadDoacao.aspx");
         }
-                
+
         protected void dtgDoacao_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                DoacoesBL doaBL = new DoacoesBL();
-                Doacoes doacoes = new Doacoes();
-                doacoes.Id = utils.ComparaIntComZero(dtgDoacao.DataKeys[e.RowIndex][0].ToString());
+            DoacoesBL doaBL = new DoacoesBL();
+            Doacoes doacoes = new Doacoes();
+            doacoes.Id = utils.ComparaIntComZero(dtgDoacao.DataKeys[e.RowIndex][0].ToString());
 
-                if(doaBL.ExcluirBL(doacoes))
-                    ExibirMensagem("Doação excluída com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir a doação.");
-
-                Pesquisar(null);
-            }
+            if (doaBL.ExcluirBL(doacoes))
+                ExibirMensagem("Doação excluída com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir a doação.");
+
+            Pesquisar(null);
         }
 
         protected void dtgDoacao_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -114,11 +109,11 @@ namespace FIBIESA
 
         protected void dtgDoacao_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
-                utils.CarregarJsExclusao("Deseja excluir esta doação?",0, e);
+                utils.CarregarJsExclusao("Deseja excluir esta doação?", 0, e);
         }
 
         protected void dtgDoacao_Sorting(object sender, GridViewSortEventArgs e)
@@ -168,6 +163,6 @@ namespace FIBIESA
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
                     "WinOpen('/Relatorios/RelReciboDoacao.aspx?doacaoid=" + doa_id + "','',600,850);", true);
         }
-        
+
     }
 }

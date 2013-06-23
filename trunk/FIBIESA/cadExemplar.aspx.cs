@@ -15,19 +15,19 @@ namespace Admin
     public partial class cadExemplar : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        string v_operacao = "";       
+        string v_operacao = "";
         #region funcoes
-       
+
         private void CarregarDados(int id_exe)
         {
             ExemplaresBL exeBL = new ExemplaresBL();
             DataSet dsPar = exeBL.PesquisarBL(id_exe);
-            
+
             if (dsPar.Tables[0].Rows.Count != 0)
             {
-                hfId.Value = (string)dsPar.Tables[0].Rows[0]["id"].ToString(); 
+                hfId.Value = (string)dsPar.Tables[0].Rows[0]["id"].ToString();
                 txtTombo.Text = (string)dsPar.Tables[0].Rows[0]["tombo"].ToString();
-                ddlStatus.SelectedValue = (string)dsPar.Tables[0].Rows[0]["status"]; 
+                ddlStatus.SelectedValue = (string)dsPar.Tables[0].Rows[0]["status"];
                 hfIdObra.Value = (string)dsPar.Tables[0].Rows[0]["obraid"].ToString();
                 txtObra.Text = (string)dsPar.Tables[0].Rows[0]["codigo"].ToString();
                 lblDesObra.Text = (string)dsPar.Tables[0].Rows[0]["titulo"];
@@ -37,14 +37,14 @@ namespace Admin
 
         private void CarregarAtributos()
         {
-           txtTombo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-        }        
+            txtTombo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
+        }
         private void CarregarDdlOrigem()
         {
             OrigensBL oriBL = new OrigensBL();
             List<Origens> origens = oriBL.PesquisarBL();
 
-            ddlOrigem.Items.Add(new ListItem("Selecione",""));
+            ddlOrigem.Items.Add(new ListItem("Selecione", ""));
             foreach (Origens ltOri in origens)
                 ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
 
@@ -102,7 +102,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_exe = 0;            
+            int id_exe = 0;
 
             if (!IsPostBack)
             {
@@ -143,30 +143,28 @@ namespace Admin
 
             if (exemplares.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                   if(exeBL.EditarBL(exemplares))
-                        ExibirMensagem("Exemplar atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar o exemplar. Revise as informações.");
+
+                if (exeBL.EditarBL(exemplares))
+                    ExibirMensagem("Exemplar atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o exemplar. Revise as informações.");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(exeBL.InserirBL(exemplares))                     
-                    {
-                        ExibirMensagem("Exemplar gravado com sucesso !");
-                        LimparCampos();
-                        txtObra.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o exemplar. Revise as informações.");
+
+                if (exeBL.InserirBL(exemplares))
+                {
+                    ExibirMensagem("Exemplar gravado com sucesso !");
+                    LimparCampos();
+                    txtObra.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o exemplar. Revise as informações.");
+
             }
-                        
+
         }
 
         protected void btnPesObra_Click(object sender, EventArgs e)
@@ -179,8 +177,8 @@ namespace Admin
         protected void txtObra_TextChanged(object sender, EventArgs e)
         {
             ObrasBL obrBL = new ObrasBL();
-            List<Obras> obras = obrBL.PesquisarBL("CODIGO",txtObra.Text);
-            
+            List<Obras> obras = obrBL.PesquisarBL("CODIGO", txtObra.Text);
+
             lblDesObra.Text = "";
             hfIdObra.Value = "";
             foreach (Obras ltObr in obras)
@@ -195,7 +193,7 @@ namespace Admin
                 txtObra.Text = "";
                 txtObra.Focus();
             }
-            
+
         }
 
         protected void txtTombo_TextChanged(object sender, EventArgs e)
@@ -212,7 +210,7 @@ namespace Admin
             {
                 lblInformacao.Text = "";
                 ddlOrigem.Focus();
-            }  
+            }
         }
 
         protected void btnSelectItem_Click(object sender, EventArgs e)
@@ -227,7 +225,7 @@ namespace Admin
             lblDesObra.Text = gvrow.Cells[3].Text;
 
             ModalPopupExtenderPesItem.Enabled = false;
-            ModalPopupExtenderPesItem.Hide();           
+            ModalPopupExtenderPesItem.Hide();
             txtTombo.Focus();
 
         }
@@ -250,6 +248,6 @@ namespace Admin
             ModalPopupExtenderPesItem.Show();
             txtPesItem.Text = "";
         }
-       
+
     }
 }

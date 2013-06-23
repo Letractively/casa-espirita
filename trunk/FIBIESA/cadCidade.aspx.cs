@@ -14,7 +14,7 @@ namespace Admin
     public partial class cadCidade : System.Web.UI.Page
     {
         Utils utils = new Utils();
-        string v_operacao = ""; 
+        string v_operacao = "";
 
         #region funcoes
         private void CarregarDdlEstado()
@@ -22,12 +22,12 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddlEstado.Items.Add(new ListItem("Selecione",""));
-            foreach (Estados ltEst in estados)            
-               ddlEstado.Items.Add(new ListItem(ltEst.Uf +" - "+ltEst.Descricao,ltEst.Id.ToString()));                
-            
+            ddlEstado.Items.Add(new ListItem("Selecione", ""));
+            foreach (Estados ltEst in estados)
+                ddlEstado.Items.Add(new ListItem(ltEst.Uf + " - " + ltEst.Descricao, ltEst.Id.ToString()));
+
             ddlEstado.SelectedIndex = 0;
- 
+
         }
         private void CarregarDados(int id_cid)
         {
@@ -41,15 +41,15 @@ namespace Admin
             {
                 Cidades cid = new Cidades();
 
-                hfId.Value  = (string)dsCid.Tables[0].Rows[0]["id"].ToString();
+                hfId.Value = (string)dsCid.Tables[0].Rows[0]["id"].ToString();
                 lblCodigo.Text = (string)dsCid.Tables[0].Rows[0]["codigo"].ToString();
                 txtDescricao.Text = (string)dsCid.Tables[0].Rows[0]["descricao"];
                 ddlEstado.SelectedValue = (string)dsCid.Tables[0].Rows[0]["estadoid"].ToString();
-                                
+
             }
-           
+
         }
-       
+
         private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
@@ -58,7 +58,7 @@ namespace Admin
 
         private void LimparCampos()
         {
-            txtDescricao.Text = "";            
+            txtDescricao.Text = "";
             ddlEstado.SelectedIndex = -1;
             lblCodigo.Text = "Código gerado automaticamente.";
             txtDescricao.Focus();
@@ -68,7 +68,7 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cid = 0;
-                        
+
             if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -108,28 +108,26 @@ namespace Admin
 
             if (cidades.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(cidBL.EditarBL(cidades))
-                         ExibirMensagem("Cidade atualizada com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar a cidade. Revise as informações.");
+
+                if (cidBL.EditarBL(cidades))
+                    ExibirMensagem("Cidade atualizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a cidade. Revise as informações.");
+
             }
             else
             {
-                if(this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(cidBL.InserirBL(cidades))
-                    {
-                        ExibirMensagem("Cidade gravada com sucesso !");
-                        LimparCampos();
-                    }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
+                if (cidBL.InserirBL(cidades))
+                {
+                    ExibirMensagem("Cidade gravada com sucesso !");
+                    LimparCampos();
+                }
+
             }
-                      
+
 
         }
-              
+
     }
 }

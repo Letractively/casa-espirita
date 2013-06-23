@@ -20,7 +20,7 @@ namespace FIBIESA
         #region funcoes
         private void CarregarDados(int id_ins)
         {
-          
+
             InstituicoesBL insBL = new InstituicoesBL();
             List<Instituicoes> intituicoes = insBL.PesquisarBL(id_ins);
 
@@ -35,7 +35,7 @@ namespace FIBIESA
                 txtCep.Text = ltIns.Cep;
                 txtEndereco.Text = ltIns.Endereco;
                 txtNumero.Text = ltIns.Numero.ToString();
-                txtComplemento.Text = ltIns.Complemento;               
+                txtComplemento.Text = ltIns.Complemento;
                 txttelefone.Text = ltIns.telefone;
                 txtRanking.Text = ltIns.Ranking.ToString();
 
@@ -54,11 +54,11 @@ namespace FIBIESA
         }
         private void CarregarAtributos()
         {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");         
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
             txttelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
-            txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");         
+            txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         private DataTable CriarDtPesquisa()
         {
@@ -81,7 +81,7 @@ namespace FIBIESA
             DataSet dsCid = cidBL.PesquisarBL(id_cid);
 
             if (dsCid.Tables[0].Rows.Count != 0)
-            {               
+            {
                 v_cidade[0] = Convert.ToString(dsCid.Tables[0].Rows[0]["codigo"]);
                 v_cidade[1] = (string)dsCid.Tables[0].Rows[0]["descricao"];
 
@@ -145,7 +145,7 @@ namespace FIBIESA
                     break;
 
                 default:
-                   // lblMsg.text = "Tipo de arquivo inválido."
+                    // lblMsg.text = "Tipo de arquivo inválido."
                     bRetorno = false;
                     break;
             }
@@ -182,7 +182,7 @@ namespace FIBIESA
             List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
 
             ddl.Items.Clear();
-            ddl.Items.Add(new ListItem("Selecione",""));
+            ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Bairros ltBai in bairros)
                 ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
 
@@ -215,11 +215,11 @@ namespace FIBIESA
             txtCodigo.Focus();
         }
         #endregion
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_ins = 0;
-            
+
             if (!IsPostBack)
             {
 
@@ -248,29 +248,37 @@ namespace FIBIESA
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            InstituicoesBL insBL = new InstituicoesBL();
-            Instituicoes instituicoes = new Instituicoes();
+            if (!utils.ValidaCNPJ(txtCnpj.Text))
+            {
+                lblCnpj.Text = "*CNPJ inválido !";
+                tcInstituicao.ActiveTabIndex = 0;
+                txtCnpj.Focus();
+            }
+            else
+            {
+                lblCnpj.Text = "";
 
-            instituicoes.Id = utils.ComparaIntComZero(hfId.Value);
-            instituicoes.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
-            instituicoes.Razao = txtRazao.Text;
-            instituicoes.NomeFantasia = txtNomeFantasia.Text;
-            instituicoes.Email = txtEmail.Text;
-            instituicoes.Cnpj = txtCnpj.Text;
-            instituicoes.CidadeId = utils.ComparaIntComNull(ddlCidades.SelectedValue);
-            instituicoes.Cep = txtCep.Text;
-            instituicoes.BairroId = utils.ComparaIntComNull(ddlBairro.SelectedValue);
-            instituicoes.Endereco = txtEndereco.Text;
-            instituicoes.Numero = txtNumero.Text;
-            instituicoes.Complemento = txtComplemento.Text;            
-            instituicoes.telefone = txttelefone.Text;
-            instituicoes.Ranking = utils.ComparaIntComZero(txtRanking.Text);
+                InstituicoesBL insBL = new InstituicoesBL();
+                Instituicoes instituicoes = new Instituicoes();
 
-            int idIns = 0;
+                instituicoes.Id = utils.ComparaIntComZero(hfId.Value);
+                instituicoes.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+                instituicoes.Razao = txtRazao.Text;
+                instituicoes.NomeFantasia = txtNomeFantasia.Text;
+                instituicoes.Email = txtEmail.Text;
+                instituicoes.Cnpj = txtCnpj.Text;
+                instituicoes.CidadeId = utils.ComparaIntComNull(ddlCidades.SelectedValue);
+                instituicoes.Cep = txtCep.Text;
+                instituicoes.BairroId = utils.ComparaIntComNull(ddlBairro.SelectedValue);
+                instituicoes.Endereco = txtEndereco.Text;
+                instituicoes.Numero = txtNumero.Text;
+                instituicoes.Complemento = txtComplemento.Text;
+                instituicoes.telefone = txttelefone.Text;
+                instituicoes.Ranking = utils.ComparaIntComZero(txtRanking.Text);
 
-            if (instituicoes.Id > 0)
-            { 
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+                int idIns = 0;
+
+                if (instituicoes.Id > 0)
                 {
                     idIns = instituicoes.Id;
 
@@ -281,25 +289,20 @@ namespace FIBIESA
                     }
                     else
                         ExibirMensagem("Não foi possível atualizar a instituição. Revise as informações.");
-                    
+
+
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
-            else            
-            {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
                 {
+
                     if (insBL.InserirBL(instituicoes))
                     {
                         VerificarImagem();
                         ExibirMensagem("Instituição gravada com sucesso !");
                         LimparCampos();
-                    }                                     
+                    }
+
                 }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
 
         }
@@ -308,7 +311,7 @@ namespace FIBIESA
         {
             Response.Redirect("~/viewInstituicao.aspx");
         }
-        
+
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
@@ -334,7 +337,9 @@ namespace FIBIESA
             {
                 lblInformacao.Text = "";
                 txtNomeFantasia.Focus();
-            }            
-        }                
+            }
+        }
+
+        
     }
 }

@@ -53,11 +53,11 @@ namespace Admin
             List<Turmas> turmas;
 
             turmas = turBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Turmas tur in turmas)
             {
                 DataRow linha = tabela.NewRow();
-                
+
                 linha["ID"] = tur.Id;
                 linha["CODIGO"] = tur.Codigo;
                 linha["DESCRICAO"] = tur.Descricao;
@@ -100,20 +100,16 @@ namespace Admin
         protected void dtgTurmas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                TurmasBL turBL = new TurmasBL();
-                Turmas turmas = new Turmas();
-                turmas.Id = utils.ComparaIntComZero(dtgTurmas.DataKeys[e.RowIndex][0].ToString());
-                if (turBL.ExcluirBL(turmas))
-                    ExibirMensagem("Turma excluída com sucesso!");
-                else
-                    ExibirMensagem("Não foi possível excluir a turma.");
-
-                Pesquisar(null);
-            }
+            TurmasBL turBL = new TurmasBL();
+            Turmas turmas = new Turmas();
+            turmas.Id = utils.ComparaIntComZero(dtgTurmas.DataKeys[e.RowIndex][0].ToString());
+            if (turBL.ExcluirBL(turmas))
+                ExibirMensagem("Turma excluída com sucesso!");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
 

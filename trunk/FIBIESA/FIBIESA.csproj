@@ -244,7 +244,6 @@
     <Content Include="viewBanco.aspx" />
     <Content Include="viewBancosInstrucoes.aspx" />
     <Content Include="viewCategoria.aspx" />
-    <Content Include="viewChamada.aspx" />
     <Content Include="viewCidade.aspx" />
     <Content Include="viewConta.aspx" />
     <Content Include="viewContasApagar.aspx" />
@@ -684,7 +683,6 @@
     <Compile Include="index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
     </Compile>
-    <Compile Include="moduloautenticador.cs" />
     <Compile Include="Pesquisar.aspx.cs">
       <DependentUpon>Pesquisar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -853,13 +851,6 @@
     </Compile>
     <Compile Include="viewCategoria.aspx.designer.cs">
       <DependentUpon>viewCategoria.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="viewChamada.aspx.cs">
-      <DependentUpon>viewChamada.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="viewChamada.aspx.designer.cs">
-      <DependentUpon>viewChamada.aspx</DependentUpon>
     </Compile>
     <Compile Include="viewCidade.aspx.cs">
       <DependentUpon>viewCidade.aspx</DependentUpon>
@@ -1145,7 +1136,9 @@
     <Content Include="index.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.sitemap" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="home.Master" />

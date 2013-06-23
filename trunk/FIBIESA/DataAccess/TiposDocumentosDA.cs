@@ -55,9 +55,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@descricao", tdo.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@aplicacao", tdo.Aplicacao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_tiposDocumentos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_tiposDocumentos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(TiposDocumentos tdo)
@@ -69,9 +76,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@descricao", tdo.Descricao.ToUpper());
             paramsToSP[3] = new SqlParameter("@aplicacao", tdo.Aplicacao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_tiposDocumentos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_tiposDocumentos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(TiposDocumentos tdo)
@@ -80,9 +94,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", tdo.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_tiposDocumentos", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_tiposDocumentos", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<TiposDocumentos> PesquisarDA(string aplicacao)

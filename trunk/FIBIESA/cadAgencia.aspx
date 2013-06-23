@@ -30,7 +30,7 @@
                         </td>
                         <td style="width: 400px" colspan="3">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
-                                Width="100px" ToolTip="Informe o código"></asp:TextBox>
+                                Width="100px" ToolTip="Informe o código" MaxLength="8"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
                                 ErrorMessage="Informe o código da agência" ValidationGroup="salvar">*</asp:RequiredFieldValidator>

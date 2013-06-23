@@ -45,7 +45,7 @@ namespace Admin
             List<Eventos> eventos;
 
             eventos = eveBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Eventos cur in eventos)
             {
 
@@ -73,7 +73,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
 
@@ -86,7 +86,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);     
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgCursos_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,20 +97,17 @@ namespace Admin
         }
 
         protected void dtgCursos_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {            
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                EventosBL eveBL = new EventosBL();
-                Eventos eventos = new Eventos();
-                eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
-                if (eveBL.ExcluirBL(eventos))
-                    ExibirMensagem("Evento excluído com sucesso!");
-                else
-                    ExibirMensagem("Não foi possível excluir o evento.");
-                Pesquisar(null);
-            }
+        {
+
+            EventosBL eveBL = new EventosBL();
+            Eventos eventos = new Eventos();
+            eventos.Id = utils.ComparaIntComZero(dtgEventos.DataKeys[e.RowIndex][0].ToString());
+            if (eveBL.ExcluirBL(eventos))
+                ExibirMensagem("Evento excluído com sucesso!");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgEventos_PageIndexChanging(object sender, GridViewPageEventArgs e)

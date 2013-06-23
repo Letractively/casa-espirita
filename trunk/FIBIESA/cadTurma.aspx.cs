@@ -24,9 +24,9 @@ namespace Admin
             EventosBL eveBL = new EventosBL();
             List<Eventos> eventos = eveBL.PesquisarBL();
 
-            ddlEvento.Items.Add(new ListItem("Selecione",""));
-            foreach (Eventos ltEve in eventos)            
-                ddlEvento.Items.Add(new ListItem(ltEve.Codigo+" - "+ ltEve.Descricao, ltEve.Id.ToString()));
+            ddlEvento.Items.Add(new ListItem("Selecione", ""));
+            foreach (Eventos ltEve in eventos)
+                ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
 
             ddlEvento.SelectedIndex = 0;
         }
@@ -36,7 +36,7 @@ namespace Admin
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
 
-            string valor = parBL.PesquisarValorBL(1,"E");
+            string valor = parBL.PesquisarValorBL(1, "E");
 
             if (utils.ComparaIntComZero(valor) > 0)
             {
@@ -55,8 +55,8 @@ namespace Admin
         {
             TurmasBL turBL = new TurmasBL();
             DataSet dsTur = turBL.PesquisarBL(id_tur);
-                   
-            foreach(DataRow ltTur in dsTur.Tables[0].Rows)
+
+            foreach (DataRow ltTur in dsTur.Tables[0].Rows)
             {
                 hfId.Value = ltTur["id"].ToString();
                 lblcodigo.Text = ltTur["Codigo"].ToString();
@@ -71,16 +71,16 @@ namespace Admin
                 }
                 txtDtFim.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
                 txtDtInicio.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
-                txtHoraFim.Text = ltTur["HoraFim"].ToString(); 
-                txtHoraInicio.Text = ltTur["HoraIni"].ToString();   
-                ddlEvento.SelectedValue = ltTur["EventoId"].ToString();               
+                txtHoraFim.Text = ltTur["HoraFim"].ToString();
+                txtHoraInicio.Text = ltTur["HoraIni"].ToString();
+                ddlEvento.SelectedValue = ltTur["EventoId"].ToString();
                 ddlInstrutor.SelectedValue = ltTur["PessoaId"].ToString();
 
-            }                
+            }
 
         }
         private void CarregarAtributos()
-        {            
+        {
             txtNroMax.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtHoraInicio.Attributes.Add("onKeyPress", "return(formatar(this,'##:##',event))");
             txtHoraFim.Attributes.Add("onKeyPress", "return(formatar(this,'##:##',event))");
@@ -119,7 +119,7 @@ namespace Admin
             int id_tur = 0;
 
             CarregarAtributos();
-            
+
             if (!IsPostBack)
             {
                 CarregarDdlEventos();
@@ -163,54 +163,47 @@ namespace Admin
             turmas.DataInicial = Convert.ToDateTime(txtDtInicio.Text);
             turmas.Sala = txtSala.Text;
             turmas.PessoaId = utils.ComparaIntComNull(ddlInstrutor.SelectedValue);
-            
+
             if (turmas.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if (turBL.EditarBL(turmas))
-                    {
-                        ExibirMensagem("Turma atualizada com sucesso !");
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar a turma. Revise as informações.");
+
+                if (turBL.EditarBL(turmas))
+                {
+                    ExibirMensagem("Turma atualizada com sucesso !");
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a turma. Revise as informações.");
 
             }
             else
             {
                 Int32 id_turma = 0;
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+                id_turma = turBL.InserirBL(turmas);
+                hfId.Value = id_turma.ToString();
+                if (id_turma > 0)
                 {
-                    id_turma = turBL.InserirBL(turmas);
-                    hfId.Value = id_turma.ToString();
-                    if (id_turma > 0)
-                    {
-                        ExibirMensagem("Turma gravada com sucesso !");                       
-                        btnParticipantes.Visible = true;
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a turma. Revise as informações.");
+                    ExibirMensagem("Turma gravada com sucesso !");
+                    btnParticipantes.Visible = true;
+                    txtDescricao.Focus();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a turma. Revise as informações.");
             }
-            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewTurma.aspx");
         }
-               
+
         protected void btnParticipantes_Click(object sender, EventArgs e)
         {
             Session["turmaId"] = hfId.Value;
             Response.Redirect("cadTurmaParticipantes.aspx?");
 
-        }        
-      
+        }
+
     }
 }

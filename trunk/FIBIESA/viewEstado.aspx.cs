@@ -49,7 +49,7 @@ namespace Admin
             List<Estados> estados;
 
             estados = estBL.PesquisarBuscaBL(valor);
-            
+
             /*Preenche as linhas do datatable com o retorno da consulta*/
             foreach (Estados est in estados)
             {
@@ -63,22 +63,27 @@ namespace Admin
                 /*Adiciona a linha vazia no datatable*/
                 tabela.Rows.Add(linha);
             }
-          
+
             dtbPesquisa = tabela;
-            dtgEstados.DataSource = tabela;          
+            dtgEstados.DataSource = tabela;
             dtgEstados.DataBind();
+        }
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
-                          
+
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text); 
+            Pesquisar(txtBusca.Text);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -88,16 +93,15 @@ namespace Admin
 
         protected void dtgEstados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                EstadosBL estBL = new EstadosBL();
-                Estados estados = new Estados();
-                estados.Id = utils.ComparaIntComZero(dtgEstados.DataKeys[e.RowIndex][0].ToString());
-                estBL.ExcluirBL(estados);
-                Pesquisar(null);
-            }
+            EstadosBL estBL = new EstadosBL();
+            Estados estados = new Estados();
+            estados.Id = utils.ComparaIntComZero(dtgEstados.DataKeys[e.RowIndex][0].ToString());
+        
+            if (estBL.ExcluirBL(estados))
+                ExibirMensagem("Estado excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
         }
 
         protected void dtgEstados_SelectedIndexChanged(object sender, EventArgs e)
@@ -160,7 +164,7 @@ namespace Admin
 
         protected void GridProduto_SelectedIndexChanged(object sender, EventArgs e)
         {
-                    }
+        }
 
     }
 }

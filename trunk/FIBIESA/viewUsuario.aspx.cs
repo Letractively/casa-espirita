@@ -33,7 +33,7 @@ namespace Admin
             DataTable tabela = new DataTable();
 
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("PESSOAID", Type.GetType("System.String"));                                                 
+            DataColumn coluna2 = new DataColumn("PESSOAID", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("NOME", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("EMAIL", Type.GetType("System.String"));
             DataColumn coluna5 = new DataColumn("STATUS", Type.GetType("System.String"));
@@ -41,7 +41,7 @@ namespace Admin
             DataColumn coluna7 = new DataColumn("DTFIM", Type.GetType("System.String"));
             DataColumn coluna8 = new DataColumn("CODCAT", Type.GetType("System.Int32"));
             DataColumn coluna9 = new DataColumn("DESCAT", Type.GetType("System.String"));
-                       
+
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
@@ -51,12 +51,12 @@ namespace Admin
             tabela.Columns.Add(coluna7);
             tabela.Columns.Add(coluna8);
             tabela.Columns.Add(coluna9);
-           
-            UsuariosBL usuBL = new UsuariosBL();           
+
+            UsuariosBL usuBL = new UsuariosBL();
             List<Usuarios> usuarios;
 
             usuarios = usuBL.PesquisarBuscaBL(valor);
-           
+
             foreach (Usuarios usu in usuarios)
             {
                 DataRow linha = tabela.NewRow();
@@ -70,7 +70,7 @@ namespace Admin
                 linha["DTFIM"] = usu.DtFim.ToString("dd/MM/yyyy");
                 linha["CODCAT"] = usu.Categoria.Codigo;
                 linha["DESCAT"] = usu.Categoria.Descricao;
-              
+
                 tabela.Rows.Add(linha);
             }
 
@@ -82,13 +82,13 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-           Pesquisar(txtBusca.Text); 
+            Pesquisar(txtBusca.Text);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -98,17 +98,14 @@ namespace Admin
 
         protected void dtgUsuarios_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                UsuariosBL usuBL = new UsuariosBL();
-                Usuarios usuarios = new Usuarios();
 
-                usuarios.Id = utils.ComparaIntComZero(dtgUsuarios.DataKeys[e.RowIndex][0].ToString());
-                usuBL.ExcluirBL(usuarios);
-                Pesquisar(null);
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            UsuariosBL usuBL = new UsuariosBL();
+            Usuarios usuarios = new Usuarios();
+
+            usuarios.Id = utils.ComparaIntComZero(dtgUsuarios.DataKeys[e.RowIndex][0].ToString());
+            usuBL.ExcluirBL(usuarios);
+            Pesquisar(null);
+
         }
 
         protected void dtgUsuarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,7 +166,7 @@ namespace Admin
             }
         }
 
-       
-        
+
+
     }
 }

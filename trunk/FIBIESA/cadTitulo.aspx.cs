@@ -122,21 +122,10 @@ namespace Admin
             titulos.Obs = txtObs.Text; 
 
             if (titulos.Id > 0)
-            {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    titBL.EditarBL(titulos);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
+                titBL.EditarBL(titulos);
             else
-            {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    titBL.InserirBL(titulos);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
+                titBL.InserirBL(titulos);
+            
 
             Response.Redirect("viewTitulo.aspx");
         }

@@ -48,7 +48,7 @@ namespace Admin
             List<Obras> obras;
 
             obras = obraBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Obras obrinha in obras)
             {
 
@@ -104,21 +104,18 @@ namespace Admin
 
         protected void dtgObras_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                ObrasBL obraBL = new ObrasBL();
-                Obras obras = new Obras();
-                obras.Id = utils.ComparaIntComZero(dtgObras.DataKeys[e.RowIndex][0].ToString());
-               
-                if (obraBL.ExcluirBL(obras))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                
-                Pesquisar(null);
-            }
+
+            ObrasBL obraBL = new ObrasBL();
+            Obras obras = new Obras();
+            obras.Id = utils.ComparaIntComZero(dtgObras.DataKeys[e.RowIndex][0].ToString());
+
+            if (obraBL.ExcluirBL(obras))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
         protected void dtgObras_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -130,7 +127,7 @@ namespace Admin
 
         protected void dtgObras_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

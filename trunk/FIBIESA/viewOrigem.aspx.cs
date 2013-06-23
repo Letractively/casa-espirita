@@ -39,12 +39,12 @@ namespace Admin
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
-            
+
             OrigensBL origemBL = new OrigensBL();
             List<Origens> origens;
-                        
+
             origens = origemBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Origens bai in origens)
             {
 
@@ -96,21 +96,18 @@ namespace Admin
 
         protected void dtgOrigens_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                OrigensBL origemBL = new OrigensBL();
-                Origens origens = new Origens();
-                origens.Id = utils.ComparaIntComZero(dtgOrigens.DataKeys[e.RowIndex][0].ToString());
-                
-                if (origemBL.ExcluirBL(origens))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                
-                Pesquisar(null);
-            }
+
+            OrigensBL origemBL = new OrigensBL();
+            Origens origens = new Origens();
+            origens.Id = utils.ComparaIntComZero(dtgOrigens.DataKeys[e.RowIndex][0].ToString());
+
+            if (origemBL.ExcluirBL(origens))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
         protected void dtgOrigens_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -122,7 +119,7 @@ namespace Admin
 
         protected void dtgOrigens_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

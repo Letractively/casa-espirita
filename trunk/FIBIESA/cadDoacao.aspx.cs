@@ -95,7 +95,7 @@ namespace Admin
                 txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtCliente.Focus();
             }
-          
+
         }
 
         protected void btnPesCliente_Click(object sender, EventArgs e)
@@ -128,26 +128,21 @@ namespace Admin
 
             }
 
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+            Int32 id_doa = doaBL.InserirBL(doacoes);
+
+            if (id_doa > 0)
             {
-                Int32 id_doa = doaBL.InserirBL(doacoes);
+                LimparCampos();
+                txtCliente.Focus();
 
-                if (id_doa > 0)
-                {
-                    LimparCampos();
-                    txtCliente.Focus();
-
-                    if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboDoacao.aspx?doacaoid=" + id_doa + "','',600,850);", true);
-                    else
-                        ExibirMensagem("Doação gravada com sucesso!");
-                }
+                if (chkImprimirRecibo.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboDoacao.aspx?doacaoid=" + id_doa + "','',600,850);", true);
                 else
-                    ExibirMensagem("Não foi possível gravar a doação.");
+                    ExibirMensagem("Doação gravada com sucesso!");
             }
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
+                ExibirMensagem("Não foi possível gravar a doação.");
 
         }
 

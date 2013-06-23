@@ -17,7 +17,7 @@ namespace Admin
         string v_operacao = "";
 
         #region funcoes
-               
+
         private void CarregarDados(int id_bai)
         {
             BairrosBL baiBL = new BairrosBL();
@@ -39,13 +39,13 @@ namespace Admin
             }
 
         }
-        
+
         private void CarregarDdlUF()
         {
             EstadosBL estBL = new EstadosBL();
             List<Estados> estados = estBL.PesquisarBL();
 
-            ddlUf.Items.Add(new ListItem("Selecione",""));
+            ddlUf.Items.Add(new ListItem("Selecione", ""));
             foreach (Estados ltUF in estados)
                 ddlUf.Items.Add(new ListItem(ltUF.Uf + " - " + ltUF.Descricao, ltUF.Id.ToString()));
 
@@ -58,7 +58,7 @@ namespace Admin
             List<Cidades> cidades = cidBL.PesquisaCidUfDA(id_uf);
 
             ddlCidade.Items.Clear();
-            ddlCidade.Items.Add(new ListItem("Selecione",""));
+            ddlCidade.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
                 ddlCidade.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
 
@@ -67,8 +67,12 @@ namespace Admin
 
         private void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    updPrincipal,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
         }
 
         private void LimparCampos()
@@ -76,7 +80,7 @@ namespace Admin
             txtDescricao.Text = "";
             ddlUf.SelectedIndex = 0;
             ddlCidade.Items.Clear();
-            lblCodigo.Text = "Código gerado automaticamente.";            
+            lblCodigo.Text = "Código gerado automaticamente.";
         }
 
         #endregion
@@ -123,40 +127,33 @@ namespace Admin
 
             if (bairros.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (baiBL.EditarBL(bairros))
-                        ExibirMensagem("Bairro atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar o bairro. Revise as informações.");
-                }
+
+                if (baiBL.EditarBL(bairros))
+                    ExibirMensagem("Bairro atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o bairro. Revise as informações.");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (baiBL.InserirBL(bairros))
                 {
-                    if (baiBL.InserirBL(bairros))
-                    {
-                        ExibirMensagem("Bairro gravado com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o bairro. Revise as informações.");
+                    ExibirMensagem("Bairro gravado com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o bairro. Revise as informações.");
+
             }
-                        
+
         }
 
         protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(utils.ComparaIntComZero(ddlUf.SelectedValue));
-        }                            
-       
+        }
+
     }
 }

@@ -30,7 +30,7 @@ namespace Admin
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
-            
+
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
@@ -38,27 +38,27 @@ namespace Admin
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
-            
-            BairrosBL baiBL = new BairrosBL();            
+
+            BairrosBL baiBL = new BairrosBL();
             List<Bairros> bairros;
-                        
+
             bairros = baiBL.PesquisarBuscaBL(valor);
-                                   
+
             foreach (Bairros bai in bairros)
             {
-                
+
                 DataRow linha = tabela.NewRow();
-                
+
                 linha["ID"] = bai.Id;
                 linha["CODIGO"] = bai.Codigo;
                 linha["DESCRICAO"] = bai.Descricao;
 
-               
+
                 tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
-            dtgBairros.DataSource = tabela;           
+            dtgBairros.DataSource = tabela;
             dtgBairros.DataBind();
         }
 
@@ -67,23 +67,23 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-      
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
-        {            
+        {
             Response.Redirect("cadBairro.aspx?operacao=new");
         }
-            
+
         protected void btnBusca_Click(object sender, EventArgs e)
-        {          
-            Pesquisar(txtBusca.Text);     
+        {
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,20 +95,17 @@ namespace Admin
 
         protected void dtgBairros_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                BairrosBL baiBL = new BairrosBL();
-                Bairros bairros = new Bairros();
-                bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
-                if (baiBL.ExcluirBL(bairros))
-                    ExibirMensagem("Bairro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o bairro.");
-                
-                Pesquisar(null);
-            }
+
+            BairrosBL baiBL = new BairrosBL();
+            Bairros bairros = new Bairros();
+            bairros.Id = utils.ComparaIntComZero(dtgBairros.DataKeys[e.RowIndex][0].ToString());
+            if (baiBL.ExcluirBL(bairros))
+                ExibirMensagem("Bairro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
         protected void dtgBairros_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -120,12 +117,12 @@ namespace Admin
 
         protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
-            if (e.Row.RowType == DataControlRowType.DataRow)             
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
-            
+
         }
 
         protected void dtgBairros_Sorting(object sender, GridViewSortEventArgs e)
@@ -160,6 +157,6 @@ namespace Admin
                 dtgBairros.DataBind();
             }
         }
-        
+
     }
 }

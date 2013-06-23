@@ -15,7 +15,7 @@ namespace Admin
     public partial class cadPessoa : System.Web.UI.Page
     {
         #region variaveis
-        Utils utils = new Utils();        
+        Utils utils = new Utils();
         DataTable dtExcluidos = new DataTable();
         DataTable dtFone = new DataTable();
         string v_operacao = "";
@@ -27,10 +27,10 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            ddlCategoria.Items.Add(new ListItem("Selecione",""));
-            foreach (Categorias ltCat in categorias)            
-               ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
-            
+            ddlCategoria.Items.Add(new ListItem("Selecione", ""));
+            foreach (Categorias ltCat in categorias)
+                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
+
             ddlCategoria.SelectedIndex = 0;
         }
         private void CarregarDdlUF(DropDownList ddl)
@@ -77,26 +77,26 @@ namespace Admin
             foreach (Pessoas pes in pessoas)
             {
                 hfId.Value = pes.Id.ToString();
-                lblCodigo.Text = pes.Codigo.ToString();                
+                lblCodigo.Text = pes.Codigo.ToString();
                 txtNome.Text = pes.Nome;
-                
+
                 if (pes.NomeFantasia.Trim() != "")
                     txtNome.Text = pes.NomeFantasia;
 
-                txtCpfCnpj.Text =  pes.CpfCnpj;
+                txtCpfCnpj.Text = pes.CpfCnpj;
                 txtRg.Text = pes.Rg;
                 txtDataNascimento.Text = pes.DtNascimento != null ? Convert.ToDateTime(pes.DtNascimento).ToString("dd/MM/yyyy") : "";
-                ddlEstadoCivil.SelectedValue =  pes.EstadoCivil;
-                txtNomeMae.Text =  pes.NomeMae;
-                txtNomePai.Text = pes.NomePai;                
+                ddlEstadoCivil.SelectedValue = pes.EstadoCivil;
+                txtNomeMae.Text = pes.NomeMae;
+                txtNomePai.Text = pes.NomePai;
                 txtCep.Text = pes.Cep;
-                txtEndereco.Text =  pes.Endereco;
-                txtNumero.Text = pes.Numero;                
+                txtEndereco.Text = pes.Endereco;
+                txtNumero.Text = pes.Numero;
                 txtComplemento.Text = pes.Complemento;
                 txtEmpresa.Text = pes.Empresa;
                 txtEnderecoProf.Text = pes.EnderecoProf;
-                txtNumeroProf.Text = pes.NumeroProf;                
-                txtComplementoProf.Text = pes.ComplementoProf;                
+                txtNumeroProf.Text = pes.NumeroProf;
+                txtComplementoProf.Text = pes.ComplementoProf;
                 txtCepProf.Text = pes.CepProf;
                 txtObservacao.Text = pes.Obs;
                 txtDtCadastro.Text = pes.DtCadastro.ToString("dd/MM/yyyy");
@@ -106,7 +106,7 @@ namespace Admin
                 txtRefNome.Text = pes.RefNome.ToString();
                 txtRefTelefone.Text = pes.RefTelefone.ToString();
 
-                if (pes.Cidade != null )
+                if (pes.Cidade != null)
                 {
                     ddlUF.SelectedValue = pes.Cidade.EstadoId.ToString();
                     CarregarDdlCidade(ddlCidades, pes.Cidade.EstadoId);
@@ -122,10 +122,10 @@ namespace Admin
                     CarregarDdlBairro(ddlBairroProf, utils.ComparaIntComZero(pes.CidadeProfId.ToString()));
                     ddlCidadeProf.SelectedValue = pes.CidadeProfId.ToString();
                     ddlBairroProf.SelectedValue = pes.BairroProf.ToString();
-                }      
-                
-                ddlCategoria.SelectedValue = pes.CategoriaId.ToString();  
-                             
+                }
+
+                ddlCategoria.SelectedValue = pes.CategoriaId.ToString();
+
                 if (pes.Tipo == "F")
                 {
                     lblDesNome.Text = "* Nome";
@@ -134,9 +134,9 @@ namespace Admin
                 {
                     lblDesNome.Text = "* Nome Fantasia";
                 }
-                
-            }          
- 
+
+            }
+
         }
         private void CarregarTabelaPesquisaCidade()
         {
@@ -166,20 +166,20 @@ namespace Admin
             Session["objPesquisa"] = ci;
         }
         private void CarregarDadosTelefones(int id_pes)
-        {           
+        {
             int ordem = 0;
-             
+
             TelefonesBL telBL = new TelefonesBL();
             List<Telefones> telefones = telBL.PesquisarBL(id_pes);
-        
+
             foreach (Telefones tel in telefones)
             {
                 ordem++;
                 DataRow linha = dtFone.NewRow();
 
-                linha["IDORDEM"] = ordem;    
-                linha["ID"] = tel.Id;                
-                linha["DESCRICAO"] = tel.Descricao;  
+                linha["IDORDEM"] = ordem;
+                linha["ID"] = tel.Id;
+                linha["DESCRICAO"] = tel.Descricao;
                 linha["NUMERO"] = tel.Numero;
 
                 dtFone.Rows.Add(linha);
@@ -190,8 +190,8 @@ namespace Admin
             dtgTelefones.DataBind();
             ordem++;
             hfOrdemFone.Value = ordem.ToString(); //proxima ordem 
-                                 
-        }       
+
+        }
         private string[] RetornarCodigoDecricaoCidade(int id_cid)
         {
             string[] v_cidade = new string[2];
@@ -219,7 +219,7 @@ namespace Admin
                 v_bairro[0] = bairros[0].Codigo.ToString();
                 v_bairro[1] = bairros[0].Descricao;
             }
-           
+
             return v_bairro;
         }
         private void CriaTabFone()
@@ -242,8 +242,8 @@ namespace Admin
 
                 dtFone.PrimaryKey = keys;
             }
-           
-        }       
+
+        }
         private void CriaDtExcluidos()
         {
             if (dtExcluidos.Columns.Count == 0)
@@ -252,7 +252,7 @@ namespace Admin
                 DataColumn coluna2 = new DataColumn("TIPO", Type.GetType("System.String"));
 
                 dtExcluidos.Columns.Add(coluna1);
-                dtExcluidos.Columns.Add(coluna2);                
+                dtExcluidos.Columns.Add(coluna2);
             }
         }
         private DataTable CriarDtPesquisa()
@@ -275,7 +275,7 @@ namespace Admin
             txtNumero.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtNumeroProf.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
-            txtRefTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");  
+            txtRefTelefone.Attributes.Add("onkeypress", "mascara(this,'(00)0000-0000')");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
             txtCepProf.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
         }
@@ -283,13 +283,13 @@ namespace Admin
         {
             TelefonesBL telBL = new TelefonesBL();
             Telefones telefones = new Telefones();
-           
+
             if (Session["tbfone"] != null)
                 dtFone = (DataTable)Session["tbfone"];
 
             foreach (DataRow linha in dtFone.Rows)
             {
-                telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());                
+                telefones.Id = utils.ComparaIntComZero(linha["ID"].ToString());
                 telefones.Numero = linha["NUMERO"].ToString();
                 telefones.Descricao = linha["DESCRICAO"].ToString();
                 telefones.PessoaId = idPes;
@@ -297,14 +297,14 @@ namespace Admin
                 if (telefones.Id > 0)
                     telBL.EditarBL(telefones);
                 else
-                    telBL.InserirBL(telefones);               
+                    telBL.InserirBL(telefones);
             }
         }
         private void ExcluirTelefones()
         {
             TelefonesBL telBL = new TelefonesBL();
             Telefones telefones = new Telefones();
-                        
+
             if (Session["tbexcluidos"] != null)
             {
                 dtExcluidos = (DataTable)Session["tbexcluidos"];
@@ -317,11 +317,11 @@ namespace Admin
                                 telefones.Id = utils.ComparaIntComZero(row["IDCODIGO"].ToString());
                                 telBL.ExcluirBL(telefones);
                                 break;
-                            }  
+                            }
                     }
                 }
             }
-           
+
         }
         private void ExibirMensagem(string mensagem)
         {
@@ -357,7 +357,7 @@ namespace Admin
             dtExcluidos.Clear();
             dtFone.Clear();
             dtgTelefones.DataSource = dtFone;
-            dtgTelefones.DataBind();            
+            dtgTelefones.DataBind();
             lblCodigo.Text = "Código gerado automaticamente.";
             lblDesNome.Text = "";
             ddlCategoria.SelectedIndex = 0;
@@ -387,13 +387,13 @@ namespace Admin
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id_pes = 0;           
+            int id_pes = 0;
             CarregarAtributos();
             this.CriaTabFone();
             this.CriaDtExcluidos();
-                                   
+
             if (!IsPostBack)
-            {                
+            {
                 if (Request.QueryString["operacao"] != null)
                 {
                     v_operacao = Request.QueryString["operacao"];
@@ -424,10 +424,10 @@ namespace Admin
                         }
                     }
                 }
-                               
-               
+
+
                 txtDtCadastro.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                
+
                 CarregarDDLCategoria();
                 CarregarDdlUF(ddlUF);
                 CarregarDdlUF(ddlUfProf);
@@ -437,10 +437,10 @@ namespace Admin
                     CarregarDadosPessoas(id_pes);
                     CarregarDadosTelefones(id_pes);
                 }
-            }          
+            }
 
         }
-                                    
+
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewPessoa.aspx");
@@ -452,16 +452,16 @@ namespace Admin
             Pessoas pessoas = new Pessoas();
 
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
-            pessoas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);            
+            pessoas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             pessoas.Nome = txtNome.Text;
-                       
+
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
             pessoas.CpfCnpj = txtCpfCnpj.Text;
             pessoas.Rg = txtRg.Text;
             pessoas.DtNascimento = utils.ComparaDataComNull(txtDataNascimento.Text);
             pessoas.EstadoCivil = ddlEstadoCivil.SelectedValue;
             pessoas.NomeMae = txtNomeMae.Text;
-            pessoas.NomePai = txtNomePai.Text;            
+            pessoas.NomePai = txtNomePai.Text;
             pessoas.CidadeId = utils.ComparaIntComZero(ddlCidades.SelectedValue);
             pessoas.Cep = txtCep.Text;
             pessoas.Endereco = txtEndereco.Text;
@@ -491,56 +491,46 @@ namespace Admin
             int idPes = 0;
 
             if (pessoas.Id > 0)
-            {                
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+            {
+                idPes = pessoas.Id;
+                if (pesBL.EditarBL(pessoas))
                 {
-                    idPes = pessoas.Id;
-                    if(pesBL.EditarBL(pessoas))
-                    {                                          
-                        ExcluirTelefones();
-                        GravarTelefones(idPes);
-                        ExibirMensagem("Pessoa atualizada com sucesso !");  
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar a pessoa. Revise as informações.");
+                    ExcluirTelefones();
+                    GravarTelefones(idPes);
+                    ExibirMensagem("Pessoa atualizada com sucesso !");
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-                
+                    ExibirMensagem("Não foi possível atualizar a pessoa. Revise as informações.");
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                idPes = pesBL.InserirBL(pessoas);
+                ExcluirTelefones();
+                GravarTelefones(idPes);
+                if (idPes > 0)
                 {
-                    idPes = pesBL.InserirBL(pessoas);
-                    ExcluirTelefones();
-                    GravarTelefones(idPes);
-                    if(idPes > 0)
-                    {
-                        ExibirMensagem("Pessoa gravada com sucesso !");
-                        LimparCampos();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a pessoa. Revise as informações.");
+                    ExibirMensagem("Pessoa gravada com sucesso !");
+                    LimparCampos();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a pessoa. Revise as informações.");
+
             }
-            
+
         }
 
         protected void btnInserirTelefone_Click(object sender, EventArgs e)
         {
             if (Session["tbfone"] != null)
                 dtFone = (DataTable)Session["tbfone"];
-           
+
             DataRow linha = dtFone.NewRow();
 
             object key = new object();
-            key = utils.ComparaIntComZero(hfOrdemFone.Value);           
+            key = utils.ComparaIntComZero(hfOrdemFone.Value);
 
             linha["IDORDEM"] = key.ToString();
-            linha["ID"] = utils.ComparaIntComZero(hfIdTelefone.ToString());           
+            linha["ID"] = utils.ComparaIntComZero(hfIdTelefone.ToString());
             linha["NUMERO"] = txtTelefone.Text;
             linha["DESCRICAO"] = ddlTipo.SelectedValue;
 
@@ -553,9 +543,9 @@ namespace Admin
             ddlTipo.SelectedIndex = 0;
 
             hfOrdemFone.Value = (utils.ComparaIntComZero(hfOrdemFone.Value) + 1).ToString(); //proxima ordem  
-            
+
         }
-                
+
         protected void dtgTelefones_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             object key = new object();
@@ -573,7 +563,7 @@ namespace Admin
             dtgTelefones.DataSource = dtFone;
             dtgTelefones.DataBind();
 
-            if (utils.ComparaIntComZero(key2.ToString()) > 0  )
+            if (utils.ComparaIntComZero(key2.ToString()) > 0)
             {
                 if (Session["tbexcluidos"] != null)
                     dtExcluidos = (DataTable)Session["tbexcluidos"];
@@ -584,8 +574,8 @@ namespace Admin
                 dtExcluidos.Rows.Add(row);
                 Session["tbexcluidos"] = dtExcluidos;
             }
-          
-        }       
+
+        }
 
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -600,7 +590,7 @@ namespace Admin
 
         protected void dtgTelefones_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -617,8 +607,8 @@ namespace Admin
             CarregarDdlBairro(ddlBairroProf, utils.ComparaIntComZero(ddlCidadeProf.SelectedValue));
         }
 
-             
 
-                                                   
+
+
     }
 }

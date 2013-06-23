@@ -29,24 +29,26 @@ namespace Admin
             }
 
         }
-
         private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-
         private void LimparCampos()
         {
             txtCodigo.Text = "";
-            txtDescricao.Text = "";            
+            txtDescricao.Text = "";
+        }
+        private void CarregarAtributos()
+        {
+            txtCodigo.Attributes.Add("onkeypress", "return(Reais(this,event))");         
         }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_ban = 0;
-                        
+
             if (!IsPostBack)
             {
 
@@ -62,7 +64,9 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_ban);
 
-                txtCodigo.Focus();                  
+                CarregarAtributos();
+
+                txtCodigo.Focus();
             }
         }
 
@@ -82,33 +86,24 @@ namespace Admin
 
             if (bancos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (banBL.EditarBL(bancos))
-                        ExibirMensagem("Banco atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar o banco. Revise as informações.");
-                }
+
+                if (banBL.EditarBL(bancos))
+                    ExibirMensagem("Banco atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o banco. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))                    
-                    if (banBL.InserirBL(bancos))
-                    {
-                        ExibirMensagem("Banco gravado com sucesso !");
-                        LimparCampos();
-                        txtCodigo.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o banco. Revise as informações.");
+                if (banBL.InserirBL(bancos))
+                {
+                    ExibirMensagem("Banco gravado com sucesso !");
+                    LimparCampos();
+                    txtCodigo.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o banco. Revise as informações.");
             }
-                     
-            
         }
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
@@ -125,7 +120,7 @@ namespace Admin
             {
                 lblInformacao.Text = "";
                 txtDescricao.Focus();
-            }  
+            }
         }
     }
 }

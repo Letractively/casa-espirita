@@ -21,12 +21,12 @@ namespace Admin
             CategoriasBL catBL = new CategoriasBL();
             List<Categorias> categorias = catBL.PesquisarBL();
 
-            ddlCategoria.Items.Add(new ListItem("Selecione",""));
-            foreach (Categorias ltCat in categorias)                        
-               ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao,ltCat.Id.ToString()));                
-            
+            ddlCategoria.Items.Add(new ListItem("Selecione", ""));
+            foreach (Categorias ltCat in categorias)
+                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
+
             ddlCategoria.SelectedIndex = 0;
-            
+
         }
         private void CarregarDados(int id_usu)
         {
@@ -36,10 +36,10 @@ namespace Admin
             foreach (Usuarios usu in usuarios)
             {
                 hfId.Value = usu.Id.ToString();
-                hfIdPessoa.Value = usu.PessoaId.ToString();                
+                hfIdPessoa.Value = usu.PessoaId.ToString();
                 txtNome.Text = usu.Nome;
                 txtEmail.Text = usu.Email;
-                txtLogin.Text = usu.Login;                
+                txtLogin.Text = usu.Login;
                 txtDtInicio.Text = usu.DtInicio.ToString("dd/MM/yyyy");
                 txtDtFim.Text = usu.DtFim.ToString("dd/MM/yyyy");
                 ddlStatus.SelectedValue = usu.Status.ToString();
@@ -163,7 +163,7 @@ namespace Admin
         {
             CarregarPesquisaPessoa(null);
             ModalPopupExtenderPessoa.Enabled = true;
-            ModalPopupExtenderPessoa.Show(); 
+            ModalPopupExtenderPessoa.Show();
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -184,26 +184,31 @@ namespace Admin
 
             if (usuarios.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(usuBL.EditarBL(usuarios))
-                        ExibirMensagem("Usuário atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar o usuário. Revise as informações.");
+
+                if (usuBL.EditarBL(usuarios))
+                    ExibirMensagem("Usuário atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o usuário. Revise as informações.");
+
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (usuarios.Senha == null || usuarios.Senha == string.Empty)
                 {
+                    lblInformacao.Text = "* Informe a senha";
+                    txtSenha.Focus();
+                    
+                }
+                else
+                {
+                    lblInformacao.Text = "";
                     if (usuBL.InserirBL(usuarios))
                     {
                         ExibirMensagem("Usuário gravado com sucesso !");
                         LimparCampos();
                     }
                 }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
             }
         }
 
@@ -254,7 +259,7 @@ namespace Admin
             txtPessoa.Text = gvrow.Cells[2].Text;
             lblDesPessoa.Text = gvrow.Cells[3].Text;
             txtNome.Text = lblDesPessoa.Text;
-           
+
             ModalPopupExtenderPessoa.Hide();
             ModalPopupExtenderPessoa.Enabled = false;
 
@@ -266,6 +271,6 @@ namespace Admin
             ModalPopupExtenderPessoa.Enabled = true;
             ModalPopupExtenderPessoa.Show();
             txtPesPessoa.Text = "";
-        }           
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace DataAccess
                 Usuarios usu = new Usuarios();
                 usu.Id = int.Parse(dr["ID"].ToString());
                 usu.Login = dr["LOGIN"].ToString();
-                usu.Senha = dr["SENHA"].ToString();
+                usu.Senha =null;
                 usu.Nome = dr["NOME"].ToString();
                 usu.Status = dr["STATUS"].ToString();
                 usu.DtInicio = Convert.ToDateTime(dr["DTINICIO"].ToString());
@@ -187,7 +187,7 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text,string.Format(@"SELECT * FROM USUARIOS WHERE ID = {0}",id_usu));
-                        
+            
             List<Usuarios> usuarios = CarregarObjUsuario(dr);             
             
             return usuarios;
@@ -213,14 +213,11 @@ namespace DataAccess
         public List<Usuarios> PesquisarDA(string login, string senha, DateTime data)
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +
+                                                                CommandType.Text, string.Format(@"SELECT U.* "+                                                                                                
+                                                                                                 " FROM USUARIOS U WHERE LOGIN = '{0}' " +
                                                                                                  " AND STATUS = 'A' ", login, utils.OneWayCrypt(senha)));
-
-            //string.Format(@"SELECT * FROM USUARIOS WHERE LOGIN = '{0}' AND SENHA = '{1}' " +
-            //" AND STATUS = 'A' AND GETDATE() BETWEEN DTINICIO AND DTFIM ", login, senha));
-
-            List<Usuarios> usuarios = CarregarObjUsuario(dr); 
-
+            List<Usuarios> usuarios = CarregarObjUsuario(dr);
+            
             return usuarios;
         }
                 

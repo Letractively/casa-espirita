@@ -23,7 +23,7 @@ namespace Admin
         {
             PortadoresBL porBL = new PortadoresBL();
             List<Portadores> por = porBL.PesquisarBL(id_por);
-            string id_age; 
+            string id_age;
 
             foreach (Portadores ltPor in por)
             {
@@ -36,23 +36,23 @@ namespace Admin
                 id_age = ltPor.AgenciaId.ToString();
                 CarregarDDLConta(utils.ComparaIntComZero(id_age));
                 ddlConta.SelectedValue = ltPor.ContaId.ToString();
-             }
+            }
 
         }
-        
+
         private void CarregarDDLAgencia(int id_ban)
         {
             AgenciasBL ageBL = new AgenciasBL();
             List<Agencias> agencias = ageBL.PesquisarBanBL(id_ban);
 
             ddlAgencia.Items.Clear();
-            ddlAgencia.Items.Add(new ListItem("Selecione",""));
+            ddlAgencia.Items.Add(new ListItem("Selecione", ""));
             foreach (Agencias ltAge in agencias)
                 ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
 
             ddlAgencia.SelectedIndex = 0;
         }
-        
+
         private void CarregarDDLBanco()
         {
             BancosBL banBL = new BancosBL();
@@ -90,14 +90,14 @@ namespace Admin
             txtDescricao.Text = "";
             ddlAgencia.SelectedIndex = -1;
             ddlConta.SelectedIndex = -1;
-            ddlBanco.SelectedIndex = 0;            
+            ddlBanco.SelectedIndex = 0;
         }
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_por = 0;
-            
+
             if (!IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -108,7 +108,7 @@ namespace Admin
                         if (Request.QueryString["id_por"] != null)
                             id_por = Convert.ToInt32(Request.QueryString["id_por"].ToString());
                 }
-                                
+
                 CarregarDDLBanco();
 
                 if (v_operacao.ToLower() == "edit")
@@ -138,31 +138,25 @@ namespace Admin
 
             if (portadores.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (porBL.EditarBL(portadores))                    
-                        ExibirMensagem("Portador atualizado com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
-                }
+
+                if (porBL.EditarBL(portadores))
+                    ExibirMensagem("Portador atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
+
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+                if (porBL.InserirBL(portadores))
                 {
-                    if (porBL.InserirBL(portadores))
-                    {
-                        ExibirMensagem("Portador gravado com sucesso !");
-                        LimparCampos();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
+                    ExibirMensagem("Portador gravado com sucesso !");
+                    LimparCampos();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }                      
+                    ExibirMensagem("Não foi possível gravar o portador. Revise as informações.");
+
+            }
 
         }
 
@@ -178,9 +172,9 @@ namespace Admin
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-            InstituicoesBL insBL = new InstituicoesBL();
+            PortadoresBL porBL = new PortadoresBL();
 
-            if (insBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtCodigo.Text)))
+            if (porBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtCodigo.Text)))
             {
                 lblInformacao.Text = "O código " + txtCodigo.Text + " já existe. Informe um novo código.";
                 txtCodigo.Text = "";
@@ -190,10 +184,10 @@ namespace Admin
             {
                 lblInformacao.Text = "";
                 txtDescricao.Focus();
-            }  
+            }
 
         }
 
-                
+
     }
 }

@@ -32,7 +32,7 @@ namespace Admin
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
-            
+
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
@@ -40,28 +40,28 @@ namespace Admin
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
-            
-            
-            EditorasBL ediBL = new EditorasBL();            
+
+
+            EditorasBL ediBL = new EditorasBL();
             List<Editoras> editoras;
 
             editoras = ediBL.PesquisarBuscaBL(valor);
-                                  
+
             foreach (Editoras bai in editoras)
             {
-                
+
                 DataRow linha = tabela.NewRow();
-                
+
                 linha["ID"] = bai.Id;
                 linha["CODIGO"] = bai.Codigo;
                 linha["DESCRICAO"] = bai.Descricao;
 
-               
+
                 tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
-            dtgEditoras.DataSource = tabela;           
+            dtgEditoras.DataSource = tabela;
             dtgEditoras.DataBind();
         }
         private void ExibirMensagem(string mensagem)
@@ -73,18 +73,18 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
-     
+
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             Response.Redirect("cadEditora.aspx?operacao=new");
         }
-            
+
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);     
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgEditoras_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,19 +96,16 @@ namespace Admin
 
         protected void dtgEditoras_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                EditorasBL edBL = new EditorasBL();
-                Editoras editoras = new Editoras();
-                editoras.Id = utils.ComparaIntComZero(dtgEditoras.DataKeys[e.RowIndex][0].ToString());
-                if (edBL.ExcluirBL(editoras))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                Pesquisar(null);
-            }
+
+            EditorasBL edBL = new EditorasBL();
+            Editoras editoras = new Editoras();
+            editoras.Id = utils.ComparaIntComZero(dtgEditoras.DataKeys[e.RowIndex][0].ToString());
+            if (edBL.ExcluirBL(editoras))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgEditoras_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -120,7 +117,7 @@ namespace Admin
 
         protected void dtgEditoras_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -159,7 +156,7 @@ namespace Admin
                 dtgEditoras.DataBind();
             }
         }
-               
-      
+
+
     }
 }

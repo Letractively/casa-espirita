@@ -6,39 +6,19 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataObjects;
 using BusinessLayer;
+using System.Data;
+using FG;
 
 namespace FIBIESA
 {
     public partial class Principal : System.Web.UI.MasterPage
     {
+        Utils utils = new Utils();
         #region funcoes
         private void Logout()
         {
             Session["usuario"] = null;
             Response.Redirect("~/login.aspx");
-        }
-        public bool VerificaPermissaoUsuario(string tipoPermissao)
-        {
-            if (Session["usuPermissoes"] != null)
-            {
-                Permissoes permissoes = (Permissoes)Session["usuPermissoes"];
-
-                switch (tipoPermissao.ToUpper())
-                {
-                    case "INSERIR":
-                        return permissoes.Inserir;
-
-                    case "EXCLUIR":
-                        return permissoes.Excluir;
-
-                    case "EDITAR":
-                        return permissoes.Editar;
-
-                    default: return false;
-                }
-            }
-            else
-                return false;
         }
         private void CarregarInstituicao()
         {
@@ -68,75 +48,31 @@ namespace FIBIESA
         //    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "JQueryMask" + CssClass, script, true);
         //}
 
-        #endregion
-
-        //habilita o menu ou nao
-        private bool IsAllMenuItemsVisible = true;
-
-        protected void rptControl_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        private void CarregarMenuPermissoes()
         {
+            PermissoesBL perBL = new PermissoesBL();
 
-            if (!IsAllMenuItemsVisible)
-            {
-                foreach (RepeaterItem item in rptControl.Items)
-                {
-                    if (item.ItemType == ListItemType.Item || item.ItemType ==
-                                                                                      ListItemType.AlternatingItem)
-                    {
-                        SiteMapNode thisMapNode = (SiteMapNode)e.Item.DataItem;
-                        if (thisMapNode != null)
-                        {
-                            
+            DataSet ds = perBL.PesquisarPermissoesBL(utils.ComparaIntComZero(hfIdCategoria.Value));
 
-                            if (thisMapNode["visibility"] != null &&
-                               thisMapNode["visibility"].ToLower().Equals(bool.FalseString.ToLower()))
-                            {
-                                rptControl.Controls.Remove(e.Item);
-                            }
-                        }
-                    }
+            ds.Tables[0].TableName = "tblCategorias";
+            ds.Tables[1].TableName = "tblSubCategoria";
 
-                }
-            }
+            //Relação para o segundo repeater (SubCategorias)
+            ds.Relations.Add("SubCategorias",
+                  ds.Tables["tblCategorias"].Columns["DESMODULO"],
+                  ds.Tables["tblSubCategoria"].Columns["DESMODULO"]);
+            ds.Relations[0].Nested = true;
+
+            rptMenu.DataSource = ds.Tables["tblCategorias"];
+            rptMenu.DataBind();
+                                  
+           
         }
+                
+        #endregion
+                
         protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["FromPage"] = "About";
-            Session["FromPage"] = "Home";
-            Session["FromPage"] = "Contact";
-
-
-            if (!IsPostBack)
-            {
-                IsAllMenuItemsVisible = true;
-            }
-            if (Session["FromPage"] != null && Convert.ToString(Session["FromPage"])
-                                                                                                             != "")
-            {
-                switch (Convert.ToString(Session["FromPage"]))
-                {
-                    case "About":
-                        {
-                            IsAllMenuItemsVisible = false;
-                            break;
-                        }
-                    case "Contact":
-                        {
-                            IsAllMenuItemsVisible = false;
-                            break;
-                        }
-                    case "Home":
-                        {
-                            IsAllMenuItemsVisible = true;
-                            break;
-                        }
-                }
-            }
-
-
-            //rptControl.DataBind();
-
-
+        {            
             if (!IsPostBack)
             {
                 if (Session["usuario"] != null)
@@ -148,13 +84,16 @@ namespace FIBIESA
                     {
                         lblNomeUsuario.Text = usu.Nome;
                         lblCategoria.Text = usu.Categoria.Descricao;
+                        hfIdCategoria.Value = usu.Categoria.Id.ToString();
                     }
+                   
+                    CarregarMenuPermissoes();
                 }
 
-                CarregarInstituicao();
+                CarregarInstituicao();                
             }       
-
         }
+
         protected void imbSair_Click(object sender, ImageClickEventArgs e)
         {
             Logout();

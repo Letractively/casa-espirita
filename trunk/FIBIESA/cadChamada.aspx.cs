@@ -20,8 +20,8 @@ namespace Admin
         {
             EventosBL eveBL = new EventosBL();
             List<Eventos> eventos = eveBL.PesquisarBL();
-                       
-            ddlEvento.Items.Add(new ListItem("Selecione",""));
+
+            ddlEvento.Items.Add(new ListItem("Selecione", ""));
             foreach (Eventos ltEve in eventos)
                 ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
 
@@ -34,7 +34,7 @@ namespace Admin
             List<Turmas> turmas = turBL.PesquisarEveBL(id_tur);
 
             ddlTurmas.Items.Clear();
-            ddlTurmas.Items.Add(new ListItem("Selecione",""));
+            ddlTurmas.Items.Add(new ListItem("Selecione", ""));
             foreach (Turmas ltTur in turmas)
                 ddlTurmas.Items.Add(new ListItem(ltTur.Codigo + " - " + ltTur.Descricao, ltTur.Id.ToString()));
 
@@ -56,7 +56,7 @@ namespace Admin
 
         private void Pesquisar(int id_tur, int id_eve)
         {
-            DateTime dataSelecionada = Convert.ToDateTime(txtSelData.Text);            
+            DateTime dataSelecionada = Convert.ToDateTime(txtSelData.Text);
             if (Convert.ToDateTime(txtSelData.Text) > DateTime.Now)
                 ExibirMensagem("Não é permitido registrar frequências futuras !");
             else
@@ -81,7 +81,7 @@ namespace Admin
                 TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
                 ChamadasBL chaBL = new ChamadasBL();
                 List<Turmas> turmas = turBL.PesquisarBL(id_tur, id_eve);
-                
+
                 if (turmas.Count != 0)
                 {
                     if (turmas[0].DiaSemana.IndexOf(char.Parse(Convert.ToString((int)dataSelecionada.DayOfWeek + 1))) == -1)
@@ -127,7 +127,7 @@ namespace Admin
                 repPermissao.DataSource = tabela;
                 repPermissao.DataBind();
             }
-            
+
         }
 
         public void ExibirMensagem(string mensagem)
@@ -142,9 +142,9 @@ namespace Admin
             if (!IsPostBack)
             {
                 txtSelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                CarregarDdlEventos();                
+                CarregarDdlEventos();
             }
-        }           
+        }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -161,32 +161,26 @@ namespace Admin
                 chamadas.Id = utils.ComparaIntComZero(((TextBox)item.FindControl("txtId")).Text);
                 chamadas.TurmaParticipanteId = utils.ComparaIntComZero(((TextBox)item.FindControl("txtTurmaParticipanteId")).Text);
                 chamadas.Presenca = ((CheckBox)item.FindControl("chkPresenca")).Checked;
-                chamadas.Data =  Convert.ToDateTime(((Label)item.FindControl("lblData")).Text);
+                chamadas.Data = Convert.ToDateTime(((Label)item.FindControl("lblData")).Text);
 
                 if (chamadas.Id > 0)
                 {
-                    if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    {
-                        if (chaBL.EditarBL(chamadas))
-                            ExibirMensagem("Registros salvos com sucesso!");
-                        else
-                            ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
-                    }
+
+                    if (chaBL.EditarBL(chamadas))
+                        ExibirMensagem("Registros salvos com sucesso!");
                     else
-                        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                        ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
+
 
                 }
                 else
                 {
-                    if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    {
-                        if(chaBL.InserirBL(chamadas))
-                            ExibirMensagem("Registros salvos com sucesso!");
-                        else
-                            ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
-                    }
+
+                    if (chaBL.InserirBL(chamadas))
+                        ExibirMensagem("Registros salvos com sucesso!");
                     else
-                        Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                        ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
+
                 }
             }
 
@@ -203,7 +197,9 @@ namespace Admin
             repPermissao.DataSource = null;
             repPermissao.DataBind();
             CarregarDdlTurmas(utils.ComparaIntComZero(ddlEvento.SelectedValue));
-        }       
-        
+        }
+
+       
+
     }
 }

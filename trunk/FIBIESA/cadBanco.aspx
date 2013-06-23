@@ -17,7 +17,7 @@
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
                                 ToolTip="Informe o código do banco" Width="100px" AutoPostBack="True" 
-                                ontextchanged="txtCodigo_TextChanged"></asp:TextBox>
+                                ontextchanged="txtCodigo_TextChanged" MaxLength="8"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtCodigo" CssClass="validacao" 
                                 ErrorMessage="*Informe o código" ValidationGroup="salvar">*</asp:RequiredFieldValidator>

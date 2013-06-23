@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataObjects;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -60,7 +61,21 @@ namespace BusinessLayer
             PermissoesDA permissoesDA = new PermissoesDA();
 
             return permissoesDA.PesquisarDA(id_categoria, nome);
-        }        
+        }   
+
+        public DataSet PesquisarPermissoesBL(int id_categoria)
+        {
+            PermissoesDA permissoesDA = new PermissoesDA();
+
+            return permissoesDA.PesquisarPermissoesDA(id_categoria);
+        }
+
+        public DataSet PesquisarModulosBL(int id_categoria)
+        {
+            PermissoesDA permissoesDA = new PermissoesDA();
+
+            return permissoesDA.PesquisarModulosDA(id_categoria);
+        }         
                
     }
 }

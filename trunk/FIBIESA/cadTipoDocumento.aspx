@@ -40,7 +40,7 @@
                         <td style="width: 400px">
                             <asp:DropDownList ID="ddlAplicacao" runat="server" CssClass="dropdownlist" 
                                 ToolTip="Selecione a aplicação">
-                                <asp:ListItem>Selecione</asp:ListItem>
+                                <asp:ListItem Value="">Selecione</asp:ListItem>
                                 <asp:ListItem Value="CP">Contas a Pagar</asp:ListItem>
                                 <asp:ListItem Value="CR">Contas a Receber</asp:ListItem>
                             </asp:DropDownList>

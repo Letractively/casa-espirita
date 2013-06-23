@@ -46,7 +46,7 @@
                                 <table>
                                     <thead>
                                     <tr>                                        
-                                        <th></th><th></th><th></th><th>Código</th><th>Página</th><th>Tipo</th><th colspan="4">Tipos de permissões</th>   
+                                        <th></th><th></th><th></th><th>Código</th><th>Página</th><th colspan="4">Permissão</th>   
                                     </tr>
                                     </thead>
                             </HeaderTemplate>
@@ -58,11 +58,7 @@
                                         <td><asp:TextBox ID="txtCategoriaId" runat="server" Visible="false" Text='<% #DataBinder.Eval(Container, "DataItem.CATEGORIAID") %>'></asp:TextBox></td>                        
                                         <td><asp:Label ID="lblCodFormulario" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.CODFORMULARIO") %>'></asp:Label></td> 
                                         <td><asp:Label ID="lblDescFormulario" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.DESCFORMULARIO") %>'></asp:Label></td> 
-                                        <td><asp:Label ID="lblTipo" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.TIPO") %>'></asp:Label></td> 
-                                        <td><asp:CheckBox  ID="chkConsultar" runat="server" Text="Consultar" Checked='<% #DataBinder.Eval(Container, "DataItem.CONSULTAR") %>' /></td>
-                                        <td><asp:CheckBox  ID="chkEditar" runat="server" Text="Editar" Checked='<% #DataBinder.Eval(Container, "DataItem.EDITAR") %>' /></td>
-                                        <td><asp:CheckBox  ID="chkInserir" runat="server" Text="Inserir" Checked='<% #DataBinder.Eval(Container, "DataItem.INSERIR") %>' /></td>
-                                        <td><asp:CheckBox  ID="chkExcluir" runat="server" Text="Excluir" Checked='<% #DataBinder.Eval(Container, "DataItem.EXCLUIR") %>' /></td>  
+                                        <td><asp:CheckBox  ID="chkConsultar" runat="server" Text="Permissão" Checked='<% #DataBinder.Eval(Container, "DataItem.CONSULTAR") %>' /></td>                                        
                                     </tr>  
                                     </tbody>  
                                 </ItemTemplate>

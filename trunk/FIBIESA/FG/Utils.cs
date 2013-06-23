@@ -304,18 +304,23 @@ namespace FG
         /// <returns></returns>
         public string OneWayCrypt(string valor)
         {
-            UnicodeEncoding UE = new UnicodeEncoding();
-            byte[] hashValue;
-            byte[] message = UE.GetBytes(valor);
-
-            SHA512Managed hashString = new SHA512Managed();
-            StringBuilder hex = new StringBuilder();
-            hashValue = hashString.ComputeHash(message);
-            foreach (byte x in hashValue)
+            if (valor != null && valor != string.Empty)
             {
-                hex.Append(String.Format("{0:x2}", x));
+                UnicodeEncoding UE = new UnicodeEncoding();
+                byte[] hashValue;
+                byte[] message = UE.GetBytes(valor);
+
+                SHA512Managed hashString = new SHA512Managed();
+                StringBuilder hex = new StringBuilder();
+                hashValue = hashString.ComputeHash(message);
+                foreach (byte x in hashValue)
+                {
+                    hex.Append(String.Format("{0:x2}", x));
+                }
+                return hex.ToString();
             }
-            return hex.ToString();
+            else
+                return null;
         }
         public string LimpaFormatacaoCNPJ(string pCNPJ)
         {
@@ -324,8 +329,7 @@ namespace FG
             pCNPJ = pCNPJ.Replace("/", "");
             return pCNPJ;
         }
-
-        public static bool ValidaCPF(string cpf)
+        public  bool ValidaCPF(string cpf)
         {
             int[] multiplic1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplic2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -369,8 +373,7 @@ namespace FG
 
             return cpf.EndsWith(digit);
         }
-
-        public static bool ValidaCNPJ(string cnpj)
+        public  bool ValidaCNPJ(string cnpj)
         {
             int[] multiplic1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplic2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -414,6 +417,31 @@ namespace FG
 
             return cnpj.EndsWith(digit);
 
+        }
+        public string Criptografar(string texto)
+        {
+            
+            string aux = "";
+            
+            aux = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(texto));
+
+            return aux;
+        }
+        public string DesCriptografar(string texto)
+        {            
+            string aux = "";
+            byte[] toDecodeByte = Convert.FromBase64String(texto);
+
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decode = encoder.GetDecoder();
+
+            int charCount = utf8Decode.GetCharCount(toDecodeByte, 0, toDecodeByte.Length);
+
+            char[] decodedChar = new char[charCount];
+            utf8Decode.GetChars(toDecodeByte, 0, toDecodeByte.Length, decodedChar, 0);
+            aux = DesCriptografar(new String(decodedChar));
+            
+            return aux;
         }
     }
        

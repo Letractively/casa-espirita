@@ -23,7 +23,7 @@ namespace Admin
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos = banBL.PesquisarBL();
 
-            ddlBanco.Items.Add(new ListItem("Selecione",""));
+            ddlBanco.Items.Add(new ListItem("Selecione", ""));
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
@@ -88,13 +88,13 @@ namespace Admin
                     CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ltAge.CidadeId.ToString()));
                     ddlCidades.SelectedValue = ltAge.CidadeId.ToString();
                     ddlBairro.SelectedValue = ltAge.BairroId.ToString();
-                }                      
-                             
+                }
+
             }
 
         }
         private void CarregarAtributos()
-        {           
+        {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtRanking.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
             txtCep.Attributes.Add("onkeypress", "mascara(this,'00000-000')");
@@ -157,7 +157,7 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_age);
-                
+
             }
         }
 
@@ -182,35 +182,32 @@ namespace Admin
             agencias.Complemento = txtComplemento.Text;
             agencias.Ranking = utils.ComparaIntComZero(txtRanking.Text);
 
-          
+
             if (agencias.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                   if(ageBL.EditarBL(agencias))
-                       ExibirMensagem("Agência atualizada com sucesso !");
-                   else
-                       ExibirMensagem("Não foi possível atualizar a agência. Revise as informações.");
+
+                if (ageBL.EditarBL(agencias))
+                    ExibirMensagem("Agência atualizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a agência. Revise as informações.");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if (ageBL.InserirBL(agencias))
-                    {
-                        ExibirMensagem("Agência gravada com sucesso !");
-                        LimparCampos();
-                        txtCodigo.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a agência. Revise as informações.");
+
+                if (ageBL.InserirBL(agencias))
+                {
+                    ExibirMensagem("Agência gravada com sucesso !");
+                    LimparCampos();
+                    txtCodigo.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a agência. Revise as informações.");
 
             }
         }
-                     
+
         protected void ddlUF_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
@@ -227,7 +224,7 @@ namespace Admin
 
         }
 
-                      
-              
+
+
     }
 }

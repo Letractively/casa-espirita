@@ -34,7 +34,7 @@ namespace Admin
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-        
+
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
@@ -53,7 +53,7 @@ namespace Admin
             List<Autores> autores;
 
             autores = autorBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Autores autor in autores)
             {
 
@@ -62,7 +62,7 @@ namespace Admin
                 linha["ID"] = autor.Id;
                 linha["CODIGO"] = autor.Codigo;
                 linha["DESCRICAO"] = autor.Descricao;
-                if(autor.TiposDeAutores != null)
+                if (autor.TiposDeAutores != null)
                     linha["TIPODESC"] = autor.TiposDeAutores.Descricao;
                 else
                     linha["TIPODESC"] = "";
@@ -101,21 +101,18 @@ namespace Admin
 
         protected void dtgBairros_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                AutoresBL autBL = new AutoresBL();
-                Autores au = new Autores();
-                au.Id = utils.ComparaIntComZero(dtgAutores.DataKeys[e.RowIndex][0].ToString());
-                
-                if (autBL.ExcluirBL(au))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                
-                Pesquisar(null);
-            }
+
+            AutoresBL autBL = new AutoresBL();
+            Autores au = new Autores();
+            au.Id = utils.ComparaIntComZero(dtgAutores.DataKeys[e.RowIndex][0].ToString());
+
+            if (autBL.ExcluirBL(au))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
+
         }
 
         protected void dtgBairros_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -127,7 +124,7 @@ namespace Admin
 
         protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -167,6 +164,6 @@ namespace Admin
             }
         }
 
-               
+
     }
 }

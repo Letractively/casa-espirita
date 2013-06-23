@@ -50,9 +50,9 @@ namespace Admin
 
             PortadoresBL porBL = new PortadoresBL();
             List<Portadores> portadores;
-                        
+
             portadores = porBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Portadores ltPor in portadores)
             {
                 DataRow linha = tabela.NewRow();
@@ -69,7 +69,7 @@ namespace Admin
                 else
                 {
                     linha["CODBANCO"] = "";
-                    linha["DESBANCO"] = ""; 
+                    linha["DESBANCO"] = "";
                 }
 
                 if (ltPor.Agencia != null)
@@ -81,22 +81,28 @@ namespace Admin
                 {
                     linha["CODAGENCIA"] = "";
                     linha["DESAGENCIA"] = "";
- 
+
                 }
-                tabela.Rows.Add(linha);                
+                tabela.Rows.Add(linha);
             }
-            
+
             dtbPesquisa = tabela;
             dtgPortadores.DataSource = tabela;
             dtgPortadores.DataBind();
- 
+
+        }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
                 Pesquisar(null);
-        }           
+        }
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
@@ -105,16 +111,16 @@ namespace Admin
 
         protected void dtgPortadores_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                PortadoresBL porBL = new PortadoresBL();
-                Portadores por = new Portadores();
-                por.Id = utils.ComparaIntComZero(dtgPortadores.DataKeys[e.RowIndex][0].ToString());
-                porBL.ExcluirBL(por);
-                Pesquisar(null);
-            }
+            PortadoresBL porBL = new PortadoresBL();
+            Portadores por = new Portadores();
+            por.Id = utils.ComparaIntComZero(dtgPortadores.DataKeys[e.RowIndex][0].ToString());
+            
+            if (porBL.ExcluirBL(por))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgPortadores_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,7 +132,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);    
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgPortadores_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -138,7 +144,7 @@ namespace Admin
 
         protected void dtgPortadores_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

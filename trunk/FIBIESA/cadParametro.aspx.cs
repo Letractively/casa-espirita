@@ -16,9 +16,9 @@ namespace Admin
         private string LerParametro(string modulo, int codigo)
         {
             ParametrosBL parBL = new ParametrosBL();
-            
+
             string valor = parBL.PesquisarValorBL(codigo, modulo);
-            
+
 
             return valor;
         }
@@ -80,7 +80,7 @@ namespace Admin
             if (dsPar.Tables[0].Rows.Count > 0)
             {
                 parametros.Id = (int)dsPar.Tables[0].Rows[0]["id"];
-                if(parBL.EditarBL(parametros))
+                if (parBL.EditarBL(parametros))
                     ExibirMensagem("Parâmetros gravados com sucesso !");
                 else
                     ExibirMensagem("Não foi possível gravar os parâmetros. Revise as informações.");
@@ -92,14 +92,14 @@ namespace Admin
                 else
                     ExibirMensagem("Não foi possível gravar os parâmetros. Revise as informações.");
             }
-                      
+
 
         }
         private string CarregarParametro(int codigo, string modulo)
         {
             ParametrosBL parBL = new ParametrosBL();
             Parametros parametros = new Parametros();
-            return parBL.PesquisarValorBL(codigo, modulo);           
+            return parBL.PesquisarValorBL(codigo, modulo);
         }
         private void CarregarDados()
         {
@@ -119,7 +119,7 @@ namespace Admin
             txtPerLucro.Text = CarregarParametro(2, "F");
             txtDesconto.Text = CarregarParametro(3, "F");
             ddlTipoDoc.SelectedValue = CarregarParametro(4, "F");
-            ddlPortadorMulta.SelectedValue = CarregarParametro(5,"F");
+            ddlPortadorMulta.SelectedValue = CarregarParametro(5, "F");
             #endregion
         }
         private void CarregarAtributos()
@@ -145,7 +145,7 @@ namespace Admin
                 CarregarDdlPortador();
                 CarregaDdlTipoDoc();
                 CarregarDados();
-               
+
             }
         }
 
@@ -157,29 +157,24 @@ namespace Admin
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
 
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-            {
-                #region eventos
-                SalvarParametro(1, "E", lblCategoria.Text, ddlCategoria.SelectedValue);
-                #endregion
+            #region eventos
+            SalvarParametro(1, "E", lblCategoria.Text, ddlCategoria.SelectedValue);
+            #endregion
 
-                #region biblioteca
-                SalvarParametro(1, "B", lblQtdMaxEmp.Text, txtQtdMaxEmp.Text);
-                SalvarParametro(2, "B", lblQtdMaxRen.Text, txtQtdMaxRen.Text);
-                SalvarParametro(3, "B", lblTempoMinRetirada.Text, txtTempoMinRetirada.Text);
-                SalvarParametro(4, "B", lblQtdMinRetirada.Text, txtQtdMinRetirada.Text);
-                #endregion
+            #region biblioteca
+            SalvarParametro(1, "B", lblQtdMaxEmp.Text, txtQtdMaxEmp.Text);
+            SalvarParametro(2, "B", lblQtdMaxRen.Text, txtQtdMaxRen.Text);
+            SalvarParametro(3, "B", lblTempoMinRetirada.Text, txtTempoMinRetirada.Text);
+            SalvarParametro(4, "B", lblQtdMinRetirada.Text, txtQtdMinRetirada.Text);
+            #endregion
 
-                #region financeiro
-                SalvarParametro(1, "F", lblValorMulta.Text, txtValorMulta.Text);
-                SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
-                SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
-                SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
-                SalvarParametro(5, "F", lblTipoDoc.Text, ddlPortadorMulta.SelectedValue);
-                #endregion
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            #region financeiro
+            SalvarParametro(1, "F", lblValorMulta.Text, txtValorMulta.Text);
+            SalvarParametro(2, "F", lblPerLucro.Text, txtPerLucro.Text);
+            SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
+            SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
+            SalvarParametro(5, "F", lblTipoDoc.Text, ddlPortadorMulta.SelectedValue);
+            #endregion
 
         }
     }
