@@ -15,7 +15,7 @@ namespace Admin
         Utils utils = new Utils();
         string v_operacao = "";
 
-        #region funcoes        
+        #region funcoes
         private void carregarDados(int id_cat)
         {
             CategoriasBL catBL = new CategoriasBL();
@@ -23,11 +23,11 @@ namespace Admin
             List<Categorias> cat = catBL.PesquisarBL(id_cat);
 
             foreach (Categorias ltCat in cat)
-	        {
+            {
                 hfId.Value = ltCat.Id.ToString();
                 lblCodigo.Text = ltCat.Codigo.ToString();
-                txtDescricao.Text = ltCat.Descricao;	 
-	        }            
+                txtDescricao.Text = ltCat.Descricao;
+            }
         }
 
         private void ExibirMensagem(string mensagem)
@@ -41,13 +41,13 @@ namespace Admin
             txtDescricao.Text = "";
             hfId.Value = "";
         }
-       
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_cat = 0;
-                      
+
             if (!Page.IsPostBack)
             {
                 if (Request.QueryString["operacao"] != null)
@@ -61,7 +61,7 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     carregarDados(id_cat);
-                else                    
+                else
                     lblCodigo.Text = "Código gerado automaticamente.";
 
                 txtDescricao.Focus();
@@ -76,7 +76,7 @@ namespace Admin
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            
+
             CategoriasBL catBL = new CategoriasBL();
             Categorias categorias = new Categorias();
 
@@ -86,28 +86,24 @@ namespace Admin
 
             if (categorias.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if (catBL.EditarBL(categorias))
-                       ExibirMensagem("Categoria atualizada com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
+                if (catBL.EditarBL(categorias))
+                    ExibirMensagem("Categoria atualizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+                if (catBL.InserirBL(categorias))
                 {
-                    if(catBL.InserirBL(categorias))
-                    {
-                        ExibirMensagem("Categoria gravada com sucesso !");
-                        LimparCampos();
-                    }
+                    ExibirMensagem("Categoria gravada com sucesso !");
+                    LimparCampos();
                 }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
             }
-                        
+
         }
     }
 }

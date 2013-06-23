@@ -29,7 +29,7 @@ namespace Admin
         }
 
         private void Pesquisar(int turmaId)
-        {          
+        {
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
@@ -44,10 +44,10 @@ namespace Admin
 
             if (dsTur.Tables[0].Rows.Count != 0)
                 lblTurma.Text = (string)dsTur.Tables[0].Rows[0]["descricao"].ToString();
-          
+
             TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
             List<TurmasParticipantes> tPar = tParBL.PesquisarBL(turmaId);
-            
+
             foreach (TurmasParticipantes ltTpar in tPar)
             {
                 DataRow linha = tabela.NewRow();
@@ -55,7 +55,7 @@ namespace Admin
                 linha["CODIGO"] = ltTpar.Pessoa.Codigo;
                 linha["NOME"] = ltTpar.Pessoa.Nome;
 
-                tabela.Rows.Add(linha);               
+                tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
@@ -77,7 +77,7 @@ namespace Admin
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarParticTurmaBL(conteudo,utils.ComparaIntComZero(hfIdTurma.Value));
+            List<Pessoas> pessoas = pesBL.PesquisarParticTurmaBL(conteudo, utils.ComparaIntComZero(hfIdTurma.Value));
 
             foreach (Pessoas pes in pessoas)
             {
@@ -123,14 +123,14 @@ namespace Admin
 
         protected void btnPesParticipante_Click(object sender, EventArgs e)
         {
-            CarregarPesquisaPessoa(null);           
+            CarregarPesquisaPessoa(null);
             ModalPopupExtenderPesquisa.Enabled = true;
             ModalPopupExtenderPesquisa.Show();
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("cadTurma.aspx?id_tur="+hfIdTurma.Value + "&operacao=edit");
+            Response.Redirect("cadTurma.aspx?id_tur=" + hfIdTurma.Value + "&operacao=edit");
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -143,39 +143,24 @@ namespace Admin
             tPar.TurmaId = utils.ComparaIntComZero(hfIdTurma.Value);
 
             if (tPar.Id > 0)
-            {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    tParBL.EditarBL(tPar);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
+                tParBL.EditarBL(tPar);
             else
-            {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    tParBL.InserirBL(tPar);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }
+                tParBL.InserirBL(tPar);
 
             txtParticipante.Text = "";
             lblDesParticipante.Text = "";
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value)); 
+            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
 
         }
 
         protected void dtgParticipantes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
-                TurmasParticipantes tPar = new TurmasParticipantes();
-                tPar.Id = utils.ComparaIntComZero(dtgParticipantes.DataKeys[e.RowIndex][0].ToString());
-                tParBL.ExcluirBL(tPar);
-                Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
+            TurmasParticipantes tPar = new TurmasParticipantes();
+            tPar.Id = utils.ComparaIntComZero(dtgParticipantes.DataKeys[e.RowIndex][0].ToString());
+            tParBL.ExcluirBL(tPar);
+            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
+
         }
 
         protected void dtgParticipantes_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -283,6 +268,6 @@ namespace Admin
             }
         }
 
-       
+
     }
 }

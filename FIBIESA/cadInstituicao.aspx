@@ -26,7 +26,8 @@
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputboxRight" 
                                                         ToolTip="Informe o código da instituição" 
-                                                        ontextchanged="txtCodigo_TextChanged" AutoPostBack="True" Width="100px"></asp:TextBox>
+                                                        ontextchanged="txtCodigo_TextChanged" AutoPostBack="True" Width="100px" 
+                                                        MaxLength="6"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCodigo"
                                                         ErrorMessage="*Informe o código - Aba geral" ForeColor="#CC0000" 
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
@@ -65,6 +66,8 @@
                                                 <td style="width: 400px">
                                                     <asp:TextBox ID="txtCnpj" runat="server" CssClass="inputbox" MaxLength="14" 
                                                         ToolTip="Informe o CNPJ"></asp:TextBox>
+                                                    <asp:Label ID="lblCnpj" runat="server" CssClass="validacao" 
+                                                        Font-Size="Smaller" ></asp:Label>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCnpj"
                                                         ErrorMessage="*Informe o CNPJ - Aba geral" ForeColor="#CC0000" 
                                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>

@@ -47,9 +47,9 @@ namespace Admin
 
             AgenciasBL ageBL = new AgenciasBL();
             List<Agencias> agencias;
-                        
+
             agencias = ageBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Agencias ltAge in agencias)
             {
                 DataRow linha = tabela.NewRow();
@@ -60,13 +60,20 @@ namespace Admin
                 linha["CODBANCO"] = ltAge.Banco.Codigo;
                 linha["DESBANCO"] = ltAge.Banco.Descricao;
 
-                tabela.Rows.Add(linha);                
+                tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
             dtgAgencia.DataSource = tabela;
             dtgAgencia.DataBind();
         }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -90,26 +97,27 @@ namespace Admin
 
         protected void dtgAgencia_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                AgenciasBL ageBL = new AgenciasBL();
-                Agencias agencias = new Agencias();
-                agencias.Id = utils.ComparaIntComZero(dtgAgencia.DataKeys[e.RowIndex][0].ToString());
-                ageBL.ExcluirBL(agencias);
-                Pesquisar(null);
-            }
+
+            AgenciasBL ageBL = new AgenciasBL();
+            Agencias agencias = new Agencias();
+            agencias.Id = utils.ComparaIntComZero(dtgAgencia.DataKeys[e.RowIndex][0].ToString());
+            
+            if (ageBL.ExcluirBL(agencias))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgAgencia_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
-            if (e.Row.RowType == DataControlRowType.DataRow)             
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
-            
+
         }
 
         protected void dtgAgencia_Sorting(object sender, GridViewSortEventArgs e)
@@ -154,9 +162,9 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);    
+            Pesquisar(txtBusca.Text);
         }
 
-      
+
     }
 }

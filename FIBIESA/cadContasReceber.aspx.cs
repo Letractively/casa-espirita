@@ -56,7 +56,7 @@ namespace FIBIESA
             List<TiposDocumentos> tipoDoc = tipDBL.PesquisarBL("CR");
 
             ddlTipoDoc.Items.Clear();
-            ddlTipoDoc.Items.Add(new ListItem("Selecione",""));
+            ddlTipoDoc.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposDocumentos ltTip in tipoDoc)
                 ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
 
@@ -67,8 +67,8 @@ namespace FIBIESA
         {
             PortadoresBL porDBL = new PortadoresBL();
             List<Portadores> port = porDBL.PesquisarBL();
-                        
-            ddlPortador.Items.Add(new ListItem("Selecione",""));
+
+            ddlPortador.Items.Add(new ListItem("Selecione", ""));
             foreach (Portadores ltPort in port)
                 ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
 
@@ -212,31 +212,24 @@ namespace FIBIESA
 
             if (titulos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
+              
                     if (titBL.EditarBL(titulos))
                         ExibirMensagem("Título atualizado com sucesso !");
                     else
                         ExibirMensagem("Não foi possível atualizar o título. Revise as informações.");
-                }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (titBL.InserirBL(titulos))
                 {
-                    if (titBL.InserirBL(titulos))
-                    {
-                        ExibirMensagem("Título gravado com sucesso !");
-                        LimparCampos();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o título. Revise as informações.");
+                    ExibirMensagem("Título gravado com sucesso !");
+                    LimparCampos();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o título. Revise as informações.");
+
             }
         }
 
@@ -268,9 +261,9 @@ namespace FIBIESA
         {
             CarregarPesquisa(null);
             ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show(); 
+            ModalPopupExtenderPesquisa.Show();
         }
-               
+
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
@@ -308,6 +301,6 @@ namespace FIBIESA
             SelecionarDadosPortador(utils.ComparaIntComZero(ddlPortador.SelectedValue));
         }
 
-        
+
     }
 }

@@ -24,7 +24,7 @@ namespace Admin
             List<Agencias> agencias = ageBL.PesquisarBanBL(id_ban);
 
             ddlAgencia.Items.Clear();
-            ddlAgencia.Items.Add(new ListItem("Selecione",""));
+            ddlAgencia.Items.Add(new ListItem("Selecione", ""));
             foreach (Agencias ltAge in agencias)
                 ddlAgencia.Items.Add(new ListItem(ltAge.Codigo.ToString() + " - " + ltAge.Descricao, ltAge.Id.ToString()));
 
@@ -62,7 +62,7 @@ namespace Admin
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
-             ddlBanco.SelectedIndex = 0;
+            ddlBanco.SelectedIndex = 0;
         }
 
         private void ExibirMensagem(string mensagem)
@@ -74,7 +74,7 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
-            txtDigito.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
+            txtDigito.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
 
         private void LimparCampos()
@@ -87,7 +87,7 @@ namespace Admin
             ddlAgencia.Items.Clear();
 
         }
-       
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -109,10 +109,10 @@ namespace Admin
                 CarregarDDLBanco();
 
                 if (v_operacao.ToLower() == "edit")
-                    CarregarDados(id_con);                
+                    CarregarDados(id_con);
             }
         }
-               
+
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewConta.aspx");
@@ -132,28 +132,23 @@ namespace Admin
 
             if (contas.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                   if(conBL.EditarBL(contas))
-                       ExibirMensagem("Conta atualizada com sucesso !");
-                   else
-                       ExibirMensagem("Não foi possível atualizar a conta. Revise as informações.");
+
+                if (conBL.EditarBL(contas))
+                    ExibirMensagem("Conta atualizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a conta. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(conBL.InserirBL(contas))
-                    {
-                        ExibirMensagem("Conta gravada com sucesso !");
-                        LimparCampos();
-                        ddlBanco.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a conta. Revise as informações.");
+                if (conBL.InserirBL(contas))
+                {
+                    ExibirMensagem("Conta gravada com sucesso !");
+                    LimparCampos();
+                    ddlBanco.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a conta. Revise as informações.");
             }
         }
 
@@ -161,7 +156,5 @@ namespace Admin
         {
             CarregarDDLAgencia(utils.ComparaIntComZero(ddlBanco.SelectedValue));
         }
-
-            
     }
 }

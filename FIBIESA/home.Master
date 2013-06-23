@@ -99,17 +99,18 @@
 
 
                 <asp:SiteMapDataSource ID="menuData" runat="server" ShowStartingNode="false"  />
-                <asp:Repeater ID="rptControl" runat="server" DataSourceID="menuData" onitemdatabound="rptControl_ItemDataBound">
+
+                <asp:Repeater ID="rptMenu" runat="server">
                     <ItemTemplate>
-                        <li>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
-                            <asp:Repeater ID="Repeater1" runat="server" DataSource='<%# ((SiteMapNode) Container.DataItem).ChildNodes %>'>
+                        <li>                                                             
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%#DataBinder.Eval(Container.DataItem, "MO")%>'><%#DataBinder.Eval(Container.DataItem, "DESMODULO")%></asp:HyperLink>
+                            <asp:Repeater ID="rptMenuSub" runat="server" DataSource='<%# DataBinder.Eval(Container.DataItem, "SubCategorias") %>'>
                                 <HeaderTemplate>
                                     <ul>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <li>
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%#DataBinder.Eval(Container.DataItem,"NOME")%>'><%#DataBinder.Eval(Container.DataItem, "DESCRICAO")%></asp:HyperLink>
                                     </li>
                                 </ItemTemplate>
                                 <FooterTemplate>
@@ -118,10 +119,13 @@
                             </asp:Repeater>
                         </li>
                     </ItemTemplate>
-                </asp:Repeater>
+                </asp:Repeater>    
+               <asp:HiddenField ID="hfIdCategoria" runat="server" />      
+               
+          
             </div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        </asp:ContentPlaceHolder>
+        </asp:ContentPlaceHolder>           
     </div>
     <p id="footer">
         &copy; Centro Espírita Alunos do Bem</p>

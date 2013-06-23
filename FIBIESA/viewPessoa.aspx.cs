@@ -52,7 +52,7 @@ namespace Admin
             List<Pessoas> pessoas;
 
             pessoas = pesBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Pessoas pes in pessoas)
             {
                 DataRow linha = tabela.NewRow();
@@ -72,7 +72,7 @@ namespace Admin
                     linha["DESCATEGORIA"] = cat.Descricao;
                 }
 
-                tabela.Rows.Add(linha);                
+                tabela.Rows.Add(linha);
             }
 
             dtbPesquisa = tabela;
@@ -89,38 +89,33 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("cadPessoa.aspx?operacao=new&tipoPessoa="+rblPesJurFis.SelectedValue);
+            Response.Redirect("cadPessoa.aspx?operacao=new&tipoPessoa=" + rblPesJurFis.SelectedValue);
         }
 
         protected void dtgPessoas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                PessoasBL pesBL = new PessoasBL();
-                Pessoas pessoas = new Pessoas();
+            PessoasBL pesBL = new PessoasBL();
+            Pessoas pessoas = new Pessoas();
 
-                pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
-                if (pesBL.ExcluirBL(pessoas))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro !");
-                Pesquisar(null);
-            }
+            pessoas.Id = utils.ComparaIntComZero(dtgPessoas.DataKeys[e.RowIndex][0].ToString());
+            if (pesBL.ExcluirBL(pessoas))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
         }
 
         protected void dtgPessoas_SelectedIndexChanged(object sender, EventArgs e)
         {
             int str_pes = 0;
             str_pes = utils.ComparaIntComZero(dtgPessoas.SelectedDataKey[0].ToString());
-            Response.Redirect("cadPessoa.aspx?id_pes=" + str_pes.ToString() + "&operacao=edit&tipoPessoa="+rblPesJurFis.SelectedValue);
+            Response.Redirect("cadPessoa.aspx?id_pes=" + str_pes.ToString() + "&operacao=edit&tipoPessoa=" + rblPesJurFis.SelectedValue);
         }
 
         protected void dtgPessoas_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -132,10 +127,10 @@ namespace Admin
 
         protected void dtgPessoas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 utils.CarregarJsExclusao("Deseja excluir este registro?", 1, e);
             }
@@ -176,7 +171,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text); 
+            Pesquisar(txtBusca.Text);
         }
 
         protected void btnSelect_Click(object sender, EventArgs e)
@@ -187,9 +182,9 @@ namespace Admin
 
             if (pes_id > 0)                                                                                                                                                                                                                                                                                                                                                                                                                                                         //l//c 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                        "WinOpen('/Relatorios/RelCarteirinha.aspx?pessoaid=" + pes_id + "','',600,850);", true);            
-                           
+                        "WinOpen('/Relatorios/RelCarteirinha.aspx?pessoaid=" + pes_id + "','',600,850);", true);
+
         }
-       
+
     }
 }

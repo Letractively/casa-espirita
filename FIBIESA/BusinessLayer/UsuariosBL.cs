@@ -12,7 +12,7 @@ namespace BusinessLayer
         private bool IsValid(Usuarios usu)
         {
             bool valido;
-            valido = usu.Nome.Length <= 70 && usu.Email.Length <= 100 && usu.Status.Length <= 1 && usu.Senha.Length <= 100;
+            valido = usu.Nome.Length <= 70 && usu.Email.Length <= 100 && usu.Status.Length <= 1 && usu.Senha.Length <= 500;
             valido = valido && usu.CategoriaId > 0;
             valido = valido && usu.DtFim != null && usu.DtInicio != null && usu.Senha != null && usu.Login != null && usu.Status != null;                        
             return valido;

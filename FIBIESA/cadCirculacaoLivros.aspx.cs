@@ -654,71 +654,67 @@ namespace FIBIESA
         }
         protected void btnFinOperacoes_Click(object sender, EventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+            ////Quantidade máxima de exemplares emprestado:
+            //int param = this.LerParametro(1, "B");
+            //if (param >= 0)
+            //{
+            //    if (empBL.QuantosLivrosEmprestados(emp.PessoaId) > param)
+            //    {
+
+            //        ExibirMensagem(lblDesPessoa.Text + " já atingiu o limite máximo de empréstimos simultâneos.");
+            //        txtPessoa.Focus();
+            //        return; //                            throw new Exception(); //tem um jeito melhor de sair do metodo?
+            //    }
+            //}
+
+            if (Session["dtItensEmp"] != null)
+                dtItensEmp = (DataTable)Session["dtItensEmp"];
+
+
+            EmprestimosBL empBL = new EmprestimosBL();
+            EmprestimoMovBL emovBL = new EmprestimoMovBL();
+            bool v_erro = false;
+
+            foreach (DataRow linha in dtItensEmp.Rows)
             {
+                Emprestimos emp = new Emprestimos();
+                emp.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
+                emp.ExemplarId = utils.ComparaIntComZero((linha["ID"].ToString()));
 
-                ////Quantidade máxima de exemplares emprestado:
-                //int param = this.LerParametro(1, "B");
-                //if (param >= 0)
-                //{
-                //    if (empBL.QuantosLivrosEmprestados(emp.PessoaId) > param)
-                //    {
+                emp.Id = empBL.InserirBL(emp);
 
-                //        ExibirMensagem(lblDesPessoa.Text + " já atingiu o limite máximo de empréstimos simultâneos.");
-                //        txtPessoa.Focus();
-                //        return; //                            throw new Exception(); //tem um jeito melhor de sair do metodo?
-                //    }
-                //}
-
-                if (Session["dtItensEmp"] != null)
-                    dtItensEmp = (DataTable)Session["dtItensEmp"];
-
-
-                EmprestimosBL empBL = new EmprestimosBL();
-                EmprestimoMovBL emovBL = new EmprestimoMovBL();
-                bool v_erro = false;
-
-                foreach (DataRow linha in dtItensEmp.Rows)
+                if (emp.Id > 0)
                 {
-                    Emprestimos emp = new Emprestimos();
-                    emp.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
-                    emp.ExemplarId = utils.ComparaIntComZero((linha["ID"].ToString()));
-
-                    emp.Id = empBL.InserirBL(emp);
-
-                    if (emp.Id > 0)
+                    EmprestimoMov mov = new EmprestimoMov();
+                    mov.EmprestimoId = emp.Id;
+                    mov.DataEmprestimo = DateTime.Now;
+                    mov.DataPrevistaEmprestimo = Convert.ToDateTime((linha["DEVOLUCAO"].ToString()));
+                    v_erro = emovBL.InserirBL(mov);
+                    if (!v_erro)
                     {
-                        EmprestimoMov mov = new EmprestimoMov();
-                        mov.EmprestimoId = emp.Id;
-                        mov.DataEmprestimo = DateTime.Now;
-                        mov.DataPrevistaEmprestimo = Convert.ToDateTime((linha["DEVOLUCAO"].ToString()));
-                        v_erro = emovBL.InserirBL(mov);
-                        if (!v_erro)
+                        if (empBL.ExcluirBL(emp))
                         {
-                            if (empBL.ExcluirBL(emp))
-                            {
-                                ExibirMensagem("Não foi possível concluir o empréstimo. Contate o administrador do sistema.");
-                                return;
-                            }
-
+                            ExibirMensagem("Não foi possível concluir o empréstimo. Contate o administrador do sistema.");
+                            return;
                         }
-                        else
-                            if (chkReciboEmprestimo.Checked)
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                                             "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + emp.Id + "','',600,850);", true);
+
                     }
-                }
-
-
-                if (v_erro)
-                {
-                    LimparCamposEmprestimo();
-                    LimparCamposRenovacao();
-                    ExibirMensagem("Empréstimo realizado com sucesso!");
+                    else
+                        if (chkReciboEmprestimo.Checked)
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                                         "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + emp.Id + "','',600,850);", true);
                 }
             }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
+
+            if (v_erro)
+            {
+                LimparCamposEmprestimo();
+                LimparCamposRenovacao();
+                ExibirMensagem("Empréstimo realizado com sucesso!");
+            }
+
         }
         protected void dtgExemplar_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -787,9 +783,6 @@ namespace FIBIESA
         }
         protected void btnFinOpeDev_Click(object sender, EventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-            {
-
                 if (Session["dtItensDev"] != null)
                     dtItensDev = (DataTable)Session["dtItensDev"];
 
@@ -822,9 +815,7 @@ namespace FIBIESA
                     else
                         ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
                 }
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+         
         }
         protected void btnVoltarDev_Click(object sender, EventArgs e)
         {

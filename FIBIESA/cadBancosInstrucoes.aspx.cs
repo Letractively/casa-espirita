@@ -22,7 +22,7 @@ namespace FIBIESA
             BancosBL banBL = new BancosBL();
             List<Bancos> bancos = banBL.PesquisarBL();
 
-            ddlBanco.Items.Add(new ListItem("Selecione",""));
+            ddlBanco.Items.Add(new ListItem("Selecione", ""));
             foreach (Bancos ltBan in bancos)
                 ddlBanco.Items.Add(new ListItem(ltBan.Codigo.ToString() + " - " + ltBan.Descricao, ltBan.Id.ToString()));
 
@@ -41,14 +41,14 @@ namespace FIBIESA
                 txtCodigo.Text = ltBanIns.Codigo.ToString();
                 txtDescricao.Text = ltBanIns.Descricao;
                 ddlObrigDias.SelectedValue = ltBanIns.Nrdias.ToString();
-                ddlBanco.SelectedValue = ltBanIns.Bancoid.ToString();                
+                ddlBanco.SelectedValue = ltBanIns.Bancoid.ToString();
             }
 
         }
 
         private void CarregarAtributos()
         {
-            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");            
+            txtCodigo.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
 
         private void ExibirMensagem(string mensagem)
@@ -108,31 +108,24 @@ namespace FIBIESA
 
             if (bancos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (banBL.EditarBL(bancos))
-                        ExibirMensagem("Instrução atualizada com sucesso!");
-                    else
-                        ExibirMensagem("Não foi possível atualizar a instrução. Revise as informações");
-                }
+                if (banBL.EditarBL(bancos))
+                    ExibirMensagem("Instrução atualizada com sucesso!");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a instrução. Revise as informações");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+                if (banBL.InserirBL(bancos))
                 {
-                    if (banBL.InserirBL(bancos))
-                    {
-                        ExibirMensagem("Instrução gravada com sucesso!");
-                        LimparCampos();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a instrução. Revise as informações");
+                    ExibirMensagem("Instrução gravada com sucesso!");
+                    LimparCampos();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a instrução. Revise as informações");
+
             }
         }
 
@@ -140,5 +133,7 @@ namespace FIBIESA
         {
             Response.Redirect("viewBancosInstrucoes.aspx");
         }
+
+        
     }
 }

@@ -86,7 +86,7 @@ namespace FIBIESA
             grdPesquisaItem.DataSource = dt;
             grdPesquisaItem.DataBind();
         }
-        
+
         private DataTable CriarTabelaPesquisa()
         {
             DataTable dt = new DataTable();
@@ -99,7 +99,7 @@ namespace FIBIESA
             dt.Columns.Add(coluna3);
 
             return dt;
- 
+
         }
 
         private void CriarDtItens()
@@ -153,7 +153,7 @@ namespace FIBIESA
             hfIdPessoa.Value = "";
             Session["dtItens"] = null;
             dtgItens.DataSource = null;
-            dtgItens.DataBind(); 
+            dtgItens.DataBind();
         }
 
         public void ExibirMensagem(string mensagem)
@@ -183,22 +183,22 @@ namespace FIBIESA
                 txtQuantidade.Text = "1";
                 lblValor.Text = "0,00";
                 txtCliente.Focus();
-            }           
-     
+            }
+
         }
-       
+
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(null);
             ModalPopupExtenderPesItem.Enabled = true;
-            ModalPopupExtenderPesItem.Show();        
+            ModalPopupExtenderPesItem.Show();
         }
 
         protected void btnPesCliente_Click(object sender, EventArgs e)
         {
             CarregarPesquisaPessoa(null);
             ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show(); 
+            ModalPopupExtenderPesquisa.Show();
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -213,9 +213,9 @@ namespace FIBIESA
 
             linha["IDORDEM"] = key.ToString();
             linha["ITEMESTOQUEID"] = hfIdItem.Value;
-            linha["QUANTIDADE"] = txtQuantidade.Text;            
+            linha["QUANTIDADE"] = txtQuantidade.Text;
             linha["VALOR"] = utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
-            linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValorUni.Text); 
+            linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValorUni.Text);
             linha["DESCONTO"] = utils.ComparaDecimalComZero(txtDesconto.Text);
             linha["CODIGO"] = txtItem.Text;
             linha["DESCRICAO"] = lblDesItem.Text;
@@ -245,12 +245,12 @@ namespace FIBIESA
             vendas.Data = DateTime.Now;
             vendas.Situacao = "A";
             vendas.PessoaId = utils.ComparaIntComZero(hfIdPessoa.Value);
-            
+
             if (Session["usuario"] != null)
             {
                 List<Usuarios> usuarios;
                 usuarios = (List<Usuarios>)Session["usuario"];
-                
+
                 foreach (Usuarios usu in usuarios)
                 {
                     usu_id = usu.Id;
@@ -258,50 +258,46 @@ namespace FIBIESA
 
                 vendas.UsuarioId = usu_id;
             }
-      
+
             if (Session["dtItens"] != null)
                 dtItens = (DataTable)Session["dtItens"];
 
-            if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+
+            if (dtItens.Rows.Count > 0)
             {
-                if (dtItens.Rows.Count > 0)
+                int id = venEBL.InserirBL(vendas);
+
+                if (id > 0)
                 {
-                    int id = venEBL.InserirBL(vendas);
+                    foreach (DataRow linha in dtItens.Rows)
+                    {
+                        vendaItens.VendaId = id;
+                        vendaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
+                        vendaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
+                        vendaItens.Valor = utils.ComparaDecimalComZero(linha["VALORUNI"].ToString());
+                        vendaItens.Situacao = "A";
+                        vendaItens.Desconto = utils.ComparaDecimalComZero(linha["DESCONTO"].ToString());
+
+                        venItBL.InserirBL(vendaItens, usu_id);
+
+                    }
 
                     if (id > 0)
                     {
-                        foreach (DataRow linha in dtItens.Rows)
-                        {
-                            vendaItens.VendaId = id;
-                            vendaItens.ItemEstoqueId = utils.ComparaIntComZero(linha["ITEMESTOQUEID"].ToString());
-                            vendaItens.Quantidade = utils.ComparaIntComZero(linha["QUANTIDADE"].ToString());
-                            vendaItens.Valor = utils.ComparaDecimalComZero(linha["VALORUNI"].ToString());
-                            vendaItens.Situacao = "A";
-                            vendaItens.Desconto = utils.ComparaDecimalComZero(linha["DESCONTO"].ToString());
+                        if (chkImprimirRec.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,850);", true);
 
-                            venItBL.InserirBL(vendaItens, usu_id);
-                            
-                        }
-
-                        if (id > 0)
-                        {                          
-                            if(chkImprimirRec.Checked)                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelReciboVenda.aspx?vendaid=" + id + "','',600,850);", true);
-                                                        
-                            ExibirMensagem("Venda gravada com sucesso !");
-                            LimparCamposGeral();
-                            txtCliente.Focus();
-                        }
-                        else
-                            ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");                       
+                        ExibirMensagem("Venda gravada com sucesso !");
+                        LimparCamposGeral();
+                        txtCliente.Focus();
                     }
                     else
                         ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
                 }
+                else
+                    ExibirMensagem("Não foi possível gravar a venda. Revise as informações!");
             }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-                      
+
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
@@ -337,7 +333,7 @@ namespace FIBIESA
                     else
                     {
                         if (totalEstoque <= qtdMinima)
-                            ExibirMensagem("Restam apenas "+ totalEstoque + " itens no estoque."); 
+                            ExibirMensagem("Restam apenas " + totalEstoque + " itens no estoque.");
                     }
                 }
 
@@ -352,12 +348,12 @@ namespace FIBIESA
             }
             else
                 txtValorUni.Focus();
-           
+
         }
 
         protected void dtgItens_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            object key = new object();            
+            object key = new object();
             key = dtgItens.DataKeys[e.RowIndex][0];
 
             if (Session["dtItens"] != null)
@@ -378,7 +374,7 @@ namespace FIBIESA
             hfIdPessoa.Value = "";
             PessoasBL pesBL = new PessoasBL();
             Pessoas pessoa = new Pessoas();
-            List<Pessoas> pes = pesBL.PesquisarBL("CODIGO",txtCliente.Text);
+            List<Pessoas> pes = pesBL.PesquisarBL("CODIGO", txtCliente.Text);
 
             foreach (Pessoas ltpessoa in pes)
             {
@@ -417,7 +413,7 @@ namespace FIBIESA
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            ModalPopupExtenderPesquisa.Enabled = false;            
+            ModalPopupExtenderPesquisa.Enabled = false;
         }
 
         protected void txtPesquisa_TextChanged(object sender, EventArgs e)
@@ -437,7 +433,7 @@ namespace FIBIESA
             hfIdPessoa.Value = grdPesquisa.DataKeys[gvrow.RowIndex].Value.ToString();
             txtCliente.Text = gvrow.Cells[2].Text;
             lblDesCliente.Text = gvrow.Cells[3].Text;
-                        
+
             ModalPopupExtenderPesquisa.Hide();
             ModalPopupExtenderPesquisa.Enabled = false;
 
@@ -464,7 +460,7 @@ namespace FIBIESA
             txtItem.Text = gvrow.Cells[2].Text;
             lblDesItem.Text = gvrow.Cells[3].Text;
             txtValorUni.Text = gvrow.Cells[4].Text;
-            
+
             ModalPopupExtenderPesItem.Hide();
             ModalPopupExtenderPesItem.Enabled = false;
 
@@ -476,7 +472,7 @@ namespace FIBIESA
             ModalPopupExtenderPesItem.Enabled = true;
             ModalPopupExtenderPesItem.Show();
             txtPesItem.Text = "";
-        }           
-               
+        }
+
     }
 }

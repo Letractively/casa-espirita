@@ -13,7 +13,7 @@ namespace FIBIESA
 {
     public partial class cadAcertoEstoque1 : System.Web.UI.Page
     {
-    
+
         Utils utils = new Utils();
         #region funcoes
         private DataTable CriarDtPesquisa()
@@ -29,33 +29,68 @@ namespace FIBIESA
 
             return dt;
         }
-
         private void CarregarAtributos()
         {
             txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");            
+            txtQtde.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtItem.Attributes.Add("onkeypress", "return(Reais(this,event))");
         }
-
         public void ExibirMensagem(string mensagem)
-        {           
+        {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-
         private void LimparCampos()
-        {            
+        {
             hfIdItem.Value = "";
             lblDesItem.Text = "";
             lblQtdAtual.Text = "";
-            txtQtde.Text = "";            
+            txtQtde.Text = "";
         }
         private void CarregarDados(int id_ItEst)
         {
             MovimentosEstoqueBL movEsBL = new MovimentosEstoqueBL();
-            Int32 total = movEsBL.PesquisarTotalMovimentosBL(id_ItEst,"");
+            Int32 total = movEsBL.PesquisarTotalMovimentosBL(id_ItEst, "");
 
-            lblQtdAtual.Text = total.ToString(); 
+            lblQtdAtual.Text = total.ToString();
+        }
+        public void CarregarPesquisaItem(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("TITULO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));
+            DataColumn coluna5 = new DataColumn("QUANTIDADE", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+            dt.Columns.Add(coluna4);
+            dt.Columns.Add(coluna5);
+
+            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
+            ItensEstoque itEstoque = new ItensEstoque();
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBuscaBL(conteudo);
+
+            foreach (ItensEstoque litE in ltItEst)
+            {
+                DataRow linha = dt.NewRow();
+
+                if (litE.Obra != null)
+                {
+                    linha["ID"] = litE.Id;
+                    linha["CODIGO"] = litE.Obra.Codigo;
+                    linha["TITULO"] = litE.Obra.Titulo;
+                    linha["VALOR"] = litE.VlrVenda.ToString();
+                    linha["QUANTIDADE"] = litE.QtdEstoque.ToString();
+
+                    dt.Rows.Add(linha);
+                }
+            }
+
+            grdPesquisaItem.DataSource = dt;
+            grdPesquisaItem.DataBind();
         }
         #endregion
 
@@ -83,7 +118,7 @@ namespace FIBIESA
                     movEstoque.UsuarioId = usu.Id;
                 }
             }
-                      
+
             movEstoque.ItemEstoqueId = utils.ComparaIntComZero(hfIdItem.Value);
             movEstoque.Quantidade = utils.ComparaIntComZero(txtQtde.Text);
             movEstoque.Data = Convert.ToDateTime(txtData.Text);
@@ -91,29 +126,28 @@ namespace FIBIESA
 
             if (movEstoque.ItemEstoqueId > 0 && movEstoque.UsuarioId > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if (mvEstBL.InserirBL(movEstoque))
-                        ExibirMensagem("Dados gravados com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível gravar o movimento. Revise as informações !");
+
+                if (mvEstBL.InserirBL(movEstoque))
+                    ExibirMensagem("Dados gravados com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o movimento. Revise as informações !");
+
             }
 
-            txtQtde.Text = "";  
+            txtQtde.Text = "";
             CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
-           
+
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
         {
-            hfIdItem.Value = ""; 
+            hfIdItem.Value = "";
             ItensEstoqueBL itEstBL = new ItensEstoqueBL();
             ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text,1);
-          
+            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL("CODIGO", txtItem.Text, 1);
+
             foreach (ItensEstoque ltItEstoque in ltItEst)
-            {                
+            {
                 hfIdItem.Value = ltItEstoque.Id.ToString();
                 txtItem.Text = ltItEstoque.Obra.Codigo.ToString();
                 lblDesItem.Text = ltItEstoque.Obra.Titulo;
@@ -131,36 +165,9 @@ namespace FIBIESA
 
         protected void btnPesItem_Click(object sender, EventArgs e)
         {
-            Session["tabelaPesquisa"] = null;
-            DataTable dt = CriarDtPesquisa();
-            ItensEstoqueBL itEstBL = new ItensEstoqueBL();
-            ItensEstoque itEstoque = new ItensEstoque();
-            List<ItensEstoque> ltItEst = itEstBL.PesquisarBL(1);
-
-            foreach (ItensEstoque litE in ltItEst)
-            {
-                DataRow linha = dt.NewRow();
-
-                if (litE.Obra != null)
-                {
-                    linha["ID"] = litE.Obra.Id;
-                    linha["CODIGO"] = litE.Obra.Codigo;
-                    linha["DESCRICAO"] = litE.Obra.Titulo;
-
-                    dt.Rows.Add(linha);
-                }
-
-            }
-
-            if (dt.Rows.Count > 0)
-                Session["tabelaPesquisa"] = dt;
-
-
-            Session["objBLPesquisa"] = itEstBL;
-            Session["objPesquisa"] = itEstoque;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Pesquisar.aspx?caixa=" + txtItem.ClientID + "&id=" + hfIdItem.ClientID + "&lbl=" + lblDesItem.ClientID + "','',600,500);", true);
-            
+            CarregarPesquisaItem(null);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -168,7 +175,43 @@ namespace FIBIESA
             Response.Redirect("~/default.aspx");
         }
 
-  
-        
+        protected void btnCanelItem_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtenderPesItem.Enabled = false;
+        }
+
+        protected void grdPesquisaItem_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+                utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnSelectItem_Click(object sender, EventArgs e)
+        {
+                     
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+
+            hfIdItem.Value = grdPesquisaItem.DataKeys[gvrow.RowIndex].Value.ToString();
+            txtItem.Text = gvrow.Cells[2].Text;
+            lblDesItem.Text = gvrow.Cells[3].Text;
+
+            if (utils.ComparaIntComZero(hfIdItem.Value) > 0)
+                CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
+
+            ModalPopupExtenderPesItem.Enabled = false;
+            ModalPopupExtenderPesItem.Hide();
+            txtQtde.Focus();          
+
+        }
+
+        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }
+
     }
 }

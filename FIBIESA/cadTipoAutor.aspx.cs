@@ -52,16 +52,16 @@ namespace Admin
         private void LimparCampos()
         {
             txtDescricao.Text = "";
-            lblCodigo.Text = "Código gerado automaticamente."; 
+            lblCodigo.Text = "Código gerado automaticamente.";
         }
-   
-        
+
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id_bai = 0;
-                       
+
             if (!IsPostBack)
             {
 
@@ -99,33 +99,31 @@ namespace Admin
 
             if (tipos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(tipoauBL.EditarBL(tipos))
-                    {
-                        ExibirMensagem("Categoria atualizada com sucesso !");
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
+                if (tipoauBL.EditarBL(tipos))
+                {
+                    ExibirMensagem("Categoria atualizada com sucesso !");
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar a categoria. Revise as informações.");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                   if(tipoauBL.InserirBL(tipos))
-                   {
-                        ExibirMensagem("Categoria gravada com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a categoria. Revise as informações.");
+
+                if (tipoauBL.InserirBL(tipos))
+                {
+                    ExibirMensagem("Categoria gravada com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a categoria. Revise as informações.");
+
             }
-                       
+
         }
     }
 }

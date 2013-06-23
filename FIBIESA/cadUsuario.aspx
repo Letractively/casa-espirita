@@ -87,8 +87,9 @@
                                 <td style="width: 300px" colspan="3">
                                     <asp:TextBox ID="txtSenha" runat="server" CssClass="inputbox" MaxLength="100" Width="300px"
                                         TextMode="Password" ToolTip="Informe a senha"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSenha"
-                                        ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                                    <asp:Label ID="lblInformacao" runat="server" CssClass="validacao" 
+                                                        Font-Size="Smaller"></asp:Label>
+                                    
                                 </td>
                             </tr>
                             <tr>

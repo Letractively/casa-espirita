@@ -49,13 +49,13 @@ namespace Admin
             List<Exemplares> exemplares;
 
             exemplares = exemBL.PesquisarBuscaBL(valor);
-            
+
             foreach (Exemplares exem in exemplares)
             {
 
                 DataRow linha = tabela.NewRow();
 
-                linha["ID"] = exem.Id;              
+                linha["ID"] = exem.Id;
                 linha["TOMBO"] = exem.Tombo;
                 linha["STATUS"] = exem.Status;
                 if (exem.Obras != null)
@@ -86,14 +86,14 @@ namespace Admin
             if (!IsPostBack)
                 Pesquisar(null);
         }
-        
+
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/cadExemplar.aspx?operacao=new");
         }
 
         protected void dtgExemplar_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {           
+        {
             dtgExemplar.DataSource = dtbPesquisa;
             dtgExemplar.PageIndex = e.NewPageIndex;
             dtgExemplar.DataBind();
@@ -101,25 +101,22 @@ namespace Admin
 
         protected void dtgExemplar_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                ExemplaresBL exemBL = new ExemplaresBL();
-                Exemplares exemplares = new Exemplares();
-                exemplares.Id = utils.ComparaIntComZero(dtgExemplar.DataKeys[e.RowIndex][0].ToString());
-               
-                if (exemBL.ExcluirBL(exemplares))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                Pesquisar(null);
-            }
+
+            ExemplaresBL exemBL = new ExemplaresBL();
+            Exemplares exemplares = new Exemplares();
+            exemplares.Id = utils.ComparaIntComZero(dtgExemplar.DataKeys[e.RowIndex][0].ToString());
+
+            if (exemBL.ExcluirBL(exemplares))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgExemplar_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

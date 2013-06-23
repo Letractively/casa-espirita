@@ -29,11 +29,11 @@ namespace Admin
                 txtDtInicio.Text = eve.DtInicio.ToString("dd/MM/yyyy");
                 txtDtFim.Text = eve.DtFim.ToString("dd/MM/yyyy");
             }
-            
+
         }
 
         private void CarregarAtributos()
-        {            
+        {
             txtDtInicio.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDtFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
         }
@@ -61,7 +61,7 @@ namespace Admin
             if (!IsPostBack)
             {
 
-                if (Request.QueryString["operacao"] != null  && (Request.QueryString["id_eve"] != null))
+                if (Request.QueryString["operacao"] != null && (Request.QueryString["id_eve"] != null))
                 {
                     v_operacao = Request.QueryString["operacao"];
 
@@ -91,44 +91,36 @@ namespace Admin
 
             if (eventos.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
+
+                if (eveBL.EditarBL(eventos))
                 {
-                    if (eveBL.EditarBL(eventos))
-                    {
-                        ExibirMensagem("Evento atualizado com sucesso !");
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar o evento. Revise as informações.");
+                    ExibirMensagem("Evento atualizado com sucesso !");
+                    txtDescricao.Focus();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o evento. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (eveBL.InserirBL(eventos))
                 {
-                    if (eveBL.InserirBL(eventos))
-                    {
-                        ExibirMensagem("Evento gravado com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar o evento. Revise as informações.");
+                    ExibirMensagem("Evento gravado com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar o evento. Revise as informações.");
+
             }
-                        
+
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewEvento.aspx");
         }
-       
-        
+
+
     }
 }

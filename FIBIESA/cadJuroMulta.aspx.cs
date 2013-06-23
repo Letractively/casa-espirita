@@ -86,25 +86,12 @@ namespace Admin
             jurosMultas.PercMultaMes = utils.ComparaDecimalComZero(txtMultaMes.Text);
 
             if (jurosMultas.Id > 0)
-            {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    jmBL.EditarBL(jurosMultas);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-
-            }
+                jmBL.EditarBL(jurosMultas);  
             else
-            {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    jmBL.InserirBL(jurosMultas);
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
-            }
+                 jmBL.InserirBL(jurosMultas);           
 
             Response.Redirect("viewJuroMulta.aspx");
-        }
-
-       
+        }      
        
     }
 }

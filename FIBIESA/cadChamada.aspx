@@ -47,10 +47,14 @@
                          <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="ddlEvento" ErrorMessage="*Selecione o evento" 
                                  ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator></td>
-                          <td colspan="2"><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                          <td><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="ddlTurmas" ErrorMessage="*Selecione a turma" 
                                   ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator></td>
-                          <td></td>
+                          <td colspan="2">
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtSelData" ErrorMessage="*Selecione uma data" 
+                                  ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
+                          </td>
                     </tr>               
                     <tr>                        
                         <td colspan="4">

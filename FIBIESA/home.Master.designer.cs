@@ -94,13 +94,22 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.SiteMapDataSource menuData;
         
         /// <summary>
-        /// rptControl control.
+        /// rptMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptControl;
+        protected global::System.Web.UI.WebControls.Repeater rptMenu;
+        
+        /// <summary>
+        /// hfIdCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdCategoria;
         
         /// <summary>
         /// MainContent control.

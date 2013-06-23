@@ -11,7 +11,7 @@ using FG;
 namespace Admin
 {
     public partial class cadEstado : System.Web.UI.Page
-    {        
+    {
         Utils utils = new Utils();
         string v_operacao = "";
 
@@ -43,7 +43,7 @@ namespace Admin
             txtUf.Text = "";
             txtDescricao.Focus();
         }
-        
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -79,29 +79,22 @@ namespace Admin
 
             if (estados.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if (estBL.EditarBL(estados))
-                       ExibirMensagem("Estado atualizado com sucesso !");
-                    else
-                       ExibirMensagem("Não foi possível atualizar o estado. Revise as informações.");
+                if (estBL.EditarBL(estados))
+                    ExibirMensagem("Estado atualizado com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar o estado. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                if (estBL.InserirBL(estados))
                 {
-                    if (estBL.InserirBL(estados))
-                    {
-                        ExibirMensagem("Estado gravado com sucesso !");
-                        LimparCampos();
-                    }
+                    ExibirMensagem("Estado gravado com sucesso !");
+                    LimparCampos();
+                    txtUf.Focus();
                 }
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
             }
-            
+
         }
 
         protected void bntVoltar_Click(object sender, EventArgs e)
@@ -123,7 +116,7 @@ namespace Admin
             {
                 lblInformacao.Text = "";
                 txtDescricao.Focus();
-            } 
+            }
         }
     }
 }

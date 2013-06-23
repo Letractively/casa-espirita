@@ -34,7 +34,7 @@ namespace Admin
             txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtQtdMin.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtVlrMedio.Attributes.Add("onkeypress", "return(Reais(this,event))");
-            txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");           
+            txtVlrVenda.Attributes.Add("onkeypress", "return(Reais(this,event))");
         }
         private void CarregarDados(int id_obra)
         {
@@ -173,30 +173,25 @@ namespace Admin
 
             if (itEstoque.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                {
-                    if (itEsBL.EditarBL(itEstoque))
-                        ExibirMensagem("Atualização realizada com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
-                }
+                if (itEsBL.EditarBL(itEstoque))
+                    ExibirMensagem("Atualização realizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
+
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if (itEsBL.InserirBL(itEstoque))
-                        ExibirMensagem("Atualização realizada com sucesso !");
-                    else
-                        ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
+
+                if (itEsBL.InserirBL(itEstoque))
+                    ExibirMensagem("Atualização realizada com sucesso !");
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível atualizar as informações. Revise as informações !");
+
             }
 
         }
-        
+
         protected void btnSelectItem_Click(object sender, EventArgs e)
         {
 
@@ -209,7 +204,7 @@ namespace Admin
             lblDesItem.Text = gvrow.Cells[3].Text;
 
             ModalPopupExtenderPesItem.Enabled = false;
-            ModalPopupExtenderPesItem.Hide();            
+            ModalPopupExtenderPesItem.Hide();
             CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
             txtQtdMin.Focus();
 

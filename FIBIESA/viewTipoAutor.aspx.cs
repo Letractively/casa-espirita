@@ -31,7 +31,7 @@ namespace Admin
         private void Pesquisar(string valor)
         {
             DataTable tabela = new DataTable("tabela");
-            
+
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
@@ -44,16 +44,16 @@ namespace Admin
             List<TiposDeAutores> tiposAutores;
 
             tiposAutores = tautorBL.PesquisarBuscaBL(valor);
-                       
+
             foreach (TiposDeAutores tipA in tiposAutores)
             {
-                
+
                 DataRow linha = tabela.NewRow();
-                
+
                 linha["ID"] = tipA.Id;
                 linha["CODIGO"] = tipA.Codigo;
                 linha["DESCRICAO"] = tipA.Descricao;
-               
+
                 tabela.Rows.Add(linha);
             }
 
@@ -70,19 +70,19 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
 
-     
+
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             Response.Redirect("cadTipoAutor.aspx?operacao=new");
         }
-            
+
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);     
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgBairros_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,20 +94,17 @@ namespace Admin
 
         protected void dtgBairros_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                TiposDeAutoresBL tiposaBL = new TiposDeAutoresBL();
-                TiposDeAutores tiposAu = new TiposDeAutores();
-                tiposAu.Id = utils.ComparaIntComZero(dtgTiposAutores.DataKeys[e.RowIndex][0].ToString());
-               
-                if (tiposaBL.ExcluirBL(tiposAu))
-                    ExibirMensagem("Registro excluído com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
-                Pesquisar(null);
-            }
+
+            TiposDeAutoresBL tiposaBL = new TiposDeAutoresBL();
+            TiposDeAutores tiposAu = new TiposDeAutores();
+            tiposAu.Id = utils.ComparaIntComZero(dtgTiposAutores.DataKeys[e.RowIndex][0].ToString());
+
+            if (tiposaBL.ExcluirBL(tiposAu))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgBairros_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -119,7 +116,7 @@ namespace Admin
 
         protected void dtgBairros_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

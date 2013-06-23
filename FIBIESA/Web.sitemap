@@ -4,18 +4,38 @@
 
     <siteMapNode title="Financeiro" description="Financeiro">
       <siteMapNode url="cadVenda.aspx" title="Vendas" description="Vendas" />
-      <siteMapNode url="viewDoacao.aspx" title="Doações" description="Doações" />
+      <siteMapNode url="viewDoacao.aspx" title="Doações" description="Doações">
+        <siteMapNode url="cadDoacao.aspx" title="Doações" description="Doações"/>
+      </siteMapNode>
       <siteMapNode url="viewManVenda.aspx" title="Manutenção Venda" description="Manutenção Venda" />
-      <siteMapNode url="viewContasApagar.aspx" title="Contas a Pagar" description="Contas a Pagar" />
-      <siteMapNode url="viewContasReceber.aspx" title="Contas a Receber" description="Contas a Receber" />
+      <siteMapNode url="viewContasApagar.aspx" title="Contas a Pagar" description="Contas a Pagar">
+        <siteMapNode url="cadContasApagar.aspx" title="Cadastro de Contas a Pagar" description="Contas a Pagar"/>
+      </siteMapNode>
+      <siteMapNode url="viewContasReceber.aspx" title="Contas a Receber" description="Contas a Receber">
+        <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber" description="Contas a Receber"/>
+      </siteMapNode>
       <siteMapNode url="emissaoBloqBan.aspx" title="Emissão de Bloqueto Bancário" description="Emissão de Bloqueto Bancário" />
-      <siteMapNode url="viewJuroMulta.aspx" title="Juros / Multas" description="Juros / Multas" />
-      <siteMapNode url="viewPortador.aspx" title="Portadores" description="Portadores" />
-      <siteMapNode url="viewConta.aspx" title="Contas" description="Contas" />
-      <siteMapNode url="viewAgencia.aspx" title="Agências" description="Agências" />
-      <siteMapNode url="viewBanco.aspx" title="Bancos" description="Bancos" />
-      <siteMapNode url="viewBancosInstrucoes.aspx" title="Instruções Bancárias" description="Instruções Bancárias" />
-      <siteMapNode url="viewTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos" />
+      <siteMapNode url="viewJuroMulta.aspx" title="Juros / Multas" description="Juros / Multas">
+        <siteMapNode url="cadJuroMulta.aspx" title="Cadastro de Juros / Multas" description="Juros / Multas"/>
+      </siteMapNode>
+      <siteMapNode url="viewPortador.aspx" title="Portadores" description="Portadores">
+        <siteMapNode url="cadPortador.aspx" title="Cadastro de Portadores" description="Portadores"/>
+      </siteMapNode>
+      <siteMapNode url="viewConta.aspx" title="Contas" description="Contas">
+        <siteMapNode url="cadConta.aspx" title="Cadastro de Categorias de Contas" description="Contas"/>
+      </siteMapNode>
+      <siteMapNode url="viewAgencia.aspx" title="Agências" description="Agências">
+        <siteMapNode url="cadAgencia.aspx" title="Cadastro de Agências" description="Agências"/>
+      </siteMapNode>
+      <siteMapNode url="viewBanco.aspx" title="Bancos" description="Bancos">
+        <siteMapNode url="cadBancos.aspx" title="Cadastro de Bancos" description="Bancos"/>
+      </siteMapNode>
+      <siteMapNode url="viewBancosInstrucoes.aspx" title="Instruções Bancárias" description="Instruções Bancárias">
+        <siteMapNode url="cadBancosInstrucoes.aspx" title="Instruções Bancária" description="Instruções Bancária"/>
+      </siteMapNode>
+      <siteMapNode url="viewTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos">
+        <siteMapNode url="cadTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos"/>
+      </siteMapNode>
       <siteMapNode url="viewRelVendas.aspx" title="Relatório de Vendas" description="Relatório de Vendas" />
       <siteMapNode url="viewRelDoacoes.aspx" title="Relatório de Doações" description="Relatório de Doações" />
       <siteMapNode url="viewRelContasPagar.aspx" title="Relatório de Contas a Pagar" description="Relatório de Contas a Pagar" />
@@ -25,14 +45,28 @@
 
     <siteMapNode title="Biblioteca" description="Biblioteca">      
       <siteMapNode url="cadCirculacaoLivros.aspx" title="Circulação de Livros" description="Circulação de Livros" />
-      <siteMapNode url="viewExemplar.aspx" title="Exemplares" description="Exemplares" />
-      <siteMapNode url="viewObra.aspx" title="Obras" description="Obras" />
-      <siteMapNode url="viewEditora.aspx" title="Editoras" description="Editoras" />
+      <siteMapNode url="viewExemplar.aspx" title="Exemplares" description="Exemplares">
+        <siteMapNode url="cadExemplar.aspx" title="Cadastro de Exemplares" description="Exemplares"/>
+      </siteMapNode>
+      <siteMapNode url="viewObra.aspx" title="Obras" description="Obras">
+        <siteMapNode url="cadObra.aspx" title="Cadastro de Obras" description="Obras"/>
+      </siteMapNode>
+      <siteMapNode url="viewEditora.aspx" title="Editoras" description="Editoras">
+        <siteMapNode url="cadEditora.aspx" title="Cadastro de Editoras" description="Editoras"/>
+      </siteMapNode>
       <siteMapNode url="viewAutor.aspx" title="Autores" description="Autores" />
-      <siteMapNode url="viewOrigem.aspx" title="Origens de Exemplares" description="Origens de Exemplares" />
-      <siteMapNode url="viewTipoAutor.aspx" title="Categorias de Autores" description="Categorias de Autores" />
-      <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras" description="Categorias de Obras" />
-      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos" />   
+        <siteMapNode url="cadAutor.aspx" title="Cadastro de Autores" description="Autores"/>
+      </siteMapNode>
+      <siteMapNode url="viewOrigem.aspx" title="Origens de Exemplares" description="Origens de Exemplares">
+        <siteMapNode url="cadOrigem.aspx" title="Cadastro de Origens" description="Origens de Exemplares"/>
+      </siteMapNode>
+      <siteMapNode url="viewTipoAutor.aspx" title="Categorias de Autores" description="Categorias de Autores">
+        <siteMapNode url="cadTipoAutor.aspx" title="Cadastro de Categorias de Autores" description="Categorias de Autores"/>
+      </siteMapNode>
+      <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras" description="Categorias de Obras">
+        <siteMapNode url="cadTipoObra.aspx" title="Cadastro de Categorias de Obras" description="Categorias de Obras"/>
+      </siteMapNode>
+      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos">   
       <siteMapNode url="viewRelCodigoBarras.aspx" title="Relatório de Código de Barras" description="Relatório Código de Barras" />     
     </siteMapNode>
 
@@ -46,28 +80,50 @@
     </siteMapNode>
 
     <siteMapNode title="Evento" description="Evento">
-      <siteMapNode url="viewEvento.aspx" title="Eventos" description="Eventos" />
-      <siteMapNode url="viewTurma.aspx" title="Turmas" description="Turmas" />
-      <siteMapNode url="cadChamada.aspx" title="Registro de Frequências" description="Registro de Frequências" />
+      <siteMapNode url="viewEvento.aspx" title="Eventos" description="Eventos">
+        <siteMapNode url="cadEvento.aspx" title="Cadastro de Eventos" description="Eventos"/>
+      </siteMapNode>
+      <siteMapNode url="viewTurma.aspx" title="Turmas" description="Turmas">
+        <siteMapNode url="cadTurma.aspx" title="Cadastro de Turmas" description="Turmas"/>
+      </siteMapNode>
+      <siteMapNode url="cadChamada.aspx" title="Registro de Frequências" description="Registro de Frequências" />      
       <siteMapNode url="viewRelCursos.aspx" title="Relatório de Eventos" description="Relatório de Eventos" />
       <siteMapNode url="viewRelTurmas.aspx" title="Relatório de Turmas" description="Relatório de Turmas" />
       <siteMapNode url="viewRelFrequencia.aspx" title="Relatório de Frequência" description="Relatório de Frequência" />
     </siteMapNode>
 
     <siteMapNode title="Geral" description="Geral">
-      <siteMapNode url="viewInstituicao.aspx" title="Instituições" description="Instituições" />
-      <siteMapNode url="viewPessoa.aspx" title="Pessoas" description="Pessoas" />
-      <siteMapNode url="viewCategoria.aspx" title="Categorias" description="Categorias" />
-      <siteMapNode url="viewUsuario.aspx" title="Usuários" description="Usuários" />
-      <siteMapNode url="viewEstado.aspx" title="Estados" description="Estados" />
-      <siteMapNode url="viewCidade.aspx" title="Cidades" description="Cidades" />
-      <siteMapNode url="viewBairro.aspx" title="Bairros" description="Bairros" />
+      <siteMapNode url="viewInstituicao.aspx" title="Instituições" description="Instituições">
+        <siteMapNode url="cadInstituicao.aspx" title="Cadastro de Instituições" description="Instituicões"/>
+      </siteMapNode>
+      <siteMapNode url="viewPessoa.aspx" title="Pessoas" description="Pessoas">
+        <siteMapNode url="cadPessoa.aspx" title="Cadastro de Pessoas" description="Pessoas"/>
+      </siteMapNode>
+      <siteMapNode url="viewCategoria.aspx" title="Categorias" description="Categorias">
+        <siteMapNode url="cadCategoria.aspx" title="Cadastro de Categorias" description="Categorias"/>
+      </siteMapNode>
+      <siteMapNode url="viewUsuario.aspx" title="Usuários" description="Usuários">
+        <siteMapNode url="cadUsuario.aspx" title="Cadastro de Usuário" description="Usuário"/>
+      </siteMapNode>
+      <siteMapNode url="viewEstado.aspx" title="Estados" description="Estados">
+        <siteMapNode url="cadEstado.aspx" title="Cadastro de Estado" description="Estado"/>
+      </siteMapNode>
+      <siteMapNode url="viewCidade.aspx" title="Cidades" description="Cidades">
+        <siteMapNode url="cadCidade.aspx" title="Cadastro de Cidade" description="Cidade"/>
+      </siteMapNode>
+      <siteMapNode url="viewBairro.aspx" title="Bairros" description="Bairros">
+        <siteMapNode url="cadBairro.aspx" title="Cadastro de Bairros" description="Bairros"/>
+      </siteMapNode>
     </siteMapNode>
 
     <siteMapNode title="Configuração" description="Configuração">
       <siteMapNode url="cadParametro.aspx" title="Parâmetros" description="Parâmetros" />
-      <siteMapNode url="viewFormulario.aspx" title="Formulários" description="Formulários" />
-      <siteMapNode url="viewPermissao.aspx" title="Permissões" description="Permissões" />
+      <siteMapNode url="viewFormulario.aspx" title="Formulários" description="Formulários">
+        <siteMapNode url="cadFormulario.aspx" title="Cadastro de Formulários" description="Formulários"/>
+      </siteMapNode>
+      <siteMapNode url="viewPermissao.aspx" title="Permissões" description="Permissões">
+        <siteMapNode url="cadPermissao.aspx" title="Cadastro de Permissões" description="Permissões"/>
+      </siteMapNode>
       <siteMapNode url="viewDoacaoLog.aspx" title="Logs Cadastro de Doações" description="Logs Cadastro de Doações" />
     </siteMapNode>
 

@@ -62,7 +62,7 @@ namespace Admin
                 DataRow linha = tabela.NewRow();
 
                 linha["ID"] = jm.Id;
-                linha["MESANO"] = jm.MesAno.ToString("MM/yyyy") ;
+                linha["MESANO"] = jm.MesAno.ToString("MM/yyyy");
                 linha["PERCJUROSDIA"] = jm.PercJurosDias;
                 linha["PERCJUROSMES"] = jm.PercJurosMes;
                 linha["PERCMULTADIA"] = jm.PercMultaDias;
@@ -97,16 +97,12 @@ namespace Admin
 
         protected void dtgJurosMultas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                JurosMultasBL jmBL = new JurosMultasBL();
-                JurosMultas jurosMultas = new JurosMultas();
-                jurosMultas.Id = utils.ComparaIntComZero(dtgJurosMultas.DataKeys[e.RowIndex][0].ToString());
-                jmBL.ExcluirBL(jurosMultas);
-                Pesquisar(null,null);
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
+            JurosMultasBL jmBL = new JurosMultasBL();
+            JurosMultas jurosMultas = new JurosMultas();
+            jurosMultas.Id = utils.ComparaIntComZero(dtgJurosMultas.DataKeys[e.RowIndex][0].ToString());
+            jmBL.ExcluirBL(jurosMultas);
+            Pesquisar(null, null);
         }
 
         protected void dtgJurosMultas_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -118,7 +114,7 @@ namespace Admin
 
         protected void dtgJurosMultas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -162,6 +158,6 @@ namespace Admin
         {
             Pesquisar(ddlCampo.SelectedValue, txtBusca.Text);
         }
-                
+
     }
 }

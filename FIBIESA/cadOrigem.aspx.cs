@@ -50,9 +50,9 @@ namespace Admin
         private void LimparCampos()
         {
             txtDescricao.Text = "";
-            lblCodigo.Text = "Código gerado automaticamente."; 
+            lblCodigo.Text = "Código gerado automaticamente.";
         }
-        
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace Admin
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_origem);
                 else
-                    lblCodigo.Text = "Código gerado automaticamente."; 
+                    lblCodigo.Text = "Código gerado automaticamente.";
             }
         }
 
@@ -94,31 +94,27 @@ namespace Admin
 
             if (origens.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(origemBL.EditarBL(origens))
-                    {
-                        ExibirMensagem("Origem atualizada com sucesso !");
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível Origem a categoria. Revise as informações.");
+
+                if (origemBL.EditarBL(origens))
+                {
+                    ExibirMensagem("Origem atualizada com sucesso !");
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível Origem a categoria. Revise as informações.");
 
             }
             else
             {
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
-                    if(origemBL.InserirBL(origens))
-                    {
-                        ExibirMensagem("Origem gravada com sucesso !");
-                        LimparCampos();
-                        txtDescricao.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a Origem. Revise as informações.");
+                if (origemBL.InserirBL(origens))
+                {
+                    ExibirMensagem("Origem gravada com sucesso !");
+                    LimparCampos();
+                    txtDescricao.Focus();
+                }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a Origem. Revise as informações.");
+
             }
         }
     }

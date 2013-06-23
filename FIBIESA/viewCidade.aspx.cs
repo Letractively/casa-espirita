@@ -38,7 +38,7 @@ namespace Admin
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("ESTADOID", Type.GetType("System.Int32"));
             DataColumn coluna5 = new DataColumn("UF", Type.GetType("System.String"));
-            DataColumn coluna6 = new DataColumn("DESESTADO",Type.GetType("System.String"));
+            DataColumn coluna6 = new DataColumn("DESESTADO", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -53,9 +53,9 @@ namespace Admin
             EstadosBL estBL = new EstadosBL();
 
             cidades = cidBL.PesquisarBuscaBL(valor);
-                        
+
             List<Estados> estados;
-            
+
             foreach (Cidades cid in cidades)
             {
                 DataRow linha = tabela.NewRow();
@@ -89,10 +89,10 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
                 Pesquisar(null);
         }
-               
+
         protected void dtgCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             int str_cid = 0;
@@ -102,19 +102,16 @@ namespace Admin
 
         protected void dtgCidades_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                CidadesBL cidBL = new CidadesBL();
-                Cidades cidades = new Cidades();
-                cidades.Id = utils.ComparaIntComZero(dtgCidades.DataKeys[e.RowIndex][0].ToString());
-                if (cidBL.ExcluirBL(cidades))
-                    ExibirMensagem("Cidade excluída com sucesso !");
-                else
-                    ExibirMensagem("Não foi possível excluir a cidade.");
-                Pesquisar(null);
-            }
+
+            CidadesBL cidBL = new CidadesBL();
+            Cidades cidades = new Cidades();
+            cidades.Id = utils.ComparaIntComZero(dtgCidades.DataKeys[e.RowIndex][0].ToString());
+            if (cidBL.ExcluirBL(cidades))
+                ExibirMensagem("Cidade excluída com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)
@@ -124,7 +121,7 @@ namespace Admin
 
         protected void Busca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text);   
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgCidades_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -138,7 +135,7 @@ namespace Admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
-            
+
             if (e.Row.RowType == DataControlRowType.DataRow) //se for uma linha de dados
             {
                 utils.CarregarJsExclusao("Deseja exlcuir este registro?", 1, e);
@@ -177,7 +174,7 @@ namespace Admin
                 dtgCidades.DataBind();
             }
         }
-              
-       
+
+
     }
 }

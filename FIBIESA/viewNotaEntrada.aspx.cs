@@ -39,12 +39,12 @@ namespace Admin
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
-            
+
             NotasEntradaBL ntEBL = new NotasEntradaBL();
             List<NotasEntrada> notasEntrada = ntEBL.PesquisarBL();
 
             notasEntrada = ntEBL.PesquisarBuscaBL(valor);
-            
+
             foreach (NotasEntrada ltNtE in notasEntrada)
             {
                 DataRow linha = tabela.NewRow();
@@ -76,16 +76,13 @@ namespace Admin
 
         protected void dtgNotaEntrada_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                NotasEntradaBL ntEBL = new NotasEntradaBL();
-                NotasEntrada notaEntrada = new NotasEntrada();
-                notaEntrada.Id = utils.ComparaIntComZero(dtgNotaEntrada.DataKeys[e.RowIndex][0].ToString());
-                ntEBL.ExcluirBL(notaEntrada);
-                Pesquisar(null);
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+
+            NotasEntradaBL ntEBL = new NotasEntradaBL();
+            NotasEntrada notaEntrada = new NotasEntrada();
+            notaEntrada.Id = utils.ComparaIntComZero(dtgNotaEntrada.DataKeys[e.RowIndex][0].ToString());
+            ntEBL.ExcluirBL(notaEntrada);
+            Pesquisar(null);
+
         }
 
         protected void dtgNotaEntrada_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +94,7 @@ namespace Admin
 
         protected void btnBusca_Click(object sender, EventArgs e)
         {
-            Pesquisar(txtBusca.Text); 
+            Pesquisar(txtBusca.Text);
         }
 
         protected void dtgNotaEntrada_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -148,6 +145,6 @@ namespace Admin
                 dtgNotaEntrada.DataBind();
             }
         }
-               
+
     }
 }

@@ -137,9 +137,9 @@ namespace Admin
                 permissao.CategoriaId = utils.ComparaIntComZero(((TextBox)item.FindControl("txtCategoriaId")).Text);
                 permissao.FormularioId = utils.ComparaIntComZero(((TextBox)item.FindControl("txtFormularioId")).Text);
                 permissao.Consultar = ((CheckBox)item.FindControl("chkConsultar")).Checked;
-                permissao.Editar = ((CheckBox)item.FindControl("chkEditar")).Checked;
-                permissao.Inserir = ((CheckBox)item.FindControl("chkInserir")).Checked;
-                permissao.Excluir = ((CheckBox)item.FindControl("chkExcluir")).Checked;
+                permissao.Editar = false;
+                permissao.Inserir = false;
+                permissao.Excluir = false;
 
                 if (permissao.CategoriaId > 0 && permissao.FormularioId > 0)
                 {

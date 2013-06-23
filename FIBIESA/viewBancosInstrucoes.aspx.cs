@@ -59,7 +59,7 @@ namespace FIBIESA
 
                 linha["ID"] = ban.Id;
                 linha["CODIGO"] = ban.Codigo;
-                linha["DESCRICAO"] = ban.Descricao;                
+                linha["DESCRICAO"] = ban.Descricao;
                 linha["NRDIAS"] = ban.Nrdias ? "Sim" : "Não";
                 if (ban.Bancos != null)
                 {
@@ -69,7 +69,7 @@ namespace FIBIESA
                 else
                 {
                     linha["CODBANCO"] = null;
-                    linha["DESBANCO"] = null; 
+                    linha["DESBANCO"] = null;
                 }
 
 
@@ -79,6 +79,12 @@ namespace FIBIESA
             dtbPesquisa = tabela;
             dtgBancos.DataSource = tabela;
             dtgBancos.DataBind();
+        }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
         #endregion
 
@@ -90,16 +96,16 @@ namespace FIBIESA
 
         protected void dtgBancos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                BancosInstrucoesBL banBL = new BancosInstrucoesBL();
-                BancosInstrucoes bancos = new BancosInstrucoes();
-                bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
-                banBL.ExcluirBL(bancos);
-                Pesquisar(null);
-            }
+            BancosInstrucoesBL banBL = new BancosInstrucoesBL();
+            BancosInstrucoes bancos = new BancosInstrucoes();
+            bancos.Id = utils.ComparaIntComZero(dtgBancos.DataKeys[e.RowIndex][0].ToString());
+          
+            if (banBL.ExcluirBL(bancos))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+            Pesquisar(null);
+
         }
 
         protected void dtgBancos_SelectedIndexChanged(object sender, EventArgs e)

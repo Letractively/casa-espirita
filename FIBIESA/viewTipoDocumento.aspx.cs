@@ -41,11 +41,11 @@ namespace Admin
             tabela.Columns.Add(coluna3);
             tabela.Columns.Add(coluna4);
 
-            TiposDocumentosBL tdoBL = new TiposDocumentosBL();           
+            TiposDocumentosBL tdoBL = new TiposDocumentosBL();
             List<TiposDocumentos> tDoc;
 
             tDoc = tdoBL.PesquisarBuscaBL(valor);
-                        
+
             foreach (TiposDocumentos ltTdoc in tDoc)
             {
                 DataRow linha = tabela.NewRow();
@@ -61,13 +61,19 @@ namespace Admin
             dtgTipoDocumento.DataSource = tabela;
             dtgTipoDocumento.DataBind();
         }
+
+        public void ExibirMensagem(string mensagem)
+        {
+            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
+               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
                 Pesquisar(null);
         }
-               
+
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
@@ -76,16 +82,16 @@ namespace Admin
 
         protected void dtgTipoDocumento_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
-                TiposDocumentosBL tdoBL = new TiposDocumentosBL();
-                TiposDocumentos tiposDocumento = new TiposDocumentos();
-                tiposDocumento.Id = utils.ComparaIntComZero(dtgTipoDocumento.DataKeys[e.RowIndex][0].ToString());
-                tdoBL.ExcluirBL(tiposDocumento);
-                Pesquisar(null);
-            }
+            TiposDocumentosBL tdoBL = new TiposDocumentosBL();
+            TiposDocumentos tiposDocumento = new TiposDocumentos();
+            tiposDocumento.Id = utils.ComparaIntComZero(dtgTipoDocumento.DataKeys[e.RowIndex][0].ToString());
+         
+            if (tdoBL.ExcluirBL(tiposDocumento))
+                ExibirMensagem("Registro excluído com sucesso !");
             else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
+
+            Pesquisar(null);
         }
 
         protected void dtgTipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,7 +110,7 @@ namespace Admin
 
         protected void dtgTipoDocumento_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow) 
+            if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
 
             if (e.Row.RowType == DataControlRowType.DataRow)

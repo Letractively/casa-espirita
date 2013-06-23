@@ -35,7 +35,7 @@ namespace Admin
             TiposObrasBL tpObBL = new TiposObrasBL();
             List<TiposObras> tiposObras = tpObBL.PesquisarBL();
 
-            ddlTipoObra.Items.Add(new ListItem("Selecione",""));
+            ddlTipoObra.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposObras lttpOb in tiposObras)
                 ddlTipoObra.Items.Add(new ListItem(lttpOb.Codigo + " - " + lttpOb.Descricao, lttpOb.Id.ToString()));
 
@@ -46,12 +46,12 @@ namespace Admin
             EditorasBL edBL = new EditorasBL();
             List<Editoras> editoras = edBL.PesquisarBL();
 
-            ddlEditora.Items.Add(new ListItem("Selecione",""));
+            ddlEditora.Items.Add(new ListItem("Selecione", ""));
             foreach (Editoras ltEd in editoras)
                 ddlEditora.Items.Add(new ListItem(ltEd.Codigo + " - " + ltEd.Descricao, ltEd.Id.ToString()));
 
             ddlEditora.SelectedIndex = 0;
-        }        
+        }
         private void CarregarDados(int id_bai)
         {
             ObrasBL obraBL = new ObrasBL();
@@ -70,20 +70,20 @@ namespace Admin
                 txtDataReimpressao.Text = dsOb.Tables[0].Rows[0]["datareimpressao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datareimpressao"]).ToString("dd/MM/yyyy") : "";
                 txtDataPublicacao.Text = dsOb.Tables[0].Rows[0]["datapublicacao"].ToString() != string.Empty ? Convert.ToDateTime(dsOb.Tables[0].Rows[0]["datapublicacao"]).ToString("dd/MM/yyyy") : "";
                 txtAssuntosAborda.Text = (string)dsOb.Tables[0].Rows[0]["assuntosaborda"].ToString();
-                ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();               
+                ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();
                 ddlTipoObra.SelectedValue = (string)dsOb.Tables[0].Rows[0]["tiposobraid"].ToString();
-                
+
             }
 
             CarregarDadosAutores(id_bai);
         }
         private void CarregarAtributos()
-        {   
+        {
             txtNroEdicao.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtNroPags.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtVolume.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtDataPublicacao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
-            txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");           
+            txtDataReimpressao.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
         }
         private void ExibirMensagem(string mensagem)
         {
@@ -108,8 +108,8 @@ namespace Admin
             txtAssuntosAborda.Text = "";
             ddlEditora.SelectedIndex = 0;
             ddlTipoObra.SelectedIndex = 0;
-            LimparCamposAutor();            
-            dtAutores = null;       
+            LimparCamposAutor();
+            dtAutores = null;
             Session["dtAutores"] = dtAutores;
             dtgAutores.DataSource = dtAutores;
             dtgAutores.DataBind();
@@ -132,7 +132,7 @@ namespace Admin
                 DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
                 DataColumn coluna4 = new DataColumn("TIPO", Type.GetType("System.String"));
                 DataColumn coluna5 = new DataColumn("AUTORESID", Type.GetType("System.Int32"));
-                DataColumn coluna6 = new DataColumn("OBRAID", Type.GetType("System.Int32"));                            
+                DataColumn coluna6 = new DataColumn("OBRAID", Type.GetType("System.Int32"));
 
                 dtAutores.Columns.Add(coluna1);
                 dtAutores.Columns.Add(coluna2);
@@ -143,7 +143,7 @@ namespace Admin
 
                 keys[0] = coluna5;
                 keys[1] = coluna6;
-                               
+
                 dtAutores.PrimaryKey = keys;
             }
         }
@@ -173,7 +173,7 @@ namespace Admin
 
             AutoresBL autBL = new AutoresBL();
             Autores autores = new Autores();
-           
+
             List<Autores> ltAutores = autBL.PesquisarBuscaBL(conteudo);
 
             foreach (Autores ltAut in ltAutores)
@@ -186,7 +186,7 @@ namespace Admin
                 linha["TIPO"] = ltAut.Descricao;
 
                 if (ltAut.TiposDeAutores != null)
-                     linha["TIPO"] = ltAut.TiposDeAutores.Descricao;
+                    linha["TIPO"] = ltAut.TiposDeAutores.Descricao;
 
                 dt.Rows.Add(linha);
 
@@ -233,17 +233,17 @@ namespace Admin
                 return false;
         }
         private void CarregarDadosAutores(int id_obra)
-        {           
+        {
             ObrasAutoresBL obAutBL = new ObrasAutoresBL();
             List<ObrasAutores> obAut = obAutBL.PesquisarBL(id_obra);
 
             foreach (ObrasAutores ltObAut in obAut)
-            {               
+            {
                 DataRow linha = dtAutores.NewRow();
-                                
+
                 linha["ID"] = ltObAut.Id;
                 linha["CODIGO"] = ltObAut.CodAutor;
-                linha["AUTORESID"] = ltObAut.AutoresId;                      
+                linha["AUTORESID"] = ltObAut.AutoresId;
                 linha["DESCRICAO"] = ltObAut.Autor;
                 linha["TIPO"] = ltObAut.TipoAutor;
                 linha["OBRAID"] = ltObAut.ObraId;
@@ -255,7 +255,7 @@ namespace Admin
             Session["dtAutores"] = dtAutores;
             dtgAutores.DataSource = dtAutores;
             dtgAutores.DataBind();
-            
+
         }
         private void GravarAutores(int id_obra)
         {
@@ -277,7 +277,7 @@ namespace Admin
                     obAutBL.InserirBL(obAut);
             }
         }
-        
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -304,16 +304,16 @@ namespace Admin
                 }
 
                 CarregarDdlEditora();
-                CarregarDdlTiposObra();                
+                CarregarDdlTiposObra();
 
-                if (v_operacao.ToLower() == "edit")               
+                if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_bai);
                 else
                     lblCodigo.Text = "Código gerado automaticamente.";
 
                 txtTitulo.Focus();
-                
-                    
+
+
             }
         }
 
@@ -342,42 +342,32 @@ namespace Admin
             obras.TiposObraId = utils.ComparaIntComNull(ddlTipoObra.SelectedValue);
             obras.LocalPublicacao = txtLocalPublic.Text;
 
-           
+
             if (obras.Id > 0)
             {
-                if (this.Master.VerificaPermissaoUsuario("EDITAR"))
-                    if(obraBL.EditarBL(obras))
-                    {
-                        ExcluirAutores();
-                        GravarAutores(obras.Id);
-                        ExibirMensagem("Obra atualizada com sucesso !");
-                    }
-                    else
-                        ExibirMensagem("Não foi possível atualizar a obra. Revise as informações.");
-                else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
 
+                if (obraBL.EditarBL(obras))
+                {
+                    ExcluirAutores();
+                    GravarAutores(obras.Id);
+                    ExibirMensagem("Obra atualizada com sucesso !");
+                }
             }
             else
             {
-
-                if (this.Master.VerificaPermissaoUsuario("INSERIR"))
+                int id_obra;
+                id_obra = obraBL.InserirBL(obras);
+                if (id_obra > 0)
                 {
-                    int id_obra;
-                    id_obra = obraBL.InserirBL(obras);
-                    if (id_obra > 0)
-                    {
-                        ExcluirAutores();
-                        GravarAutores(id_obra);
-                        ExibirMensagem("Obra gravada com sucesso !");
-                        LimparCampos();
-                        txtTitulo.Focus();
-                    }
-                    else
-                        ExibirMensagem("Não foi possível gravar a obra. Revise as informações.");
+                    ExcluirAutores();
+                    GravarAutores(id_obra);
+                    ExibirMensagem("Obra gravada com sucesso !");
+                    LimparCampos();
+                    txtTitulo.Focus();
                 }
                 else
-                    Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+                    ExibirMensagem("Não foi possível gravar a obra. Revise as informações.");
+
             }
         }
 
@@ -452,7 +442,7 @@ namespace Admin
 
             if (utils.ComparaIntComZero(hfIdAutor.Value) > 0)
             {
-                if (!AutorJaIncluido(dtAutores,hfId.Value, hfIdAutor.Value, "dtAutores"))
+                if (!AutorJaIncluido(dtAutores, hfId.Value, hfIdAutor.Value, "dtAutores"))
                 {
                     DataRow linha = dtAutores.NewRow();
 
@@ -474,17 +464,17 @@ namespace Admin
                 else
                     ExibirMensagem("Autor já incluído !");
             }
-            
+
         }
 
         protected void dtgAutores_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {        
+        {
             object[] keys = new object[2];
-             
+
             keys[0] = dtgAutores.DataKeys[e.RowIndex][0];
             keys[1] = dtgAutores.DataKeys[e.RowIndex][1];
 
-         
+
             if (Session["dtAutores"] != null)
                 dtAutores = (DataTable)Session["dtAutores"];
 
@@ -492,7 +482,7 @@ namespace Admin
             string id = linha["id"].ToString();
 
             if (dtAutores.Rows.Contains(keys))
-                dtAutores.Rows.Remove(dtAutores.Rows.Find(keys));            
+                dtAutores.Rows.Remove(dtAutores.Rows.Find(keys));
 
             Session["dtAutores"] = dtAutores;
             dtgAutores.DataSource = dtAutores;
@@ -522,7 +512,7 @@ namespace Admin
             txtAutor.Text = gvrow.Cells[2].Text;
             lblDesAutor.Text = gvrow.Cells[3].Text;
             txtDesTipo.Text = gvrow.Cells[4].Text;
-             
+
             ModalPopupExtenderPesAutor.Enabled = false;
             ModalPopupExtenderPesAutor.Hide();
             txtAutor.Focus();
@@ -543,8 +533,8 @@ namespace Admin
         protected void txtAutor_TextChanged(object sender, EventArgs e)
         {
             AutoresBL autBl = new AutoresBL();
-            List<Autores> autores = autBl.PesquisarBL("CODIGO",txtAutor.Text);
-                        
+            List<Autores> autores = autBl.PesquisarBL("CODIGO", txtAutor.Text);
+
             foreach (Autores ltAut in autores)
             {
                 hfIdAutor.Value = ltAut.Id.ToString();
@@ -553,10 +543,10 @@ namespace Admin
                 if (ltAut.TiposDeAutores != null)
                     txtDesTipo.Text = ltAut.TiposDeAutores.Descricao;
             }
-            
+
             if (hfIdAutor.Value == null || hfIdAutor.Value == string.Empty)
             {
-                hfIdAutor.Value = "";                
+                hfIdAutor.Value = "";
                 lblDesAutor.Text = "";
                 txtAutor.Text = "";
                 ExibirMensagem("Autor não cadastrado !");
@@ -567,6 +557,6 @@ namespace Admin
                 txtAutor.Focus();
         }
 
-       
+
     }
 }

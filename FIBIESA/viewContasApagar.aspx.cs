@@ -106,20 +106,17 @@ namespace FIBIESA
 
         protected void dtgTitulos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (this.Master.VerificaPermissaoUsuario("EXCLUIR"))
-            {
+            
                 TitulosBL titBL = new TitulosBL();
                 Titulos titulos = new Titulos();
                 titulos.Id = utils.ComparaIntComZero(dtgTitulos.DataKeys[e.RowIndex][0].ToString());
                 if (titBL.ExcluirBL(titulos))
                     ExibirMensagem("Título excluído com sucesso !");
                 else
-                    ExibirMensagem("Não foi possível excluir o título.");
+                    ExibirMensagem("Não foi possível excluir o registro, existem registros dependentes");
 
                 Pesquisar(null);
-            }
-            else
-                Response.Redirect("~/erroPermissao.aspx?nomeUsuario=" + ((Label)Master.FindControl("lblNomeUsuario")).Text + "&usuOperacao=operação", true);
+            
         }
 
         protected void dtgTitulos_PageIndexChanging(object sender, GridViewPageEventArgs e)

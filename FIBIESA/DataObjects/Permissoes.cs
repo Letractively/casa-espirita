@@ -76,5 +76,33 @@ namespace DataObjects
             get { return _formulario; }
             set { _formulario = value; }
         }
+
+        private string _url;
+        public string Url
+        {
+            get { return _url; }
+            set { _url = value; }
+        }
+
+        private string _urlSub;
+        public string UrlSub
+        {
+            get { return _urlSub; }
+            set { _urlSub = value; }
+        }
+
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+
+        private string _titleSub;
+        public string TitleSub
+        {
+            get { return _titleSub; }
+            set { _titleSub = value; }
+        }
     }
 }

@@ -48,9 +48,16 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@formularioid", per.FormularioId);
             paramsToSP[5] = new SqlParameter("@categoriaid", per.CategoriaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_permissoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_permissoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Permissoes per)
@@ -65,9 +72,16 @@ namespace DataAccess
             paramsToSP[5] = new SqlParameter("@formularioid", per.FormularioId);
             paramsToSP[6] = new SqlParameter("@categoriaid", per.CategoriaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_permissoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_permissoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Permissoes per)
@@ -76,9 +90,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", per.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Permissoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_Permissoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Permissoes> PesquisarDA()
@@ -135,7 +156,83 @@ namespace DataAccess
             
 
             return permissoes;
-        }        
-                
+        }
+
+        public DataSet PesquisarPermissoesDA(int id_cat)
+        {
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, string.Format(@"SELECT CASE FMOD.MO " +
+                                                                                                "  WHEN 'F' THEN 'A' " +
+                                                                                                "  WHEN 'B' THEN 'B' " + 
+                                                                                                "  WHEN 'E' THEN 'C' " +
+                                                                                                "  WHEN 'V' THEN 'D' " +
+                                                                                                "  WHEN 'G' THEN 'E' " +
+                                                                                                "  WHEN 'C' THEN 'F' " +
+                                                                                                "  ELSE ' ' END AS MO " +
+                                                                                                " , CASE FMOD.M " +
+                                                                                                "      WHEN 'F' THEN 'Financeiro' " +
+                                                                                                "      WHEN 'B' THEN 'Biblioteca'  " +
+                                                                                                "      WHEN 'E' THEN 'Estoque'  " +
+                                                                                                "      WHEN 'V' THEN 'Evento' " +
+                                                                                                "      WHEN 'G' THEN 'Geral' " +
+                                                                                                "      WHEN 'C' THEN 'Configuração'" +
+                                                                                                "      ELSE ' ' END AS DESMODULO " +
+                                                                                                " FROM(SELECT distinct F.MODULO MO,  F.MODULO M " +
+                                                                                                "        FROM PERMISSOES PER " +
+                                                                                                "            ,FORMULARIOS F  " +
+                                                                                                "       WHERE PER.FORMULARIOID = F.ID   " +
+                                                                                                "         AND PER.CONSULTAR = 1   " +
+                                                                                                "         AND PER.CATEGORIAID = {0}   " +
+                                                                                                "         AND F.TIPO = 'V') FMOD  " +
+                                                                                                "  ORDER BY MO " +
+                                                                                                "; " +
+                                                                                                @"SELECT F.DESCRICAO "+
+                                                                                                 "      ,F.NOME " +
+                                                                                                 "      ,F.TIPO " +
+                                                                                                 "      ,CASE F.MODULO " +
+                                                                                                 "       WHEN 'F' THEN 'Financeiro'" +
+                                                                                                 "       WHEN 'B' THEN 'Biblioteca'" +
+                                                                                                 "       WHEN 'E' THEN 'Estoque'" +
+                                                                                                 "       WHEN 'V' THEN 'Evento'" +
+                                                                                                 "       WHEN 'G' THEN 'Geral'" +
+                                                                                                 "       WHEN 'C' THEN 'Configuração'" +
+                                                                                                 "       ELSE ' ' END AS DESMODULO" +
+                                                                                                 " FROM PERMISSOES PER " +
+                                                                                                 "     ,FORMULARIOS F " +
+                                                                                                 " WHERE PER.FORMULARIOID = F.ID " +
+                                                                                                 " AND PER.CONSULTAR = 1 " +
+                                                                                                 " AND PER.CATEGORIAID = {0} " +
+                                                                                                 " AND F.TIPO = 'V' "+
+                                                                                                 " ORDER BY F.ID ", id_cat));
+            
+          return ds;
+        }
+
+        public DataSet PesquisarModulosDA(int id_cat)
+        {
+            
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                               CommandType.Text, string.Format(@"SELECT CASE FMOD.M " +
+                                                                                                "      WHEN 'F' THEN 'Financeiro' " +
+                                                                                                "      WHEN 'B' THEN 'Biblioteca'  " +
+                                                                                                "      WHEN 'E' THEN 'Estoque'  " +
+                                                                                                "      WHEN 'V' THEN 'Evento' " +
+                                                                                                "      WHEN 'G' THEN 'Geral' " +
+                                                                                                "      WHEN 'C' THEN 'Configuração'" +
+                                                                                                "      ELSE ' ' END AS DESMODULO " +
+                                                                                                " FROM(SELECT distinct F.MODULO m " +
+                                                                                                "        FROM PERMISSOES PER " +
+                                                                                                "            ,FORMULARIOS F  " +
+                                                                                                "       WHERE PER.FORMULARIOID = F.ID   " +
+                                                                                                "         AND PER.CONSULTAR = 1   " +
+                                                                                                "         AND PER.CATEGORIAID = {0}   " +
+                                                                                                "         AND F.TIPO = 'V') FMOD ", id_cat));
+
+
+            return ds;
+                     
+
+        }                
     }
 }

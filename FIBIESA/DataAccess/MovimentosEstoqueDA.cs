@@ -199,11 +199,11 @@ namespace DataAccess
             {
                 consulta = string.Format(@" SELECT SUM(ME.QUANTIDADE) " +
                                           " - (SELECT ISNULL(SUM(M.QUANTIDADE),0) FROM MOVIMENTOSESTOQUE M WHERE M.ITEMESTOQUEID = {0} " +
-                                          "    AND M.TIPO ='S' AND M.DATA <= CONVERT(DATETIME,'{1}',101)) TOTAL " +
+                                          "    AND M.TIPO ='S' AND M.DATA <= CONVERT(DATE,'{1}',103)) TOTAL " +
                                           "         FROM MOVIMENTOSESTOQUE ME " +
                                           "         WHERE ME.ITEMESTOQUEID = {0} " +
                                           "           AND ME.TIPO = 'E' " +
-                                          "           AND ME.DATA BETWEEN CONVERT(DATETIME,'{1} 00:00:00.001',103) AND CONVERT(DATETIME,'{1} 23:59:59.999',103) "
+                                          "           AND CONVERT(DATE,ME.DATA,103) BETWEEN CONVERT(DATE,'{1}',103) AND CONVERT(DATE,'{1}',103) "
                                                                              , id_ItEst, data != null ? Convert.ToDateTime(data).ToString("dd/MM/yyyy") : "");
 
 
@@ -249,7 +249,7 @@ namespace DataAccess
                 sqlQuery.Append(@" AND m.tipo = '" + movestoque.Tipo +"'");            
 
             if ((dtIni != string.Empty) && (dtFim != string.Empty))
-                sqlQuery.Append(@" AND M.data BETWEEN CONVERT(DATETIME,'" + dtIni + "',103) AND CONVERT(DATETIME,'" + dtFim + "',103)");            
+                sqlQuery.Append(@" AND CONVERT(DATE,M.data,103)  BETWEEN CONVERT(DATE,'" + dtIni + "',103) AND CONVERT(DATE,'" + dtFim + "',103)");            
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, sqlQuery.ToString());
