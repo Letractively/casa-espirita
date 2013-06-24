@@ -38,11 +38,7 @@ namespace Admin
         {
             txtCodigo.Text = "";
             txtDescricao.Text = "";
-        }
-        private void CarregarAtributos()
-        {
-            txtCodigo.Attributes.Add("onkeypress", "return(Reais(this,event))");         
-        }
+        }      
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -63,9 +59,7 @@ namespace Admin
 
                 if (v_operacao.ToLower() == "edit")
                     CarregarDados(id_ban);
-
-                CarregarAtributos();
-
+                               
                 txtCodigo.Focus();
             }
         }
@@ -81,7 +75,7 @@ namespace Admin
             Bancos bancos = new Bancos();
 
             bancos.Id = utils.ComparaIntComZero(hfId.Value);
-            bancos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            bancos.Codigo = txtCodigo.Text;
             bancos.Descricao = txtDescricao.Text;
 
             if (bancos.Id > 0)

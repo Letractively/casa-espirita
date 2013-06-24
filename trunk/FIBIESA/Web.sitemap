@@ -15,8 +15,8 @@
         <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber" description="Contas a Receber"/>
       </siteMapNode>
       <siteMapNode url="emissaoBloqBan.aspx" title="Emissão de Bloqueto Bancário" description="Emissão de Bloqueto Bancário" />
-      <siteMapNode url="viewJuroMulta.aspx" title="Juros / Multas" description="Juros / Multas">
-        <siteMapNode url="cadJuroMulta.aspx" title="Cadastro de Juros / Multas" description="Juros / Multas"/>
+      <siteMapNode url="viewJuroMulta.aspx" title="Juros Multas" description="Juros Multas">
+        <siteMapNode url="cadJuroMulta.aspx" title="Cadastro de Juros e Multas" description="Juros Multas"/>
       </siteMapNode>
       <siteMapNode url="viewPortador.aspx" title="Portadores" description="Portadores">
         <siteMapNode url="cadPortador.aspx" title="Cadastro de Portadores" description="Portadores"/>
@@ -28,7 +28,7 @@
         <siteMapNode url="cadAgencia.aspx" title="Cadastro de Agências" description="Agências"/>
       </siteMapNode>
       <siteMapNode url="viewBanco.aspx" title="Bancos" description="Bancos">
-        <siteMapNode url="cadBancos.aspx" title="Cadastro de Bancos" description="Bancos"/>
+        <siteMapNode url="cadBanco.aspx" title="Cadastro de Bancos" description="Bancos"/>
       </siteMapNode>
       <siteMapNode url="viewBancosInstrucoes.aspx" title="Instruções Bancárias" description="Instruções Bancárias">
         <siteMapNode url="cadBancosInstrucoes.aspx" title="Instruções Bancária" description="Instruções Bancária"/>
@@ -39,8 +39,7 @@
       <siteMapNode url="viewRelVendas.aspx" title="Relatório de Vendas" description="Relatório de Vendas" />
       <siteMapNode url="viewRelDoacoes.aspx" title="Relatório de Doações" description="Relatório de Doações" />
       <siteMapNode url="viewRelContasPagar.aspx" title="Relatório de Contas a Pagar" description="Relatório de Contas a Pagar" />
-      <siteMapNode url="viewRelContasReceber.aspx" title="Relatório de Contas a Receber" description="Relatório de Contas a Receber" />
-      
+      <siteMapNode url="viewRelContasReceber.aspx" title="Relatório de Contas a Receber" description="Relatório de Contas a Receber" />      
     </siteMapNode>
 
     <siteMapNode title="Biblioteca" description="Biblioteca">      
@@ -54,7 +53,7 @@
       <siteMapNode url="viewEditora.aspx" title="Editoras" description="Editoras">
         <siteMapNode url="cadEditora.aspx" title="Cadastro de Editoras" description="Editoras"/>
       </siteMapNode>
-      <siteMapNode url="viewAutor.aspx" title="Autores" description="Autores" />
+      <siteMapNode url="viewAutor.aspx" title="Autores" description="Autores">
         <siteMapNode url="cadAutor.aspx" title="Cadastro de Autores" description="Autores"/>
       </siteMapNode>
       <siteMapNode url="viewOrigem.aspx" title="Origens de Exemplares" description="Origens de Exemplares">
@@ -66,9 +65,9 @@
       <siteMapNode url="viewTipoObra.aspx" title="Categorias de Obras" description="Categorias de Obras">
         <siteMapNode url="cadTipoObra.aspx" title="Cadastro de Categorias de Obras" description="Categorias de Obras"/>
       </siteMapNode>
-      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos">   
+      <siteMapNode url="viewRelEmprestimo.aspx" title="Relatório de Emprésimos" description="Relatório de Emprésimos"/>   
       <siteMapNode url="viewRelCodigoBarras.aspx" title="Relatório de Código de Barras" description="Relatório Código de Barras" />     
-    </siteMapNode>
+      </siteMapNode>
 
     <siteMapNode title="Estoque" description="Estoque">
       <siteMapNode url="viewNotaEntrada.aspx" title="Nota de Entrada" description="Nota de Entrada" />
@@ -115,7 +114,7 @@
         <siteMapNode url="cadBairro.aspx" title="Cadastro de Bairros" description="Bairros"/>
       </siteMapNode>
     </siteMapNode>
-
+      
     <siteMapNode title="Configuração" description="Configuração">
       <siteMapNode url="cadParametro.aspx" title="Parâmetros" description="Parâmetros" />
       <siteMapNode url="viewFormulario.aspx" title="Formulários" description="Formulários">
@@ -127,6 +126,6 @@
       <siteMapNode url="viewDoacaoLog.aspx" title="Logs Cadastro de Doações" description="Logs Cadastro de Doações" />
     </siteMapNode>
 
+  
   </siteMapNode>
-
 </siteMap>
