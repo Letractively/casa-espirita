@@ -8,7 +8,7 @@
         EnableScriptLocalization="true">
     </asp:ScriptManager>
     <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">
-        <ContentTemplate>
+        <ContentTemplate>            
             <div id="content">
                 <div class="container half left">
                     <div class="conthead">
@@ -16,6 +16,13 @@
                             Relatório de Código de Barras</h2>
                     </div>
                     <div class="contentbox">
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="upnlPesquisa">
+                            <ProgressTemplate>
+                                <center>
+                                    <img id="imgCarregando" runat="server" src="~/images/loading.gif"  />
+                                </center>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
                         <table>
                             <tr>
                                 <td style="width: 140px">
