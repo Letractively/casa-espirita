@@ -34,7 +34,7 @@ namespace Admin
             DataTable tabela = new DataTable("tabela");
 
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);

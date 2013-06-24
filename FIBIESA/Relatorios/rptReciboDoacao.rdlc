@@ -281,7 +281,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Doaçõa Número: " + Sum(Fields!Id.Value, "DataSet_Doacao").ToString()</Value>
+                <Value>="Doação Número: " + Sum(Fields!Id.Value, "DataSet_Doacao").ToString()</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -630,7 +630,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Doaçõa Número: " + Sum(Fields!Id.Value, "DataSet_Doacao").ToString()</Value>
+                <Value>="Doação Número: " + Sum(Fields!Id.Value, "DataSet_Doacao").ToString()</Value>
                 <Style />
               </TextRun>
             </TextRuns>

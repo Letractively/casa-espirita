@@ -217,7 +217,7 @@ namespace DataAccess
                                                                                         "      ,[complemento] " +
                                                                                         "      ,[DDD] " +
                                                                                         "      ,[telefone] " +
-                                                                                        "  FROM [FIBIESE].[dbo].[Instituicoes]"));
+                                                                                        "  FROM [dbo].[Instituicoes]"));
 
             
             return instituicoes;

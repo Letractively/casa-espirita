@@ -104,6 +104,8 @@ namespace Admin
 
             }
 
+            txtDescricao.Focus();
+
         }
     }
 }

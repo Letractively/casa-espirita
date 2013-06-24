@@ -24,7 +24,7 @@ namespace DataAccess
             {
                 Bancos ban = new Bancos();
                 ban.Id = int.Parse(dr["ID"].ToString());
-                ban.Codigo = int.Parse(dr["CODIGO"].ToString());
+                ban.Codigo = dr["CODIGO"].ToString();
                 ban.Descricao = dr["DESCRICAO"].ToString();
 
                 bancos.Add(ban);
@@ -39,8 +39,8 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[2];
 
-            paramsToSP[0] = new SqlParameter("@codigo", ban.Codigo);
-            paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao);
+            paramsToSP[0] = new SqlParameter("@codigo", ban.Codigo.ToUpper());
+            paramsToSP[1] = new SqlParameter("@descricao", ban.Descricao.ToUpper());
 
             try
             {
@@ -59,8 +59,8 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
             paramsToSP[0] = new SqlParameter("@id", ban.Id);
-            paramsToSP[1] = new SqlParameter("@codigo", ban.Codigo);
-            paramsToSP[2] = new SqlParameter("@descricao", ban.Descricao);
+            paramsToSP[1] = new SqlParameter("@codigo", ban.Codigo.ToUpper());
+            paramsToSP[2] = new SqlParameter("@descricao", ban.Descricao.ToUpper());
 
             try
             {
