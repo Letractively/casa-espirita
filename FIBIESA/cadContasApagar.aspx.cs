@@ -54,7 +54,7 @@ namespace FIBIESA
             ddlTipoDoc.Items.Clear();
             ddlTipoDoc.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposDocumentos ltTip in tipoDoc)
-                ddlTipoDoc.Items.Add(new ListItem(ltTip.Codigo + " - " + ltTip.Descricao, ltTip.Id.ToString()));
+                ddlTipoDoc.Items.Add(new ListItem(ltTip.Descricao, ltTip.Id.ToString()));
 
             ddlTipoDoc.SelectedIndex = 0;
         }

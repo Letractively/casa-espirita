@@ -30,7 +30,6 @@ namespace Admin
 
             ddlEvento.SelectedIndex = 0;
         }
-
         private void CarregarDdlInstrutor()
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -50,7 +49,6 @@ namespace Admin
                 ddlInstrutor.SelectedIndex = 0;
             }
         }
-
         private void CarregarDados(int id_tur)
         {
             TurmasBL turBL = new TurmasBL();
@@ -71,8 +69,8 @@ namespace Admin
                 }
                 txtDtFim.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
                 txtDtInicio.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
-                txtHoraFim.Text = ltTur["HoraFim"].ToString();
-                txtHoraInicio.Text = ltTur["HoraIni"].ToString();
+                txtHoraFim.Text = String.Format("{0:hh:mm}",(DateTime)ltTur["HoraFim"]);
+                txtHoraInicio.Text = String.Format("{0:hh:mm}", (DateTime)ltTur["HoraIni"]); 
                 ddlEvento.SelectedValue = ltTur["EventoId"].ToString();
                 ddlInstrutor.SelectedValue = ltTur["PessoaId"].ToString();
 
@@ -87,13 +85,11 @@ namespace Admin
             txtDtInicio.Attributes.Add("onKeyPress", "return(formatar(this,'##/##/####',event))");
             txtDtFim.Attributes.Add("onKeyPress", "return(formatar(this,'##/##/####',event))");
         }
-
         private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
         }
-
         private void LimparCampos()
         {
             txtDescricao.Text = "";
