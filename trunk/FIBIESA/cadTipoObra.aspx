@@ -26,7 +26,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtDescricao" runat="server" CssClass="inputbox" 
-                                MaxLength="40" Width="335px" ToolTip="Informe a descrição"></asp:TextBox>
+                                MaxLength="40" Width="290px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
@@ -38,7 +38,7 @@
                         </td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtQtdDias" runat="server" CssClass="inputboxRight" 
-                                ToolTip="Informe a quantidade de dias" MaxLength="4"></asp:TextBox>
+                                ToolTip="Informe a quantidade de dias" MaxLength="4" Width="80px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtQtdDias" ErrorMessage="*Preenchimento Obrigatório" 
                                 ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
