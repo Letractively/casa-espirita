@@ -54,9 +54,16 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@pessoaid", turP.PessoaId);
             paramsToSP[1] = new SqlParameter("@turmasid", turP.TurmaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_turmasParticipantes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_turmasParticipantes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(TurmasParticipantes turP)
@@ -67,9 +74,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@pessoaid", turP.PessoaId);
             paramsToSP[2] = new SqlParameter("@turmasid", turP.TurmaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_turmasParticipantes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_turmasParticipantes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(TurmasParticipantes turP)
@@ -78,9 +92,17 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", turP.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_turmasParticipantes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_turmasParticipantes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public List<TurmasParticipantes> PesquisarDA()

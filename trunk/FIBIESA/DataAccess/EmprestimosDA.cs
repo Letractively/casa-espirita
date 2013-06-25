@@ -94,9 +94,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@exemplarid", instancia.ExemplarId);
             paramsToSP[2] = new SqlParameter("@pessoaid", instancia.PessoaId);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_emprestimos", paramsToSP) > 0);
+            try
+            {
+                return (SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_update_emprestimos", paramsToSP) > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Emprestimos instancia)
@@ -105,9 +112,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_emprestimos", paramsToSP) > 0);
+            try
+            {
+                return (SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_delete_emprestimos", paramsToSP) > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Emprestimos> PesquisarDA()

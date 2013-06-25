@@ -66,9 +66,17 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@obraid", obAt.ObraId);
             paramsToSP[2] = new SqlParameter("@autoresid", obAt.AutoresId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_obrasAutores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_obrasAutores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public bool ExcluirDA(ObrasAutores obAt)
@@ -77,9 +85,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", obAt.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_obrasAutores", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_obrasAutores", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<ObrasAutores> PesquisarDA()

@@ -123,16 +123,16 @@ namespace DataAccess
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);            
             paramsToSP[12] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
 
-            //try
-            //{
+            try
+            {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                 CommandType.StoredProcedure, "stp_update_obras", paramsToSP);
                 return true;
-            //}
-            //catch (Exception e)
-            //{
-            //    return false;
-            //}
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
         }
 
