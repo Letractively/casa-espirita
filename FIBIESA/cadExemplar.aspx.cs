@@ -46,7 +46,7 @@ namespace Admin
 
             ddlOrigem.Items.Add(new ListItem("Selecione", ""));
             foreach (Origens ltOri in origens)
-                ddlOrigem.Items.Add(new ListItem(ltOri.Codigo + " - " + ltOri.Descricao, ltOri.Id.ToString()));
+                ddlOrigem.Items.Add(new ListItem(ltOri.Descricao, ltOri.Id.ToString()));
 
             ddlOrigem.SelectedIndex = 0;
         }

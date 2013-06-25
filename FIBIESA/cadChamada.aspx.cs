@@ -23,7 +23,7 @@ namespace Admin
 
             ddlEvento.Items.Add(new ListItem("Selecione", ""));
             foreach (Eventos ltEve in eventos)
-                ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
+                ddlEvento.Items.Add(new ListItem(ltEve.Descricao, ltEve.Id.ToString()));
 
             ddlEvento.SelectedIndex = 0;
         }
@@ -36,7 +36,7 @@ namespace Admin
             ddlTurmas.Items.Clear();
             ddlTurmas.Items.Add(new ListItem("Selecione", ""));
             foreach (Turmas ltTur in turmas)
-                ddlTurmas.Items.Add(new ListItem(ltTur.Codigo + " - " + ltTur.Descricao, ltTur.Id.ToString()));
+                ddlTurmas.Items.Add(new ListItem(ltTur.Descricao, ltTur.Id.ToString()));
 
             ddlTurmas.SelectedIndex = 0;
         }
@@ -197,6 +197,7 @@ namespace Admin
             repPermissao.DataSource = null;
             repPermissao.DataBind();
             CarregarDdlTurmas(utils.ComparaIntComZero(ddlEvento.SelectedValue));
+            ddlTurmas.Focus();
         }
 
        

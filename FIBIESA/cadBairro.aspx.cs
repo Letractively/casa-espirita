@@ -60,7 +60,7 @@ namespace Admin
             ddlCidade.Items.Clear();
             ddlCidade.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
-                ddlCidade.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+                ddlCidade.Items.Add(new ListItem(ltCid.Descricao, ltCid.Id.ToString()));
 
             ddlCidade.SelectedIndex = 0;
         }
@@ -153,6 +153,7 @@ namespace Admin
         protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(utils.ComparaIntComZero(ddlUf.SelectedValue));
+            ddlCidade.Focus();
         }
 
     }

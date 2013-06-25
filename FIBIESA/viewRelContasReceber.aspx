@@ -10,7 +10,7 @@
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>        
             <div id="content">
-                <div class="container">
+                <div class="container half3 left">
                     <div class="conthead">
                         <h2>Relatório de Contas a Receber</h2>
                     </div>

@@ -40,9 +40,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@imagem", insL.Imagem);
             paramsToSP[2] = new SqlParameter("@extensao", insL.Extensao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_instituicoeslogo", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_instituicoeslogo", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(InstituicoesLogo insL)
@@ -54,9 +61,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@imagem", insL.Imagem);
             paramsToSP[3] = new SqlParameter("@extensao", insL.Extensao);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoeslogo", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_UPDATE_instituicoeslogo", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(InstituicoesLogo insL)
@@ -65,9 +79,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", insL.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_instituicoeslogo", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_instituicoeslogo", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<InstituicoesLogo> PesquisarDA()

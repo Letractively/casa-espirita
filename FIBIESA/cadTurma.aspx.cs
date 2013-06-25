@@ -26,7 +26,7 @@ namespace Admin
 
             ddlEvento.Items.Add(new ListItem("Selecione", ""));
             foreach (Eventos ltEve in eventos)
-                ddlEvento.Items.Add(new ListItem(ltEve.Codigo + " - " + ltEve.Descricao, ltEve.Id.ToString()));
+                ddlEvento.Items.Add(new ListItem(ltEve.Descricao, ltEve.Id.ToString()));
 
             ddlEvento.SelectedIndex = 0;
         }
@@ -44,7 +44,7 @@ namespace Admin
 
                 ddlInstrutor.Items.Add(new ListItem("Selecione", ""));
                 foreach (Pessoas ltPes in pessoas)
-                    ddlInstrutor.Items.Add(new ListItem(ltPes.Codigo + " - " + ltPes.Nome, ltPes.Id.ToString()));
+                    ddlInstrutor.Items.Add(new ListItem(ltPes.Nome, ltPes.Id.ToString()));
 
                 ddlInstrutor.SelectedIndex = 0;
             }

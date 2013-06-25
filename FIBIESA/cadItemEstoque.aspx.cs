@@ -228,5 +228,18 @@ namespace Admin
             ModalPopupExtenderPesItem.Show();
             txtPesItem.Text = "";
         }
+
+        protected void txtVlrMedio_TextChanged(object sender, EventArgs e)
+        {
+            ParametrosBL parBL = new ParametrosBL();
+            DataSet dsPar = parBL.PesquisarBL(2, "F");
+            decimal percentual = 0;
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+                percentual = utils.ComparaDecimalComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
+
+            txtVlrVenda.Text = String.Format("{0:C2}", (utils.ComparaDecimalComZero(String.Format("{0:C2}", txtVlrMedio.Text)) +
+                                 ((utils.ComparaDecimalComZero(String.Format("{0:C2}", txtVlrMedio.Text)) * percentual) / 100)));
+        }
     }
 }

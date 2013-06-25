@@ -55,7 +55,7 @@ namespace Admin
             ddlTiposAutores.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposDeAutores tp in listao)
             {
-                ddlTiposAutores.Items.Add(new ListItem(tp.Codigo + " - " + tp.Descricao, tp.Id.ToString()));
+                ddlTiposAutores.Items.Add(new ListItem(tp.Descricao, tp.Id.ToString()));
             }
 
         }

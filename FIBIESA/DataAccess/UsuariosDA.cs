@@ -197,7 +197,7 @@ namespace DataAccess
         {
             StringBuilder consulta = new StringBuilder(@"SELECT * FROM USUARIOS ");
 
-            if (valor != "")
+            if (valor != "" && valor != null)
                 consulta.Append(string.Format(" WHERE NOME  LIKE '%{0}%'", valor));
 
             consulta.Append(" ORDER BY NOME ");

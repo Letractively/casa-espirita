@@ -29,7 +29,7 @@ namespace Admin
 
             ddlCategoria.Items.Add(new ListItem("Selecione", ""));
             foreach (Categorias ltCat in categorias)
-                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
+                ddlCategoria.Items.Add(new ListItem(ltCat.Descricao, ltCat.Id.ToString()));
 
             ddlCategoria.SelectedIndex = 0;
         }
@@ -52,7 +52,7 @@ namespace Admin
             ddl.Items.Clear();
             ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
-                ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltCid.Descricao, ltCid.Id.ToString()));
 
             ddl.SelectedIndex = 0;
         }
@@ -64,7 +64,7 @@ namespace Admin
             ddl.Items.Clear();
             ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Bairros ltBai in bairros)
-                ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltBai.Descricao, ltBai.Id.ToString()));
 
             ddl.SelectedIndex = 0;
         }
@@ -517,6 +517,8 @@ namespace Admin
 
             }
 
+            tcPessoa.ActiveTabIndex = 0;
+
         }
 
         protected void btnInserirTelefone_Click(object sender, EventArgs e)
@@ -581,11 +583,13 @@ namespace Admin
         {
             CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
             ddlBairro.Items.Clear();
+            ddlCidades.Focus();
         }
 
         protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ddlCidades.SelectedValue));
+            ddlBairro.Focus();
         }
 
         protected void dtgTelefones_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -600,11 +604,13 @@ namespace Admin
         protected void ddlUfProf_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlCidade(ddlCidadeProf, utils.ComparaIntComZero(ddlUfProf.SelectedValue));
+            ddlCidadeProf.Focus();
         }
 
         protected void ddlCidadeProf_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlBairro(ddlBairroProf, utils.ComparaIntComZero(ddlCidadeProf.SelectedValue));
+            ddlBairroProf.Focus();
         }
 
 

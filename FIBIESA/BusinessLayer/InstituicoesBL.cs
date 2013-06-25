@@ -24,7 +24,7 @@ namespace BusinessLayer
             return valido;
         }
 
-        public bool InserirBL(Instituicoes ins)
+        public Int32 InserirBL(Instituicoes ins)
         {
             if (IsValid(ins))
             {
@@ -35,7 +35,7 @@ namespace BusinessLayer
                 return instituicaoDA.InserirDA(ins);
             }
             else
-                return false;
+                return 0;
         }
 
         public bool EditarBL(Instituicoes ins)
