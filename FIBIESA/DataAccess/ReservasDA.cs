@@ -43,9 +43,18 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@dataInicio", instancia.DataInicio);
             paramsToSP[0] = new SqlParameter("@dataFim", instancia.DataFim);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_insert_Reservas", paramsToSP) > 0);
+            try
+            {
+                return (SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_insert_Reservas", paramsToSP) > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+
         }
 
         public bool EditarDA(Reservas instancia)
@@ -58,9 +67,16 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@dataInicio", instancia.DataInicio);
             paramsToSP[4] = new SqlParameter("@dataFim", instancia.DataFim);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_update_Reservas", paramsToSP) > 0);
+            try
+            {
+                return (SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_update_Reservas", paramsToSP) > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
         }
 
@@ -70,9 +86,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
 
-            return (SqlHelper.ExecuteNonQuery(
-                ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.StoredProcedure, "stp_delete_Reservas", paramsToSP) > 0);
+            try
+            {
+                return (SqlHelper.ExecuteNonQuery(
+                    ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                    CommandType.StoredProcedure, "stp_delete_Reservas", paramsToSP) > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Reservas> PesquisarDA()

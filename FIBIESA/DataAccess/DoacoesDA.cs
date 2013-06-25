@@ -103,9 +103,16 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@valor", doa.Valor);
             paramsToSP[4] = new SqlParameter("@usuarioid", doa.UsuarioId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_doacoes", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_doacoes", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Doacoes doa)

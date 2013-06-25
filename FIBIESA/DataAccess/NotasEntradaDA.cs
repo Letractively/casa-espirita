@@ -45,13 +45,20 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@serie", ntE.Serie);
             paramsToSP[2] = new SqlParameter("@data", ntE.Data);
 
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_notaEntrada", paramsToSP);
-                       
-            DataTable tabela = ds.Tables[0];
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_notaEntrada", paramsToSP);
 
-            int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+                DataTable tabela = ds.Tables[0];
 
-            return id;
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public bool EditarDA(NotasEntrada ntE)
@@ -63,9 +70,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@serie", ntE.Serie);
             paramsToSP[3] = new SqlParameter("@data", ntE.Data);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_notaEntrada", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_notaEntrada", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(NotasEntrada ntE)
@@ -74,9 +88,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", ntE.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_notaEntrada", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_notaEntrada", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<NotasEntrada> PesquisarDA()

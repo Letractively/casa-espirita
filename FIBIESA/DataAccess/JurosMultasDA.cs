@@ -44,9 +44,16 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@percmultadia", jm.PercMultaDias);
             paramsToSP[4] = new SqlParameter("@percmultames", jm.PercMultaMes);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_jurosMultas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_jurosMultas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(JurosMultas jm)
@@ -60,9 +67,16 @@ namespace DataAccess
             paramsToSP[4] = new SqlParameter("@percmultadia", jm.PercMultaDias);
             paramsToSP[5] = new SqlParameter("@percmultames", jm.PercMultaMes);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_jurosMultas", paramsToSP);
-                       
-            return true; 
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_jurosMultas", paramsToSP);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(JurosMultas jm)
@@ -71,9 +85,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", jm.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_jurosMultas", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_jurosMultas", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<JurosMultas> PesquisarDA()

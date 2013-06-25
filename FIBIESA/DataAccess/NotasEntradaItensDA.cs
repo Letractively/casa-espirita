@@ -51,18 +51,25 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@itemestoqueid", ntEi.ItemEstoqueId);
             paramsToSP[4] = new SqlParameter("@usuarioId", ntEi.UsuarioId);
             paramsToSP[5] = new SqlParameter("@ValorVenda", ntEi.ValorVenda);
-            
 
-            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
+            try
+            {
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_NotaEntradaItens", paramsToSP);
 
-            DataTable tabela = ds.Tables[0];         
+                DataTable tabela = ds.Tables[0];
 
-            string resultado = tabela.Rows[0][0].ToString();
+                string resultado = tabela.Rows[0][0].ToString();
 
-            if (resultado == "true")
-                return true;
-            else
+                if (resultado == "true")
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
                 return false;
+            }
+
 
         }
 
@@ -76,9 +83,16 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@quantidade", ntEi.Quantidade);
             paramsToSP[4] = new SqlParameter("@itemestoqueid", ntEi.ItemEstoqueId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_NotaEntradaItens", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_NotaEntradaItens", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(NotasEntradaItens ntEi)
@@ -87,9 +101,16 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", ntEi.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_NotaEntradaItens", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_NotaEntradaItens", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<NotasEntradaItens> PesquisarDA()

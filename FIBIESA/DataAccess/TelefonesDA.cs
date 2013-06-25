@@ -21,9 +21,16 @@ namespace DataAccess
             paramsToSP[1] = new SqlParameter("@numero", tel.Numero);
             paramsToSP[2] = new SqlParameter("@pessoaid", tel.PessoaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_telefones", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_telefones", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool EditarDA(Telefones tel)
@@ -35,9 +42,16 @@ namespace DataAccess
             paramsToSP[2] = new SqlParameter("@numero", tel.Numero);
             paramsToSP[3] = new SqlParameter("@pessoaid", tel.PessoaId);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_telefones", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_telefones", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(Telefones tel)
@@ -46,17 +60,32 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", tel.Id);
 
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_telefones", paramsToSP);
+            try
+            {
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_delete_telefones", paramsToSP);
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool ExcluirDA(int id_pes)
         {
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                           CommandType.Text, string.Format(@"DELETE TELEFONES WHERE PESSOAID = {0}", id_pes));
+            try
+            {
 
-            return true;
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                               CommandType.Text, string.Format(@"DELETE TELEFONES WHERE PESSOAID = {0}", id_pes));
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public List<Telefones> PesquisarDA()
