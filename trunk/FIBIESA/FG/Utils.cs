@@ -322,13 +322,13 @@ namespace FG
             else
                 return null;
         }
-        public string LimpaFormatacaoCNPJ(string pCNPJ)
+        public string LimpaFormatacaoCNPJCPF(string pCNPJ)
         {
             pCNPJ = pCNPJ.Replace(".", "");
             pCNPJ = pCNPJ.Replace("-", "");
             pCNPJ = pCNPJ.Replace("/", "");
             return pCNPJ;
-        }
+        }      
         public  bool ValidaCPF(string cpf)
         {
             int[] multiplic1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -442,6 +442,100 @@ namespace FG
             aux = DesCriptografar(new String(decodedChar));
             
             return aux;
+        }
+        public string FormataCPF(string pCPF)
+        {
+            pCPF = pCPF.Replace(".", "");
+            pCPF = pCPF.Replace("-", "");
+
+            pCPF = pCPF.Insert(3, ".");
+            pCPF = pCPF.Insert(7, ".");
+            pCPF = pCPF.Insert(11, "-");
+
+            return pCPF;
+        }
+        public string FormataCNPJ(string pCNPJ)
+        {
+            pCNPJ = pCNPJ.Replace(".", "");
+            pCNPJ = pCNPJ.Replace("-", "");
+            pCNPJ = pCNPJ.Replace("/", "");
+
+            pCNPJ = pCNPJ.Insert(2, ".");
+            pCNPJ = pCNPJ.Insert(6, ".");
+            pCNPJ = pCNPJ.Insert(10, "/");
+            pCNPJ = pCNPJ.Insert(15, "-");
+
+            return pCNPJ;
+        }
+        /// <summary>
+        /// Retorna CNPJ somente com números
+        /// </summary>
+        /// <param name="cnpj"></param>
+        /// <returns></returns>
+        public string LimpaCNPJ(string cnpj)
+        {
+            return RemoveAcentos(cnpj).Trim().Replace(".", "").Replace("/", "").Replace("-", "");
+        }
+        /// <summary>
+        /// Retorna CNPJ somente com números
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns></returns>
+        public string LimpaCPF(string cpf)
+        {
+            return RemoveAcentos(cpf).Trim().Replace(".", "").Replace("-", "").Replace("-", "").Replace("/", "").Trim();
+        }
+        /// <summary>
+        /// Retorna True se o item informado for um CNPJ
+        /// a variavel formatada e se o CNPJ for passado com os . e /
+        /// </summary>
+        /// <param name="cnpj"></param>
+        /// <returns></returns>
+        public bool eCnpj(string cnpj, bool formatado)
+        {
+            if (formatado == true)
+                if (cnpj.Length == 18)
+                    return true;
+                else
+                    return false;
+            else
+                if (cnpj.Length == 14)
+                    return true;
+                else
+                    return false;
+        }
+        /// <summary>
+        /// Retorna True se o item informado for um CPF
+        /// a variavel formatada e se o CPF for passado com os . e -
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <param name="formatado"></param>
+        /// <returns></returns>
+        public bool eCpf(string cpf, bool formatado)
+        {
+            if (formatado == true)
+                if (cpf.Length == 14)
+                    return true;
+                else
+                    return false;
+            else
+                if (cpf.Length == 11)
+                    return true;
+                else
+                    return false;
+        }
+        public string FormataCNPJouCPF(string pCPFouCNPJ)
+        {
+            pCPFouCNPJ = LimpaCNPJ(pCPFouCNPJ);
+            pCPFouCNPJ = LimpaCPF(pCPFouCNPJ);
+
+            if (eCnpj(pCPFouCNPJ, false))
+                return pCPFouCNPJ.Substring(0, 2) + "." + pCPFouCNPJ.Substring(2, 3) + "." + pCPFouCNPJ.Substring(5, 3) + "/" + pCPFouCNPJ.Substring(8, 4) + "-" + pCPFouCNPJ.Substring(12, 2);
+            else
+                if (eCpf(pCPFouCNPJ, false))
+                    return pCPFouCNPJ.Substring(0, 3) + "." + pCPFouCNPJ.Substring(3, 3) + "." + pCPFouCNPJ.Substring(6, 3) + "-" + pCPFouCNPJ.Substring(9, 2);
+                else
+                    return pCPFouCNPJ;
         }
     }
        

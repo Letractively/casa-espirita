@@ -65,7 +65,7 @@ namespace FIBIESA
                 linha["CODIGO"] = ins.Codigo;
                 linha["RAZAO"] = ins.Razao;
                 linha["EMAIL"] = ins.Email;
-                linha["CNPJ"] = ins.Cnpj;
+                linha["CNPJ"] = utils.FormataCNPJouCPF(ins.Cnpj);
                 linha["CEP"] = ins.Cep;
                 linha["ENDERECO"] = ins.Endereco;
                 linha["NUMERO"] = ins.Numero;

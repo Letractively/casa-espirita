@@ -60,7 +60,7 @@ namespace Admin
                 linha["ID"] = pes.Id;
                 linha["CODIGO"] = pes.Codigo;
                 linha["NOME"] = pes.Nome;
-                linha["CPFCNPJ"] = pes.CpfCnpj;
+                linha["CPFCNPJ"] = utils.FormataCNPJouCPF(pes.CpfCnpj);
                 linha["TIPO"] = pes.Tipo;
                 linha["CATEGORIAID"] = pes.CategoriaId;
                 linha["DTCADASTRO"] = pes.DtCadastro.ToString("dd/MM/yyyy");

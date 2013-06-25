@@ -58,10 +58,14 @@
                                                    * CPF/CNPJ:
                                                 </td>
                                                 <td style="width: 150px">
-                                                    <asp:TextBox ID="txtCpfCnpj" runat="server" CssClass="inputbox" MaxLength="14" ToolTip="Informe o CPF/CNPJ"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCpfCnpj" runat="server" CssClass="inputbox" MaxLength="14" 
+                                                        ToolTip="Informe o CPF/CNPJ" AutoPostBack="True" 
+                                                        ontextchanged="txtCpfCnpj_TextChanged"></asp:TextBox>
                                                     <asp:RequiredFieldValidator
                                                         ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCpfCnpj" ErrorMessage="Informe o CPF/CNPJ"
-                                                        ForeColor="#CC0000" ValidationGroup="salvar" >*</asp:RequiredFieldValidator>                                                    
+                                                        ForeColor="#CC0000" ValidationGroup="salvar" >*</asp:RequiredFieldValidator>   
+                                                    <asp:Label ID="lblCpfCnpjInvalido" runat="server" CssClass="validacao" 
+                                                        Font-Size="Smaller"></asp:Label>                                                 
                                                 </td>  
                                                 <td style="width: 150px">
                                                    * Categoria:
