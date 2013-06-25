@@ -23,7 +23,7 @@ namespace Admin
 
             ddlCategoria.Items.Add(new ListItem("Selecione", ""));
             foreach (Categorias ltCat in categorias)
-                ddlCategoria.Items.Add(new ListItem(ltCat.Codigo.ToString() + " - " + ltCat.Descricao, ltCat.Id.ToString()));
+                ddlCategoria.Items.Add(new ListItem(ltCat.Descricao, ltCat.Id.ToString()));
 
             ddlCategoria.SelectedIndex = 0;
 

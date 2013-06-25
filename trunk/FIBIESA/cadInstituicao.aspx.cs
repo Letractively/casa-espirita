@@ -172,7 +172,7 @@ namespace FIBIESA
             ddl.Items.Clear();
             ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Cidades ltCid in cidades)
-                ddl.Items.Add(new ListItem(ltCid.Codigo + " - " + ltCid.Descricao, ltCid.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltCid.Descricao, ltCid.Id.ToString()));
 
             ddl.SelectedIndex = 0;
         }
@@ -184,7 +184,7 @@ namespace FIBIESA
             ddl.Items.Clear();
             ddl.Items.Add(new ListItem("Selecione", ""));
             foreach (Bairros ltBai in bairros)
-                ddl.Items.Add(new ListItem(ltBai.Codigo + " - " + ltBai.Descricao, ltBai.Id.ToString()));
+                ddl.Items.Add(new ListItem(ltBai.Descricao, ltBai.Id.ToString()));
 
             ddl.SelectedIndex = 0;
         }
@@ -294,8 +294,8 @@ namespace FIBIESA
                 }
                 else
                 {
-
-                    if (insBL.InserirBL(instituicoes))
+                    hfId.Value = insBL.InserirBL(instituicoes).ToString();
+                    if (utils.ComparaIntComZero(hfId.Value) > 0)
                     {
                         VerificarImagem();
                         ExibirMensagem("Instituição gravada com sucesso !");
@@ -316,11 +316,13 @@ namespace FIBIESA
         {
             CarregarDdlCidade(ddlCidades, utils.ComparaIntComZero(ddlUF.SelectedValue));
             ddlBairro.Items.Clear();
+            ddlCidades.Focus();
         }
 
         protected void ddlCidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarDdlBairro(ddlBairro, utils.ComparaIntComZero(ddlCidades.SelectedValue));
+            ddlBairro.Focus();
         }
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)

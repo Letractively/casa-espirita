@@ -73,7 +73,7 @@ namespace DataAccess
         }
         #endregion
 
-        public bool InserirDA(Instituicoes ins)
+        public Int32 InserirDA(Instituicoes ins)
         {
             SqlParameter[] paramsToSP = new SqlParameter[14];
 
@@ -93,14 +93,18 @@ namespace DataAccess
             paramsToSP[13] = new SqlParameter("@ranking", ins.Ranking);
 
             try
-            {
-                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
+            {                
+                DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_INSERT_instituicoes", paramsToSP);
 
-                return true;
+                DataTable tabela = ds.Tables[0];
+
+                int id = utils.ComparaIntComZero(tabela.Rows[0]["ID"].ToString());
+
+                return id;
             }
             catch (Exception e)
             {
-                return false;
+                return 0;
             }
         }
 

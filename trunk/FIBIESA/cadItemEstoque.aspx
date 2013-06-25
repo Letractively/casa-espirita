@@ -81,7 +81,8 @@
                                 </td>
                                 <td>
                                     &nbsp;<asp:TextBox ID="txtVlrMedio" runat="server" Width="100px" 
-                                        CssClass="inputboxValor" ToolTip="Informe o custo médio"></asp:TextBox>
+                                        CssClass="inputboxValor" ToolTip="Informe o custo médio" 
+                                        AutoPostBack="True" ontextchanged="txtVlrMedio_TextChanged"></asp:TextBox>
                                 </td>
                                 <td style="width: 120px">
                                     Valor Venda:

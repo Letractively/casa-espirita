@@ -37,7 +37,7 @@ namespace Admin
 
             ddlTipoObra.Items.Add(new ListItem("Selecione", ""));
             foreach (TiposObras lttpOb in tiposObras)
-                ddlTipoObra.Items.Add(new ListItem(lttpOb.Codigo + " - " + lttpOb.Descricao, lttpOb.Id.ToString()));
+                ddlTipoObra.Items.Add(new ListItem(lttpOb.Descricao, lttpOb.Id.ToString()));
 
             ddlTipoObra.SelectedIndex = 0;
         }
@@ -48,7 +48,7 @@ namespace Admin
 
             ddlEditora.Items.Add(new ListItem("Selecione", ""));
             foreach (Editoras ltEd in editoras)
-                ddlEditora.Items.Add(new ListItem(ltEd.Codigo + " - " + ltEd.Descricao, ltEd.Id.ToString()));
+                ddlEditora.Items.Add(new ListItem(ltEd.Descricao, ltEd.Id.ToString()));
 
             ddlEditora.SelectedIndex = 0;
         }
