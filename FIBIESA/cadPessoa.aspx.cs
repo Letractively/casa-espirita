@@ -69,8 +69,7 @@ namespace Admin
             ddl.SelectedIndex = 0;
         }
         private void CarregarDadosPessoas(int id_pes)
-        {
-            string[] v_pesquisa;
+        {            
             PessoasBL pesBL = new PessoasBL();
             List<Pessoas> pessoas = pesBL.PesquisarBL(id_pes);
 
@@ -83,7 +82,7 @@ namespace Admin
                 if (pes.NomeFantasia.Trim() != "")
                     txtNome.Text = pes.NomeFantasia;
 
-                txtCpfCnpj.Text = pes.CpfCnpj;
+                txtCpfCnpj.Text = pes.CpfCnpj;                
                 txtRg.Text = pes.Rg;
                 txtDataNascimento.Text = pes.DtNascimento != null ? Convert.ToDateTime(pes.DtNascimento).ToString("dd/MM/yyyy") : "";
                 ddlEstadoCivil.SelectedValue = pes.EstadoCivil;
@@ -135,6 +134,7 @@ namespace Admin
                     lblDesNome.Text = "* Nome Fantasia";
                 }
 
+                ConsisteCPFCNPJ();
             }
 
         }
@@ -384,6 +384,23 @@ namespace Admin
 
             }
         }
+        private void ConsisteCPFCNPJ()
+        {
+            lblCpfCnpjInvalido.Text = "";
+
+            if (utils.ValidaCPF(txtCpfCnpj.Text))
+               txtCpfCnpj.Text = utils.FormataCPF(txtCpfCnpj.Text);                
+            else
+            {
+                if (utils.ValidaCNPJ(txtCpfCnpj.Text))
+                    txtCpfCnpj.Text = utils.FormataCNPJ(txtCpfCnpj.Text);                    
+                else
+                {
+                    txtCpfCnpj.Text = "";
+                    lblCpfCnpjInvalido.Text = "*CPF/CNPJ inválido";
+                }
+            }
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -454,9 +471,8 @@ namespace Admin
             pessoas.Id = utils.ComparaIntComZero(hfId.Value);
             pessoas.Codigo = utils.ComparaIntComZero(lblCodigo.Text);
             pessoas.Nome = txtNome.Text;
-
             pessoas.CategoriaId = utils.ComparaIntComZero(ddlCategoria.SelectedValue);
-            pessoas.CpfCnpj = txtCpfCnpj.Text;
+            pessoas.CpfCnpj = utils.LimpaFormatacaoCNPJCPF(txtCpfCnpj.Text);
             pessoas.Rg = txtRg.Text;
             pessoas.DtNascimento = utils.ComparaDataComNull(txtDataNascimento.Text);
             pessoas.EstadoCivil = ddlEstadoCivil.SelectedValue;
@@ -613,8 +629,9 @@ namespace Admin
             ddlBairroProf.Focus();
         }
 
-
-
-
+        protected void txtCpfCnpj_TextChanged(object sender, EventArgs e)
+        {
+            ConsisteCPFCNPJ();
+        }
     }
 }

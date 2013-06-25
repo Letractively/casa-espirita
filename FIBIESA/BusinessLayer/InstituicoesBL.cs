@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 InstituicoesDA instituicaoDA = new InstituicoesDA();
                 
-                ins.Cnpj = utils.LimpaFormatacaoCNPJ(ins.Cnpj);
+                ins.Cnpj = utils.LimpaFormatacaoCNPJCPF(ins.Cnpj);
                 
                 return instituicaoDA.InserirDA(ins);
             }
@@ -44,7 +44,7 @@ namespace BusinessLayer
             {
                 InstituicoesDA instituicaoDA = new InstituicoesDA();
                 
-                ins.Cnpj = utils.LimpaFormatacaoCNPJ(ins.Cnpj);
+                ins.Cnpj = utils.LimpaFormatacaoCNPJCPF(ins.Cnpj);
                 
                 return instituicaoDA.EditarDA(ins);
             }
