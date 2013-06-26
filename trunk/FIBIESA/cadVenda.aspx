@@ -55,7 +55,8 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtValorUni" runat="server" CssClass="inputboxValor" Width="110px"
-                                        ToolTip="Informe o valor unitário do item."></asp:TextBox>
+                                        ToolTip="Informe o valor unitário do item." AutoPostBack="True" 
+                                        ontextchanged="txtValorUni_TextChanged"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtValorUni"
                                         CssClass="validacao" ErrorMessage="*Informe o valor unitário" ValidationGroup="inserir">*</asp:RequiredFieldValidator>
                                 </td>
