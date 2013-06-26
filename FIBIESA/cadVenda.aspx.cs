@@ -47,7 +47,6 @@ namespace FIBIESA
             grdPesquisa.DataSource = dt;
             grdPesquisa.DataBind();
         }
-
         public void CarregarPesquisaItem(string conteudo)
         {
             DataTable dt = new DataTable();
@@ -86,7 +85,6 @@ namespace FIBIESA
             grdPesquisaItem.DataSource = dt;
             grdPesquisaItem.DataBind();
         }
-
         private DataTable CriarTabelaPesquisa()
         {
             DataTable dt = new DataTable();
@@ -101,7 +99,6 @@ namespace FIBIESA
             return dt;
 
         }
-
         private void CriarDtItens()
         {
             DataColumn[] keys = new DataColumn[1];
@@ -131,7 +128,6 @@ namespace FIBIESA
                 dtItens.PrimaryKey = keys;
             }
         }
-
         private void LimparCampos()
         {
             txtItem.Text = "";
@@ -142,7 +138,6 @@ namespace FIBIESA
             txtDesconto.Text = "";
             lblDesItem.Text = "";
         }
-
         private void LimparCamposGeral()
         {
             LimparCampos();
@@ -155,7 +150,6 @@ namespace FIBIESA
             dtgItens.DataSource = null;
             dtgItens.DataBind();
         }
-
         public void ExibirMensagem(string mensagem)
         {
             ScriptManager.RegisterStartupScript(
@@ -165,10 +159,13 @@ namespace FIBIESA
                                     "window.alert(\"" + mensagem + "\");",
                                     true);
         }
-
         private void CarregarAtributos()
         {
             txtQuantidade.Attributes.Add("onkeypress", "return(Reais(this,event))");
+        }
+        private decimal RetornaValorVendaItem()
+        {
+           return  utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -214,7 +211,7 @@ namespace FIBIESA
             linha["IDORDEM"] = key.ToString();
             linha["ITEMESTOQUEID"] = hfIdItem.Value;
             linha["QUANTIDADE"] = txtQuantidade.Text;
-            linha["VALOR"] = utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
+            linha["VALOR"] = RetornaValorVendaItem();
             linha["VALORUNI"] = utils.ComparaDecimalComZero(txtValorUni.Text);
             linha["DESCONTO"] = utils.ComparaDecimalComZero(txtDesconto.Text);
             linha["CODIGO"] = txtItem.Text;
@@ -472,6 +469,11 @@ namespace FIBIESA
             ModalPopupExtenderPesItem.Enabled = true;
             ModalPopupExtenderPesItem.Show();
             txtPesItem.Text = "";
+        }
+
+        protected void txtValorUni_TextChanged(object sender, EventArgs e)
+        {
+            lblValor.Text = RetornaValorVendaItem().ToString();
         }
 
     }

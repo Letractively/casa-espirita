@@ -7,7 +7,9 @@
       <siteMapNode url="viewDoacao.aspx" title="Doações" description="Doações">
         <siteMapNode url="cadDoacao.aspx" title="Doações" description="Doações"/>
       </siteMapNode>
-      <siteMapNode url="viewManVenda.aspx" title="Manutenção Venda" description="Manutenção Venda" />
+      <siteMapNode url="viewManVenda.aspx" title="Manutenção Venda" description="Manutenção Venda">
+        <siteMapNode url="cadManVenda.aspx" title="Cadastro de Manutenção Venda" description="Manutenção Venda"/>
+      </siteMapNode>
       <siteMapNode url="viewContasApagar.aspx" title="Contas a Pagar" description="Contas a Pagar">
         <siteMapNode url="cadContasApagar.aspx" title="Cadastro de Contas a Pagar" description="Contas a Pagar"/>
       </siteMapNode>
@@ -70,7 +72,9 @@
       </siteMapNode>
 
     <siteMapNode title="Estoque" description="Estoque">
-      <siteMapNode url="viewNotaEntrada.aspx" title="Nota de Entrada" description="Nota de Entrada" />
+      <siteMapNode url="viewNotaEntrada.aspx" title="Nota de Entrada" description="Nota de Entrada">
+        <siteMapNode url="cadNotaEntrada.aspx" title="Cadastro de Nota de Entrada" description="Nota de Entrada"/>
+      </siteMapNode>
       <siteMapNode url="cadMovimentoEstoque.aspx" title="Movimentos do Estoque" description="Movimentos do Estoque" />
       <siteMapNode url="cadAcertoEstoque.aspx" title="Acerto do Estoque" description="Acerto do Estoque" />
       <siteMapNode url="cadItemEstoque.aspx" title="Implantação do Estoque" description="Implantação do Estoque" />
