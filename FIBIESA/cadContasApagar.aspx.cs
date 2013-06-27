@@ -71,12 +71,18 @@ namespace FIBIESA
             txtDataVencimento.Text = "";
             hfId.Value = "";
             hfIdPessoa.Value = "";
+            txtVlrPago.Text = "";
+            txtDtPagamento.Text = "";
         }
 
         private void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                   updPrincipal,
+                                   this.GetType(),
+                                   "Alert",
+                                   "window.alert(\"" + mensagem + "\");",
+                                   true);
         }
 
         public void CarregarPesquisa(string conteudo)

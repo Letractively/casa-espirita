@@ -102,14 +102,24 @@ namespace FIBIESA
         }
         private void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                    updPrincipal,
+                                    this.GetType(),
+                                    "Alert",
+                                    "window.alert(\"" + mensagem + "\");",
+                                    true);
+        }
+        private void CarregarAtributos()
+        {            
+            txtDtEmiIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtEmiFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");      
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                CarregarAtributos();
                 CarregarDdlPortador();
                 CarregarDdlTipoDoc();
             }

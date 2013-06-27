@@ -13,6 +13,24 @@ namespace FIBIESA {
     public partial class emissaoBloqBan {
         
         /// <summary>
+        /// ScriptManager2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager2;
+        
+        /// <summary>
+        /// updPrincipal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPrincipal;
+        
+        /// <summary>
         /// txtIntClientes control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace FIBIESA {
         protected global::AjaxControlToolkit.CalendarExtender txtDtEmiIni_CalendarExtender;
         
         /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
         /// txtDtEmiFim control.
         /// </summary>
         /// <remarks>
@@ -101,6 +128,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtDtEmiFim_CalendarExtender;
+        
+        /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
         /// txtInstrucaoum control.
@@ -146,15 +182,6 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGerar;
-        
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// hfIdPessoa control.

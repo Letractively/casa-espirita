@@ -65,7 +65,8 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtDesconto" runat="server" CssClass="inputboxValor" Width="110px"
-                                        ToolTip="Informe o valor de desconto."></asp:TextBox>
+                                        ToolTip="Informe o valor de desconto." AutoPostBack="True" 
+                                        ontextchanged="txtDesconto_TextChanged"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

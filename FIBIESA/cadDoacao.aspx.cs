@@ -20,6 +20,7 @@ namespace Admin
         private void CarregarAtributos()
         {
             txtValor.Attributes.Add("onkeypress", "return(Reais(this,event))");
+            txtData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");             
         }
 
         public void ExibirMensagem(string mensagem)
