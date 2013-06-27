@@ -53,10 +53,13 @@
                                        <asp:BoundField DataField="NUMERO" HeaderText="Título" 
                                            SortExpression="NUMERO" />
                                        <asp:BoundField DataField="PARCELA" HeaderText="Parcela" 
-                                           SortExpression="PARCELA" />
-                                       <asp:BoundField DataField="VALOR" HeaderText="Valor" SortExpression="VALOR" />
+                                           SortExpression="PARCELA" />                                       
                                        <asp:BoundField DataField="DTEMISSAO" HeaderText="Dt. Emissão" 
                                            SortExpression="DTEMISSAO" />
+                                       <asp:BoundField DataField="VALOR" HeaderText="Valor" SortExpression="VALOR" />
+                                       <asp:BoundField DataField="DTPAGTO" HeaderText="Dt. Pagto" 
+                                           SortExpression="DTPAGTO" />
+                                       <asp:BoundField DataField="VALORPAG" HeaderText="Valor Pagto" SortExpression="VALORPAG" />
                                    </Columns>
                                    <FooterStyle BackColor="White" ForeColor="#000066" />
                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

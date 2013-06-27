@@ -62,7 +62,7 @@ namespace FIBIESA
 
                 linha["ID"] = ltVenItens.Id;                
                 linha["QUANTIDADE"] = ltVenItens.Quantidade;
-                linha["VALOR"] = ltVenItens.Valor;               
+                linha["VALOR"] = (ltVenItens.Quantidade * ltVenItens.Valor) - ltVenItens.Desconto;               
                 linha["DESCONTO"] = ltVenItens.Desconto;
                 linha["CODIGO"] = ltVenItens.Obras.Codigo;
                 linha["DESCRICAO"] = ltVenItens.Obras.Titulo;
@@ -73,6 +73,7 @@ namespace FIBIESA
 
             dtgItens.DataSource = dtItens;
             dtgItens.DataBind();
+            txtTotal.Text = dtItens.Compute("sum(VALOR)", "").ToString();
         }
 
         private void CarregarAtributos()

@@ -72,6 +72,15 @@
                             </asp:Panel>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                           Total :
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="txtTotal" runat="server" CssClass="inputboxValor" 
+                                Font-Bold="True" ForeColor="#CC0000" ReadOnly="True" Width="100px" ></asp:TextBox>                        
+                        </td>
+                    </tr>
                     
                 </table>
                 <table>
