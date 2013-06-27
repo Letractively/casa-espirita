@@ -29,7 +29,7 @@
                                 <td style="width: 180px" colspan="3">
                                     <asp:TextBox ID="txtItem" runat="server" Width="75px" CssClass="inputboxRight" AutoPostBack="True"
                                         OnTextChanged="txtItem_TextChanged" 
-                                        ToolTip="Informe o item - Lista de valores disponível"></asp:TextBox>
+                                        ToolTip="Informe o item - Lista de valores disponível" MaxLength="8"></asp:TextBox>
                                     <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." OnClick="btnPesItem_Click" />
                                     &nbsp;
                                     <asp:Label ID="lblDesItem" runat="server"></asp:Label>
@@ -49,6 +49,9 @@
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtData"
                                         CssClass="validacao" ErrorMessage="*Informe a data de implantação do estoque"
                                         ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtData" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </td>
                                 <td style="width: 120px">
                                     * Status:
@@ -68,7 +71,7 @@
                                 <td>
                                     <asp:TextBox ID="txtQtdMin" runat="server" Width="100px" 
                                         CssClass="inputboxRight" 
-                                        ToolTip="Informe a quantidade mínima do item no estoque"></asp:TextBox>
+                                        ToolTip="Informe a quantidade mínima do item no estoque" MaxLength="8"></asp:TextBox>
                                 </td>
                                 <td colspan="2">
                                     <asp:CheckBox ID="chkControlaEstoque" runat="server" Text="Controla Estoque" 
@@ -82,14 +85,14 @@
                                 <td>
                                     &nbsp;<asp:TextBox ID="txtVlrMedio" runat="server" Width="100px" 
                                         CssClass="inputboxValor" ToolTip="Informe o custo médio" 
-                                        AutoPostBack="True" ontextchanged="txtVlrMedio_TextChanged"></asp:TextBox>
+                                        AutoPostBack="True" ontextchanged="txtVlrMedio_TextChanged" MaxLength="10"></asp:TextBox>
                                 </td>
                                 <td style="width: 120px">
                                     Valor Venda:
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtVlrVenda" runat="server" Width="100px" 
-                                        CssClass="inputboxValor" ToolTip="Informe o valor de venda"></asp:TextBox>
+                                        CssClass="inputboxValor" ToolTip="Informe o valor de venda" MaxLength="10"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
