@@ -24,7 +24,7 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtItem" runat="server" CssClass="inputboxRight" Width="75px" AutoPostBack="True"
-                                        OnTextChanged="txtItem_TextChanged" ToolTip="Informe o item"></asp:TextBox>
+                                        OnTextChanged="txtItem_TextChanged" ToolTip="Informe o item" MaxLength="8"></asp:TextBox>
                                     <asp:Button ID="btnPesItem" runat="server" CssClass="btn" Text="..." OnClick="btnPesItem_Click" />
                                     &nbsp;
                                     <asp:Label ID="lblDesItem" runat="server"></asp:Label>
@@ -36,6 +36,9 @@
                                     <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px" ToolTip="Informe a data"></asp:TextBox>
                                     <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData">
                                     </asp:CalendarExtender>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtData" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                     &nbsp;&nbsp;
                                     <asp:Button ID="btnPesquisar" runat="server" CssClass="btn" Text="Pesquisar" OnClick="btnPesquisar_Click"
                                         ToolTip="Realiza a pesquisa conforme o filtro"></asp:Button>

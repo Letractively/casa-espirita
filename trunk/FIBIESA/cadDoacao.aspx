@@ -61,7 +61,8 @@
                                 </td>
                                 <td style="width: 400px" colspan="3">
                                     <asp:TextBox ID="txtCliente" runat="server" CssClass="inputboxRight" Width="110px"
-                                        AutoPostBack="True" OnTextChanged="txtCliente_TextChanged" ToolTip="Informe o cliente"></asp:TextBox>
+                                        AutoPostBack="True" OnTextChanged="txtCliente_TextChanged" 
+                                        ToolTip="Informe o cliente" MaxLength="8"></asp:TextBox>
                                     <asp:Button ID="btnPesCliente" runat="server" CssClass="btn" Text="..." OnClick="btnPesCliente_Click"
                                         CausesValidation="False" />
                                     <asp:Label ID="lblDesCliente" runat="server"></asp:Label>
