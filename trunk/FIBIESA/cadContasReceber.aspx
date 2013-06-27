@@ -90,6 +90,10 @@
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtDataEmissao"
                                         CssClass="validacao" ErrorMessage="* Informe a data de emissão" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDataEmissao"
+                                        ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </td>
                                 <td style="width: 140px">
                                     * Data Vencimento:
@@ -101,6 +105,10 @@
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtDataVencimento"
                                         CssClass="validacao" ErrorMessage="* Informe a data de vencimento" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDataVencimento"
+                                        ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -112,6 +120,10 @@
                                         ToolTip="Informe a data de pagamento" MaxLength="10"></asp:TextBox>
                                     <asp:CalendarExtender ID="txtDtPagamento_CalendarExtender" runat="server" TargetControlID="txtDtPagamento">
                                     </asp:CalendarExtender>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDtPagamento"
+                                        ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </td>
                                 <td style="width: 140px">
                                     Valor Pago:

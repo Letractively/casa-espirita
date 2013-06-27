@@ -457,6 +457,7 @@ namespace FIBIESA
             txtItem.Text = gvrow.Cells[2].Text;
             lblDesItem.Text = gvrow.Cells[3].Text;
             txtValorUni.Text = gvrow.Cells[4].Text;
+            lblValor.Text = RetornaValorVendaItem().ToString();
 
             ModalPopupExtenderPesItem.Hide();
             ModalPopupExtenderPesItem.Enabled = false;
@@ -472,6 +473,11 @@ namespace FIBIESA
         }
 
         protected void txtValorUni_TextChanged(object sender, EventArgs e)
+        {
+            lblValor.Text = RetornaValorVendaItem().ToString();
+        }
+
+        protected void txtDesconto_TextChanged(object sender, EventArgs e)
         {
             lblValor.Text = RetornaValorVendaItem().ToString();
         }

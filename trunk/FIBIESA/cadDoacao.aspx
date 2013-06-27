@@ -5,15 +5,15 @@
 <%@ MasterType VirtualPath="~/home.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">  
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true">
-    </asp:ScriptManager> 
-    <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">     
-        <ContentTemplate>        
-        <script type="text/javascript">
-            Sys.Application.add_load(formatarValor);
-        </script>
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="upnlPesquisa" runat="server" UpdateMode="Always">
+        <ContentTemplate>
+            <script type="text/javascript">
+                Sys.Application.add_load(formatarValor);
+            </script>
             <div id="content">
                 <!-- Atenção -->
                 <div class="status warning">
@@ -80,6 +80,9 @@
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtData"
                                         CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
+                                        ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtData" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                        Display="Dynamic" ValidationGroup="salvar" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -87,8 +90,8 @@
                                     * Valor:
                                 </td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxValor" 
-                                        Width="110px" ToolTip="Informe o valor da doação" AutoPostBack="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtValor" runat="server" CssClass="inputboxValor" Width="110px"
+                                        ToolTip="Informe o valor da doação" AutoPostBack="True"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtValor"
                                         CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                 </td>
