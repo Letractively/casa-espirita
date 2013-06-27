@@ -67,10 +67,10 @@ namespace Admin
                     if (dia != string.Empty)
                         ckbDiasSemana.Items.FindByValue(dia).Selected = true;
                 }
-                txtDtFim.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
-                txtDtInicio.Text = string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
-                txtHoraFim.Text = String.Format("{0:hh:mm}",(DateTime)ltTur["HoraFim"]);
-                txtHoraInicio.Text = String.Format("{0:hh:mm}", (DateTime)ltTur["HoraIni"]); 
+                txtDtFim.Text = ltTur["DtFim"].ToString() == string.Empty ? "" : string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtFim"]);
+                txtDtInicio.Text = ltTur["DtIni"].ToString() == string.Empty ? "" : string.Format("{0:dd/MM/yyyy}", (DateTime)ltTur["DtIni"]);
+                txtHoraFim.Text = ltTur["HoraFim"].ToString() == string.Empty ? "" : String.Format("{0:hh:mm}", (DateTime)ltTur["HoraFim"]);
+                txtHoraInicio.Text = ltTur["HoraIni"].ToString() == string.Empty ? "" : String.Format("{0:hh:mm}", (DateTime)ltTur["HoraIni"]); 
                 ddlEvento.SelectedValue = ltTur["EventoId"].ToString();
                 ddlInstrutor.SelectedValue = ltTur["PessoaId"].ToString();
 
