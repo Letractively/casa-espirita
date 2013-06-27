@@ -179,19 +179,24 @@ namespace DataAccess
             return vendaItens;
         }
 
-        public DataSet PesquisarDADataSet(int id_venda)
+        public DataSet PesquisarDADataSet(int id_venda, string situacao)
         {
+            StringBuilder query = new StringBuilder();
+
+            query.Append(@"SELECT id " +
+                            ",vendaId " +
+                            ",quantidade " +
+                            ",total " +
+                            ",desconto " +
+                            ",situacao " +
+                            ",itemEstoqueId " +
+                            ",titulo " +
+                        " FROM VIEW_vendasItens " +
+                        " WHERE vendaId = " + id_venda);
+            if (situacao != string.Empty)
+                query.Append(@" AND situacao = '" + situacao + "'");
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT id " +
-                                                                                            ",vendaId " +
-                                                                                            ",quantidade " +
-                                                                                            ",total " +
-                                                                                            ",desconto " +
-                                                                                            ",situacao " +
-                                                                                            ",itemEstoqueId " +
-                                                                                            ",titulo " +
-                                                                                       " FROM VIEW_vendasItens " +
-                                                                                       " WHERE vendaId = {0} ", id_venda));
+                                                       CommandType.Text, query.ToString());
 
 
             return ds;
@@ -233,7 +238,7 @@ namespace DataAccess
             return ds;
         }
 
-        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados , string ord)
+        public DataSet PesquisarDARelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados, string ord)
         {
             StringBuilder query = new StringBuilder();
 

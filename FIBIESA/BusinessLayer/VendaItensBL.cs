@@ -77,11 +77,11 @@ namespace BusinessLayer
             return venItDA.PesquisarDA(venIt);
         }
 
-        public DataSet PesquisarBLDataSet(int venda)
+        public DataSet PesquisarBLDataSet(int venda, string situacao)
         {
             VendaItensDA venItDA = new VendaItensDA();
 
-            return venItDA.PesquisarDADataSet(venda);
+            return venItDA.PesquisarDADataSet(venda, situacao);
         }
 
         public DataSet PesquisarBLRelDataSet(string pessoasCod, string itensCod, string dtIni, string dtFim, Boolean cancelados, string ord)

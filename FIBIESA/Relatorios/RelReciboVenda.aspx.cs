@@ -48,7 +48,7 @@ namespace FIBIESA.Relatorios
                 ReportDataSource rptDatasourceInstituicao = new ReportDataSource("DataSet_Instituicao", instBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceInstituicaoLogo = new ReportDataSource("DataSet_InstituicaoLogo", instLogoBL.PesquisarDsBL().Tables[0]);
                 ReportDataSource rptDatasourceVenda = new ReportDataSource("DataSet_Venda", lDtVenda);
-                DataSet lds = vendaItensBL.PesquisarBLDataSet(vendaid);
+                DataSet lds = vendaItensBL.PesquisarBLDataSet(vendaid, "A");
                 ReportParameter[] param = new ReportParameter[1];
                 ReportDataSource rptDatasourceVendaItem = new ReportDataSource("DataSet_VendaItens", lds.Tables[0]);
 
