@@ -37,6 +37,8 @@ namespace FIBIESA
             DataColumn coluna4 = new DataColumn("VALOR", Type.GetType("System.Decimal"));           
             DataColumn coluna5 = new DataColumn("DTEMISSAO", Type.GetType("System.String"));
             DataColumn coluna6 = new DataColumn("TIPODOC", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("DTPAGTO", Type.GetType("System.String"));
+            DataColumn coluna8 = new DataColumn("VALORPAG", Type.GetType("System.Decimal"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -44,6 +46,8 @@ namespace FIBIESA
             tabela.Columns.Add(coluna4);
             tabela.Columns.Add(coluna5);
             tabela.Columns.Add(coluna6);
+            tabela.Columns.Add(coluna7);
+            tabela.Columns.Add(coluna8);
            
             TitulosBL titBL = new TitulosBL();
             List<Titulos> titulos;
@@ -64,9 +68,13 @@ namespace FIBIESA
                 if(tit.TiposDocumentos != null)
                     linha["TIPODOC"] = tit.TiposDocumentos.Descricao;
                 else
-                    linha["TIPODOC"] = "";                         
+                    linha["TIPODOC"] = "";
+
+                linha["DTPAGTO"] = tit.DtPagamento.ToString() == string.Empty ? "" : string.Format("{0:dd/MM/yyyy}", (DateTime)tit.DtPagamento);
+                linha["VALORPAG"] = tit.ValorPago;
 
                 tabela.Rows.Add(linha);
+
             }
 
             dtbPesquisa = tabela;

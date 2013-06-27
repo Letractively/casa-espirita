@@ -130,10 +130,15 @@ namespace Admin
 
         }
 
-        public void ExibirMensagem(string mensagem)
+        private void ExibirMensagem(string mensagem)
         {
             ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
                "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+        }
+        
+        private void CarregarAtributos()
+        {
+            txtSelData.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
         }
 
         #endregion
@@ -141,6 +146,7 @@ namespace Admin
         {
             if (!IsPostBack)
             {
+                CarregarAtributos();
                 txtSelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 CarregarDdlEventos();
             }
@@ -198,9 +204,7 @@ namespace Admin
             repPermissao.DataBind();
             CarregarDdlTurmas(utils.ComparaIntComZero(ddlEvento.SelectedValue));
             ddlTurmas.Focus();
-        }
-
-       
+        }      
 
     }
 }
