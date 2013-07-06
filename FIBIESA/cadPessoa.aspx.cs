@@ -498,6 +498,7 @@ namespace Admin
             pessoas.TipoAssociado = rbTipoAssoc.SelectedValue;
             pessoas.RefNome = txtRefNome.Text;
             pessoas.RefTelefone = txtRefTelefone.Text;
+            pessoas.foto = imagemFoto;
 
             if (lblDesNome.Text == "* Nome")
                 pessoas.Tipo = "F";
@@ -633,5 +634,7 @@ namespace Admin
         {
             ConsisteCPFCNPJ();
         }
+
+        public byte[] imagemFoto { get; set; }
     }
 }
