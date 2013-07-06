@@ -27,7 +27,7 @@ namespace DataAccess
                 eve.Codigo = int.Parse(dr["CODIGO"].ToString());
                 eve.Descricao = dr["DESCRICAO"].ToString();
                 eve.DtInicio = Convert.ToDateTime(dr["DTINICIO"].ToString());
-                eve.DtFim = Convert.ToDateTime(dr["DTFIM"].ToString());                
+                eve.DtFim = Convert.ToDateTime(dr["DTFIM"].ToString());
 
                 eventos.Add(eve);
             }
@@ -113,14 +113,14 @@ namespace DataAccess
         public List<Eventos> PesquisarDA()
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT * " + 
+                                                                CommandType.Text, string.Format(@"SELECT * " +
                                                                                                  "  FROM EVENTOS " +
-                                                                                                 " WHERE CONVERT(DATETIME,GETDATE(),103) "  +
+                                                                                                 " WHERE CONVERT(DATETIME,GETDATE(),103) " +
                                                                                                  " BETWEEN  CONVERT(DATETIME,DTINICIO,103) AND  CONVERT(DATETIME,DTFIM,103) "
                                                                                                 ));
-   
+
             List<Eventos> eventos = CarregarObjEventos(dr);
-                        
+
             return eventos;
 
         }
@@ -134,7 +134,7 @@ namespace DataAccess
             List<Eventos> eventos = CarregarObjEventos(dr);
 
             return eventos;
-                      
+
         }
 
         public List<Eventos> PesquisarDA(string campo, string valor)
@@ -183,8 +183,8 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM EVENTOS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'",utils.ComparaIntComZero(descricao), descricao));
-            
+                                                                                       " FROM EVENTOS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'", utils.ComparaIntComZero(descricao), descricao));
+
             List<Base> ba = new List<Base>();
 
             while (dr.Read())
@@ -225,25 +225,55 @@ namespace DataAccess
                                     ",dtInicio " +
                                     ",dtfIM " +
                                 " FROM EVENTOS WHERE 1 = 1 ");
-            
+
             if (codDes != string.Empty)
                 sqlQuery.Append(@" AND codigo IN (" + codDes + ")");
-            
+
 
             if ((dataIni != string.Empty) && (dataIniF != string.Empty))
                 sqlQuery.Append(@" AND dtInicio BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataIniF + "',103)");
-            
+
             if ((dataFim != string.Empty) && (dataFimF != string.Empty))
                 sqlQuery.Append(@" AND dtfIM BETWEEN CONVERT(DATETIME,'" + dataFim + "',103) AND CONVERT(DATETIME,'" + dataFimF + "',103)");
-            
+
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, sqlQuery.ToString());
 
-            
+
+            return ds;
+        }
+
+        public DataSet PesquisarDataSet(string strPesquisa)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT id
+                                  ,codEvento
+                                  ,EVENTO
+                                  ,dtInicio
+                                  ,dtFimEvento
+                                  ,codTurma
+                                  ,TURMA
+                                  ,sala
+                                  ,horaini
+                                  ,horafim
+                                  ,dtIni
+                                  ,dtFim
+                                  ,nromax
+                            FROM VIEW_EVENTOS WHERE 1 = 1 ");
+
+            if (strPesquisa != string.Empty)
+                sqlQuery.Append(@" AND EVENTO LIKE '%" + strPesquisa + "%' ");
+
+            sqlQuery.Append(@" AND dtFimEvento > CONVERT(DATETIME, GETDATE(),103)");
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, sqlQuery.ToString());
+
+
             return ds;
         }
 
     }
-    
+
 }
