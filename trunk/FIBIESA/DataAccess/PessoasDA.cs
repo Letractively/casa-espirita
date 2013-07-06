@@ -58,6 +58,7 @@ namespace DataAccess
                 pes.BairroProf = utils.ComparaIntComZero(dr["BAIRROPROFID"].ToString());
                 pes.Sexo = dr["SEXO"].ToString();
                 pes.TipoAssociado = dr["TIPOASSOCIADO"].ToString();
+                //pes.foto = (byte[])dr["FOTO"];
 
                 Categorias catg = new Categorias();
 
@@ -146,7 +147,7 @@ namespace DataAccess
 
         public int InserirDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[34];
+            SqlParameter[] paramsToSP = new SqlParameter[35];
 
             paramsToSP[0] = new SqlParameter("@nome", pes.Nome.ToUpper());
             paramsToSP[1] = new SqlParameter("@nomefantasia", pes.NomeFantasia);
@@ -182,6 +183,7 @@ namespace DataAccess
             paramsToSP[31] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[32] = new SqlParameter("@sexo", pes.Sexo);
             paramsToSP[33] = new SqlParameter("@tipoassociado", pes.TipoAssociado);
+            paramsToSP[34] = new SqlParameter("@foto", pes.foto);
 
             try
             {
@@ -201,7 +203,7 @@ namespace DataAccess
 
         public bool EditarDA(Pessoas pes)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[35];
+            SqlParameter[] paramsToSP = new SqlParameter[36];
 
             paramsToSP[0] = new SqlParameter("@id", pes.Id);
             paramsToSP[1] = new SqlParameter("@codigo", pes.Codigo);
@@ -238,6 +240,7 @@ namespace DataAccess
             paramsToSP[32] = new SqlParameter("@bairroProfId", pes.BairroProf);
             paramsToSP[33] = new SqlParameter("@sexo", pes.Sexo);
             paramsToSP[34] = new SqlParameter("@tipoassociado", pes.TipoAssociado);
+            paramsToSP[35] = new SqlParameter("@foto", pes.foto);
 
             try
             {
