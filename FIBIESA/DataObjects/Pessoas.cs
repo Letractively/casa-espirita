@@ -279,6 +279,13 @@ namespace DataObjects
             get { return _categorias; }
             set { _categorias = value; }
         }
+
+        private byte[] _foto;
+        public byte[] foto
+        {
+            get { return _foto; }
+            set { _foto = value; }
+        }
                                
     }
 }
