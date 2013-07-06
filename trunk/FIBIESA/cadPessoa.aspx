@@ -434,6 +434,32 @@ ControlToValidate="txtCepProf" ValidationExpression="^\d{5}-?\d{3}$" Display="Dy
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>
+
+                                <asp:TabPanel ID="tpFoto" HeaderText="Foto" runat="server">
+                                    <ContentTemplate>
+                                        <table>
+                                            <tr>
+                                                <td style="width: 540px; height: 700px;">
+                                                    <div id='errorLocation' style="font-size: small;color: Gray;"></div>
+
+                                                    <div id="silverlightControlHost">
+		                                                <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="100%">
+			                                                <param name="source" value="ClientBin/WebCamTeste.xap"/>
+			                                                <param name="onerror" value="onSilverlightError" />
+			                                                <param name="background" value="white" />
+			                                                <param name="minRuntimeVersion" value="4.0.41108.0" />
+			                                                <param name="autoUpgrade" value="true" />
+			                                                <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=4.0.41108.0" style="text-decoration: none;">
+     			                                                <img src="http://go.microsoft.com/fwlink/?LinkID=161376" alt="Get Microsoft Silverlight" style="border-style: none"/>
+			                                                </a>
+		                                                </object>
+                                                        <!--iframe id='imagemFoto' style='visibility:hidden;height:0;width:0;border:0px'></iframe-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </ContentTemplate>
+                                </asp:TabPanel>
                             </asp:TabContainer>
                         </td>
                     </tr>
