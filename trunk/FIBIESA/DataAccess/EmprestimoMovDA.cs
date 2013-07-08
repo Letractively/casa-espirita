@@ -19,7 +19,7 @@ namespace DataAccess
         private List<EmprestimoMov> CarregarObjEmpMov(SqlDataReader dr)
         {
             List<EmprestimoMov> emprestimoMov = new List<EmprestimoMov>();
-            
+
             while (dr.Read())
             {
                 EmprestimoMov empMov = new EmprestimoMov();
@@ -33,7 +33,7 @@ namespace DataAccess
 
                 Exemplares exemplar = new Exemplares();
                 exemplar.Id = int.Parse(dr["IDEXE"].ToString());
-                exemplar.Tombo =  int.Parse(dr["TOMBO"].ToString());
+                exemplar.Tombo = int.Parse(dr["TOMBO"].ToString());
 
                 empMov.Exemplares = exemplar;
 
@@ -43,12 +43,13 @@ namespace DataAccess
                 obras.Titulo = dr["TITULO"].ToString();
 
                 empMov.Obras = obras;
-                
+
                 emprestimoMov.Add(empMov);
             }
 
             return emprestimoMov;
         }
+        
         #endregion
 
         public bool InserirDA(EmprestimoMov instancia)
@@ -85,14 +86,14 @@ namespace DataAccess
 
             try
             {
-               
+
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                            CommandType.StoredProcedure, "stp_update_emprestimoMov", paramsToSP);
 
                 return true;
 
-            }            
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -103,15 +104,15 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[1];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
-            
+
             try
             {
-                SqlHelper.ExecuteNonQuery( ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                             CommandType.StoredProcedure, "stp_delete_emprestimoMov", paramsToSP);
 
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -137,19 +138,19 @@ namespace DataAccess
                                   " WHERE 1 = 1 ");
                 if (pessoasCod != string.Empty)
                     sqlQuery.Append(@" AND pessoaCodigo IN (" + pessoasCod + ")");
-                
+
                 if (obrasCod != string.Empty)
                     sqlQuery.Append(@" AND obrasCodigo IN (" + obrasCod + ")");
-                
+
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
                     sqlQuery.Append(@" AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)");
-                
+
                 if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
                     sqlQuery.Append(@" AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)");
-                
+
                 if (Status != string.Empty)
-                    sqlQuery.Append(@" AND Status = '" + Status +"'");
-                
+                    sqlQuery.Append(@" AND Status = '" + Status + "'");
+
                 lDs = SqlHelper.ExecuteDataset(
                     ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                     CommandType.Text, sqlQuery.ToString());
@@ -162,13 +163,13 @@ namespace DataAccess
 
         }
 
-        public DataSet PesquisarRelatorioDA(string pessoasCod,string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
+        public DataSet PesquisarRelatorioDA(string pessoasCod, string obrasCod, string dataRetiradaIni, string dataRetiradaFim, string dataDevolucaoIni, string dataDevolucaoFim, string Status, string retirados)
         {
             DataSet lDs;
             try
             {
                 StringBuilder sqlQuery = new StringBuilder();
-                sqlQuery.Append( @"SELECT " +
+                sqlQuery.Append(@"SELECT " +
                                   "    descricao " +
                                   "    ,tombo " +
                                   "    ,COUNT(tombo) quantidade " +
@@ -176,24 +177,24 @@ namespace DataAccess
                                   " WHERE 1 = 1 ");
                 if (pessoasCod != string.Empty)
                     sqlQuery.Append(@" AND pessoaCodigo in (" + pessoasCod + ")");
-                
+
                 if (obrasCod != string.Empty)
                     sqlQuery.Append(@" AND obrasCodigo in (" + obrasCod + ")");
-                
+
 
                 if ((dataRetiradaIni != string.Empty) && (dataRetiradaFim != string.Empty))
                     sqlQuery.Append(@" AND dataRetirada BETWEEN CONVERT(DATETIME,'" + dataRetiradaIni + "',103) AND CONVERT(DATETIME,'" + dataRetiradaFim + "',103)");
-                
+
                 if ((dataDevolucaoIni != string.Empty) && (dataDevolucaoFim != string.Empty))
                     sqlQuery.Append(@" AND dataDevolucao BETWEEN CONVERT(DATETIME,'" + dataDevolucaoIni + "',103) AND CONVERT(DATETIME,'" + dataDevolucaoFim + "',103)");
-                
+
                 if (Status != string.Empty)
-                    sqlQuery.Append(@" AND Status = '" + Status+ "'");
+                    sqlQuery.Append(@" AND Status = '" + Status + "'");
 
                 sqlQuery.Append(@" GROUP BY tombo, descricao order by quantidade " + retirados);
-                
+
                 lDs = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                    CommandType.Text,sqlQuery.ToString());
+                                                                    CommandType.Text, sqlQuery.ToString());
                 return lDs;
             }
             catch (Exception ex)
@@ -209,8 +210,8 @@ namespace DataAccess
             int i = -1;
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());
-            if (dr.Read())            
-                return int.Parse(dr["ID"].ToString());            
+            if (dr.Read())
+                return int.Parse(dr["ID"].ToString());
             else
                 return -1;
         }
@@ -281,7 +282,9 @@ namespace DataAccess
             }
             else
                 return false;
- 
+
         }
+
+        
     }
 }

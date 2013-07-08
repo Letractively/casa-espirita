@@ -131,7 +131,6 @@ namespace DataAccess
             }
             return pessoas;
         }
-
         private Int32 RetornaMaxCodigo()
         {
             Int32 codigo = 1;
@@ -142,6 +141,17 @@ namespace DataAccess
                 codigo = utils.ComparaIntComZero(ds.Tables[0].Rows[0]["COD"].ToString());
 
             return codigo;
+        }
+        private int LerParametro(int codigo, string modulo)
+        {
+            ParametrosDA parDA = new ParametrosDA();
+            DataSet dsPar = parDA.PesquisarDA(codigo, modulo);
+            int valor = -1;
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+                valor = utils.ComparaIntComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
+
+            return valor;
         }
         #endregion
 
@@ -453,6 +463,7 @@ namespace DataAccess
             StringBuilder v_erro = new StringBuilder();
             StringBuilder v_query = new StringBuilder();
 
+            //VERIFICA SE EXISTE ALGUMA PENDENCIA FINANCEIRA
             if (financeiro)
             {
                 v_query.Append(@"SELECT COUNT(1) QTDE ");
@@ -474,8 +485,8 @@ namespace DataAccess
                 }
             }
 
+            //VERIFICA SE EXISTE ALGUMA PENDENCIA NA BIBLIOTECA
             v_query.Clear();
-
             if (biblioteca)
             {
                 v_query.Append(@"SELECT COUNT(1) QTDE ");
@@ -498,7 +509,8 @@ namespace DataAccess
                         v_erro.Append(" Cliente com pendencia na biblioteca.");
                 }
             }
-            
+
+                       
             return v_erro.ToString();
         }
 

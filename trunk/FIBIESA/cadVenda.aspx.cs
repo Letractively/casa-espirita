@@ -167,6 +167,27 @@ namespace FIBIESA
         {
            return  utils.ComparaDecimalComZero(txtValorUni.Text) * utils.ComparaDecimalComZero(txtQuantidade.Text) - utils.ComparaDecimalComZero(txtDesconto.Text);
         }
+        private int LerParametro(int codigo, string modulo)
+        {
+            ParametrosBL parBL = new ParametrosBL();
+            DataSet dsPar = parBL.PesquisarBL(codigo, modulo);
+            int valor = -1;
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+                valor = utils.ComparaIntComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
+
+            return valor;
+        }
+        private bool VerificaMaxDesconto()
+        {
+            int perMaxDesc = this.LerParametro(3,"F");
+            decimal perDesc = utils.ComparaDecimalComZero(txtDesconto.Text) * 100 / utils.ComparaDecimalComZero(txtValorUni.Text);
+
+            if (perDesc > perMaxDesc)
+                return false;
+
+            return true; 
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -479,7 +500,13 @@ namespace FIBIESA
 
         protected void txtDesconto_TextChanged(object sender, EventArgs e)
         {
-            lblValor.Text = RetornaValorVendaItem().ToString();
+            if(!VerificaMaxDesconto())
+            {
+                ExibirMensagem("O desconto é maior que o máximo permitido !");
+                txtDesconto.Text = "";
+            }
+            else
+                lblValor.Text = RetornaValorVendaItem().ToString();
         }
 
     }

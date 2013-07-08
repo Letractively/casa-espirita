@@ -31,7 +31,7 @@
                                 MaxLength="40" Width="300px" ToolTip="Informe a descrição"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtDescricao" ErrorMessage="Informe da descrição" 
-                                ValidationGroup="salvar" CssClass="validacao" Enabled="False">*</asp:RequiredFieldValidator>
+                                ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
                      <tr>

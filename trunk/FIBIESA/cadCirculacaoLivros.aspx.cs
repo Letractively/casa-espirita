@@ -606,14 +606,28 @@ namespace FIBIESA
                 lblClienteItens.Text = "";
                 tcPrincipal.ActiveTabIndex = 0;
             }
+
+            if (LblSituacao.Text != "OK")
+            {
+                ExibirMensagem("Não é possível realizar empréstimos para esse cliente!");
+                tcPrincipal.ActiveTabIndex = 0;
+            }
         }
         protected void btnExemplar_Click(object sender, EventArgs e)
         {
             if (hfIdPessoa.Value != null && hfIdPessoa.Value != String.Empty)
             {
-                CarregarPesquisaItemEmp(null);
-                ModalPopupExtenderPesquisaEmp.Enabled = true;
-                ModalPopupExtenderPesquisaEmp.Show();
+                if (LblSituacao.Text != "OK")
+                {
+                    ExibirMensagem("Não é possível realizar empréstimos para esse cliente!");
+                    tcPrincipal.ActiveTabIndex = 0;
+                }
+                else
+                {
+                    CarregarPesquisaItemEmp(null);
+                    ModalPopupExtenderPesquisaEmp.Enabled = true;
+                    ModalPopupExtenderPesquisaEmp.Show();
+                }
             }
             else
             {
@@ -654,26 +668,18 @@ namespace FIBIESA
         }
         protected void btnFinOperacoes_Click(object sender, EventArgs e)
         {
+            EmprestimosBL empBL = new EmprestimosBL();
+            EmprestimoMovBL emovBL = new EmprestimoMovBL();
 
-            ////Quantidade máxima de exemplares emprestado:
-            //int param = this.LerParametro(1, "B");
-            //if (param >= 0)
-            //{
-            //    if (empBL.QuantosLivrosEmprestados(emp.PessoaId) > param)
-            //    {
-
-            //        ExibirMensagem(lblDesPessoa.Text + " já atingiu o limite máximo de empréstimos simultâneos.");
-            //        txtPessoa.Focus();
-            //        return; //                            throw new Exception(); //tem um jeito melhor de sair do metodo?
-            //    }
-            //}
+            if (!empBL.VerificaQtdeMaximaEmprestimo(utils.ComparaIntComZero(hfIdPessoa.Value)))
+            {
+                ExibirMensagem("O cliente já atingiu o limite máximo de empréstimos permitido!");
+                return;
+            }
 
             if (Session["dtItensEmp"] != null)
                 dtItensEmp = (DataTable)Session["dtItensEmp"];
 
-
-            EmprestimosBL empBL = new EmprestimosBL();
-            EmprestimoMovBL emovBL = new EmprestimoMovBL();
             bool v_erro = false;
 
             foreach (DataRow linha in dtItensEmp.Rows)
@@ -783,39 +789,39 @@ namespace FIBIESA
         }
         protected void btnFinOpeDev_Click(object sender, EventArgs e)
         {
-                if (Session["dtItensDev"] != null)
-                    dtItensDev = (DataTable)Session["dtItensDev"];
+            if (Session["dtItensDev"] != null)
+                dtItensDev = (DataTable)Session["dtItensDev"];
 
-                EmprestimoMovBL emovBL = new EmprestimoMovBL();
+            EmprestimoMovBL emovBL = new EmprestimoMovBL();
 
-                foreach (DataRow linha in dtItensDev.Rows)
+            foreach (DataRow linha in dtItensDev.Rows)
+            {
+
+                EmprestimoMov mov = new EmprestimoMov();
+                mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
+                mov.EmprestimoId = utils.ComparaIntComZero(linha["ID"].ToString());
+                mov.DataPrevistaEmprestimo = utils.ComparaDataComNull(linha["DEVOLUCAO"].ToString());
+                mov.PessoaId = utils.ComparaIntComZero(hfIdPessoaDev.Value);
+                mov.Titulo = linha["TITULO"].ToString();
+                mov.DataDevolucao = DateTime.Now;
+
+                string retorno = emovBL.EditarBL(mov);
+                if (retorno != "false")
                 {
-
-                    EmprestimoMov mov = new EmprestimoMov();
-                    mov.Id = utils.ComparaIntComZero(linha["MOVID"].ToString());
-                    mov.EmprestimoId = utils.ComparaIntComZero(linha["ID"].ToString());
-                    mov.DataPrevistaEmprestimo = utils.ComparaDataComNull(linha["DEVOLUCAO"].ToString());
-                    mov.PessoaId = utils.ComparaIntComZero(hfIdPessoaDev.Value);
-                    mov.Titulo = linha["TITULO"].ToString();
-                    mov.DataDevolucao = DateTime.Now;
-
-                    string retorno = emovBL.EditarBL(mov);
-                    if (retorno != "false")
-                    {
-                        if (chkReciboDevolucao.Checked)
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
-                                                     "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.EmprestimoId + "','',600,850);", true);
-                        else
-                            ExibirMensagem("Devolução realizada com sucesso!");
-
-                        LimparCamposDevolucao();
-                        LimparCamposRenovacao();
-                        LimparCamposEmprestimo();
-                    }
+                    if (chkReciboDevolucao.Checked)
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(),
+                                                 "WinOpen('/Relatorios/RelRecibos.aspx?emprestimoid=" + mov.EmprestimoId + "','',600,850);", true);
                     else
-                        ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
+                        ExibirMensagem("Devolução realizada com sucesso!");
+
+                    LimparCamposDevolucao();
+                    LimparCamposRenovacao();
+                    LimparCamposEmprestimo();
                 }
-         
+                else
+                    ExibirMensagem("Não foi possível realizar a devolução. Contate o administrador do sistema.");
+            }
+
         }
         protected void btnVoltarDev_Click(object sender, EventArgs e)
         {
