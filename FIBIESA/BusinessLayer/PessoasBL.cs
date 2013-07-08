@@ -9,7 +9,7 @@ using System.Data;
 namespace BusinessLayer
 {
     public class PessoasBL : BaseBL
-    {
+    {       
         public int InserirBL(Pessoas pes)
         {
             /*criar as regras de negocio*/
@@ -111,8 +111,14 @@ namespace BusinessLayer
         public string VerificaSituacaoPessoa(int id_pes, bool financeiro, bool biblioteca)
         {
             PessoasDA pesDA = new PessoasDA();
+            EmprestimosDA empDA = new EmprestimosDA();
+            StringBuilder situacao = new StringBuilder();
 
-            return pesDA.VerificaSituacaoPessoa(id_pes, financeiro, biblioteca);
+            situacao.Append(pesDA.VerificaSituacaoPessoa(id_pes, financeiro, biblioteca));
+            if (!empDA.VerificaQtdeMaximaEmprestimo(id_pes))
+                situacao.Append("O cliente já atingiu o limite máximo de empréstimos permitido!");
+
+            return situacao.ToString();
         }
 
         /// <summary>

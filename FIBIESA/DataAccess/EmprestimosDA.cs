@@ -31,7 +31,6 @@ namespace DataAccess
 
             return emprestimos;
         }
-
         private List<ViewEmprestimos> CarregarObjViewEmprestimos(SqlDataReader dr)
         {
             List<ViewEmprestimos> emprestimos = new List<ViewEmprestimos>();
@@ -59,6 +58,17 @@ namespace DataAccess
             }
 
             return emprestimos;
+        }
+        private int LerParametro(int codigo, string modulo)
+        {
+            ParametrosDA parDA = new ParametrosDA();
+            DataSet dsPar = parDA.PesquisarDA(codigo, modulo);
+            int valor = -1;
+
+            if (dsPar.Tables[0].Rows.Count != 0)
+                valor = utils.ComparaIntComZero(dsPar.Tables[0].Rows[0]["VALOR"].ToString());
+
+            return valor;
         }
         #endregion
 
@@ -371,6 +381,43 @@ namespace DataAccess
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                 CommandType.StoredProcedure, "stp_CONSULTA_emprestimo", paramsToSP);
             return ds;
+        }
+
+        public bool VerificaQtdeMaximaEmprestimo(int id_pessoa)
+        {
+            StringBuilder v_erro = new StringBuilder();
+            StringBuilder v_query = new StringBuilder();
+            
+            //verifica quantidade minima inicial para emprestimos
+            v_query.Clear();
+
+            int minQtdDias = this.LerParametro(3, "B");
+            int minEmp = this.LerParametro(4, "B");
+            int maxExemp = this.LerParametro(1, "B");
+            int qtdEmprestados = this.QuantosLivrosEmprestados(id_pessoa);
+
+            v_query.Append(@"SELECT DATEDIFF ( DAY , CONVERT(DATE,P.DTCADASTRO,103), CONVERT(DATE,GETDATE(),103)) AS QTDE ");
+            v_query.Append(@"  FROM PESSOAS P ");
+            v_query.Append(@" WHERE P.ID = " + id_pessoa.ToString());
+
+            DataSet dsEmp = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, v_query.ToString());
+            int v_qtd;
+
+            if (dsEmp.Tables[0].Rows.Count != 0)
+            {
+                v_qtd = (Int32)dsEmp.Tables[0].Rows[0]["QTDE"];
+
+                if (minQtdDias >= v_qtd && qtdEmprestados >= minEmp)
+                    return false;
+            }
+
+            //Quantidade máxima de exemplares emprestado           
+            if (qtdEmprestados >= maxExemp)
+                return false;
+
+            return true;
+
         }
 
     }

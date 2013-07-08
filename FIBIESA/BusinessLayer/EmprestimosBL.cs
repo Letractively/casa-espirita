@@ -118,6 +118,11 @@ namespace BusinessLayer
             return varDA.PesquisarDataSetDA(empId);
         }
 
-        
+        public bool VerificaQtdeMaximaEmprestimo(int id_pessoa)
+        {
+            EmprestimosDA empDA = new EmprestimosDA();
+
+            return empDA.VerificaQtdeMaximaEmprestimo(id_pessoa);
+        }
     }
 }
