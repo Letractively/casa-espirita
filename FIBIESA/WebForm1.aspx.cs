@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 using BoletoNet;
 using System.Globalization;
 //using PdfSharp.Drawing;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using BoletoNetGerandoPDF;
+//using iTextSharp.text;
+//using iTextSharp.text.pdf;
+//using BoletoNetGerandoPDF;
 
 namespace FIBIESA
 {

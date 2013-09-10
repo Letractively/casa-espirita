@@ -31,6 +31,8 @@ namespace DataAccess
                 por.AgenciaId = utils.ComparaIntComNull(dr["AGENCIAID"].ToString());
                 por.BancoId = utils.ComparaIntComNull(dr["BANCOID"].ToString());
                 por.ContaId = utils.ComparaIntComNull(dr["CONTAID"].ToString());
+                por.CodCedente = utils.ComparaIntComNull(dr["CODCEDENTE"].ToString());
+                por.Carteira = dr["CARTEIRA"].ToString();
                 
                 int Id = 0;
                 
@@ -100,13 +102,15 @@ namespace DataAccess
         #endregion
         public bool InserirDA(Portadores por)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[7];
 
             paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", por.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@agenciaid", por.AgenciaId);
             paramsToSP[3] = new SqlParameter("@bancoid", por.BancoId);
             paramsToSP[4] = new SqlParameter("@contaid", por.ContaId);
+            paramsToSP[5] = new SqlParameter("@codCedente", por.CodCedente);
+            paramsToSP[6] = new SqlParameter("@carteria", por.Carteira);
 
             try
             {
@@ -122,7 +126,7 @@ namespace DataAccess
 
         public bool EditarDA(Portadores por)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[6];
+            SqlParameter[] paramsToSP = new SqlParameter[8];
 
             paramsToSP[0] = new SqlParameter("@id", por.Id);
             paramsToSP[1] = new SqlParameter("@codigo", por.Codigo);
@@ -130,7 +134,9 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@agenciaid", por.AgenciaId);
             paramsToSP[4] = new SqlParameter("@bancoid", por.BancoId);
             paramsToSP[5] = new SqlParameter("@contaid", por.ContaId);
-
+            paramsToSP[6] = new SqlParameter("@codCedente", por.CodCedente);
+            paramsToSP[7] = new SqlParameter("@carteira", por.Carteira);
+            
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_update_Portadores", paramsToSP);

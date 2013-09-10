@@ -214,22 +214,17 @@ namespace DataAccess
 
         public DataSet PesquisarDsDA()
         {
+            StringBuilder v_query = new StringBuilder();
+
+            v_query.Append(@"SELECT id, codigo, razao, nomefantasia ");
+            v_query.Append("       ,email, cnpj, cidadeid, cep ");
+            v_query.Append("       ,bairroid, endereco, numero, complemento ");
+            v_query.Append("       ,DDD, telefone ");
+            v_query.Append("  FROM instituicoes ");
+            v_query.Append(" WHERE ranking = (SELECT MIN(ranking) FROM instituicoes)");
+
             DataSet instituicoes = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT [id] " +
-                                                                                        "      ,[codigo] " +
-                                                                                        "      ,[razao] " +
-                                                                                        "      ,[nomefantasia] " +
-                                                                                        "      ,[email] " +
-                                                                                        "      ,[cnpj] " +
-                                                                                        "      ,[cidadeid] " +
-                                                                                        "      ,[cep] " +
-                                                                                        "      ,[bairroid] " +
-                                                                                        "      ,[endereco] " +
-                                                                                        "      ,[numero] " +
-                                                                                        "      ,[complemento] " +
-                                                                                        "      ,[DDD] " +
-                                                                                        "      ,[telefone] " +
-                                                                                        "  FROM [dbo].[Instituicoes]"));
+                                                       CommandType.Text, string.Format(v_query.ToString()));
 
             
             return instituicoes;

@@ -26,7 +26,7 @@ namespace DataAccess
             {
                 BancosInstrucoes banInst = new BancosInstrucoes();
                 banInst.Id = int.Parse(dr["ID"].ToString());
-                banInst.Codigo = int.Parse(dr["CODIGO"].ToString());
+                banInst.Codigo = dr["CODIGO"].ToString();
                 banInst.Descricao = dr["DESCRICAO"].ToString();
                 banInst.Nrdias = Boolean.Parse(dr["NRDIAS"].ToString());
                 banInst.Bancoid = int.Parse(dr["BANCOID"].ToString());

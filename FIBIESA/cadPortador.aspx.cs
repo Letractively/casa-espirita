@@ -36,6 +36,8 @@ namespace Admin
                 id_age = ltPor.AgenciaId.ToString();
                 CarregarDDLConta(utils.ComparaIntComZero(id_age));
                 ddlConta.SelectedValue = ltPor.ContaId.ToString();
+                txtNroConvenio.Text = ltPor.CodCedente.ToString();
+                txtCarteira.Text = ltPor.Carteira.ToString();
             }
 
         }
@@ -135,6 +137,8 @@ namespace Admin
             portadores.AgenciaId = utils.ComparaIntComNull(ddlAgencia.SelectedValue);
             portadores.BancoId = utils.ComparaIntComNull(ddlBanco.SelectedValue);
             portadores.ContaId = utils.ComparaIntComNull(ddlConta.SelectedValue);
+            portadores.CodCedente = utils.ComparaIntComNull(txtNroConvenio.Text);
+            portadores.Carteira = txtCarteira.Text;
 
             if (portadores.Id > 0)
             {

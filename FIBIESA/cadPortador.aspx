@@ -61,6 +61,20 @@
                              </asp:DropDownList> 
                         </td>
                     </tr>
+                    <tr>
+                        <td style="width: 140px">&nbsp;Nro. Convênio:</td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtNroConvenio" runat="server" CssClass="inputboxRight" 
+                                MaxLength="14" Width="100px" ToolTip="Informe o número do convênio" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 140px">&nbsp;Carteira:</td>
+                        <td style="width: 400px">
+                            <asp:TextBox ID="txtCarteira" runat="server" CssClass="inputbox"
+                                MaxLength="4" Width="50px" ToolTip="Informe o tipo de carteira" ></asp:TextBox>
+                        </td>
+                    </tr>
                 </table>
                 <table>
                     <tr>

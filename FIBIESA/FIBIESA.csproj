@@ -114,6 +114,7 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="GerarRemessa.aspx" />
     <Content Include="images\logoff.png" />
     <Content Include="images\logoFibiese.png" />
     <Content Include="images\users1.png" />
@@ -599,6 +600,13 @@
     </Compile>
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GerarRemessa.aspx.cs">
+      <DependentUpon>GerarRemessa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GerarRemessa.aspx.designer.cs">
+      <DependentUpon>GerarRemessa.aspx</DependentUpon>
     </Compile>
     <Compile Include="ops.aspx.cs">
       <DependentUpon>ops.aspx</DependentUpon>
