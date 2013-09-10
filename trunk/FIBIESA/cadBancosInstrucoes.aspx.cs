@@ -101,7 +101,7 @@ namespace FIBIESA
             BancosInstrucoes bancos = new BancosInstrucoes();
 
             bancos.Id = utils.ComparaIntComZero(hfId.Value);
-            bancos.Codigo = utils.ComparaIntComZero(txtCodigo.Text);
+            bancos.Codigo = txtCodigo.Text;
             bancos.Descricao = txtDescricao.Text;
             bancos.Nrdias = ddlObrigDias.SelectedValue == "true";
             bancos.Bancoid = utils.ComparaIntComZero(ddlBanco.SelectedValue);
@@ -134,6 +134,7 @@ namespace FIBIESA
             Response.Redirect("viewBancosInstrucoes.aspx");
         }
 
+       
         
     }
 }

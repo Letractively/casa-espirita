@@ -33,7 +33,7 @@ namespace FIBIESA
             DataTable tabela = new DataTable("tabela");
 
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
             DataColumn coluna4 = new DataColumn("CODBANCO", Type.GetType("System.Int32"));
             DataColumn coluna5 = new DataColumn("DESBANCO", Type.GetType("System.String"));

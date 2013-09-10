@@ -328,8 +328,8 @@ namespace FG
             pCNPJ = pCNPJ.Replace("-", "");
             pCNPJ = pCNPJ.Replace("/", "");
             return pCNPJ;
-        }      
-        public  bool ValidaCPF(string cpf)
+        }
+        public bool ValidaCPF(string cpf)
         {
             int[] multiplic1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplic2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -373,7 +373,7 @@ namespace FG
 
             return cpf.EndsWith(digit);
         }
-        public  bool ValidaCNPJ(string cnpj)
+        public bool ValidaCNPJ(string cnpj)
         {
             int[] multiplic1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplic2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -420,15 +420,15 @@ namespace FG
         }
         public string Criptografar(string texto)
         {
-            
+
             string aux = "";
-            
+
             aux = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(texto));
 
             return aux;
         }
         public string DesCriptografar(string texto)
-        {            
+        {
             string aux = "";
             byte[] toDecodeByte = Convert.FromBase64String(texto);
 
@@ -440,7 +440,7 @@ namespace FG
             char[] decodedChar = new char[charCount];
             utf8Decode.GetChars(toDecodeByte, 0, toDecodeByte.Length, decodedChar, 0);
             aux = DesCriptografar(new String(decodedChar));
-            
+
             return aux;
         }
         public string FormataCPF(string pCPF)
@@ -537,6 +537,177 @@ namespace FG
                 else
                     return pCPFouCNPJ;
         }
-    }
+        /// <summary>
+        /// Cria um arquivo txt com o texto de entrada e retorna o caminho do arquivo
+        /// </summary>
+        /// <param name="texto"></param>
+        /// <returns></returns>
+        //public string CriaArqTXT(string texto)
+        //{
+        //    string arq;// = CriaNomeArqTemporario("txt");
+
+        //   // StreamWriter SW;
+        //   //// SW = File.CreateText(arq);
+        //   // SW.WriteLine(texto);
+        //   // SW.Close();
+
+        //   // return arq;
+
+        //}
+        /// <summary>
+        /// Cria um arquivo txt com o texto de entrada conforme o nome do arquivo passado o nome deve conter o caminho para criacao
+        /// </summary>
+        /// <param name="texto"></param>
+        /// <param name="NomeArquivo">Informe o caminho o nome e estensao do arquivo</param>
+        /// <returns></returns>
+        public string CriaArqTXT(string texto, string NomeArquivo)
+        {
+            if (File.Exists(NomeArquivo))
+            {
+                File.Delete(NomeArquivo);
+            }
+
+            StreamWriter SW;
+            SW = File.CreateText(NomeArquivo);
+            SW.WriteLine(texto);
+            SW.Close();
+
+            return NomeArquivo;
+        }
+
+        //public void CriarArqTXT()
+        //{
+        //    string FILE_NAME = "c:\TesteNEt.txt";
+
+        //    if (File.Exists(FILE_NAME))
+        //    {
+        //        File.Delete(FILE_NAME);
+        //    }
+ 
+        //    using (StreamWriter sw = File.CreateText(FILE_NAME))
+        //    {
+        //        sw.WriteLine ("Teste de arquivo texto...");
+        //        sw.Close();
+        //    }
+
+        //}
+
+        //public void downlad
+        //{
+
+        //     System.IO.FileInfo arquivo = new System.IO.FileInfo(Request.ServerVariables[“APPL_PHYSICAL_PATH”] + @”\IMAGES\” + DropDownList1.SelectedValue);
+        //      Response.Clear();
+        //      Response.AddHeader(“Content-Disposition”, “attachment; filename=” + arquivo.Name);
+        //      Response.AddHeader(“Content-Length”, arquivo.Length.ToString());
+        //      Response.ContentType = “application/octet-stream”;|
+        //      Response.WriteFile(arquivo.FullName);
+        //      Response.End();
+
+        //Leia mais em: Download de arquivos com ASP.Net http://www.devmedia.com.br/download-de-arquivos-com-asp-net/7076#ixzz2ck34ZBIv
+
+        //    string txt = "line1";
+        //    MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(txt));
+
+        //    Response.Charset = "iso-8859-1";
+        //    Response.ContentType = "application/octet-stream";
+        //    Response.AddHeader("Content-Disposition:", "attachment; filename=Senhas.txt");
+        //    ms.WriteTo(Context.Response.OutputStream);
+        //    ms.Close();
+
+        //    Response.Flush();
+        //    Response.Clear();
+        //    Response.End();
+
+        //}       
+        public static void Download(string fName)
+        {
+            FileInfo fInfo = new FileInfo(fName);
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.ContentType = "application/octet-stream";
+            HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + fInfo.Name + "\"");
+            HttpContext.Current.Response.AddHeader("Content-Length", fInfo.Length.ToString());
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.Response.WriteFile(fInfo.FullName);
+            fInfo = null;
+        }
+
+        public void IncluirCampoNumerico(StringBuilder stringbuilder, string conteudo, int tamanho)
+        {
+            for (int i = 0; i < conteudo.Length - tamanho; i++)
+            {
+                stringbuilder.Append("0");
+            }
+
+            stringbuilder.Append(conteudo);
+        }
+
+        public void IncluirCampoAlfanumerico(StringBuilder stringbuilder, string conteudo, int tamanho)
+        {
+            stringbuilder.Append(conteudo);
+
+            for (int i = 0; i < conteudo.Length - tamanho; i++)
+            {
+                stringbuilder.Append(" ");
+            }
+            
+        }
+
+        /// <summary>
+        /// Passa de um stream read nome do arquiv passando para o write geralmente a
+        /// entrada do Stream vai ser Response.OutputStream
+        /// se houver exception não irá mostrar
+        /// </summary>
+        /// <param name="nomearquivo">nome do arquivo para o Read</param>
+        /// <param name="stream">geralmente Response.OutputStream</param>
+        public void LeStreamReadPassaStreamWrite(string nomearquivo, Stream stream)
+        {
+            try
+            {
+                StreamReader read = new StreamReader(nomearquivo);
+                StreamWriter write = new StreamWriter(stream);
+
+                string input = "";
+                while ((input = read.ReadLine()) != null)
+                {
+                    write.WriteLine(input);
+                }
+                read.Close();
+                write.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Passa de um stream read nome do arquiv passando para o write geralmente a
+        /// entrada do Stream vai ser Response.OutputStream
+        /// se houver exception não irá mostrar
+        /// </summary>
+        /// <param name="nomearquivo">nome do arquivo para o Read</param>
+        /// <param name="stream">geralmente Response.OutputStream</param>
+        public void LeStreamReadPassaStreamWrite(string nomearquivo, Stream stream, Encoding enc)
+        {
+            try
+            {
+                StreamReader read = new StreamReader(nomearquivo, enc);
+                StreamWriter write = new StreamWriter(stream, enc);
+
+                string input = "";
+                while ((input = read.ReadLine()) != null)
+                {
+                    write.WriteLine(input);
+                }
+                read.Close();
+                write.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
+    }    
        
 }

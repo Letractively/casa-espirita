@@ -153,7 +153,18 @@ ControlToValidate="txtDiasVctoMulta" ValidationExpression="^\d+$" Display="Dynam
                                                     <asp:TextBox ID="txtDesconto" CssClass="inputboxRight" runat="server" 
                                                         MaxLength="5"></asp:TextBox>
                                                 </td>
-                                            </tr>                                            
+                                            </tr> 
+                                            <tr>
+                                                <td style="width: 400px">
+                                                    <asp:Label ID="lblPastaRemessa" runat="server">
+                                                        Nome da pasta e do arquivo de remessa:
+                                                    </asp:Label>
+                                                </td>
+                                                <td style="width: 140px">
+                                                    <asp:TextBox ID="txtPastaRemessa" CssClass="inputboxRight" runat="server" 
+                                                        MaxLength="20"></asp:TextBox>
+                                                </td>
+                                            </tr>                                               
                                         </table>
                                     </ContentTemplate>
                                 </asp:TabPanel>

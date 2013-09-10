@@ -61,6 +61,7 @@
     <Compile Include="NotasEntradaItens.cs" />
     <Compile Include="ObrasAutores.cs" />
     <Compile Include="Portadores.cs" />
+    <Compile Include="Remessa.cs" />
     <Compile Include="TiposDocumentos.cs" />
     <Compile Include="Titulos.cs" />
     <Compile Include="TurmasParticipantes.cs" />

@@ -11,7 +11,7 @@
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div id="content">
-                <div class="container half2 left">
+                <div class="container">
                     <div class="conthead">
                         <h2>
                             Emissão de Bloquetos Bancários</h2>
@@ -96,8 +96,9 @@
                                     Instrução 1:
                                 </td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtInstrucaoum" runat="server" CssClass="inputbox" ToolTip="Informe a instrução 1"
-                                        Width="300px"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlInstrucao1" runat="server" CssClass="dropdownlist" ToolTip="Selecione a instrução um"
+                                        AutoPostBack="True">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -105,8 +106,9 @@
                                     Instrução 2:
                                 </td>
                                 <td style="width: 400px">
-                                    <asp:TextBox ID="txtInstrucaoDois" runat="server" CssClass="inputbox" ToolTip="Informe a instrução 2"
-                                        Width="300px"></asp:TextBox>
+                                     <asp:DropDownList ID="ddlInstrucao2" runat="server" CssClass="dropdownlist" ToolTip="Selecione a instrução dois"
+                                        AutoPostBack="True">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -123,12 +125,21 @@
                             <tr>
                                 <td style="width: 140px">
                                 </td>
+                                <td>
+                                    <asp:Button ID="btnGerarArquivo" runat="server" Text="Gerar Arquivo Remessa" CssClass="btn" OnClick="btnGerarArquivo_Click"
+                                        ValidationGroup="grupo" ToolTip="Gera arquivo de remessa" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 140px">
+                                </td>
                                 <td style="width: 400px">
                                     <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" OnClick="btnVoltar_Click"
                                         ToolTip="Volta para página principal" />
                                     &nbsp;&nbsp;&nbsp;
-                                    <asp:Button ID="btnGerar" runat="server" Text="Imprimir" CssClass="btn" OnClick="btnGerar_Click"
+                                    <asp:Button ID="btnGerar" runat="server" Text="Imprimir Boleto" CssClass="btn" OnClick="btnGerar_Click"
                                         ValidationGroup="grupo" ToolTip="Gera e Imprimi os bloquetos bancários" />
+                                                                    
                                 </td>
                             </tr>
                         </table>

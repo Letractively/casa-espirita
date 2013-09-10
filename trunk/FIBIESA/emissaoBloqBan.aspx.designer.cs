@@ -139,22 +139,22 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
-        /// txtInstrucaoum control.
+        /// ddlInstrucao1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInstrucaoum;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInstrucao1;
         
         /// <summary>
-        /// txtInstrucaoDois control.
+        /// ddlInstrucao2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInstrucaoDois;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInstrucao2;
         
         /// <summary>
         /// txtInstrucoes control.
@@ -164,6 +164,15 @@ namespace FIBIESA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInstrucoes;
+        
+        /// <summary>
+        /// btnGerarArquivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGerarArquivo;
         
         /// <summary>
         /// btnVoltar control.

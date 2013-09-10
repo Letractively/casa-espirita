@@ -14,7 +14,7 @@ namespace BusinessLayer
         {
             bool valido;
             valido = ban.Descricao.Length <= 70;
-            valido = valido && ban.Codigo > 0 && ban.Bancoid > 0;
+            valido = valido && ban.Codigo.Length <= 2 && ban.Bancoid > 0;
 
             return valido;
         }

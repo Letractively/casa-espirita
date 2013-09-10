@@ -69,5 +69,26 @@ namespace DataObjects
             get { return _contas; }
             set { _contas = value; }
         }
+
+        private Int32? _codCedente;
+        public Int32? CodCedente
+        {
+            get { return _codCedente; }
+            set { _codCedente = value; }
+        }
+
+        private string _carteira;
+        public string Carteira
+        {
+            get { return _carteira; }
+            set { _carteira = value; }
+        }
+
+        private string _codEmpBanriMicro;
+        public string CodEmpBanriMicro
+        {
+            get { return _codEmpBanriMicro; }
+            set { _codEmpBanriMicro = value; }
+        }
     }
 }

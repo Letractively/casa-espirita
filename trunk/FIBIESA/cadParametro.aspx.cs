@@ -8,10 +8,12 @@ using DataObjects;
 using BusinessLayer;
 using System.Data;
 
+
 namespace Admin
 {
     public partial class cadParametro : System.Web.UI.Page
     {
+        
         #region funcoes
         private string LerParametro(string modulo, int codigo)
         {
@@ -120,6 +122,7 @@ namespace Admin
             txtDesconto.Text = CarregarParametro(3, "F");
             ddlTipoDoc.SelectedValue = CarregarParametro(4, "F");
             ddlPortadorMulta.SelectedValue = CarregarParametro(5, "F");
+            txtPastaRemessa.Text = CarregarParametro(6, "F");
             #endregion
         }
         private void CarregarAtributos()
@@ -133,7 +136,7 @@ namespace Admin
             txtDesconto.Attributes.Add("onkeypress", "return(Reais(this,event))");
             txtDiasVctoMulta.Attributes.Add("onkeypress", "return(Reais(this,event))");
 
-        }
+        }        
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -174,6 +177,7 @@ namespace Admin
             SalvarParametro(3, "F", lblDesconto.Text, txtDesconto.Text);
             SalvarParametro(4, "F", lblTipoDoc.Text, ddlTipoDoc.SelectedValue);
             SalvarParametro(5, "F", lblTipoDoc.Text, ddlPortadorMulta.SelectedValue);
+            SalvarParametro(6, "F", lblPastaRemessa.Text, txtPastaRemessa.Text);
             #endregion
 
         }
