@@ -114,6 +114,13 @@ namespace BusinessLayer
 
             return exeDA.CodigoJaUtilizadoDA(codigo);
         }
+
+        public DataSet PesquisarDataset(string strPesquisa)
+        {
+            ExemplaresDA exeDA = new ExemplaresDA();
+
+            return exeDA.PesquisarDataSet(strPesquisa);
+        }
                 
     }
     
