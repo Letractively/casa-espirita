@@ -336,5 +336,27 @@ namespace DataAccess
 
         }
 
+        public DataSet PesquisarDataSet(string strPesquisa)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT id,
+                                     obraid,
+                                     titulo,
+                                     autor,
+                                     status
+                              FROM VIEW_EXEMPLARES  WHERE 1 = 1"); 
+           
+
+            if (strPesquisa != string.Empty)
+                sqlQuery.Append(@"AND titulo LIKE '%" + strPesquisa + "%' ");
+                sqlQuery.Append(@" OR autor LIKE '%" + strPesquisa + "%' ");
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, sqlQuery.ToString());
+
+
+            return ds;
+        }
+
     }
 }
