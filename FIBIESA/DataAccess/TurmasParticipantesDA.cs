@@ -144,5 +144,42 @@ namespace DataAccess
 
             return turmasParticipantes;
         }
+
+        public List<TurmasParticipantes> PesquisarDA(int id_turma, string nm_participante)
+        {
+            StringBuilder v_query = new StringBuilder();
+            v_query.Append(@"SELECT TP.*, T.ID ID_TUR, T.DESCRICAO ");
+            v_query.Append(@"       ,P.CODIGO P_COD,P.ID ID_PES, P.NOME ");
+            v_query.Append(@"  FROM TURMASPARTICIPANTES TP ");
+            v_query.Append(@"      ,TURMAS T ");
+            v_query.Append(@"      ,PESSOAS P ");
+            v_query.Append(@" WHERE T.ID = TP.TURMASID ");
+            v_query.Append(@"   AND TP.PESSOAID = P.ID ");
+            v_query.Append(@"   AND TP.TURMASID = {0}");
+            if (nm_participante != string.Empty)
+                v_query.Append(@"   AND P.NOME LIKE '%{1}%'  ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(v_query.ToString(), id_turma, nm_participante));
+
+            List<TurmasParticipantes> turmasParticipantes = CarregarObjTurmasParticipantes(dr);
+
+            return turmasParticipantes;
+        }
+
+        public DataSet PesquisarParticipantesNotInTurmaDA(int id_turma, string nm_participante)
+        {
+            StringBuilder v_query = new StringBuilder();
+            v_query.Append(@"SELECT  P.CODIGO P_COD,P.ID ID_PES, P.NOME   ");
+            v_query.Append(@"   FROM PESSOAS P WHERE P.ID NOT IN ");
+            v_query.Append(@"   (SELECT TP.pessoaid FROM TURMASPARTICIPANTES TP WHERE TP.TURMASID = {0}) ");
+            if(nm_participante != string.Empty)
+                v_query.Append(@"   AND P.NOME LIKE '%{1}%'  ");
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(v_query.ToString(), id_turma,nm_participante));
+            
+            return ds;
+        }
     }
 }
