@@ -67,24 +67,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnPesParticipante;
         
         /// <summary>
-        /// lblDesParticipante control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesParticipante;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
         /// btnVoltar control.
         /// </summary>
         /// <remarks>
@@ -94,13 +76,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
-        /// btnInserir control.
+        /// dtgParticipantesNotInTurma control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInserir;
+        protected global::System.Web.UI.WebControls.GridView dtgParticipantesNotInTurma;
         
         /// <summary>
         /// dtgParticipantes control.
@@ -146,51 +128,6 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfOrdem;
-        
-        /// <summary>
-        /// ModalPopupExtenderPesquisa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtenderPesquisa;
-        
-        /// <summary>
-        /// pnlVenda control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlVenda;
-        
-        /// <summary>
-        /// txtPesquisa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
-        
-        /// <summary>
-        /// grdPesquisa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
         /// Master property.
