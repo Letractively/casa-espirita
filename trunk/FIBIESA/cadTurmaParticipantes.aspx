@@ -24,23 +24,19 @@
                                     <td style="width: 140px">
                                         Turma:
                                     </td>
-                                    <td style="width: 400px">
+                                    <td style="width: 700px">
                                         <asp:Label ID="lblTurma" runat="server" Text=" "></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 140px">
-                                        * Participante:
+                                        Participante:
                                     </td>
                                     <td style="width: 400px">
                                         <asp:TextBox ID="txtParticipante" runat="server" CssClass="inputbox" 
                                             ToolTip="Informe o participante" AutoPostBack="True" 
                                             ontextchanged="txtParticipante_TextChanged"></asp:TextBox>
-                                        <asp:Button ID="btnPesParticipante" runat="server" CssClass="btn" Text="..." OnClick="btnPesParticipante_Click" />
-                                        &nbsp;
-                                        <asp:Label ID="lblDesParticipante" runat="server"></asp:Label>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtParticipante"
-                                            CssClass="validacao" ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="salvar"></asp:RequiredFieldValidator>
+                                        <asp:Button ID="btnPesParticipante" runat="server" CssClass="btn" Text="..." OnClick="btnPesParticipante_Click" />                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,36 +46,74 @@
                                         <asp:Button ID="btnVoltar" runat="server" Text="Voltar" CssClass="btn" OnClick="btnVoltar_Click"
                                             ToolTip="Volta para página de cadastro de turmas" />
                                         &nbsp;&nbsp;&nbsp;
-                                        <asp:Button ID="btnInserir" runat="server" Text="Inserir" CssClass="btn" OnClick="btnInserir_Click"
-                                            ValidationGroup="salvar" ToolTip="Inseri o participante selecionado" />
-                                    </td>
+                                        </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
-                                        <asp:GridView ID="dtgParticipantes" runat="server" AutoGenerateColumns="False" BackColor="White"
-                                            BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
-                                            DataKeyNames="ID" PageSize="7" AllowSorting="True" OnRowDeleting="dtgParticipantes_RowDeleting"
-                                            GridLines="None" OnRowDataBound="dtgParticipantes_RowDataBound" OnPageIndexChanging="dtgParticipantes_PageIndexChanging"
-                                            OnSorting="dtgParticipantes_Sorting" Width="400px">
-                                            <Columns>
-                                                <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
-                                                    <HeaderStyle CssClass="grd_cmd_header" />
-                                                    <ItemStyle CssClass="grd_delete" />
-                                                </asp:CommandField>
-                                                <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                                <asp:BoundField DataField="CODIGO" HeaderText="Código" SortExpression="CODIGO" />
-                                                <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
-                                            </Columns>
-                                            <FooterStyle BackColor="White" ForeColor="#000066" />
-                                            <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                                            <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                            <RowStyle ForeColor="#000066" />
-                                            <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                            <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                            <SortedDescendingHeaderStyle BackColor="#00547E" />
-                                        </asp:GridView>
+                                    <td colspan="2" style="width:400px;">
+                                        <table>
+                                            <tr>
+                                                <td valign="top">Não Participantes
+                                                </td>
+                                                <td valign="top">Participantes
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">
+                                                    <asp:GridView ID="dtgParticipantesNotInTurma" runat="server" 
+                                                        AutoGenerateColumns="False" BackColor="White" 
+                                                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
+                                                        DataKeyNames="ID_PES" PageSize="7" AllowSorting="True" OnRowDeleting="dtgParticipantesNotInTurma_RowDeleting"
+                                                        GridLines="None" OnRowDataBound="dtgParticipantesNotInTurma_RowDataBound" OnPageIndexChanging="dtgParticipantesNotInTurma_PageIndexChanging"
+                                                        OnSorting="dtgParticipantesNotInTurma_Sorting" Width="275px" EmptyDataText="Participante não encontrado ou ja cadastrado."
+                                                        Visible="true">
+                                                        <Columns>
+                                                            <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
+                                                                <HeaderStyle CssClass="grd_cmd_header" />
+                                                                <ItemStyle CssClass="grd_select" />
+                                                            </asp:CommandField>
+                                                            <asp:BoundField DataField="ID_PES" HeaderText="ID" Visible="False" />
+                                                            <asp:BoundField DataField="P_COD" HeaderText="Código" SortExpression="P_COD" />
+                                                            <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME"  ControlStyle-Font-Size="Small"/>
+                                                        </Columns>
+                                                        <FooterStyle BackColor="White" ForeColor="#000066" />
+                                                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                                        <RowStyle ForeColor="#000066" />
+                                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                                        <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                                        <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                                    </asp:GridView>
+                                                </td>
+                                                <td valign="top">
+                                                    <asp:GridView ID="dtgParticipantes" runat="server" AutoGenerateColumns="False" BackColor="White"
+                                                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
+                                                        DataKeyNames="ID" PageSize="7" AllowSorting="True" OnRowDeleting="dtgParticipantes_RowDeleting"
+                                                        GridLines="None" OnRowDataBound="dtgParticipantes_RowDataBound" OnPageIndexChanging="dtgParticipantes_PageIndexChanging"
+                                                        OnSorting="dtgParticipantes_Sorting" Width="370px" Visible="true" EmptyDataText="Participante não cadastrado.">
+                                                        <Columns>
+                                                            <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
+                                                                <HeaderStyle CssClass="grd_cmd_header" />
+                                                                <ItemStyle CssClass="grd_delete" />
+                                                            </asp:CommandField>
+                                                            <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
+                                                            <asp:BoundField DataField="CODIGO" HeaderText="Cod" SortExpression="CODIGO" Visible="false" />
+                                                            <asp:BoundField DataField="NOME" HeaderText="Nome" SortExpression="NOME" />
+                                                        </Columns>
+                                                        <FooterStyle BackColor="White" ForeColor="#000066" />
+                                                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                                        <RowStyle ForeColor="#000066" />
+                                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                                        <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                                        <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                                    </asp:GridView>                                                    
+                                                </td>
+                                            </tr>
+                                        </table>                                                                               
                                     </td>
                                 </tr>
                             </table>
@@ -92,54 +126,6 @@
                 <div class="status">
                 </div>
                 <asp:HiddenField ID="hfOrdem" runat="server" />
-                <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdParticipante"
-                    PopupControlID="pnlVenda" BackgroundCssClass="modalBackground" DropShadow="true"
-                    OkControlID="btnCancel" Enabled="false" />
-                <asp:Panel runat="server" ID="pnlVenda" Width="400px" CssClass="modalPopup" Style="display: none">
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <asp:GridView ID="grdPesquisa" runat="server" CellPadding="3" AutoGenerateColumns="False"
-                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
-                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisa_RowDataBound"
-                                    Width="300px">
-                                    <Columns>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_tick.png"
-                                                    OnClick="btnSelect_Click" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
-                                    </Columns>
-                                    <FooterStyle BackColor="White" ForeColor="#000066" />
-                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                    <RowStyle ForeColor="#000066" />
-                                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                    <SortedDescendingHeaderStyle BackColor="#00547E" />
-                                </asp:GridView>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
