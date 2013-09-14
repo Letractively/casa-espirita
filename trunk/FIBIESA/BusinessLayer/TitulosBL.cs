@@ -106,73 +106,73 @@ namespace BusinessLayer
             InstituicoesBL instBL = new InstituicoesBL();
             DataSet dsInst = instBL.PesquisarDsBL();
             
-            //posicoes 001 - 009 
-            header.Append("01REMESSA"); 
+            ////posicoes 001 - 009 
+            //header.Append("01REMESSA"); 
 
-            //posicoes 010 - 026 brancos
-            utils.IncluirBrancos(header, 0, 16);
+            ////posicoes 010 - 026 brancos
+            //utils.IncluirBrancos(header, 0, 16);
 
-            //posicoes 027 - 039     
-            header.Append(titulo.Portador.CodCedente.ToString());
-            utils.IncluirZeros(header, titulo.Portador.CodCedente.ToString().Length, 13);                       
+            ////posicoes 027 - 039     
+            //header.Append(titulo.Portador.CodCedente.ToString());
+            //utils.IncluirZeros(header, titulo.Portador.CodCedente.ToString().Length, 13);                       
             
-            //posicoes 040 - 046 brancos
-            utils.IncluirBrancos(header, 0, 7);
+            ////posicoes 040 - 046 brancos
+            //utils.IncluirBrancos(header, 0, 7);
 
-            if (dsInst.Tables[0].Rows.Count != 0)
-            {
-                //posicoes 047 - 076 nome da empresa
-                utils.IncluirBrancos(header, dsInst.Tables[0].Rows[0]["razao"].ToString().Length, 30);
-                header.Append((string)dsInst.Tables[0].Rows[0]["razao"].ToString());
-            }
+            //if (dsInst.Tables[0].Rows.Count != 0)
+            //{
+            //    //posicoes 047 - 076 nome da empresa
+            //    utils.IncluirBrancos(header, dsInst.Tables[0].Rows[0]["razao"].ToString().Length, 30);
+            //    header.Append((string)dsInst.Tables[0].Rows[0]["razao"].ToString());
+            //}
             
-            //posicoes 077 - 087 
-            header.Append("041BANRISUL");
+            ////posicoes 077 - 087 
+            //header.Append("041BANRISUL");
 
-            //posicoes 088 - 094 brancos
-            utils.IncluirBrancos(header,0, 7);
+            ////posicoes 088 - 094 brancos
+            //utils.IncluirBrancos(header,0, 7);
 
-            //posicoes 095 - 100 
-            header.Append(DateTime.Now.ToString("ddMMyy"));
+            ////posicoes 095 - 100 
+            //header.Append(DateTime.Now.ToString("ddMMyy"));
 
-            //posicoes 101 - 109 brancos
-            utils.IncluirBrancos(header, 0, 9);
+            ////posicoes 101 - 109 brancos
+            //utils.IncluirBrancos(header, 0, 9);
 
-            //posicoes 110 - 113
-            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X")
-            {
-                header.Append("0808");
-                //posicoes 114 - 114 branco
-                utils.IncluirBrancos(header, 0, 1);
+            ////posicoes 110 - 113
+            //if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X")
+            //{
+            //    header.Append("0808");
+            //    //posicoes 114 - 114 branco
+            //    utils.IncluirBrancos(header, 0, 1);
 
-                // posicoes 115 - 115
-                header.Append("P");
+            //    // posicoes 115 - 115
+            //    header.Append("P");
 
-                //posicoes 116 - 116
-                utils.IncluirBrancos(header, 0, 1);
+            //    //posicoes 116 - 116
+            //    utils.IncluirBrancos(header, 0, 1);
 
-                //posicoes 117 - 126
-                utils.IncluirBrancos(header, titulo.Portador.CodEmpBanriMicro.Length, 10);
-                header.Append(titulo.Portador.CodEmpBanriMicro);
-            }
-            else
-            {
-                //posicoes 110 - 113 e 114 ao 126
-                utils.IncluirBrancos(header, 0, 17);
-            }                    
+            //    //posicoes 117 - 126
+            //    utils.IncluirBrancos(header, titulo.Portador.CodEmpBanriMicro.Length, 10);
+            //    header.Append(titulo.Portador.CodEmpBanriMicro);
+            //}
+            //else
+            //{
+            //    //posicoes 110 - 113 e 114 ao 126
+            //    utils.IncluirBrancos(header, 0, 17);
+            //}                    
 
-            //posicoes 127 - 394 brancos
-            utils.IncluirBrancos(header, 0, 268);
+            ////posicoes 127 - 394 brancos
+            //utils.IncluirBrancos(header, 0, 268);
 
-            //posicoes 395 - 400
-            header.Append("000001");
+            ////posicoes 395 - 400
+            //header.Append("000001");
 
             return header;
         }
 
         public StringBuilder ArquivoRemessaMontarTransacao(StringBuilder transacao, Titulos titulo, Remessa remessa)
         {
-            decimal v_taxa_juro;
+            decimal v_taxa_juro = 0;
 
             //posicoes 001 - 001
             transacao.Append("1");
@@ -250,32 +250,32 @@ namespace BusinessLayer
                 utils.IncluirCampoNumerico(transacao, ((titulo.Valor * v_taxa_juro) / 100).ToString(), 12); 
 
             //posicoes 174 - 179 data de desconto
-            utils.IncluirCampoAlfanumerico(transacao," ",6);
+            utils.IncluirCampoNumerico(transacao, "0", 6);
 
-            ////posicoes 180 - 192 valor do desconto
-            //IncluirBrancos(detalhe, 13);
+            //posicoes 180 - 192 valor do desconto
+            utils.IncluirCampoNumerico(transacao, "0", 13);
 
-            ////posicoes 193 - 205 valor IOF
-            //IncluirBrancos(detalhe, 13);
+            //posicoes 193 - 205 valor IOF
+            utils.IncluirCampoNumerico(transacao, "0", 13);
 
-            ////posicoes 206 - 218
-            //IncluirBrancos(detalhe, 13);
+            //posicoes 206 - 218 valor do abatimento
+            utils.IncluirCampoNumerico(transacao, "0", 13);
 
-            ////posicoes 219 - 220 tipo de inscrição do sacado
-            ////01 pessoa fisica, 02 pessoa juridica
-            //detalhe.Append("01 ou 02");
+            //posicoes 219 - 220 tipo de inscrição do sacado
+            //01 pessoa fisica, 02 pessoa juridica
+            utils.IncluirCampoNumerico(transacao, titulo.Pessoas.Tipo == "F" ? "01" : "02", 2);
 
-            ////posicoes 221 - 234 cpf/cnfp
-            //detalhe.Append("cpfCnpf");
+            //posicoes 221 - 234 cpf/cnfp
+            utils.IncluirCampoNumerico(transacao, titulo.Pessoas.CpfCnpj, 14);
 
-            ////posicoes 235 - 269 nome do sacado
-            //detalhe.Append("nome cliente");
+            //posicoes 235 - 269 nome do sacado
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Nome, 35);
 
-            ////posicoes 270 - 274 brancos
-            //utils.IncluirBrancos(transacao, 0, 5);
+            //posicoes 270 - 274 brancos
+            utils.IncluirCampoAlfanumerico(transacao, " ", 5);
 
-            ////posicoes 275 - 314 endereco 
-            //detalhe.Append("endereço do cliente");
+            //posicoes 275 - 314 endereco 
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Endereco,35);
 
             //posicoes 315 - 321 
             utils.IncluirCampoAlfanumerico(transacao," ", 7);
@@ -289,17 +289,17 @@ namespace BusinessLayer
             trailler.Append("9");
 
             //posicoes 002 - 027
-            utils.IncluirBrancos(trailler, 0, 26);
+            utils.IncluirCampoAlfanumerico(trailler, " ", 26);
 
-            //posicoes 028 - 040
-            utils.IncluirZeros(trailler, titulo.Valor.ToString().Length, 13);
-            trailler.Append(titulo.Valor.ToString());
+            ////posicoes 028 - 040
+            //utils.IncluirZeros(trailler, titulo.Valor.ToString().Length, 13);
+            //trailler.Append(titulo.Valor.ToString());
 
-            //posicoes 041 - 395 
-            utils.IncluirBrancos(trailler, 0, 353);
+            ////posicoes 041 - 395 
+            //utils.IncluirBrancos(trailler, 0, 353);
 
-            //posicoes 395 - 400 sequencia do registro
-            trailler.Append("000001");
+            ////posicoes 395 - 400 sequencia do registro
+            //trailler.Append("000001");
 
             return trailler;
         }
