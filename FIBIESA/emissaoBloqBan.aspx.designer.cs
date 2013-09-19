@@ -166,15 +166,6 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtInstrucoes;
         
         /// <summary>
-        /// btnGerarArquivo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGerarArquivo;
-        
-        /// <summary>
         /// btnVoltar control.
         /// </summary>
         /// <remarks>

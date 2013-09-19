@@ -579,29 +579,6 @@ namespace FIBIESA
             pnlTitulos_ModalPopupExtender.Enabled = true;
             pnlTitulos_ModalPopupExtender.Show(); 
         }
-
-        protected void btnGerarArquivo_Click(object sender, EventArgs e)
-        {
-            //string nomeAqrquivo = LerParametro(6,"F");
-
-            //nomeAqrquivo = System.Web.HttpContext.Current.Server.MapPath(nomeAqrquivo);
-
-            //if (File.Exists(nomeAqrquivo))
-            //{
-            //    File.Delete(nomeAqrquivo);
-            //}
-
-            //StreamWriter SW;
-            //SW = File.CreateText(nomeAqrquivo);
-            ////SW.WriteLine(texto);
-            //SW.Close();
-
-            //UTF-8 ISO-8859-1 verificar qual utilizar
-            Nomedoarquivo = Path.Combine(Path.GetTempPath(), System.IO.Path.GetRandomFileName() + ".txt");
-            StreamWriter sw = new StreamWriter(Nomedoarquivo, true, System.Text.Encoding.GetEncoding("UTF - 8"));
-
-            
-        }
         
     }
 }

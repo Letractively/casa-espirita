@@ -310,6 +310,35 @@ namespace DataAccess
 
             return ds;
         }
-                
+
+        public List<Titulos> PesquisarBuscaDA(SelecaoTitulos selTitulos)
+        {
+            StringBuilder consulta = new StringBuilder();
+
+            consulta.Append(@"SELECT * FROM VIEW_TITULOS WHERE 1 = 1  ");
+
+            if (selTitulos.TipoTitulo != string.Empty)
+                consulta.Append(@" AND APLICACAO = '" + selTitulos.TipoTitulo + "' ");
+            
+            if (selTitulos.CodPotadores != string.Empty)
+                consulta.Append(@" AND CODIGOPORTADOR IN (" + selTitulos.CodPotadores + ")");
+
+            if (selTitulos.CodTitulos != string.Empty)
+                consulta.Append(@" AND numero IN (" + selTitulos.CodTitulos + ")");
+          
+            if ((selTitulos.DataEmissaoIni != string.Empty) && (selTitulos.DataEmissaoFim != string.Empty))
+                consulta.Append(@" AND CONVERT(DATE,DTEMISSAO,103) BETWEEN CONVERT(DATE,'" + selTitulos.DataEmissaoIni + "',103) AND CONVERT(DATE,'" + selTitulos.DataEmissaoFim + "',103)");
+
+            if ((selTitulos.DataVencimentoIni != string.Empty) && (selTitulos.DataVencimentoFim != string.Empty))
+                consulta.Append(@" AND CONVERT(DATE,DTVENCIMENTO,103)  BETWEEN CONVERT(DATE,'" + selTitulos.DataVencimentoIni + "',103) AND CONVERT(DATE,'" + selTitulos.DataVencimentoFim + "',103)");
+
+            
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Titulos> titulos = CarregarObjTitulos(dr);
+
+            return titulos;
+        }
     }
 }

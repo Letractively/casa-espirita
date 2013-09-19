@@ -44,7 +44,8 @@
                                 <td style="width: 400px" colspan="3">
                                     <asp:TextBox ID="txtIntTitulos" runat="server" CssClass="inputbox" Width="300px"
                                         AutoPostBack="True" ToolTip="Intervalo Selecionado. Use ',' ou '|' ou '%'. Ex:1,2; 1|8; 1,20% "></asp:TextBox>
-                                    <asp:Button ID="btnPesTitulo" runat="server" CssClass="btn" Text="..." CausesValidation="False" />
+                                    <asp:Button ID="btnPesTitulo" runat="server" CssClass="btn" Text="..." 
+                                        CausesValidation="False" onclick="btnPesTitulo_Click1" />
                                 </td>
                             </tr>
                             <tr>
@@ -55,7 +56,8 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDtEmiIni" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox>
+                                                <asp:TextBox ID="txtDtEmiIni" runat="server" CssClass="inputbox" Width="100px" 
+                                                    MaxLength="10"></asp:TextBox>
                                                 <asp:CalendarExtender ID="txtDtEmiIni_CalendarExtender" runat="server" TargetControlID="txtDtEmiIni">
                                                 </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Data com formato errado"
@@ -66,7 +68,8 @@
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtDtEmiFim" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
+                                                <asp:TextBox ID="txtDtEmiFim" runat="server" CssClass="inputbox" Width="110px" 
+                                                    MaxLength="10"></asp:TextBox>
                                                 <asp:CalendarExtender ID="txtDtEmiFim_CalendarExtender" runat="server" TargetControlID="txtDtEmiFim">
                                                 </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
@@ -85,22 +88,24 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txtDtVencIni" runat="server" CssClass="inputbox" Width="100px"></asp:TextBox>
-                                                <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtDtEmiIni">
+                                                <asp:TextBox ID="txtDtVencIni" runat="server" CssClass="inputbox" Width="100px" 
+                                                    MaxLength="10"></asp:TextBox>
+                                                <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtDtVencIni">
                                                 </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*Data com formato errado"
-                                                    ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDtEmiIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                                    ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDtVencIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
                                                     Display="Dynamic" ValidationGroup="grupo" ForeColor="Red"></asp:RegularExpressionValidator>
                                             </td>
                                             <td>
                                                 &nbsp;a&nbsp;&nbsp;
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtDtVencFim" runat="server" CssClass="inputbox" Width="110px"></asp:TextBox>
-                                                <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtDtEmiFim">
+                                                <asp:TextBox ID="txtDtVencFim" runat="server" CssClass="inputbox" Width="110px" 
+                                                    MaxLength="10"></asp:TextBox>
+                                                <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtDtVencFim">
                                                 </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*Data com formato errado"
-                                                    ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDtEmiFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
+                                                    ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtDtVencFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"
                                                     Display="Dynamic" ValidationGroup="grupo" ForeColor="Red"></asp:RegularExpressionValidator>
                                             </td>
                                         </tr>
@@ -220,55 +225,7 @@
                     <asp:HiddenField ID="hfIdPessoa" runat="server" />
                 </div>
                 <div class="status">
-                </div>
-                <asp:Panel runat="server" ID="pnlCliente" Width="400px" CssClass="modalPopup" Style="display: none">
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <asp:GridView ID="grdPesquisa" runat="server" CellPadding="3" AutoGenerateColumns="False"
-                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
-                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisa_RowDataBound"
-                                    Width="300px">
-                                    <Columns>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="btnSelect" runat="server" ImageUrl="~/images/icons/icon_tick.png"
-                                                    OnClick="btnSelect_Click" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
-                                        <asp:BoundField DataField="CODIGO" HeaderText="Código" />
-                                        <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
-                                    </Columns>
-                                    <FooterStyle BackColor="White" ForeColor="#000066" />
-                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                    <RowStyle ForeColor="#000066" />
-                                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                    <SortedDescendingHeaderStyle BackColor="#00547E" />
-                                </asp:GridView>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-                <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdPessoa"
-                    PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
-                    OkControlID="btnCancel" Enabled="false" />
+                </div>               
                 <asp:Panel runat="server" ID="pnlTitulos" Width="400px" CssClass="modalPopup" Style="display: none">
                     <table>
                         <tr>

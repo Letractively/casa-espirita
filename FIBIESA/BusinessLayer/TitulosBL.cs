@@ -106,66 +106,64 @@ namespace BusinessLayer
             InstituicoesBL instBL = new InstituicoesBL();
             DataSet dsInst = instBL.PesquisarDsBL();
             
-            ////posicoes 001 - 009 
-            //header.Append("01REMESSA"); 
+            //posicoes 001 - 009 
+            header.Append("01REMESSA"); 
 
-            ////posicoes 010 - 026 brancos
-            //utils.IncluirBrancos(header, 0, 16);
+            //posicoes 010 - 026 brancos
+            utils.IncluirCampoAlfanumerico(header, " ", 17);
 
-            ////posicoes 027 - 039     
-            //header.Append(titulo.Portador.CodCedente.ToString());
-            //utils.IncluirZeros(header, titulo.Portador.CodCedente.ToString().Length, 13);                       
+            //posicoes 027 - 039     
+            utils.IncluirCampoNumerico(header, titulo.Portador.CodCedente.ToString(), 13);
             
-            ////posicoes 040 - 046 brancos
-            //utils.IncluirBrancos(header, 0, 7);
+            //posicoes 040 - 046 brancos
+            utils.IncluirCampoAlfanumerico(header, " ", 7);
 
-            //if (dsInst.Tables[0].Rows.Count != 0)
-            //{
-            //    //posicoes 047 - 076 nome da empresa
-            //    utils.IncluirBrancos(header, dsInst.Tables[0].Rows[0]["razao"].ToString().Length, 30);
-            //    header.Append((string)dsInst.Tables[0].Rows[0]["razao"].ToString());
-            //}
+            if (dsInst.Tables[0].Rows.Count != 0)
+            {
+                //posicoes 047 - 076 nome da empresa
+                utils.IncluirCampoAlfanumerico(header, dsInst.Tables[0].Rows[0]["razao"].ToString(), 30);                
+            }
             
-            ////posicoes 077 - 087 
-            //header.Append("041BANRISUL");
+            //posicoes 077 - 087 
+            header.Append("041BANRISUL");
 
-            ////posicoes 088 - 094 brancos
-            //utils.IncluirBrancos(header,0, 7);
+            //posicoes 088 - 094 brancos
+            utils.IncluirCampoAlfanumerico(header, " ", 7);
 
-            ////posicoes 095 - 100 
-            //header.Append(DateTime.Now.ToString("ddMMyy"));
+            //posicoes 095 - 100 
+            header.Append(DateTime.Now.ToString("ddMMyy"));
 
-            ////posicoes 101 - 109 brancos
-            //utils.IncluirBrancos(header, 0, 9);
+            //posicoes 101 - 109 brancos
+            utils.IncluirCampoAlfanumerico(header, " ", 9);
 
-            ////posicoes 110 - 113
-            //if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X")
-            //{
-            //    header.Append("0808");
-            //    //posicoes 114 - 114 branco
-            //    utils.IncluirBrancos(header, 0, 1);
+            //posicoes 110 - 113
+            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X")
+            {
+                header.Append("0808");
+                //posicoes 114 - 114 branco
+                utils.IncluirCampoAlfanumerico(header, " ", 1);
 
-            //    // posicoes 115 - 115
-            //    header.Append("P");
+                // posicoes 115 - 115
+                header.Append("P");
 
-            //    //posicoes 116 - 116
-            //    utils.IncluirBrancos(header, 0, 1);
+                //posicoes 116 - 116
+                utils.IncluirCampoAlfanumerico(header, " ", 1);
 
-            //    //posicoes 117 - 126
-            //    utils.IncluirBrancos(header, titulo.Portador.CodEmpBanriMicro.Length, 10);
-            //    header.Append(titulo.Portador.CodEmpBanriMicro);
-            //}
-            //else
-            //{
-            //    //posicoes 110 - 113 e 114 ao 126
-            //    utils.IncluirBrancos(header, 0, 17);
-            //}                    
+                //posicoes 117 - 126
+                utils.IncluirCampoAlfanumerico(header, titulo.Portador.CodEmpBanriMicro, 10);
+               
+            }
+            else
+            {
+                //posicoes 110 - 113 e 114 ao 126
+                utils.IncluirCampoAlfanumerico(header, " ", 17); 
+            }                    
 
-            ////posicoes 127 - 394 brancos
-            //utils.IncluirBrancos(header, 0, 268);
+            //posicoes 127 - 394 brancos
+            utils.IncluirCampoAlfanumerico(header, " ", 268);
 
-            ////posicoes 395 - 400
-            //header.Append("000001");
+            //posicoes 395 - 400
+            utils.IncluirCampoNumerico(header, "1", 6);
 
             return header;
         }
@@ -291,18 +289,25 @@ namespace BusinessLayer
             //posicoes 002 - 027
             utils.IncluirCampoAlfanumerico(trailler, " ", 26);
 
-            ////posicoes 028 - 040
-            //utils.IncluirZeros(trailler, titulo.Valor.ToString().Length, 13);
-            //trailler.Append(titulo.Valor.ToString());
+            //posicoes 028 - 040
+            utils.IncluirCampoNumerico(trailler, "valor", 13); 
 
-            ////posicoes 041 - 395 
-            //utils.IncluirBrancos(trailler, 0, 353);
+            //posicoes 041 - 395 
+            utils.IncluirCampoAlfanumerico(trailler, " ", 355);
 
-            ////posicoes 395 - 400 sequencia do registro
-            //trailler.Append("000001");
+            //posicoes 395 - 400 sequencia do registro
+            utils.IncluirCampoNumerico(trailler, "1", 6);
 
             return trailler;
         }
+
+        public List<Titulos> PesquisarBuscaBL(SelecaoTitulos selTitulos)
+        {
+            TitulosDA titulosDA = new TitulosDA();
+
+            return titulosDA.PesquisarBuscaDA(selTitulos);
+        }
+
         
     }
 }

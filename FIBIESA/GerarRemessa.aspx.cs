@@ -24,7 +24,7 @@ namespace FIBIESA
 
             ddlPortador.Items.Add(new ListItem());
             foreach (Portadores ltPort in port)
-                ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
+                ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Codigo.ToString()));
 
             ddlPortador.SelectedIndex = 0;
         }
@@ -44,7 +44,45 @@ namespace FIBIESA
             get { return ViewState["nomedoarquivo"].ToString(); }
             set { ViewState["nomedoarquivo"] = value; }
         }
+        public void CarregarPesquisaTitulos(string conteudo)
+        {
+            DataTable dt = new DataTable();
+            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
+            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+
+            dt.Columns.Add(coluna1);
+            dt.Columns.Add(coluna2);
+            dt.Columns.Add(coluna3);
+
+            TitulosBL titBL = new TitulosBL();
+            Titulos tit = new Titulos();
+            List<Titulos> titulos = titBL.PesquisarBuscaBL("R", conteudo);
+
+            foreach (Titulos ltTit in titulos)
+            {
+                DataRow linha = dt.NewRow();
+
+                linha["ID"] = ltTit.Id;
+                linha["CODIGO"] = ltTit.Numero;
+                linha["DESCRICAO"] = ltTit.Parcela;
+
+                dt.Rows.Add(linha);
+            }
+
+
+            grdPesquisatit.DataSource = dt;
+            grdPesquisatit.DataBind();
+        }
+        private void CarregarAtributos()
+        {
+            txtDtVencIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtVencFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtEmiIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDtEmiFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+        }
         #endregion
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,6 +90,9 @@ namespace FIBIESA
                 CarregarDdlInstrucao(ddlInstrucao1);
                 CarregarDdlInstrucao(ddlInstrucao2);
                 CarregarDdlPortador();
+                CarregarAtributos();
+                lkbDownload.Visible = false;
+                Session["IntTitulos"] = null;
             }
 
         }
@@ -59,15 +100,7 @@ namespace FIBIESA
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/default.aspx");
-        }
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            //CarregarPesquisa(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
+        }              
 
         protected void btnCancelTit_Click(object sender, EventArgs e)
         {
@@ -89,6 +122,15 @@ namespace FIBIESA
             StreamWriter sw = new StreamWriter(Nomedoarquivo, true, System.Text.Encoding.GetEncoding("UTF-8"));
 
             TitulosBL titulosBL = new TitulosBL();
+            SelecaoTitulos selTitulos = new SelecaoTitulos();
+
+            selTitulos.CodTitulos = txtIntTitulos.Text;
+            selTitulos.CodPotadores = ddlPortador.SelectedValue;
+            selTitulos.DataEmissaoIni = txtDtEmiIni.Text;
+            selTitulos.DataEmissaoFim = txtDtEmiFim.Text;
+            selTitulos.DataVencimentoIni = txtDtVencIni.Text;
+            selTitulos.DataVencimentoFim = txtDtVencFim.Text;
+
             List<Titulos> titulos = titulosBL.PesquisarBuscaBL("R",null);
 
             StringBuilder arquivo = new StringBuilder(); 
@@ -111,27 +153,7 @@ namespace FIBIESA
             btnGerar.Visible = false;
 
         }
-
-        protected void btnSelect_Click(object sender, EventArgs e)
-        {
-
-            ImageButton btndetails = sender as ImageButton;
-            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
-
-            //if (Session["IntClientes"] != null)
-            //    txtIntClientes.Text = Session["IntClientes"].ToString() + ",";
-
-            //txtIntClientes.Text = txtIntClientes.Text + gvrow.Cells[2].Text;
-            //Session["IntClientes"] = txtIntClientes.Text;
-            ModalPopupExtenderPesquisa.Hide();
-            ModalPopupExtenderPesquisa.Enabled = false;
-        }
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            ModalPopupExtenderPesquisa.Enabled = false;
-        }
-
+        
         protected void btnPesTitulo_Click(object sender, EventArgs e)
         {
             //CarregarPesquisaTitulos(null);
@@ -141,7 +163,7 @@ namespace FIBIESA
 
         protected void txtPesTitulo_TextChanged(object sender, EventArgs e)
         {
-           // CarregarPesquisaTitulos(txtPesquisa.Text);
+            CarregarPesquisaTitulos(txtPesTitulo.Text);
             pnlTitulos_ModalPopupExtender.Enabled = true;
             pnlTitulos_ModalPopupExtender.Show();
             txtPesTitulo.Text = "";
@@ -179,6 +201,12 @@ namespace FIBIESA
           
         }
 
+        protected void btnPesTitulo_Click1(object sender, EventArgs e)
+        {
+            CarregarPesquisaTitulos(null);
+            pnlTitulos_ModalPopupExtender.Enabled = true;
+            pnlTitulos_ModalPopupExtender.Show();
+        }
        
     }
 }
