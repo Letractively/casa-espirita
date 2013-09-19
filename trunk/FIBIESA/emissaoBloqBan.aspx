@@ -121,15 +121,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table>
-                            <tr>
-                                <td style="width: 140px">
-                                </td>
-                                <td>
-                                    <asp:Button ID="btnGerarArquivo" runat="server" Text="Gerar Arquivo Remessa" CssClass="btn" OnClick="btnGerarArquivo_Click"
-                                        ValidationGroup="grupo" ToolTip="Gera arquivo de remessa" />
-                                </td>
-                            </tr>
+                        <table>                           
                             <tr>
                                 <td style="width: 140px">
                                 </td>

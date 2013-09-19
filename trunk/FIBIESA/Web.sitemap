@@ -17,6 +17,7 @@
         <siteMapNode url="cadContasReceber.aspx" title="Cadastro de Contas a Receber" description="Contas a Receber"/>
       </siteMapNode>
       <siteMapNode url="emissaoBloqBan.aspx" title="Emissão de Bloqueto Bancário" description="Emissão de Bloqueto Bancário" />
+      <siteMapNode url="GerarRemessa.aspx" title="Gerar arquivo de remessa" description="Gerar arquivo de remessa" />
       <siteMapNode url="viewJuroMulta.aspx" title="Juros Multas" description="Juros Multas">
         <siteMapNode url="cadJuroMulta.aspx" title="Cadastro de Juros e Multas" description="Juros Multas"/>
       </siteMapNode>
@@ -37,7 +38,7 @@
       </siteMapNode>
       <siteMapNode url="viewTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos">
         <siteMapNode url="cadTipoDocumento.aspx" title="Tipos de Documentos" description="Tipos de Documentos"/>
-      </siteMapNode>
+      </siteMapNode>      
       <siteMapNode url="viewRelVendas.aspx" title="Relatório de Vendas" description="Relatório de Vendas" />
       <siteMapNode url="viewRelDoacoes.aspx" title="Relatório de Doações" description="Relatório de Doações" />
       <siteMapNode url="viewRelContasPagar.aspx" title="Relatório de Contas a Pagar" description="Relatório de Contas a Pagar" />
