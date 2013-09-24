@@ -24,7 +24,7 @@ namespace FIBIESA
 
             ddlPortador.Items.Add(new ListItem());
             foreach (Portadores ltPort in port)
-                ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Codigo.ToString()));
+                ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
 
             ddlPortador.SelectedIndex = 0;
         }
@@ -121,6 +121,7 @@ namespace FIBIESA
             Nomedoarquivo = Path.Combine(Path.GetTempPath(), System.IO.Path.GetRandomFileName() + ".txt");
             StreamWriter sw = new StreamWriter(Nomedoarquivo, true, System.Text.Encoding.GetEncoding("UTF-8"));
 
+            PortadoresBL portadoresBL = new PortadoresBL();
             TitulosBL titulosBL = new TitulosBL();
             SelecaoTitulos selTitulos = new SelecaoTitulos();
 
@@ -130,23 +131,30 @@ namespace FIBIESA
             selTitulos.DataEmissaoFim = txtDtEmiFim.Text;
             selTitulos.DataVencimentoIni = txtDtVencIni.Text;
             selTitulos.DataVencimentoFim = txtDtVencFim.Text;
+            selTitulos.Tipo = "R";
 
-            List<Titulos> titulos = titulosBL.PesquisarBuscaBL("R",null);
+            StringBuilder arquivo = new StringBuilder();
 
-            StringBuilder arquivo = new StringBuilder(); 
+            List<Portadores> portadores = portadoresBL.PesquisarBL(utils.ComparaIntComZero(ddlPortador.SelectedValue));
 
-            foreach (Titulos ltTit in titulos)
+            foreach (Portadores ltPor in portadores)
             {
-                titulosBL.ArquivoRemessaMontarHeader(arquivo, ltTit);
-                sw.WriteLine(arquivo);
-
-                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa);
-                sw.WriteLine(arquivo);
-
-                titulosBL.ArquivoRemessaMontarHeader(arquivo, ltTit);
+                titulosBL.ArquivoRemessaMontarHeader(arquivo, ltPor);
                 sw.WriteLine(arquivo);
             }
-            
+
+            List<Titulos> titulos = titulosBL.PesquisarBuscaBL(selTitulos);
+                        
+            foreach (Titulos ltTit in titulos)
+            {
+                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa);
+                sw.WriteLine(arquivo);                
+            }
+
+            //titulosBL.ArquivoRemessaMontarHeader(arquivo, ltTit);
+            //sw.WriteLine(arquivo);
+
+
             sw.Close();
             lkbDownload.Visible = true;
             lkbDownload.Text = "remessa_" + ddlPortador.SelectedItem.Text.Replace(" ", "_") + "_" + DateTime.Now.ToString("dd_MM_yyyy") + ".txt";

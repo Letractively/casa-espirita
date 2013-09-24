@@ -317,8 +317,8 @@ namespace DataAccess
 
             consulta.Append(@"SELECT * FROM VIEW_TITULOS WHERE 1 = 1  ");
 
-            if (selTitulos.TipoTitulo != string.Empty)
-                consulta.Append(@" AND APLICACAO = '" + selTitulos.TipoTitulo + "' ");
+            if (selTitulos.Tipo != string.Empty)
+                consulta.Append(@" AND TIPO = '" + selTitulos.Tipo + "' ");
             
             if (selTitulos.CodPotadores != string.Empty)
                 consulta.Append(@" AND CODIGOPORTADOR IN (" + selTitulos.CodPotadores + ")");
