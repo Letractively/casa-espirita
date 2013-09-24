@@ -101,7 +101,7 @@ namespace BusinessLayer
             return titulosDA.RetornaNovoNumero();
         }
 
-        public StringBuilder ArquivoRemessaMontarHeader(StringBuilder header, Titulos titulo)
+        public StringBuilder ArquivoRemessaMontarHeader(StringBuilder header, Portadores portador)
         {
             InstituicoesBL instBL = new InstituicoesBL();
             DataSet dsInst = instBL.PesquisarDsBL();
@@ -113,7 +113,7 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(header, " ", 17);
 
             //posicoes 027 - 039     
-            utils.IncluirCampoNumerico(header, titulo.Portador.CodCedente.ToString(), 13);
+            utils.IncluirCampoNumerico(header, portador.CodCedente.ToString(), 13);
             
             //posicoes 040 - 046 brancos
             utils.IncluirCampoAlfanumerico(header, " ", 7);
@@ -137,7 +137,7 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(header, " ", 9);
 
             //posicoes 110 - 113
-            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X")
+            if (portador.Carteira == "R" || portador.Carteira == "S" || portador.Carteira == "X")
             {
                 header.Append("0808");
                 //posicoes 114 - 114 branco
@@ -150,7 +150,7 @@ namespace BusinessLayer
                 utils.IncluirCampoAlfanumerico(header, " ", 1);
 
                 //posicoes 117 - 126
-                utils.IncluirCampoAlfanumerico(header, titulo.Portador.CodEmpBanriMicro, 10);
+                utils.IncluirCampoAlfanumerico(header, portador.CodEmpBanriMicro, 10);
                
             }
             else
