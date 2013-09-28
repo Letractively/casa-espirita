@@ -76,7 +76,7 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px" ToolTip="Informe a data"></asp:TextBox>
-                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData"
+                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData" Format="dd/MM/yyyy"
                                         Enabled="True">
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtData"

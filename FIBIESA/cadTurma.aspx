@@ -62,7 +62,7 @@
                         <td>
                             <asp:TextBox ID="txtDtInicio" runat="server" CssClass="inputbox" Width="110px" 
                                 ToolTip="Selecione a data de início" ></asp:TextBox>
-                            <asp:CalendarExtender
+                            <asp:CalendarExtender Format="dd/MM/yyyy"
                              ID="txtDtInicio_CalendarExtender" runat="server" TargetControlID="txtDtInicio"
                                     Enabled="True">
                             </asp:CalendarExtender>
@@ -79,7 +79,7 @@ ControlToValidate="txtDtInicio" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/
                         <td>
                             <asp:TextBox ID="txtDtFim" runat="server" CssClass="inputbox" Width="110px" 
                                 ToolTip="Selecione a data de fim" ></asp:TextBox>
-                            <asp:CalendarExtender
+                            <asp:CalendarExtender Format="dd/MM/yyyy"
                              ID="txtDtFim_CalendarExtender" runat="server" TargetControlID="txtDtFim"
                                         Enabled="True">
                             </asp:CalendarExtender>

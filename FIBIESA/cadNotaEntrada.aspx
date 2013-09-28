@@ -49,7 +49,7 @@
                                 <td style="width: 300px" colspan="2">
                                     <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="100px" MaxLength="10"
                                         ToolTip="Informe a data"></asp:TextBox>
-                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData">
+                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData" Format="dd/MM/yyyy">
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Informe a data da nota"
                                         CssClass="validacao" ControlToValidate="txtData" 

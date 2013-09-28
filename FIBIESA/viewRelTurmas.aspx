@@ -54,7 +54,7 @@
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data inicial" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data inicial" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataIni_CalendarExtender" runat="server" TargetControlID="txtDataIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -67,7 +67,7 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtDataIniF" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data inicial" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data inicial" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataIniF_CalendarExtender" runat="server" TargetControlID="txtDataIniF"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -88,7 +88,7 @@
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataFimI" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data final" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data final" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataFimI_CalendarExtender" runat="server" TargetControlID="txtDataFimI"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -101,7 +101,7 @@
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data final" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data final" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataFim_CalendarExtender" runat="server" TargetControlID="txtDataFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>

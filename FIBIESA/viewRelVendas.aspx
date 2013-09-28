@@ -52,7 +52,7 @@ ControlToValidate="txtItem" ValidationExpression="^\d+(,\d+)*$" Display="Dynamic
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" ToolTip="Informe a data da venda"
-                                                    Width="100px"></asp:TextBox><asp:CalendarExtender ID="txtDataIni_CalendarExtender"
+                                                    Width="100px"></asp:TextBox><asp:CalendarExtender ID="txtDataIni_CalendarExtender" Format="dd/MM/yyyy"
                                                         runat="server" TargetControlID="txtDataIni" Enabled="True">
                                                     </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
@@ -64,7 +64,7 @@ ControlToValidate="txtDataIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" ToolTip="Informe a data de venda"
-                                                    Width="100px"></asp:TextBox><asp:CalendarExtender ID="txtDataFim_CalendarExtender"
+                                                    Width="100px"></asp:TextBox><asp:CalendarExtender ID="txtDataFim_CalendarExtender" Format="dd/MM/yyyy"
                                                         runat="server" TargetControlID="txtDataFim" Enabled="True">
                                                     </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 

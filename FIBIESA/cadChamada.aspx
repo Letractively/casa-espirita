@@ -33,7 +33,7 @@
                         <td style="width: 130px"> 
                         <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px" 
                                 ToolTip="Selecione a data"></asp:TextBox>
-                        <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData"
+                        <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData" Format="dd/MM/yyyy"
                             Enabled="True">
                         </asp:CalendarExtender>  
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
