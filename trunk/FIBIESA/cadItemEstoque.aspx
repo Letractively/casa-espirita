@@ -44,7 +44,7 @@
                                 <td style="width: 180px">
                                     <asp:TextBox ID="txtData" runat="server" Width="100px" CssClass="inputbox" 
                                         AutoPostBack="True" ToolTip="Informe a data"></asp:TextBox>
-                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData">
+                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData" Format="dd/MM/yyyy">
                                     </asp:CalendarExtender>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtData"
                                         CssClass="validacao" ErrorMessage="*Informe a data de implantação do estoque"

@@ -67,7 +67,7 @@ ControlToValidate="txtCliente" ValidationExpression="^\d+(,\d+)*$" Display="Dyna
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataIni" runat="server" CssClass="inputbox" Width="100px" 
-                                                    ToolTip="Informe a data "></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data "></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataIni_CalendarExtender" runat="server" TargetControlID="txtDataIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -80,7 +80,7 @@ ControlToValidate="txtDataIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="txtDataFim" runat="server" CssClass="inputbox" Width="100px" 
-                                                    ToolTip="Informe a data"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataFim_CalendarExtender" runat="server" TargetControlID="txtDataFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>

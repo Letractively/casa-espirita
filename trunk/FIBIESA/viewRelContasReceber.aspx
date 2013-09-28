@@ -82,7 +82,7 @@ ControlToValidate="txtPortador" ValidationExpression="^\d+(,\d+)*$" Display="Dyn
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataEmissaoIni" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de emissão" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de emissão" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataEmissaoIni_CalendarExtender" runat="server" TargetControlID="txtDataEmissaoIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -95,7 +95,7 @@ ControlToValidate="txtDataEmissaoIni" ValidationExpression="^(((0[1-9]|[12]\d|3[
                                             </td>
                                             <td>    
                                                 <asp:TextBox ID="txtDataEmissaoFim" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de emissão" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de emissão" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataEmissaoFim_CalendarExtender" runat="server" TargetControlID="txtDataEmissaoFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -116,7 +116,7 @@ ControlToValidate="txtDataEmissaoFim" ValidationExpression="^(((0[1-9]|[12]\d|3[
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataVencimentoIni" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de vencimento" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de vencimento" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataVencimentoIni_CalendarExtender" runat="server" TargetControlID="txtDataVencimentoIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -129,7 +129,7 @@ ControlToValidate="txtDataVencimentoIni" ValidationExpression="^(((0[1-9]|[12]\d
                                             </td>
                                             <td>    
                                                 <asp:TextBox ID="txtDataVencimentoFim" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de vencimento" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de vencimento" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataVencimentoFim_CalendarExtender" runat="server" TargetControlID="txtDataVencimentoFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -150,7 +150,7 @@ ControlToValidate="txtDataVencimentoFim" ValidationExpression="^(((0[1-9]|[12]\d
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDataPagamentoIni" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de pagamento" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de pagamento" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataPagamentoIni_CalendarExtender" runat="server" TargetControlID="txtDataPagamentoIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -163,7 +163,7 @@ ControlToValidate="txtDataPagamentoIni" ValidationExpression="^(((0[1-9]|[12]\d|
                                             </td>
                                             <td>    
                                                 <asp:TextBox ID="txtDataPagamentoFim" runat="server" CssClass="inputbox" 
-                                                    ToolTip="Informe a data de pagamento" Width="100px"></asp:TextBox><asp:CalendarExtender
+                                                    ToolTip="Informe a data de pagamento" Width="100px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataPagamentoFim_CalendarExtender" runat="server" TargetControlID="txtDataPagamentoFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>

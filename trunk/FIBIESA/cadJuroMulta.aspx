@@ -19,7 +19,7 @@
                                         ControlToValidate="txtMesAno" ErrorMessage="*Preenchimento Obrigatório" 
                                         ForeColor="#CC0000" ValidationGroup="salvar"></asp:RequiredFieldValidator>
                                     <asp:CalendarExtender
-                                        ID="txtMesAno_CalendarExtender" runat="server" TargetControlID="txtMesAno"
+                                        ID="txtMesAno_CalendarExtender" runat="server" TargetControlID="txtMesAno" Format="MM/yyyy"
                                         Enabled="True">
                                     </asp:CalendarExtender>
                                 </td>

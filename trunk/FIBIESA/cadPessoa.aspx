@@ -102,7 +102,7 @@
                                                 </td>
                                                 <td style="width: 180px" >
                                                     <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="inputbox" ToolTip="Informe a data de nascimento"
-                                                        Width="110px"></asp:TextBox><asp:CalendarExtender
+                                                        Width="110px"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                         ID="txtDataNascimento_CalendarExtender" runat="server" TargetControlID="txtDataNascimento"
                                                         Enabled="True">
                                                     </asp:CalendarExtender>

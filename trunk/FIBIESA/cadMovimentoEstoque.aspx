@@ -34,7 +34,7 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtData" runat="server" CssClass="inputbox" Width="110px" ToolTip="Informe a data"></asp:TextBox>
-                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData">
+                                    <asp:CalendarExtender ID="txtData_CalendarExtender" runat="server" TargetControlID="txtData" Format="dd/MM/yyyy">
                                     </asp:CalendarExtender>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Data com formato errado"
                                         ToolTip="Não Válido" SetFocusOnError="true" ControlToValidate="txtData" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"

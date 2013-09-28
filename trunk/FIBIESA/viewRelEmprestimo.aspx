@@ -57,7 +57,7 @@ ControlToValidate="txtAssociado" ValidationExpression="^\d+(,\d+)*$" Display="Dy
                                                 <asp:TextBox ID="txtDataRetiradaIni" runat="server" CssClass="inputbox" 
                                                     Width="100px" ToolTip="Informe a data de retirada"></asp:TextBox><asp:CalendarExtender
                                                     ID="txtDataRetiradaIni_CalendarExtender" runat="server" TargetControlID="txtDataRetiradaIni"
-                                                    Enabled="True">
+                                                    Enabled="True" Format="dd/MM/yyyy">
                                                 </asp:CalendarExtender>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*" ToolTip="Não Válido" SetFocusOnError="true" 
 ControlToValidate="txtDataRetiradaIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" 
@@ -68,7 +68,7 @@ ControlToValidate="txtDataRetiradaIni" ValidationExpression="^(((0[1-9]|[12]\d|3
                                             </td>
                                             <td>    
                                                 <asp:TextBox ID="txtDataRetiradaFin" runat="server" CssClass="inputbox" 
-                                                    Width="100px" ToolTip="Informe a data de retirada"></asp:TextBox><asp:CalendarExtender
+                                                    Width="100px" ToolTip="Informe a data de retirada"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDataRetiradaFin_CalendarExtender" runat="server" TargetControlID="txtDataRetiradaFin"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -89,7 +89,7 @@ ControlToValidate="txtDataRetiradaFin" ValidationExpression="^(((0[1-9]|[12]\d|3
                                         <tr>
                                             <td>
                                                 <asp:TextBox ID="txtDevolucaoIni" runat="server" CssClass="inputbox" 
-                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender
+                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDevolucaoIni_CalendarExtender" runat="server" TargetControlID="txtDevolucaoIni"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
@@ -102,7 +102,7 @@ ControlToValidate="txtDevolucaoIni" ValidationExpression="^(((0[1-9]|[12]\d|3[01
                                             </td>
                                             <td>     
                                                 <asp:TextBox ID="txtDevolucaoFim" runat="server" CssClass="inputbox" 
-                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender
+                                                    Width="100px" ToolTip="Informe a data de devolução"></asp:TextBox><asp:CalendarExtender Format="dd/MM/yyyy"
                                                     ID="txtDevolucaoFim_CalendarExtender" runat="server" TargetControlID="txtDevolucaoFim"
                                                     Enabled="True">
                                                 </asp:CalendarExtender>
