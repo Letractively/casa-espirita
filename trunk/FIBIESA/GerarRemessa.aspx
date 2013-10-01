@@ -35,6 +35,9 @@
                                     <asp:DropDownList ID="ddlPortador" runat="server" CssClass="dropdownlist" ToolTip="Selecione o portador"
                                         AutoPostBack="True">
                                     </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                        ControlToValidate="ddlPortador" CssClass="validacao" 
+                                        ErrorMessage="*Preenchimento Obrigatório" ValidationGroup="gerar">*Preenchimento obrigatório</asp:RequiredFieldValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -147,10 +150,11 @@
                                                 </asp:DropDownList>
                                             </td>
                                             <td>
-                                                Dias :
+                                                Dias protesto/devolução :
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtDiasUm" CssClass="inputboxRight" runat="server" Width="50px"></asp:TextBox>
+                                                <asp:TextBox ID="txtDiasUm" CssClass="inputboxRight" runat="server" 
+                                                    Width="50px" MaxLength="2"></asp:TextBox>
                                             </td>
                                         </tr>
                                     </table>
@@ -163,17 +167,11 @@
                                 <td style="width: 400px" colspan="3">
                                     <table>
                                         <tr>
-                                            <td>
+                                            <td colspan = 3>
                                                 <asp:DropDownList ID="ddlInstrucao2" runat="server" CssClass="dropdownlist" ToolTip="Selecione a instrução dois"
                                                     AutoPostBack="True">
                                                 </asp:DropDownList>
-                                            </td>
-                                            <td>
-                                                Dias :
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtDiasDois" runat="server" CssClass="inputboxRight" Width="50px"></asp:TextBox>
-                                            </td>
+                                            </td>                                          
                                         </tr>
                                     </table>
                                 </td>
@@ -217,7 +215,7 @@
                                         ToolTip="Volta para página principal" />
                                     &nbsp;&nbsp;&nbsp;
                                     <asp:Button ID="btnGerar" runat="server" Text="Gerar Remessa" CssClass="btn" OnClick="btnGerar_Click"
-                                        ValidationGroup="grupo" ToolTip="Gera o arquivo de remessa" />
+                                        ValidationGroup="gerar" ToolTip="Gera o arquivo de remessa" />
                                 </td>
                             </tr>
                         </table>

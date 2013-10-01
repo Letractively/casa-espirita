@@ -23,10 +23,12 @@ namespace FIBIESA
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("TOMBO", Type.GetType("System.String"));
 
             dt.Columns.Add(coluna1);
             dt.Columns.Add(coluna2);
             dt.Columns.Add(coluna3);
+            dt.Columns.Add(coluna4);
 
             ExemplaresBL exeBL = new ExemplaresBL();
             Exemplares exe = new Exemplares();
@@ -37,8 +39,9 @@ namespace FIBIESA
                 DataRow linha = dt.NewRow();
 
                 linha["ID"] = pes.Id;
-                linha["CODIGO"] = pes.Id;
+                linha["CODIGO"] = pes.Obras.Codigo;
                 linha["DESCRICAO"] = pes.Obras.Titulo;
+                linha["TOMBO"] = pes.Tombo;
 
                 dt.Rows.Add(linha);
             }
@@ -53,7 +56,7 @@ namespace FIBIESA
         {
             if (!IsPostBack)
             {
-
+                Session["IntExemplar"] = null;
             }
 
         }
@@ -74,10 +77,10 @@ namespace FIBIESA
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            if (Session["IntExemplar"] != null && Session["IntExemplar"] != string.Empty)
+            if (Session["IntExemplar"] != null)
                 txtCodigo.Text = Session["IntExemplar"].ToString() + ",";
 
-            txtCodigo.Text = txtCodigo.Text + gvrow.Cells[2].Text;
+            txtCodigo.Text = txtCodigo.Text + gvrow.Cells[4].Text;
             Session["IntExemplar"] = txtCodigo.Text;
             ModalPopupExtenderPesquisaExemplar.Hide();
             ModalPopupExtenderPesquisaExemplar.Enabled = false;

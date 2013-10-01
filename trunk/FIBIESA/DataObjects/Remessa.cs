@@ -34,5 +34,12 @@ namespace DataObjects
             get { return _juroMora; }
             set { _juroMora = value; }
         }
+
+        private string _diasProtesto;
+        public string DiasProtesto
+        {
+            get { return _diasProtesto; }
+            set { _diasProtesto = value; }
+        }
     }
 }

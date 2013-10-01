@@ -26,7 +26,7 @@ namespace FIBIESA
             foreach (Portadores ltPort in port)
                 ddlPortador.Items.Add(new ListItem(ltPort.Codigo + " - " + ltPort.Descricao, ltPort.Id.ToString()));
 
-            ddlPortador.SelectedIndex = 0;
+            ddlPortador.SelectedIndex = 1;
         }
         private void CarregarDdlInstrucao(DropDownList ddl)
         {
@@ -80,6 +80,7 @@ namespace FIBIESA
             txtDtVencFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDtEmiIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDtEmiFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
+            txtDiasUm.Attributes.Add("onkeypress", "return(Inteiros(this,event))");
         }
         #endregion
         
@@ -126,20 +127,25 @@ namespace FIBIESA
             SelecaoTitulos selTitulos = new SelecaoTitulos();
 
             selTitulos.CodTitulos = txtIntTitulos.Text;
-            selTitulos.CodPotadores = ddlPortador.SelectedValue;
+            selTitulos.PortadorId = ddlPortador.SelectedValue;
             selTitulos.DataEmissaoIni = txtDtEmiIni.Text;
             selTitulos.DataEmissaoFim = txtDtEmiFim.Text;
             selTitulos.DataVencimentoIni = txtDtVencIni.Text;
             selTitulos.DataVencimentoFim = txtDtVencFim.Text;
             selTitulos.Tipo = "R";
 
+            remessa.DiasProtesto = txtDiasUm.Text;
+            remessa.Instrucao1 = ddlInstrucao1.SelectedValue;
+            remessa.Instrucao2 = ddlInstrucao2.SelectedValue;
+            
             StringBuilder arquivo = new StringBuilder();
+            int v_seq = 1;
 
             List<Portadores> portadores = portadoresBL.PesquisarBL(utils.ComparaIntComZero(ddlPortador.SelectedValue));
 
             foreach (Portadores ltPor in portadores)
             {
-                titulosBL.ArquivoRemessaMontarHeader(arquivo, ltPor);
+                titulosBL.ArquivoRemessaMontarHeader(arquivo, ltPor, v_seq.ToString());
                 sw.WriteLine(arquivo);
             }
 
@@ -147,12 +153,15 @@ namespace FIBIESA
                         
             foreach (Titulos ltTit in titulos)
             {
-                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa);
+                v_seq++;
+                arquivo.Clear();
+                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa, v_seq.ToString());
                 sw.WriteLine(arquivo);                
             }
 
-            //titulosBL.ArquivoRemessaMontarHeader(arquivo, ltTit);
-            //sw.WriteLine(arquivo);
+            arquivo.Clear();
+            titulosBL.ArquivoRemessaMontarTrailler(arquivo, "300", v_seq.ToString());
+            sw.WriteLine(arquivo);
 
 
             sw.Close();

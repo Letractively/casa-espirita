@@ -101,7 +101,7 @@ namespace BusinessLayer
             return titulosDA.RetornaNovoNumero();
         }
 
-        public StringBuilder ArquivoRemessaMontarHeader(StringBuilder header, Portadores portador)
+        public StringBuilder ArquivoRemessaMontarHeader(StringBuilder header, Portadores portador, string seq)
         {
             InstituicoesBL instBL = new InstituicoesBL();
             DataSet dsInst = instBL.PesquisarDsBL();
@@ -163,12 +163,12 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(header, " ", 268);
 
             //posicoes 395 - 400
-            utils.IncluirCampoNumerico(header, "1", 6);
+            utils.IncluirCampoNumerico(header, seq, 6);
 
             return header;
         }
 
-        public StringBuilder ArquivoRemessaMontarTransacao(StringBuilder transacao, Titulos titulo, Remessa remessa)
+        public StringBuilder ArquivoRemessaMontarTransacao(StringBuilder transacao, Titulos titulo, Remessa remessa, string seq)
         {
             decimal v_taxa_juro = 0;
 
@@ -277,11 +277,30 @@ namespace BusinessLayer
 
             //posicoes 315 - 321 
             utils.IncluirCampoAlfanumerico(transacao," ", 7);
+
+            //posicoes 370 - 371 n° dias para protesto ou devolução
+            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
+                utils.IncluirCampoAlfanumerico(transacao, " ", 2);
+            else
+            {
+                if (remessa.Instrucao1 == "09" || remessa.Instrucao1 == "15")
+                    utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto, 2);
+                else if
+                    (remessa.Instrucao2 == "09" || remessa.Instrucao2 == "15")
+                        utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto,2);
+
+            }
+
+            //posicoes 372 - 394 brancos
+            utils.IncluirCampoAlfanumerico(transacao, " ", 13);
+
+            //posicoes 395 - 400 sequencial
+            utils.IncluirCampoNumerico(transacao, seq, 6);
             
             return transacao;
         }
 
-        public StringBuilder ArquivoRemessaMontarTrailler(StringBuilder trailler, Titulos titulo)
+        public StringBuilder ArquivoRemessaMontarTrailler(StringBuilder trailler, string valor, string seq)
         {
             //posicoes 001 - 001
             trailler.Append("9");
@@ -290,13 +309,13 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(trailler, " ", 26);
 
             //posicoes 028 - 040
-            utils.IncluirCampoNumerico(trailler, "valor", 13); 
+            utils.IncluirCampoNumerico(trailler, valor, 13); 
 
             //posicoes 041 - 395 
-            utils.IncluirCampoAlfanumerico(trailler, " ", 355);
+            utils.IncluirCampoAlfanumerico(trailler, " ", 354);
 
             //posicoes 395 - 400 sequencia do registro
-            utils.IncluirCampoNumerico(trailler, "1", 6);
+            utils.IncluirCampoNumerico(trailler, seq, 6);
 
             return trailler;
         }
