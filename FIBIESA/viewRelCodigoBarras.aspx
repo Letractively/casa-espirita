@@ -26,7 +26,7 @@
                         <table>
                             <tr>
                                 <td style="width: 140px">
-                                    Exemplar:
+                                    Exemplar(es):
                                 </td>
                                 <td style="width: 530px" colspan="2">
                                     <asp:TextBox ID="txtCodigo" runat="server" CssClass="inputbox" Width="260px" 
@@ -68,7 +68,7 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                                     <asp:GridView ID="grdPesquisaExemplar" runat="server" CellPadding="3" AutoGenerateColumns="False"
                                         DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
                                         BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaExemplar_RowDataBound"
-                                        Width="300px">
+                                        Width="400px">
                                         <Columns>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
@@ -79,6 +79,7 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                                             <asp:BoundField DataField="ID" HeaderText="ID" Visible="False" />
                                             <asp:BoundField DataField="CODIGO" HeaderText="Código" />
                                             <asp:BoundField DataField="DESCRICAO" HeaderText="Descrição" />
+                                            <asp:BoundField DataField="TOMBO" HeaderText="Tombo" />
                                         </Columns>
                                         <FooterStyle BackColor="White" ForeColor="#000066" />
                                         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

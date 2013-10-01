@@ -90,5 +90,13 @@ namespace DataObjects
             get { return _dataPagamentoFim; }
             set { _dataPagamentoFim = value; }
         }
+
+        private string _portadorId;
+        public string PortadorId
+        {
+            get { return _portadorId; }
+            set { _portadorId = value; }
+        }
+
     }
 }

@@ -303,14 +303,14 @@ namespace DataAccess
             return ba;
         }
 
-        public DataSet PesquisarBuscaExemplaresDA(string exemId)
+        public DataSet PesquisarBuscaExemplaresDA(string tombo)
         {
             StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
-            if (exemId != string.Empty && exemId != null)
-                consulta.Append(string.Format(" AND O.CODIGO IN ({0})  ", exemId));
+            if (tombo != string.Empty && tombo != null)
+                consulta.Append(string.Format(" AND E.TOMBO IN ({0})  ", tombo));
 
-            consulta.Append(" ORDER BY O.CODIGO ");
+            consulta.Append(" ORDER BY O.CODIGO, E.TOMBO ");
 
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());

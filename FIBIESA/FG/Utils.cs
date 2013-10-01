@@ -633,7 +633,7 @@ namespace FG
 
         public void IncluirCampoNumerico(StringBuilder stringbuilder, string conteudo, int tamanho)
         {
-            for (int i = 0; i < conteudo.Length - tamanho; i++)
+            for (int i = 0; i < tamanho - conteudo.Length; i++)
             {
                 stringbuilder.Append("0");
             }
@@ -645,7 +645,7 @@ namespace FG
         {
             stringbuilder.Append(conteudo);
 
-            for (int i = 0; i < conteudo.Length - tamanho; i++)
+            for (int i = 0; i < tamanho - conteudo.Length; i++)
             {
                 stringbuilder.Append(" ");
             }

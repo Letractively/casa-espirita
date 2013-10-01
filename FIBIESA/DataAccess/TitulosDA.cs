@@ -320,8 +320,8 @@ namespace DataAccess
             if (selTitulos.Tipo != string.Empty)
                 consulta.Append(@" AND TIPO = '" + selTitulos.Tipo + "' ");
             
-            if (selTitulos.CodPotadores != string.Empty)
-                consulta.Append(@" AND CODIGOPORTADOR IN (" + selTitulos.CodPotadores + ")");
+            if (selTitulos.PortadorId != string.Empty)
+                consulta.Append(@" AND PORTADORID IN (" + selTitulos.PortadorId + ")");
 
             if (selTitulos.CodTitulos != string.Empty)
                 consulta.Append(@" AND numero IN (" + selTitulos.CodTitulos + ")");
