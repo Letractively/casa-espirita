@@ -65,6 +65,7 @@
     <Compile Include="SelecaoTitulos.cs" />
     <Compile Include="TiposDocumentos.cs" />
     <Compile Include="Titulos.cs" />
+    <Compile Include="TurmasDiario.cs" />
     <Compile Include="TurmasParticipantes.cs" />
     <Compile Include="Turmas.cs" />
     <Compile Include="Eventos.cs" />

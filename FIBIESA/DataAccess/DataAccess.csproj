@@ -65,6 +65,7 @@
     <Compile Include="PortadoresDA.cs" />
     <Compile Include="TiposDocumentosDA.cs" />
     <Compile Include="TitulosDA.cs" />
+    <Compile Include="TurmasDiarioDA.cs" />
     <Compile Include="TurmasParticipantesDA.cs" />
     <Compile Include="TurmasDA.cs" />
     <Compile Include="EditorasDA.cs" />

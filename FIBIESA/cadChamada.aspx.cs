@@ -46,10 +46,12 @@ namespace Admin
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
             DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("OBS", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
+            tabela.Columns.Add(coluna4);
 
             return tabela;
         }
@@ -69,14 +71,14 @@ namespace Admin
                 DataColumn coluna4 = new DataColumn("PRESENCA", Type.GetType("System.Boolean"));
                 DataColumn coluna5 = new DataColumn("DATA", Type.GetType("System.String"));
                 DataColumn coluna6 = new DataColumn("ID", Type.GetType("System.Int32"));
-
+               
                 tabela.Columns.Add(coluna1);
                 tabela.Columns.Add(coluna2);
                 tabela.Columns.Add(coluna3);
                 tabela.Columns.Add(coluna4);
                 tabela.Columns.Add(coluna5);
                 tabela.Columns.Add(coluna6);
-
+             
                 TurmasBL turBL = new TurmasBL();
                 TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
                 ChamadasBL chaBL = new ChamadasBL();
@@ -110,14 +112,14 @@ namespace Admin
                             {
                                 linha["ID"] = ltCha.Id;
                                 linha["PRESENCA"] = ltCha.Presenca;
-                                linha["DATA"] = ltCha.Data.ToString("dd/MM/yyyy");
+                                linha["DATA"] = ltCha.Data.ToString("dd/MM/yyyy");                              
                             }
                         }
                         else
                         {
                             linha["ID"] = 0;
                             linha["PRESENCA"] = false;
-                            linha["DATA"] = txtSelData.Text;
+                            linha["DATA"] = txtSelData.Text;                           
                         }
 
                         tabela.Rows.Add(linha);
@@ -126,6 +128,14 @@ namespace Admin
 
                 repPermissao.DataSource = tabela;
                 repPermissao.DataBind();
+
+                TurmasDiarioBL turDiarioBl = new TurmasDiarioBL();
+                DataSet dsTurPar = turDiarioBl.PesquisarBL(utils.ComparaIntComZero(ddlTurmas.SelectedValue), Convert.ToDateTime(txtSelData.Text));
+
+                if (dsTurPar.Tables[0].Rows.Count != 0)
+                    txtObs.Text = dsTurPar.Tables[0].Rows[0]["obs"].ToString();
+                else
+                    txtObs.Text = "";
             }
 
         }
@@ -159,16 +169,32 @@ namespace Admin
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
+            TurmasDiarioBL turDiarioBL = new TurmasDiarioBL();
+            TurmasDiario turDiario = new TurmasDiario();
+            turDiario.Id = utils.ComparaIntComZero(hfIdTurDiario.Value);
+            turDiario.Data = Convert.ToDateTime(txtSelData.Text);
+            turDiario.Obs = txtObs.Text;
+            turDiario.TurmaId = utils.ComparaIntComZero(ddlTurmas.SelectedValue);
+
+            if (turDiario.Id > 0)
+            {
+                turDiarioBL.EditarBL(turDiario);
+            }
+            else
+            {
+                turDiarioBL.InserirBL(turDiario);
+            }
+            
             ChamadasBL chaBL = new ChamadasBL();
             Chamadas chamadas = new Chamadas();
-
+            
             foreach (RepeaterItem item in repPermissao.Items)
             {
                 chamadas.Id = utils.ComparaIntComZero(((TextBox)item.FindControl("txtId")).Text);
                 chamadas.TurmaParticipanteId = utils.ComparaIntComZero(((TextBox)item.FindControl("txtTurmaParticipanteId")).Text);
                 chamadas.Presenca = ((CheckBox)item.FindControl("chkPresenca")).Checked;
                 chamadas.Data = Convert.ToDateTime(((Label)item.FindControl("lblData")).Text);
-
+               
                 if (chamadas.Id > 0)
                 {
 
@@ -176,7 +202,6 @@ namespace Admin
                         ExibirMensagem("Registros salvos com sucesso!");
                     else
                         ExibirMensagem("Não foi possível atualizar os registros. Revise as informações!");
-
 
                 }
                 else

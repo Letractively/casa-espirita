@@ -103,6 +103,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.Repeater repPermissao;
         
         /// <summary>
+        /// txtObs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObs;
+        
+        /// <summary>
         /// btnVoltar control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfId;
+        
+        /// <summary>
+        /// hfIdTurDiario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTurDiario;
         
         /// <summary>
         /// ScriptManager1 control.

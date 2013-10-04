@@ -34,5 +34,6 @@ namespace DataObjects
             get { return _data; }
             set { _data = value; }
         }
+                
     }
 }
