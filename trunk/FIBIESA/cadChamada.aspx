@@ -18,19 +18,19 @@
                         <td style="width: 130px" colspan="2"> * Data: </td>                         
                     </tr>
                     <tr>                           
-                        <td style="width: 280px">                                                         
+                        <td style="width: 380px">                                                         
                             <asp:DropDownList ID="ddlEvento" runat="server" CssClass="dropdownlist" 
                                 AutoPostBack="True" 
                                 onselectedindexchanged="ddlEvento_SelectedIndexChanged" 
                                 ToolTip="Selecione o evento">
                             </asp:DropDownList>       
                         </td>                        
-                        <td style="width: 280px"> 
+                        <td style="width: 200px"> 
                             <asp:DropDownList ID="ddlTurmas" runat="server" CssClass="dropdownlist" 
                                 ToolTip="Selecione a turma">
                             </asp:DropDownList>                                                                               
                         </td>
-                        <td style="width: 130px"> 
+                        <td style="width: 110px"> 
                         <asp:TextBox ID="txtSelData" CssClass="inputbox" runat="server" Width="100px" 
                                 ToolTip="Selecione a data"></asp:TextBox>
                         <asp:CalendarExtender ID="txtSelData_CalendarExtender" runat="server" TargetControlID="txtSelData" Format="dd/MM/yyyy"
@@ -58,9 +58,16 @@
                                 ControlToValidate="txtSelData" ErrorMessage="*Selecione uma data" 
                                   ValidationGroup="salvar" CssClass="validacao"></asp:RequiredFieldValidator>
                           </td>
-                    </tr>               
+                    </tr>  
+                    <tr>
+                        <td >
+                        </td>
+                        <td colspan="3">
+                        Diário de Aula
+                        </td>
+                    </tr>             
                     <tr>                        
-                        <td colspan="4">
+                        <td>
                              <asp:Repeater ID="repPermissao" runat="server">
                             <HeaderTemplate>
                                 <table>
@@ -87,6 +94,10 @@
                             </FooterTemplate>
                             </asp:Repeater>        
                         </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="txtObs" runat="server" Height="189px" MaxLength="500" 
+                                TextMode="MultiLine" Width="469px"></asp:TextBox>
+                        </td>
                     </tr>
                      <tr>
                         <td style="width: 100px"> </td>
@@ -101,6 +112,7 @@
                 </table>                
             </div>
             <asp:HiddenField ID="hfId" runat="server" />
+            <asp:HiddenField ID="hfIdTurDiario" runat="server" />
             <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true">
             </asp:ScriptManager>
         </div>

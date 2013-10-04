@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using InfrastructureSqlServer.Helpers;
 using System.Configuration;
-using System.Data;
 	
 namespace DataAccess
 {
@@ -25,7 +24,7 @@ namespace DataAccess
                 cha.TurmaParticipanteId = int.Parse(dr["TURMAPARTICIPANTEID"].ToString());
                 cha.Presenca = Convert.ToBoolean(dr["PRESENCA"].ToString());
                 cha.Data = Convert.ToDateTime(dr["DATA"].ToString());
-                
+                                
                 chamadas.Add(cha);
             }
             return chamadas;
@@ -38,7 +37,7 @@ namespace DataAccess
             paramsToSP[0] = new SqlParameter("@turmaparticipanteid", cha.TurmaParticipanteId);
             paramsToSP[1] = new SqlParameter("@presenca", cha.Presenca);
             paramsToSP[2] = new SqlParameter("@data", cha.Data);
-
+            
             try
             {
                 SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["conexao"].ToString(), CommandType.StoredProcedure, "stp_insert_Chamadas", paramsToSP);

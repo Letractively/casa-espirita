@@ -88,6 +88,7 @@ namespace DataAccess
 
         }
         #endregion
+
         public Int32 InserirDA(Turmas tur)
         {
             SqlParameter[] paramsToSP = new SqlParameter[11];
@@ -286,7 +287,6 @@ namespace DataAccess
             }
             return ba;
         }
-
 
         public DataSet PesquisarDataSet(string codEvento,string codTurma, string dataIni, string dataIniF, string dataFim, string dataFimF,Boolean turmasAberto)
         {

@@ -22,7 +22,7 @@
                         <table width="100%">
                             <tr>
                                 <td>
-                                    <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
+                                    <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
                                         <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                             <ContentTemplate>
                                                 <table width="800PX">
@@ -254,6 +254,7 @@
                                                                         <asp:BoundField DataField="TITULO" HeaderText="Título" />
                                                                         <asp:BoundField DataField="DEVOLUCAO" HeaderText="Prazo Devolução" />
                                                                         <asp:BoundField DataField="SITUACAO" HeaderText="Situação" />
+                                                                        <asp:BoundField DataField="VLRMULTA" HeaderText="Vlr. Multa" />
                                                                     </Columns>
                                                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

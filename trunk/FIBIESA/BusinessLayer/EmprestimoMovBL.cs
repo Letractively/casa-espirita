@@ -161,5 +161,20 @@ namespace BusinessLayer
 
             return erro;
         }
+
+        public decimal RetornarValorMultaEmprestimo(DateTime dtPrevistaEmprestimo)
+        {
+            DateTime hoje = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            TimeSpan data = hoje - dtPrevistaEmprestimo;
+            int diasAtraso = data.Days;
+            
+            decimal multa = utils.ComparaDecimalComZero(this.LerParametro(1, "F"));
+
+            if (utils.ComparaIntComZero(diasAtraso.ToString()) > 0)
+                return multa = multa * diasAtraso;
+            else
+                return 0;
+ 
+        }
     }
 }

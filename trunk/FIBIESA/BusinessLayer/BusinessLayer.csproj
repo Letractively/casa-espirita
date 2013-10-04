@@ -86,6 +86,7 @@
     <Compile Include="PortadoresBL.cs" />
     <Compile Include="TiposDocumentosBL.cs" />
     <Compile Include="TitulosBL.cs" />
+    <Compile Include="TurmasDiarioBL.cs" />
     <Compile Include="TurmasParticipantesBL.cs" />
     <Compile Include="TurmasBL.cs" />
     <Compile Include="EventosBL.cs" />

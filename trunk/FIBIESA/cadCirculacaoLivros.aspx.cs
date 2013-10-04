@@ -67,6 +67,7 @@ namespace FIBIESA
                 DataColumn coluna4 = new DataColumn("TITULO", Type.GetType("System.String"));
                 DataColumn coluna5 = new DataColumn("DEVOLUCAO", Type.GetType("System.String"));
                 DataColumn coluna6 = new DataColumn("SITUACAO", Type.GetType("System.String"));
+                DataColumn coluna7 = new DataColumn("VLRMULTA", Type.GetType("System.Decimal"));
 
                 dtItensDev.Columns.Add(coluna1);
                 dtItensDev.Columns.Add(coluna2);
@@ -74,6 +75,7 @@ namespace FIBIESA
                 dtItensDev.Columns.Add(coluna4);
                 dtItensDev.Columns.Add(coluna5);
                 dtItensDev.Columns.Add(coluna6);
+                dtItensDev.Columns.Add(coluna7);
 
                 keys[0] = coluna1;
 
@@ -438,8 +440,10 @@ namespace FIBIESA
 
         private void IncluirExemplarDevolucao(DataSet dsExe)
         {
+            EmprestimoMovBL empMov = new EmprestimoMovBL();
+
             if (Session["dtItensDev"] != null)
-                dtItensEmp = (DataTable)Session["dtItensEmp"];
+                dtItensDev = (DataTable)Session["dtItensDev"];
 
             if (dsExe.Tables[0].Rows.Count != 0)
             {
@@ -451,6 +455,7 @@ namespace FIBIESA
                 linha["TITULO"] = dsExe.Tables[0].Rows[0]["titulo"].ToString();
                 linha["DEVOLUCAO"] = Convert.ToDateTime(dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"]).ToString("dd/MM/yyyy");
                 linha["SITUACAO"] = dsExe.Tables[0].Rows[0]["SITUACAO"].ToString();
+                linha["VLRMULTA"] = empMov.RetornarValorMultaEmprestimo(Convert.ToDateTime(dsExe.Tables[0].Rows[0]["DATAPREVISTAEMPRESTIMO"]));
 
                 dtItensDev.Rows.Add(linha);
             }
