@@ -492,7 +492,9 @@ namespace Admin
             pessoas.BairroProf = utils.ComparaIntComNull(ddlBairroProf.SelectedValue);
             pessoas.CepProf = txtCepProf.Text;
             pessoas.Obs = txtObservacao.Text;
-            pessoas.DtCadastro = DateTime.Now;
+            DateTime dtCadastro;
+            DateTime.TryParse(txtDtCadastro.Text, out dtCadastro);
+            pessoas.DtCadastro = dtCadastro;
             pessoas.Sexo = ddlSexo.SelectedValue;
             pessoas.Email = txtEmail.Text;
             pessoas.TipoAssociado = rbTipoAssoc.SelectedValue;
