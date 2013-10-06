@@ -115,8 +115,8 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT * " +
                                                                                                  "  FROM EVENTOS " +
-                                                                                                 " WHERE CONVERT(DATETIME,GETDATE(),103) " +
-                                                                                                 " BETWEEN  CONVERT(DATETIME,DTINICIO,103) AND  CONVERT(DATETIME,DTFIM,103) "
+                                                                                                 " WHERE CONVERT(DATETIME,GETDATE(),103)  + ' 00:00:00.000' " +
+                                                                                                 " BETWEEN  CONVERT(DATETIME,DTINICIO,103) AND  CONVERT(DATETIME,DTFIM,103)  + ' 23:59:59.999'  "
                                                                                                 ));
 
             List<Eventos> eventos = CarregarObjEventos(dr);
