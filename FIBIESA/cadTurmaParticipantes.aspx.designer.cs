@@ -31,6 +31,15 @@ namespace Admin {
         protected global::System.Web.UI.UpdatePanel updPrincipal;
         
         /// <summary>
+        /// mensagemErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensagemErro;
+        
+        /// <summary>
         /// pnParticipantes control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPesParticipante;
+        
+        /// <summary>
+        /// CheckBoxList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
         
         /// <summary>
         /// btnVoltar control.
