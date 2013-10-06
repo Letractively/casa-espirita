@@ -32,7 +32,10 @@
                                                 </td>
                                                 <td style="width: 150px" colspan="3">
                                                     <asp:TextBox ID="txtDtCadastro" runat="server" CssClass="inputbox" 
-                                                        ReadOnly="True" Width="110px"></asp:TextBox>                                                    
+                                                         Width="110px"></asp:TextBox>
+                                                    <asp:CalendarExtender Format="dd/MM/yyyy"
+                                                        ID="CalendarExtender1" runat="server" TargetControlID="txtDtCadastro"
+                                                        Enabled="True"></asp:CalendarExtender>                                                    
                                                 </td>                                               
                                             </tr>
                                             <tr>
@@ -121,7 +124,8 @@ ControlToValidate="txtDataNascimento" ValidationExpression="^(((0[1-9]|[12]\d|3[
                                                         <asp:ListItem>Casado</asp:ListItem>
                                                         <asp:ListItem>Separado</asp:ListItem>
                                                         <asp:ListItem>Divorciado</asp:ListItem>
-                                                        <asp:ListItem Value="Viuvo">Viúvo</asp:ListItem>
+                                                        <asp:ListItem >Viúvo</asp:ListItem>
+                                                        <asp:ListItem >União Estável</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
