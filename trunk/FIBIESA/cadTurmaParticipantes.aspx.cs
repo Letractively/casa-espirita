@@ -42,6 +42,19 @@ namespace Admin
 
         private void Pesquisar(int turmaId)
         {
+
+            TurmasBL turBL = new TurmasBL();
+            DataSet dsTur = turBL.PesquisarBL(turmaId);
+
+            if (dsTur.Tables[0].Rows.Count != 0)
+                lblTurma.Text = (string)dsTur.Tables[0].Rows[0]["descricao"].ToString();
+
+        }
+
+        private void PesquisarParticipante(int turmaId)
+        {
+
+
             DataTable tabela = new DataTable();
             DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
             DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.Int32"));
@@ -50,13 +63,6 @@ namespace Admin
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
             tabela.Columns.Add(coluna3);
-
-            TurmasBL turBL = new TurmasBL();
-            DataSet dsTur = turBL.PesquisarBL(turmaId);
-
-            if (dsTur.Tables[0].Rows.Count != 0)
-                lblTurma.Text = (string)dsTur.Tables[0].Rows[0]["descricao"].ToString();
-
             TurmasParticipantesBL tParBL = new TurmasParticipantesBL();
             List<TurmasParticipantes> tPar = tParBL.PesquisarBL(turmaId, txtParticipante.Text);
 
@@ -73,11 +79,14 @@ namespace Admin
             dtbPesquisa = tabela;
             dtgParticipantes.DataSource = tabela;
             dtgParticipantes.DataBind();
+            mensagemErro.InnerText = string.Empty;
+
 
         }
 
         private void PesquisarParticipanteNotInTurma(int turmaId)
         {
+
 
             TurmasBL turBL = new TurmasBL();
             DataSet dsTur = turBL.PesquisarBL(turmaId);
@@ -91,6 +100,8 @@ namespace Admin
             dtbPesquisaParticipanteNotInTurma = tPar.Tables[0];
             dtgParticipantesNotInTurma.DataSource = tPar;
             dtgParticipantesNotInTurma.DataBind();
+            mensagemErro.InnerText = string.Empty;
+
 
         }
 
@@ -115,7 +126,7 @@ namespace Admin
 
                     hfIdTurma.Value = Session["turmaId"].ToString();
                     Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-                    PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+                    //PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
                 }
 
                 else
@@ -128,7 +139,7 @@ namespace Admin
 
                         hfIdTurma.Value = Session["turmaId"].ToString();
                         Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-                        PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+                        //PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
                     }
                 }
             }
@@ -142,8 +153,7 @@ namespace Admin
 
         protected void btnPesParticipante_Click(object sender, EventArgs e)
         {
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-            PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+                validapesquisa();
         }
 
         protected void dtgParticipantesNotInTurma_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -158,10 +168,7 @@ namespace Admin
 
             if (!tParBL.InserirBL(tPar))
                 ExibirMensagem("Erro: Número máximo de participantes atingido.");
-
-            txtParticipante.Text = "";
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-            PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+            validapesquisa();
 
         }
 
@@ -171,8 +178,7 @@ namespace Admin
             TurmasParticipantes tPar = new TurmasParticipantes();
             tPar.Id = utils.ComparaIntComZero(dtgParticipantes.DataKeys[e.RowIndex][0].ToString());
             tParBL.ExcluirBL(tPar);
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-            PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+            validapesquisa();
         }
 
         protected void dtgParticipantes_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -269,11 +275,46 @@ namespace Admin
 
         protected void txtParticipante_TextChanged(object sender, EventArgs e)
         {
-            Pesquisar(utils.ComparaIntComZero(hfIdTurma.Value));
-            PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+
+            validapesquisa();
+
 
         }
 
+
+        public void validapesquisa()
+        {
+            if (txtParticipante.Text.Length >= 3)
+            {
+                if (CheckBoxList1.Items[1].Selected)
+                {
+                    PesquisarParticipante(utils.ComparaIntComZero(hfIdTurma.Value));
+                }
+                else
+                {
+                    dtgParticipantes.DataBind();
+                }
+
+                if (CheckBoxList1.Items[0].Selected)
+                {
+                    PesquisarParticipanteNotInTurma(utils.ComparaIntComZero(hfIdTurma.Value));
+                }
+                else
+                {
+                    dtgParticipantesNotInTurma.DataBind();
+                }
+
+                if (!CheckBoxList1.Items[0].Selected && !CheckBoxList1.Items[1].Selected)
+                {
+                    mensagemErro.InnerText = "Selecione um tipo de filtro, Participante ou Não Participante.";
+                }
+            }
+            else
+            {
+                mensagemErro.InnerText = "Para realizar a pesquisa digite no mínimo 3 caracteres.";
+            }
+
+        }
 
     }
 }

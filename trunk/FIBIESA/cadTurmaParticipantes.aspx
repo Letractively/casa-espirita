@@ -17,6 +17,7 @@
                         <h2>
                             Cadastro de Participantes</h2>
                     </div>
+                    <center><p runat="server" id="mensagemErro" class="errortxt"></p></center>                    
                     <div class="contentbox">
                         <asp:Panel ID="pnParticipantes" runat="server" ScrollBars="Auto">
                             <table>
@@ -32,11 +33,25 @@
                                     <td style="width: 140px">
                                         Participante:
                                     </td>
-                                    <td style="width: 400px">
-                                        <asp:TextBox ID="txtParticipante" runat="server" CssClass="inputbox" 
-                                            ToolTip="Informe o participante" AutoPostBack="True" 
-                                            ontextchanged="txtParticipante_TextChanged"></asp:TextBox>
-                                        <asp:Button ID="btnPesParticipante" runat="server" CssClass="btn" Text="..." OnClick="btnPesParticipante_Click" />                                        
+                                    <td style="width: 500px; height:10px;">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width:40%;">
+                                                    <asp:TextBox ID="txtParticipante" runat="server" CssClass="inputbox" 
+                                                        ToolTip="Informe o participante" AutoPostBack="True" 
+                                                        ontextchanged="txtParticipante_TextChanged"></asp:TextBox>
+                                                    <asp:Button ID="btnPesParticipante" runat="server" CssClass="btn" Text="Buscar" OnClick="btnPesParticipante_Click" />                                        
+                                                </td>
+                                                <td align="left">
+                                                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" 
+                                                        RepeatDirection="Horizontal" >
+                                                        <asp:ListItem Selected>Não Participantes</asp:ListItem>
+                                                        <asp:ListItem Selected>Participantes</asp:ListItem>
+                                                        
+                                                    </asp:CheckBoxList>
+                                                </td>
+                                            </tr>
+                                        </table>                                                                                
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,7 +79,7 @@
                                                         BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
                                                         DataKeyNames="ID_PES" PageSize="7" AllowSorting="True" OnRowDeleting="dtgParticipantesNotInTurma_RowDeleting"
                                                         GridLines="None" OnRowDataBound="dtgParticipantesNotInTurma_RowDataBound" OnPageIndexChanging="dtgParticipantesNotInTurma_PageIndexChanging"
-                                                        OnSorting="dtgParticipantesNotInTurma_Sorting" Width="275px" EmptyDataText="Participante não encontrado ou ja cadastrado."
+                                                        OnSorting="dtgParticipantesNotInTurma_Sorting" Width="275px" EmptyDataText="Participante não encontrado ou ja cadastrado. Realize sua consulta."
                                                         Visible="true">
                                                         <Columns>
                                                             <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
@@ -91,7 +106,7 @@
                                                         BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" AllowPaging="True"
                                                         DataKeyNames="ID" PageSize="7" AllowSorting="True" OnRowDeleting="dtgParticipantes_RowDeleting"
                                                         GridLines="None" OnRowDataBound="dtgParticipantes_RowDataBound" OnPageIndexChanging="dtgParticipantes_PageIndexChanging"
-                                                        OnSorting="dtgParticipantes_Sorting" Width="370px" Visible="true" EmptyDataText="Participante não cadastrado.">
+                                                        OnSorting="dtgParticipantes_Sorting" Width="370px" Visible="true" EmptyDataText="Participante não cadastrado. Realize sua consulta">
                                                         <Columns>
                                                             <asp:CommandField DeleteText="Excluir" ShowDeleteButton="True">
                                                                 <HeaderStyle CssClass="grd_cmd_header" />
