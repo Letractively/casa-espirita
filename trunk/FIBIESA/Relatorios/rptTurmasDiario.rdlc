@@ -581,7 +581,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Diário de Turmas</Value>
+                  <Value>Diário de Turma</Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
