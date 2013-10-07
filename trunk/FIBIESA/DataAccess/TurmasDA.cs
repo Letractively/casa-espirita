@@ -337,5 +337,42 @@ namespace DataAccess
             return ds;
         }
 
+        public DataSet PesquisarDiarioDataSet(string codEvento, string codTurma, string dataIni, string dataFim)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT codEvento " +
+                                "  ,EVENTO " +
+                                "  ,codTurma " +
+                                "  ,TURMA " +
+                                "  ,sala " +
+                                "  ,left(convert(varchar,[horaini],108),5) + ' as ' + left(convert(varchar,horafim,108),5) as horario " +
+                                "  ,diario.data " +
+                                "  ,diario.obs " +
+                                " FROM VIEW_EVENTOS  " +
+                                "  INNER JOIN dbo.turmasDiario diario on " +
+                                " diario.turmaId = VIEW_EVENTOS.idTurma WHERE 1 = 1 ");
+            if (codEvento != string.Empty)
+            {
+
+                sqlQuery.Append(@" AND codevento in (" + codEvento + ")");
+            }
+
+            if (codTurma != string.Empty)
+            {
+
+                sqlQuery.Append(@" AND codturma in (" + codTurma + ")");
+            }
+
+            if ((dataIni != string.Empty) && (dataFim != string.Empty))
+            {
+
+                sqlQuery.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)");
+            }
+
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, sqlQuery.ToString());
+            return ds;
+        }
+
     }
 }
