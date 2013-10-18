@@ -137,9 +137,11 @@ namespace FIBIESA
             remessa.DiasProtesto = txtDiasUm.Text;
             remessa.Instrucao1 = ddlInstrucao1.SelectedValue;
             remessa.Instrucao2 = ddlInstrucao2.SelectedValue;
+            remessa.CodOcorrencia = ddlRemessa.SelectedValue;
             
             StringBuilder arquivo = new StringBuilder();
             int v_seq = 1;
+            string codCedente = "";
 
             List<Portadores> portadores = portadoresBL.PesquisarBL(utils.ComparaIntComZero(ddlPortador.SelectedValue));
 
@@ -147,6 +149,7 @@ namespace FIBIESA
             {
                 titulosBL.ArquivoRemessaMontarHeader(arquivo, ltPor, v_seq.ToString());
                 sw.WriteLine(arquivo);
+                codCedente = ltPor.CodCedente.ToString();
             }
 
             List<Titulos> titulos = titulosBL.PesquisarBuscaBL(selTitulos);
@@ -155,7 +158,7 @@ namespace FIBIESA
             {
                 v_seq++;
                 arquivo.Clear();
-                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa, v_seq.ToString());
+                titulosBL.ArquivoRemessaMontarTransacao(arquivo, ltTit, remessa, v_seq.ToString(), codCedente);
                 sw.WriteLine(arquivo);                
             }
 

@@ -104,6 +104,7 @@ namespace Admin
                 rbTipoAssoc.SelectedValue = pes.TipoAssociado.ToString();
                 txtRefNome.Text = pes.RefNome.ToString();
                 txtRefTelefone.Text = pes.RefTelefone.ToString();
+                ckEnviaEmail.Checked = pes.EnvEmail;
 
                 if (pes.Cidade != null)
                 {
@@ -501,6 +502,7 @@ namespace Admin
             pessoas.RefNome = txtRefNome.Text;
             pessoas.RefTelefone = txtRefTelefone.Text;
             pessoas.foto = imagemFoto;
+            pessoas.EnvEmail = ckEnviaEmail.Checked;
 
             if (lblDesNome.Text == "* Nome")
                 pessoas.Tipo = "F";
@@ -508,11 +510,14 @@ namespace Admin
                 pessoas.Tipo = "J";
 
             int idPes = 0;
+            string retorno;
 
+            
             if (pessoas.Id > 0)
             {
                 idPes = pessoas.Id;
-                if (pesBL.EditarBL(pessoas))
+                retorno = pesBL.EditarBL(pessoas);
+                if (retorno == string.Empty || retorno == "True")
                 {
                     ExcluirTelefones();
                     GravarTelefones(idPes);
@@ -523,16 +528,18 @@ namespace Admin
             }
             else
             {
-                idPes = pesBL.InserirBL(pessoas);
-                ExcluirTelefones();
-                GravarTelefones(idPes);
+                 
+                retorno = pesBL.InserirBL(pessoas);
+                idPes = utils.ComparaIntComZero(retorno);
                 if (idPes > 0)
                 {
+                    ExcluirTelefones();
+                    GravarTelefones(idPes);
                     ExibirMensagem("Pessoa gravada com sucesso !");
                     LimparCampos();
                 }
                 else
-                    ExibirMensagem("Não foi possível gravar a pessoa. Revise as informações.");
+                    ExibirMensagem("Não foi possível gravar a pessoa. Erro :" + retorno);
 
             }
 

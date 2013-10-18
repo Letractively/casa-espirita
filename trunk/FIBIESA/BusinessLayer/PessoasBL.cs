@@ -9,21 +9,50 @@ using System.Data;
 namespace BusinessLayer
 {
     public class PessoasBL : BaseBL
-    {       
-        public int InserirBL(Pessoas pes)
+    {
+        private bool CPJCNPJJaCadastrado(Pessoas pes)
         {
-            /*criar as regras de negocio*/
-            PessoasDA pessoasDA = new PessoasDA();
+            PessoasDA pesDA = new PessoasDA();
 
-            return pessoasDA.InserirDA(pes);
+            return pesDA.CPJCNPJJaCadastrado(pes);
         }
 
-        public bool EditarBL(Pessoas pes)
+        private string IsValid(Pessoas pes)
         {
-            /*criar as regras de negocio*/
-            PessoasDA pessoasDA = new PessoasDA();
-            
-            return pessoasDA.EditarDA(pes);
+            string msgErro = "";
+
+            if (CPJCNPJJaCadastrado(pes))
+                msgErro = "CPF/CNPJ já cadastrado!";
+
+            return msgErro;
+        }
+
+        public string InserirBL(Pessoas pes)
+        {
+            string msg_erro = IsValid(pes);
+
+            if (msg_erro == string.Empty || msg_erro == null)
+            {
+                PessoasDA pessoasDA = new PessoasDA();
+
+                return pessoasDA.InserirDA(pes).ToString();
+            }
+            else
+                return msg_erro;            
+        }
+
+        public string EditarBL(Pessoas pes)
+        {
+            string msg_erro = IsValid(pes);
+
+            if (msg_erro == string.Empty || msg_erro == null)
+            {
+                PessoasDA pessoasDA = new PessoasDA();
+
+                return pessoasDA.EditarDA(pes).ToString();
+            }
+            else
+                return msg_erro; 
         }
 
         public bool ExcluirBL(Pessoas pes)

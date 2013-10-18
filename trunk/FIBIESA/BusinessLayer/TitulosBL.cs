@@ -121,7 +121,7 @@ namespace BusinessLayer
             if (dsInst.Tables[0].Rows.Count != 0)
             {
                 //posicoes 047 - 076 nome da empresa
-                utils.IncluirCampoAlfanumerico(header, dsInst.Tables[0].Rows[0]["razao"].ToString(), 30);                
+                utils.IncluirCampoAlfanumerico(header,utils.RemoveAcentos(dsInst.Tables[0].Rows[0]["razao"].ToString()), 30);                
             }
             
             //posicoes 077 - 087 
@@ -168,7 +168,7 @@ namespace BusinessLayer
             return header;
         }
 
-        public StringBuilder ArquivoRemessaMontarTransacao(StringBuilder transacao, Titulos titulo, Remessa remessa, string seq)
+        public StringBuilder ArquivoRemessaMontarTransacao(StringBuilder transacao, Titulos titulo, Remessa remessa, string seq, string codCedente)
         {
             decimal v_taxa_juro = 0;
 
@@ -179,7 +179,7 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(transacao, " ", 16);
 
             //posicoes 018 - 030 codigo cedente
-            utils.IncluirCampoNumerico(transacao, titulo.Portador.CodCedente.ToString(), 13); 
+            utils.IncluirCampoNumerico(transacao, codCedente, 13); 
 
             //posicoes 031 - 037 brancos
             utils.IncluirCampoAlfanumerico(transacao," ", 7);
@@ -188,7 +188,7 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(transacao,titulo.Id.ToString(), 25);
                         
             //posicoes 063 - 072 nosso numero
-            transacao.Append("nosso numero");
+            transacao.Append("0000000000");
 
             //posicoes 073 - 104 mensagem no bloqueto
             utils.IncluirCampoAlfanumerico(transacao, " ", 32);
@@ -198,21 +198,22 @@ namespace BusinessLayer
 
             //posicoes 108 -108 tipo de carteira
             transacao.Append(titulo.Portador.Carteira != null ? titulo.Portador.Carteira : "0");
-                        
+
             //posicoes 109 - 110 codigo de ocorrencia
             transacao.Append(remessa.CodOcorrencia);
 
             //posicoes 111 - 120 seu numero
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Numero.ToString(), 10);
 
             //posicoes 121 - 126 data de vencimento
-            transacao.Append(titulo.DataVencimento.ToString("dd/MM/yy"));
+            transacao.Append(titulo.DataVencimento.ToString("ddMMyy"));
 
             //posicoes 127 - 139 valor do título
             utils.IncluirCampoNumerico(transacao, titulo.Valor.ToString(), 13);
 
             //posicoes 140 - 142
             transacao.Append("041");
-
+            
             //posicoes 123 - 147 brancos
             utils.IncluirCampoAlfanumerico(transacao, "", 5);
 
@@ -224,17 +225,17 @@ namespace BusinessLayer
             transacao.Append("A");
 
             //posicoes 151 - 156 
-            transacao.Append(titulo.DataEmissao.ToString("dd/MM/yy"));
+            transacao.Append(titulo.DataEmissao.ToString("ddMMyy"));
 
             //posicoes 157 - 158 instrucao 1 e  //posicoes 159 - 160 instrucao 2
-            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira =="N")
-                utils.IncluirCampoAlfanumerico(transacao," ", 4);
+            if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
+                utils.IncluirCampoAlfanumerico(transacao, " ", 4);
             else
             {
                 transacao.Append(remessa.Instrucao1);
                 transacao.Append(remessa.Instrucao2);
             }
-            
+
             //posicoes 161 - 161 código de mora
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
                 transacao.Append(" ");
@@ -243,9 +244,9 @@ namespace BusinessLayer
 
             //posicoes 162 - 173 
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
-                utils.IncluirCampoAlfanumerico(transacao,string.Empty, 12);
+                utils.IncluirCampoAlfanumerico(transacao, string.Empty, 12);
             else
-                utils.IncluirCampoNumerico(transacao, ((titulo.Valor * v_taxa_juro) / 100).ToString(), 12); 
+                utils.IncluirCampoNumerico(transacao, ((titulo.Valor * v_taxa_juro) / 100).ToString(), 12);
 
             //posicoes 174 - 179 data de desconto
             utils.IncluirCampoNumerico(transacao, "0", 6);
@@ -273,10 +274,10 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(transacao, " ", 5);
 
             //posicoes 275 - 314 endereco 
-            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Endereco,35);
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Endereco, 35);
 
             //posicoes 315 - 321 
-            utils.IncluirCampoAlfanumerico(transacao," ", 7);
+            utils.IncluirCampoAlfanumerico(transacao, " ", 7);
 
             //posicoes 370 - 371 n° dias para protesto ou devolução
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
@@ -287,7 +288,7 @@ namespace BusinessLayer
                     utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto, 2);
                 else if
                     (remessa.Instrucao2 == "09" || remessa.Instrucao2 == "15")
-                        utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto,2);
+                    utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto, 2);
 
             }
 

@@ -72,7 +72,7 @@
                         <td style="width: 140px">&nbsp;Carteira:</td>
                         <td style="width: 400px">
                             <asp:TextBox ID="txtCarteira" runat="server" CssClass="inputbox"
-                                MaxLength="4" Width="50px" ToolTip="Informe o tipo de carteira" ></asp:TextBox>
+                                MaxLength="1" Width="50px" ToolTip="Informe o tipo de carteira" ></asp:TextBox>
                         </td>
                     </tr>
                 </table>

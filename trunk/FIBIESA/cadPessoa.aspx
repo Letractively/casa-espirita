@@ -16,7 +16,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="0">
+                            <asp:TabContainer ID="tcPessoa" runat="server" ActiveTabIndex="1">
                                 <asp:TabPanel runat="server" HeaderText="Geral" ID="tpGeral">
                                     <ContentTemplate>
                                         <table>
@@ -133,14 +133,17 @@ ControlToValidate="txtDataNascimento" ValidationExpression="^(((0[1-9]|[12]\d|3[
                                                 <td style="width: 200px">
                                                     E-mail:
                                                 </td>
-                                                <td style="width: 150px" colspan="3">
+                                                <td style="width: 150px">
                                                     <asp:TextBox ID="txtEmail" runat="server" CssClass="inputbox" MaxLength="100" ToolTip="Informe o e-mail"
                                                         Width="280px"></asp:TextBox>
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
                                                         ErrorMessage="*Formato do e-mail errado" ToolTip="Não Válido" SetFocusOnError="True"
 ControlToValidate="txtEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic" 
                                                         validationgroup="salvar"  CssClass="validacao">*</asp:RegularExpressionValidator>
-                                                </td>                                                
+                                                </td>   
+                                                <td colspan="2">
+                                                    <asp:CheckBox runat="server" ID="ckEnviaEmail" Text="Enviar e-mail" ToolTip="Indica se o sistema irá enviar e-mail automaticamente"/>
+                                                </td>                                             
                                             </tr>
                                             <tr>
                                                 <td style="width: 200px">
