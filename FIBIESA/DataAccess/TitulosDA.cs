@@ -72,6 +72,8 @@ namespace DataAccess
                         por.Id = ltPor.Id;
                         por.Codigo = ltPor.Codigo;
                         por.Descricao = ltPor.Descricao;
+                        por.Carteira = ltPor.Carteira;
+
                     }
 
                     tit.Portador = por;

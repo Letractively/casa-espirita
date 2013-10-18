@@ -514,6 +514,21 @@ namespace DataAccess
             return v_erro.ToString();
         }
 
+        public bool CPJCNPJJaCadastrado(Pessoas pes)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT *  ");
+            consulta.Append(@"  FROM PESSOAS P ");
+            consulta.Append(string.Format(" WHERE CPFCNPJ = '{0}'", pes.CpfCnpj));
+            if(pes.Id > 0)
+                consulta.Append(string.Format(" AND ID != {0}", pes.Id));
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            return dr.HasRows;
+        }
+
         /// <summary>
         /// Conta quantos titulos em aberto a pessoa tem. Retorna -1 em caso de erro.
         /// </summary>
