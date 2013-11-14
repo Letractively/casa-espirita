@@ -32,6 +32,7 @@ namespace Admin
                 txtObra.Text = (string)dsPar.Tables[0].Rows[0]["codigo"].ToString();
                 lblDesObra.Text = (string)dsPar.Tables[0].Rows[0]["titulo"];
                 ddlOrigem.SelectedValue = (string)dsPar.Tables[0].Rows[0]["origemid"].ToString();
+                txtObs.Text = (string)dsPar.Tables[0].Rows[0]["obs"].ToString();
             }
         }
 
@@ -67,6 +68,7 @@ namespace Admin
             ddlOrigem.SelectedIndex = 0;
             hfIdObra.Value = "";
             hfId.Value = "";
+            txtObs.Text = "";
         }
         public void CarregarPesquisaItem(string conteudo)
         {
@@ -140,6 +142,7 @@ namespace Admin
             exemplares.Tombo = utils.ComparaIntComZero(txtTombo.Text);
             exemplares.Status = ddlStatus.SelectedValue;
             exemplares.OrigemId = utils.ComparaIntComNull(ddlOrigem.SelectedValue);
+            exemplares.Obs = txtObs.Text;
 
             if (exemplares.Id > 0)
             {

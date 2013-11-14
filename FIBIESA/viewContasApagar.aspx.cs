@@ -39,6 +39,7 @@ namespace FIBIESA
             DataColumn coluna6 = new DataColumn("TIPODOC", Type.GetType("System.String"));
             DataColumn coluna7 = new DataColumn("DTPAGTO", Type.GetType("System.String"));
             DataColumn coluna8 = new DataColumn("VALORPAG", Type.GetType("System.Decimal"));
+            DataColumn coluna9 = new DataColumn("DTVENC", Type.GetType("System.String"));
 
             tabela.Columns.Add(coluna1);
             tabela.Columns.Add(coluna2);
@@ -48,6 +49,7 @@ namespace FIBIESA
             tabela.Columns.Add(coluna6);
             tabela.Columns.Add(coluna7);
             tabela.Columns.Add(coluna8);
+            tabela.Columns.Add(coluna9);
            
             TitulosBL titBL = new TitulosBL();
             List<Titulos> titulos;
@@ -65,6 +67,7 @@ namespace FIBIESA
                 linha["VALOR"] = tit.Valor;
                 linha["PARCELA"] = tit.Parcela;
                 linha["DTEMISSAO"] = tit.DataEmissao.ToString("dd/MM/yyyy");
+                linha["DTVENC"] = tit.DataVencimento.ToString("dd/MM/yyyy");
                 if(tit.TiposDocumentos != null)
                     linha["TIPODOC"] = tit.TiposDocumentos.Descricao;
                 else

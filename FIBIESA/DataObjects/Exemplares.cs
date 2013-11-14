@@ -55,6 +55,13 @@ namespace DataObjects
             get { return _origemId; }
             set { _origemId = value; }
         }
+
+        private string _obs;
+        public string Obs
+        {
+            get { return _obs; }
+            set { _obs = value; }
+        }
         
     }
 }

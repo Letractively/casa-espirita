@@ -22,7 +22,7 @@
                         <table width="100%">
                             <tr>
                                 <td>
-                                    <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="2">
+                                    <asp:TabContainer ID="tcPrincipal" runat="server" ActiveTabIndex="0">
                                         <asp:TabPanel ID="tpUsuario" runat="server" HeaderText="Cliente/Renovação">
                                             <ContentTemplate>
                                                 <table width="800PX">

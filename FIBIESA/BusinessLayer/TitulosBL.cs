@@ -328,6 +328,11 @@ namespace BusinessLayer
             return titulosDA.PesquisarBuscaDA(selTitulos);
         }
 
-        
+        public bool CodigoJaUtilizadoBL(Int32 codigo, string tipo )
+        {
+            TitulosDA exeDA = new TitulosDA();
+
+            return exeDA.CodigoJaUtilizadoDA(codigo, tipo);
+        }
     }
 }

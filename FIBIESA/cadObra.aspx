@@ -158,16 +158,7 @@
                                                                 Width="75px" MaxLength="10" AutoPostBack="True" 
                                                                 ontextchanged="txtAutor_TextChanged"></asp:TextBox><asp:Button ID="btnAutor" runat="server" CssClass="btn"
                                                                     Text="..." OnClick="btnAutor_Click" /><asp:Label ID="lblDesAutor" runat="server"></asp:Label>
-                                                        </td>
-                                                        <tr>
-                                                            <td>
-                                                                Tipo:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="txtDesTipo" runat="server" CssClass="inputbox" ReadOnly="True"></asp:TextBox>&nbsp;&nbsp;&nbsp;
-                                                                <asp:Button ID="btnInserir" runat="server" CssClass="btn" Text="Inserir" OnClick="btnInserir_Click" />
-                                                            </td>
-                                                        </tr>
+                                                        </td>                                                      
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">

@@ -118,8 +118,8 @@ namespace Admin
         private void LimparCamposAutor()
         {
             txtAutor.Text = "";
-            lblDesAutor.Text = "";
-            txtDesTipo.Text = "";
+            lblDesAutor.Text = "";            
+            hfIdAutor.Value = "";
         }
         private void CriarDtItens()
         {
@@ -277,7 +277,60 @@ namespace Admin
                     obAutBL.InserirBL(obAut);
             }
         }
+        private void PesquisarAutor(string autor)
+        {
+            AutoresBL autBl = new AutoresBL();
+            List<Autores> autores = autBl.PesquisarBL("CODIGO", autor);
+            string tipo = "";
+            foreach (Autores ltAut in autores)
+            {
+                hfIdAutor.Value = ltAut.Id.ToString();
+                txtAutor.Text = ltAut.Codigo.ToString();
+                lblDesAutor.Text = ltAut.Descricao;
+                if (ltAut.TiposDeAutores != null)
+                    tipo = ltAut.TiposDeAutores.Descricao;
+            }
 
+            if (hfIdAutor.Value == null || hfIdAutor.Value == string.Empty)
+            {
+                LimparCamposAutor();
+                ExibirMensagem("Autor não cadastrado !");
+                txtAutor.Focus();
+            }
+            else
+                txtAutor.Focus();
+
+            if (Session["dtAutores"] != null)
+                dtAutores = (DataTable)Session["dtAutores"];
+
+            if (utils.ComparaIntComZero(hfIdAutor.Value) > 0)
+            {
+                if (!AutorJaIncluido(dtAutores, hfId.Value, hfIdAutor.Value, "dtAutores"))
+                {
+                    DataRow linha = dtAutores.NewRow();
+
+                    linha["ID"] = 0;
+                    linha["CODIGO"] = txtAutor.Text;
+                    linha["DESCRICAO"] = lblDesAutor.Text;
+                    linha["TIPO"] = tipo;
+                    linha["AUTORESID"] = hfIdAutor.Value;
+                    linha["OBRAID"] = utils.ComparaIntComZero(hfId.Value);
+
+                    dtAutores.Rows.Add(linha);
+
+                    dtbPesquisa = dtAutores;
+                    Session["dtAutores"] = dtAutores;
+                    dtgAutores.DataSource = dtAutores;
+                    dtgAutores.DataBind();
+                    LimparCamposAutor();
+                }
+                else
+                {
+                    ExibirMensagem("Autor já incluído !");
+                    LimparCamposAutor();
+                }
+            }
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -437,33 +490,7 @@ namespace Admin
 
         protected void btnInserir_Click(object sender, EventArgs e)
         {
-            if (Session["dtAutores"] != null)
-                dtAutores = (DataTable)Session["dtAutores"];
-
-            if (utils.ComparaIntComZero(hfIdAutor.Value) > 0)
-            {
-                if (!AutorJaIncluido(dtAutores, hfId.Value, hfIdAutor.Value, "dtAutores"))
-                {
-                    DataRow linha = dtAutores.NewRow();
-
-                    linha["ID"] = 0;
-                    linha["CODIGO"] = txtAutor.Text;
-                    linha["DESCRICAO"] = lblDesAutor.Text;
-                    linha["TIPO"] = txtDesTipo.Text;
-                    linha["AUTORESID"] = hfIdAutor.Value;
-                    linha["OBRAID"] = utils.ComparaIntComZero(hfId.Value);
-
-                    dtAutores.Rows.Add(linha);
-
-                    dtbPesquisa = dtAutores;
-                    Session["dtAutores"] = dtAutores;
-                    dtgAutores.DataSource = dtAutores;
-                    dtgAutores.DataBind();
-                    LimparCamposAutor();
-                }
-                else
-                    ExibirMensagem("Autor já incluído !");
-            }
+            
 
         }
 
@@ -508,11 +535,8 @@ namespace Admin
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
 
-            hfIdAutor.Value = grdPesquisaAutor.DataKeys[gvrow.RowIndex].Value.ToString();
-            txtAutor.Text = gvrow.Cells[2].Text;
-            lblDesAutor.Text = gvrow.Cells[3].Text;
-            txtDesTipo.Text = gvrow.Cells[4].Text;
-
+            PesquisarAutor(gvrow.Cells[2].Text);
+            
             ModalPopupExtenderPesAutor.Enabled = false;
             ModalPopupExtenderPesAutor.Hide();
             txtAutor.Focus();
@@ -532,31 +556,8 @@ namespace Admin
 
         protected void txtAutor_TextChanged(object sender, EventArgs e)
         {
-            AutoresBL autBl = new AutoresBL();
-            List<Autores> autores = autBl.PesquisarBL("CODIGO", txtAutor.Text);
-
-            foreach (Autores ltAut in autores)
-            {
-                hfIdAutor.Value = ltAut.Id.ToString();
-                txtAutor.Text = ltAut.Codigo.ToString();
-                lblDesAutor.Text = ltAut.Descricao;
-                if (ltAut.TiposDeAutores != null)
-                    txtDesTipo.Text = ltAut.TiposDeAutores.Descricao;
-            }
-
-            if (hfIdAutor.Value == null || hfIdAutor.Value == string.Empty)
-            {
-                hfIdAutor.Value = "";
-                lblDesAutor.Text = "";
-                txtAutor.Text = "";
-                ExibirMensagem("Autor não cadastrado !");
-                txtDesTipo.Text = "";
-                txtAutor.Focus();
-            }
-            else
-                txtAutor.Focus();
+            PesquisarAutor(txtAutor.Text);
         }
-
 
     }
 }

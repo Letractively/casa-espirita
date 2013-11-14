@@ -506,6 +506,8 @@ namespace FIBIESA
                 dtItensDev = null;
                 Session["dtItensEmp"] = null;
                 Session["dtItensDev"] = null;
+                txtCliente.Focus();
+                
             }
         }
 
@@ -769,6 +771,7 @@ namespace FIBIESA
             ModalPopupExtenderPesquisaItem.Enabled = true;
             ModalPopupExtenderPesquisaItem.Show();
         }
+        
         protected void btnSelectItemDev_Click(object sender, EventArgs e)
         {
 
@@ -784,10 +787,12 @@ namespace FIBIESA
             PesquisarExemplarDev(txtExemplarDev.Text);
 
         }
+        
         protected void btnCancelDev_Click(object sender, EventArgs e)
         {
             ModalPopupExtenderPesquisaItem.Enabled = false;
         }
+        
         protected void btnDevolver_Click(object sender, EventArgs e)
         {
 

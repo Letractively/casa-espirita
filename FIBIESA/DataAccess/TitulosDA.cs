@@ -127,7 +127,7 @@ namespace DataAccess
                     SqlParameter[] paramsToSP = new SqlParameter[12];
                     paramsToSP[0] = new SqlParameter("@numero", tit.Numero);
                     paramsToSP[1] = new SqlParameter("@parcela", qtde_parc);
-                    paramsToSP[2] = new SqlParameter("@valor", tit.Valor);
+                    paramsToSP[2] = new SqlParameter("@valor", tit.Valor / tit.Parcela);
                     paramsToSP[3] = new SqlParameter("@pessoaid", tit.Pessoaid);
                     paramsToSP[4] = new SqlParameter("@portadorid", tit.Portadorid);
                     paramsToSP[5] = new SqlParameter("@dtvencimento", dt_vencimento);
@@ -341,6 +341,25 @@ namespace DataAccess
             List<Titulos> titulos = CarregarObjTitulos(dr);
 
             return titulos;
+        }
+
+        public bool CodigoJaUtilizadoDA(Int32 codigo, string tipo )
+        {
+            DataSet dsInst = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT 1 COD " +
+                                                                                        "  FROM TITULOS " +
+                                                                                        " WHERE NUMERO = {0} "+
+                                                                                        " AND TIPO = '{1}' ", codigo, tipo));
+            int cod = 0;
+
+            if (dsInst.Tables[0].Rows.Count != 0)
+                cod = (int)dsInst.Tables[0].Rows[0]["COD"];
+
+            if (cod == 1)
+                return true;
+            else
+                return false;
+
         }
     }
 }

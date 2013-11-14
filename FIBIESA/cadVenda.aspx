@@ -14,8 +14,8 @@
                 Sys.Application.add_load(formatarValor);
             </script>
             <div id="content">
-                <div class="container half2 left">
-                    <div class="conthead">
+               <div class="container half3 left">
+                 <div class="conthead">
                         <h2>
                             Vendas</h2>
                     </div>

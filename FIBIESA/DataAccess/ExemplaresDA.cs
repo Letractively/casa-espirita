@@ -29,6 +29,7 @@ namespace DataAccess
                 tipo.Tombo = int.Parse(dr["TOMBO"].ToString());
                 tipo.Status = dr["STATUS"].ToString();                
                 tipo.OrigemId = utils.ComparaIntComNull(dr["ORIGEMID"].ToString());
+                tipo.Obs = dr["OBS"].ToString();
                               
                 Obras obras = new Obras();
 
@@ -47,12 +48,13 @@ namespace DataAccess
 
         public bool InserirDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[4];
+            SqlParameter[] paramsToSP = new SqlParameter[5];
 
             paramsToSP[0] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[1] = new SqlParameter("@status", instancia.Status);
             paramsToSP[2] = new SqlParameter("@tombo", instancia.Tombo);
             paramsToSP[3] = new SqlParameter("@origemId", instancia.OrigemId);
+            paramsToSP[4] = new SqlParameter("@obs", instancia.Obs.ToUpper());
                       
             try
             {
@@ -69,13 +71,14 @@ namespace DataAccess
 
         public bool EditarDA(Exemplares instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[5];
+            SqlParameter[] paramsToSP = new SqlParameter[6];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@obraid", instancia.Obraid);
             paramsToSP[2] = new SqlParameter("@status", instancia.Status);
             paramsToSP[3] = new SqlParameter("@tombo", instancia.Tombo);
             paramsToSP[4] = new SqlParameter("@origemId", instancia.OrigemId);
+            paramsToSP[5] = new SqlParameter("@obs", instancia.Obs.ToUpper());
            
             try
             {
