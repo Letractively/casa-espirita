@@ -39,7 +39,8 @@
                                 </td>
                                 <td style="width: 400px">
                                     <asp:TextBox ID="txtTitulo" runat="server" CssClass="inputboxRight" Width="100px"
-                                        ToolTip="Informe o número do título" MaxLength="10"></asp:TextBox>
+                                        ToolTip="Informe o número do título" MaxLength="10" AutoPostBack="True" 
+                                        ontextchanged="txtTitulo_TextChanged"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtTitulo"
                                         CssClass="validacao" ErrorMessage="* Informe o número do título" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
                                 </td>
@@ -51,6 +52,12 @@
                                         ToolTip="Informe a parcela" MaxLength="3"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtParcela"
                                         CssClass="validacao" ErrorMessage="* Informe o número da parcela" ValidationGroup="salvar">*</asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="3">
+                                    <asp:Label ID="lblInformacao" runat="server" ForeColor="Red" ></asp:Label>
                                 </td>
                             </tr>
                             <tr>

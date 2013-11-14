@@ -12,7 +12,7 @@
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div id="content">
-                <div class="container half left">
+                <div class="container">
                     <div class="conthead">
                         <h2>
                             Cadastro de Exemplares</h2>
@@ -64,6 +64,16 @@
                                 <td style="width: 120px">
                                     <asp:DropDownList ID="ddlOrigem" runat="server" CssClass="dropdownlist" ToolTip="Selecione a origem">
                                     </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 120px">
+                                    OBS:
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:TextBox ID="txtObs" runat="server" CssClass="inputbox" 
+                                        ToolTip="Informe a Observação" Height="122px" MaxLength="500" 
+                                        TextMode="MultiLine" Width="324px"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>

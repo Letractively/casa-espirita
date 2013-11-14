@@ -259,6 +259,23 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Show();
         }
 
+        protected void txtTitulo_TextChanged(object sender, EventArgs e)
+        {
+            TitulosBL titBL = new TitulosBL();
+
+            if (titBL.CodigoJaUtilizadoBL(utils.ComparaIntComZero(txtTitulo.Text), "P"))
+            {
+                lblInformacao.Text = "O título número " + txtTitulo.Text + " já existe. Informe um novo número.";
+                txtTitulo.Text = "";
+                txtTitulo.Focus();
+            }
+            else
+            {
+                lblInformacao.Text = "";
+                txtParcela.Focus();
+            }
+        }
+
 
     }
 }

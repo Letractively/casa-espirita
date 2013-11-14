@@ -56,6 +56,8 @@
                                            SortExpression="PARCELA" />                                       
                                        <asp:BoundField DataField="DTEMISSAO" HeaderText="Dt. Emissão" 
                                            SortExpression="DTEMISSAO" />
+                                       <asp:BoundField DataField="DTVENC" HeaderText="Dt. Vencimento" 
+                                           SortExpression="DTVENC" />
                                        <asp:BoundField DataField="VALOR" HeaderText="Valor" SortExpression="VALOR" />
                                        <asp:BoundField DataField="DTPAGTO" HeaderText="Dt. Pagto" 
                                            SortExpression="DTPAGTO" />
