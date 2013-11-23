@@ -15,7 +15,7 @@
                 <div class="container half left">
                     <div class="conthead">
                         <h2>
-                            Diário de Turmas</h2>
+                           Relatório do Diário de Turmas</h2>
                     </div>
                     <div class="contentbox">
                         <table>
@@ -86,9 +86,9 @@
                                     <asp:Button ID="btnVoltar" runat="server" CssClass="btn" Text="Voltar" 
                                         OnClick="btnVoltar_Click" ToolTip="Volta para página principal" />
                                     &nbsp;&nbsp;&nbsp;
-                                    <asp:Button ID="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
-                                        OnClick="btnRelatorio_Click" ToolTip="Imprime o relatório" validationgroup="grupo" />
-                                </td>
+                                    <asp:Button id="btnRelatorio" runat="server" CssClass="btn" Text="Relatório" 
+                                        onclick="btnRelatorio_Click1"/>
+                                    </td>
                             </tr>
                         </table>
                     </div>

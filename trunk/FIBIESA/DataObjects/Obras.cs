@@ -111,6 +111,14 @@ namespace DataObjects
             get { return _tiposObras; }
             set { _tiposObras = value; }
         }
+
+        private string _cdu;
+
+        public string Cdu
+        {
+            get { return _cdu; }
+            set { _cdu = value; }
+        }
         
 
     }

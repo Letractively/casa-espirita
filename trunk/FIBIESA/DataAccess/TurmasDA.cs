@@ -369,6 +369,8 @@ namespace DataAccess
                 sqlQuery.Append(@" AND data BETWEEN CONVERT(DATETIME,'" + dataIni + "',103) AND CONVERT(DATETIME,'" + dataFim + "',103)");
             }
 
+            sqlQuery.Append(@" ORDER BY view_eventos.idturma, data");
+
             DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, sqlQuery.ToString());
             return ds;

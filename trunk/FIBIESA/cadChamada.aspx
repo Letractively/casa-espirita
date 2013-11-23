@@ -73,7 +73,7 @@
                                 <table>
                                     <thead>
                                     <tr>                                        
-                                        <th></th><th></th><th>Código</th><th>Nome</th><th>Status</th><th>Data</th> 
+                                        <th></th><th></th><th>Código</th><th>Nome</th><th>Presente</th><th>Data</th> 
                                     </tr>
                                     </thead>
                             </HeaderTemplate>
@@ -84,7 +84,7 @@
                                         <td><asp:TextBox ID="txtTurmaParticipanteId" runat="server" Visible="false" Text='<% #DataBinder.Eval(Container, "DataItem.TURMAPARTICIPANTEID") %>'></asp:TextBox></td>                                                        
                                         <td><asp:Label ID="lblCodParticipante" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.CODPARTICIPANTE") %>'></asp:Label></td> 
                                         <td><asp:Label ID="lblDescParticipante" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.DESCPARTICIPANTE") %>'></asp:Label></td> 
-                                        <td><asp:CheckBox ID="chkPresenca" runat="server" Text="Presente" Checked='<% #DataBinder.Eval(Container, "DataItem.PRESENCA") %>' /></td>
+                                        <td><center><asp:CheckBox ID="chkPresenca" runat="server" Checked='<% #DataBinder.Eval(Container, "DataItem.PRESENCA") %>' /></center></td>
                                         <td><asp:Label ID="lblData" runat="server" Text='<% #DataBinder.Eval(Container, "DataItem.DATA") %>' /></td>                                     
                                     </tr>  
                                     </tbody>  

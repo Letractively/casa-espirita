@@ -94,6 +94,15 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valTipoObra;
         
         /// <summary>
+        /// Controle txtCdu.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCdu;
+        
+        /// <summary>
         /// Controle txtNroEdicao.
         /// </summary>
         /// <remarks>

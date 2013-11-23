@@ -22,6 +22,8 @@ namespace DataAccess
             PessoasDA pesDA = new PessoasDA();
             PortadoresDA porDA = new PortadoresDA();
             TiposDocumentosDA tipDA = new TiposDocumentosDA();
+            CidadesDA cidDA = new CidadesDA();
+            EstadosDA estDA = new EstadosDA();
             
             while (dr.Read())
             {
@@ -55,6 +57,30 @@ namespace DataAccess
                         pes.Nome = ltPes.Nome;
                         pes.CpfCnpj = ltPes.CpfCnpj;
                         pes.Endereco = ltPes.Endereco;
+                        
+                        DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
+                        Cidades cid = new Cidades();
+                        if (dsCid.Tables[0].Rows.Count != 0)
+                        {
+                            cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
+                            cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
+                            cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
+                            cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
+                                                       
+                            DataSet dsEst = estDA.PesquisaDA(cid.EstadoId);
+                            Estados est = new Estados();
+
+                            if (dsEst.Tables[0].Rows.Count > 0)
+                            {
+                                est.Id = (Int32)dsEst.Tables[0].Rows[0]["id"];
+                                est.Uf = (string)dsEst.Tables[0].Rows[0]["uf"];
+                                est.Descricao = (string)dsEst.Tables[0].Rows[0]["descricao"];
+                            }
+
+                            cid.Estados = est;
+
+
+                        }
                     }
 
                     tit.Pessoas = pes;
@@ -218,13 +244,16 @@ namespace DataAccess
 
         public List<Titulos> PesquisarBuscaDA(string tipo, string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM TITULOS WHERE 1 = 1 ");
-
+            StringBuilder consulta = new StringBuilder(@"SELECT T.* ");
+            consulta.Append(@"FROM TITULOS T ");
+            consulta.Append(@" , TIPOSDOCUMENTOS TD ");
+            consulta.Append(@"WHERE T.TIPODOCUMENTOID = TD.ID ");
+           
             if (tipo != "" && tipo != null)
-                consulta.Append(string.Format(" AND TIPO = '{0}'", tipo));
+                consulta.Append(string.Format(" AND T.TIPO = '{0}'", tipo));
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND NUMERO = {0}", utils.ComparaIntComZero(valor)));
+                consulta.Append(string.Format(" AND (T.NUMERO = {0} OR UPPER(TD.DESCRICAO) LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY NUMERO ");
 
