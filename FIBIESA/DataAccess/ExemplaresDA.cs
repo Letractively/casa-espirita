@@ -115,7 +115,7 @@ namespace DataAccess
         {
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT E.*, O.ORIGEMID FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ORDER BY O.CODIGO  "));
+                CommandType.Text, string.Format(@"SELECT E.* FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ORDER BY O.CODIGO  "));
             return CarregarObjExemplares(dr);
         }
 
@@ -123,7 +123,7 @@ namespace DataAccess
         {
             SqlDataReader ds = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, "
+                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, "
                     + " OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
 
             List<Exemplares> oi = CarregarObjExemplares(ds);
@@ -137,14 +137,14 @@ namespace DataAccess
         {
             DataSet ds = SqlHelper.ExecuteDataset(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
+                CommandType.Text, string.Format(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O  WHERE E.OBRAID = O.ID AND E.ID = {0}", id));
 
             return ds;
         }
 
         public List<Exemplares> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT E.*, O.ORIGEMID, O.codigo, o.titulo FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+            StringBuilder consulta = new StringBuilder("SELECT E.*, O.codigo, o.titulo FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             switch (campo.ToUpper())
             {
@@ -170,7 +170,7 @@ namespace DataAccess
 
         public List<Exemplares> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+            StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             if (valor != "" && valor != null)
                 consulta.Append(string.Format(" AND (O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
@@ -194,7 +194,7 @@ namespace DataAccess
         {
             //StringBuilder consulta = new StringBuilder(@"SELECT * FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
-            StringBuilder consulta = new StringBuilder(@"SELECT EX.*, OB.ID IDOBRA, OB.TITULO, OB.CODIGO, OB.ORIGEMID FROM EXEMPLARES EX ");
+            StringBuilder consulta = new StringBuilder(@"SELECT EX.*, OB.ID IDOBRA, OB.TITULO, OB.CODIGO FROM EXEMPLARES EX ");
 
             consulta.Append(" INNER JOIN OBRAS OB ON OB.ID = EX.OBRAID");
             consulta.Append(" WHERE EX.STATUS = 'A'");
@@ -223,7 +223,6 @@ namespace DataAccess
 
             consulta.Append(@"SELECT EX.* "+
                              ", OB.TITULO "+
-                             ", OB.ORIGEMID " +
                              ", OB.CODIGO "+ 
                              ", TOB.QTDDIAS "+
                              ",(SELECT MOV.DATAPREVISTAEMPRESTIMO "+
@@ -308,7 +307,7 @@ namespace DataAccess
 
         public DataSet PesquisarBuscaExemplaresDA(string tombo)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO, O.ORIGEMID FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
+            StringBuilder consulta = new StringBuilder(@"SELECT E.*, O.ID IDOBRA, O.CODIGO, O.TITULO FROM EXEMPLARES E, OBRAS O WHERE E.OBRAID = O.ID ");
 
             if (tombo != string.Empty && tombo != null)
                 consulta.Append(string.Format(" AND E.TOMBO IN ({0})  ", tombo));

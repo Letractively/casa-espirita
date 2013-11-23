@@ -119,6 +119,10 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="images\nav_current.png" />
+    <Content Include="images\nav_hover.png" />
+    <Content Include="images\nav_sub.png" />
+    <Content Include="images\nav_sub_active.png" />
     <Content Include="Relatorios\RelTurmasDiario.aspx" />
     <Content Include="viewRelTurmasDiario.aspx" />
     <Content Include="GerarRemessa.aspx" />
@@ -1255,7 +1259,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49338</DevelopmentServerPort>
+          <DevelopmentServerPort>52231</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -110,7 +110,7 @@ namespace DataAccess
             paramsToSP[3] = new SqlParameter("@bancoid", por.BancoId);
             paramsToSP[4] = new SqlParameter("@contaid", por.ContaId);
             paramsToSP[5] = new SqlParameter("@codCedente", por.CodCedente);
-            paramsToSP[6] = new SqlParameter("@carteria", por.Carteira);
+            paramsToSP[6] = new SqlParameter("@carteira", por.Carteira);
 
             try
             {

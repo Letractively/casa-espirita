@@ -153,17 +153,24 @@ namespace FIBIESA
         {
 
 
+
             TurmasBL turmasBL = new TurmasBL();
 
+            txtEvento.Text = "0";
             Session["ldsRel"] = turmasBL.PesquisarDiarioDataset(txtEvento.Text, txtTurma.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            txtEvento.Text = "1";
             if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
-            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+            {
+                txtEvento.Text = "2";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelTurmasDiario.aspx','',600,915);", true);
             }
             else
             {
+                txtEvento.Text = "3";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
+
+            txtEvento.Text = "4";
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -211,6 +218,28 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnRelatorio_Click1(object sender, EventArgs e)
+        {
+           
+            TurmasBL turmasBL = new TurmasBL();
+         
+            Session["ldsRel"] = turmasBL.PesquisarDiarioDataset(txtEvento.Text, txtTurma.Text, txtDataIni.Text, txtDataFim.Text).Tables[0];
+            
+        
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
+            {
+    
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelTurmasDiario.aspx','',600,915);", true);
+            }
+            else
+            {
+           
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
+            }
+
+          
         }
     }
 }

@@ -133,9 +133,15 @@ namespace Admin
                 DataSet dsTurPar = turDiarioBl.PesquisarBL(utils.ComparaIntComZero(ddlTurmas.SelectedValue), Convert.ToDateTime(txtSelData.Text));
 
                 if (dsTurPar.Tables[0].Rows.Count != 0)
+                {
+                    hfIdTurDiario.Value = dsTurPar.Tables[0].Rows[0]["id"].ToString();
                     txtObs.Text = dsTurPar.Tables[0].Rows[0]["obs"].ToString();
+                }
                 else
+                {
+                    hfIdTurDiario.Value = "";
                     txtObs.Text = "";
+                }
             }
 
         }

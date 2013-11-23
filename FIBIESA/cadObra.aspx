@@ -48,11 +48,18 @@
                                                         <td>
                                                             * Tipo de Obra:
                                                         </td>
-                                                        <td colspan="3">
+                                                        <td>
                                                             <asp:DropDownList ID="ddlTipoObra" runat="server" CssClass="dropdownlist" ToolTip="Selecione o tipo de obra">
                                                             </asp:DropDownList>
                                                             <asp:RequiredFieldValidator ID="valTipoObra" runat="server" ControlToValidate="ddlTipoObra"
                                                                 ErrorMessage="Informe o Tipo de Obra" ValidationGroup="salvar" CssClass="validacao">*</asp:RequiredFieldValidator>
+                                                        </td>
+                                                         <td style="width: 140px">
+                                                            CDU:
+                                                        </td>
+                                                        <td style="width: 180px">
+                                                            <asp:TextBox ID="txtCdu" runat="server" CssClass="inputbox" Width="110px"
+                                                                ToolTip="Informe o CDU" MaxLength="40"></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>

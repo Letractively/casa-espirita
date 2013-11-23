@@ -72,6 +72,7 @@ namespace Admin
                 txtAssuntosAborda.Text = (string)dsOb.Tables[0].Rows[0]["assuntosaborda"].ToString();
                 ddlEditora.SelectedValue = (string)dsOb.Tables[0].Rows[0]["editoraid"].ToString();
                 ddlTipoObra.SelectedValue = (string)dsOb.Tables[0].Rows[0]["tiposobraid"].ToString();
+                txtCdu.Text = (string)dsOb.Tables[0].Rows[0]["cdu"].ToString();
 
             }
 
@@ -114,6 +115,7 @@ namespace Admin
             dtgAutores.DataSource = dtAutores;
             dtgAutores.DataBind();
             tcPrincipal.ActiveTabIndex = 0;
+            txtCdu.Text = "";
         }
         private void LimparCamposAutor()
         {
@@ -386,7 +388,7 @@ namespace Admin
             obras.Titulo = txtTitulo.Text;
             obras.NroEdicao = utils.ComparaIntComNull(txtNroEdicao.Text);
             obras.EditoraId = utils.ComparaIntComNull(ddlEditora.SelectedValue);
-            obras.NroPaginas = Convert.ToInt16(txtNroPags.Text);
+            obras.NroPaginas = utils.ComparaIntComNull(txtNroPags.Text);
             obras.Volume = utils.ComparaIntComNull(txtVolume.Text);
             obras.Isbn = txtISBN.Text;
             obras.AssuntosAborda = txtAssuntosAborda.Text;
@@ -394,6 +396,7 @@ namespace Admin
             obras.DataReimpressao = utils.ComparaDataComNull(txtDataReimpressao.Text);
             obras.TiposObraId = utils.ComparaIntComNull(ddlTipoObra.SelectedValue);
             obras.LocalPublicacao = txtLocalPublic.Text;
+            obras.Cdu = txtCdu.Text;                
 
 
             if (obras.Id > 0)

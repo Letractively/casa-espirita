@@ -43,7 +43,7 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[4];
 
-            paramsToSP[0] = new SqlParameter("@data", tur.Id);
+            paramsToSP[0] = new SqlParameter("@id", tur.Id);
             paramsToSP[1] = new SqlParameter("@data", tur.Data);
             paramsToSP[2] = new SqlParameter("@obs", tur.Obs);
             paramsToSP[3] = new SqlParameter("@turmaId", tur.TurmaId);
@@ -82,7 +82,7 @@ namespace DataAccess
         {
             StringBuilder v_query = new StringBuilder();
 
-            v_query.Append(@"SELECT obs ");
+            v_query.Append(@"SELECT id,obs ");
             v_query.Append(@" FROM turmasDiario");
             v_query.Append(@" WHERE CONVERT(DATE,data,103) = CONVERT(DATE,'" + data + "',103)");
             v_query.Append(@"  AND turmaId = {0} ");

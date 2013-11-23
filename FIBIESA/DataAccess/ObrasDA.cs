@@ -36,6 +36,7 @@ namespace DataAccess
                 //obrinha.ImagemCapa = utils.ComparaIntComNull(dr["IMAGEMCAPA"].ToString());
                 obrinha.Volume = utils.ComparaIntComNull(dr["VOLUME"].ToString());                
                 obrinha.TiposObraId = utils.ComparaIntComNull(dr["TIPOSOBRAID"].ToString());
+                obrinha.Cdu = dr["CDU"].ToString();
 
                 TiposObrasDA tObDA = new TiposObrasDA();
                 List<TiposObras> tOb = tObDA.PesquisarDA(utils.ComparaIntComZero(obrinha.TiposObraId.ToString()));
@@ -83,10 +84,10 @@ namespace DataAccess
             paramsToSP[6] = new SqlParameter("@nroPaginas", instancia.NroPaginas);            
             paramsToSP[7] = new SqlParameter("@isbn", instancia.Isbn);                     
             paramsToSP[8] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda.ToUpper());
-            paramsToSP[9] = new SqlParameter("@tipo", 0);
-            paramsToSP[10] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
-            paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);                   
-            paramsToSP[12] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
+            paramsToSP[9] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
+            paramsToSP[10] = new SqlParameter("@volume", instancia.Volume);                   
+            paramsToSP[11] = new SqlParameter("@tiposObraId", instancia.TiposObraId);
+            paramsToSP[12] = new SqlParameter("@cdu", instancia.Cdu);
 
             try
             {
@@ -107,7 +108,7 @@ namespace DataAccess
 
         public bool EditarDA(Obras instancia)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[13];
+            SqlParameter[] paramsToSP = new SqlParameter[14];
 
             paramsToSP[0] = new SqlParameter("@id", instancia.Id);
             paramsToSP[1] = new SqlParameter("@codigo", instancia.Codigo);
@@ -122,6 +123,7 @@ namespace DataAccess
             paramsToSP[10] = new SqlParameter("@assuntosAborda", instancia.AssuntosAborda.ToUpper());
             paramsToSP[11] = new SqlParameter("@volume", instancia.Volume);            
             paramsToSP[12] = new SqlParameter("@dataReimpressao", instancia.DataReimpressao);
+            paramsToSP[13] = new SqlParameter("@cdu", instancia.Cdu);
 
             try
             {
