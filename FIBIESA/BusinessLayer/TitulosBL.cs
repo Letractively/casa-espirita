@@ -232,15 +232,15 @@ namespace BusinessLayer
                 utils.IncluirCampoAlfanumerico(transacao, " ", 4);
             else
             {
-                transacao.Append(remessa.Instrucao1);
-                transacao.Append(remessa.Instrucao2);
+                utils.IncluirCampoNumerico(transacao, remessa.Instrucao1, 2);
+                utils.IncluirCampoNumerico(transacao, remessa.Instrucao2, 2);
             }
 
             //posicoes 161 - 161 código de mora
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
                 transacao.Append(" ");
             else
-                transacao.Append(remessa.JuroMora);
+                utils.IncluirCampoNumerico(transacao, remessa.JuroMora, 1);
 
             //posicoes 162 - 173 
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
@@ -274,7 +274,7 @@ namespace BusinessLayer
             utils.IncluirCampoAlfanumerico(transacao, " ", 5);
 
             //posicoes 275 - 314 endereco 
-            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Endereco, 35);
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Endereco, 40);
 
             //posicoes 315 - 321 
             utils.IncluirCampoAlfanumerico(transacao, " ", 7);
@@ -310,9 +310,10 @@ namespace BusinessLayer
             {
                 if (remessa.Instrucao1 == "09" || remessa.Instrucao1 == "15")
                     utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto, 2);
-                else if
-                    (remessa.Instrucao2 == "09" || remessa.Instrucao2 == "15")
+                else if (remessa.Instrucao2 == "09" || remessa.Instrucao2 == "15")
                     utils.IncluirCampoNumerico(transacao, remessa.DiasProtesto, 2);
+                else
+                    utils.IncluirCampoNumerico(transacao, "0", 2);
 
             }
 
