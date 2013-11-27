@@ -138,6 +138,7 @@ namespace FIBIESA
             remessa.Instrucao1 = ddlInstrucao1.SelectedValue;
             remessa.Instrucao2 = ddlInstrucao2.SelectedValue;
             remessa.CodOcorrencia = ddlRemessa.SelectedValue;
+            remessa.JuroMora = ddlJuroMora.SelectedValue;
             
             StringBuilder arquivo = new StringBuilder();
             int v_seq = 1;

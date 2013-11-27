@@ -57,6 +57,9 @@ namespace DataAccess
                         pes.Nome = ltPes.Nome;
                         pes.CpfCnpj = ltPes.CpfCnpj;
                         pes.Endereco = ltPes.Endereco;
+                        pes.Tipo = ltPes.Tipo;
+                        pes.Cep = ltPes.Cep;
+                        pes.CidadeId = ltPes.CidadeId;
                         
                         DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
                         Cidades cid = new Cidades();
@@ -79,7 +82,7 @@ namespace DataAccess
 
                             cid.Estados = est;
 
-
+                            pes.Cidade = cid;
                         }
                     }
 
