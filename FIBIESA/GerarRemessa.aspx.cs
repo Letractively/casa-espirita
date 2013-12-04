@@ -164,6 +164,7 @@ namespace FIBIESA
             }
 
             arquivo.Clear();
+            v_seq++;
             titulosBL.ArquivoRemessaMontarTrailler(arquivo, "300", v_seq.ToString());
             sw.WriteLine(arquivo);
 

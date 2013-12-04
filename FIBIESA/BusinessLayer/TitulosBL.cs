@@ -286,22 +286,22 @@ namespace BusinessLayer
             utils.IncluirCampoNumerico(transacao, "0", 2);
 
             //posicoes 327 - 334 cep 
-            utils.IncluirCampoNumerico(transacao, titulo.Pessoas.Cep, 8);
+            utils.IncluirCampoNumerico(transacao,  titulo.Pessoas.Cep.Replace("-",""), 8);
 
             //posicoes 335 - 349 cidade
             utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Cidade.Descricao, 15);
 
             //posicoes 350 - 351 UF
-            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Cidade.Estados.Descricao, 2);
+            utils.IncluirCampoAlfanumerico(transacao, titulo.Pessoas.Cidade.Estados.Uf, 2);
 
             //posices 352 - 355 taxa para pagamento antecipado
-            utils.IncluirCampoNumerico(transacao, "0", 3);
+            utils.IncluirCampoNumerico(transacao, "0", 4);
 
             //posicoes 356 - 356 brancos
             utils.IncluirCampoAlfanumerico(transacao, "", 1);
 
             //posicoes 357 - 369 valor para calculo desconto
-            utils.IncluirCampoNumerico(transacao, "0", 12);
+            utils.IncluirCampoNumerico(transacao, "0", 13);
 
             //posicoes 370 - 371 n° dias para protesto ou devolução
             if (titulo.Portador.Carteira == "R" || titulo.Portador.Carteira == "S" || titulo.Portador.Carteira == "X" || titulo.Portador.Carteira == "N")
@@ -318,7 +318,7 @@ namespace BusinessLayer
             }
 
             //posicoes 372 - 394 brancos
-            utils.IncluirCampoAlfanumerico(transacao, " ", 13);
+            utils.IncluirCampoAlfanumerico(transacao, " ", 23);
 
             //posicoes 395 - 400 sequencial
             utils.IncluirCampoNumerico(transacao, seq, 6);
