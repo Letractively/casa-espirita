@@ -123,6 +123,7 @@
     <Content Include="images\nav_hover.png" />
     <Content Include="images\nav_sub.png" />
     <Content Include="images\nav_sub_active.png" />
+    <Content Include="Relatorios\RelBoletos.aspx" />
     <Content Include="Relatorios\RelTurmasDiario.aspx" />
     <Content Include="viewRelTurmasDiario.aspx" />
     <Content Include="GerarRemessa.aspx" />
@@ -611,6 +612,13 @@
     </Compile>
     <Compile Include="cadVenda.aspx.designer.cs">
       <DependentUpon>cadVenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelBoletos.aspx.cs">
+      <DependentUpon>RelBoletos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelBoletos.aspx.designer.cs">
+      <DependentUpon>RelBoletos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelTurmasDiario.aspx.cs">
       <DependentUpon>RelTurmasDiario.aspx</DependentUpon>
@@ -1250,6 +1258,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="instituicoesLogo.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Relatorios\rptBoletos.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

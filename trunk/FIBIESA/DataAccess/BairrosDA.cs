@@ -51,6 +51,24 @@ namespace DataAccess
             return bairros;
         }
 
+        private List<Bairros> CarregarObjBairroSimples(SqlDataReader dr)
+        {
+            List<Bairros> bairros = new List<Bairros>();
+
+            while (dr.Read())
+            {
+                Bairros bai = new Bairros();
+                bai.Id = int.Parse(dr["ID"].ToString());
+                bai.Codigo = int.Parse(dr["CODIGO"].ToString());
+                bai.Descricao = dr["DESCRICAO"].ToString();
+                bai.CidadeId = utils.ComparaIntComNull(dr["CIDADEID"].ToString());
+
+                bairros.Add(bai);
+            }
+
+            return bairros;
+        }
+
         private Int32 RetornaMaxCodigo()
         {
             Int32 codigo = 1;
@@ -153,6 +171,17 @@ namespace DataAccess
                                                                                        " FROM BAIRROS WHERE CIDADEID = {0}", id_cid));
 
             List<Bairros> bairros = CarregarObjBairro(dr);
+
+            return bairros;
+        }
+
+        public List<Bairros> PesquisarCidSimplesDA(int id_cid)
+        {
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                       CommandType.Text, string.Format(@"SELECT * " +
+                                                                                       " FROM BAIRROS WHERE CIDADEID = {0}", id_cid));
+
+            List<Bairros> bairros = CarregarObjBairroSimples(dr);
 
             return bairros;
         }
