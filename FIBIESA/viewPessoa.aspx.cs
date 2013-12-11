@@ -51,7 +51,7 @@ namespace Admin
             PessoasBL pesBL = new PessoasBL();
             List<Pessoas> pessoas;
 
-            pessoas = pesBL.PesquisarBuscaBL(valor);
+            pessoas = pesBL.PesquisarBuscaSimplesBL(valor);
 
             foreach (Pessoas pes in pessoas)
             {
@@ -65,12 +65,8 @@ namespace Admin
                 linha["CATEGORIAID"] = pes.CategoriaId;
                 linha["DTCADASTRO"] = pes.DtCadastro.ToString("dd/MM/yyyy");
 
-                CategoriasBL catBL = new CategoriasBL();
-                List<Categorias> categorias = catBL.PesquisarBL(pes.CategoriaId);
-                foreach (Categorias cat in categorias)
-                {
-                    linha["DESCATEGORIA"] = cat.Descricao;
-                }
+                if (pes.Categorias != null)
+                    linha["DESCATEGORIA"] = pes.Categorias.Descricao;
 
                 tabela.Rows.Add(linha);
             }
@@ -89,8 +85,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                Pesquisar(null);
+            
         }
 
         protected void btnInserir_Click(object sender, EventArgs e)

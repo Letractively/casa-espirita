@@ -131,6 +131,37 @@ namespace DataAccess
             }
             return pessoas;
         }
+        
+        private List<Pessoas> CarregarObjPessoaSimples(SqlDataReader dr)
+        {
+            List<Pessoas> pessoas = new List<Pessoas>();
+
+            while (dr.Read())
+            {
+                Pessoas pes = new Pessoas();
+                pes.Id = utils.ComparaIntComZero(dr["ID"].ToString());
+                pes.Codigo = utils.ComparaIntComZero(dr["CODIGO"].ToString());
+                pes.Nome = dr["NOME"].ToString();
+                pes.NomeFantasia = dr["NOMEFANTASIA"].ToString();
+                pes.CpfCnpj = dr["CPFCNPJ"].ToString();
+                pes.Tipo = dr["TIPO"].ToString();
+                pes.Obs = dr["OBS"].ToString();
+                pes.CategoriaId = Convert.ToInt32(dr["CATEGORIAID"].ToString());
+                pes.DtCadastro = DateTime.Parse(dr["DTCADASTRO"].ToString());
+                pes.Status = utils.ComparaIntComZero(dr["STATUS"].ToString());
+                
+                Categorias catg = new Categorias();
+
+                catg.Id = utils.ComparaIntComZero(dr["IDCATG"].ToString());
+                catg.Codigo = utils.ComparaIntComZero(dr["CODCATG"].ToString());
+                catg.Descricao = dr["DESCATG"].ToString();
+
+                pes.Categorias = catg;
+                
+                pessoas.Add(pes);
+            }
+            return pessoas;
+        }
         private Int32 RetornaMaxCodigo()
         {
             Int32 codigo = 1;
@@ -378,7 +409,7 @@ namespace DataAccess
             StringBuilder consulta = new StringBuilder();
             consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
             consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
-
+           
             if (valor != "" && valor != null)
                 consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
 
@@ -388,6 +419,25 @@ namespace DataAccess
                                                                 CommandType.Text, consulta.ToString());
 
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
+
+            return pessoas;
+        }
+        
+        public List<Pessoas> PesquisarBuscaSimplesDA(string valor)
+        {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
+            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
+     
+            if (valor != "" && valor != null)
+                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
+
+            consulta.Append(" ORDER BY P.CODIGO ");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
+
+            List<Pessoas> pessoas = CarregarObjPessoaSimples(dr);
 
             return pessoas;
         }

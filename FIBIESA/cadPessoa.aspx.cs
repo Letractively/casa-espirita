@@ -59,7 +59,7 @@ namespace Admin
         private void CarregarDdlBairro(DropDownList ddl, int id_cid)
         {
             BairrosBL baiBL = new BairrosBL();
-            List<Bairros> bairros = baiBL.PesquisarCidBL(id_cid);
+            List<Bairros> bairros = baiBL.PesquisarCiSimplesdBL(id_cid);
 
             ddl.Items.Clear();
             ddl.Items.Add(new ListItem("Selecione", ""));

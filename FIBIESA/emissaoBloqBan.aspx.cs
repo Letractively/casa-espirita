@@ -17,6 +17,7 @@ namespace FIBIESA
     public partial class emissaoBloqBan : System.Web.UI.Page
     {
         Utils utils = new Utils();
+        DataTable dt_boletos = new DataTable();
 
         #region funcoes
         public string Nomedoarquivo
@@ -131,8 +132,7 @@ namespace FIBIESA
         {            
             txtDtEmiIni.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");
             txtDtEmiFim.Attributes.Add("onkeypress", "return(formatar(this,'##/##/####',event))");      
-        }        
-        
+        }                
         private string LerParametro(int codigo, string modulo)
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -144,6 +144,59 @@ namespace FIBIESA
 
             return valor;
         }
+        private void CriarDtBoletos()
+        {
+            //cedente
+            DataColumn coluna1 = new DataColumn("CED_CODIGO", Type.GetType("System.String"));
+            DataColumn coluna2 = new DataColumn("CED_NOSSONUMERO", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("CED_CPFCNPJ", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("CED_NOME", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("CED_AGENCIA", Type.GetType("System.String"));
+            DataColumn coluna6 = new DataColumn("CED_CONTA", Type.GetType("System.String"));
+            DataColumn coluna7 = new DataColumn("CED_DIGITOCONTA", Type.GetType("System.String"));
+
+            dt_boletos.Columns.Add(coluna1);
+            dt_boletos.Columns.Add(coluna2);
+            dt_boletos.Columns.Add(coluna3);
+            dt_boletos.Columns.Add(coluna4);
+            dt_boletos.Columns.Add(coluna5);
+            dt_boletos.Columns.Add(coluna6);
+            dt_boletos.Columns.Add(coluna7);          
+            
+            //sacado
+            DataColumn coluna8 = new DataColumn("SAC_CPFCNPJ", Type.GetType("System.String"));
+            DataColumn coluna9 = new DataColumn("SAC_NOME", Type.GetType("System.String"));
+            DataColumn coluna10 = new DataColumn("SAC_ENDERECO", Type.GetType("System.String"));
+            DataColumn coluna11 = new DataColumn("SAC_BAIRRO", Type.GetType("System.String"));
+            DataColumn coluna12 = new DataColumn("SAC_CIDADE", Type.GetType("System.String"));
+            DataColumn coluna13 = new DataColumn("SAC_CEP", Type.GetType("System.String"));
+            DataColumn coluna14 = new DataColumn("SAC_UF", Type.GetType("System.String"));
+
+            dt_boletos.Columns.Add(coluna8);
+            dt_boletos.Columns.Add(coluna9);
+            dt_boletos.Columns.Add(coluna10);
+            dt_boletos.Columns.Add(coluna11);
+            dt_boletos.Columns.Add(coluna12);
+            dt_boletos.Columns.Add(coluna13);
+            dt_boletos.Columns.Add(coluna14);
+
+            //titulo
+            DataColumn coluna15 = new DataColumn("VENCIMENTO", Type.GetType("System.String"));
+            DataColumn coluna16 = new DataColumn("VLR_BOLETO", Type.GetType("System.String"));
+            DataColumn coluna17 = new DataColumn("NRO_DOCUMENTO", Type.GetType("System.String"));
+
+            dt_boletos.Columns.Add(coluna15);
+            dt_boletos.Columns.Add(coluna16);
+            dt_boletos.Columns.Add(coluna17);
+
+            //
+            DataColumn coluna18 = new DataColumn("COD_BANCO", Type.GetType("System.String"));
+            
+            dt_boletos.Columns.Add(coluna18);
+
+          
+        }
+        
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -165,16 +218,53 @@ namespace FIBIESA
 
         protected void btnGerar_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            DataColumn coluna1 = new DataColumn("ID", Type.GetType("System.Int32"));
-            DataColumn coluna2 = new DataColumn("CODIGO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("DESCRICAO", Type.GetType("System.String"));
-
-            dt.Columns.Add(coluna1);
-            dt.Columns.Add(coluna2);
-            dt.Columns.Add(coluna3);
+            TitulosBL titulosBL = new TitulosBL();
+            PortadoresBL portadoresBL = new PortadoresBL();
+            SelecaoTitulos selTitulos = new SelecaoTitulos();
+            InstituicoesBL instBL = new InstituicoesBL();
             
-            //TitulosBL titulosBL = new TitulosBL();
+            
+            CriarDtBoletos();
+            DataSet dsInst = instBL.PesquisarDsBL();
+            List<Titulos> titulos = titulosBL.PesquisarBuscaBL(selTitulos);
+
+            
+            foreach (Titulos ltTit in titulos)
+            {
+                DataRow linha = dt_boletos.NewRow();
+
+                //cedente que vai receber o valor
+                List<Portadores> portadores = portadoresBL.PesquisarBL(utils.ComparaIntComZero(ltTit.Portadorid.ToString()));
+                
+                foreach (Portadores ltPor in portadores)
+                {
+
+                    linha["CED_CODIGO"] = ltPor.CodCedente;
+                    //linha["CED_NOSSONUMERO"] = ;
+                    //linha["CED_CPFCNPJ"] =  ;
+                    linha["CED_NOME"] = dsInst.Tables[0].Rows[0]["razao"].ToString();
+                    linha["CED_AGENCIA"] = ltPor.Agencia.Codigo;
+                    linha["CED_CONTA"] = ltPor.Contas.Codigo;
+                    linha["CED_DIGITOCONTA"] = ltPor.Contas.Digito;
+                }
+                
+
+
+                //sacado quem vai pagar o titulo                
+                linha["SAC_CPFCNPJ"] = ltTit.Pessoas.CpfCnpj;
+                linha["SAC_NOME"] = ltTit.Pessoas.Nome;
+                linha["SAC_ENDERECO"] = ltTit.Pessoas.Endereco;
+                linha["SAC_BAIRRO"] = ltTit.Pessoas.Bairro.Descricao;
+                linha["SAC_CIDADE"] = ltTit.Pessoas.Cidade.Descricao;
+                linha["SAC_CEP"] = ltTit.Pessoas.Cep;
+                linha["SAC_UF"] = ltTit.Pessoas.Cidade.Estados.Uf;
+
+                linha["VENCIMENTO"] = ltTit.DataVencimento.ToString("dd/MM/yyyy");
+                linha["VLR_BOLETO"] = ltTit.Valor;
+                linha["NRO_DOCUMENTO"] = ltTit.Numero;
+                
+            }
+           
             //Titulos titulos = new Titulos();
             //DataSet dtsTitulos = new DataSet();
                         
