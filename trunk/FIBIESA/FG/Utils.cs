@@ -708,6 +708,18 @@ namespace FG
             }
         }
 
+        public int CalcularNumeroDiasEntreDatas(DateTime dataUm, DateTime dataDois)
+        {
+
+            // Difference in days, hours, and minutes.
+            TimeSpan ts = dataUm - dataDois;
+
+            // Difference in days.
+            int differenceInDays = ts.Days;
+
+            return differenceInDays;
+        }
+
     }    
        
 }
