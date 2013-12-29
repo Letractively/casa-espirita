@@ -507,15 +507,7 @@ namespace Admin
             txtQtde.Focus();
 
         }
-
-        protected void txtPesItem_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesItem.Text);
-            ModalPopupExtenderPesItem.Enabled = true;
-            ModalPopupExtenderPesItem.Show();
-            txtPesItem.Text = "";
-        }
-
+                
         protected void txtNumero_TextChanged(object sender, EventArgs e)
         {
             NotasEntradaBL insBL = new NotasEntradaBL();
@@ -528,6 +520,14 @@ namespace Admin
             }
             else
                 txtSerie.Focus();
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
         }
 
     }

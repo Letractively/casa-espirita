@@ -220,6 +220,20 @@ namespace DataAccess
             
             return usuarios;
         }
+
+        public DataSet PesquisarDAEmail(string email)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            sqlQuery.Append(@"SELECT email, login, senha, nome ");
+            sqlQuery.Append(@" FROM usuarios  "); 
+            sqlQuery.Append(@" WHERE email = '{0}'");
+           
+            DataSet ds = SqlHelper.ExecuteDataset(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                      CommandType.Text, string.Format(sqlQuery.ToString(),email));
+            return ds;
+        }
                 
+        // string.Format(@"SELECT * " +
+        //" FROM TURMAS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'",utils.ComparaIntComZero(descricao), descricao));
     }
 }

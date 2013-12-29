@@ -220,15 +220,7 @@ namespace Admin
         {
             ModalPopupExtenderPesItem.Enabled = false;
         }
-
-        protected void txtPesItem_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesItem.Text);
-            ModalPopupExtenderPesItem.Enabled = true;
-            ModalPopupExtenderPesItem.Show();
-            txtPesItem.Text = "";
-        }
-
+                
         protected void txtVlrMedio_TextChanged(object sender, EventArgs e)
         {
             ParametrosBL parBL = new ParametrosBL();
@@ -240,6 +232,14 @@ namespace Admin
 
             txtVlrVenda.Text = String.Format("{0:C2}", (utils.ComparaDecimalComZero(String.Format("{0:C2}", txtVlrMedio.Text)) +
                                  ((utils.ComparaDecimalComZero(String.Format("{0:C2}", txtVlrMedio.Text)) * percentual) / 100)));
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
         }
     }
 }

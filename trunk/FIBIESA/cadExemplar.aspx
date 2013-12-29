@@ -100,19 +100,24 @@
                     DropShadow="true" PopupControlID="pnlItem" BackgroundCssClass="modalBackground"
                     OkControlID="btnCanelItem" Enabled="false">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlItem" runat="server" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel ID="pnlItem" runat="server" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px" OnTextChanged="txtPesItem_TextChanged"
-                                    AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
+                                &nbsp;&nbsp;                                
+                                <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                                    onclick="btnBusca_Click"/>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
+                           
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <asp:GridView ID="grdPesquisaItem" runat="server" CellPadding="3" AutoGenerateColumns="False"
-                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
-                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaItem_RowDataBound">
+                                    DataKeyNames="ID" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"  
+                                    BorderWidth="1px" GridLines="None" OnRowDataBound="grdPesquisaItem_RowDataBound" >
                                     <Columns>
                                         <asp:TemplateField>
                                             <ItemTemplate>
@@ -135,12 +140,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
-                            </td>
-                        </tr>
+                        </tr>                       
                     </table>
                 </asp:Panel>
         </ContentTemplate>

@@ -111,12 +111,17 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                 </div>
                 <div class="status">
                 </div>
-                    <asp:Panel runat="server" ID="pnlCliente" Width="400px" CssClass="modalPopup" Style="display: none">
+                    <asp:Panel runat="server" ID="pnlCliente" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
                         <table>
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
-                                        AutoPostBack="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnbusca" runat="server" Text="Buscar"  CssClass="btn" 
+                                        onclick="btnbusca_Click" />
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
+                                        CssClass="btn" />
                                 </td>
                             </tr>
                             <tr>
@@ -147,24 +152,24 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                         <SortedDescendingHeaderStyle BackColor="#00547E" />
                                     </asp:GridView>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                        CssClass="btn" />
-                                </td>
-                            </tr>
+                            </tr>                            
                         </table>
                     </asp:Panel>
                     <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaCliente" runat="server" TargetControlID="hfIdCliente"
                         PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
                         OkControlID="btnCancel" Enabled="false" />
-                    <asp:Panel runat="server" ID="pnlItem" Width="400px" CssClass="modalPopup" Style="display: none">
+                    <asp:Panel runat="server" ID="pnlItem" Width="450px" Height="450px" CssClass="modalPopup" ScrollBars="Auto" Style="display: none">
                         <table>
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtPesquisaItem" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisaItem_TextChanged"
-                                        AutoPostBack="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtPesquisaItem" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnBuscaItem" runat="server" Text="Buscar" CssClass="btn" 
+                                        onclick="btnBuscaItem_Click" />
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnCancelItem" runat="server" Text="Cancelar" OnClick="btnCancelItem_Click"
+                                        CssClass="btn" />
+
                                 </td>
                             </tr>
                             <tr>
@@ -195,13 +200,7 @@ ControlToValidate="txtDataFim" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(
                                         <SortedDescendingHeaderStyle BackColor="#00547E" />
                                     </asp:GridView>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Button ID="btnCancelItem" runat="server" Text="Cancelar" OnClick="btnCancelItem_Click"
-                                        CssClass="btn" />
-                                </td>
-                            </tr>
+                            </tr>                            
                         </table>
                     </asp:Panel>
                     <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaItem" runat="server" TargetControlID="hfIdItem"

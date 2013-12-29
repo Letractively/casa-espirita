@@ -55,12 +55,17 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                 </div>                
                 <div class="status">
                 </div>
-                    <asp:Panel runat="server" ID="pnlExemplar" Width="400px" CssClass="modalPopup" Style="display: none">
+                    <asp:Panel runat="server" ID="pnlExemplar" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
                         <table>
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtPesquisaExemplar" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisaExemplar_TextChanged"
-                                        AutoPostBack="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtPesquisaExemplar" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn" 
+                                        onclick="btnBuscar_Click" />
+                                    &nbsp;&nbsp;
+                                    <asp:Button ID="btnCancelExemplar" runat="server" Text="Cancelar" OnClick="btnCancelExemplar_Click"
+                                        CssClass="btn" />                                    
                                 </td>
                             </tr>
                             <tr>
@@ -92,13 +97,7 @@ ControlToValidate="txtCodigo" ValidationExpression="^\d+(,\d+)*$" Display="Dynam
                                         <SortedDescendingHeaderStyle BackColor="#00547E" />
                                     </asp:GridView>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Button ID="btnCancelExemplar" runat="server" Text="Cancelar" OnClick="btnCancelExemplar_Click"
-                                        CssClass="btn" />
-                                </td>
-                            </tr>
+                            </tr>                           
                         </table>
                     </asp:Panel>
                     <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaExemplar" runat="server" TargetControlID="hfIdExemplar"

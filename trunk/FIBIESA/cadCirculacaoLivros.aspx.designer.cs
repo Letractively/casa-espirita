@@ -409,13 +409,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisaCliente;
         
         /// <summary>
-        /// Controle grdPesquisa.
+        /// Controle btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
         /// Controle btnCancel.
@@ -425,6 +425,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// Controle grdPesquisa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisa.
@@ -454,13 +463,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisaItemDev;
         
         /// <summary>
-        /// Controle grdPesquisaItem.
+        /// Controle btnBuscarItemDev.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
+        protected global::System.Web.UI.WebControls.Button btnBuscarItemDev;
         
         /// <summary>
         /// Controle btnCancelDev.
@@ -470,6 +479,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelDev;
+        
+        /// <summary>
+        /// Controle grdPesquisaItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisaItem.
@@ -499,13 +517,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisaEmp;
         
         /// <summary>
-        /// Controle grdPesquisaEmp.
+        /// Controle btnBuscaItemEmp.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaEmp;
+        protected global::System.Web.UI.WebControls.Button btnBuscaItemEmp;
         
         /// <summary>
         /// Controle btnCancelEmp.
@@ -515,6 +533,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelEmp;
+        
+        /// <summary>
+        /// Controle grdPesquisaEmp.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaEmp;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisaEmp.

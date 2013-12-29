@@ -335,14 +335,6 @@ namespace FIBIESA
             ModalPopupExtenderPesquisa.Enabled = false;
         }
 
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisa(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-
         protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -361,15 +353,7 @@ namespace FIBIESA
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
-
-        protected void txtPesTitulo_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaTitulos(txtPesquisa.Text);
-            pnlTitulos_ModalPopupExtender.Enabled = true;
-            pnlTitulos_ModalPopupExtender.Show();
-            txtPesTitulo.Text = "";
-        }
-
+               
         protected void txtIntTitulos_TextChanged(object sender, EventArgs e)
         {
             if (txtIntTitulos.Text == "")
@@ -402,6 +386,23 @@ namespace FIBIESA
             CarregarPesquisaTitulos(null);
             pnlTitulos_ModalPopupExtender.Enabled = true;
             pnlTitulos_ModalPopupExtender.Show(); 
+        }
+
+        protected void btnBuscarTit_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaTitulos(txtPesquisa.Text);
+            pnlTitulos_ModalPopupExtender.Enabled = true;
+            pnlTitulos_ModalPopupExtender.Show();
+            txtPesTitulo.Text = "";
+
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
         }
         
     }

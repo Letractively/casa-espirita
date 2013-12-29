@@ -214,6 +214,48 @@ ControlToValidate="txtCep" ValidationExpression="^\d{5}-?\d{3}$" Display="Dynami
                                         </table>                                    
                                     </ContentTemplate>
                                 </asp:TabPanel>
+                                <asp:TabPanel ID="tpEmail" runat="server" HeaderText="Configuração E-mail">
+                                    <ContentTemplate>
+                                        <table>
+                                            <tr> 
+                                                <td style="width: 140px">
+                                                   Servidor SMTP:     
+                                                </td> 
+                                                <td style="width: 500px">
+                                                    <asp:TextBox ID="txtServidorSmtp" runat="server" CssClass="inputbox" 
+                                                        MaxLength="100" Width="335px" ToolTip="Informe o servidor SMTP"></asp:TextBox>   
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 140px">
+                                                    Porta:   
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:TextBox ID="txtPorta" runat="server" CssClass="inputbox" Width="70px" ToolTip="Informe a porta do servidor de e-mail"></asp:TextBox>   
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 140px">
+                                                    Login:   
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:TextBox ID="txtLogin" runat="server" CssClass="inputbox" MaxLength="100" 
+                                                        Width="250px" ToolTip="Informe o login do servidor de e-mail."></asp:TextBox>   
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 140px">
+                                                    Senha:   
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <asp:TextBox ID="txtSenha" runat="server" CssClass="inputbox" MaxLength="100" 
+                                                        TextMode="Password" Width="250px" 
+                                                        ToolTip="Informe a senha do servidor de e-mail"></asp:TextBox>   
+                                                </td>
+                                            </tr>
+                                        </table>                                    
+                                    </ContentTemplate>
+                                </asp:TabPanel>
                             </asp:TabContainer>                            
                         </td>
                     </tr>

@@ -38,6 +38,10 @@ namespace DataAccess
                 ins.DDD = dr["DDD"].ToString();
                 ins.telefone = dr["telefone"].ToString();
                 ins.Ranking = utils.ComparaIntComZero(dr["ranking"].ToString());
+                ins.Senha = dr["senha"].ToString();
+                ins.Login = dr["login"].ToString();
+                ins.ServidorSMTP = dr["servidorsmtp"].ToString();
+                ins.Porta = utils.ComparaIntComNull(dr["porta"].ToString());
 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
@@ -75,7 +79,7 @@ namespace DataAccess
 
         public Int32 InserirDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[14];
+            SqlParameter[] paramsToSP = new SqlParameter[18];
 
             paramsToSP[0] = new SqlParameter("@codigo", ins.Codigo);
             paramsToSP[1] = new SqlParameter("@razao", ins.Razao);
@@ -91,6 +95,10 @@ namespace DataAccess
             paramsToSP[11] = new SqlParameter("@DDD", ins.DDD);
             paramsToSP[12] = new SqlParameter("@telefone", ins.telefone);
             paramsToSP[13] = new SqlParameter("@ranking", ins.Ranking);
+            paramsToSP[14] = new SqlParameter("@servidorsmtp", ins.Ranking);
+            paramsToSP[15] = new SqlParameter("@login", ins.Ranking);
+            paramsToSP[16] = new SqlParameter("@senha", ins.Ranking);
+            paramsToSP[17] = new SqlParameter("@porta", ins.Ranking);
 
             try
             {                
@@ -110,7 +118,7 @@ namespace DataAccess
 
         public bool EditarDA(Instituicoes ins)
         {
-            SqlParameter[] paramsToSP = new SqlParameter[15];
+            SqlParameter[] paramsToSP = new SqlParameter[19];
 
             paramsToSP[0] = new SqlParameter("@id", ins.Id);
             paramsToSP[1] = new SqlParameter("@codigo", ins.Codigo);
@@ -127,6 +135,10 @@ namespace DataAccess
             paramsToSP[12] = new SqlParameter("@DDD", ins.DDD);
             paramsToSP[13] = new SqlParameter("@telefone", ins.telefone);
             paramsToSP[14] = new SqlParameter("@ranking", ins.Ranking);
+            paramsToSP[15] = new SqlParameter("@servidorsmtp", ins.ServidorSMTP);
+            paramsToSP[16] = new SqlParameter("@login", ins.Login);
+            paramsToSP[17] = new SqlParameter("@senha", ins.Senha);
+            paramsToSP[18] = new SqlParameter("@porta", ins.Porta);
 
             try
             {

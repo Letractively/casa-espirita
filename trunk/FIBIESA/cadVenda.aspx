@@ -163,12 +163,17 @@
                 <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdPessoa"
                     PopupControlID="pnlVenda" BackgroundCssClass="modalBackground" DropShadow="true"
                     OkControlID="btnCancel" Enabled="false" />
-                <asp:Panel runat="server" ID="pnlVenda" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel runat="server" ID="pnlVenda" Width="450px" Height="450px" CssClass="modalPopup" ScrollBars="Auto" Style="display: none">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisa_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
+                                <asp:TextBox ID="txtPesquisa" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscarCli" runat="server" Text="Buscar" 
+                                    CssClass="btn" onclick="btnBuscarCli_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
+                                    CssClass="btn" />
                             </td>
                         </tr>
                         <tr>
@@ -199,25 +204,24 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
                 <asp:ModalPopupExtender ID="ModalPopupExtenderPesItem" runat="server" PopupControlID="pnlItem"
                     TargetControlID="hfIdItem" DropShadow="true" BackgroundCssClass="modalBackground"
                     CancelControlID="btnCanelItem">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlItem" runat="server" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel ID="pnlItem" runat="server" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto" >
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px" OnTextChanged="txtPesItem_TextChanged"
-                                    AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn" 
+                                    onclick="btnBuscar_Click"  />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
+
                             </td>
                         </tr>
                         <tr>
@@ -249,12 +253,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
             </div>

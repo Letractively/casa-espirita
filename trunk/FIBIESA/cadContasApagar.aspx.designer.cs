@@ -319,13 +319,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
         
         /// <summary>
-        /// Controle grdPesquisa.
+        /// Controle btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
         /// Controle btnCancel.
@@ -335,6 +335,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// Controle grdPesquisa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisa.

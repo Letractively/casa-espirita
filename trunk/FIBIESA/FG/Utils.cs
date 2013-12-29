@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Security.Cryptography;
+
 namespace FG
 {
     public class Utils
@@ -719,6 +720,8 @@ namespace FG
 
             return differenceInDays;
         }
+
+        
 
     }    
        

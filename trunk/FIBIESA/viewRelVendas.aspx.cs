@@ -183,24 +183,7 @@ namespace FIBIESA
 
 
         #region TextChanged
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaCliente(txtPesquisa.Text);
-            ModalPopupExtenderPesquisaCliente.Enabled = true;
-            ModalPopupExtenderPesquisaCliente.Show();
-            txtPesquisa.Text = "";
-        }
-
-        protected void txtPesquisaItem_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesquisaItem.Text);
-            ModalPopupExtenderPesquisaItem.Enabled = true;
-            ModalPopupExtenderPesquisaItem.Show();
-            txtPesquisaItem.Text = "";
-        }
-
-
+               
         protected void txtCliente_TextChanged(object sender, EventArgs e)
         {
             if (txtCliente.Text == "")
@@ -234,6 +217,22 @@ namespace FIBIESA
         }
 
         #endregion
+
+        protected void btnBuscaItem_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisaItem.Text);
+            ModalPopupExtenderPesquisaItem.Enabled = true;
+            ModalPopupExtenderPesquisaItem.Show();
+            txtPesquisaItem.Text = "";
+        }
+
+        protected void btnbusca_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaCliente(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaCliente.Enabled = true;
+            ModalPopupExtenderPesquisaCliente.Show();
+            txtPesquisa.Text = "";
+        }
 
                
     }

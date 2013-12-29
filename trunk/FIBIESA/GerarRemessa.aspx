@@ -224,12 +224,17 @@
                 </div>
                 <div class="status">
                 </div>               
-                <asp:Panel runat="server" ID="pnlTitulos" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel runat="server" ID="pnlTitulos" Width="450px" Height="450px" CssClass="modalPopup" ScrollBars="Auto" Style="display: none">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesTitulo" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesTitulo_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
+                                <asp:TextBox ID="txtPesTitulo" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscarTit" runat="server" Text="Buscar" CssClass="btn" 
+                                    onclick="btnBuscarTit_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCancelTit" runat="server" Text="Cancelar" OnClick="btnCancelTit_Click"
+                                    CssClass="btn" />
                             </td>
                         </tr>
                         <tr>
@@ -260,13 +265,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancelTit" runat="server" Text="Cancelar" OnClick="btnCancelTit_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
                 <asp:ModalPopupExtender ID="pnlTitulos_ModalPopupExtender" runat="server" TargetControlID="hfIdPessoa"

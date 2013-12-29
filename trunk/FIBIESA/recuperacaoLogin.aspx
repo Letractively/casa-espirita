@@ -25,11 +25,11 @@
                 Digite seu e-mail:  </p><br />
                
                 <div class="inputcontainer">
-                    <asp:TextBox ID="txtSenha" runat="server" MaxLength="100" Height="16px" 
+                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="100" Height="16px" 
                         Width="251px" ></asp:TextBox>                   
                 </div>                  
                 <asp:Button ID="btnEnviar" Text="Enviar" CssClass="loginsubmit" 
-                    runat="server" ValidationGroup="salvar" />            
+                    runat="server" ValidationGroup="salvar" onclick="btnEnviar_Click" />            
                 <p><asp:Label ID="lblMensagem" runat="server" ForeColor="#CC0000"></asp:Label> </p>                
         </div>
        </div>

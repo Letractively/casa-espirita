@@ -243,8 +243,8 @@ namespace Admin
         {
             ModalPopupExtenderPesItem.Enabled = false;
         }
-
-        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        
+        protected void btnBusca_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(txtPesItem.Text);
             ModalPopupExtenderPesItem.Enabled = true;

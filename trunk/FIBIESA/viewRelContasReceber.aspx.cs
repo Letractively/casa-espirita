@@ -249,30 +249,7 @@ namespace FIBIESA
         }
 
         #region eventos textBox
-        protected void txtPesquisaAssociado_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaAssociado(txtPesquisaAssociado.Text);
-            ModalPopupExtenderPesquisaAssociado.Enabled = true;
-            ModalPopupExtenderPesquisaAssociado.Show();
-            txtPesquisaAssociado.Text = "";
-        }
-
-        protected void txtPesquisaTitulo_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaTitulo(txtPesquisaTitulo.Text);
-            ModalPopupExtenderPesquisaTitulo.Enabled = true;
-            ModalPopupExtenderPesquisaTitulo.Show();
-            txtPesquisaTitulo.Text = "";
-        }
-
-        protected void txtPesquisaPortador_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaPortador(txtPesquisaPortador.Text);
-            ModalPopupExtenderPesquisaPortador.Enabled = true;
-            ModalPopupExtenderPesquisaPortador.Show();
-            txtPesquisaPortador.Text = "";
-        }
-
+                         
         protected void txtAssociado_TextChanged(object sender, EventArgs e)
         {
             if (txtAssociado.Text == "")
@@ -350,6 +327,32 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnBuscarPor_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaPortador(txtPesquisaPortador.Text);
+            ModalPopupExtenderPesquisaPortador.Enabled = true;
+            ModalPopupExtenderPesquisaPortador.Show();
+            txtPesquisaPortador.Text = "";
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaTitulo(txtPesquisaTitulo.Text);
+            ModalPopupExtenderPesquisaTitulo.Enabled = true;
+            ModalPopupExtenderPesquisaTitulo.Show();
+            txtPesquisaTitulo.Text = "";
+
+        }
+
+        protected void btnBuscarAss_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaAssociado(txtPesquisaAssociado.Text);
+            ModalPopupExtenderPesquisaAssociado.Enabled = true;
+            ModalPopupExtenderPesquisaAssociado.Show();
+            txtPesquisaAssociado.Text = "";
+
         }
     }
 }

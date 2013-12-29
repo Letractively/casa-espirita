@@ -125,5 +125,33 @@ namespace DataObjects
             get { return _ranking; }
             set { _ranking = value; }
         }
+
+        private string servidorSMTP;
+        public string ServidorSMTP
+        {
+            get { return servidorSMTP; }
+            set { servidorSMTP = value; }
+        }
+
+        private string login;
+        public string Login
+        {
+            get { return login; }
+            set { login = value; }
+        }
+
+        private string senha;
+        public string Senha
+        {
+            get { return senha; }
+            set { senha = value; }
+        }
+
+        private int? porta;
+        public int? Porta
+        {
+            get { return porta; }
+            set { porta = value; }
+        }
     }
 }

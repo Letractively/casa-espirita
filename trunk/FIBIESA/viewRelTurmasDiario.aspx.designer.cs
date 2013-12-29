@@ -193,13 +193,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
         
         /// <summary>
-        /// Controle grdPesquisaEvento.
+        /// Controle btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaEvento;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
         /// Controle btnCancel.
@@ -209,6 +209,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// Controle grdPesquisaEvento.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaEvento;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisaEvento.
@@ -238,13 +247,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisaTurma;
         
         /// <summary>
-        /// Controle grdPesquisaTurma.
+        /// Controle btnBuscarTurma.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaTurma;
+        protected global::System.Web.UI.WebControls.Button btnBuscarTurma;
         
         /// <summary>
         /// Controle btnCancelTurma.
@@ -254,6 +263,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelTurma;
+        
+        /// <summary>
+        /// Controle grdPesquisaTurma.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaTurma;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesquisaTurma.
