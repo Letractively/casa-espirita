@@ -178,22 +178,6 @@ namespace FIBIESA
             Response.Redirect("~/default.aspx");
         }
 
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaEvento(txtPesquisa.Text);
-            ModalPopupExtenderPesquisaEvento.Enabled = true;
-            ModalPopupExtenderPesquisaEvento.Show();
-            txtPesquisa.Text = "";
-        }
-
-        protected void txtPesquisaTurma_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaTurma(txtPesquisaTurma.Text);
-            ModalPopupExtenderPesquisaTurma.Enabled = true;
-            ModalPopupExtenderPesquisaTurma.Show();
-            txtPesquisaTurma.Text = "";
-        }
-
         protected void txtEvento_TextChanged(object sender, EventArgs e)
         {
             if (txtEvento.Text == "")
@@ -240,6 +224,22 @@ namespace FIBIESA
             }
 
           
+        }
+
+        protected void btnBuscarTurma_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaTurma(txtPesquisaTurma.Text);
+            ModalPopupExtenderPesquisaTurma.Enabled = true;
+            ModalPopupExtenderPesquisaTurma.Show();
+            txtPesquisaTurma.Text = "";
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaEvento(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaEvento.Enabled = true;
+            ModalPopupExtenderPesquisaEvento.Show();
+            txtPesquisa.Text = "";
         }
     }
 }

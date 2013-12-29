@@ -274,13 +274,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
         
         /// <summary>
-        /// Controle grdPesquisa.
+        /// Controle btnBuscarCli.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
+        protected global::System.Web.UI.WebControls.Button btnBuscarCli;
         
         /// <summary>
         /// Controle btnCancel.
@@ -290,6 +290,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// Controle grdPesquisa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisa;
         
         /// <summary>
         /// Controle ModalPopupExtenderPesItem.
@@ -319,13 +328,13 @@ namespace FIBIESA {
         protected global::System.Web.UI.WebControls.TextBox txtPesItem;
         
         /// <summary>
-        /// Controle grdPesquisaItem.
+        /// Controle btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
         /// Controle btnCanelItem.
@@ -335,6 +344,15 @@ namespace FIBIESA {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCanelItem;
+        
+        /// <summary>
+        /// Controle grdPesquisaItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
         
         /// <summary>
         /// Propriedade Master.

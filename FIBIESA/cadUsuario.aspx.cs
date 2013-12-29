@@ -265,12 +265,13 @@ namespace Admin
 
         }
 
-        protected void txtPesPessoa_TextChanged(object sender, EventArgs e)
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             CarregarPesquisaPessoa(txtPesPessoa.Text);
             ModalPopupExtenderPessoa.Enabled = true;
             ModalPopupExtenderPessoa.Show();
             txtPesPessoa.Text = "";
         }
+        
     }
 }

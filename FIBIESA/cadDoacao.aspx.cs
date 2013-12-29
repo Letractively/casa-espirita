@@ -152,15 +152,7 @@ namespace Admin
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-
+        
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
@@ -204,6 +196,14 @@ namespace Admin
                 lblDesCliente.Text = "";
                 txtCliente.Focus();
             }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
         }
 
 

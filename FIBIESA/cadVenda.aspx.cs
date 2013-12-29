@@ -433,15 +433,7 @@ namespace FIBIESA
         {
             ModalPopupExtenderPesquisa.Enabled = false;
         }
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaPessoa(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-
+                
         protected void btnSelect_Click(object sender, EventArgs e)
         {
 
@@ -484,15 +476,7 @@ namespace FIBIESA
             ModalPopupExtenderPesItem.Enabled = false;
 
         }
-
-        protected void txtPesItem_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaItem(txtPesItem.Text);
-            ModalPopupExtenderPesItem.Enabled = true;
-            ModalPopupExtenderPesItem.Show();
-            txtPesItem.Text = "";
-        }
-
+                
         protected void txtValorUni_TextChanged(object sender, EventArgs e)
         {
             lblValor.Text = RetornaValorVendaItem().ToString();
@@ -507,6 +491,22 @@ namespace FIBIESA
             }
             else
                 lblValor.Text = RetornaValorVendaItem().ToString();
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaItem(txtPesItem.Text);
+            ModalPopupExtenderPesItem.Enabled = true;
+            ModalPopupExtenderPesItem.Show();
+            txtPesItem.Text = "";
+        }
+
+        protected void btnBuscarCli_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaPessoa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
         }
 
     }

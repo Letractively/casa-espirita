@@ -122,16 +122,6 @@ namespace FIBIESA
 
 
         #region TextChanged
-        
-
-        protected void txtPesquisaExemplar_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaExemplar(txtPesquisaExemplar.Text);
-            ModalPopupExtenderPesquisaExemplar.Enabled = true;
-            ModalPopupExtenderPesquisaExemplar.Show();
-            txtPesquisaExemplar.Text = "";
-        }
-
        
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
         {
@@ -147,6 +137,14 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaExemplar(txtPesquisaExemplar.Text);
+            ModalPopupExtenderPesquisaExemplar.Enabled = true;
+            ModalPopupExtenderPesquisaExemplar.Show();
+            txtPesquisaExemplar.Text = "";
         }
     }
 }

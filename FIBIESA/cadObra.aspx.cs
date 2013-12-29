@@ -483,14 +483,6 @@ namespace Admin
             ModalPopupExtenderPesAutor.Show();
         }
 
-        protected void txtPesAutor_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaAutor(txtPesAutor.Text);
-            ModalPopupExtenderPesAutor.Enabled = true;
-            ModalPopupExtenderPesAutor.Show();
-            txtPesAutor.Text = "";
-        }
-
         protected void btnInserir_Click(object sender, EventArgs e)
         {
             
@@ -560,6 +552,14 @@ namespace Admin
         protected void txtAutor_TextChanged(object sender, EventArgs e)
         {
             PesquisarAutor(txtAutor.Text);
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaAutor(txtPesAutor.Text);
+            ModalPopupExtenderPesAutor.Enabled = true;
+            ModalPopupExtenderPesAutor.Show();
+            txtPesAutor.Text = "";
         }
 
     }

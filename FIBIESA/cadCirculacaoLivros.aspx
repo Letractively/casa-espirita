@@ -292,13 +292,18 @@
                 </div>
                 <div class="status">
                 </div>
-                <asp:Panel runat="server" ID="pnlCliente" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel runat="server" ID="pnlCliente" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesquisaCliente" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisaCliente_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
-                            </td>
+                                <asp:TextBox ID="txtPesquisaCliente" runat="server" CssClass="inputbox" Width="180px" ></asp:TextBox>
+                                &nbsp;&nbsp
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar"
+                                    CssClass="btn" onclick="btnBuscar_Click" />
+                                &nbsp;&nbsp
+                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
+                                    CssClass="btn" />
+                            </td>                                           
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -328,24 +333,23 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancel" runat="server" Text="Cancelar" OnClick="btnCancel_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
                 <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisa" runat="server" TargetControlID="hfIdPessoa"
                     PopupControlID="pnlCliente" BackgroundCssClass="modalBackground" DropShadow="true"
                     OkControlID="btnCancel" Enabled="false" />
-                <asp:Panel runat="server" ID="pnlItem" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel runat="server" ID="pnlItem" Width="450px" Height="450px" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesquisaItemDev" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisaItemDev_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
+                                <asp:TextBox ID="txtPesquisaItemDev" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>                                
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscarItemDev" runat="server" Text="Buscar" 
+                                    CssClass="btn" onclick="btnBuscarItemDev_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCancelDev" runat="server" Text="Cancelar" OnClick="btnCancelDev_Click"
+                                    CssClass="btn" />
                             </td>
                         </tr>
                         <tr>
@@ -376,24 +380,23 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancelDev" runat="server" Text="Cancelar" OnClick="btnCancelDev_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
+                        </tr>                       
                     </table>
                 </asp:Panel>
                 <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaItem" runat="server" TargetControlID="hfIdPessoaDev"
                     PopupControlID="pnlItem" BackgroundCssClass="modalBackground" DropShadow="true"
                     OkControlID="btnCancel" Enabled="false" />
-                <asp:Panel runat="server" ID="pnlItemEmp" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel runat="server" ID="pnlItemEmp" Width="450px" Height="450px" CssClass="modalPopup"  Style="display: none" ScrollBars="Auto">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesquisaEmp" runat="server" CssClass="inputbox" Width="180px" OnTextChanged="txtPesquisaEmp_TextChanged"
-                                    AutoPostBack="True"></asp:TextBox>
+                                <asp:TextBox ID="txtPesquisaEmp" runat="server" CssClass="inputbox" Width="180px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscaItemEmp" runat="server" Text="Buscar" 
+                                    CssClass="btn" onclick="btnBuscaItemEmp_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCancelEmp" runat="server" Text="Cancelar" OnClick="btnCancelEmp_Click"
+                                    CssClass="btn" />
                             </td>
                         </tr>
                         <tr>
@@ -424,13 +427,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCancelEmp" runat="server" Text="Cancelar" OnClick="btnCancelEmp_Click"
-                                    CssClass="btn" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
                 <asp:ModalPopupExtender ID="ModalPopupExtenderPesquisaEmp" runat="server" TargetControlID="hfIdItem"

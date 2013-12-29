@@ -430,7 +430,7 @@ namespace DataAccess
             consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
      
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  UPPER(P.NOME) LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY P.CODIGO ");
 

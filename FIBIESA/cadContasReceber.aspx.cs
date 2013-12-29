@@ -286,15 +286,7 @@ namespace FIBIESA
         {
             ModalPopupExtenderPesquisa.Enabled = false;
         }
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisa(txtPesquisa.Text);
-            ModalPopupExtenderPesquisa.Enabled = true;
-            ModalPopupExtenderPesquisa.Show();
-            txtPesquisa.Text = "";
-        }
-
+        
         protected void grdPesquisa_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -320,6 +312,14 @@ namespace FIBIESA
                 lblInformacao.Text = "";
                 txtParcela.Focus();
             }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisa(txtPesquisa.Text);
+            ModalPopupExtenderPesquisa.Enabled = true;
+            ModalPopupExtenderPesquisa.Show();
+            txtPesquisa.Text = "";
         }
 
 

@@ -337,13 +337,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtPesAutor;
         
         /// <summary>
-        /// Controle grdPesquisaAutor.
+        /// Controle btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaAutor;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
         /// Controle btnCanel.
@@ -353,6 +353,15 @@ namespace Admin {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCanel;
+        
+        /// <summary>
+        /// Controle grdPesquisaAutor.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaAutor;
         
         /// <summary>
         /// Propriedade Master.

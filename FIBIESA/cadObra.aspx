@@ -229,12 +229,17 @@
                     DropShadow="true" PopupControlID="pnlAutor" BackgroundCssClass="modalBackground"
                     OkControlID="btnCanel" Enabled="false">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlAutor" runat="server" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel ID="pnlAutor" runat="server" Width="450px" Height="450px" Style="display: none" CssClass="modalPopup" ScrollBars="Auto">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesAutor" runat="server" CssClass="inputbox" Width="200px" OnTextChanged="txtPesAutor_TextChanged"
-                                    AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txtPesAutor" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn" 
+                                    onclick="btnBuscar_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCanel" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanel_Click" />
+                           
                             </td>
                         </tr>
                         <tr>
@@ -265,12 +270,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCanel" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanel_Click" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
             </div>

@@ -182,15 +182,7 @@ namespace FIBIESA
             pnlTitulos_ModalPopupExtender.Enabled = true;
             pnlTitulos_ModalPopupExtender.Show();
         }
-
-        protected void txtPesTitulo_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaTitulos(txtPesTitulo.Text);
-            pnlTitulos_ModalPopupExtender.Enabled = true;
-            pnlTitulos_ModalPopupExtender.Show();
-            txtPesTitulo.Text = "";
-        }
-
+               
         protected void btnSelectTit_Click(object sender, EventArgs e)
         {
 
@@ -228,6 +220,15 @@ namespace FIBIESA
             CarregarPesquisaTitulos(null);
             pnlTitulos_ModalPopupExtender.Enabled = true;
             pnlTitulos_ModalPopupExtender.Show();
+        }
+
+        protected void btnBuscarTit_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaTitulos(txtPesTitulo.Text);
+            pnlTitulos_ModalPopupExtender.Enabled = true;
+            pnlTitulos_ModalPopupExtender.Show();
+            txtPesTitulo.Text = "";
+
         }
        
     }

@@ -184,13 +184,13 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtPesItem;
         
         /// <summary>
-        /// Controle grdPesquisaItem.
+        /// Controle btnBusca.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
+        protected global::System.Web.UI.WebControls.Button btnBusca;
         
         /// <summary>
         /// Controle btnCanelItem.
@@ -200,6 +200,15 @@ namespace Admin {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCanelItem;
+        
+        /// <summary>
+        /// Controle grdPesquisaItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPesquisaItem;
         
         /// <summary>
         /// Propriedade Master.

@@ -205,13 +205,15 @@ namespace FIBIESA
 
         }
 
-        protected void txtPesItem_TextChanged(object sender, EventArgs e)
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(txtPesItem.Text);
             ModalPopupExtenderPesItem.Enabled = true;
             ModalPopupExtenderPesItem.Show();
             txtPesItem.Text = "";
         }
+
+       
 
     }
 }

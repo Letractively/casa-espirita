@@ -120,12 +120,16 @@
                     DropShadow="true" PopupControlID="pnlItem" BackgroundCssClass="modalBackground"
                     OkControlID="btnCanelItem" Enabled="false">
                 </asp:ModalPopupExtender>
-                <asp:Panel ID="pnlItem" runat="server" Width="400px" CssClass="modalPopup" Style="display: none">
+                <asp:Panel ID="pnlItem" runat="server" Width="450px" Height="450px" CssClass="modalPopup" ScrollBars="Auto" Style="display: none">
                     <table>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px" OnTextChanged="txtPesItem_TextChanged"
-                                    AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txtPesItem" runat="server" CssClass="inputbox" Width="200px"></asp:TextBox>
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn" 
+                                    onclick="btnBuscar_Click" />
+                                &nbsp;&nbsp;
+                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
                             </td>
                         </tr>
                         <tr>
@@ -155,12 +159,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnCanelItem" runat="server" Text="Cancelar" CssClass="btn" OnClick="btnCanelItem_Click" />
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </asp:Panel>
             </div>

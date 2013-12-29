@@ -192,24 +192,7 @@ namespace FIBIESA
 
 
         #region TextChanged
-
-        protected void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaAssociado(txtPesquisa.Text);
-            ModalPopupExtenderPesquisaAssociado.Enabled = true;
-            ModalPopupExtenderPesquisaAssociado.Show();
-            txtPesquisa.Text = "";
-        }
-
-        protected void txtPesquisaObra_TextChanged(object sender, EventArgs e)
-        {
-            CarregarPesquisaObra(txtPesquisaObra.Text);
-            ModalPopupExtenderPesquisaObra.Enabled = true;
-            ModalPopupExtenderPesquisaObra.Show();
-            txtPesquisaObra.Text = "";
-        }
-
-
+                              
         protected void txtAssociado_TextChanged(object sender, EventArgs e)
         {
             if (txtAssociado.Text == "")
@@ -240,6 +223,22 @@ namespace FIBIESA
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarPesquisaObra(txtPesquisaObra.Text);
+            ModalPopupExtenderPesquisaObra.Enabled = true;
+            ModalPopupExtenderPesquisaObra.Show();
+            txtPesquisaObra.Text = "";
+        }
+
+        protected void btnBuscar_Click1(object sender, EventArgs e)
+        {
+            CarregarPesquisaAssociado(txtPesquisa.Text);
+            ModalPopupExtenderPesquisaAssociado.Enabled = true;
+            ModalPopupExtenderPesquisaAssociado.Show();
+            txtPesquisa.Text = "";
         }
     }
 }

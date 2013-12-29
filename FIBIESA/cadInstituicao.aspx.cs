@@ -38,6 +38,10 @@ namespace FIBIESA
                 txtComplemento.Text = ltIns.Complemento;
                 txttelefone.Text = ltIns.telefone;
                 txtRanking.Text = ltIns.Ranking.ToString();
+                txtSenha.Text = ltIns.Senha.ToString();
+                txtLogin.Text = ltIns.Login.ToString();
+                txtServidorSmtp.Text = ltIns.ServidorSMTP.ToString();
+                txtPorta.Text = ltIns.Porta.ToString();
 
                 if (ltIns.Cidades != null)
                 {
@@ -211,6 +215,10 @@ namespace FIBIESA
             ddlBairro.SelectedIndex = -1;
             txttelefone.Text = "";
             txtRanking.Text = "";
+            txtServidorSmtp.Text = "";
+            txtSenha.Text = "";
+            txtLogin.Text = "";
+            txtPorta.Text = "";
             tcInstituicao.ActiveTabIndex = 0;
             txtCodigo.Focus();
         }
@@ -274,7 +282,13 @@ namespace FIBIESA
                 instituicoes.Numero = txtNumero.Text;
                 instituicoes.Complemento = txtComplemento.Text;
                 instituicoes.telefone = txttelefone.Text;
-                instituicoes.Ranking = utils.ComparaIntComZero(txtRanking.Text);
+                instituicoes.Ranking = utils.ComparaIntComZero(txtRanking.Text);                
+                instituicoes.Login = txtLogin.Text;
+                instituicoes.ServidorSMTP = txtServidorSmtp.Text;
+                instituicoes.Porta = utils.ComparaIntComNull(txtPorta.Text);
+
+                if (txtSenha.Text != string.Empty)
+                    instituicoes.Senha = txtSenha.Text;
 
                 int idIns = 0;
 

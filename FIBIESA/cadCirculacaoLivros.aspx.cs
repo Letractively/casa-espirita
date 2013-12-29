@@ -158,7 +158,7 @@ namespace FIBIESA
 
             PessoasBL pesBL = new PessoasBL();
             Pessoas pe = new Pessoas();
-            List<Pessoas> pessoas = pesBL.PesquisarBuscaBL(conteudo);
+            List<Pessoas> pessoas = pesBL.PesquisarBuscaSimplesBL(conteudo);
 
             foreach (Pessoas pes in pessoas)
             {
@@ -591,7 +591,8 @@ namespace FIBIESA
             if (e.Row.RowType == DataControlRowType.DataRow)
                 utils.CarregarEfeitoGrid("#c8defc", "#ffffff", e);
         }
-        protected void txtPesquisaCliente_TextChanged(object sender, EventArgs e)
+       
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             CarregarPesquisaCliente(txtPesquisaCliente.Text);
             ModalPopupExtenderPesquisa.Enabled = true;
@@ -751,7 +752,7 @@ namespace FIBIESA
             dtgItens.DataBind();
 
         }
-        protected void txtPesquisaEmp_TextChanged(object sender, EventArgs e)
+        protected void btnBuscaItemEmp_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItemEmp(txtPesquisaEmp.Text);
             ModalPopupExtenderPesquisaEmp.Enabled = true;
@@ -857,7 +858,8 @@ namespace FIBIESA
         {
             Response.Redirect("~/default.aspx");
         }
-        protected void txtPesquisaItemDev_TextChanged(object sender, EventArgs e)
+        
+        protected void btnBuscarItemDev_Click(object sender, EventArgs e)
         {
             CarregarPesquisaItem(txtPesquisaItemDev.Text);
             ModalPopupExtenderPesquisaItem.Enabled = true;
@@ -865,6 +867,10 @@ namespace FIBIESA
             txtPesquisaItemDev.Text = "";
         }
         #endregion
+
+            
+
+       
 
     }
 }

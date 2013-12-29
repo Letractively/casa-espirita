@@ -205,7 +205,7 @@ namespace DataAccess
             consulta.Append(" WHERE DATADEVOLUCAO IS NULL)");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (EX.TOMBO = {0} OR  OB.TITULO  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (EX.TOMBO = {0} OR  UPPER(OB.TITULO)  LIKE '%{1}%') ", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY EX.TOMBO ");
 
