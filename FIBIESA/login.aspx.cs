@@ -14,7 +14,10 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                txtLogin.Focus();
+            {
+                txtLogin.Focus(); 
+                Session["usuario"] = null;
+            }
         }              
 
         protected void btnAcessar_Click(object sender, EventArgs e)

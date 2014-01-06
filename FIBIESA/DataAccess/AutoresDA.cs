@@ -23,24 +23,18 @@ namespace DataAccess
             while (dr.Read())
             {
                 Autores aut = new Autores();
+                TiposDeAutores tiposDeAutores = new TiposDeAutores();
                 aut.Id = int.Parse(dr["ID"].ToString());
                 aut.Codigo = int.Parse(dr["CODIGO"].ToString());
                 aut.Descricao = dr["DESCRICAO"].ToString();
                 aut.TipoId = int.Parse(dr["TIPOID"].ToString());
-                
-                TiposDeAutoresDA tAutDA = new TiposDeAutoresDA();
-                List<TiposDeAutores> tAut = tAutDA.PesquisarDA(aut.TipoId);
-                TiposDeAutores tiposDeAutores = new TiposDeAutores();
 
-                foreach (TiposDeAutores lttAut in tAut)
-                {
-                    tiposDeAutores.Id = lttAut.Id;
-                    tiposDeAutores.Codigo = lttAut.Codigo;
-                    tiposDeAutores.Descricao = lttAut.Descricao;
+                tiposDeAutores.Id = int.Parse(dr["TIPOID"].ToString());
+                tiposDeAutores.Codigo =int.Parse(dr["CODTIPO"].ToString());
+                tiposDeAutores.Descricao = dr["DESTIPO"].ToString();
 
-                    aut.TiposDeAutores = tiposDeAutores;
-                }
-
+                aut.TiposDeAutores = tiposDeAutores;
+               
                 autor.Add(aut);
             }
 
@@ -126,31 +120,45 @@ namespace DataAccess
 
         public List<Autores> PesquisarDA()
         {
+            StringBuilder consulta = new StringBuilder(@"SELECT A.*, TA.CODIGO CODTIPO, TA.DESCRICAO DESTIPO FROM AUTORES A ");
+            consulta.Append(" ,TIPOSDEAUTORES TA ");
+            consulta.Append(" WHERE TA.ID = A.TIPOID ");
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM AUTORES "));
+                CommandType.Text, consulta.ToString());
+
             return CarregarObjAutores(dr);
         }
 
         public List<Autores> PesquisarDA(int id)
         {
+            StringBuilder consulta = new StringBuilder(@"SELECT A.*, TA.CODIGO CODTIPO, TA.DESCRICAO DESTIPO FROM AUTORES A ");
+            consulta.Append(" ,TIPOSDEAUTORES TA ");
+            consulta.Append(" WHERE TA.ID = A.TIPOID ");
+            consulta.Append(" AND A.ID = {0}");
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM AUTORES  WHERE ID = {0}", id));
+                CommandType.Text, string.Format(consulta.ToString(), id));
+            
             return CarregarObjAutores(dr);
         }
 
         public List<Autores> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM AUTORES ");
-
+         
+            StringBuilder consulta = new StringBuilder(@"SELECT A.*, TA.CODIGO CODTIPO, TA.DESCRICAO DESTIPO FROM AUTORES A ");
+            consulta.Append(" ,TIPOSDEAUTORES TA ");
+            consulta.Append(" WHERE TA.ID = A.TIPOID ");
+         
             switch (campo.ToUpper())
             {
                 case "CODIGO":
-                    consulta.Append(string.Format("WHERE CODIGO = {0}", utils.ComparaIntComZero(valor)));
+                    consulta.Append(string.Format(" AND A.CODIGO = {0}", utils.ComparaIntComZero(valor)));
                     break;
                 case "DESCRICAO":
-                    consulta.Append(string.Format("WHERE DESCRICAO  LIKE '%{0}%'", valor));
+                    consulta.Append(string.Format(" AND A.DESCRICAO  LIKE '%{0}%'", valor));
                     break;
                 default:
                     break;
@@ -165,12 +173,14 @@ namespace DataAccess
 
         public List<Autores> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM AUTORES ");
+            StringBuilder consulta = new StringBuilder(@"SELECT A.*, TA.CODIGO CODTIPO, TA.DESCRICAO DESTIPO FROM AUTORES A ");
+            consulta.Append(" ,TIPOSDEAUTORES TA ");
+            consulta.Append(" WHERE TA.ID = A.TIPOID ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
-
-            consulta.Append(" ORDER BY CODIGO ");
+                consulta.Append(string.Format(" AND CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+            
+            consulta.Append(" ORDER BY A.CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());

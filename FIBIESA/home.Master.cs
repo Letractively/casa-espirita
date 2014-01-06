@@ -15,11 +15,7 @@ namespace FIBIESA
     {
         Utils utils = new Utils();
         #region funcoes
-        private void Logout()
-        {
-            Session["usuario"] = null;
-            Response.Redirect("~/login.aspx");
-        }
+       
         private void CarregarInstituicao()
         {
             InstituicoesBL insBL = new InstituicoesBL();
@@ -82,8 +78,7 @@ namespace FIBIESA
 
                     foreach (Usuarios usu in usuarios)
                     {
-                        lblNomeUsuario.Text = usu.Nome;
-                        lblCategoria.Text = usu.Categoria.Descricao;
+                        lblNomeUsuario.Text = "Bem-vindo, " + usu.Nome +" " + usu.Categoria.Descricao;
                         hfIdCategoria.Value = usu.Categoria.Id.ToString();
                     }
                    
@@ -93,11 +88,7 @@ namespace FIBIESA
                 CarregarInstituicao();                
             }       
         }
-
-        protected void imbSair_Click(object sender, ImageClickEventArgs e)
-        {
-            Logout();
-        }
+               
 
         protected void imgHome_Click(object sender, ImageClickEventArgs e)
         {

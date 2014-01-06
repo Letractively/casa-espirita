@@ -38,8 +38,8 @@ namespace BusinessLayer
                 msg.Append("Segue seus dados de login: \n");
                 msg.Append("Usuário: ");
                 msg.Append(dsUsu.Tables[0].Rows[0]["login"]);
-                msg.Append("Senha: ");
-                msg.Append(dsUsu.Tables[0].Rows[0]["senha"]);
+                msg.Append(", Senha: ");
+                msg.Append(utils.DesCriptografar(dsUsu.Tables[0].Rows[0]["senha"].ToString()));
 
                 MailMessage Msg = new MailMessage();
 
