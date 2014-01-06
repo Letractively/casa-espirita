@@ -89,8 +89,7 @@ namespace FIBIESA
             boleto_bancario.Boleto.Valida();
 
             boleto_bancario.MostrarComprovanteEntrega = true;
-            this.Panel1.Controls.Add(boleto_bancario);
-            
+            this.Panel1.Controls.Add(boleto_bancario);         
 
             
 

@@ -22,6 +22,8 @@ namespace DataAccess
             while (dr.Read())
             {
                 Obras obrinha = new Obras();
+                TiposObras tiposObras = new TiposObras();
+
                 obrinha.Id = int.Parse(dr["ID"].ToString());
                 obrinha.Codigo = int.Parse(dr["CODIGO"].ToString());
                 obrinha.Titulo = dr["TITULO"].ToString();
@@ -38,19 +40,12 @@ namespace DataAccess
                 obrinha.TiposObraId = utils.ComparaIntComNull(dr["TIPOSOBRAID"].ToString());
                 obrinha.Cdu = dr["CDU"].ToString();
 
-                TiposObrasDA tObDA = new TiposObrasDA();
-                List<TiposObras> tOb = tObDA.PesquisarDA(utils.ComparaIntComZero(obrinha.TiposObraId.ToString()));
-                TiposObras tiposObras = new TiposObras();
+                tiposObras.Id = utils.ComparaIntComZero(dr["TIPOSOBRAID"].ToString());
+                tiposObras.Codigo = utils.ComparaIntComZero(dr["CODTIPO"].ToString());
+                tiposObras.Descricao = dr["DESTIPO"].ToString();
 
-                foreach (TiposObras lttObr in tOb)
-                {
-                    tiposObras.Id = lttObr.Id;
-                    tiposObras.Codigo = lttObr.Codigo;
-                    tiposObras.Descricao = lttObr.Descricao;
-
-                    obrinha.TiposObras = tiposObras;
-                }
-
+                obrinha.TiposObras = tiposObras;
+               
                 obra.Add(obrinha);
             }
 
@@ -158,9 +153,13 @@ namespace DataAccess
 
         public List<Obras> PesquisarDA()
         {
+            StringBuilder consulta = new StringBuilder(@"SELECT O.*, T.CODIGO CODTIPO, T.DESCRICAO DESTIPO, T.QTDDIAS FROM OBRAS O ");
+            consulta.Append(" ,TIPOSOBRAS T ");
+            consulta.Append(" WHERE O.TIPOSOBRAID = T.ID ");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(
                 ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                CommandType.Text, string.Format(@"SELECT * FROM OBRAS "));
+                CommandType.Text,consulta.ToString());
             return CarregarObjObras(dr);
         }
 
@@ -173,15 +172,17 @@ namespace DataAccess
 
         public List<Obras> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder("SELECT * FROM OBRAS ");
+            StringBuilder consulta = new StringBuilder(@"SELECT O.*, T.CODIGO CODTIPO, T.DESCRICAO DESTIPO, T.QTDDIAS FROM OBRAS O ");
+            consulta.Append(" ,TIPOSOBRAS T ");
+            consulta.Append(" WHERE O.TIPOSOBRAID = T.ID ");
 
             switch (campo.ToUpper())
             {
                 case "CODIGO":
-                    consulta.Append(string.Format("WHERE CODIGO = {0}", utils.ComparaIntComZero(valor)));
+                    consulta.Append(string.Format(" AND O.CODIGO = {0}", utils.ComparaIntComZero(valor)));
                     break;
                 case "TITULO":
-                    consulta.Append(string.Format("WHERE TITULO  LIKE '%{0}%'", valor));
+                    consulta.Append(string.Format(" AND O.TITULO  LIKE '%{0}%'", valor));
                     break;
                 default:
                     break;
@@ -196,12 +197,14 @@ namespace DataAccess
 
         public List<Obras> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM OBRAS ");
+            StringBuilder consulta = new StringBuilder(@"SELECT O.*, T.CODIGO CODTIPO, T.DESCRICAO DESTIPO, T.QTDDIAS FROM OBRAS O ");
+            consulta.Append(" ,TIPOSOBRAS T ");
+            consulta.Append(" WHERE O.TIPOSOBRAID = T.ID ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  TITULO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
 
-            consulta.Append(" ORDER BY CODIGO ");
+            consulta.Append(" ORDER BY O.CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());

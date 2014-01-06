@@ -104,7 +104,7 @@
                 <li class="alt"><a href="#" title="">Alterar senha</a></li>
                 <li class="alt"><a href="#" title="">Alterar endereço</a></li>
                 <li class="alt"><a href="#" title="">Detalhes do pagamento</a></li>
-                <li class="alt"><a>Sair</a></li>
+                <li class="alt"><a href="login.aspx">Sair</a></li>
             </ul>
             <div id="openCloseWrap">
                 <div id="toolbox">
@@ -114,28 +114,41 @@
             </div>
         </div>
         <div id="userbox">
-            <p>
-                Bem-vindo,
-                <asp:Label ID="lblNomeUsuario" runat="server" /></p>
-            <p>
-                <span>Você está logado como
-                    <asp:Label ID="lblCategoria" runat="server" /></span></p>
-            <ul>     
-                <li><a>
-                    <asp:ImageButton ID="imbSair" runat="server" ImageUrl="images/icons/icon_unlock.png"
-                        AlternateText="Sair" OnClick="imbSair_Click" ToolTip="Sair" /></a></li>
-                 
-            </ul>
+            
         </div>
     </div>
     <div id="right">
         <div id="breadcrumb">
+                      
+           <%-- <asp:Panel ID="pnlSite" Width = "50%" runat="server" Style="text-align: left">
             <ul>
                 <li>
                     <asp:SiteMapPath ID="SiteMapPath1" runat="server" PathSeparator=" / ">
                     </asp:SiteMapPath>
-                </li>
+                </li>                       
             </ul>
+            </asp:Panel>
+            <asp:Panel ID="pnlUsu" Width = "50%" runat="server" >
+            <ul>
+             <li>
+                   
+            <asp:Label ID="lblNomeUsuario" runat="server"  />  
+             </li>        
+            </ul>
+            </asp:Panel>--%>
+             <table width="100%">
+                <tr>
+                    <td style="width: 50%">
+                        <asp:SiteMapPath ID="SiteMapPath1" runat="server" PathSeparator=" / " CssClass="usuario"></asp:SiteMapPath>
+                    </td>                    
+                    <td style="width: 50%"> 
+                       <asp:Label ID="lblNomeUsuario" runat="server" CssClass="usuario" />                        
+                       &nbsp;&nbsp;
+                       <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/login.aspx" 
+                            ToolTip="Realiza o logout do sistema">[Sair]</asp:HyperLink>
+                    </td>
+                </tr>
+             </table>              
         </div>
         <div>
             <div class="navigation2">

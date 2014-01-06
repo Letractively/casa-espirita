@@ -78,6 +78,9 @@
 
 .titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}   	
 
+.usuario {float: left; padding-right: 10px; color: #fff; text-shadow: 1px 1px 1px #222}
+
+
 .labeldesc
 {
 	display:inline;		

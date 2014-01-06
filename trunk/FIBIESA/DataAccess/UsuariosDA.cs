@@ -78,7 +78,7 @@ namespace DataAccess
             SqlParameter[] paramsToSP = new SqlParameter[12];
 
             paramsToSP[0] = new SqlParameter("@login", usu.Login);
-            paramsToSP[1] = new SqlParameter("@senha", utils.OneWayCrypt(usu.Senha));
+            paramsToSP[1] = new SqlParameter("@senha", utils.Criptografar(usu.Senha));
             paramsToSP[2] = new SqlParameter("@nome", usu.Nome.ToUpper());
             paramsToSP[3] = new SqlParameter("@status", usu.Status);
             paramsToSP[4] = new SqlParameter("@dtinicio", usu.DtInicio);
@@ -108,7 +108,10 @@ namespace DataAccess
 
             paramsToSP[0] = new SqlParameter("@id", usu.Id);
             paramsToSP[1] = new SqlParameter("@login", usu.Login);
-            paramsToSP[2] = new SqlParameter("@senha", utils.OneWayCrypt(usu.Senha));
+            string senha = utils.Criptografar(usu.Senha);
+            if (senha == string.Empty)
+                senha = null;
+            paramsToSP[2] = new SqlParameter("@senha", senha);
             paramsToSP[3] = new SqlParameter("@nome", usu.Nome.ToUpper());
             paramsToSP[4] = new SqlParameter("@status", usu.Status);
             paramsToSP[5] = new SqlParameter("@dtinicio", usu.DtInicio);
@@ -215,7 +218,9 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, string.Format(@"SELECT U.* "+                                                                                                
                                                                                                  " FROM USUARIOS U WHERE LOGIN = '{0}' " +
-                                                                                                 " AND STATUS = 'A' ", login, utils.OneWayCrypt(senha)));
+                                                                                                 " AND SENHA = '{1}' " +
+                                                                                                 " AND STATUS = 'A' ", login, utils.Criptografar(senha)));
+           
             List<Usuarios> usuarios = CarregarObjUsuario(dr);
             
             return usuarios;

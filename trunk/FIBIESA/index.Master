@@ -16,8 +16,7 @@
 </head>
 <body>
 <div id="logincontainer">
-    	<h1>
-            <img alt="FIBIESE" class="style1" src="images/logo.png" />
+    	<h1>            
             <br/><span>Faça o login</span>
         </h1>
         <div id="loginbox">
