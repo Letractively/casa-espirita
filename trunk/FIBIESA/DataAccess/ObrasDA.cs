@@ -202,7 +202,7 @@ namespace DataAccess
             consulta.Append(" WHERE O.TIPOSOBRAID = T.ID ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (O.CODIGO = {0} OR  O.TITULO  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
 
             consulta.Append(" ORDER BY O.CODIGO ");
 

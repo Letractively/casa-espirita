@@ -174,7 +174,7 @@ ControlToValidate="txtDiasVctoMulta" ValidationExpression="^\d+$" Display="Dynam
                                             <tr>
                                                 <td style="width: 400px">
                                                     <asp:Label ID="lblCategoria" runat="server">
-                                            Categoria definida como instrutor : 
+                                            Categoria definida como facilitador: 
                                                     </asp:Label>
                                                 </td>
                                                 <td style="width: 140px">

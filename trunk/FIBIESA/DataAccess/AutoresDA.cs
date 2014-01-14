@@ -178,7 +178,7 @@ namespace DataAccess
             consulta.Append(" WHERE TA.ID = A.TIPOID ");
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (A.CODIGO = {0} OR  A.DESCRICAO  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
             
             consulta.Append(" ORDER BY A.CODIGO ");
 

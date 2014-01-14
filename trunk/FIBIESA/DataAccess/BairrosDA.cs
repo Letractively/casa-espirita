@@ -23,6 +23,7 @@ namespace DataAccess
             while (dr.Read())
             {
                 Bairros bai = new Bairros();
+                Cidades cid = new Cidades();
                 bai.Id = int.Parse(dr["ID"].ToString());
                 bai.Codigo = int.Parse(dr["CODIGO"].ToString());
                 bai.Descricao = dr["DESCRICAO"].ToString();
@@ -30,19 +31,12 @@ namespace DataAccess
 
                 if (bai.CidadeId != null)
                 {
-                    CidadesDA cidDA = new CidadesDA();
-                    Cidades cid = new Cidades();
-                    DataSet dsCid = cidDA.PesquisaDA(bai.CidadeId != null? utils.ComparaIntComZero(bai.CidadeId.ToString()) : 0);
+                    cid.Id = int.Parse(dr["CIDADEID"].ToString());
+                    cid.Codigo = int.Parse(dr["CODCID"].ToString());
+                    cid.Descricao = dr["DESCID"].ToString(); ;
+                    cid.EstadoId = int.Parse(dr["ESTADOID"].ToString());
 
-                    if (dsCid.Tables[0].Rows.Count != 0)
-                    {
-                        cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
-                        cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
-                        cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
-                        cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
-                    }
-
-                    bai.Cidade =  cid;    
+                    bai.Cidade = cid;
                 }
 
                 bairros.Add(bai);
@@ -86,7 +80,7 @@ namespace DataAccess
         {
             SqlParameter[] paramsToSP = new SqlParameter[3];
 
-            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo()); 
+            paramsToSP[0] = new SqlParameter("@codigo", RetornaMaxCodigo());
             paramsToSP[1] = new SqlParameter("@descricao", bai.Descricao.ToUpper());
             paramsToSP[2] = new SqlParameter("@cidadeid", bai.CidadeId);
 
@@ -144,23 +138,35 @@ namespace DataAccess
 
         public List<Bairros> PesquisarDA()
         {
-            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(), 
-                                                                CommandType.Text, string.Format(@"SELECT * FROM BAIRROS "));
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT B.*, C.CODIGO CODCID, C.DESCRICAO DESCID, C.ESTADOID");
+            consulta.Append(@"  FROM BAIRROS B");
+            consulta.Append(@"      ,CIDADES C");
+            consulta.Append(@" WHERE B.CIDADEID = C.ID");
+
+            SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
+                                                                CommandType.Text, consulta.ToString());
 
             List<Bairros> bairros = CarregarObjBairro(dr);
-                        
-            return bairros;    
+
+            return bairros;
 
         }
 
         public List<Bairros> PesquisarDA(int id_bai)
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT B.*, C.CODIGO CODCID, C.DESCRICAO DESCID, C.ESTADOID");
+            consulta.Append(@"  FROM BAIRROS B");
+            consulta.Append(@"      ,CIDADES C");
+            consulta.Append(@" WHERE B.CIDADEID = C.ID");
+            consulta.Append(@"   AND B.ID = {0}");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM BAIRROS WHERE ID = {0}", id_bai));
+                                                       CommandType.Text, string.Format(consulta.ToString(), id_bai));
 
             List<Bairros> bairros = CarregarObjBairro(dr);
-                        
+
             return bairros;
         }
 
@@ -177,9 +183,15 @@ namespace DataAccess
 
         public List<Bairros> PesquisarCidSimplesDA(int id_cid)
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT B.*, C.CODIGO CODCID, C.DESCRICAO DESCID, C.ESTADOID");
+            consulta.Append(@"  FROM BAIRROS B");
+            consulta.Append(@"      ,CIDADES C");
+            consulta.Append(@" WHERE B.CIDADEID = C.ID");
+            consulta.Append(@"   AND B.CIDADEID = {0}");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                       CommandType.Text, string.Format(@"SELECT * " +
-                                                                                       " FROM BAIRROS WHERE CIDADEID = {0}", id_cid));
+                                                       CommandType.Text, string.Format(consulta.ToString(), id_cid));
 
             List<Bairros> bairros = CarregarObjBairroSimples(dr);
 
@@ -188,15 +200,23 @@ namespace DataAccess
 
         public List<Bairros> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM BAIRROS ");
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT B.*, C.CODIGO CODCID, C.DESCRICAO DESCID, C.ESTADOID");
+            consulta.Append(@"  FROM BAIRROS B");
+            consulta.Append(@"      ,CIDADES C");
+            consulta.Append(@" WHERE B.CIDADEID = C.ID");
+
 
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE CODIGO = {0} OR  DESCRICAO  LIKE '%{1}%'", utils.ComparaIntComZero(valor), valor));
+            {
+                consulta.Append(@"   AND B.CODIGO = {0}");
+                consulta.Append(@"   AND B.DESCRICAO LIKE '%{1}%'");
+            }
 
-            consulta.Append(" ORDER BY CODIGO ");
+            consulta.Append(" ORDER BY B.CODIGO ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, consulta.ToString());
+                                                                CommandType.Text, string.Format(consulta.ToString(), utils.ComparaIntComZero(valor), valor));
 
             List<Bairros> bairros = CarregarObjBairro(dr);
 
@@ -217,7 +237,7 @@ namespace DataAccess
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                       CommandType.Text, string.Format(@"SELECT * " +
                                                                                        " FROM BAIRROS WHERE CODIGO = '{0}' OR DESCRICAO LIKE '%{1}%'", utils.ComparaIntComZero(descricao), descricao));
-            
+
             List<Base> ba = new List<Base>();
 
             while (dr.Read())
@@ -231,6 +251,6 @@ namespace DataAccess
             }
             return ba;
         }
-                
+
     }
 }

@@ -90,8 +90,7 @@ namespace FIBIESA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                Pesquisar(null);
+           
         }
 
         protected void dtgBancos_RowDeleting(object sender, GridViewDeleteEventArgs e)
