@@ -89,8 +89,7 @@ namespace Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                Pesquisar(null);
+           
         }
 
         protected void dtgCidades_SelectedIndexChanged(object sender, EventArgs e)

@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 140px">
-                                    Instrutor:
+                                    Facilitador:
                                 </td>
                                 <td style="width: 530px" colspan="3">
                                     <asp:Label ID="lblInstrutor" runat="server"/>                                                                            

@@ -49,7 +49,7 @@
                     </tr>
                     <tr>
                         <td style="width: 140px">
-                            Instrutor:
+                            Facilitador:
                         </td>
                         <td style="width: 400px" colspan="3">                            
                             <asp:DropDownList ID="ddlInstrutor" runat="server" CssClass="dropdownlist" 

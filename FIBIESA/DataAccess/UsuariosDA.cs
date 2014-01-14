@@ -20,10 +20,13 @@ namespace DataAccess
         private List<Usuarios> CarregarObjUsuario(SqlDataReader dr)
         {
             List<Usuarios> usuarios = new List<Usuarios>();
-
+            
             while (dr.Read())
             {
                 Usuarios usu = new Usuarios();
+                Categorias cat = new Categorias();
+                Pessoas pes = new Pessoas();
+
                 usu.Id = int.Parse(dr["ID"].ToString());
                 usu.Login = dr["LOGIN"].ToString();
                 usu.Senha =null;
@@ -38,33 +41,20 @@ namespace DataAccess
                 usu.DhTentLogin = utils.ComparaDataComNull(dr["DHTENTLOGIN"].ToString());
                 usu.CategoriaId = utils.ComparaIntComZero(dr["CATEGORIAID"].ToString());
 
-                CategoriasDA catDA = new CategoriasDA();
-                
-                List<Categorias> categorias = catDA.PesquisarDA(usu.CategoriaId);
-                Categorias cat = new Categorias();
+                cat.Id = int.Parse(dr["CATEGORIAID"].ToString());
+                cat.Codigo = int.Parse(dr["CODCAT"].ToString());
+                cat.Descricao = dr["DESCAT"].ToString();
 
-                foreach (Categorias ltcat in categorias)
-                {                    
-                    cat.Id = ltcat.Id;
-                    cat.Codigo = ltcat.Codigo;
-                    cat.Descricao = ltcat.Descricao;
-                    usu.Categoria = cat;
-                }
+                usu.Categoria = cat;
 
-                PessoasDA pesDA = new PessoasDA();
-
-                List<Pessoas> pessoas = pesDA.PesquisarDA(utils.ComparaIntComZero(usu.PessoaId.ToString()));
-                Pessoas pes = new Pessoas();
-
-                foreach (Pessoas ltpes in pessoas)
+                if (utils.ComparaIntComZero(dr["PESSOAID"].ToString()) > 0)
                 {
-                    pes.Id = ltpes.Id;
-                    pes.Codigo = ltpes.Codigo;
-                    pes.Nome = ltpes.Nome;
+                    pes.Id = int.Parse(dr["PESSOAID"].ToString());
+                    pes.Codigo = int.Parse(dr["PESCOD"].ToString());
+                    pes.Nome = dr["PESNOME"].ToString();
                     usu.Pessoa = pes;
                 }
-                          
-
+                
                 usuarios.Add(usu);
             }
 
@@ -156,8 +146,14 @@ namespace DataAccess
 
         public List<Usuarios> PesquisarDA()
         {
+            StringBuilder consulta = new StringBuilder(); 
+            consulta.Append(@"SELECT U.*, C.CODIGO CODCAT, C.DESCRICAO DESCAT, P.CODIGO PESCOD, P.NOME PESNOME ");
+            consulta.Append(@"  FROM USUARIOS U ");
+            consulta.Append(@"  INNER JOIN CATEGORIAS C ON C.ID = U.CATEGORIAID ");
+            consulta.Append(@"  LEFT JOIN  PESSOAS P ON P.ID = U.PESSOAID");
+           
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, @"SELECT * FROM USUARIOS ");
+                                                                CommandType.Text, consulta.ToString());
 
             List<Usuarios> usuarios = CarregarObjUsuario(dr);
                        
@@ -166,20 +162,24 @@ namespace DataAccess
 
         public List<Usuarios> PesquisarDA(string campo, string valor)
         {
-            string consulta;
-
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT U.*, C.CODIGO CODCAT, C.DESCRICAO DESCAT, P.CODIGO PESCOD, P.NOME PESNOME ");
+            consulta.Append(@"  FROM USUARIOS U ");
+            consulta.Append(@"  INNER JOIN CATEGORIAS C ON C.ID = U.CATEGORIAID ");
+            consulta.Append(@"  LEFT JOIN  PESSOAS P ON P.ID = U.PESSOAID");
+            
             switch (campo.ToUpper())
             {
                 case "NOME":
-                    consulta = string.Format("SELECT * FROM USUARIOS WHERE NOME LIKE '%{0}%'", valor);
+                    consulta.Append(@" WHERE P.NOME LIKE '%{0}%' ");
                     break;             
                 default:
-                    consulta = "";
+                    consulta.Clear();
                     break;
             }
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                              CommandType.Text, consulta);
+                                                              CommandType.Text, string.Format(consulta.ToString(),valor));
 
             List<Usuarios> usuarios = CarregarObjUsuario(dr);
 
@@ -198,12 +198,16 @@ namespace DataAccess
 
         public List<Usuarios> PesquisarBuscaDA(string valor)
         {
-            StringBuilder consulta = new StringBuilder(@"SELECT * FROM USUARIOS ");
-
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT U.*, C.CODIGO CODCAT, C.DESCRICAO DESCAT, P.CODIGO PESCOD, P.NOME PESNOME ");
+            consulta.Append(@"  FROM USUARIOS U ");
+            consulta.Append(@"  INNER JOIN CATEGORIAS C ON C.ID = U.CATEGORIAID ");
+            consulta.Append(@"  LEFT JOIN  PESSOAS P ON P.ID = U.PESSOAID");
+            
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" WHERE NOME  LIKE '%{0}%'", valor));
+                consulta.Append(string.Format(" WHERE U.NOME  LIKE '%{0}%'", valor));
 
-            consulta.Append(" ORDER BY NOME ");
+            consulta.Append(" ORDER BY U.NOME ");
 
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
                                                                 CommandType.Text, consulta.ToString());
@@ -215,11 +219,17 @@ namespace DataAccess
 
         public List<Usuarios> PesquisarDA(string login, string senha, DateTime data)
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT U.*, C.CODIGO CODCAT, C.DESCRICAO DESCAT, P.CODIGO PESCOD, P.NOME PESNOME ");
+            consulta.Append(@"  FROM USUARIOS U ");
+            consulta.Append(@" INNER JOIN CATEGORIAS C ON C.ID = U.CATEGORIAID ");
+            consulta.Append(@"  LEFT JOIN  PESSOAS P ON P.ID = U.PESSOAID");
+            consulta.Append(@" WHERE U.LOGIN = '{0}' ");
+            consulta.Append(@"   AND U.SENHA = '{1}' ");
+            consulta.Append(@"   AND U.STATUS = 'A' ");
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT U.* "+                                                                                                
-                                                                                                 " FROM USUARIOS U WHERE LOGIN = '{0}' " +
-                                                                                                 " AND SENHA = '{1}' " +
-                                                                                                 " AND STATUS = 'A' ", login, utils.Criptografar(senha)));
+                                                                CommandType.Text, string.Format(consulta.ToString(), login, utils.Criptografar(senha)));
            
             List<Usuarios> usuarios = CarregarObjUsuario(dr);
             
