@@ -119,6 +119,7 @@
     <Content Include="cadTurmaParticipantes.aspx" />
     <Content Include="cadUsuario.aspx" />
     <Content Include="cadVenda.aspx" />
+    <Content Include="images\logo_banrisul.jpg" />
     <Content Include="images\nav_current.png" />
     <Content Include="images\nav_hover.png" />
     <Content Include="images\nav_sub.png" />
@@ -1247,6 +1248,7 @@
     </Content>
     <Content Include="Relatorios\rptTurmas.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Relatorios\rptVendas.rdlc">
       <SubType>Designer</SubType>

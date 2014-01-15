@@ -147,13 +147,34 @@ namespace FIBIESA
         private void CriarDtBoletos()
         {
             //cedente
-            DataColumn coluna1 = new DataColumn("CED_CODIGO", Type.GetType("System.String"));
-            DataColumn coluna2 = new DataColumn("CED_NOSSONUMERO", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("CED_CPFCNPJ", Type.GetType("System.String"));
-            DataColumn coluna4 = new DataColumn("CED_NOME", Type.GetType("System.String"));
-            DataColumn coluna5 = new DataColumn("CED_AGENCIA", Type.GetType("System.String"));
-            DataColumn coluna6 = new DataColumn("CED_CONTA", Type.GetType("System.String"));
-            DataColumn coluna7 = new DataColumn("CED_DIGITOCONTA", Type.GetType("System.String"));
+            DataColumn coluna1 = new DataColumn("CodCedente", Type.GetType("System.Int32"));
+            //DataColumn coluna2 = new DataColumn("CED_NOSSONUMERO", Type.GetType("System.String"));
+            //DataColumn coluna3 = new DataColumn("CED_CPFCNPJ", Type.GetType("System.String"));
+            DataColumn coluna2 = new DataColumn("Cedente", Type.GetType("System.String"));
+            DataColumn coluna3 = new DataColumn("CedAgencia", Type.GetType("System.Int32"));
+            //DataColumn coluna6 = new DataColumn("CED_CONTA", Type.GetType("System.String"));
+            //DataColumn coluna7 = new DataColumn("CED_DIGITOCONTA", Type.GetType("System.String"));
+            //sacado
+            //DataColumn coluna8 = new DataColumn("SAC_CPFCNPJ", Type.GetType("System.String"));
+            //DataColumn coluna9 = new DataColumn("SAC_NOME", Type.GetType("System.String"));
+            //DataColumn coluna10 = new DataColumn("SAC_ENDERECO", Type.GetType("System.String"));
+            //DataColumn coluna11 = new DataColumn("SAC_BAIRRO", Type.GetType("System.String"));
+            //DataColumn coluna12 = new DataColumn("SAC_CIDADE", Type.GetType("System.String"));
+            //DataColumn coluna13 = new DataColumn("SAC_CEP", Type.GetType("System.String"));
+            //DataColumn coluna14 = new DataColumn("SAC_UF", Type.GetType("System.String"));
+
+            //titulo
+            DataColumn coluna4 = new DataColumn("DataVencimento", Type.GetType("System.DateTime"));
+            DataColumn coluna5 = new DataColumn("ValorBoleto", Type.GetType("System.Decimal"));
+            DataColumn coluna6 = new DataColumn("NumeroDocumento", Type.GetType("System.Int32"));
+            DataColumn coluna7 = new DataColumn("Instrucoes1", Type.GetType("System.String"));
+            DataColumn coluna8 = new DataColumn("Instrucoes2", Type.GetType("System.String"));
+            
+            //
+            DataColumn coluna9 = new DataColumn("Banco", Type.GetType("System.String"));
+            DataColumn coluna10 = new DataColumn("LinhaDigitavel", Type.GetType("System.String"));
+            DataColumn coluna11 = new DataColumn("Carteira", Type.GetType("System.String"));
+            DataColumn coluna12 = new DataColumn("LocalPagamento", Type.GetType("System.String"));
 
             dt_boletos.Columns.Add(coluna1);
             dt_boletos.Columns.Add(coluna2);
@@ -161,43 +182,20 @@ namespace FIBIESA
             dt_boletos.Columns.Add(coluna4);
             dt_boletos.Columns.Add(coluna5);
             dt_boletos.Columns.Add(coluna6);
-            dt_boletos.Columns.Add(coluna7);          
-            
-            //sacado
-            DataColumn coluna8 = new DataColumn("SAC_CPFCNPJ", Type.GetType("System.String"));
-            DataColumn coluna9 = new DataColumn("SAC_NOME", Type.GetType("System.String"));
-            DataColumn coluna10 = new DataColumn("SAC_ENDERECO", Type.GetType("System.String"));
-            DataColumn coluna11 = new DataColumn("SAC_BAIRRO", Type.GetType("System.String"));
-            DataColumn coluna12 = new DataColumn("SAC_CIDADE", Type.GetType("System.String"));
-            DataColumn coluna13 = new DataColumn("SAC_CEP", Type.GetType("System.String"));
-            DataColumn coluna14 = new DataColumn("SAC_UF", Type.GetType("System.String"));
-
+            dt_boletos.Columns.Add(coluna7);
             dt_boletos.Columns.Add(coluna8);
             dt_boletos.Columns.Add(coluna9);
             dt_boletos.Columns.Add(coluna10);
             dt_boletos.Columns.Add(coluna11);
             dt_boletos.Columns.Add(coluna12);
-            dt_boletos.Columns.Add(coluna13);
-            dt_boletos.Columns.Add(coluna14);
-
-            //titulo
-            DataColumn coluna15 = new DataColumn("VENCIMENTO", Type.GetType("System.String"));
-            DataColumn coluna16 = new DataColumn("VLR_BOLETO", Type.GetType("System.String"));
-            DataColumn coluna17 = new DataColumn("NRO_DOCUMENTO", Type.GetType("System.String"));
-            DataColumn coluna18 = new DataColumn("INSTRUCAO1", Type.GetType("System.String"));
-            DataColumn coluna19 = new DataColumn("INSTRUCAO2", Type.GetType("System.String"));
-
-            dt_boletos.Columns.Add(coluna15);
-            dt_boletos.Columns.Add(coluna16);
-            dt_boletos.Columns.Add(coluna17);
-            dt_boletos.Columns.Add(coluna18);
-            dt_boletos.Columns.Add(coluna19);
-
-            //
-            DataColumn coluna20 = new DataColumn("COD_BANCO", Type.GetType("System.String"));
-            DataColumn coluna21 = new DataColumn("LINHA_DIGITAVEL", Type.GetType("System.String"));
-         
-            dt_boletos.Columns.Add(coluna20);
+            //dt_boletos.Columns.Add(coluna13);
+            //dt_boletos.Columns.Add(coluna14);
+            //dt_boletos.Columns.Add(coluna15);
+            //dt_boletos.Columns.Add(coluna16);
+            //dt_boletos.Columns.Add(coluna17);
+            //dt_boletos.Columns.Add(coluna18);
+            //dt_boletos.Columns.Add(coluna19);
+            
 
           
         }
@@ -244,37 +242,40 @@ namespace FIBIESA
                 
                 foreach (Portadores ltPor in portadores)
                 {
-                    linha["CED_CODIGO"] = ltPor.CodCedente;
+                    linha["CodCedente"] = ltPor.CodCedente;
                     //linha["CED_NOSSONUMERO"] = ;
                     //linha["CED_CPFCNPJ"] =  ;
-                    linha["CED_NOME"] = dsInst.Tables[0].Rows[0]["razao"].ToString();
-                    linha["CED_AGENCIA"] = ltPor.Agencia.Codigo;
-                    linha["CED_CONTA"] = ltPor.Contas.Codigo;
-                    linha["CED_DIGITOCONTA"] = ltPor.Contas.Digito;
+                    linha["Cedente"] = dsInst.Tables[0].Rows[0]["razao"].ToString();
+                    linha["CedAgencia"] = ltPor.Agencia.Codigo;
+                    //linha["CED_CONTA"] = ltPor.Contas.Codigo;
+                    //linha["CED_DIGITOCONTA"] = ltPor.Contas.Digito;
 
                     if (ltPor.Banco != null)
-                        linha["COD_BANCO"] = ltPor.Banco.Codigo;
+                        linha["Banco"] = ltPor.Banco.Codigo;
                     else
-                        linha["COD_BANCO"] = "";
+                        linha["Banco"] = "";
                 }
 
-                //sacado quem vai pagar o titulo                
-                linha["SAC_CPFCNPJ"] = ltTit.Pessoas.CpfCnpj;
-                linha["SAC_NOME"] = ltTit.Pessoas.Nome;
-                linha["SAC_ENDERECO"] = ltTit.Pessoas.Endereco;
-                linha["SAC_BAIRRO"] = ltTit.Pessoas.Bairro.Descricao;
-                linha["SAC_CIDADE"] = ltTit.Pessoas.Cidade.Descricao;
-                linha["SAC_CEP"] = ltTit.Pessoas.Cep;
-                linha["SAC_UF"] = ltTit.Pessoas.Cidade.Estados.Uf;
+                ////sacado quem vai pagar o titulo                
+                //linha["SAC_CPFCNPJ"] = ltTit.Pessoas.CpfCnpj;
+                //linha["SAC_NOME"] = ltTit.Pessoas.Nome;
+                //linha["SAC_ENDERECO"] = ltTit.Pessoas.Endereco;
+                //linha["SAC_BAIRRO"] = ltTit.Pessoas.Bairro.Descricao;
+                //linha["SAC_CIDADE"] = ltTit.Pessoas.Cidade.Descricao;
+                //linha["SAC_CEP"] = ltTit.Pessoas.Cep;
+                //linha["SAC_UF"] = ltTit.Pessoas.Cidade.Estados.Uf;
 
-                linha["VENCIMENTO"] = ltTit.DataVencimento.ToString("dd/MM/yyyy");
-                linha["VLR_BOLETO"] = ltTit.Valor;
-                linha["NRO_DOCUMENTO"] = ltTit.Numero;
-                linha["INSTRUCAO1"] = ddlInstrucao1.SelectedValue;
-                linha["INSTRUCAO2"] = ddlInstrucao2.SelectedValue;
+                linha["DataVencimento"] = ltTit.DataVencimento;
+                linha["ValorBoleto"] = ltTit.Valor;
+                linha["NumeroDocumento"] = ltTit.Numero;
+                linha["Instrucoes1"] = ddlInstrucao1.SelectedValue;
+                linha["Instrucoes2"] = ddlInstrucao2.SelectedValue;
+                linha["Carteira"] = "teste";
+                linha["LocalPagamento"] = "Até o vencimento, preferencialmente no Banco Banrisul";
+                
 
                 //codigo do banco 01 - 03
-                linhaDigitavel.Append(linha["LINHA_DIGITAVEL"]);
+                linhaDigitavel.Append(linha["LinhaDigitavel"]);
                 //moeda 9 real 04 - 04
                 linhaDigitavel.Append("9");
                 //DAC 05 - 05
@@ -282,7 +283,7 @@ namespace FIBIESA
                 //fator de vencimento 06 - 09
                 linhaDigitavel.Append(utils.CalcularNumeroDiasEntreDatas(dtInicialFV, DateTime.Now));
                 //valor 10 -19
-                utils.IncluirCampoNumerico(linhaDigitavel, linha["VLR_BOLETO"].ToString(), 10);
+                utils.IncluirCampoNumerico(linhaDigitavel, linha["ValorBoleto"].ToString(), 10);
                 //campo livre 20 - 44
                 linhaDigitavel.Append("");
                 //Produto 20 - 20 2 cobrança direta, fichario emitido pelo cliente
@@ -290,9 +291,9 @@ namespace FIBIESA
                 //Constante 1
                 linhaDigitavel.Append("1");
                 //Codigo da agencia 22 - 25
-                utils.IncluirCampoNumerico(linhaDigitavel, linha["CED_AGENCIA"].ToString(), 4);
+                utils.IncluirCampoNumerico(linhaDigitavel, linha["CedAgencia"].ToString(), 4);
                 //Codigo do cedente 26 - 32
-                utils.IncluirCampoNumerico(linhaDigitavel, linha["CED_CODIGO"].ToString(), 7);
+                utils.IncluirCampoNumerico(linhaDigitavel, linha["CodCedente"].ToString(), 7);
                 //Nosso numero 33 - 40
                 linhaDigitavel.Append("");
                 //Constante 40 41 - 42
@@ -300,9 +301,19 @@ namespace FIBIESA
                 //Duplo digito modulos 10 e 11 
                 linhaDigitavel.Append("");
 
-                linha["LINHA_DIGITAVEL"] = linhaDigitavel.ToString();
+                linha["LinhaDigitavel"] = linhaDigitavel.ToString();
 
                 dt_boletos.Rows.Add(linha);
+            }
+
+            Session["ldsRel"] = dt_boletos;
+            if (((DataTable)Session["ldsRel"]).Rows.Count != 0)
+            {                                                                                                                                                                                                                                                                                                                                                                                                                                           //l//c 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "WinOpen('/Relatorios/RelBoletos.aspx?Eventos=" + ddlPortador.SelectedValue + "','',600,1000);", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "alert('Sua pesquisa não retornou dados.');", true);
             }
            
    
