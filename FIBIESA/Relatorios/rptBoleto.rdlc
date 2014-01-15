@@ -12,18 +12,6 @@
   <DataSets>
     <DataSet Name="DataSet_Boleto">
       <Fields>
-        <Field Name="Categoria">
-          <DataField>Categoria</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="imageBanco">
-          <DataField>imageBanco</DataField>
-          <rd:TypeName>System.Byte[]</rd:TypeName>
-        </Field>
-        <Field Name="Carteira">
-          <DataField>Carteira</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="DataVencimento">
           <DataField>DataVencimento</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
@@ -32,148 +20,44 @@
           <DataField>ValorBoleto</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="ValorCobrado">
-          <DataField>ValorCobrado</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="Carteira">
+          <DataField>Carteira</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Instrucoes">
-          <DataField>Instrucoes</DataField>
-          <rd:TypeName>System.Collections.Generic.List`1[[BoletoNet.IInstrucao, Boleto.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null]]</rd:TypeName>
+        <Field Name="Instrucoes1">
+          <DataField>Instrucoes1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Instrucoes2">
+          <DataField>Instrucoes2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NumeroDocumento">
+          <DataField>NumeroDocumento</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="LinhaDigitavel">
+          <DataField>LinhaDigitavel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="LocalPagamento">
           <DataField>LocalPagamento</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="QuantidadeMoeda">
-          <DataField>QuantidadeMoeda</DataField>
+        <Field Name="CedAgencia">
+          <DataField>CedAgencia</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ValorMoeda">
-          <DataField>ValorMoeda</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Aceite">
-          <DataField>Aceite</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Especie">
-          <DataField>Especie</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EspecieDocumento">
-          <DataField>EspecieDocumento</DataField>
-          <rd:TypeName>BoletoNet.IEspecieDocumento</rd:TypeName>
-        </Field>
-        <Field Name="DataDocumento">
-          <DataField>DataDocumento</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DataProcessamento">
-          <DataField>DataProcessamento</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="NumeroParcela">
-          <DataField>NumeroParcela</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NumeroDocumento">
-          <DataField>NumeroDocumento</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DigitoNossoNumero">
-          <DataField>DigitoNossoNumero</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NossoNumero">
-          <DataField>NossoNumero</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Moeda">
-          <DataField>Moeda</DataField>
+        <Field Name="CodCedente">
+          <DataField>CodCedente</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Cedente">
           <DataField>Cedente</DataField>
-          <rd:TypeName>BoletoNet.Cedente</rd:TypeName>
-        </Field>
-        <Field Name="CodigoBarra">
-          <DataField>CodigoBarra</DataField>
-          <rd:TypeName>BoletoNet.CodigoBarra</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Banco">
           <DataField>Banco</DataField>
-          <rd:TypeName>BoletoNet.IBanco</rd:TypeName>
-        </Field>
-        <Field Name="ContaBancaria">
-          <DataField>ContaBancaria</DataField>
-          <rd:TypeName>BoletoNet.ContaBancaria</rd:TypeName>
-        </Field>
-        <Field Name="ValorDesconto">
-          <DataField>ValorDesconto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Sacado">
-          <DataField>Sacado</DataField>
-          <rd:TypeName>BoletoNet.Sacado</rd:TypeName>
-        </Field>
-        <Field Name="UsoBanco">
-          <DataField>UsoBanco</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PercJurosMora">
-          <DataField>PercJurosMora</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="JurosMora">
-          <DataField>JurosMora</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="IOF">
-          <DataField>IOF</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Abatimento">
-          <DataField>Abatimento</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="PercMulta">
-          <DataField>PercMulta</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="ValorMulta">
-          <DataField>ValorMulta</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="OutrosAcrescimos">
-          <DataField>OutrosAcrescimos</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="OutrosDescontos">
-          <DataField>OutrosDescontos</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="DataJurosMora">
-          <DataField>DataJurosMora</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DataMulta">
-          <DataField>DataMulta</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DataDesconto">
-          <DataField>DataDesconto</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DataOutrosAcrescimos">
-          <DataField>DataOutrosAcrescimos</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DataOutrosDescontos">
-          <DataField>DataOutrosDescontos</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="TipoModalidade">
-          <DataField>TipoModalidade</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -196,52 +80,36 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>9.09375in</Width>
+              <Width>8.50394in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>4.53125in</Height>
+              <Height>4.25197in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Rectangle Name="Rectangle1">
                       <ReportItems>
-                        <Image Name="Image1">
-                          <Source>Database</Source>
-                          <Value>=Fields!imageBanco.Value</Value>
-                          <MIMEType>image/jpeg</MIMEType>
-                          <Sizing>FitProportional</Sizing>
-                          <Top>0.44979cm</Top>
-                          <Left>0.42333cm</Left>
-                          <Height>1.5cm</Height>
-                          <Width>1.5cm</Width>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
-                        </Image>
-                        <Textbox Name="NumeroDocumento">
+                        <Textbox Name="ValorBoleto">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="numero do Boleto " + Fields!NumeroDocumento.Value</Value>
+                                  <Value>=Fields!ValorBoleto.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>NumeroDocumento</rd:DefaultName>
-                          <Top>0.47625cm</Top>
-                          <Left>8.67833cm</Left>
-                          <Height>0.66146cm</Height>
-                          <Width>10.50396cm</Width>
-                          <ZIndex>1</ZIndex>
+                          <rd:DefaultName>ValorBoleto</rd:DefaultName>
+                          <Top>6.11187cm</Top>
+                          <Left>10.18646cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>2.5cm</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -252,30 +120,168 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <Image Name="Image2">
-                          <Source>Embedded</Source>
-                          <Value>logoFibiese</Value>
-                          <Sizing>FitProportional</Sizing>
-                          <Top>1.48167cm</Top>
-                          <Left>7.67291cm</Left>
-                          <Height>3.54542cm</Height>
-                          <Width>3.78354cm</Width>
-                          <ZIndex>2</ZIndex>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Textbox Name="DataVencimento">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!DataVencimento.Value</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>dd/MM/yyyy</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>DataVencimento</rd:DefaultName>
+                              <Top>0.03175cm</Top>
+                              <Left>17.53583cm</Left>
+                              <Height>0.5068cm</Height>
+                              <Width>3.70417cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line1">
+                              <Top>0.02646cm</Top>
+                              <Left>14.86958cm</Left>
+                              <Height>0.61383cm</Height>
+                              <Width>0cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="Textbox2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Vencimento</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>0.05821cm</Top>
+                              <Left>14.97542cm</Left>
+                              <Height>0.5068cm</Height>
+                              <Width>2.10313cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Local de pagamento</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>0.03175cm</Top>
+                              <Left>0.09525cm</Left>
+                              <Height>0.5068cm</Height>
+                              <Width>3.135cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="LocalPagamento">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!LocalPagamento.Value</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>LocalPagamento</rd:DefaultName>
+                              <Top>0.03704cm</Top>
+                              <Left>3.6777cm</Left>
+                              <Height>0.5068cm</Height>
+                              <Width>11.01549cm</Width>
+                              <ZIndex>4</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Top>1.40229cm</Top>
+                          <Height>0.64029cm</Height>
+                          <Width>21.6cm</Width>
+                          <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Style>Solid</Style>
                             </Border>
                           </Style>
-                        </Image>
+                        </Rectangle>
                       </ReportItems>
                       <KeepTogether>true</KeepTogether>
                       <Style>
                         <Border>
-                          <Style>None</Style>
+                          <Style>Solid</Style>
                         </Border>
                       </Style>
                     </Rectangle>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -297,8 +303,8 @@
         <DataSetName>DataSet_Boleto</DataSetName>
         <Top>0.38841cm</Top>
         <Left>0.57362cm</Left>
-        <Height>11.50938cm</Height>
-        <Width>23.09812cm</Width>
+        <Height>10.8cm</Height>
+        <Width>21.60001cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -306,10 +312,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>6.19792in</Height>
+    <Height>5.59375in</Height>
     <Style />
   </Body>
-  <Width>9.48958in</Width>
+  <Width>11.16666in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

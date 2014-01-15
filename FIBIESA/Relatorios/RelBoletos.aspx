@@ -22,7 +22,7 @@
         <rsweb:ReportViewer ID="rptBoletos" runat="server" Height="600px" Width="820px" ShowRefreshButton="False"
             ShowPromptAreaButton="False" ShowDocumentMapButton="False" ShowFindControls="False"
             ShowPrintButton="true" Font-Names="Arial" Font-Size="8pt">
-            <LocalReport ReportPath="Relatorios\rptBoletos.rdlc">
+            <LocalReport ReportPath="Relatorios\rptBoleto.rdlc">
             </LocalReport>
         </rsweb:ReportViewer>
     </div>

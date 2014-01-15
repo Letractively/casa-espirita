@@ -349,21 +349,22 @@ namespace DataAccess
         {
             StringBuilder consulta = new StringBuilder();
 
-            consulta.Append(@"SELECT * FROM VIEW_TITULOS WHERE 1 = 1  ");
+            consulta.Append(@"SELECT * ");          
+            consulta.Append(@" FROM VIEW_TITULOS WHERE 1 = 1  ");
 
-            if (selTitulos.Tipo != string.Empty)
+            if (selTitulos.Tipo != string.Empty && selTitulos.Tipo != null)
                 consulta.Append(@" AND TIPO = '" + selTitulos.Tipo + "' ");
-            
-            if (selTitulos.PortadorId != string.Empty)
+
+            if (selTitulos.PortadorId != string.Empty && selTitulos.PortadorId != null)
                 consulta.Append(@" AND PORTADORID IN (" + selTitulos.PortadorId + ")");
 
-            if (selTitulos.CodTitulos != string.Empty)
+            if (selTitulos.CodTitulos != string.Empty && selTitulos.CodTitulos != null)
                 consulta.Append(@" AND numero IN (" + selTitulos.CodTitulos + ")");
-          
-            if ((selTitulos.DataEmissaoIni != string.Empty) && (selTitulos.DataEmissaoFim != string.Empty))
+
+            if ((selTitulos.DataEmissaoIni != string.Empty && selTitulos.DataEmissaoIni != null) && (selTitulos.DataEmissaoFim != string.Empty && selTitulos.DataEmissaoFim != null))
                 consulta.Append(@" AND CONVERT(DATE,DTEMISSAO,103) BETWEEN CONVERT(DATE,'" + selTitulos.DataEmissaoIni + "',103) AND CONVERT(DATE,'" + selTitulos.DataEmissaoFim + "',103)");
 
-            if ((selTitulos.DataVencimentoIni != string.Empty) && (selTitulos.DataVencimentoFim != string.Empty))
+            if ((selTitulos.DataVencimentoIni != string.Empty && selTitulos.DataVencimentoIni != null) && (selTitulos.DataVencimentoFim != string.Empty && selTitulos.DataVencimentoIni != null))
                 consulta.Append(@" AND CONVERT(DATE,DTVENCIMENTO,103)  BETWEEN CONVERT(DATE,'" + selTitulos.DataVencimentoIni + "',103) AND CONVERT(DATE,'" + selTitulos.DataVencimentoFim + "',103)");
 
             
