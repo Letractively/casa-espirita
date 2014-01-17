@@ -148,10 +148,10 @@ namespace FIBIESA
         {
             //cedente
             DataColumn coluna1 = new DataColumn("CodCedente", Type.GetType("System.Int32"));
-            //DataColumn coluna2 = new DataColumn("CED_NOSSONUMERO", Type.GetType("System.String"));
+            DataColumn coluna2 = new DataColumn("CedNossonumero", Type.GetType("System.String"));
             //DataColumn coluna3 = new DataColumn("CED_CPFCNPJ", Type.GetType("System.String"));
-            DataColumn coluna2 = new DataColumn("Cedente", Type.GetType("System.String"));
-            DataColumn coluna3 = new DataColumn("CedAgencia", Type.GetType("System.Int32"));
+            DataColumn coluna3 = new DataColumn("Cedente", Type.GetType("System.String"));
+            DataColumn coluna4 = new DataColumn("CedAgencia", Type.GetType("System.Int32"));
             //DataColumn coluna6 = new DataColumn("CED_CONTA", Type.GetType("System.String"));
             //DataColumn coluna7 = new DataColumn("CED_DIGITOCONTA", Type.GetType("System.String"));
             //sacado
@@ -164,18 +164,22 @@ namespace FIBIESA
             //DataColumn coluna14 = new DataColumn("SAC_UF", Type.GetType("System.String"));
 
             //titulo
-            DataColumn coluna4 = new DataColumn("DataVencimento", Type.GetType("System.DateTime"));
-            DataColumn coluna5 = new DataColumn("ValorBoleto", Type.GetType("System.Decimal"));
-            DataColumn coluna6 = new DataColumn("NumeroDocumento", Type.GetType("System.Int32"));
-            DataColumn coluna7 = new DataColumn("Instrucoes1", Type.GetType("System.String"));
-            DataColumn coluna8 = new DataColumn("Instrucoes2", Type.GetType("System.String"));
+            DataColumn coluna5 = new DataColumn("DataVencimento", Type.GetType("System.DateTime"));
+            DataColumn coluna6 = new DataColumn("ValorBoleto", Type.GetType("System.Decimal"));
+            DataColumn coluna7 = new DataColumn("NumeroDocumento", Type.GetType("System.Int32"));
+            DataColumn coluna8 = new DataColumn("Instrucoes1", Type.GetType("System.String"));
+            DataColumn coluna9 = new DataColumn("Instrucoes2", Type.GetType("System.String"));
             
             //
-            DataColumn coluna9 = new DataColumn("Banco", Type.GetType("System.String"));
-            DataColumn coluna10 = new DataColumn("LinhaDigitavel", Type.GetType("System.String"));
-            DataColumn coluna11 = new DataColumn("Carteira", Type.GetType("System.String"));
-            DataColumn coluna12 = new DataColumn("LocalPagamento", Type.GetType("System.String"));
-
+            DataColumn coluna10 = new DataColumn("Banco", Type.GetType("System.String"));
+            DataColumn coluna11 = new DataColumn("LinhaDigitavel", Type.GetType("System.String"));
+            DataColumn coluna12 = new DataColumn("Carteira", Type.GetType("System.String"));
+            DataColumn coluna13 = new DataColumn("LocalPagamento", Type.GetType("System.String"));
+            DataColumn coluna14 = new DataColumn("Aceite", Type.GetType("System.String"));
+            DataColumn coluna15 = new DataColumn("DataDocumento", Type.GetType("System.DateTime"));
+            DataColumn coluna16 = new DataColumn("DataProcessamento", Type.GetType("System.DateTime"));
+            DataColumn coluna17 = new DataColumn("Quantidade", Type.GetType("System.Int32"));
+                        
             dt_boletos.Columns.Add(coluna1);
             dt_boletos.Columns.Add(coluna2);
             dt_boletos.Columns.Add(coluna3);
@@ -188,11 +192,11 @@ namespace FIBIESA
             dt_boletos.Columns.Add(coluna10);
             dt_boletos.Columns.Add(coluna11);
             dt_boletos.Columns.Add(coluna12);
-            //dt_boletos.Columns.Add(coluna13);
-            //dt_boletos.Columns.Add(coluna14);
-            //dt_boletos.Columns.Add(coluna15);
-            //dt_boletos.Columns.Add(coluna16);
-            //dt_boletos.Columns.Add(coluna17);
+            dt_boletos.Columns.Add(coluna13);
+            dt_boletos.Columns.Add(coluna14);
+            dt_boletos.Columns.Add(coluna15);
+            dt_boletos.Columns.Add(coluna16);
+            dt_boletos.Columns.Add(coluna17);
             //dt_boletos.Columns.Add(coluna18);
             //dt_boletos.Columns.Add(coluna19);
             
@@ -243,7 +247,7 @@ namespace FIBIESA
                 foreach (Portadores ltPor in portadores)
                 {
                     linha["CodCedente"] = ltPor.CodCedente;
-                    //linha["CED_NOSSONUMERO"] = ;
+                    linha["CedNossonumero"] = "2222";
                     //linha["CED_CPFCNPJ"] =  ;
                     linha["Cedente"] = dsInst.Tables[0].Rows[0]["razao"].ToString();
                     linha["CedAgencia"] = ltPor.Agencia.Codigo;
@@ -272,7 +276,10 @@ namespace FIBIESA
                 linha["Instrucoes2"] = ddlInstrucao2.SelectedValue;
                 linha["Carteira"] = "teste";
                 linha["LocalPagamento"] = "Até o vencimento, preferencialmente no Banco Banrisul";
-                
+                linha["Aceite"] ="N"; //implementar o aceite.
+                linha["DataDocumento"] = ltTit.DataEmissao;
+                linha["DataProcessamento"] = DateTime.Now;
+                linha["Quantidade"] = 1;
 
                 //codigo do banco 01 - 03
                 linhaDigitavel.Append(linha["LinhaDigitavel"]);
