@@ -53,6 +53,9 @@
     <Compile Include="EmprestimoMov.cs" />
     <Compile Include="Instituicoes.cs" />
     <Compile Include="InstituicoesLogo.cs" />
+    <Compile Include="LogLocalidade.cs" />
+    <Compile Include="Logbairro.cs" />
+    <Compile Include="Loglogradouro.cs" />
     <Compile Include="MovimentosEstoque.cs" />
     <Compile Include="JurosMultas.cs" />
     <Compile Include="ItensEstoque.cs" />
