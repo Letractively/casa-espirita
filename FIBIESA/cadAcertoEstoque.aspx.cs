@@ -37,8 +37,12 @@ namespace FIBIESA
         }
         public void ExibirMensagem(string mensagem)
         {
-            ClientScript.RegisterStartupScript(System.Type.GetType("System.String"), "Alert",
-               "<script language='javascript'> { window.alert(\"" + mensagem + "\") }</script>");
+            ScriptManager.RegisterStartupScript(
+                                   updPrincipal,
+                                   this.GetType(),
+                                   "Alert",
+                                   "window.alert(\"" + mensagem + "\");",
+                                   true);
         }
         private void LimparCampos()
         {
@@ -46,6 +50,8 @@ namespace FIBIESA
             lblDesItem.Text = "";
             lblQtdAtual.Text = "";
             txtQtde.Text = "";
+            txtItem.Text = "";
+            txtData.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
         private void CarregarDados(int id_ItEst)
         {
@@ -128,15 +134,15 @@ namespace FIBIESA
             {
 
                 if (mvEstBL.InserirBL(movEstoque))
-                    ExibirMensagem("Dados gravados com sucesso !");
+                    ExibirMensagem("Estoque atualizado com sucesso!");
                 else
                     ExibirMensagem("Não foi possível gravar o movimento. Revise as informações !");
 
             }
 
             txtQtde.Text = "";
-            CarregarDados(utils.ComparaIntComZero(hfIdItem.Value));
-
+            LimparCampos();
+            
         }
 
         protected void txtItem_TextChanged(object sender, EventArgs e)
