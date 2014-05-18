@@ -202,6 +202,8 @@ body {
 
 .titulo {float: left;  color: #fff; font-weight: 700; font-size: 16px; position:relative; bottom: -20px}   	
 
+.migalhapao {float: left; color: #fff; text-shadow: 1px 1px 1px #222{
+
 .labeldesc
 {
 	display:inline;		
@@ -238,16 +240,6 @@ body {
     background-color:#000;
 }
  
-.fechar{display:block; text-align:right;}
-   	
-
-
-
-
-
-
-
-
-
-
-
+.fechar{display:block; text-align:right;};
+    padding-right: 10px;;		
+	
