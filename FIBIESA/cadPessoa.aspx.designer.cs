@@ -544,24 +544,6 @@ namespace Admin {
         protected global::System.Web.UI.WebControls.TextBox txtObservacao;
         
         /// <summary>
-        /// Controle tpFoto.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel tpFoto;
-        
-        /// <summary>
-        /// Controle lbFinaliza.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbFinaliza;
-        
-        /// <summary>
         /// Controle btnVoltar.
         /// </summary>
         /// <remarks>

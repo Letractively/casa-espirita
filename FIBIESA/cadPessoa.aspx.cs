@@ -15,13 +15,7 @@ namespace Admin
 {
     public partial class cadPessoa : System.Web.UI.Page
     {                               
-        
-        public string Parametros
-        {
-            //get { return "teswte"; }
-            get { return "Pagina=FotoUsuario,Chave1=1,Chave2=" + Page.Request.Url.AbsoluteUri.ToLower().Substring(0, Page.Request.Url.AbsoluteUri.ToLower().IndexOf("cadpessoa.aspx?operacao=new&tipopessoa=f")) + "Receptor.ashx"; }
-        }
-        
+                       
         #region variaveis
         Utils utils = new Utils();
         DataTable dtExcluidos = new DataTable();
@@ -508,8 +502,7 @@ namespace Admin
             pessoas.Email = txtEmail.Text;
             pessoas.TipoAssociado = rbTipoAssoc.SelectedValue;
             pessoas.RefNome = txtRefNome.Text;
-            pessoas.RefTelefone = txtRefTelefone.Text;
-            pessoas.foto = imagemFoto;
+            pessoas.RefTelefone = txtRefTelefone.Text;            
             pessoas.EnvEmail = ckEnviaEmail.Checked;
 
             if (lblDesNome.Text == "* Nome")
@@ -651,28 +644,6 @@ namespace Admin
         {
             ConsisteCPFCNPJ();
         }
-
-        public byte[] imagemFoto { get; set; }
-
-        protected void lbFinaliza_Click(object sender, EventArgs e)
-        {
-            if (Session["sl_FotoUsuario_Nome"] != null && Session["sl_FotoUsuario_Arquivo"] != null)
-            {
-                string str_nome_caixa = Request.QueryString["caixa"].ToString();
-
-                StringBuilder js = new StringBuilder();
-                js.Append("<script language='javascript'>");
-                js.Append("window.opener.document.getElementById('" + str_nome_caixa + "').value = '" + DateTime.Now.ToString() + "';");
-                if (Request.QueryString["caixaPost"] != null)
-                    js.Append("window.opener.__doPostBack('" + Request.QueryString["caixaPost"].ToString() + "','');");
-                js.Append("window.close();");
-                js.Append("</script>");
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), js.ToString(), false);
-            }
-            else
-            {
-               // Master.MostraStatus("Aguarde alguns minutos operação em andamento !", MasterPes.eIcoInfor.error);
-            }
-        }
+                
     }
 }
