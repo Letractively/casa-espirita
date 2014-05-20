@@ -61,72 +61,45 @@ namespace DataAccess
                 //pes.foto = (byte[])dr["FOTO"];
 
                 Categorias catg = new Categorias();
-
                 catg.Id = utils.ComparaIntComZero(dr["IDCATG"].ToString());
                 catg.Codigo = utils.ComparaIntComZero(dr["CODCATG"].ToString());
                 catg.Descricao = dr["DESCATG"].ToString();
-
                 pes.Categorias = catg;
 
                 CidadesDA cidDA = new CidadesDA();
                 Cidades cid = new Cidades();
-                DataSet dsCid = cidDA.PesquisaDA(pes.CidadeId);
-
-                if (dsCid.Tables[0].Rows.Count != 0)
-                {
-                    cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
-                    cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
-                    cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
-                    cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
-
-                    EstadosDA estDA = new EstadosDA();
-                    DataSet dsEst = estDA.PesquisaDA(cid.EstadoId);
-                    Estados est = new Estados();
-
-                    if (dsEst.Tables[0].Rows.Count > 0)
-                    {
-                        est.Id = (Int32)dsEst.Tables[0].Rows[0]["id"];
-                        est.Uf = (string)dsEst.Tables[0].Rows[0]["uf"];
-                        est.Descricao = (string)dsEst.Tables[0].Rows[0]["descricao"];
-                    }
-
-                    cid.Estados = est;
-
-
-                }
-
+                cid.Id = utils.ComparaIntComZero(dr["CIDADEID"].ToString());
+                cid.Codigo = utils.ComparaIntComZero(dr["CIDCODIGO"].ToString());
+                cid.Descricao = dr["CIDDESCRICAO"].ToString();
+                cid.EstadoId = utils.ComparaIntComZero(dr["ESTADOID"].ToString());
+                
+                EstadosDA estDA = new EstadosDA();
+                Estados est = new Estados();
+                est.Id = utils.ComparaIntComZero(dr["ESTADOID"].ToString());
+                est.Uf = dr["CIDUF"].ToString();
+                est.Descricao = dr["DESCUF"].ToString();               
+                               
+                cid.Estados = est;
                 pes.Cidade = cid;
 
                 BairrosDA baiDA = new BairrosDA();
                 Bairros bai = new Bairros();
-                DataSet dsBai;
-
-                dsBai = baiDA.PesquisaDA(pes.BairroId);
-                if (dsBai.Tables[0].Rows.Count > 0)
-                {
-                    bai.Id = (Int32)dsBai.Tables[0].Rows[0]["id"];
-                    bai.Codigo = (Int32)dsBai.Tables[0].Rows[0]["codigo"];
-                    bai.Descricao = (string)dsBai.Tables[0].Rows[0]["descricao"];
-                }
-
+                bai.Id = utils.ComparaIntComZero(dr["BAIRROID"].ToString());
+                bai.Codigo = utils.ComparaIntComZero(dr["CODBAIRRO"].ToString());
+                bai.Descricao = dr["DESBAIRRO"].ToString();
+               
                 pes.Bairro = bai;
 
-                if (pes.CidadeProfId != null)
+                if (pes.CidadeProfId > 0)
                 {
-                    dsCid.Clear();
-                    dsCid = cidDA.PesquisaDA(pes.CidadeProfId != null ? utils.ComparaIntComZero(pes.CidadeProfId.ToString()) : 0);
-
-                    if (dsCid.Tables[0].Rows.Count != 0)
-                    {
-                        cid.Id = (Int32)dsCid.Tables[0].Rows[0]["id"];
-                        cid.Codigo = (Int32)dsCid.Tables[0].Rows[0]["codigo"];
-                        cid.Descricao = (string)dsCid.Tables[0].Rows[0]["descricao"];
-                        cid.EstadoId = (Int32)dsCid.Tables[0].Rows[0]["estadoid"];
-                    }
+                    cid.Id = utils.ComparaIntComZero(dr["CIDADEPROF"].ToString());
+                    cid.Codigo = utils.ComparaIntComZero(dr["CIDPROFCODIGO"].ToString());
+                    cid.Descricao = dr["CIDPROFDESCRICAO"].ToString();
+                    cid.EstadoId = utils.ComparaIntComZero(dr["ESTADOID"].ToString());
 
                     pes.CidadeProf = cid;
                 }
-
+                               
                 pessoas.Add(pes);
             }
             return pessoas;
@@ -327,14 +300,26 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarDA(int id_pes)
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");  
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");  
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");  
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+            consulta.Append(@"WHERE P.ID = {0}");
+            
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
-                                                                                                 " FROM PESSOAS P " +
-                                                                                                 "     ,CATEGORIAS C " +
-                                                                                                 " WHERE P.CATEGORIAID = C.ID " +
-                                                                                                 " AND P.ID = {0}", id_pes));
+                                                                CommandType.Text, string.Format(consulta.ToString(), id_pes));
 
-
+          
+            
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
 
             return pessoas;
@@ -411,7 +396,7 @@ namespace DataAccess
             consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
            
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  P.NOME  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor));
+                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  UPPER(P.NOME)  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY P.CODIGO ");
 

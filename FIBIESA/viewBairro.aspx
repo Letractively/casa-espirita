@@ -18,7 +18,7 @@
                             ToolTip="Pesquisar por"></asp:TextBox>
                    </td>               
                    <td>
-                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn" 
+                        <asp:Button ID="btnBusca" runat="server" Text="Buscar" CssClass="btn"
                             OnClick="btnBusca_Click" />                 
                     </td>
                     <td>
