@@ -12,7 +12,7 @@
     <asp:UpdatePanel ID="updPrincipal" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div id="content">
-                <div class="container half left">
+                <div class="container">
                     <div class="conthead">
                         <h2>
                             Cadastro de Participantes</h2>
