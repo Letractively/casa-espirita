@@ -288,11 +288,22 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarDA()
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+                        
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, @"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
-                                                                                   " FROM PESSOAS P " +
-                                                                                   "     ,CATEGORIAS C " +
-                                                                                   " WHERE P.CATEGORIAID = C.ID ");
+                                                                CommandType.Text, consulta.ToString());
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
 
             return pessoas;
@@ -348,12 +359,23 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarPorGeneroDA(int id_cat)
         {
+            StringBuilder consulta = new StringBuilder();
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+            consulta.Append(@"WHERE P.CATEGORIAID = {0} ");
+
             SqlDataReader dr = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["conexao"].ToString(),
-                                                                CommandType.Text, string.Format(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  " +
-                                                                                                 " FROM PESSOAS P " +
-                                                                                                 "     ,CATEGORIAS C " +
-                                                                                                 " WHERE P.CATEGORIAID = C.ID " +
-                                                                                                 " AND P.CATEGORIAID = {0}", id_cat));
+                                                                CommandType.Text, string.Format(consulta.ToString() , id_cat));
             List<Pessoas> pessoas = CarregarObjPessoa(dr);
 
             return pessoas;
@@ -361,10 +383,20 @@ namespace DataAccess
 
         public List<Pessoas> PesquisarDA(string campo, string valor)
         {
-            StringBuilder consulta = new StringBuilder();
-
-            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
-            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
+            StringBuilder consulta = new StringBuilder();          
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+            consulta.Append(@"WHERE P.CATEGORIAID = {0} ");
 
             switch (campo.ToUpper())
             {
@@ -392,11 +424,21 @@ namespace DataAccess
         public List<Pessoas> PesquisarBuscaDA(string valor)
         {
             StringBuilder consulta = new StringBuilder();
-            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
-            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
-           
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+  
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  UPPER(P.NOME)  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
+                consulta.Append(string.Format(" WHERE (P.CODIGO = {0} OR  UPPER(P.NOME)  LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY P.CODIGO ");
 
@@ -411,11 +453,21 @@ namespace DataAccess
         public List<Pessoas> PesquisarBuscaSimplesDA(string valor)
         {
             StringBuilder consulta = new StringBuilder();
-            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
-            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
      
             if (valor != "" && valor != null)
-                consulta.Append(string.Format(" AND (P.CODIGO = {0} OR  UPPER(P.NOME) LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
+                consulta.Append(string.Format(" WHERE (P.CODIGO = {0} OR  UPPER(P.NOME) LIKE '%{1}%')", utils.ComparaIntComZero(valor), valor.ToUpper()));
 
             consulta.Append(" ORDER BY P.CODIGO ");
 
@@ -430,8 +482,19 @@ namespace DataAccess
         public List<Pessoas> PesquisarParticTurmaDA(string valor, int tur_id)
         {
             StringBuilder consulta = new StringBuilder();
-            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG  ");
-            consulta.Append(@" FROM PESSOAS P, CATEGORIAS C WHERE P.CATEGORIAID = C.ID ");
+            consulta.Append(@"SELECT P.*, C.ID IDCATG, C.CODIGO CODCATG, C.DESCRICAO DESCATG ");
+            consulta.Append(@",CID.CODIGO CIDCODIGO, CID.DESCRICAO CIDDESCRICAO, CID.ESTADOID ");
+            consulta.Append(@",EST.UF CIDUF, EST.DESCRICAO DESCUF, CIDPROF.ID CIDPROFID ");
+            consulta.Append(@",CIDPROF.CODIGO CIDPROFCODIGO,CIDPROF.DESCRICAO CIDPROFDESCRICAO ");
+            consulta.Append(@",ESTPROF.UF CIDPROFUD, B.CODIGO CODBAIRRO, B.DESCRICAO DESBAIRRO ");
+            consulta.Append(@"FROM PESSOAS P ");
+            consulta.Append(@"INNER JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID  ");
+            consulta.Append(@"INNER JOIN CIDADES CID ON P.CIDADEID = CID.ID ");
+            consulta.Append(@"INNER JOIN ESTADOS EST ON CID.ESTADOID = EST.ID ");
+            consulta.Append(@"INNER JOIN BAIRROS B ON P.BAIRROID = B.ID ");
+            consulta.Append(@"LEFT JOIN CIDADES CIDPROF ON P.CIDADEPROF = CIDPROF.ID ");
+            consulta.Append(@"LEFT JOIN ESTADOS ESTPROF ON CIDPROF.ESTADOID = ESTPROF.ID ");
+            consulta.Append(@"WHERE 1 = 1 ");
 
             if(tur_id > 0)
                 consulta.Append(string.Format(@"  AND NOT EXISTS(SELECT 1 FROM TURMASPARTICIPANTES T WHERE T.PESSOAID = P.ID AND T.TURMASID = {0})",tur_id));
